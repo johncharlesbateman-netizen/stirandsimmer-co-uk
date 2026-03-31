@@ -9,9 +9,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="font-display text-xl">Sofia Martini</h3>
+            <h3 className="font-display text-xl">Great Food Recipes</h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Food photography focused on texture, light and desire.
+              Delicious recipes crafted with love, flavor, and fresh ingredients.
             </p>
           </div>
 
@@ -38,9 +38,8 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="micro-caption">Get in Touch</h4>
             <div className="space-y-3 text-sm">
-              <p className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-default">hello@sofiamartini.com</p>
-              <p className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-default">Milan, Italy</p>
-              <p className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-default">Available worldwide</p>
+              <p className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-default">hello@greatfoodrecipes.com</p>
+              <p className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-default">Available everywhere</p>
             </div>
           </div>
         </div>
