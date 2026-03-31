@@ -66,8 +66,8 @@ const About = () => {
               {/* Portrait */}
               <div className="aspect-[3/4] bg-muted overflow-hidden">
                 <img
-                  src={sofiaImage}
-                  alt="Sofia Martini"
+                  src={brandImage}
+                  alt="Great Food Recipes kitchen"
                   className="w-full h-full object-cover"
                 />
               </div>
