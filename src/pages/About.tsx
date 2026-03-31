@@ -104,13 +104,13 @@ const About = () => {
       <section className="section-breathing border-t border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <blockquote className="max-w-3xl">
-            <p className="heading-editorial text-muted-foreground italic leading-relaxed">
-              "Food is memory, identity, and pleasure. My camera tries to capture 
-              all three in a single frame."
-            </p>
-            <footer className="mt-8">
-              <p className="micro-caption">— Sofia Martini</p>
-            </footer>
+              <p className="heading-editorial text-muted-foreground italic leading-relaxed">
+                "Good food doesn't need to be complicated. It needs to be made 
+                with intention, fresh ingredients, and a little bit of joy."
+              </p>
+              <footer className="mt-8">
+                <p className="micro-caption">— Great Food Recipes</p>
+              </footer>
           </blockquote>
         </div>
       </section>
