@@ -1,0 +1,284 @@
+@import url('https://api.fontshare.com/v2/css?f[]=boska@400,500,700,400i,500i,700i&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Food Photographer Portfolio — Editorial Design System
+   All colors are HSL for theming consistency
+*/
+
+@layer base {
+  :root {
+    /* Off-white warm background */
+    --background: 36 33% 97%;
+    --foreground: 0 0% 17%;
+
+    /* Cards with subtle warmth */
+    --card: 36 33% 97%;
+    --card-foreground: 0 0% 17%;
+
+    --popover: 36 33% 97%;
+    --popover-foreground: 0 0% 17%;
+
+    /* Charcoal primary */
+    --primary: 0 0% 17%;
+    --primary-foreground: 36 33% 97%;
+
+    /* Warm cream secondary */
+    --secondary: 36 20% 92%;
+    --secondary-foreground: 0 0% 17%;
+
+    /* Muted tones */
+    --muted: 36 15% 90%;
+    --muted-foreground: 0 0% 45%;
+
+    /* Terracotta accent */
+    --accent: 16 45% 55%;
+    --accent-foreground: 36 33% 97%;
+
+    /* Earthy tones */
+    --terracotta: 16 45% 55%;
+    --olive: 82 25% 40%;
+    --wine: 345 35% 35%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 36 15% 85%;
+    --input: 36 15% 85%;
+    --ring: 0 0% 17%;
+
+    --radius: 0.25rem;
+
+    /* Sidebar */
+    --sidebar-background: 36 33% 97%;
+    --sidebar-foreground: 0 0% 17%;
+    --sidebar-primary: 0 0% 17%;
+    --sidebar-primary-foreground: 36 33% 97%;
+    --sidebar-accent: 36 20% 92%;
+    --sidebar-accent-foreground: 0 0% 17%;
+    --sidebar-border: 36 15% 85%;
+    --sidebar-ring: 0 0% 17%;
+  }
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 36 33% 95%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 36 33% 95%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 36 33% 95%;
+
+    --primary: 36 33% 95%;
+    --primary-foreground: 0 0% 8%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 36 33% 95%;
+
+    --muted: 0 0% 18%;
+    --muted-foreground: 36 15% 60%;
+
+    --accent: 16 45% 55%;
+    --accent-foreground: 36 33% 97%;
+
+    --terracotta: 16 45% 55%;
+    --olive: 82 25% 50%;
+    --wine: 345 35% 45%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 36 33% 95%;
+
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 36 33% 95%;
+    --sidebar-primary: 36 33% 95%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 36 33% 95%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 36 33% 95%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Boska', serif;
+  }
+
+  /* Smooth transitions for all interactive elements */
+  a, button {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  /* Subtle entrance animations for sections */
+  section {
+    @apply animate-fade-in;
+  }
+
+  /* Images with smooth loading */
+  img {
+    @apply transition-opacity duration-500 ease-out;
+  }
+}
+
+@layer components {
+  /* Editorial micro-caption style */
+  .micro-caption {
+    @apply text-xs tracking-wider uppercase text-muted-foreground;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.1em;
+  }
+
+  /* Elegant link underline animation */
+  .editorial-link {
+    @apply relative inline-block;
+  }
+
+  .editorial-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-px bg-foreground origin-bottom-right transition-transform duration-500 ease-out scale-x-0;
+  }
+
+  .editorial-link:hover::after {
+    @apply origin-bottom-left scale-x-100;
+  }
+
+  /* Image with editorial treatment */
+  .editorial-image {
+    @apply transition-all duration-700 ease-out;
+  }
+
+  .editorial-image:hover {
+    @apply scale-[1.02];
+  }
+
+  /* Gentle hover lift effect */
+  .hover-lift {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Subtle text reveal on hover */
+  .text-reveal {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .text-reveal:hover {
+    @apply tracking-wide;
+  }
+
+  /* Smooth button interactions */
+  .btn-smooth {
+    @apply relative overflow-hidden transition-all duration-500 ease-out;
+  }
+
+  .btn-smooth::before {
+    content: '';
+    @apply absolute inset-0 bg-foreground/5 translate-y-full transition-transform duration-500 ease-out;
+  }
+
+  .btn-smooth:hover::before {
+    @apply translate-y-0;
+  }
+
+  /* Fade up on scroll placeholder */
+  .fade-up {
+    @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
+  }
+
+  .fade-up.visible {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+@layer utilities {
+  /* Floating animation - like floating on water */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  
+  .floating-item {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .floating-item-delay-1 {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+  
+  .floating-item-delay-2 {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+  
+  .floating-item-delay-3 {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 1.5s;
+  }
+  
+  .floating-item-delay-4 {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+  
+  .floating-item-delay-5 {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 2.5s;
+  }
+
+  /* Large editorial headings */
+  .heading-display {
+    font-family: 'Boska', serif;
+    @apply text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-tight;
+  }
+
+  .heading-editorial {
+    font-family: 'Boska', serif;
+    @apply text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight;
+  }
+
+  .heading-section {
+    font-family: 'Boska', serif;
+    @apply text-2xl md:text-3xl font-medium;
+  }
+
+  /* Body text styles */
+  .body-editorial {
+    font-family: 'DM Sans', sans-serif;
+    @apply text-base md:text-lg leading-relaxed;
+  }
+
+  /* Breathing space */
+  .section-breathing {
+    @apply py-20 md:py-32 lg:py-40;
+  }
+}
