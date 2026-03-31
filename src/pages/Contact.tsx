@@ -176,9 +176,9 @@ const Contact = () => {
               </div>
 
               <div>
-                <h3 className="micro-caption mb-4">Location</h3>
-                <p className="text-lg">Milan, Italy</p>
-                <p className="text-muted-foreground mt-2">Available for travel worldwide</p>
+                <h3 className="micro-caption mb-4">Based</h3>
+                <p className="text-lg">Online, everywhere</p>
+                <p className="text-muted-foreground mt-2">New recipes published weekly</p>
               </div>
 
               <div>
