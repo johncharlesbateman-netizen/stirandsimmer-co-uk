@@ -2,15 +2,15 @@ import Layout from "@/components/Layout";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
 import { Link } from "react-router-dom";
 
-const sofiaImage = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=85";
+const brandImage = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=85";
 
-const clientTypes = [
-  "Fine Dining Restaurants",
-  "Artisan Food Brands",
-  "Editorial Publications",
-  "Hospitality Groups",
-  "Food & Beverage Agencies",
-  "Cookbook Authors",
+const audienceTypes = [
+  "Home Cooks",
+  "Busy Families",
+  "Health-Conscious Foodies",
+  "Weekend Entertainers",
+  "Beginner Chefs",
+  "Meal Prep Enthusiasts",
 ];
 
 const carouselImages = [
