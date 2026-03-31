@@ -92,10 +92,10 @@ const Index = () => {
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-3xl">
             <p className="heading-section text-muted-foreground leading-relaxed">
-              I create images that make you taste with your eyes. Every photograph tells a story of 
-              <span className="text-foreground"> craft</span>, 
-              <span className="text-foreground"> passion</span>, and 
-              <span className="text-foreground"> flavor</span>.
+              We believe food is more than fuel — it's a celebration of 
+              <span className="text-foreground"> tradition</span>, 
+              <span className="text-foreground"> creativity</span>, and 
+              <span className="text-foreground"> togetherness</span>.
             </p>
           </div>
         </div>
