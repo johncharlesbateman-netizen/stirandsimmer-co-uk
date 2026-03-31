@@ -77,8 +77,8 @@ const Contact = () => {
             <div className="md:col-span-7">
               <h1 className="heading-display mb-6">Contact</h1>
               <p className="text-lg text-muted-foreground mb-12 max-w-lg">
-                Have a project in mind? I'd love to hear about it. 
-                Fill out the form below and I'll get back to you within 48 hours.
+                Have a recipe request or want to collaborate? 
+                Drop us a message and we'll get back to you within 48 hours.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-8">
