@@ -9,6 +9,7 @@ export const categoryLabels: Record<RecipeCategory, string> = {
   pork: "Pork",
   spicy: "Spicy",
   seafood: "Seafood",
+  pasta: "Pasta Heaven",
   lunch_suggestions: "Lunch Suggestions",
   sweets: "Sweets to Tempt",
 };
@@ -20,6 +21,7 @@ export const allCategories: RecipeCategory[] = [
   "pork",
   "spicy",
   "seafood",
+  "pasta",
   "lunch_suggestions",
   "sweets",
 ];
