@@ -36,27 +36,27 @@ const About = () => {
               
               <div className="space-y-8 body-editorial text-muted-foreground">
                 <p className="text-foreground text-xl md:text-2xl font-display leading-relaxed">
-                  I photograph food the same way people experience it — slowly, 
-                  with attention to texture, light and emotion.
+                  We create recipes the same way we enjoy food — with care, 
+                  curiosity, and a love for fresh, honest ingredients.
                 </p>
                 
                 <p>
-                  My work lives between editorial storytelling and commercial precision. 
-                  Every image I create is designed to evoke appetite, memory, and desire — 
-                  the three pillars of how we truly connect with food.
+                  Great Food Recipes is where culinary passion meets practical cooking. 
+                  Every recipe is tested multiple times to ensure it works in your kitchen, 
+                  with your tools, on your schedule.
                 </p>
                 
                 <p>
-                  With over eight years behind the camera, I've collaborated with Michelin-starred 
-                  chefs, heritage food brands, and international publications. My approach combines 
-                  natural light mastery with meticulous styling to create images that feel both 
-                  authentic and aspirational.
+                  From rustic comfort food to modern weeknight meals, our collection 
+                  covers everything you need to bring incredible flavors to your table. 
+                  We focus on seasonal ingredients, simple techniques, and bold flavors 
+                  that make every meal memorable.
                 </p>
                 
                 <p>
-                  I believe that great food photography should make you hungry. It should transport 
-                  you to the table, make you smell the herbs, feel the warmth of freshly baked bread. 
-                  That's the standard I hold myself to with every shot.
+                  We believe cooking should be joyful, not stressful. That's why every 
+                  recipe comes with clear instructions, helpful tips, and the confidence 
+                  that it will taste amazing every single time.
                 </p>
               </div>
             </div>
