@@ -120,9 +120,9 @@ const About = () => {
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             <div>
-              <h2 className="heading-section mb-4">Have a project in mind?</h2>
+              <h2 className="heading-section mb-4">Have a recipe request?</h2>
               <p className="text-muted-foreground">
-                I'd love to discuss how we can work together.
+                We'd love to hear what you want us to cook next.
               </p>
             </div>
             <Link

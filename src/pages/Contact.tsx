@@ -225,7 +225,7 @@ const Contact = () => {
               className="w-full h-full object-cover"
             />
           </div>
-          <p className="micro-caption mt-4">Behind the scenes — On set in Milan</p>
+          <p className="micro-caption mt-4">Behind the scenes — In the kitchen</p>
         </div>
       </section>
     </Layout>
