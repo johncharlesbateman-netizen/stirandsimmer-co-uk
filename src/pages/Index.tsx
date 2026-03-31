@@ -65,19 +65,19 @@ const Index = () => {
             className="text-sm md:text-base tracking-[0.3em] uppercase mb-4 opacity-0 animate-fade-in"
             style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}
           >
-            Food Photography
+            Great Food Recipes
           </p>
           <h1 
             className="font-display text-4xl md:text-6xl lg:text-7xl mb-6 opacity-0 animate-fade-in leading-tight"
             style={{ animationDelay: "0.4s", animationFillMode: "forwards" }}
           >
-            Transforming ingredients into visual stories that sell
+            Recipes that bring people together around the table
           </h1>
           <p 
             className="text-lg md:text-xl font-body tracking-wide opacity-0 animate-fade-in max-w-2xl mx-auto"
             style={{ animationDelay: "0.6s", animationFillMode: "forwards" }}
           >
-            Milan-based photographer crafting images that make you taste with your eyes.
+            Curated recipes crafted with fresh ingredients, bold flavors, and a whole lot of love.
           </p>
         </div>
 
