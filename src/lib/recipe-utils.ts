@@ -21,6 +21,7 @@ export const allCategories: RecipeCategory[] = [
   "pork",
   "spicy",
   "seafood",
+  "pasta",
   "lunch_suggestions",
   "sweets",
 ];
