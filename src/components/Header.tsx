@@ -22,7 +22,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="font-display text-xl tracking-wide hover:opacity-70 transition-opacity duration-300">
-            Sofia Martini
+            Great Food Recipes
           </Link>
 
           {/* Desktop Navigation */}

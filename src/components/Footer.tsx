@@ -47,7 +47,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground">
-            © {currentYear} Sofia Martini. All rights reserved.
+            © {currentYear} Great Food Recipes. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground">
             Crafted with intention

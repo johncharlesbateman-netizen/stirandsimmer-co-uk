@@ -177,8 +177,8 @@ const Index = () => {
             <div className="md:col-span-5">
               <div className="aspect-[3/4] overflow-hidden bg-muted floating-item">
                 <img
-                  src={sofiaImage}
-                  alt="Sofia Martini"
+                  src={brandImage}
+                  alt="Great Food Recipes kitchen"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -186,12 +186,12 @@ const Index = () => {
 
             {/* Content */}
             <div className="md:col-span-6 md:col-start-7">
-              <p className="micro-caption mb-6">The Photographer</p>
-              <h2 className="heading-editorial mb-6">Sofia Martini</h2>
+              <p className="micro-caption mb-6">Our Story</p>
+              <h2 className="heading-editorial mb-6">Great Food Recipes</h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                Milan-based food photographer with over 8 years of experience 
-                capturing the essence of gastronomy. Specializing in natural light and 
-                visual storytelling for award-winning brands and restaurants.
+                A passion project born from a love of home cooking. We share 
+                tested, reliable recipes using fresh seasonal ingredients — 
+                from weeknight dinners to weekend feasts worth celebrating.
               </p>
               <Link
                 to="/about"
