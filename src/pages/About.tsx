@@ -86,9 +86,9 @@ const About = () => {
 
               {/* Location */}
               <div>
-                <h3 className="micro-caption mb-4">Location</h3>
-                <p className="text-sm text-muted-foreground">Based in Milan, Italy</p>
-                <p className="text-sm text-muted-foreground">Available worldwide</p>
+                <h3 className="micro-caption mb-4">Reach</h3>
+                <p className="text-sm text-muted-foreground">Available online, everywhere</p>
+                <p className="text-sm text-muted-foreground">New recipes every week</p>
               </div>
             </div>
           </div>
