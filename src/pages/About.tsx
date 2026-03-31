@@ -74,11 +74,11 @@ const About = () => {
 
               {/* Client Types */}
               <div>
-                <h3 className="micro-caption mb-6">I Work With</h3>
+                <h3 className="micro-caption mb-6">We Cook For</h3>
                 <ul className="space-y-3">
-                  {clientTypes.map((client) => (
-                    <li key={client} className="text-sm text-muted-foreground">
-                      {client}
+                  {audienceTypes.map((audience) => (
+                    <li key={audience} className="text-sm text-muted-foreground">
+                      {audience}
                     </li>
                   ))}
                 </ul>
