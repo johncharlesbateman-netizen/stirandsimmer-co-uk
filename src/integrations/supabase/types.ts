@@ -14,7 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      recipes: {
+        Row: {
+          category: Database["public"]["Enums"]["recipe_category"]
+          cook_time_minutes: number | null
+          created_at: string
+          description: string
+          id: string
+          image_url: string | null
+          ingredients: Json
+          instructions: Json
+          is_seasonal: boolean | null
+          prep_time_minutes: number | null
+          servings: number | null
+          slug: string
+          tips: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: Database["public"]["Enums"]["recipe_category"]
+          cook_time_minutes?: number | null
+          created_at?: string
+          description: string
+          id?: string
+          image_url?: string | null
+          ingredients?: Json
+          instructions?: Json
+          is_seasonal?: boolean | null
+          prep_time_minutes?: number | null
+          servings?: number | null
+          slug: string
+          tips?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["recipe_category"]
+          cook_time_minutes?: number | null
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string | null
+          ingredients?: Json
+          instructions?: Json
+          is_seasonal?: boolean | null
+          prep_time_minutes?: number | null
+          servings?: number | null
+          slug?: string
+          tips?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +76,15 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      recipe_category:
+        | "chicken"
+        | "beef"
+        | "lamb"
+        | "pork"
+        | "spicy"
+        | "seafood"
+        | "lunch_suggestions"
+        | "sweets"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +211,17 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      recipe_category: [
+        "chicken",
+        "beef",
+        "lamb",
+        "pork",
+        "spicy",
+        "seafood",
+        "lunch_suggestions",
+        "sweets",
+      ],
+    },
   },
 } as const
