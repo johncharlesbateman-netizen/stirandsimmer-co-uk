@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
-const sofiaImage = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=85";
+const brandImage = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=85";
 
 const galleryImages = [
   {
@@ -65,19 +65,19 @@ const Index = () => {
             className="text-sm md:text-base tracking-[0.3em] uppercase mb-4 opacity-0 animate-fade-in"
             style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}
           >
-            Food Photography
+            Great Food Recipes
           </p>
           <h1 
             className="font-display text-4xl md:text-6xl lg:text-7xl mb-6 opacity-0 animate-fade-in leading-tight"
             style={{ animationDelay: "0.4s", animationFillMode: "forwards" }}
           >
-            Transforming ingredients into visual stories that sell
+            Recipes that bring people together around the table
           </h1>
           <p 
             className="text-lg md:text-xl font-body tracking-wide opacity-0 animate-fade-in max-w-2xl mx-auto"
             style={{ animationDelay: "0.6s", animationFillMode: "forwards" }}
           >
-            Milan-based photographer crafting images that make you taste with your eyes.
+            Curated recipes crafted with fresh ingredients, bold flavors, and a whole lot of love.
           </p>
         </div>
 
@@ -92,10 +92,10 @@ const Index = () => {
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-3xl">
             <p className="heading-section text-muted-foreground leading-relaxed">
-              I create images that make you taste with your eyes. Every photograph tells a story of 
-              <span className="text-foreground"> craft</span>, 
-              <span className="text-foreground"> passion</span>, and 
-              <span className="text-foreground"> flavor</span>.
+              We believe food is more than fuel — it's a celebration of 
+              <span className="text-foreground"> tradition</span>, 
+              <span className="text-foreground"> creativity</span>, and 
+              <span className="text-foreground"> togetherness</span>.
             </p>
           </div>
         </div>
@@ -177,8 +177,8 @@ const Index = () => {
             <div className="md:col-span-5">
               <div className="aspect-[3/4] overflow-hidden bg-muted floating-item">
                 <img
-                  src={sofiaImage}
-                  alt="Sofia Martini"
+                  src={brandImage}
+                  alt="Great Food Recipes kitchen"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -186,12 +186,12 @@ const Index = () => {
 
             {/* Content */}
             <div className="md:col-span-6 md:col-start-7">
-              <p className="micro-caption mb-6">The Photographer</p>
-              <h2 className="heading-editorial mb-6">Sofia Martini</h2>
+              <p className="micro-caption mb-6">Our Story</p>
+              <h2 className="heading-editorial mb-6">Great Food Recipes</h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                Milan-based food photographer with over 8 years of experience 
-                capturing the essence of gastronomy. Specializing in natural light and 
-                visual storytelling for award-winning brands and restaurants.
+                A passion project born from a love of home cooking. We share 
+                tested, reliable recipes using fresh seasonal ingredients — 
+                from weeknight dinners to weekend feasts worth celebrating.
               </p>
               <Link
                 to="/about"

@@ -77,8 +77,8 @@ const Contact = () => {
             <div className="md:col-span-7">
               <h1 className="heading-display mb-6">Contact</h1>
               <p className="text-lg text-muted-foreground mb-12 max-w-lg">
-                Have a project in mind? I'd love to hear about it. 
-                Fill out the form below and I'll get back to you within 48 hours.
+                Have a recipe request or want to collaborate? 
+                Drop us a message and we'll get back to you within 48 hours.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-8">
@@ -168,17 +168,17 @@ const Contact = () => {
               <div>
                 <h3 className="micro-caption mb-4">Email</h3>
                 <a 
-                  href="mailto:hello@sofiamartini.com" 
+                  href="mailto:hello@greatfoodrecipes.com" 
                   className="text-lg editorial-link"
                 >
-                  hello@sofiamartini.com
+                  hello@greatfoodrecipes.com
                 </a>
               </div>
 
               <div>
-                <h3 className="micro-caption mb-4">Location</h3>
-                <p className="text-lg">Milan, Italy</p>
-                <p className="text-muted-foreground mt-2">Available for travel worldwide</p>
+                <h3 className="micro-caption mb-4">Based</h3>
+                <p className="text-lg">Online, everywhere</p>
+                <p className="text-muted-foreground mt-2">New recipes published weekly</p>
               </div>
 
               <div>
@@ -225,7 +225,7 @@ const Contact = () => {
               className="w-full h-full object-cover"
             />
           </div>
-          <p className="micro-caption mt-4">Behind the scenes — On set in Milan</p>
+          <p className="micro-caption mt-4">Behind the scenes — In the kitchen</p>
         </div>
       </section>
     </Layout>

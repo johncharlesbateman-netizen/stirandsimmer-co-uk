@@ -2,15 +2,15 @@ import Layout from "@/components/Layout";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
 import { Link } from "react-router-dom";
 
-const sofiaImage = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=85";
+const brandImage = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=85";
 
-const clientTypes = [
-  "Fine Dining Restaurants",
-  "Artisan Food Brands",
-  "Editorial Publications",
-  "Hospitality Groups",
-  "Food & Beverage Agencies",
-  "Cookbook Authors",
+const audienceTypes = [
+  "Home Cooks",
+  "Busy Families",
+  "Health-Conscious Foodies",
+  "Weekend Entertainers",
+  "Beginner Chefs",
+  "Meal Prep Enthusiasts",
 ];
 
 const carouselImages = [
@@ -36,27 +36,27 @@ const About = () => {
               
               <div className="space-y-8 body-editorial text-muted-foreground">
                 <p className="text-foreground text-xl md:text-2xl font-display leading-relaxed">
-                  I photograph food the same way people experience it — slowly, 
-                  with attention to texture, light and emotion.
+                  We create recipes the same way we enjoy food — with care, 
+                  curiosity, and a love for fresh, honest ingredients.
                 </p>
                 
                 <p>
-                  My work lives between editorial storytelling and commercial precision. 
-                  Every image I create is designed to evoke appetite, memory, and desire — 
-                  the three pillars of how we truly connect with food.
+                  Great Food Recipes is where culinary passion meets practical cooking. 
+                  Every recipe is tested multiple times to ensure it works in your kitchen, 
+                  with your tools, on your schedule.
                 </p>
                 
                 <p>
-                  With over eight years behind the camera, I've collaborated with Michelin-starred 
-                  chefs, heritage food brands, and international publications. My approach combines 
-                  natural light mastery with meticulous styling to create images that feel both 
-                  authentic and aspirational.
+                  From rustic comfort food to modern weeknight meals, our collection 
+                  covers everything you need to bring incredible flavors to your table. 
+                  We focus on seasonal ingredients, simple techniques, and bold flavors 
+                  that make every meal memorable.
                 </p>
                 
                 <p>
-                  I believe that great food photography should make you hungry. It should transport 
-                  you to the table, make you smell the herbs, feel the warmth of freshly baked bread. 
-                  That's the standard I hold myself to with every shot.
+                  We believe cooking should be joyful, not stressful. That's why every 
+                  recipe comes with clear instructions, helpful tips, and the confidence 
+                  that it will taste amazing every single time.
                 </p>
               </div>
             </div>
@@ -66,19 +66,19 @@ const About = () => {
               {/* Portrait */}
               <div className="aspect-[3/4] bg-muted overflow-hidden">
                 <img
-                  src={sofiaImage}
-                  alt="Sofia Martini"
+                  src={brandImage}
+                  alt="Great Food Recipes kitchen"
                   className="w-full h-full object-cover"
                 />
               </div>
 
               {/* Client Types */}
               <div>
-                <h3 className="micro-caption mb-6">I Work With</h3>
+                <h3 className="micro-caption mb-6">We Cook For</h3>
                 <ul className="space-y-3">
-                  {clientTypes.map((client) => (
-                    <li key={client} className="text-sm text-muted-foreground">
-                      {client}
+                  {audienceTypes.map((audience) => (
+                    <li key={audience} className="text-sm text-muted-foreground">
+                      {audience}
                     </li>
                   ))}
                 </ul>
@@ -86,9 +86,9 @@ const About = () => {
 
               {/* Location */}
               <div>
-                <h3 className="micro-caption mb-4">Location</h3>
-                <p className="text-sm text-muted-foreground">Based in Milan, Italy</p>
-                <p className="text-sm text-muted-foreground">Available worldwide</p>
+                <h3 className="micro-caption mb-4">Reach</h3>
+                <p className="text-sm text-muted-foreground">Available online, everywhere</p>
+                <p className="text-sm text-muted-foreground">New recipes every week</p>
               </div>
             </div>
           </div>
@@ -104,13 +104,13 @@ const About = () => {
       <section className="section-breathing border-t border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <blockquote className="max-w-3xl">
-            <p className="heading-editorial text-muted-foreground italic leading-relaxed">
-              "Food is memory, identity, and pleasure. My camera tries to capture 
-              all three in a single frame."
-            </p>
-            <footer className="mt-8">
-              <p className="micro-caption">— Sofia Martini</p>
-            </footer>
+              <p className="heading-editorial text-muted-foreground italic leading-relaxed">
+                "Good food doesn't need to be complicated. It needs to be made 
+                with intention, fresh ingredients, and a little bit of joy."
+              </p>
+              <footer className="mt-8">
+                <p className="micro-caption">— Great Food Recipes</p>
+              </footer>
           </blockquote>
         </div>
       </section>
@@ -120,9 +120,9 @@ const About = () => {
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             <div>
-              <h2 className="heading-section mb-4">Have a project in mind?</h2>
+              <h2 className="heading-section mb-4">Have a recipe request?</h2>
               <p className="text-muted-foreground">
-                I'd love to discuss how we can work together.
+                We'd love to hear what you want us to cook next.
               </p>
             </div>
             <Link
