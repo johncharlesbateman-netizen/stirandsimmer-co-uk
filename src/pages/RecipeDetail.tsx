@@ -9,6 +9,7 @@ import { categoryLabels } from "@/lib/recipe-utils";
 
 const RecipeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { toast } = useToast();
 
   const { data: recipe, isLoading } = useQuery({
     queryKey: ["recipe", slug],
