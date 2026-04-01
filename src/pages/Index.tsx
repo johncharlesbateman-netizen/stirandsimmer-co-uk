@@ -65,27 +65,6 @@ const Index = () => {
       {/* Featured Recipes from Database */}
       <FeaturedRecipes />
 
-      {/* About Sofia Section */}
-      <section className="section-breathing border-t border-border">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="max-w-2xl">
-            <p className="micro-caption mb-6">Our Story</p>
-            <h2 className="heading-editorial mb-6">Great Food Recipes</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              A passion project born from a love of home cooking. We share 
-              tested, reliable recipes using fresh seasonal ingredients — 
-              from weeknight dinners to weekend feasts worth celebrating.
-            </p>
-            <Link
-              to="/about"
-              className="inline-block px-8 py-4 border border-foreground text-foreground text-sm tracking-wider uppercase hover:bg-foreground hover:text-background transition-colors"
-            >
-              Learn More
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="section-breathing border-t border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20 text-center">
