@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import RecipeCard from "@/components/RecipeCard";
