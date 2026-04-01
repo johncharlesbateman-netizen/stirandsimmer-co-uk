@@ -114,14 +114,22 @@ const RecipeDetail = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Back Link */}
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-8">
+      {/* Back Link & Share */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-8 flex items-center justify-between">
         <Link
           to="/recipes"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Recipes
+        </Link>
+        <button
+          onClick={handleShare}
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Share2 className="w-4 h-4" />
+          Share
+        </button>
         </Link>
       </div>
 
