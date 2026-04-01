@@ -83,6 +83,16 @@ const RecipeDetail = () => {
   };
 
   const pageUrl = `https://greatfoodrecipes.co.uk/recipes/${recipe.slug}`;
+  const shareUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-recipe?slug=${recipe.slug}`;
+
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      toast({ title: "Link copied!", description: "Share this link on social media for a rich preview." });
+    } catch {
+      toast({ title: "Couldn't copy", description: shareUrl, variant: "destructive" });
+    }
+  };
 
   return (
     <Layout>
