@@ -6,44 +6,6 @@ const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777
 
 const brandImage = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=85";
 
-const galleryImages = [
-  {
-    src: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1200&q=85",
-    alt: "Fresh pasta with herbs",
-    caption: "Fresh basil, San Marzano tomatoes",
-    subcaption: "Warm afternoon light",
-    aspectRatio: "landscape" as const,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&q=85",
-    alt: "Artisan pizza",
-    caption: "Wood-fired, 48-hour fermentation",
-    subcaption: "Earthy tones, natural texture",
-    aspectRatio: "portrait" as const,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=1200&q=85",
-    alt: "Fresh salad composition",
-    caption: "Garden vegetables, edible flowers",
-    subcaption: "Morning dew, soft diffused light",
-    aspectRatio: "square" as const,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=1200&q=85",
-    alt: "Gourmet burger",
-    caption: "Brioche, aged cheddar, caramelized onions",
-    subcaption: "Controlled studio lighting",
-    aspectRatio: "landscape" as const,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=1200&q=85",
-    alt: "Fresh croissants",
-    caption: "French butter, 72 layers",
-    subcaption: "Golden morning warmth",
-    aspectRatio: "wide" as const,
-  },
-];
-
 const Index = () => {
   return (
     <Layout>
