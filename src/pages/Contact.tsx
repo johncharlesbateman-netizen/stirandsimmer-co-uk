@@ -1,4 +1,5 @@
 import { useState } from "react";
+import contactBehindScenes from "@/assets/contact-behind-scenes.jpg";
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -218,7 +219,7 @@ const Contact = () => {
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="aspect-[21/9] overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1920&q=85"
+              src={contactBehindScenes}
               alt="Behind the scenes"
               className="w-full h-full object-cover"
             />
