@@ -41,12 +41,6 @@ const About = () => {
                 </p>
                 
                 <p>
-                  Great Food Recipes is where culinary passion meets practical cooking. 
-                  Every recipe is tested multiple times to ensure it works in your kitchen, 
-                  with your tools, on your schedule.
-                </p>
-                
-                <p>
                   From rustic comfort food to modern weeknight meals, our collection 
                   covers everything you need to bring incredible flavors to your table. 
                   We focus on seasonal ingredients, simple techniques, and bold flavors 
@@ -55,8 +49,8 @@ const About = () => {
                 
                 <p>
                   We believe cooking should be joyful, not stressful. That's why every 
-                  recipe comes with clear instructions, helpful tips, and the confidence 
-                  that it will taste amazing every single time.
+                  recipe comes with clear instructions, and we're always adding helpful 
+                  tips so you can cook with confidence every single time.
                 </p>
               </div>
             </div>
