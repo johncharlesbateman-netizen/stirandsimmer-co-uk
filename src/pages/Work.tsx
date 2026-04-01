@@ -7,7 +7,7 @@ const projects = [
     id: "seasonal-italian-cuisine",
     title: "Seasonal Italian Cuisine",
     category: "Restaurant Editorial",
-    description: "A celebration of authentic Italian flavors, captured through the lens of natural light and earthy textures. Shot for Osteria del Tempo in Milan.",
+    description: "A celebration of authentic Italian flavours, captured through the lens of natural light and earthy textures. Shot for Osteria del Tempo in Milan.",
     image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=1200&q=85",
     images: [
       {
