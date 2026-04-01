@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import FeaturedRecipes from "@/components/FeaturedRecipes";
 import { Link } from "react-router-dom";
