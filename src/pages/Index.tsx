@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import FeaturedRecipes from "@/components/FeaturedRecipes";
 import { Link } from "react-router-dom";
@@ -8,6 +9,11 @@ const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777
 const Index = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>Great Food Recipes — Delicious Recipes for Every Occasion</title>
+        <meta name="description" content="Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love. Discover chicken, beef, seafood, pasta, sweets and more." />
+        <link rel="canonical" href="https://greatfoodrecipes.co.uk" />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative h-screen w-screen flex items-center justify-center overflow-hidden" style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', marginTop: '-5rem', width: '100vw' }}>
         {/* Background Image */}

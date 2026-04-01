@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -69,6 +70,11 @@ const Contact = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Contact — Great Food Recipes</title>
+        <meta name="description" content="Get in touch with Great Food Recipes. We'd love to hear from you — questions, suggestions, or just to say hello." />
+        <link rel="canonical" href="https://greatfoodrecipes.co.uk/contact" />
+      </Helmet>
       {/* Header */}
       <section className="section-breathing pb-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">

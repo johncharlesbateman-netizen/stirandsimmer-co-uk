@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
 import { Link } from "react-router-dom";
@@ -26,6 +27,11 @@ const carouselImages = [
 const About = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>About — Great Food Recipes</title>
+        <meta name="description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
+        <link rel="canonical" href="https://greatfoodrecipes.co.uk/about" />
+      </Helmet>
       {/* Header */}
       <section className="section-breathing pb-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
