@@ -1,13 +1,15 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, Clock, Users, Leaf } from "lucide-react";
+import { ArrowLeft, Clock, Users, Leaf, Share2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
 
 const RecipeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { toast } = useToast();
 
   const { data: recipe, isLoading } = useQuery({
     queryKey: ["recipe", slug],
@@ -81,6 +83,16 @@ const RecipeDetail = () => {
   };
 
   const pageUrl = `https://greatfoodrecipes.co.uk/recipes/${recipe.slug}`;
+  const shareUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-recipe?slug=${recipe.slug}`;
+
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      toast({ title: "Link copied!", description: "Share this link on social media for a rich preview." });
+    } catch {
+      toast({ title: "Couldn't copy", description: shareUrl, variant: "destructive" });
+    }
+  };
 
   return (
     <Layout>
@@ -102,8 +114,8 @@ const RecipeDetail = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Back Link */}
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-8">
+      {/* Back Link & Share */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-8 flex items-center justify-between">
         <Link
           to="/recipes"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -111,6 +123,13 @@ const RecipeDetail = () => {
           <ArrowLeft className="w-4 h-4" />
           Back to Recipes
         </Link>
+        <button
+          onClick={handleShare}
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Share2 className="w-4 h-4" />
+          Share
+        </button>
       </div>
 
       {/* Hero */}
