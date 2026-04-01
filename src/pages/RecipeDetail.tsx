@@ -80,8 +80,24 @@ const RecipeDetail = () => {
     dateModified: recipe.updated_at,
   };
 
+  const pageUrl = `https://greatfoodrecipes.co.uk/recipes/${recipe.slug}`;
+
   return (
     <Layout>
+      <Helmet>
+        <title>{recipe.title} — Great Food Recipes</title>
+        <meta name="description" content={recipe.description} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={recipe.title} />
+        <meta property="og:description" content={recipe.description} />
+        <meta property="og:url" content={pageUrl} />
+        {recipe.image_url && <meta property="og:image" content={recipe.image_url} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={recipe.title} />
+        <meta name="twitter:description" content={recipe.description} />
+        {recipe.image_url && <meta name="twitter:image" content={recipe.image_url} />}
+        <link rel="canonical" href={pageUrl} />
+      </Helmet>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
