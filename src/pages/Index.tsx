@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
-const brandImage = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=85";
 
 const Index = () => {
   return (
@@ -69,34 +68,20 @@ const Index = () => {
       {/* About Sofia Section */}
       <section className="section-breathing border-t border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
-            {/* Photo */}
-            <div className="md:col-span-5">
-              <div className="aspect-[3/4] overflow-hidden bg-muted floating-item">
-                <img
-                  src={brandImage}
-                  alt="Great Food Recipes kitchen"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="md:col-span-6 md:col-start-7">
-              <p className="micro-caption mb-6">Our Story</p>
-              <h2 className="heading-editorial mb-6">Great Food Recipes</h2>
-              <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                A passion project born from a love of home cooking. We share 
-                tested, reliable recipes using fresh seasonal ingredients — 
-                from weeknight dinners to weekend feasts worth celebrating.
-              </p>
-              <Link
-                to="/about"
-                className="inline-block px-8 py-4 border border-foreground text-foreground text-sm tracking-wider uppercase hover:bg-foreground hover:text-background transition-colors"
-              >
-                Learn More
-              </Link>
-            </div>
+          <div className="max-w-2xl">
+            <p className="micro-caption mb-6">Our Story</p>
+            <h2 className="heading-editorial mb-6">Great Food Recipes</h2>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
+              A passion project born from a love of home cooking. We share 
+              tested, reliable recipes using fresh seasonal ingredients — 
+              from weeknight dinners to weekend feasts worth celebrating.
+            </p>
+            <Link
+              to="/about"
+              className="inline-block px-8 py-4 border border-foreground text-foreground text-sm tracking-wider uppercase hover:bg-foreground hover:text-background transition-colors"
+            >
+              Learn More
+            </Link>
           </div>
         </div>
       </section>
