@@ -25,9 +25,6 @@ const Footer = () => {
               <Link to="/about" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
                 About
               </Link>
-              <Link to="/styleguide" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
-                Styleguide
-              </Link>
               <Link to="/contact" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
                 Contact
               </Link>
