@@ -130,7 +130,6 @@ const RecipeDetail = () => {
           <Share2 className="w-4 h-4" />
           Share
         </button>
-        </Link>
       </div>
 
       {/* Hero */}
