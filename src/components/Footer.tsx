@@ -40,7 +40,7 @@ const Footer = () => {
             <div className="space-y-3 text-sm">
               <p className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-default">hello@greatfoodrecipes.com</p>
               <a 
-                href="https://instagram.com/Great.Food.Recipes" 
+                href="https://www.instagram.com/Great.Food.Recipes/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="block opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
