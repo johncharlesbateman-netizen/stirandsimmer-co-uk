@@ -53,8 +53,38 @@ const RecipeDetail = () => {
   const instructions = recipe.instructions as string[];
   const totalTime = (recipe.prep_time_minutes || 0) + (recipe.cook_time_minutes || 0);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Recipe",
+    name: recipe.title,
+    description: recipe.description,
+    ...(recipe.image_url && { image: recipe.image_url }),
+    ...(recipe.prep_time_minutes && { prepTime: `PT${recipe.prep_time_minutes}M` }),
+    ...(recipe.cook_time_minutes && { cookTime: `PT${recipe.cook_time_minutes}M` }),
+    ...(totalTime > 0 && { totalTime: `PT${totalTime}M` }),
+    ...(recipe.servings && { recipeYield: `${recipe.servings} servings` }),
+    recipeCategory: categoryLabels[recipe.category],
+    recipeIngredient: ingredients,
+    recipeInstructions: instructions.map((step, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      text: step,
+    })),
+    author: {
+      "@type": "Organization",
+      name: "Great Food Recipes",
+      url: "https://greatfoodrecipes.co.uk",
+    },
+    datePublished: recipe.created_at,
+    dateModified: recipe.updated_at,
+  };
+
   return (
     <Layout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Back Link */}
       <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-8">
         <Link
