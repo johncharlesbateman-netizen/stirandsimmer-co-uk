@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
 import { Link } from "react-router-dom";
 
-const brandImage = "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=800&q=85";
+const brandImage = "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=800&q=85";
 
 const audienceTypes = [
   "Home Cooks",
