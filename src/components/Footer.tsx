@@ -35,7 +35,7 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="micro-caption">Get in Touch</h4>
             <div className="space-y-3 text-sm">
-              <p className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-default">hello@greatfoodrecipes.com</p>
+              <p className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-default">hello@greatfoodrecipes.co.uk</p>
               <a 
                 href="https://www.instagram.com/Great.Food.Recipes/" 
                 target="_blank" 
