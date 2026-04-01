@@ -55,7 +55,7 @@ const projects = [
     id: "fine-dining-experience",
     title: "Fine Dining Experience",
     category: "Chef Tasting Menu",
-    description: "Documenting the artistry of a 12-course tasting menu. Minimalist compositions that honor the chef's vision at Ristorante Stellare.",
+    description: "Documenting the artistry of a 12-course tasting menu. Minimalist compositions that honour the chef's vision at Ristorante Stellare.",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85",
     images: [
       {
