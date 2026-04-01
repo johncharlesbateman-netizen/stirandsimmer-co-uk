@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import ImageWithCaption from "@/components/ImageWithCaption";
+import FeaturedRecipes from "@/components/FeaturedRecipes";
 import { Link } from "react-router-dom";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
