@@ -1,4 +1,5 @@
 import { useState } from "react";
+import contactBehindScenes from "@/assets/contact-behind-scenes.jpg";
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
