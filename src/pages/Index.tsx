@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
-const brandImage = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=85";
 
 const Index = () => {
   return (
