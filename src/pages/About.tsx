@@ -42,8 +42,8 @@ const About = () => {
                 
                 <p>
                   From rustic comfort food to modern weeknight meals, our collection 
-                  covers everything you need to bring incredible flavors to your table. 
-                  We focus on seasonal ingredients, simple techniques, and bold flavors 
+                  covers everything you need to bring incredible flavours to your table. 
+                  We focus on seasonal ingredients, simple techniques, and bold flavours 
                   that make every meal memorable.
                 </p>
                 

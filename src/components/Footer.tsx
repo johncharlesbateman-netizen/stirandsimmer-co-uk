@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-display text-xl">Great Food Recipes</h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Delicious recipes crafted with love, flavor, and fresh ingredients.
+              Delicious recipes crafted with love, flavour, and fresh ingredients.
             </p>
           </div>
 

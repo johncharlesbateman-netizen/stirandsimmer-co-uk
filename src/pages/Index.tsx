@@ -77,7 +77,7 @@ const Index = () => {
             className="text-lg md:text-xl font-body tracking-wide opacity-0 animate-fade-in max-w-2xl mx-auto"
             style={{ animationDelay: "0.6s", animationFillMode: "forwards" }}
           >
-            Curated recipes crafted with fresh ingredients, bold flavors, and a whole lot of love.
+            Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love.
           </p>
         </div>
 
