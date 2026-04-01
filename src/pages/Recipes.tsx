@@ -33,6 +33,11 @@ const Recipes = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Recipes — Great Food Recipes</title>
+        <meta name="description" content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions." />
+        <link rel="canonical" href="https://greatfoodrecipes.co.uk/recipes" />
+      </Helmet>
       {/* Header */}
       <section className="section-breathing border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
