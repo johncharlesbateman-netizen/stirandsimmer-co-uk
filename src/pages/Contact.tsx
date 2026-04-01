@@ -175,10 +175,10 @@ const Contact = () => {
               <div>
                 <h3 className="micro-caption mb-4">Email</h3>
                 <a 
-                  href="mailto:hello@greatfoodrecipes.com" 
-                  className="text-lg editorial-link"
-                >
-                  hello@greatfoodrecipes.com
+                   href="mailto:hello@greatfoodrecipes.co.uk" 
+                   className="text-lg editorial-link"
+                 >
+                   hello@greatfoodrecipes.co.uk
                 </a>
               </div>
 
