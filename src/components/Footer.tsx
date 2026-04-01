@@ -19,6 +19,9 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="micro-caption">Navigate</h4>
             <nav className="flex flex-col gap-3">
+              <Link to="/recipes" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
+                Recipes
+              </Link>
               <Link to="/about" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
                 About
               </Link>
