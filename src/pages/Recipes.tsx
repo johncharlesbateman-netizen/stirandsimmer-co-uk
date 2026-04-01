@@ -74,33 +74,49 @@ const Recipes = () => {
         </div>
       </section>
 
-      {/* Category Filters */}
-      <section className="py-8 border-b border-border sticky top-20 z-40 bg-background/95 backdrop-blur-sm">
+      {/* Category Grid */}
+      <section className="py-10 md:py-14 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="flex flex-wrap gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+            {/* All button */}
             <button
               onClick={() => setActiveCategory("all")}
               className={cn(
-                "px-4 py-2 text-sm tracking-wider uppercase border transition-colors duration-300",
+                "relative aspect-square overflow-hidden group transition-all duration-300",
                 activeCategory === "all"
-                  ? "bg-foreground text-background border-foreground"
-                  : "border-border text-muted-foreground hover:text-foreground hover:border-foreground"
+                  ? "ring-2 ring-foreground ring-offset-2 ring-offset-background"
+                  : "opacity-80 hover:opacity-100"
               )}
             >
-              All
+              <div className="absolute inset-0 bg-foreground" />
+              <span className="relative z-10 flex items-center justify-center h-full text-sm tracking-[0.2em] uppercase font-medium text-background">
+                All
+              </span>
             </button>
+
             {allCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={cn(
-                  "px-4 py-2 text-sm tracking-wider uppercase border transition-colors duration-300",
+                  "relative aspect-square overflow-hidden group transition-all duration-300",
                   activeCategory === cat
-                    ? "bg-foreground text-background border-foreground"
-                    : "border-border text-muted-foreground hover:text-foreground hover:border-foreground"
+                    ? "ring-2 ring-foreground ring-offset-2 ring-offset-background"
+                    : "opacity-80 hover:opacity-100"
                 )}
               >
-                {categoryLabels[cat]}
+                <img
+                  src={categoryImages[cat]}
+                  alt={categoryLabels[cat]}
+                  loading="lazy"
+                  width={640}
+                  height={640}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300" />
+                <span className="relative z-10 flex items-center justify-center h-full text-sm tracking-[0.2em] uppercase font-medium text-white drop-shadow-md">
+                  {categoryLabels[cat]}
+                </span>
               </button>
             ))}
           </div>
