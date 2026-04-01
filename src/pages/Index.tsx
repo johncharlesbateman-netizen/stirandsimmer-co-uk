@@ -1,48 +1,10 @@
 import Layout from "@/components/Layout";
-import ImageWithCaption from "@/components/ImageWithCaption";
+import FeaturedRecipes from "@/components/FeaturedRecipes";
 import { Link } from "react-router-dom";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
 const brandImage = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=85";
-
-const galleryImages = [
-  {
-    src: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1200&q=85",
-    alt: "Fresh pasta with herbs",
-    caption: "Fresh basil, San Marzano tomatoes",
-    subcaption: "Warm afternoon light",
-    aspectRatio: "landscape" as const,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&q=85",
-    alt: "Artisan pizza",
-    caption: "Wood-fired, 48-hour fermentation",
-    subcaption: "Earthy tones, natural texture",
-    aspectRatio: "portrait" as const,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=1200&q=85",
-    alt: "Fresh salad composition",
-    caption: "Garden vegetables, edible flowers",
-    subcaption: "Morning dew, soft diffused light",
-    aspectRatio: "square" as const,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=1200&q=85",
-    alt: "Gourmet burger",
-    caption: "Brioche, aged cheddar, caramelized onions",
-    subcaption: "Controlled studio lighting",
-    aspectRatio: "landscape" as const,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=1200&q=85",
-    alt: "Fresh croissants",
-    caption: "French butter, 72 layers",
-    subcaption: "Golden morning warmth",
-    aspectRatio: "wide" as const,
-  },
-];
 
 const Index = () => {
   return (
@@ -101,73 +63,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Asymmetric Gallery */}
-      <section className="pb-32">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-            {/* Row 1 - Large left, small right */}
-            <div className="md:col-span-7">
-              <ImageWithCaption
-                src={galleryImages[0].src}
-                alt={galleryImages[0].alt}
-                caption={galleryImages[0].caption}
-                subcaption={galleryImages[0].subcaption}
-                aspectRatio="landscape"
-                priority
-                floatDelay={0}
-              />
-            </div>
-            <div className="md:col-span-5 md:pt-24">
-              <ImageWithCaption
-                src={galleryImages[1].src}
-                alt={galleryImages[1].alt}
-                caption={galleryImages[1].caption}
-                subcaption={galleryImages[1].subcaption}
-                aspectRatio="portrait"
-                floatDelay={1}
-              />
-            </div>
-
-            {/* Row 2 - Full width breathing space then offset */}
-            <div className="md:col-span-12 py-12" />
-            
-            <div className="md:col-span-4 md:col-start-2">
-              <ImageWithCaption
-                src={galleryImages[2].src}
-                alt={galleryImages[2].alt}
-                caption={galleryImages[2].caption}
-                subcaption={galleryImages[2].subcaption}
-                aspectRatio="square"
-                floatDelay={2}
-              />
-            </div>
-            <div className="md:col-span-6 md:col-start-7 md:pt-16">
-              <ImageWithCaption
-                src={galleryImages[3].src}
-                alt={galleryImages[3].alt}
-                caption={galleryImages[3].caption}
-                subcaption={galleryImages[3].subcaption}
-                aspectRatio="landscape"
-                floatDelay={3}
-              />
-            </div>
-
-            {/* Row 3 - Wide centered */}
-            <div className="md:col-span-12 py-8" />
-            
-            <div className="md:col-span-10 md:col-start-2">
-              <ImageWithCaption
-                src={galleryImages[4].src}
-                alt={galleryImages[4].alt}
-                caption={galleryImages[4].caption}
-                subcaption={galleryImages[4].subcaption}
-                aspectRatio="wide"
-                floatDelay={4}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Featured Recipes from Database */}
+      <FeaturedRecipes />
 
       {/* About Sofia Section */}
       <section className="section-breathing border-t border-border">
