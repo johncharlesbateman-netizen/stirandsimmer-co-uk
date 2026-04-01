@@ -185,20 +185,12 @@ const Contact = () => {
                 <h3 className="micro-caption mb-4">Social</h3>
                 <div className="space-y-2">
                   <a 
-                    href="https://instagram.com" 
+                    href="https://instagram.com/Great.Food.Recipes" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="block text-lg editorial-link w-fit"
                   >
                     Instagram
-                  </a>
-                  <a 
-                    href="https://pinterest.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="block text-lg editorial-link w-fit"
-                  >
-                    Pinterest
                   </a>
                 </div>
               </div>

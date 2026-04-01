@@ -34,12 +34,19 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* Contact Info */}
+          {/* Connect */}
           <div className="space-y-4">
             <h4 className="micro-caption">Get in Touch</h4>
             <div className="space-y-3 text-sm">
               <p className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-default">hello@greatfoodrecipes.com</p>
-              <p className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-default">Available everywhere</p>
+              <a 
+                href="https://instagram.com/Great.Food.Recipes" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
+              >
+                Instagram
+              </a>
             </div>
           </div>
         </div>
