@@ -80,7 +80,7 @@ const CategoryPage = () => {
       </section>
 
       {/* Category Nav */}
-      <section className="py-10 md:py-14 border-b border-border">
+      <section className="py-8 md:py-10 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
             <Link
