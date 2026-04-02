@@ -80,7 +80,7 @@ const Recipes = () => {
             {allCategories.map((cat) => (
               <Link
                 key={cat}
-                to={`/recipes/${categoryToSlug[cat]}`}
+                to={`/recipes/category/${categoryToSlug[cat]}`}
                 className="relative aspect-square overflow-hidden group transition-all duration-300 opacity-80 hover:opacity-100"
               >
                 <img
