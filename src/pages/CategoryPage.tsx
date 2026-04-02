@@ -79,46 +79,15 @@ const CategoryPage = () => {
         </div>
       </section>
 
-      {/* Category Nav */}
-      <section className="py-8 md:py-10 border-b border-border">
+      {/* Browse All Link */}
+      <section className="py-6 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            <Link
-              to="/recipes"
-              className="relative aspect-square overflow-hidden group transition-all duration-300 opacity-80 hover:opacity-100"
-            >
-              <div className="absolute inset-0 bg-foreground" />
-              <span className="relative z-10 flex items-center justify-center h-full text-sm tracking-[0.2em] uppercase font-medium text-background">
-                All
-              </span>
-            </Link>
-
-            {allCategories.map((cat) => (
-              <Link
-                key={cat}
-                to={`/recipes/category/${categoryToSlug[cat]}`}
-                className={cn(
-                  "relative aspect-square overflow-hidden group transition-all duration-300",
-                  category === cat
-                    ? "ring-2 ring-foreground ring-offset-2 ring-offset-background"
-                    : "opacity-80 hover:opacity-100"
-                )}
-              >
-                <img
-                  src={categoryImages[cat]}
-                  alt={categoryLabels[cat]}
-                  loading="lazy"
-                  width={640}
-                  height={640}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300" />
-                <span className="relative z-10 flex items-center justify-center h-full text-sm tracking-[0.2em] uppercase font-medium text-white drop-shadow-md text-center px-2 leading-tight">
-                  {categoryLabels[cat]}
-                </span>
-              </Link>
-            ))}
-          </div>
+          <Link
+            to="/recipes"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors editorial-link"
+          >
+            ← Browse All Recipes
+          </Link>
         </div>
       </section>
 
