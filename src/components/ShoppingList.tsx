@@ -22,12 +22,12 @@ const ShoppingList = ({ ingredients }: ShoppingListProps) => {
   };
 
   const handleCopy = async () => {
-    const unchecked = ingredients.filter((_, i) => !checked.has(i));
-    const text = unchecked.length > 0 ? unchecked.join("\n") : ingredients.join("\n");
+    const checkedItems = ingredients.filter((_, i) => checked.has(i));
+    const text = checkedItems.length > 0 ? checkedItems.join("\n") : ingredients.join("\n");
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-      toast({ title: "Copied!", description: "Shopping list copied to clipboard." });
+      toast({ title: "Copied!", description: checkedItems.length > 0 ? "Checked items copied to clipboard." : "All items copied to clipboard." });
       setTimeout(() => setCopied(false), 2000);
     } catch {
       toast({ title: "Couldn't copy", variant: "destructive" });
