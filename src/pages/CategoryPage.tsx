@@ -96,7 +96,7 @@ const CategoryPage = () => {
             {allCategories.map((cat) => (
               <Link
                 key={cat}
-                to={`/recipes/${categoryToSlug[cat]}`}
+                to={`/recipes/category/${categoryToSlug[cat]}`}
                 className={cn(
                   "relative aspect-square overflow-hidden group transition-all duration-300",
                   category === cat
