@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
+import ShoppingList from "@/components/ShoppingList";
 
 const RecipeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
