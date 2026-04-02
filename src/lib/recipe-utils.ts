@@ -13,6 +13,17 @@ export const categoryLabels: Record<RecipeCategory, string> = {
   lunch_suggestions: "Lunch Suggestions",
   sweets: "Sweets to Tempt",
 };
+export const categoryHeadings: Record<RecipeCategory, string> = {
+  chicken: "Chicken — From Classic Roasts to Bold World Flavours",
+  beef: "Beef — Hearty, Rich & Full of Character",
+  lamb: "Lamb — Tender Cuts, Big Flavours",
+  pork: "Pork — Comfort Food at Its Finest",
+  spicy: "Spicy — Fiery Dishes for Heat Seekers",
+  seafood: "Seafood — Fresh Catches, Simply Prepared",
+  pasta: "Pasta Heaven — Sauces, Shapes & Slow Sundays",
+  lunch_suggestions: "Lunch — Quick Bites & Midday Favourites",
+  sweets: "Sweets to Tempt — Cakes, Puddings & Guilty Pleasures",
+};
 
 export const categoryDescriptions: Record<RecipeCategory, string> = {
   chicken: "From coq au vin and chicken kiev to satay, tapas and spicy fried chicken — bold chicken dishes for every occasion.",

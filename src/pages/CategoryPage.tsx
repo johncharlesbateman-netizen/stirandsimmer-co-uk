@@ -6,6 +6,7 @@ import RecipeCard from "@/components/RecipeCard";
 import { supabase } from "@/integrations/supabase/client";
 import {
   categoryLabels,
+  categoryHeadings,
   categoryDescriptions,
   categorySlugs,
 } from "@/lib/recipe-utils";
