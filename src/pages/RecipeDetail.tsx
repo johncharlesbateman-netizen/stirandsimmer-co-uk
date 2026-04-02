@@ -213,6 +213,8 @@ const RecipeDetail = () => {
                   </li>
                 ))}
               </ul>
+
+              <ShoppingList ingredients={ingredients} />
             </div>
 
             {/* Instructions */}
