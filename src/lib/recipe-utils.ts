@@ -13,28 +13,16 @@ export const categoryLabels: Record<RecipeCategory, string> = {
   lunch_suggestions: "Lunch Suggestions",
   sweets: "Sweets to Tempt",
 };
-export const categoryHeadings: Record<RecipeCategory, string> = {
-  chicken: "Chicken — From Classic Roasts to Bold World Flavours",
-  beef: "Beef — Hearty, Rich & Full of Character",
-  lamb: "Lamb — Tender Cuts, Big Flavours",
-  pork: "Pork — Comfort Food at Its Finest",
-  spicy: "Spicy — Fiery Dishes for Heat Seekers",
-  seafood: "Seafood — Fresh Catches, Simply Prepared",
-  pasta: "Pasta Heaven — Sauces, Shapes & Slow Sundays",
-  lunch_suggestions: "Lunch — Quick Bites & Midday Favourites",
-  sweets: "Sweets to Tempt — Cakes, Puddings & Guilty Pleasures",
-};
-
 export const categoryDescriptions: Record<RecipeCategory, string> = {
-  chicken: "From coq au vin and chicken kiev to satay, tapas and spicy fried chicken — bold chicken dishes for every occasion.",
-  beef: "Steaks, stroganoff, burgers, kebabs and cottage pie — hearty beef recipes with simple techniques and incredible results.",
-  lamb: "Lamb fillets, burgers, skewers, meatballs and shepherd's pie — flavourful lamb recipes with fresh seasonal ingredients.",
-  pork: "Sausage casseroles, pork fillets, meatballs, chow mein and bangers & mash — comforting pork dishes the whole family will love.",
-  spicy: "Curries, baltis, jalfrezi, tikka and masala — fiery recipes featuring chicken, lamb, prawns and salmon for spice lovers.",
-  seafood: "Salmon, prawns, scallops, crab and halibut — fresh seafood recipes from risottos and salads to terrines and paella.",
-  pasta: "Tagliatelle, penne, spaghetti, lasagne and lamb ragu — comforting pasta dishes with rich sauces and fresh ingredients.",
-  lunch_suggestions: "Baguettes, wraps, salads, toasts and sandwiches — quick and satisfying lunch ideas perfect for midday.",
-  sweets: "Cakes, scones, soufflés, ice cream, biscotti and crème brûlée — irresistible sweet treats for every occasion.",
+  chicken: "Whether it's a golden Sunday roast, a fragrant Thai satay or a crispy Southern-style supper, chicken is endlessly versatile. Browse our collection of tried-and-tested recipes that celebrate this kitchen staple in every style — from comfort classics to adventurous world flavours.",
+  beef: "Rich, robust and deeply satisfying — beef lends itself to everything from a seared steak with peppercorn sauce to a slow-cooked cottage pie on a cold evening. Explore recipes that make the most of quality cuts with simple techniques and bold seasoning.",
+  lamb: "Sweet, tender and full of character, lamb pairs beautifully with herbs, spices and seasonal vegetables. From herb-crusted fillets and Moroccan tagines to hearty shepherd's pie, these recipes bring out the best in every cut.",
+  pork: "Comforting, versatile and loved by the whole family — pork shines in everything from sticky glazed fillets and crispy crackling roasts to fragrant stir-fries and slow-braised casseroles. Discover recipes that turn simple pork into something special.",
+  spicy: "For those who like a little fire on the plate. From aromatic curries and sizzling baltis to punchy jalfrezi and rich masalas, these recipes bring warmth and depth to chicken, lamb, prawns and more — each one seasoned with care.",
+  seafood: "Fresh from the water and onto your plate — seafood at its finest. Delicate pan-fried scallops, zesty prawn linguine, herb-crusted salmon and elegant crab terrines all feature in this collection of light, flavourful dishes.",
+  pasta: "There's nothing quite like a bowl of perfectly cooked pasta dressed in a beautiful sauce. From rich lamb ragù with pappardelle to a simple garlic and chilli spaghetti, these recipes celebrate Italy's greatest gift to the kitchen.",
+  lunch_suggestions: "Midday meals that go beyond the ordinary. Think warm baguettes with melting cheese, vibrant salads, loaded wraps and satisfying toasted sandwiches — all quick to prepare and perfect for refuelling.",
+  sweets: "Life's too short to skip dessert. Indulge in velvety crème brûlée, light-as-air soufflés, buttery scones and decadent chocolate cakes — sweet treats crafted for every occasion and every craving.",
 };
 
 export const categorySlugs: Record<string, RecipeCategory> = {
