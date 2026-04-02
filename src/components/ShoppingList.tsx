@@ -80,6 +80,13 @@ const ShoppingList = ({ ingredients }: ShoppingListProps) => {
             {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
             {copied ? "Copied" : "Copy unchecked"}
           </button>
+          <button
+            onClick={handlePrint}
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Printer className="w-3.5 h-3.5" />
+            Print
+          </button>
         </div>
       </div>
       <ul className="space-y-3">
