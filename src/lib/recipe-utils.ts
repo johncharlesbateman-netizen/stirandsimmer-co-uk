@@ -15,15 +15,15 @@ export const categoryLabels: Record<RecipeCategory, string> = {
 };
 
 export const categoryDescriptions: Record<RecipeCategory, string> = {
-  chicken: "Delicious chicken recipes — from roasts and curries to quick weeknight dinners. Fresh ingredients, bold flavours.",
-  beef: "Hearty beef recipes for every occasion — steaks, stews, slow cooks and more. Simple techniques, incredible results.",
-  lamb: "Flavourful lamb recipes — roasts, tagines, chops and slow-cooked favourites using fresh seasonal ingredients.",
-  pork: "Tasty pork recipes — from crispy belly to pulled pork, chops and sausage dishes. Comfort food at its best.",
-  spicy: "Turn up the heat with our spicy recipes — fiery curries, chilli dishes and bold-flavoured meals for spice lovers.",
-  seafood: "Fresh seafood recipes — fish, prawns, mussels and more. Light, flavourful dishes with simple preparation.",
-  pasta: "Comforting pasta recipes — from creamy carbonara to fresh ragu. Classic Italian-inspired dishes made easy.",
-  lunch_suggestions: "Quick and satisfying lunch recipes — salads, sandwiches, soups and light meals perfect for midday.",
-  sweets: "Irresistible sweet treats — cakes, puddings, biscuits and desserts to satisfy every craving.",
+  chicken: "From coq au vin and chicken kiev to satay, tapas and spicy fried chicken — bold chicken dishes for every occasion.",
+  beef: "Steaks, stroganoff, burgers, kebabs and cottage pie — hearty beef recipes with simple techniques and incredible results.",
+  lamb: "Lamb fillets, burgers, skewers, meatballs and shepherd's pie — flavourful lamb recipes with fresh seasonal ingredients.",
+  pork: "Sausage casseroles, pork fillets, meatballs, chow mein and bangers & mash — comforting pork dishes the whole family will love.",
+  spicy: "Curries, baltis, jalfrezi, tikka and masala — fiery recipes featuring chicken, lamb, prawns and salmon for spice lovers.",
+  seafood: "Salmon, prawns, scallops, crab and halibut — fresh seafood recipes from risottos and salads to terrines and paella.",
+  pasta: "Tagliatelle, penne, spaghetti, lasagne and lamb ragu — comforting pasta dishes with rich sauces and fresh ingredients.",
+  lunch_suggestions: "Baguettes, wraps, salads, toasts and sandwiches — quick and satisfying lunch ideas perfect for midday.",
+  sweets: "Cakes, scones, soufflés, ice cream, biscotti and crème brûlée — irresistible sweet treats for every occasion.",
 };
 
 export const categorySlugs: Record<string, RecipeCategory> = {
