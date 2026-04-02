@@ -8,10 +8,7 @@ import {
   categoryLabels,
   categoryDescriptions,
   categorySlugs,
-  categoryToSlug,
-  allCategories,
 } from "@/lib/recipe-utils";
-import { cn } from "@/lib/utils";
 
 import categoryChicken from "@/assets/category-chicken.jpg";
 import categoryBeef from "@/assets/category-beef.jpg";
