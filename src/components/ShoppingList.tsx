@@ -35,8 +35,8 @@ const ShoppingList = ({ ingredients }: ShoppingListProps) => {
   };
 
   const handlePrint = () => {
-    const unchecked = ingredients.filter((_, i) => !checked.has(i));
-    const items = unchecked.length > 0 ? unchecked : ingredients;
+    const checkedItems = ingredients.filter((_, i) => checked.has(i));
+    const items = checkedItems.length > 0 ? checkedItems : ingredients;
     const printWindow = window.open("", "_blank");
     if (!printWindow) return;
     printWindow.document.write(`
@@ -58,36 +58,36 @@ const ShoppingList = ({ ingredients }: ShoppingListProps) => {
 
   return (
     <div className="mt-8 p-5 bg-secondary border border-border">
-      <div className="flex items-center justify-between mb-4">
-        <p className="micro-caption">Shopping List</p>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => {
-              if (checked.size === ingredients.length) {
-                setChecked(new Set());
-              } else {
-                setChecked(new Set(ingredients.map((_, i) => i)));
-              }
-            }}
-            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {checked.size === ingredients.length ? "Clear all" : "Select all"}
-          </button>
-          <button
-            onClick={handleCopy}
-            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-            {copied ? "Copied" : "Copy unchecked"}
-          </button>
-          <button
-            onClick={handlePrint}
-            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Printer className="w-3.5 h-3.5" />
-            Print
-          </button>
-        </div>
+      <p className="micro-caption mb-4">Shopping List</p>
+      <div className="flex items-center justify-center gap-4 mb-5 py-3 border-y border-border">
+        <button
+          onClick={() => {
+            if (checked.size === ingredients.length) {
+              setChecked(new Set());
+            } else {
+              setChecked(new Set(ingredients.map((_, i) => i)));
+            }
+          }}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+        >
+          {checked.size === ingredients.length ? "Clear all" : "Select all"}
+        </button>
+        <span className="text-border">|</span>
+        <button
+          onClick={handleCopy}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+        >
+          {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+          {copied ? "Copied" : "Copy checked"}
+        </button>
+        <span className="text-border">|</span>
+        <button
+          onClick={handlePrint}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Printer className="w-4 h-4" />
+          Print
+        </button>
       </div>
       <ul className="space-y-3">
         {ingredients.map((item, i) => (
