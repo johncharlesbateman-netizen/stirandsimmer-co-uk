@@ -113,7 +113,7 @@ const CategoryPage = () => {
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300" />
-                <span className="relative z-10 flex items-center justify-center h-full text-sm tracking-[0.2em] uppercase font-medium text-white drop-shadow-md">
+                <span className="relative z-10 flex items-center justify-center h-full text-sm tracking-[0.2em] uppercase font-medium text-white drop-shadow-md text-center px-2 leading-tight">
                   {categoryLabels[cat]}
                 </span>
               </Link>
