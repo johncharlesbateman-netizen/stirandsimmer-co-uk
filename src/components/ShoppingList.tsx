@@ -38,13 +38,23 @@ const ShoppingList = ({ ingredients }: ShoppingListProps) => {
     <div className="mt-8 p-5 bg-secondary border border-border">
       <div className="flex items-center justify-between mb-4">
         <p className="micro-caption">Shopping List</p>
-        <button
-          onClick={handleCopy}
-          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-        >
-          {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-          {copied ? "Copied" : "Copy unchecked"}
-        </button>
+        <div className="flex items-center gap-3">
+          {checked.size > 0 && (
+            <button
+              onClick={() => setChecked(new Set())}
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Clear all
+            </button>
+          )}
+          <button
+            onClick={handleCopy}
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+            {copied ? "Copied" : "Copy unchecked"}
+          </button>
+        </div>
       </div>
       <ul className="space-y-3">
         {ingredients.map((item, i) => (
