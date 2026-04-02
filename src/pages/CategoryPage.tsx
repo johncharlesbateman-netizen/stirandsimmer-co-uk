@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   categoryLabels,
   categoryDescriptions,
+  categoryMetaDescriptions,
   categorySlugs,
 } from "@/lib/recipe-utils";
 
@@ -40,7 +41,7 @@ const CategoryPage = () => {
     <Layout>
       <Helmet>
         <title>{label} Recipes — Great Food Recipes</title>
-        <meta name="description" content={description} />
+        <meta name="description" content={categoryMetaDescriptions[category]} />
         <link rel="canonical" href={`https://greatfoodrecipes.co.uk/recipes/category/${slug}`} />
       </Helmet>
 

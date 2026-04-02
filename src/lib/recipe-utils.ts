@@ -25,6 +25,18 @@ export const categoryDescriptions: Record<RecipeCategory, string> = {
   sweets: "Life's too short to skip dessert. Indulge in velvety crème brûlée, light-as-air soufflés, buttery scones and decadent chocolate cakes — sweet treats crafted for every occasion and every craving.",
 };
 
+export const categoryMetaDescriptions: Record<RecipeCategory, string> = {
+  chicken: "Golden roasts, fragrant satay, crispy Southern suppers and more — free chicken recipes with bold flavours and simple methods.",
+  beef: "Seared steaks, slow-cooked pies, hearty burgers and rich stews — free beef recipes that make the most of every cut.",
+  lamb: "Herb-crusted fillets, Moroccan tagines, juicy burgers and shepherd's pie — free lamb recipes full of seasonal flavour.",
+  pork: "Sticky glazed fillets, crackling roasts, fragrant stir-fries and slow-braised casseroles — free pork recipes the family will love.",
+  spicy: "Aromatic curries, sizzling baltis, punchy jalfrezi and rich masalas — free spicy recipes for chicken, lamb, prawns and more.",
+  seafood: "Pan-fried scallops, prawn linguine, herb-crusted salmon and crab terrines — free seafood recipes that are light and full of flavour.",
+  pasta: "Rich lamb ragù, garlic and chilli spaghetti, creamy lasagne and more — free pasta recipes celebrating Italy's finest comfort food.",
+  lunch_suggestions: "Warm baguettes, vibrant salads, loaded wraps and toasted sandwiches — free lunch recipes that are quick to prepare and full of flavour.",
+  sweets: "Crème brûlée, light soufflés, buttery scones and decadent chocolate cakes — free sweet recipes for every occasion and craving.",
+};
+
 export const categorySlugs: Record<string, RecipeCategory> = {
   chicken: "chicken",
   beef: "beef",
