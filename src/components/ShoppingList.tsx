@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, Printer } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface ShoppingListProps {
@@ -34,6 +34,28 @@ const ShoppingList = ({ ingredients }: ShoppingListProps) => {
     }
   };
 
+  const handlePrint = () => {
+    const unchecked = ingredients.filter((_, i) => !checked.has(i));
+    const items = unchecked.length > 0 ? unchecked : ingredients;
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) return;
+    printWindow.document.write(`
+      <html><head><title>Shopping List</title>
+      <style>
+        body { font-family: system-ui, sans-serif; padding: 2rem; }
+        h1 { font-size: 1.25rem; margin-bottom: 1rem; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 0.35rem 0; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 0.5rem; }
+        li::before { content: "☐"; }
+      </style></head><body>
+      <h1>Shopping List</h1>
+      <ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>
+      </body></html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+  };
+
   return (
     <div className="mt-8 p-5 bg-secondary border border-border">
       <div className="flex items-center justify-between mb-4">
@@ -57,6 +79,13 @@ const ShoppingList = ({ ingredients }: ShoppingListProps) => {
           >
             {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
             {copied ? "Copied" : "Copy unchecked"}
+          </button>
+          <button
+            onClick={handlePrint}
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Printer className="w-3.5 h-3.5" />
+            Print
           </button>
         </div>
       </div>
