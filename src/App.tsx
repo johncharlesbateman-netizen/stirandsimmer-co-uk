@@ -10,6 +10,7 @@ import Styleguide from "./pages/Styleguide";
 import Contact from "./pages/Contact";
 import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
+import CategoryPage from "./pages/CategoryPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/styleguide" element={<Styleguide />} />
           <Route path="/recipes" element={<Recipes />} />
+          <Route path="/recipes/category/:slug" element={<CategoryPage />} />
           <Route path="/recipes/:slug" element={<RecipeDetail />} />
           <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
