@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   categoryLabels,
   categoryDescriptions,
+  categoryMetaDescriptions,
   categorySlugs,
 } from "@/lib/recipe-utils";
 
