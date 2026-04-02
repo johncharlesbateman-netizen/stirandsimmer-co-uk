@@ -57,7 +57,7 @@ const Recipes = () => {
             Recipes
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl">
-            Over 100 recipes using local and seasonal produce — all completely free. 
+            Over 100 recipes using local and seasonal produce. 
             From quick lunches to indulgent sweets, there's something for every table.
           </p>
         </div>
