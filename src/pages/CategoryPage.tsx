@@ -69,7 +69,7 @@ const CategoryPage = () => {
       </Helmet>
 
       {/* Header */}
-      <section className="section-breathing border-b border-border">
+      <section className="py-12 md:py-16 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <p className="micro-caption mb-4">
             <Link to="/recipes" className="editorial-link">Recipes</Link> / {label}
