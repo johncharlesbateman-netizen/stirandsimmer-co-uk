@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, Printer } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface ShoppingListProps {
