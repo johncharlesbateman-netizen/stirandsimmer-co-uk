@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import ProjectCard from "@/components/ProjectCard";
 import ImageWithCaption from "@/components/ImageWithCaption";
@@ -80,6 +81,11 @@ const projects = [
 const Work = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>Work — Great Food Recipes</title>
+        <meta name="description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
+        <link rel="canonical" href="https://greatfoodrecipes.co.uk/work" />
+      </Helmet>
       {/* Header */}
       <section className="section-breathing pb-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
