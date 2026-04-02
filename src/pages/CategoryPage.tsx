@@ -6,7 +6,6 @@ import RecipeCard from "@/components/RecipeCard";
 import { supabase } from "@/integrations/supabase/client";
 import {
   categoryLabels,
-  categoryHeadings,
   categoryDescriptions,
   categorySlugs,
 } from "@/lib/recipe-utils";
@@ -51,7 +50,7 @@ const CategoryPage = () => {
           <p className="micro-caption mb-4">
             <Link to="/recipes" className="editorial-link">Recipes</Link> / {label}
           </p>
-          <h1 className="heading-display mb-6">{categoryHeadings[category]}</h1>
+          <h1 className="heading-display mb-6">{label} Recipes</h1>
           <p className="text-muted-foreground text-lg max-w-2xl">{description}</p>
         </div>
       </section>
