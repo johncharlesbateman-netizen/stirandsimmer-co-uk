@@ -50,7 +50,7 @@ const Recipes = () => {
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/recipes" />
       </Helmet>
       {/* Header */}
-      <section className="section-breathing border-b border-border">
+      <section className="py-12 md:py-16 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <p className="micro-caption mb-4">Free Recipes</p>
           <h1 className="heading-display mb-6">
@@ -64,7 +64,7 @@ const Recipes = () => {
       </section>
 
       {/* Category Grid */}
-      <section className="py-10 md:py-14 border-b border-border">
+      <section className="py-8 md:py-10 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
             {/* All - active on this page */}
@@ -102,7 +102,7 @@ const Recipes = () => {
       </section>
 
       {/* Recipe Grid */}
-      <section className="py-16 md:py-24">
+      <section className="py-12 md:py-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
