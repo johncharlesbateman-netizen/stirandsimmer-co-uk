@@ -1,10 +1,16 @@
+import { useParams, Navigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import RecipeCard from "@/components/RecipeCard";
 import { supabase } from "@/integrations/supabase/client";
-import { categoryLabels, categoryToSlug, allCategories } from "@/lib/recipe-utils";
+import {
+  categoryLabels,
+  categoryDescriptions,
+  categorySlugs,
+  categoryToSlug,
+  allCategories,
+} from "@/lib/recipe-utils";
 import { cn } from "@/lib/utils";
 
 import categoryChicken from "@/assets/category-chicken.jpg";
@@ -29,59 +35,74 @@ const categoryImages: Record<string, string> = {
   pasta: categoryPasta,
 };
 
-const Recipes = () => {
+const CategoryPage = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const category = slug ? categorySlugs[slug] : undefined;
+
   const { data: recipes, isLoading } = useQuery({
-    queryKey: ["recipes", "all"],
+    queryKey: ["recipes", category],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
         .select("*")
+        .eq("category", category!)
         .order("created_at", { ascending: false });
       if (error) throw error;
       return data;
     },
+    enabled: !!category,
   });
+
+  if (!category) {
+    return <Navigate to="/recipes" replace />;
+  }
+
+  const label = categoryLabels[category];
+  const description = categoryDescriptions[category];
 
   return (
     <Layout>
       <Helmet>
-        <title>Recipes — Great Food Recipes</title>
-        <meta name="description" content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions." />
-        <link rel="canonical" href="https://greatfoodrecipes.co.uk/recipes" />
+        <title>{label} Recipes — Great Food Recipes</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={`https://greatfoodrecipes.co.uk/recipes/${slug}`} />
       </Helmet>
+
       {/* Header */}
       <section className="section-breathing border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <p className="micro-caption mb-4">Free Recipes</p>
-          <h1 className="heading-display mb-6">
-            Recipes
-          </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl">
-            Over 100 recipes using local and seasonal produce — all completely free. 
-            From quick lunches to indulgent sweets, there's something for every table.
+          <p className="micro-caption mb-4">
+            <Link to="/recipes" className="editorial-link">Recipes</Link> / {label}
           </p>
+          <h1 className="heading-display mb-6">{label} Recipes</h1>
+          <p className="text-muted-foreground text-lg max-w-2xl">{description}</p>
         </div>
       </section>
 
-      {/* Category Grid */}
+      {/* Category Nav */}
       <section className="py-10 md:py-14 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {/* All - active on this page */}
-            <div
-              className="relative aspect-square overflow-hidden ring-2 ring-foreground ring-offset-2 ring-offset-background"
+            <Link
+              to="/recipes"
+              className="relative aspect-square overflow-hidden group transition-all duration-300 opacity-80 hover:opacity-100"
             >
               <div className="absolute inset-0 bg-foreground" />
               <span className="relative z-10 flex items-center justify-center h-full text-sm tracking-[0.2em] uppercase font-medium text-background">
                 All
               </span>
-            </div>
+            </Link>
 
             {allCategories.map((cat) => (
               <Link
                 key={cat}
                 to={`/recipes/${categoryToSlug[cat]}`}
-                className="relative aspect-square overflow-hidden group transition-all duration-300 opacity-80 hover:opacity-100"
+                className={cn(
+                  "relative aspect-square overflow-hidden group transition-all duration-300",
+                  category === cat
+                    ? "ring-2 ring-foreground ring-offset-2 ring-offset-background"
+                    : "opacity-80 hover:opacity-100"
+                )}
               >
                 <img
                   src={categoryImages[cat]}
@@ -118,21 +139,13 @@ const Recipes = () => {
           ) : recipes && recipes.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
               {recipes.map((recipe, index) => (
-                <RecipeCard
-                  key={recipe.id}
-                  recipe={recipe}
-                  floatDelay={index}
-                />
+                <RecipeCard key={recipe.id} recipe={recipe} floatDelay={index} />
               ))}
             </div>
           ) : (
             <div className="text-center py-20">
-              <p className="heading-section text-muted-foreground mb-4">
-                No recipes yet
-              </p>
-              <p className="text-muted-foreground">
-                Recipes are being added — check back soon!
-              </p>
+              <p className="heading-section text-muted-foreground mb-4">No {label.toLowerCase()} recipes yet</p>
+              <p className="text-muted-foreground">Recipes are being added — check back soon!</p>
             </div>
           )}
         </div>
@@ -141,4 +154,4 @@ const Recipes = () => {
   );
 };
 
-export default Recipes;
+export default CategoryPage;
