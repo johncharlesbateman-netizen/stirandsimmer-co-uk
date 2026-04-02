@@ -39,14 +39,18 @@ const ShoppingList = ({ ingredients }: ShoppingListProps) => {
       <div className="flex items-center justify-between mb-4">
         <p className="micro-caption">Shopping List</p>
         <div className="flex items-center gap-3">
-          {checked.size > 0 && (
-            <button
-              onClick={() => setChecked(new Set())}
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Clear all
-            </button>
-          )}
+          <button
+            onClick={() => {
+              if (checked.size === ingredients.length) {
+                setChecked(new Set());
+              } else {
+                setChecked(new Set(ingredients.map((_, i) => i)));
+              }
+            }}
+            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {checked.size === ingredients.length ? "Clear all" : "Select all"}
+          </button>
           <button
             onClick={handleCopy}
             className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
