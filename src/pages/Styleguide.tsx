@@ -15,6 +15,10 @@ const colors = [
 const Styleguide = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>Styleguide — Great Food Recipes</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       {/* Header */}
       <section className="section-breathing pb-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
