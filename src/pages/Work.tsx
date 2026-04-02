@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import ProjectCard from "@/components/ProjectCard";
 import ImageWithCaption from "@/components/ImageWithCaption";
