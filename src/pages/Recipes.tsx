@@ -50,7 +50,7 @@ const Recipes = () => {
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/recipes" />
       </Helmet>
       {/* Header */}
-      <section className="section-breathing border-b border-border">
+      <section className="py-12 md:py-16 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <p className="micro-caption mb-4">Free Recipes</p>
           <h1 className="heading-display mb-6">
