@@ -110,6 +110,8 @@ const ShoppingList = ({ ingredients }: ShoppingListProps) => {
           </li>
         ))}
       </ul>
+
+      <SupermarketBasket checkedItems={ingredients.filter((_, i) => checked.has(i))} />
     </div>
   );
 };
