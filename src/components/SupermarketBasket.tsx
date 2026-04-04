@@ -1,10 +1,11 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { ExternalLink, Info } from "lucide-react";
 import {
   estimateAllPrices,
   type SupermarketId,
-  type SupermarketPrices,
 } from "@/lib/supermarketPricing";
+
+const STORAGE_KEY = "preferred-supermarket";
 
 interface SupermarketBasketProps {
   checkedItems: string[];
@@ -15,8 +16,17 @@ interface Supermarket {
   name: string;
   colour: string;
   logo: string;
-  buildUrl: (items: string[]) => string;
+  buildSearchUrl: (term: string) => string;
 }
+
+/** Strip quantities/units to get a cleaner search term */
+const toSearchTerm = (ingredient: string): string =>
+  ingredient
+    .replace(/^\d[\d./]*\s*/g, "")                       // leading numbers
+    .replace(/\b(g|kg|ml|l|tbsp|tsp|cup|cups|oz|lb|bunch|handful|pinch|cloves?|slices?|rashers?|sheets?|sprigs?|stalks?|pieces?|small|medium|large|tin|tins|can|cans|pack|packs|packet|packets)\b/gi, "")
+    .replace(/[,()\[\]]/g, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 
 const supermarkets: Supermarket[] = [
   {
@@ -24,37 +34,54 @@ const supermarkets: Supermarket[] = [
     name: "ASDA",
     colour: "hsl(120, 61%, 38%)",
     logo: "🟢",
-    buildUrl: (items) =>
-      `https://groceries.asda.com/search/${encodeURIComponent(items[0] || "")}`,
+    buildSearchUrl: (term) =>
+      `https://groceries.asda.com/search/${encodeURIComponent(term)}`,
   },
   {
     id: "tesco",
     name: "Tesco",
     colour: "hsl(0, 68%, 42%)",
     logo: "🔴",
-    buildUrl: (items) =>
-      `https://www.tesco.com/groceries/en-GB/search?query=${encodeURIComponent(items[0] || "")}`,
+    buildSearchUrl: (term) =>
+      `https://www.tesco.com/groceries/en-GB/search?query=${encodeURIComponent(term)}`,
   },
   {
     id: "sainsburys",
     name: "Sainsbury's",
     colour: "hsl(24, 100%, 50%)",
     logo: "🟠",
-    buildUrl: (items) =>
-      `https://www.sainsburys.co.uk/gol-ui/SearchResults/${encodeURIComponent(items[0] || "")}`,
+    buildSearchUrl: (term) =>
+      `https://www.sainsburys.co.uk/gol-ui/SearchResults/${encodeURIComponent(term)}`,
   },
   {
     id: "ocado",
     name: "Ocado",
     colour: "hsl(267, 56%, 48%)",
     logo: "🟣",
-    buildUrl: (items) =>
-      `https://www.ocado.com/webshop/getSearchProducts.do?entry=${encodeURIComponent(items.join(", "))}`,
+    buildSearchUrl: (term) =>
+      `https://www.ocado.com/webshop/getSearchProducts.do?entry=${encodeURIComponent(term)}`,
   },
 ];
 
+const getStoredPreference = (): SupermarketId | null => {
+  try {
+    const val = localStorage.getItem(STORAGE_KEY);
+    if (val && supermarkets.some((s) => s.id === val)) return val as SupermarketId;
+  } catch {}
+  return null;
+};
+
 const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
-  const [selected, setSelected] = useState<SupermarketId>("asda");
+  const [selected, setSelected] = useState<SupermarketId>(
+    () => getStoredPreference() || "asda"
+  );
+
+  // Persist preference
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, selected);
+    } catch {}
+  }, [selected]);
 
   const prices = useMemo(() => {
     if (checkedItems.length === 0) return null;
@@ -71,6 +98,16 @@ const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
     (a, b) => prices[a.id].total - prices[b.id].total
   );
   const cheapestId = sortedMarkets[0].id;
+
+  /** Open a tab per ticked ingredient on the chosen supermarket */
+  const openIngredientSearches = (market: Supermarket) => {
+    // Limit to 5 tabs to avoid popup-blocker issues
+    const terms = checkedItems.slice(0, 5).map(toSearchTerm).filter(Boolean);
+    if (terms.length === 0) return;
+    terms.forEach((term) => {
+      window.open(market.buildSearchUrl(term), "_blank");
+    });
+  };
 
   return (
     <div className="mt-6 pt-6 border-t border-border">
@@ -92,15 +129,11 @@ const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
           const isCheapest = market.id === cheapestId;
 
           return (
-            <a
+            <button
               key={market.id}
-              href={market.buildUrl(checkedItems)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={() => {
                 setSelected(market.id);
-                window.open(market.buildUrl(checkedItems), "_blank");
+                openIngredientSearches(market);
               }}
               className={`relative flex flex-col items-center gap-1 p-3 border transition-colors text-center cursor-pointer ${
                 isActive
@@ -118,7 +151,7 @@ const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
               <span className="text-xs text-muted-foreground">
                 ~£{total.toFixed(2)}
               </span>
-            </a>
+            </button>
           );
         })}
       </div>
@@ -153,15 +186,13 @@ const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
           </span>
           <span className="text-xs ml-1">(est.)</span>
         </p>
-        <a
-          href={activeMarket.buildUrl(checkedItems)}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={() => openIngredientSearches(activeMarket)}
           className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
         >
           Open {activeMarket.name}
           <ExternalLink className="w-3.5 h-3.5" />
-        </a>
+        </button>
       </div>
     </div>
   );
