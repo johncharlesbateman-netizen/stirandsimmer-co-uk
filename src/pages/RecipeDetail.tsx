@@ -211,8 +211,13 @@ const RecipeDetail = () => {
               <h2 className="heading-section mb-6 pb-4 border-b border-border">
                 Ingredients
               </h2>
+              <ServingScaler
+                servings={servings}
+                baseServings={baseServings}
+                onChange={setServings}
+              />
               <ul className="space-y-3">
-                {ingredients.map((item, i) => (
+                {scaledIngredients.map((item, i) => (
                   <li
                     key={i}
                     className="text-sm text-muted-foreground pl-4 border-l-2 border-border"
@@ -222,7 +227,7 @@ const RecipeDetail = () => {
                 ))}
               </ul>
 
-              <ShoppingList ingredients={ingredients} />
+              <ShoppingList ingredients={scaledIngredients} scaleFactor={scaleFactor} />
             </div>
 
             {/* Instructions */}
