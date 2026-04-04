@@ -6,6 +6,7 @@ import SupermarketBasket from "@/components/SupermarketBasket";
 
 interface ShoppingListProps {
   ingredients: string[];
+  scaleFactor?: number;
 }
 
 const ShoppingList = ({ ingredients }: ShoppingListProps) => {
