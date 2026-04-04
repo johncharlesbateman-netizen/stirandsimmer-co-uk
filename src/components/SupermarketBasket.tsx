@@ -9,6 +9,7 @@ const STORAGE_KEY = "preferred-supermarket";
 
 interface SupermarketBasketProps {
   checkedItems: string[];
+  scaleFactor?: number;
 }
 
 interface Supermarket {
