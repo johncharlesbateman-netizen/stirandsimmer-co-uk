@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
-import { ExternalLink, Loader2 } from "lucide-react";
+import { useState, useMemo } from "react";
+import { ExternalLink, Info } from "lucide-react";
 import {
-  fetchAllPrices,
+  estimateAllPrices,
   type SupermarketId,
   type SupermarketPrices,
 } from "@/lib/supermarketPricing";
@@ -20,12 +20,12 @@ interface Supermarket {
 
 const supermarkets: Supermarket[] = [
   {
-    id: "ocado",
-    name: "Ocado",
-    colour: "hsl(267, 56%, 48%)",
-    logo: "🟣",
+    id: "asda",
+    name: "ASDA",
+    colour: "hsl(120, 61%, 38%)",
+    logo: "🟢",
     buildUrl: (items) =>
-      `https://www.ocado.com/webshop/getSearchProducts.do?entry=${encodeURIComponent(items.join(", "))}`,
+      `https://groceries.asda.com/search/${encodeURIComponent(items[0] || "")}`,
   },
   {
     id: "tesco",
@@ -44,96 +44,72 @@ const supermarkets: Supermarket[] = [
       `https://www.sainsburys.co.uk/gol-ui/SearchResults/${encodeURIComponent(items[0] || "")}`,
   },
   {
-    id: "asda",
-    name: "ASDA",
-    colour: "hsl(120, 61%, 38%)",
-    logo: "🟢",
+    id: "ocado",
+    name: "Ocado",
+    colour: "hsl(267, 56%, 48%)",
+    logo: "🟣",
     buildUrl: (items) =>
-      `https://groceries.asda.com/search/${encodeURIComponent(items[0] || "")}`,
+      `https://www.ocado.com/webshop/getSearchProducts.do?entry=${encodeURIComponent(items.join(", "))}`,
   },
 ];
 
 const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
-  const [selected, setSelected] = useState<SupermarketId>("ocado");
-  const [loading, setLoading] = useState(false);
-  const [prices, setPrices] = useState<Record<SupermarketId, SupermarketPrices> | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const prevItemsRef = useRef<string>("");
+  const [selected, setSelected] = useState<SupermarketId>("asda");
 
-  // Fetch live prices when checked items change
-  useEffect(() => {
-    const key = checkedItems.slice().sort().join("|");
-    if (key === prevItemsRef.current || checkedItems.length === 0) {
-      if (checkedItems.length === 0) {
-        setPrices(null);
-        setError(null);
-      }
-      return;
-    }
-    prevItemsRef.current = key;
-
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-
-    fetchAllPrices(checkedItems)
-      .then((result) => {
-        if (!cancelled) {
-          setPrices(result);
-          setLoading(false);
-        }
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setError("Couldn't fetch live prices. Showing estimates instead.");
-          setPrices(null);
-          setLoading(false);
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
+  const prices = useMemo(() => {
+    if (checkedItems.length === 0) return null;
+    return estimateAllPrices(checkedItems);
   }, [checkedItems]);
 
-  if (checkedItems.length === 0) return null;
+  if (checkedItems.length === 0 || !prices) return null;
 
   const activeMarket = supermarkets.find((s) => s.id === selected)!;
-  const activePrices = prices?.[selected];
+  const activePrices = prices[selected];
+
+  // Sort supermarkets by total to highlight cheapest
+  const sortedMarkets = [...supermarkets].sort(
+    (a, b) => prices[a.id].total - prices[b.id].total
+  );
+  const cheapestId = sortedMarkets[0].id;
 
   return (
     <div className="mt-6 pt-6 border-t border-border">
-      <p className="micro-caption mb-4">Shop these ingredients</p>
+      <div className="flex items-center gap-2 mb-4">
+        <p className="micro-caption">Price Estimates</p>
+        <div className="group relative">
+          <Info className="w-3.5 h-3.5 text-muted-foreground/60 cursor-help" />
+          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2.5 py-1.5 bg-foreground text-background text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+            Estimated prices · actual prices may vary
+          </div>
+        </div>
+      </div>
 
-      {/* Supermarket cards */}
+      {/* Supermarket cards — sorted cheapest first */}
       <div className="grid grid-cols-2 gap-2 mb-4">
-        {supermarkets.map((market) => {
+        {sortedMarkets.map((market) => {
           const isActive = market.id === selected;
-          const marketPrices = prices?.[market.id];
-          const total = marketPrices
-            ? `£${marketPrices.total.toFixed(2)}`
-            : loading
-              ? "…"
-              : "—";
+          const total = prices[market.id].total;
+          const isCheapest = market.id === cheapestId;
 
           return (
             <button
               key={market.id}
               onClick={() => setSelected(market.id)}
-              className={`flex flex-col items-center gap-1 p-3 border transition-colors text-center ${
+              className={`relative flex flex-col items-center gap-1 p-3 border transition-colors text-center ${
                 isActive
                   ? "border-foreground bg-secondary"
                   : "border-border hover:border-muted-foreground/40"
               }`}
             >
+              {isCheapest && (
+                <span className="absolute -top-2 right-2 text-[10px] font-semibold tracking-wider uppercase bg-background border border-border px-1.5 py-0.5 text-muted-foreground">
+                  Cheapest
+                </span>
+              )}
               <span className="text-lg">{market.logo}</span>
               <span className="text-xs font-medium text-foreground">{market.name}</span>
               <span className="text-xs text-muted-foreground">
-                {loading ? (
-                  <Loader2 className="w-3 h-3 animate-spin inline" />
-                ) : (
-                  total
-                )}
+                ~£{total.toFixed(2)}
               </span>
             </button>
           );
@@ -141,47 +117,31 @@ const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
       </div>
 
       {/* Per-ingredient price breakdown */}
-      {loading && (
-        <div className="flex items-center gap-2 mb-4 text-sm text-muted-foreground">
-          <Loader2 className="w-4 h-4 animate-spin" />
-          Fetching live prices…
-        </div>
-      )}
-
-      {error && (
-        <p className="text-xs text-muted-foreground mb-4">{error}</p>
-      )}
-
-      {activePrices && !loading && (
-        <ul className="space-y-1.5 mb-4">
-          {activePrices.items.map((item, i) => (
-            <li
-              key={i}
-              className="flex items-center justify-between text-sm"
-            >
-              <span className="text-muted-foreground truncate mr-2">
-                {item.productName ?? item.ingredient}
-              </span>
-              <span className="font-medium text-foreground whitespace-nowrap">
-                {item.price !== null ? `£${item.price.toFixed(2)}` : "n/a"}
-              </span>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul className="space-y-1.5 mb-4">
+        {activePrices.items.map((item, i) => (
+          <li
+            key={i}
+            className="flex items-center justify-between text-sm"
+          >
+            <span className="text-muted-foreground truncate mr-2">
+              {item.productName}
+            </span>
+            <span className="font-medium text-foreground whitespace-nowrap">
+              ~£{item.price.toFixed(2)}
+            </span>
+          </li>
+        ))}
+      </ul>
 
       {/* Summary + CTA */}
       <div className="flex items-center justify-between gap-3">
         <p className="text-sm text-muted-foreground">
           {checkedItems.length} item{checkedItems.length !== 1 ? "s" : ""}
-          {activePrices && !loading && (
-            <>
-              {" · "}
-              <span className="font-medium text-foreground">
-                £{activePrices.total.toFixed(2)}
-              </span>
-            </>
-          )}
+          {" · "}
+          <span className="font-medium text-foreground">
+            ~£{activePrices.total.toFixed(2)}
+          </span>
+          <span className="text-xs ml-1">(est.)</span>
         </p>
         <a
           href={activeMarket.buildUrl(checkedItems)}
