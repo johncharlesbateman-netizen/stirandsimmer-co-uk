@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Copy, Check, Printer } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import SupermarketBasket from "@/components/SupermarketBasket";
 
 interface ShoppingListProps {
   ingredients: string[];
