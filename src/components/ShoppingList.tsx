@@ -9,7 +9,7 @@ interface ShoppingListProps {
   scaleFactor?: number;
 }
 
-const ShoppingList = ({ ingredients }: ShoppingListProps) => {
+const ShoppingList = ({ ingredients, scaleFactor = 1 }: ShoppingListProps) => {
   const [checked, setChecked] = useState<Set<number>>(new Set());
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
