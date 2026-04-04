@@ -58,6 +58,11 @@ const RecipeDetail = () => {
 
   const ingredients = recipe.ingredients as string[];
   const instructions = recipe.instructions as string[];
+  const baseServings = recipe.servings || 4;
+  const [servings, setServings] = useState(baseServings);
+  const scaleFactor = servings / baseServings;
+
+  const scaledIngredients = scaleIngredients(ingredients, baseServings, servings);
   const totalTime = (recipe.prep_time_minutes || 0) + (recipe.cook_time_minutes || 0);
 
   const jsonLd = {
