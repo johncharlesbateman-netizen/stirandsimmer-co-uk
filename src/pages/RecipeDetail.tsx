@@ -214,7 +214,7 @@ const RecipeDetail = () => {
                 Ingredients
               </h2>
               <ServingScaler
-                servings={servings}
+                servings={currentServings}
                 baseServings={baseServings}
                 onChange={setServings}
               />
