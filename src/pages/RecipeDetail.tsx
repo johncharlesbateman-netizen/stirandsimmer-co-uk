@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
@@ -6,11 +7,14 @@ import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
+import { scaleIngredients } from "@/lib/ingredient-scaler";
+import ServingScaler from "@/components/ServingScaler";
 import ShoppingList from "@/components/ShoppingList";
 
 const RecipeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
+  const [servings, setServings] = useState<number | null>(null);
 
   const { data: recipe, isLoading } = useQuery({
     queryKey: ["recipe", slug],
@@ -25,6 +29,14 @@ const RecipeDetail = () => {
     },
     enabled: !!slug,
   });
+
+  const baseServings = recipe?.servings || 4;
+  const currentServings = servings ?? baseServings;
+  const scaleFactor = currentServings / baseServings;
+
+  const ingredients = (recipe?.ingredients as string[]) || [];
+  const instructions = (recipe?.instructions as string[]) || [];
+  const scaledIngredients = scaleIngredients(ingredients, baseServings, currentServings);
 
   if (isLoading) {
     return (
@@ -53,8 +65,6 @@ const RecipeDetail = () => {
     );
   }
 
-  const ingredients = recipe.ingredients as string[];
-  const instructions = recipe.instructions as string[];
   const totalTime = (recipe.prep_time_minutes || 0) + (recipe.cook_time_minutes || 0);
 
   const jsonLd = {
@@ -203,8 +213,13 @@ const RecipeDetail = () => {
               <h2 className="heading-section mb-6 pb-4 border-b border-border">
                 Ingredients
               </h2>
+              <ServingScaler
+                servings={currentServings}
+                baseServings={baseServings}
+                onChange={setServings}
+              />
               <ul className="space-y-3">
-                {ingredients.map((item, i) => (
+                {scaledIngredients.map((item, i) => (
                   <li
                     key={i}
                     className="text-sm text-muted-foreground pl-4 border-l-2 border-border"
@@ -214,7 +229,7 @@ const RecipeDetail = () => {
                 ))}
               </ul>
 
-              <ShoppingList ingredients={ingredients} />
+              <ShoppingList ingredients={scaledIngredients} scaleFactor={scaleFactor} />
             </div>
 
             {/* Instructions */}

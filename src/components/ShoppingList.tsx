@@ -6,9 +6,10 @@ import SupermarketBasket from "@/components/SupermarketBasket";
 
 interface ShoppingListProps {
   ingredients: string[];
+  scaleFactor?: number;
 }
 
-const ShoppingList = ({ ingredients }: ShoppingListProps) => {
+const ShoppingList = ({ ingredients, scaleFactor = 1 }: ShoppingListProps) => {
   const [checked, setChecked] = useState<Set<number>>(new Set());
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
@@ -111,7 +112,7 @@ const ShoppingList = ({ ingredients }: ShoppingListProps) => {
         ))}
       </ul>
 
-      <SupermarketBasket checkedItems={ingredients.filter((_, i) => checked.has(i))} />
+      <SupermarketBasket checkedItems={ingredients.filter((_, i) => checked.has(i))} scaleFactor={scaleFactor} />
     </div>
   );
 };
