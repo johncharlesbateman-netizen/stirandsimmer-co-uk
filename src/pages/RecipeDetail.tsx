@@ -14,6 +14,7 @@ import ShoppingList from "@/components/ShoppingList";
 const RecipeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
+  const [servings, setServings] = useState<number | null>(null);
 
   const { data: recipe, isLoading } = useQuery({
     queryKey: ["recipe", slug],
@@ -28,6 +29,14 @@ const RecipeDetail = () => {
     },
     enabled: !!slug,
   });
+
+  const baseServings = recipe?.servings || 4;
+  const currentServings = servings ?? baseServings;
+  const scaleFactor = currentServings / baseServings;
+
+  const ingredients = (recipe?.ingredients as string[]) || [];
+  const instructions = (recipe?.instructions as string[]) || [];
+  const scaledIngredients = scaleIngredients(ingredients, baseServings, currentServings);
 
   if (isLoading) {
     return (
@@ -56,13 +65,6 @@ const RecipeDetail = () => {
     );
   }
 
-  const ingredients = recipe.ingredients as string[];
-  const instructions = recipe.instructions as string[];
-  const baseServings = recipe.servings || 4;
-  const [servings, setServings] = useState(baseServings);
-  const scaleFactor = servings / baseServings;
-
-  const scaledIngredients = scaleIngredients(ingredients, baseServings, servings);
   const totalTime = (recipe.prep_time_minutes || 0) + (recipe.cook_time_minutes || 0);
 
   const jsonLd = {
