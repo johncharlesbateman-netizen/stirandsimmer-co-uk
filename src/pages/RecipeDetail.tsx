@@ -30,7 +30,7 @@ const RecipeDetail = () => {
     enabled: !!slug,
   });
 
-  const baseServings = recipe?.servings || 4;
+  const baseServings = recipe?.servings || 2;
   const currentServings = servings ?? baseServings;
   const scaleFactor = currentServings / baseServings;
 
