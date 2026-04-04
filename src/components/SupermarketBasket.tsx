@@ -85,17 +85,24 @@ const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
       </div>
 
       {/* Supermarket cards — sorted cheapest first */}
-      <div className="grid grid-cols-2 gap-2 mb-4">
+      <div className="grid grid-cols-2 gap-2 mb-2">
         {sortedMarkets.map((market) => {
           const isActive = market.id === selected;
           const total = prices[market.id].total;
           const isCheapest = market.id === cheapestId;
 
           return (
-            <button
+            <a
               key={market.id}
-              onClick={() => setSelected(market.id)}
-              className={`relative flex flex-col items-center gap-1 p-3 border transition-colors text-center ${
+              href={market.buildUrl(checkedItems)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                setSelected(market.id);
+                window.open(market.buildUrl(checkedItems), "_blank");
+              }}
+              className={`relative flex flex-col items-center gap-1 p-3 border transition-colors text-center cursor-pointer ${
                 isActive
                   ? "border-foreground bg-secondary"
                   : "border-border hover:border-muted-foreground/40"
@@ -111,10 +118,13 @@ const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
               <span className="text-xs text-muted-foreground">
                 ~£{total.toFixed(2)}
               </span>
-            </button>
+            </a>
           );
         })}
       </div>
+      <p className="text-xs text-muted-foreground/60 mb-4">
+        Prices are estimates. Click a supermarket to check current prices.
+      </p>
 
       {/* Per-ingredient price breakdown */}
       <ul className="space-y-1.5 mb-4">
