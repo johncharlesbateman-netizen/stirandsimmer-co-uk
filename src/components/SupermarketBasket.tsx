@@ -72,7 +72,7 @@ const getStoredPreference = (): SupermarketId | null => {
   return null;
 };
 
-const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
+const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketProps) => {
   const [selected, setSelected] = useState<SupermarketId>(
     () => getStoredPreference() || "asda"
   );
@@ -86,8 +86,21 @@ const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
 
   const prices = useMemo(() => {
     if (checkedItems.length === 0) return null;
-    return estimateAllPrices(checkedItems);
-  }, [checkedItems]);
+    const base = estimateAllPrices(checkedItems);
+    if (scaleFactor === 1) return base;
+    // Scale all prices by the factor
+    const scaled = {} as typeof base;
+    for (const key of Object.keys(base) as SupermarketId[]) {
+      const entry = base[key];
+      const items = entry.items.map((item) => ({
+        ...item,
+        price: +(item.price * scaleFactor).toFixed(2),
+      }));
+      const total = +items.reduce((s, i) => s + i.price, 0).toFixed(2);
+      scaled[key] = { ...entry, items, total };
+    }
+    return scaled;
+  }, [checkedItems, scaleFactor]);
 
   if (checkedItems.length === 0 || !prices) return null;
 
