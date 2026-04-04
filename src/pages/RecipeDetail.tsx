@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
@@ -6,6 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
+import { scaleIngredients } from "@/lib/ingredient-scaler";
+import ServingScaler from "@/components/ServingScaler";
 import ShoppingList from "@/components/ShoppingList";
 
 const RecipeDetail = () => {
