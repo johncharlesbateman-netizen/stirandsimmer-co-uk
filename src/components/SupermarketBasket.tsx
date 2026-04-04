@@ -1,12 +1,17 @@
-import { useState, useMemo } from "react";
-import { ExternalLink } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { ExternalLink, Loader2 } from "lucide-react";
+import {
+  fetchAllPrices,
+  type SupermarketId,
+  type SupermarketPrices,
+} from "@/lib/supermarketPricing";
 
 interface SupermarketBasketProps {
   checkedItems: string[];
 }
 
 interface Supermarket {
-  id: string;
+  id: SupermarketId;
   name: string;
   colour: string;
   logo: string;
@@ -48,50 +53,53 @@ const supermarkets: Supermarket[] = [
   },
 ];
 
-/** Rough placeholder prices (£) per common ingredient keyword */
-const estimateItemPrice = (item: string): number => {
-  const lower = item.toLowerCase();
-  if (lower.includes("chicken") || lower.includes("beef") || lower.includes("lamb") || lower.includes("pork") || lower.includes("prawn") || lower.includes("salmon") || lower.includes("scallop"))
-    return 3.5;
-  if (lower.includes("cheese") || lower.includes("cream") || lower.includes("butter") || lower.includes("yoghurt"))
-    return 2.0;
-  if (lower.includes("pasta") || lower.includes("rice") || lower.includes("noodle") || lower.includes("bread") || lower.includes("flour"))
-    return 1.2;
-  if (lower.includes("oil") || lower.includes("vinegar") || lower.includes("sauce") || lower.includes("stock"))
-    return 1.8;
-  if (lower.includes("wine") || lower.includes("beer") || lower.includes("cider"))
-    return 4.0;
-  if (lower.includes("spice") || lower.includes("cumin") || lower.includes("paprika") || lower.includes("turmeric") || lower.includes("cinnamon") || lower.includes("chilli"))
-    return 1.0;
-  if (lower.includes("herb") || lower.includes("basil") || lower.includes("parsley") || lower.includes("coriander") || lower.includes("thyme") || lower.includes("rosemary"))
-    return 0.8;
-  if (lower.includes("egg"))
-    return 2.2;
-  if (lower.includes("milk"))
-    return 1.3;
-  return 0.9; // generic veg / misc
-};
-
-/** Small per-supermarket price modifier so estimates differ slightly */
-const priceModifiers: Record<string, number> = {
-  ocado: 1.12,
-  tesco: 1.0,
-  sainsburys: 1.05,
-  asda: 0.95,
-};
-
 const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
-  const [selected, setSelected] = useState<string>("ocado");
+  const [selected, setSelected] = useState<SupermarketId>("ocado");
+  const [loading, setLoading] = useState(false);
+  const [prices, setPrices] = useState<Record<SupermarketId, SupermarketPrices> | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const prevItemsRef = useRef<string>("");
 
-  const baseTotal = useMemo(
-    () => checkedItems.reduce((sum, item) => sum + estimateItemPrice(item), 0),
-    [checkedItems],
-  );
+  // Fetch live prices when checked items change
+  useEffect(() => {
+    const key = checkedItems.slice().sort().join("|");
+    if (key === prevItemsRef.current || checkedItems.length === 0) {
+      if (checkedItems.length === 0) {
+        setPrices(null);
+        setError(null);
+      }
+      return;
+    }
+    prevItemsRef.current = key;
+
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+
+    fetchAllPrices(checkedItems)
+      .then((result) => {
+        if (!cancelled) {
+          setPrices(result);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setError("Couldn't fetch live prices. Showing estimates instead.");
+          setPrices(null);
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [checkedItems]);
 
   if (checkedItems.length === 0) return null;
 
   const activeMarket = supermarkets.find((s) => s.id === selected)!;
-  const estimatedTotal = (baseTotal * (priceModifiers[selected] ?? 1)).toFixed(2);
+  const activePrices = prices?.[selected];
 
   return (
     <div className="mt-6 pt-6 border-t border-border">
@@ -101,7 +109,13 @@ const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
       <div className="grid grid-cols-2 gap-2 mb-4">
         {supermarkets.map((market) => {
           const isActive = market.id === selected;
-          const est = (baseTotal * (priceModifiers[market.id] ?? 1)).toFixed(2);
+          const marketPrices = prices?.[market.id];
+          const total = marketPrices
+            ? `£${marketPrices.total.toFixed(2)}`
+            : loading
+              ? "…"
+              : "—";
+
           return (
             <button
               key={market.id}
@@ -114,17 +128,60 @@ const SupermarketBasket = ({ checkedItems }: SupermarketBasketProps) => {
             >
               <span className="text-lg">{market.logo}</span>
               <span className="text-xs font-medium text-foreground">{market.name}</span>
-              <span className="text-xs text-muted-foreground">≈ £{est}</span>
+              <span className="text-xs text-muted-foreground">
+                {loading ? (
+                  <Loader2 className="w-3 h-3 animate-spin inline" />
+                ) : (
+                  total
+                )}
+              </span>
             </button>
           );
         })}
       </div>
 
+      {/* Per-ingredient price breakdown */}
+      {loading && (
+        <div className="flex items-center gap-2 mb-4 text-sm text-muted-foreground">
+          <Loader2 className="w-4 h-4 animate-spin" />
+          Fetching live prices…
+        </div>
+      )}
+
+      {error && (
+        <p className="text-xs text-muted-foreground mb-4">{error}</p>
+      )}
+
+      {activePrices && !loading && (
+        <ul className="space-y-1.5 mb-4">
+          {activePrices.items.map((item, i) => (
+            <li
+              key={i}
+              className="flex items-center justify-between text-sm"
+            >
+              <span className="text-muted-foreground truncate mr-2">
+                {item.productName ?? item.ingredient}
+              </span>
+              <span className="font-medium text-foreground whitespace-nowrap">
+                {item.price !== null ? `£${item.price.toFixed(2)}` : "n/a"}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+
       {/* Summary + CTA */}
       <div className="flex items-center justify-between gap-3">
         <p className="text-sm text-muted-foreground">
-          {checkedItems.length} item{checkedItems.length !== 1 ? "s" : ""} · est.{" "}
-          <span className="font-medium text-foreground">£{estimatedTotal}</span>
+          {checkedItems.length} item{checkedItems.length !== 1 ? "s" : ""}
+          {activePrices && !loading && (
+            <>
+              {" · "}
+              <span className="font-medium text-foreground">
+                £{activePrices.total.toFixed(2)}
+              </span>
+            </>
+          )}
         </p>
         <a
           href={activeMarket.buildUrl(checkedItems)}
