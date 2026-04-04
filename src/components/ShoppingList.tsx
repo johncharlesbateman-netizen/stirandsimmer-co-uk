@@ -112,7 +112,7 @@ const ShoppingList = ({ ingredients, scaleFactor = 1 }: ShoppingListProps) => {
         ))}
       </ul>
 
-      <SupermarketBasket checkedItems={ingredients.filter((_, i) => checked.has(i))} />
+      <SupermarketBasket checkedItems={ingredients.filter((_, i) => checked.has(i))} scaleFactor={scaleFactor} />
     </div>
   );
 };
