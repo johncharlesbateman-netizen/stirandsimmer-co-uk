@@ -76,7 +76,7 @@ const supermarkets: Supermarket[] = [
     colour: "hsl(267, 56%, 48%)",
     logo: "🟣",
     buildSearchUrl: (term) =>
-      `https://www.ocado.com/webshop/getSearchProducts.do?entry=${encodeURIComponent(term)}`,
+      `https://www.ocado.com/search?entry=${encodeURIComponent(term)}`,
   },
   {
     id: "waitrose",
