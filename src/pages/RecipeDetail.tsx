@@ -228,8 +228,6 @@ const RecipeDetail = () => {
                   </li>
                 ))}
               </ul>
-
-              <ShoppingList ingredients={scaledIngredients} scaleFactor={scaleFactor} recipeName={recipe.title} />
             </div>
 
             {/* Instructions */}
