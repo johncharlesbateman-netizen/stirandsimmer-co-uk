@@ -1,8 +1,11 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
+import type { Database } from "@/integrations/supabase/types";
+
+type RecipeCategory = Database["public"]["Enums"]["recipe_category"];
 
 interface RecipePickerDialogProps {
   open: boolean;
@@ -10,10 +13,21 @@ interface RecipePickerDialogProps {
   onSelect: (recipe: { id: string; title: string; slug: string; ingredients: string[]; servings: number | null; image_url: string | null }) => void;
   dayLabel: string;
   mealLabel: string;
+  /** Pre-selected category filter when the dialog opens */
+  defaultFilter?: RecipeCategory;
 }
 
-const RecipePickerDialog = ({ open, onClose, onSelect, dayLabel, mealLabel }: RecipePickerDialogProps) => {
+const RecipePickerDialog = ({ open, onClose, onSelect, dayLabel, mealLabel, defaultFilter }: RecipePickerDialogProps) => {
   const [search, setSearch] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState<RecipeCategory | null>(defaultFilter ?? null);
+
+  // Reset filter when dialog opens with a new defaultFilter
+  useEffect(() => {
+    if (open) {
+      setCategoryFilter(defaultFilter ?? null);
+      setSearch("");
+    }
+  }, [open, defaultFilter]);
 
   const { data: recipes = [] } = useQuery({
     queryKey: ["all-recipes"],
@@ -28,14 +42,25 @@ const RecipePickerDialog = ({ open, onClose, onSelect, dayLabel, mealLabel }: Re
   });
 
   const filtered = useMemo(() => {
-    if (!search.trim()) return recipes;
-    const q = search.toLowerCase();
-    return recipes.filter(
-      (r) =>
-        r.title.toLowerCase().includes(q) ||
-        categoryLabels[r.category]?.toLowerCase().includes(q)
-    );
-  }, [recipes, search]);
+    let list = recipes;
+
+    if (categoryFilter) {
+      list = list.filter((r) => r.category === categoryFilter);
+    }
+
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      list = list.filter(
+        (r) =>
+          r.title.toLowerCase().includes(q) ||
+          categoryLabels[r.category]?.toLowerCase().includes(q)
+      );
+    }
+
+    return list;
+  }, [recipes, search, categoryFilter]);
+
+  const filterLabel = categoryFilter ? categoryLabels[categoryFilter] : null;
 
   if (!open) return null;
 
@@ -70,10 +95,35 @@ const RecipePickerDialog = ({ open, onClose, onSelect, dayLabel, mealLabel }: Re
           </div>
         </div>
 
+        {/* Filter bar */}
+        {categoryFilter && (
+          <div className="px-5 py-2.5 border-b border-border bg-secondary/50 flex items-center justify-between">
+            <p className="text-xs text-muted-foreground">
+              Showing <span className="font-medium text-foreground">{filterLabel}</span> · {filtered.length} recipe{filtered.length !== 1 ? "s" : ""}
+            </p>
+            <button
+              onClick={() => setCategoryFilter(null)}
+              className="text-xs font-medium text-foreground hover:text-muted-foreground transition-colors underline underline-offset-2"
+            >
+              Show all recipes
+            </button>
+          </div>
+        )}
+
         {/* Recipe list */}
         <div className="flex-1 overflow-y-auto p-2">
           {filtered.length === 0 ? (
-            <p className="text-sm text-muted-foreground text-center py-8">No recipes found</p>
+            <div className="text-center py-8">
+              <p className="text-sm text-muted-foreground mb-2">No recipes found</p>
+              {categoryFilter && (
+                <button
+                  onClick={() => setCategoryFilter(null)}
+                  className="text-xs font-medium text-foreground hover:text-muted-foreground transition-colors underline underline-offset-2"
+                >
+                  Show all recipes
+                </button>
+              )}
+            </div>
           ) : (
             <div className="space-y-1">
               {filtered.map((recipe) => (
