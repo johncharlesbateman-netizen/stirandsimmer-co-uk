@@ -70,6 +70,49 @@ const MealPlanner = () => {
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pickerSlot, setPickerSlot] = useState<{ day: string; meal: MealType } | null>(null);
 
+  /* Auto-save to localStorage */
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(plan));
+  }, [plan]);
+
+  /* Fetch all recipes for "Surprise me" */
+  const { data: allRecipes = [] } = useQuery({
+    queryKey: ["all-recipes"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("recipes")
+        .select("id, title, slug, ingredients, servings, image_url")
+        .order("title");
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  /* Surprise me — randomly fill empty slots */
+  const handleSurpriseMe = useCallback(() => {
+    if (allRecipes.length === 0) return;
+    setPlan((prev) => {
+      const next = { ...prev };
+      for (const day of DAYS) {
+        next[day] = { ...next[day] };
+        for (const { key } of MEALS) {
+          if (!next[day][key]) {
+            const pick = allRecipes[Math.floor(Math.random() * allRecipes.length)];
+            next[day][key] = {
+              id: pick.id,
+              title: pick.title,
+              slug: pick.slug,
+              ingredients: (pick.ingredients as string[]) || [],
+              servings: pick.servings,
+              image_url: pick.image_url,
+            };
+          }
+        }
+      }
+      return next;
+    });
+  }, [allRecipes]);
+
   /* Assign / remove recipes */
   const assignRecipe = useCallback((day: string, meal: MealType, recipe: AssignedRecipe) => {
     setPlan((prev) => ({
