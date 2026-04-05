@@ -70,6 +70,14 @@ const supermarkets: Supermarket[] = [
     buildSearchUrl: (term) =>
       `https://www.waitrose.com/ecom/shop/search?&searchTerm=${encodeURIComponent(term)}`,
   },
+  {
+    id: "morrisons",
+    name: "Morrisons",
+    colour: "hsl(82, 70%, 40%)",
+    logo: "🟡",
+    buildSearchUrl: (term) =>
+      `https://groceries.morrisons.com/search?entry=${encodeURIComponent(term)}`,
+  },
 ];
 
 const getStoredPreference = (): SupermarketId | null => {

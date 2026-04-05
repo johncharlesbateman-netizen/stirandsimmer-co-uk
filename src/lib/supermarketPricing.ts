@@ -1,4 +1,4 @@
-export type SupermarketId = "tesco" | "sainsburys" | "asda" | "ocado" | "waitrose";
+export type SupermarketId = "tesco" | "sainsburys" | "asda" | "ocado" | "waitrose" | "morrisons";
 
 export interface PriceResult {
   ingredient: string;
@@ -342,6 +342,7 @@ const PRICE_RULES: { keywords: string[]; base: number; label: string }[] = [
 /** Per-supermarket multiplier to simulate slight price variation */
 const SUPERMARKET_MULTIPLIER: Record<SupermarketId, number> = {
   asda: 0.95,
+  morrisons: 0.97,
   tesco: 1.00,
   sainsburys: 1.04,
   ocado: 1.08,
@@ -370,7 +371,7 @@ function estimateIngredientPrice(
 export function estimateAllPrices(
   ingredients: string[]
 ): Record<SupermarketId, SupermarketPrices> {
-  const supermarkets: SupermarketId[] = ["tesco", "sainsburys", "asda", "ocado", "waitrose"];
+  const supermarkets: SupermarketId[] = ["tesco", "sainsburys", "asda", "ocado", "waitrose", "morrisons"];
   const results = {} as Record<SupermarketId, SupermarketPrices>;
 
   for (const sid of supermarkets) {
