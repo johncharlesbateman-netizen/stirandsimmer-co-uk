@@ -1,10 +1,12 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Plus, X, Printer, Trash2, ExternalLink, Info } from "lucide-react";
+import { Plus, X, Printer, Trash2, ExternalLink, Info, Shuffle } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import RecipePickerDialog from "@/components/RecipePickerDialog";
 import { mergeIngredients } from "@/lib/ingredientMerger";
+import { supabase } from "@/integrations/supabase/client";
 import {
   estimateAllPrices,
   type SupermarketId,
@@ -34,6 +36,8 @@ const MEALS: { key: MealType; label: string }[] = [
   { key: "dinner", label: "Dinner" },
 ];
 
+const STORAGE_KEY = "gfr-meal-plan";
+
 const SUPERMARKET_META: Record<SupermarketId, { name: string; logo: string; buildUrl: (t: string) => string }> = {
   aldi: { name: "Aldi", logo: "🔵", buildUrl: () => "https://www.aldi.co.uk" },
   lidl: { name: "Lidl", logo: "🟡", buildUrl: () => "https://www.lidl.co.uk" },
@@ -48,12 +52,66 @@ const SUPERMARKET_META: Record<SupermarketId, { name: string; logo: string; buil
 const emptyWeek = (): WeekPlan =>
   Object.fromEntries(DAYS.map((d) => [d, { breakfast: null, lunch: null, dinner: null }]));
 
+const loadSavedPlan = (): WeekPlan => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved) as WeekPlan;
+      if (parsed && typeof parsed === "object" && DAYS.every((d) => d in parsed)) return parsed;
+    }
+  } catch { /* ignore */ }
+  return emptyWeek();
+};
+
 /* ── Component ────────────────────────────────────────────── */
 
 const MealPlanner = () => {
-  const [plan, setPlan] = useState<WeekPlan>(emptyWeek);
+  const [plan, setPlan] = useState<WeekPlan>(loadSavedPlan);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pickerSlot, setPickerSlot] = useState<{ day: string; meal: MealType } | null>(null);
+
+  /* Auto-save to localStorage */
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(plan));
+  }, [plan]);
+
+  /* Fetch all recipes for "Surprise me" */
+  const { data: allRecipes = [] } = useQuery({
+    queryKey: ["all-recipes"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("recipes")
+        .select("id, title, slug, ingredients, servings, image_url")
+        .order("title");
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  /* Surprise me — randomly fill empty slots */
+  const handleSurpriseMe = useCallback(() => {
+    if (allRecipes.length === 0) return;
+    setPlan((prev) => {
+      const next = { ...prev };
+      for (const day of DAYS) {
+        next[day] = { ...next[day] };
+        for (const { key } of MEALS) {
+          if (!next[day][key]) {
+            const pick = allRecipes[Math.floor(Math.random() * allRecipes.length)];
+            next[day][key] = {
+              id: pick.id,
+              title: pick.title,
+              slug: pick.slug,
+              ingredients: (pick.ingredients as string[]) || [],
+              servings: pick.servings,
+              image_url: pick.image_url,
+            };
+          }
+        }
+      }
+      return next;
+    });
+  }, [allRecipes]);
 
   /* Assign / remove recipes */
   const assignRecipe = useCallback((day: string, meal: MealType, recipe: AssignedRecipe) => {
@@ -181,24 +239,33 @@ const MealPlanner = () => {
             <p className="micro-caption mb-2">Plan & Shop</p>
             <h1 className="heading-editorial">Weekly Meal Planner</h1>
           </div>
-          {hasRecipes && (
-            <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3">
               <button
-                onClick={handlePrint}
+                onClick={handleSurpriseMe}
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
-                <Printer className="w-4 h-4" />
-                Print
+                <Shuffle className="w-4 h-4" />
+                Surprise me
               </button>
-              <button
-                onClick={() => setPlan(emptyWeek())}
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Trash2 className="w-4 h-4" />
-                Clear week
-              </button>
+              {hasRecipes && (
+                <>
+                  <button
+                    onClick={handlePrint}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Printer className="w-4 h-4" />
+                    Print
+                  </button>
+                  <button
+                    onClick={() => setPlan(emptyWeek())}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    Clear week
+                  </button>
+                </>
+              )}
             </div>
-          )}
         </div>
 
         {/* 7-day grid */}
