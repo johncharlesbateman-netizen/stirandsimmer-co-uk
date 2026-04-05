@@ -43,8 +43,8 @@ const supermarkets: Supermarket[] = [
     name: "Lidl",
     colour: "hsl(50, 100%, 50%)",
     logo: "🟡",
-    buildSearchUrl: (term) =>
-      `https://www.google.co.uk/search?q=site:lidl.co.uk+${encodeURIComponent(term)}`,
+    buildSearchUrl: (_term) =>
+      `https://www.lidl.co.uk`,
   },
   {
     id: "asda",
@@ -181,6 +181,7 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
                 setSelected(market.id);
                 openIngredientSearches(market);
               }}
+              title={market.id === "lidl" ? "Search for your ingredients on Lidl's website" : undefined}
               className={`relative flex flex-col items-center gap-1 p-3 border transition-colors text-center cursor-pointer ${
                 isActive
                   ? "border-foreground bg-secondary"
