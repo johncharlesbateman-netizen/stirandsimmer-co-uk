@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Plus, X, Printer, Trash2, ExternalLink, Info, Shuffle } from "lucide-react";
+import { Plus, X, Printer, Trash2, ExternalLink, Info, Shuffle, ChevronDown, ChevronUp } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import RecipePickerDialog from "@/components/RecipePickerDialog";
