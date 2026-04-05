@@ -144,7 +144,7 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
       </div>
 
       {/* Supermarket cards — sorted cheapest first */}
-      <div className="grid grid-cols-2 gap-2 mb-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-2">
         {sortedMarkets.map((market) => {
           const isActive = market.id === selected;
           const total = prices[market.id].total;
