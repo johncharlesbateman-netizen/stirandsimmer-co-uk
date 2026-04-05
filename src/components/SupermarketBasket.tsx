@@ -91,8 +91,8 @@ const supermarkets: Supermarket[] = [
     name: "Morrisons",
     colour: "hsl(82, 70%, 40%)",
     logo: "🟡",
-    buildSearchUrl: (term) =>
-      `https://groceries.morrisons.com/search?entry=${encodeURIComponent(term)}`,
+    buildSearchUrl: (_term) =>
+      `https://groceries.morrisons.com`,
   },
 ];
 
