@@ -91,8 +91,8 @@ const supermarkets: Supermarket[] = [
     name: "Morrisons",
     colour: "hsl(82, 70%, 40%)",
     logo: "🟡",
-    buildSearchUrl: (term) =>
-      `https://groceries.morrisons.com/search?entry=${encodeURIComponent(term)}`,
+    buildSearchUrl: (_term) =>
+      `https://groceries.morrisons.com`,
   },
 ];
 
@@ -181,7 +181,7 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
                 setSelected(market.id);
                 openIngredientSearches(market);
               }}
-              title={market.id === "lidl" ? "Search for your ingredients on Lidl's website" : undefined}
+              title={market.id === "lidl" ? "Search for your ingredients on Lidl's website" : market.id === "morrisons" ? "Search for your ingredients on Morrisons' website" : undefined}
               className={`relative flex flex-col items-center gap-1 p-3 border transition-colors text-center cursor-pointer ${
                 isActive
                   ? "border-foreground bg-secondary"
