@@ -239,24 +239,33 @@ const MealPlanner = () => {
             <p className="micro-caption mb-2">Plan & Shop</p>
             <h1 className="heading-editorial">Weekly Meal Planner</h1>
           </div>
-          {hasRecipes && (
-            <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3">
               <button
-                onClick={handlePrint}
+                onClick={handleSurpriseMe}
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
-                <Printer className="w-4 h-4" />
-                Print
+                <Shuffle className="w-4 h-4" />
+                Surprise me
               </button>
-              <button
-                onClick={() => setPlan(emptyWeek())}
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Trash2 className="w-4 h-4" />
-                Clear week
-              </button>
+              {hasRecipes && (
+                <>
+                  <button
+                    onClick={handlePrint}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Printer className="w-4 h-4" />
+                    Print
+                  </button>
+                  <button
+                    onClick={() => setPlan(emptyWeek())}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    Clear week
+                  </button>
+                </>
+              )}
             </div>
-          )}
         </div>
 
         {/* 7-day grid */}
