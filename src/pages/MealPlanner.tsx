@@ -1,10 +1,12 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Plus, X, Printer, Trash2, ExternalLink, Info } from "lucide-react";
+import { Plus, X, Printer, Trash2, ExternalLink, Info, Shuffle } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import RecipePickerDialog from "@/components/RecipePickerDialog";
 import { mergeIngredients } from "@/lib/ingredientMerger";
+import { supabase } from "@/integrations/supabase/client";
 import {
   estimateAllPrices,
   type SupermarketId,
@@ -34,6 +36,8 @@ const MEALS: { key: MealType; label: string }[] = [
   { key: "dinner", label: "Dinner" },
 ];
 
+const STORAGE_KEY = "gfr-meal-plan";
+
 const SUPERMARKET_META: Record<SupermarketId, { name: string; logo: string; buildUrl: (t: string) => string }> = {
   aldi: { name: "Aldi", logo: "🔵", buildUrl: () => "https://www.aldi.co.uk" },
   lidl: { name: "Lidl", logo: "🟡", buildUrl: () => "https://www.lidl.co.uk" },
@@ -48,10 +52,21 @@ const SUPERMARKET_META: Record<SupermarketId, { name: string; logo: string; buil
 const emptyWeek = (): WeekPlan =>
   Object.fromEntries(DAYS.map((d) => [d, { breakfast: null, lunch: null, dinner: null }]));
 
+const loadSavedPlan = (): WeekPlan => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved) as WeekPlan;
+      if (parsed && typeof parsed === "object" && DAYS.every((d) => d in parsed)) return parsed;
+    }
+  } catch { /* ignore */ }
+  return emptyWeek();
+};
+
 /* ── Component ────────────────────────────────────────────── */
 
 const MealPlanner = () => {
-  const [plan, setPlan] = useState<WeekPlan>(emptyWeek);
+  const [plan, setPlan] = useState<WeekPlan>(loadSavedPlan);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pickerSlot, setPickerSlot] = useState<{ day: string; meal: MealType } | null>(null);
 
