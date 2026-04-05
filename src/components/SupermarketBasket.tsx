@@ -62,6 +62,14 @@ const supermarkets: Supermarket[] = [
     buildSearchUrl: (term) =>
       `https://www.ocado.com/webshop/getSearchProducts.do?entry=${encodeURIComponent(term)}`,
   },
+  {
+    id: "waitrose",
+    name: "Waitrose",
+    colour: "hsl(145, 63%, 32%)",
+    logo: "🟢",
+    buildSearchUrl: (term) =>
+      `https://www.waitrose.com/ecom/shop/search?&searchTerm=${encodeURIComponent(term)}`,
+  },
 ];
 
 const getStoredPreference = (): SupermarketId | null => {
