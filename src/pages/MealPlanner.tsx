@@ -321,17 +321,29 @@ const MealPlanner = () => {
           <section className="max-w-2xl">
             <p className="micro-caption mb-4">Combined Shopping List</p>
             <div className="p-5 bg-secondary border border-border">
-              <p className="text-sm text-muted-foreground mb-4">
-                {mergedIngredients.length} item{mergedIngredients.length !== 1 ? "s" : ""} from {assignedRecipes.length} recipe{assignedRecipes.length !== 1 ? "s" : ""}
-              </p>
-              <ul className="space-y-2 mb-6">
-                {mergedIngredients.map((item, i) => (
-                  <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                    <span className="text-muted-foreground/40 mt-0.5">☐</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <button
+                onClick={() => setShoppingListOpen((o) => !o)}
+                className="w-full flex items-center justify-between text-sm text-muted-foreground mb-0"
+              >
+                <span>
+                  {mergedIngredients.length} item{mergedIngredients.length !== 1 ? "s" : ""} from {assignedRecipes.length} recipe{assignedRecipes.length !== 1 ? "s" : ""}
+                </span>
+                <span className="inline-flex items-center gap-1 text-xs font-medium text-foreground">
+                  {shoppingListOpen ? "Hide" : "Show"} list
+                  {shoppingListOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                </span>
+              </button>
+
+              {shoppingListOpen && (
+                <ul className="space-y-2 mt-4 mb-6">
+                  {mergedIngredients.map((item, i) => (
+                    <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                      <span className="text-muted-foreground/40 mt-0.5">☐</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               {/* Price comparison */}
               {prices && sortedMarkets.length > 0 && (
