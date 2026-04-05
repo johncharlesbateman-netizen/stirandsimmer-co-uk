@@ -422,6 +422,13 @@ const MealPlanner = () => {
         }}
         dayLabel={pickerSlot?.day || ""}
         mealLabel={MEALS.find((m) => m.key === pickerSlot?.meal)?.label || ""}
+        defaultFilter={
+          pickerSlot?.meal === "breakfast"
+            ? "lunch_suggestions"
+            : pickerSlot?.meal === "lunch"
+              ? "lunch_suggestions"
+              : undefined
+        }
       />
     </Layout>
   );
