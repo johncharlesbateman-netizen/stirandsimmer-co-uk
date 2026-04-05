@@ -31,6 +31,22 @@ const toSearchTerm = (ingredient: string): string =>
 
 const supermarkets: Supermarket[] = [
   {
+    id: "aldi",
+    name: "Aldi",
+    colour: "hsl(213, 70%, 30%)",
+    logo: "🔵",
+    buildSearchUrl: (term) =>
+      `https://www.aldi.co.uk/search#q=${encodeURIComponent(term)}`,
+  },
+  {
+    id: "lidl",
+    name: "Lidl",
+    colour: "hsl(50, 100%, 50%)",
+    logo: "🟡",
+    buildSearchUrl: (term) =>
+      `https://www.lidl.co.uk/search?query=${encodeURIComponent(term)}`,
+  },
+  {
     id: "asda",
     name: "ASDA",
     colour: "hsl(120, 61%, 38%)",
@@ -152,7 +168,7 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
       </div>
 
       {/* Supermarket cards — sorted cheapest first */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
         {sortedMarkets.map((market) => {
           const isActive = market.id === selected;
           const total = prices[market.id].total;
