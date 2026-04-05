@@ -44,7 +44,7 @@ const supermarkets: Supermarket[] = [
     colour: "hsl(50, 100%, 50%)",
     logo: "🟡",
     buildSearchUrl: (term) =>
-      `https://www.lidl.co.uk/search?query=${encodeURIComponent(term)}`,
+      `https://www.lidl.co.uk`,
   },
   {
     id: "asda",
