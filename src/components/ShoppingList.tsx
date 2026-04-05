@@ -274,6 +274,19 @@ const ShoppingList = ({ ingredients, scaleFactor = 1, recipeName = "Recipe" }: S
         ))}
       </ul>
 
+      {/* Prominent print button above price estimates */}
+      {checked.size > 0 && (
+        <div className="mt-6 pt-4 border-t border-border">
+          <button
+            onClick={handlePrint}
+            className="w-full inline-flex items-center justify-center gap-2 py-2.5 text-sm font-medium text-foreground border border-border hover:bg-secondary transition-colors"
+          >
+            <Printer className="w-4 h-4" />
+            Print shopping list
+          </button>
+        </div>
+      )}
+
       <SupermarketBasket checkedItems={ingredients.filter((_, i) => checked.has(i))} scaleFactor={scaleFactor} />
     </div>
   );
