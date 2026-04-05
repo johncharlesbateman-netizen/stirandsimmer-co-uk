@@ -69,6 +69,7 @@ const MealPlanner = () => {
   const [plan, setPlan] = useState<WeekPlan>(loadSavedPlan);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pickerSlot, setPickerSlot] = useState<{ day: string; meal: MealType } | null>(null);
+  const [shoppingListOpen, setShoppingListOpen] = useState(false);
 
   /* Auto-save to localStorage */
   useEffect(() => {
