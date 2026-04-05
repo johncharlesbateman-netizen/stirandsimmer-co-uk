@@ -228,8 +228,6 @@ const RecipeDetail = () => {
                   </li>
                 ))}
               </ul>
-
-              <ShoppingList ingredients={scaledIngredients} scaleFactor={scaleFactor} recipeName={recipe.title} />
             </div>
 
             {/* Instructions */}
@@ -260,6 +258,11 @@ const RecipeDetail = () => {
                 </div>
               )}
             </div>
+          </div>
+
+          {/* Shopping list & price comparison — below method on mobile */}
+          <div className="max-w-4xl mt-12">
+            <ShoppingList ingredients={scaledIngredients} scaleFactor={scaleFactor} recipeName={recipe.title} />
           </div>
         </div>
       </section>
