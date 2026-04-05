@@ -31,6 +31,22 @@ const toSearchTerm = (ingredient: string): string =>
 
 const supermarkets: Supermarket[] = [
   {
+    id: "aldi",
+    name: "Aldi",
+    colour: "hsl(213, 70%, 30%)",
+    logo: "🔵",
+    buildSearchUrl: (term) =>
+      `https://www.aldi.co.uk/search#q=${encodeURIComponent(term)}`,
+  },
+  {
+    id: "lidl",
+    name: "Lidl",
+    colour: "hsl(50, 100%, 50%)",
+    logo: "🟡",
+    buildSearchUrl: (term) =>
+      `https://www.lidl.co.uk/search?query=${encodeURIComponent(term)}`,
+  },
+  {
     id: "asda",
     name: "ASDA",
     colour: "hsl(120, 61%, 38%)",
