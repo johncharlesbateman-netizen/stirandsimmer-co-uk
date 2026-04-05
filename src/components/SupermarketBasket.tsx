@@ -181,6 +181,7 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
                 setSelected(market.id);
                 openIngredientSearches(market);
               }}
+              title={market.id === "lidl" ? "Search for your ingredients on Lidl's website" : undefined}
               className={`relative flex flex-col items-center gap-1 p-3 border transition-colors text-center cursor-pointer ${
                 isActive
                   ? "border-foreground bg-secondary"
