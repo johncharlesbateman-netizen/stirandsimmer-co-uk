@@ -62,6 +62,14 @@ const supermarkets: Supermarket[] = [
     buildSearchUrl: (term) =>
       `https://www.ocado.com/webshop/getSearchProducts.do?entry=${encodeURIComponent(term)}`,
   },
+  {
+    id: "waitrose",
+    name: "Waitrose",
+    colour: "hsl(145, 63%, 32%)",
+    logo: "🟢",
+    buildSearchUrl: (term) =>
+      `https://www.waitrose.com/ecom/shop/search?&searchTerm=${encodeURIComponent(term)}`,
+  },
 ];
 
 const getStoredPreference = (): SupermarketId | null => {
@@ -136,7 +144,7 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
       </div>
 
       {/* Supermarket cards — sorted cheapest first */}
-      <div className="grid grid-cols-2 gap-2 mb-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-2">
         {sortedMarkets.map((market) => {
           const isActive = market.id === selected;
           const total = prices[market.id].total;
