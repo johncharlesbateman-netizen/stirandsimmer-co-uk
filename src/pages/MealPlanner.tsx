@@ -114,31 +114,42 @@ const MealPlanner = () => {
     if (allRecipes.length === 0) return;
     setPlan((prev) => {
       const next = { ...prev };
+      const newSelections = { ...selections };
       for (const day of DAYS) {
         next[day] = { ...next[day] };
         for (const { key } of MEALS) {
           if (!next[day][key]) {
             const pick = allRecipes[Math.floor(Math.random() * allRecipes.length)];
+            const ings = (pick.ingredients as string[]) || [];
             next[day][key] = {
               id: pick.id,
               title: pick.title,
               slug: pick.slug,
-              ingredients: (pick.ingredients as string[]) || [],
+              ingredients: ings,
               servings: pick.servings,
               image_url: pick.image_url,
             };
+            // Auto-select all ingredients
+            newSelections[`${day}::${key}`] = ings.map((_, i) => i);
           }
         }
       }
+      setSelections(newSelections);
       return next;
     });
-  }, [allRecipes]);
+  }, [allRecipes, selections]);
 
   /* Assign / remove recipes */
   const assignRecipe = useCallback((day: string, meal: MealType, recipe: AssignedRecipe) => {
     setPlan((prev) => ({
       ...prev,
       [day]: { ...prev[day], [meal]: recipe },
+    }));
+    // Auto-select all ingredients for the new recipe
+    const slotKey = `${day}::${meal}`;
+    setSelections((prev) => ({
+      ...prev,
+      [slotKey]: recipe.ingredients.map((_, i) => i),
     }));
   }, []);
 
@@ -147,6 +158,13 @@ const MealPlanner = () => {
       ...prev,
       [day]: { ...prev[day], [meal]: null },
     }));
+    // Clean up selections
+    const slotKey = `${day}::${meal}`;
+    setSelections((prev) => {
+      const next = { ...prev };
+      delete next[slotKey];
+      return next;
+    });
   }, []);
 
   /* Gather all assigned recipes */
@@ -163,11 +181,28 @@ const MealPlanner = () => {
 
   const hasRecipes = assignedRecipes.length > 0;
 
-  /* Merged shopping list */
-  const mergedIngredients = useMemo(
-    () => (hasRecipes ? mergeIngredients(assignedRecipes.map((r) => r.ingredients)) : []),
-    [assignedRecipes, hasRecipes]
-  );
+  /* Merged shopping list — only include checked ingredients */
+  const mergedIngredients = useMemo(() => {
+    if (!hasRecipes) return [];
+    const filteredLists: string[][] = [];
+    for (const day of DAYS) {
+      for (const { key } of MEALS) {
+        const r = plan[day][key];
+        if (!r) continue;
+        const slotKey = `${day}::${key}`;
+        const checked = selections[slotKey];
+        if (checked && checked.length > 0) {
+          const checkedSet = new Set(checked);
+          filteredLists.push(r.ingredients.filter((_, i) => checkedSet.has(i)));
+        } else if (checked === undefined) {
+          // No selection saved yet — include all (backwards compat)
+          filteredLists.push(r.ingredients);
+        }
+        // If checked is empty array → user unchecked everything → include nothing
+      }
+    }
+    return mergeIngredients(filteredLists);
+  }, [plan, selections, hasRecipes]);
 
   /* Price comparison */
   const prices = useMemo(() => {
