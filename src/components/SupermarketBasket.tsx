@@ -202,7 +202,7 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
                   Cheapest
                 </span>
               )}
-              <span className="text-lg">{market.logo}</span>
+              <img src={supermarketLogos[market.id]} alt={market.name} className="w-8 h-8 object-contain" loading="lazy" width={32} height={32} />
               <span className="text-xs font-medium text-foreground">{market.name}</span>
               <span className="text-xs text-muted-foreground">
                 ~£{total.toFixed(2)}
