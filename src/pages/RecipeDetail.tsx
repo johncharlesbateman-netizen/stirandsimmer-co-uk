@@ -11,18 +11,24 @@ import { categoryLabels } from "@/lib/recipe-utils";
 import { scaleIngredients } from "@/lib/ingredient-scaler";
 import ServingScaler from "@/components/ServingScaler";
 import IngredientList from "@/components/IngredientList";
+import { useIsMobile } from "@/hooks/use-mobile";
+
+type MobileTab = "ingredients" | "method" | "shop";
 
 const RecipeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   const [servings, setServings] = useState<number | null>(null);
   const [checkedIngredients, setCheckedIngredients] = useState<Set<number>>(new Set());
+  const [activeTab, setActiveTab] = useState<MobileTab>("ingredients");
 
   // Scroll to top and reset state when navigating to a new recipe
   useEffect(() => {
     window.scrollTo(0, 0);
     setServings(null);
     setCheckedIngredients(new Set());
+    setActiveTab("ingredients");
   }, [slug]);
 
   const toggleIngredient = (index: number) => {
