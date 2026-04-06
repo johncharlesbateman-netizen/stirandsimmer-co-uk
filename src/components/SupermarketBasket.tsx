@@ -4,6 +4,7 @@ import {
   estimateAllPrices,
   type SupermarketId,
 } from "@/lib/supermarketPricing";
+import { supermarketLogos } from "@/lib/supermarket-logos";
 
 const STORAGE_KEY = "preferred-supermarket";
 
