@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
@@ -16,6 +16,13 @@ const RecipeDetail = () => {
   const { toast } = useToast();
   const [servings, setServings] = useState<number | null>(null);
   const [checkedIngredients, setCheckedIngredients] = useState<Set<number>>(new Set());
+
+  // Scroll to top and reset state when navigating to a new recipe
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setServings(null);
+    setCheckedIngredients(new Set());
+  }, [slug]);
 
   const toggleIngredient = (index: number) => {
     setCheckedIngredients((prev) => {
