@@ -241,16 +241,32 @@ const RecipeDetail = () => {
                 Method
               </h2>
               <ol className="space-y-6">
-                {instructions.map((step, i) => (
-                  <li key={i} className="flex gap-4">
-                    <span className="font-display text-2xl text-muted-foreground/40 flex-shrink-0 w-8">
-                      {i + 1}
-                    </span>
-                    <p className="text-muted-foreground leading-relaxed pt-1">
-                      {step}
-                    </p>
-                  </li>
-                ))}
+                {(() => {
+                  let stepNum = 0;
+                  return instructions.map((step, i) => {
+                    const isHeader = /^(for the |for |the )/i.test(step.trim()) && step.trim().split(" ").length <= 6;
+                    if (isHeader) {
+                      return (
+                        <li key={i} className="pt-4 first:pt-0">
+                          <span className="text-base font-semibold text-foreground">
+                            {step.replace(/:$/, "")}
+                          </span>
+                        </li>
+                      );
+                    }
+                    stepNum++;
+                    return (
+                      <li key={i} className="flex gap-4">
+                        <span className="font-display text-2xl text-muted-foreground/40 flex-shrink-0 w-8">
+                          {stepNum}
+                        </span>
+                        <p className="text-muted-foreground leading-relaxed pt-1">
+                          {step}
+                        </p>
+                      </li>
+                    );
+                  });
+                })()}
               </ol>
 
               {/* Tips */}
