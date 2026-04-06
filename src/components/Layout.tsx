@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "./Header";
@@ -33,11 +33,6 @@ const pageVariants = {
 
 const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
-
-  // Scroll to top on route change
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [location.pathname]);
 
   return (
     <div className="min-h-screen flex flex-col">
