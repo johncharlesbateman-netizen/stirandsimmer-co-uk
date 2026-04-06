@@ -94,6 +94,14 @@ const supermarkets: Supermarket[] = [
     buildSearchUrl: (_term) =>
       `https://groceries.morrisons.com`,
   },
+  {
+    id: "booths",
+    name: "Booths",
+    colour: "hsl(220, 60%, 35%)",
+    logo: "🛒",
+    buildSearchUrl: (term) =>
+      `https://www.booths.co.uk/search?q=${encodeURIComponent(term)}`,
+  },
 ];
 
 const getStoredPreference = (): SupermarketId | null => {
