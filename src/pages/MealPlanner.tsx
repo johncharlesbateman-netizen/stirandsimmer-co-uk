@@ -437,11 +437,9 @@ const MealPlanner = () => {
         dayLabel={pickerSlot?.day || ""}
         mealLabel={MEALS.find((m) => m.key === pickerSlot?.meal)?.label || ""}
         defaultFilter={
-          pickerSlot?.meal === "breakfast"
+          pickerSlot?.meal === "lunch"
             ? "lunch_suggestions"
-            : pickerSlot?.meal === "lunch"
-              ? "lunch_suggestions"
-              : undefined
+            : undefined
         }
       />
     </Layout>
