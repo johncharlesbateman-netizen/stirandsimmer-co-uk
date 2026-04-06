@@ -24,7 +24,7 @@ interface AssignedRecipe {
   image_url: string | null;
 }
 
-type MealType = "breakfast" | "lunch" | "dinner";
+type MealType = "lunch" | "dinner";
 
 type WeekPlan = Record<string, Record<MealType, AssignedRecipe | null>>;
 
@@ -32,7 +32,6 @@ type WeekPlan = Record<string, Record<MealType, AssignedRecipe | null>>;
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const MEALS: { key: MealType; label: string }[] = [
-  { key: "breakfast", label: "Breakfast" },
   { key: "lunch", label: "Lunch" },
   { key: "dinner", label: "Dinner" },
 ];
@@ -52,7 +51,7 @@ const SUPERMARKET_META: Record<SupermarketId, { name: string; logo: string; buil
 };
 
 const emptyWeek = (): WeekPlan =>
-  Object.fromEntries(DAYS.map((d) => [d, { breakfast: null, lunch: null, dinner: null }]));
+  Object.fromEntries(DAYS.map((d) => [d, { lunch: null, dinner: null }]));
 
 const loadSavedPlan = (): WeekPlan => {
   try {
@@ -438,11 +437,9 @@ const MealPlanner = () => {
         dayLabel={pickerSlot?.day || ""}
         mealLabel={MEALS.find((m) => m.key === pickerSlot?.meal)?.label || ""}
         defaultFilter={
-          pickerSlot?.meal === "breakfast"
+          pickerSlot?.meal === "lunch"
             ? "lunch_suggestions"
-            : pickerSlot?.meal === "lunch"
-              ? "lunch_suggestions"
-              : undefined
+            : undefined
         }
       />
     </Layout>
