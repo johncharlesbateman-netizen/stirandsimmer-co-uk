@@ -16,6 +16,7 @@ const SUPERMARKET_LABELS: Record<SupermarketId, string> = {
   lidl: "Lidl",
   asda: "ASDA",
   morrisons: "Morrisons",
+  booths: "Booths",
   tesco: "Tesco",
   sainsburys: "Sainsbury's",
   ocado: "Ocado",

@@ -47,6 +47,7 @@ const SUPERMARKET_META: Record<SupermarketId, { name: string; logo: string; buil
   ocado: { name: "Ocado", logo: "🟣", buildUrl: (t) => `https://www.ocado.com/search?entry=${encodeURIComponent(t)}` },
   waitrose: { name: "Waitrose", logo: "🟢", buildUrl: (t) => `https://www.waitrose.com/ecom/shop/search?&searchTerm=${encodeURIComponent(t)}` },
   morrisons: { name: "Morrisons", logo: "🟡", buildUrl: () => "https://groceries.morrisons.com" },
+  booths: { name: "Booths", logo: "🛒", buildUrl: (t) => `https://www.booths.co.uk/search?q=${encodeURIComponent(t)}` },
 };
 
 const emptyWeek = (): WeekPlan =>
