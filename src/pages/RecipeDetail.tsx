@@ -11,14 +11,12 @@ import { categoryLabels } from "@/lib/recipe-utils";
 import { scaleIngredients } from "@/lib/ingredient-scaler";
 import ServingScaler from "@/components/ServingScaler";
 import IngredientList from "@/components/IngredientList";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 type MobileTab = "ingredients" | "method" | "shop";
 
 const RecipeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
-  const isMobile = useIsMobile();
   const [servings, setServings] = useState<number | null>(null);
   const [checkedIngredients, setCheckedIngredients] = useState<Set<number>>(new Set());
   const [activeTab, setActiveTab] = useState<MobileTab>("ingredients");
@@ -232,31 +230,29 @@ const RecipeDetail = () => {
       <section className="pb-20 md:pb-32">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           {/* Mobile tab bar */}
-          {isMobile && (
-            <div className="flex border-b border-border mb-8 max-w-4xl">
-              {([
-                { key: "ingredients" as MobileTab, label: "Ingredients" },
-                { key: "method" as MobileTab, label: "Method" },
-                { key: "shop" as MobileTab, label: "Shop" },
-              ]).map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveTab(tab.key)}
-                  className={`flex-1 py-3 text-sm font-medium transition-colors ${
-                    activeTab === tab.key
-                      ? "text-foreground border-b-2 border-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          )}
+          <div className="mb-8 flex max-w-4xl border-b border-border md:hidden">
+            {([
+              { key: "ingredients" as MobileTab, label: "Ingredients" },
+              { key: "method" as MobileTab, label: "Method" },
+              { key: "shop" as MobileTab, label: "Shop" },
+            ]).map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`flex-1 py-3 text-sm font-medium transition-colors ${
+                  activeTab === tab.key
+                    ? "border-b-2 border-foreground text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 max-w-4xl">
             {/* Ingredients — order-2 on mobile (after image+info), order-1 on md */}
-            <div className={`md:col-span-4 order-1 md:order-1 ${isMobile && activeTab !== "ingredients" ? "hidden" : ""}`}>
+            <div className={`order-1 ${activeTab === "ingredients" ? "block" : "hidden"} md:col-span-4 md:order-1 md:block`}>
               <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
                 Ingredients
               </h2>
@@ -273,7 +269,7 @@ const RecipeDetail = () => {
             </div>
 
             {/* Instructions */}
-            <div className={`md:col-span-8 order-2 md:order-2 ${isMobile && activeTab !== "method" ? "hidden" : ""}`}>
+            <div className={`order-2 ${activeTab === "method" ? "block" : "hidden"} md:col-span-8 md:order-2 md:block`}>
               <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
                 Method
               </h2>
@@ -318,7 +314,7 @@ const RecipeDetail = () => {
             </div>
 
             {/* Supermarket Cards */}
-            <div className={`md:col-span-12 order-3 ${isMobile && activeTab !== "shop" ? "hidden" : ""}`}>
+            <div className={`order-3 ${activeTab === "shop" ? "block" : "hidden"} md:col-span-12 md:block`}>
               <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
                 Shop the Ingredients
               </h2>
