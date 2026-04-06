@@ -285,15 +285,16 @@ const RecipeDetail = () => {
               <h2 className="heading-section mb-6 pb-4 border-b border-border">
                 Shop the Ingredients
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {[
-                  { name: "Sainsbury's", logo: "🟠", url: "https://www.sainsburys.co.uk/gol-ui/groceries" },
-                  { name: "ASDA", logo: "🟢", url: "https://groceries.asda.com/" },
-                  { name: "Tesco", logo: "🔴", url: "https://www.tesco.com/groceries/" },
-                  { name: "Waitrose", logo: "🟢", url: "https://www.waitrose.com/ecom/shop/browse/groceries" },
-                  { name: "Morrisons", logo: "🟡", url: "https://groceries.morrisons.com/" },
+                  { name: "Tesco", logo: "🔴", url: "https://www.tesco.com/" },
+                  { name: "Sainsbury's", logo: "🟠", url: "https://www.sainsburys.co.uk/" },
+                  { name: "ASDA", logo: "🟢", url: "https://www.asda.com/" },
+                  { name: "Waitrose", logo: "🟢", url: "https://www.waitrose.com/" },
+                  { name: "Morrisons", logo: "🟡", url: "https://www.morrisons.com/" },
                   { name: "Aldi", logo: "🔵", url: "https://www.aldi.co.uk/" },
                   { name: "Lidl", logo: "🟡", url: "https://www.lidl.co.uk/" },
+                  { name: "Booths", logo: "🟤", url: "https://www.booths.co.uk/" },
                   { name: "Ocado", logo: "🟣", url: "https://www.ocado.com/" },
                 ].map((market) => (
                   <a
