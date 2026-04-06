@@ -191,10 +191,10 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
                 openIngredientSearches(market);
               }}
               title={["lidl", "morrisons", "aldi"].includes(market.id) ? `Search for your ingredients on ${market.name}'s website` : undefined}
-              className={`relative flex flex-col items-center gap-1 p-3 border transition-colors text-center cursor-pointer ${
+              className={`relative flex flex-col items-center gap-1 p-3 border transition-all duration-200 text-center cursor-pointer group ${
                 isActive
-                  ? "border-foreground bg-secondary"
-                  : "border-border hover:border-muted-foreground/40"
+                  ? "border-foreground bg-secondary shadow-sm"
+                  : "border-border hover:border-muted-foreground/40 hover:bg-secondary hover:shadow-sm"
               }`}
             >
               {isCheapest && (
@@ -202,7 +202,7 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
                   Cheapest
                 </span>
               )}
-              <img src={supermarketLogos[market.id]} alt={market.name} className="w-8 h-8 object-contain" loading="lazy" width={32} height={32} />
+              <img src={supermarketLogos[market.id]} alt={market.name} className="w-8 h-8 object-contain group-hover:scale-110 transition-transform duration-200" loading="lazy" width={32} height={32} />
               <span className="text-xs font-medium text-foreground">{market.name}</span>
               <span className="text-xs text-muted-foreground">
                 ~£{total.toFixed(2)}
