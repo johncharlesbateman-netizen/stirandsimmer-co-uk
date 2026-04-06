@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, Clock, Users, Leaf, Share2 } from "lucide-react";
+import { ArrowLeft, Clock, Users, Leaf, Share2, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
@@ -218,8 +218,8 @@ const RecipeDetail = () => {
       <section className="pb-20 md:pb-32">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 max-w-4xl">
-            {/* Ingredients */}
-            <div className="md:col-span-4">
+            {/* Ingredients — order-2 on mobile (after image+info), order-1 on md */}
+            <div className="md:col-span-4 order-1 md:order-1">
               <h2 className="heading-section mb-6 pb-4 border-b border-border">
                 Ingredients
               </h2>
@@ -236,7 +236,7 @@ const RecipeDetail = () => {
             </div>
 
             {/* Instructions */}
-            <div className="md:col-span-8">
+            <div className="md:col-span-8 order-2 md:order-2">
               <h2 className="heading-section mb-6 pb-4 border-b border-border">
                 Method
               </h2>
@@ -278,6 +278,35 @@ const RecipeDetail = () => {
                   </p>
                 </div>
               )}
+            </div>
+
+            {/* Supermarket Cards */}
+            <div className="md:col-span-12 order-3">
+              <h2 className="heading-section mb-6 pb-4 border-b border-border">
+                Shop Ingredients
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { name: "Tesco", colour: "hsl(0, 68%, 42%)", logo: "🔴", url: "https://www.tesco.com/groceries/" },
+                  { name: "Sainsbury's", colour: "hsl(24, 100%, 50%)", logo: "🟠", url: "https://www.sainsburys.co.uk/gol-ui/groceries" },
+                  { name: "Waitrose", colour: "hsl(145, 63%, 32%)", logo: "🟢", url: "https://www.waitrose.com/ecom/shop/browse/groceries" },
+                  { name: "ASDA", colour: "hsl(120, 61%, 38%)", logo: "🟢", url: "https://groceries.asda.com/" },
+                ].map((market) => (
+                  <a
+                    key={market.name}
+                    href={market.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center gap-2 p-5 border border-border hover:border-muted-foreground/40 transition-colors text-center group"
+                  >
+                    <span className="text-2xl">{market.logo}</span>
+                    <span className="text-sm font-semibold text-foreground">{market.name}</span>
+                    <span className="inline-flex items-center gap-1 text-xs text-muted-foreground group-hover:text-foreground transition-colors">
+                      Shop now <ExternalLink className="w-3 h-3" />
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
