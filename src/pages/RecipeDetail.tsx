@@ -283,14 +283,18 @@ const RecipeDetail = () => {
             {/* Supermarket Cards */}
             <div className="md:col-span-12 order-3">
               <h2 className="heading-section mb-6 pb-4 border-b border-border">
-                Shop Ingredients
+                Shop the Ingredients
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { name: "Tesco", colour: "hsl(0, 68%, 42%)", logo: "🔴", url: "https://www.tesco.com/groceries/" },
-                  { name: "Sainsbury's", colour: "hsl(24, 100%, 50%)", logo: "🟠", url: "https://www.sainsburys.co.uk/gol-ui/groceries" },
-                  { name: "Waitrose", colour: "hsl(145, 63%, 32%)", logo: "🟢", url: "https://www.waitrose.com/ecom/shop/browse/groceries" },
-                  { name: "ASDA", colour: "hsl(120, 61%, 38%)", logo: "🟢", url: "https://groceries.asda.com/" },
+                  { name: "Sainsbury's", logo: "🟠", url: "https://www.sainsburys.co.uk/gol-ui/groceries" },
+                  { name: "ASDA", logo: "🟢", url: "https://groceries.asda.com/" },
+                  { name: "Tesco", logo: "🔴", url: "https://www.tesco.com/groceries/" },
+                  { name: "Waitrose", logo: "🟢", url: "https://www.waitrose.com/ecom/shop/browse/groceries" },
+                  { name: "Morrisons", logo: "🟡", url: "https://groceries.morrisons.com/" },
+                  { name: "Aldi", logo: "🔵", url: "https://www.aldi.co.uk/" },
+                  { name: "Lidl", logo: "🟡", url: "https://www.lidl.co.uk/" },
+                  { name: "Ocado", logo: "🟣", url: "https://www.ocado.com/" },
                 ].map((market) => (
                   <a
                     key={market.name}
