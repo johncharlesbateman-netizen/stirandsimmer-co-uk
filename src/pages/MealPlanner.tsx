@@ -338,19 +338,33 @@ const MealPlanner = () => {
                     <p className="text-[10px] uppercase tracking-wider text-muted-foreground/60 mb-1.5">{label}</p>
                     {recipe ? (
                       <div className="flex-1 flex flex-col">
-                        <Link
-                          to={`/recipes/${recipe.slug}`}
-                          className="text-xs font-medium text-foreground hover:text-muted-foreground transition-colors line-clamp-2 mb-auto"
+                        <button
+                          onClick={() => {
+                            setSelectorSlot({ day, meal: key });
+                            setSelectorOpen(true);
+                          }}
+                          className="text-xs font-medium text-foreground hover:text-muted-foreground transition-colors line-clamp-2 mb-auto text-left"
                         >
                           {recipe.title}
-                        </Link>
-                        <button
-                          onClick={() => removeRecipe(day, key)}
-                          className="self-end mt-1 p-0.5 text-muted-foreground/40 hover:text-foreground transition-colors"
-                          aria-label="Remove recipe"
-                        >
-                          <X className="w-3 h-3" />
                         </button>
+                        <div className="flex items-center justify-between mt-1">
+                          <span className="text-[10px] text-muted-foreground/40">
+                            {(() => {
+                              const slotKey = `${day}::${key}`;
+                              const sel = selections[slotKey];
+                              const total = recipe.ingredients.length;
+                              const checked = sel ? sel.length : total;
+                              return checked < total ? `${checked}/${total}` : "";
+                            })()}
+                          </span>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); removeRecipe(day, key); }}
+                            className="p-0.5 text-muted-foreground/40 hover:text-foreground transition-colors"
+                            aria-label="Remove recipe"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </div>
                       </div>
                     ) : (
                       <button
@@ -496,6 +510,30 @@ const MealPlanner = () => {
             : undefined
         }
       />
+
+      {/* Ingredient selector modal */}
+      {selectorSlot && (() => {
+        const recipe = plan[selectorSlot.day][selectorSlot.meal];
+        if (!recipe) return null;
+        const slotKey = `${selectorSlot.day}::${selectorSlot.meal}`;
+        const saved = selections[slotKey];
+        const checkedSet = new Set(saved !== undefined ? saved : recipe.ingredients.map((_, i) => i));
+        return (
+          <IngredientSelectorModal
+            open={selectorOpen}
+            onClose={() => setSelectorOpen(false)}
+            recipeTitle={recipe.title}
+            ingredients={recipe.ingredients}
+            checkedIndices={checkedSet}
+            onSave={(checked) => {
+              setSelections((prev) => ({
+                ...prev,
+                [slotKey]: Array.from(checked),
+              }));
+            }}
+          />
+        );
+      })()}
     </Layout>
   );
 };
