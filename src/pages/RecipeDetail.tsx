@@ -256,8 +256,8 @@ const RecipeDetail = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 max-w-4xl">
             {/* Ingredients — order-2 on mobile (after image+info), order-1 on md */}
-            <div className="md:col-span-4 order-1 md:order-1">
-              <h2 className="heading-section mb-6 pb-4 border-b border-border">
+            <div className={`md:col-span-4 order-1 md:order-1 ${isMobile && activeTab !== "ingredients" ? "hidden" : ""}`}>
+              <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
                 Ingredients
               </h2>
               <ServingScaler
@@ -273,8 +273,8 @@ const RecipeDetail = () => {
             </div>
 
             {/* Instructions */}
-            <div className="md:col-span-8 order-2 md:order-2">
-              <h2 className="heading-section mb-6 pb-4 border-b border-border">
+            <div className={`md:col-span-8 order-2 md:order-2 ${isMobile && activeTab !== "method" ? "hidden" : ""}`}>
+              <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
                 Method
               </h2>
               <ol className="space-y-6">
@@ -318,8 +318,8 @@ const RecipeDetail = () => {
             </div>
 
             {/* Supermarket Cards */}
-            <div className="md:col-span-12 order-3">
-              <h2 className="heading-section mb-6 pb-4 border-b border-border">
+            <div className={`md:col-span-12 order-3 ${isMobile && activeTab !== "shop" ? "hidden" : ""}`}>
+              <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
                 Shop the Ingredients
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
