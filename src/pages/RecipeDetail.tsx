@@ -9,12 +9,22 @@ import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
 import { scaleIngredients } from "@/lib/ingredient-scaler";
 import ServingScaler from "@/components/ServingScaler";
-import ShoppingList from "@/components/ShoppingList";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const RecipeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
   const [servings, setServings] = useState<number | null>(null);
+  const [checkedIngredients, setCheckedIngredients] = useState<Set<number>>(new Set());
+
+  const toggleIngredient = (index: number) => {
+    setCheckedIngredients((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  };
 
   const { data: recipe, isLoading } = useQuery({
     queryKey: ["recipe", slug],
@@ -222,9 +232,24 @@ const RecipeDetail = () => {
                 {scaledIngredients.map((item, i) => (
                   <li
                     key={i}
-                    className="text-sm text-muted-foreground pl-4 border-l-2 border-border"
+                    className="flex items-start gap-3"
                   >
-                    {item}
+                    <Checkbox
+                      id={`ingredient-${i}`}
+                      checked={checkedIngredients.has(i)}
+                      onCheckedChange={() => toggleIngredient(i)}
+                      className="mt-0.5"
+                    />
+                    <label
+                      htmlFor={`ingredient-${i}`}
+                      className={`text-sm cursor-pointer transition-colors ${
+                        checkedIngredients.has(i)
+                          ? "line-through text-muted-foreground/40"
+                          : "text-muted-foreground"
+                      }`}
+                    >
+                      {item}
+                    </label>
                   </li>
                 ))}
               </ul>
@@ -260,10 +285,6 @@ const RecipeDetail = () => {
             </div>
           </div>
 
-          {/* Shopping list & price comparison — below method on mobile */}
-          <div className="max-w-4xl mt-12">
-            <ShoppingList ingredients={scaledIngredients} scaleFactor={scaleFactor} recipeName={recipe.title} />
-          </div>
         </div>
       </section>
     </Layout>
