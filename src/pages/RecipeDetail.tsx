@@ -310,9 +310,9 @@ const RecipeDetail = () => {
                     href={market.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-col items-center gap-2 p-5 border border-border hover:border-muted-foreground/40 transition-colors text-center group"
+                    className="flex flex-col items-center gap-2 p-5 border border-border hover:border-muted-foreground/40 hover:bg-secondary hover:shadow-sm transition-all duration-200 text-center group"
                   >
-                    <img src={supermarketLogos[market.id]} alt={market.name} className="w-10 h-10 object-contain" loading="lazy" width={40} height={40} />
+                    <img src={supermarketLogos[market.id]} alt={market.name} className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200" loading="lazy" width={40} height={40} />
                     <span className="text-sm font-semibold text-foreground">{market.name}</span>
                     <span className="inline-flex items-center gap-1 text-xs text-muted-foreground group-hover:text-foreground transition-colors">
                       Shop now <ExternalLink className="w-3 h-3" />
