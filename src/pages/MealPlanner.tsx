@@ -11,6 +11,7 @@ import {
   estimateAllPrices,
   type SupermarketId,
 } from "@/lib/supermarketPricing";
+import { supermarketLogos } from "@/lib/supermarket-logos";
 
 /* ── Types ────────────────────────────────────────────────── */
 
@@ -387,7 +388,7 @@ const MealPlanner = () => {
                               Cheapest
                             </span>
                           )}
-                          <span className="text-lg">{m.logo}</span>
+                          <img src={supermarketLogos[m.id]} alt={m.name} className="w-8 h-8 object-contain" loading="lazy" width={32} height={32} />
                           <span className="text-xs font-medium text-foreground">{m.name}</span>
                           <span className="text-xs text-muted-foreground">~£{total.toFixed(2)}</span>
                         </button>

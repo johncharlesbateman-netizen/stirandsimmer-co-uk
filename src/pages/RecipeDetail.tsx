@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { ArrowLeft, Clock, Users, Leaf, Share2, ExternalLink } from "lucide-react";
+import { supermarketLogos } from "@/lib/supermarket-logos";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
@@ -293,17 +294,17 @@ const RecipeDetail = () => {
                 Shop the Ingredients
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {[
-                  { name: "Tesco", logo: "🔴", url: "https://www.tesco.com/" },
-                  { name: "Sainsbury's", logo: "🟠", url: "https://www.sainsburys.co.uk/" },
-                  { name: "ASDA", logo: "🟢", url: "https://www.asda.com/" },
-                  { name: "Waitrose", logo: "🟢", url: "https://www.waitrose.com/" },
-                  { name: "Morrisons", logo: "🟡", url: "https://www.morrisons.com/" },
-                  { name: "Aldi", logo: "🔵", url: "https://www.aldi.co.uk/" },
-                  { name: "Lidl", logo: "🟡", url: "https://www.lidl.co.uk/" },
-                  { name: "Booths", logo: "🟤", url: "https://www.booths.co.uk/" },
-                  { name: "Ocado", logo: "🟣", url: "https://www.ocado.com/" },
-                ].map((market) => (
+                {([
+                  { name: "Tesco", id: "tesco" as const, url: "https://www.tesco.com/" },
+                  { name: "Sainsbury's", id: "sainsburys" as const, url: "https://www.sainsburys.co.uk/" },
+                  { name: "ASDA", id: "asda" as const, url: "https://www.asda.com/" },
+                  { name: "Waitrose", id: "waitrose" as const, url: "https://www.waitrose.com/" },
+                  { name: "Morrisons", id: "morrisons" as const, url: "https://www.morrisons.com/" },
+                  { name: "Aldi", id: "aldi" as const, url: "https://www.aldi.co.uk/" },
+                  { name: "Lidl", id: "lidl" as const, url: "https://www.lidl.co.uk/" },
+                  { name: "Booths", id: "booths" as const, url: "https://www.booths.co.uk/" },
+                  { name: "Ocado", id: "ocado" as const, url: "https://www.ocado.com/" },
+                ]).map((market) => (
                   <a
                     key={market.name}
                     href={market.url}
@@ -311,7 +312,7 @@ const RecipeDetail = () => {
                     rel="noopener noreferrer"
                     className="flex flex-col items-center gap-2 p-5 border border-border hover:border-muted-foreground/40 transition-colors text-center group"
                   >
-                    <span className="text-2xl">{market.logo}</span>
+                    <img src={supermarketLogos[market.id]} alt={market.name} className="w-10 h-10 object-contain" loading="lazy" width={40} height={40} />
                     <span className="text-sm font-semibold text-foreground">{market.name}</span>
                     <span className="inline-flex items-center gap-1 text-xs text-muted-foreground group-hover:text-foreground transition-colors">
                       Shop now <ExternalLink className="w-3 h-3" />
