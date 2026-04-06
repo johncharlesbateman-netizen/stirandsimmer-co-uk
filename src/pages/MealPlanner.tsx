@@ -313,7 +313,7 @@ const MealPlanner = () => {
                     Print
                   </button>
                   <button
-                    onClick={() => setPlan(emptyWeek())}
+                    onClick={() => { setPlan(emptyWeek()); setSelections({}); }}
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
