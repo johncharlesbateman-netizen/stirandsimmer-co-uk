@@ -5,6 +5,7 @@ import { Plus, X, Printer, Trash2, ExternalLink, Info, Shuffle, ChevronDown, Che
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import RecipePickerDialog from "@/components/RecipePickerDialog";
+import IngredientSelectorModal from "@/components/IngredientSelectorModal";
 import { mergeIngredients } from "@/lib/ingredientMerger";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -37,6 +38,10 @@ const MEALS: { key: MealType; label: string }[] = [
 ];
 
 const STORAGE_KEY = "gfr-meal-plan";
+const SELECTIONS_KEY = "gfr-ingredient-selections";
+
+/** Map of "day::meal" → Set of checked ingredient indices */
+type IngredientSelections = Record<string, number[]>;
 
 const SUPERMARKET_META: Record<SupermarketId, { name: string; logo: string; buildUrl: (t: string) => string }> = {
   aldi: { name: "Aldi", logo: "🔵", buildUrl: () => "https://www.aldi.co.uk" },
@@ -71,6 +76,20 @@ const MealPlanner = () => {
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pickerSlot, setPickerSlot] = useState<{ day: string; meal: MealType } | null>(null);
   const [shoppingListOpen, setShoppingListOpen] = useState(false);
+
+  /* Ingredient selections per slot */
+  const [selections, setSelections] = useState<IngredientSelections>(() => {
+    try {
+      const saved = localStorage.getItem(SELECTIONS_KEY);
+      return saved ? JSON.parse(saved) : {};
+    } catch { return {}; }
+  });
+  const [selectorOpen, setSelectorOpen] = useState(false);
+  const [selectorSlot, setSelectorSlot] = useState<{ day: string; meal: MealType } | null>(null);
+
+  useEffect(() => {
+    localStorage.setItem(SELECTIONS_KEY, JSON.stringify(selections));
+  }, [selections]);
 
   /* Auto-save to localStorage */
   useEffect(() => {
