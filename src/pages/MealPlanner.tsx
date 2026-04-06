@@ -5,6 +5,7 @@ import { Plus, X, Printer, Trash2, ExternalLink, Info, Shuffle, ChevronDown, Che
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import RecipePickerDialog from "@/components/RecipePickerDialog";
+import IngredientSelectorModal from "@/components/IngredientSelectorModal";
 import { mergeIngredients } from "@/lib/ingredientMerger";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -37,6 +38,10 @@ const MEALS: { key: MealType; label: string }[] = [
 ];
 
 const STORAGE_KEY = "gfr-meal-plan";
+const SELECTIONS_KEY = "gfr-ingredient-selections";
+
+/** Map of "day::meal" → Set of checked ingredient indices */
+type IngredientSelections = Record<string, number[]>;
 
 const SUPERMARKET_META: Record<SupermarketId, { name: string; logo: string; buildUrl: (t: string) => string }> = {
   aldi: { name: "Aldi", logo: "🔵", buildUrl: () => "https://www.aldi.co.uk" },
@@ -72,6 +77,20 @@ const MealPlanner = () => {
   const [pickerSlot, setPickerSlot] = useState<{ day: string; meal: MealType } | null>(null);
   const [shoppingListOpen, setShoppingListOpen] = useState(false);
 
+  /* Ingredient selections per slot */
+  const [selections, setSelections] = useState<IngredientSelections>(() => {
+    try {
+      const saved = localStorage.getItem(SELECTIONS_KEY);
+      return saved ? JSON.parse(saved) : {};
+    } catch { return {}; }
+  });
+  const [selectorOpen, setSelectorOpen] = useState(false);
+  const [selectorSlot, setSelectorSlot] = useState<{ day: string; meal: MealType } | null>(null);
+
+  useEffect(() => {
+    localStorage.setItem(SELECTIONS_KEY, JSON.stringify(selections));
+  }, [selections]);
+
   /* Auto-save to localStorage */
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(plan));
@@ -95,31 +114,42 @@ const MealPlanner = () => {
     if (allRecipes.length === 0) return;
     setPlan((prev) => {
       const next = { ...prev };
+      const newSelections = { ...selections };
       for (const day of DAYS) {
         next[day] = { ...next[day] };
         for (const { key } of MEALS) {
           if (!next[day][key]) {
             const pick = allRecipes[Math.floor(Math.random() * allRecipes.length)];
+            const ings = (pick.ingredients as string[]) || [];
             next[day][key] = {
               id: pick.id,
               title: pick.title,
               slug: pick.slug,
-              ingredients: (pick.ingredients as string[]) || [],
+              ingredients: ings,
               servings: pick.servings,
               image_url: pick.image_url,
             };
+            // Auto-select all ingredients
+            newSelections[`${day}::${key}`] = ings.map((_, i) => i);
           }
         }
       }
+      setSelections(newSelections);
       return next;
     });
-  }, [allRecipes]);
+  }, [allRecipes, selections]);
 
   /* Assign / remove recipes */
   const assignRecipe = useCallback((day: string, meal: MealType, recipe: AssignedRecipe) => {
     setPlan((prev) => ({
       ...prev,
       [day]: { ...prev[day], [meal]: recipe },
+    }));
+    // Auto-select all ingredients for the new recipe
+    const slotKey = `${day}::${meal}`;
+    setSelections((prev) => ({
+      ...prev,
+      [slotKey]: recipe.ingredients.map((_, i) => i),
     }));
   }, []);
 
@@ -128,6 +158,13 @@ const MealPlanner = () => {
       ...prev,
       [day]: { ...prev[day], [meal]: null },
     }));
+    // Clean up selections
+    const slotKey = `${day}::${meal}`;
+    setSelections((prev) => {
+      const next = { ...prev };
+      delete next[slotKey];
+      return next;
+    });
   }, []);
 
   /* Gather all assigned recipes */
@@ -144,11 +181,28 @@ const MealPlanner = () => {
 
   const hasRecipes = assignedRecipes.length > 0;
 
-  /* Merged shopping list */
-  const mergedIngredients = useMemo(
-    () => (hasRecipes ? mergeIngredients(assignedRecipes.map((r) => r.ingredients)) : []),
-    [assignedRecipes, hasRecipes]
-  );
+  /* Merged shopping list — only include checked ingredients */
+  const mergedIngredients = useMemo(() => {
+    if (!hasRecipes) return [];
+    const filteredLists: string[][] = [];
+    for (const day of DAYS) {
+      for (const { key } of MEALS) {
+        const r = plan[day][key];
+        if (!r) continue;
+        const slotKey = `${day}::${key}`;
+        const checked = selections[slotKey];
+        if (checked && checked.length > 0) {
+          const checkedSet = new Set(checked);
+          filteredLists.push(r.ingredients.filter((_, i) => checkedSet.has(i)));
+        } else if (checked === undefined) {
+          // No selection saved yet — include all (backwards compat)
+          filteredLists.push(r.ingredients);
+        }
+        // If checked is empty array → user unchecked everything → include nothing
+      }
+    }
+    return mergeIngredients(filteredLists);
+  }, [plan, selections, hasRecipes]);
 
   /* Price comparison */
   const prices = useMemo(() => {
@@ -259,7 +313,7 @@ const MealPlanner = () => {
                     Print
                   </button>
                   <button
-                    onClick={() => setPlan(emptyWeek())}
+                    onClick={() => { setPlan(emptyWeek()); setSelections({}); }}
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -284,19 +338,33 @@ const MealPlanner = () => {
                     <p className="text-[10px] uppercase tracking-wider text-muted-foreground/60 mb-1.5">{label}</p>
                     {recipe ? (
                       <div className="flex-1 flex flex-col">
-                        <Link
-                          to={`/recipes/${recipe.slug}`}
-                          className="text-xs font-medium text-foreground hover:text-muted-foreground transition-colors line-clamp-2 mb-auto"
+                        <button
+                          onClick={() => {
+                            setSelectorSlot({ day, meal: key });
+                            setSelectorOpen(true);
+                          }}
+                          className="text-xs font-medium text-foreground hover:text-muted-foreground transition-colors line-clamp-2 mb-auto text-left"
                         >
                           {recipe.title}
-                        </Link>
-                        <button
-                          onClick={() => removeRecipe(day, key)}
-                          className="self-end mt-1 p-0.5 text-muted-foreground/40 hover:text-foreground transition-colors"
-                          aria-label="Remove recipe"
-                        >
-                          <X className="w-3 h-3" />
                         </button>
+                        <div className="flex items-center justify-between mt-1">
+                          <span className="text-[10px] text-muted-foreground/40">
+                            {(() => {
+                              const slotKey = `${day}::${key}`;
+                              const sel = selections[slotKey];
+                              const total = recipe.ingredients.length;
+                              const checked = sel ? sel.length : total;
+                              return checked < total ? `${checked}/${total}` : "";
+                            })()}
+                          </span>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); removeRecipe(day, key); }}
+                            className="p-0.5 text-muted-foreground/40 hover:text-foreground transition-colors"
+                            aria-label="Remove recipe"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </div>
                       </div>
                     ) : (
                       <button
@@ -442,6 +510,30 @@ const MealPlanner = () => {
             : undefined
         }
       />
+
+      {/* Ingredient selector modal */}
+      {selectorSlot && (() => {
+        const recipe = plan[selectorSlot.day][selectorSlot.meal];
+        if (!recipe) return null;
+        const slotKey = `${selectorSlot.day}::${selectorSlot.meal}`;
+        const saved = selections[slotKey];
+        const checkedSet = new Set(saved !== undefined ? saved : recipe.ingredients.map((_, i) => i));
+        return (
+          <IngredientSelectorModal
+            open={selectorOpen}
+            onClose={() => setSelectorOpen(false)}
+            recipeTitle={recipe.title}
+            ingredients={recipe.ingredients}
+            checkedIndices={checkedSet}
+            onSave={(checked) => {
+              setSelections((prev) => ({
+                ...prev,
+                [slotKey]: Array.from(checked),
+              }));
+            }}
+          />
+        );
+      })()}
     </Layout>
   );
 };
