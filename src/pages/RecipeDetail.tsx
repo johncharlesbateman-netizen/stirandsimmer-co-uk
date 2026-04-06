@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
 import { scaleIngredients } from "@/lib/ingredient-scaler";
 import ServingScaler from "@/components/ServingScaler";
-import { Checkbox } from "@/components/ui/checkbox";
+import IngredientList from "@/components/IngredientList";
 
 const RecipeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -228,31 +228,11 @@ const RecipeDetail = () => {
                 baseServings={baseServings}
                 onChange={setServings}
               />
-              <ul className="space-y-3">
-                {scaledIngredients.map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3"
-                  >
-                    <Checkbox
-                      id={`ingredient-${i}`}
-                      checked={checkedIngredients.has(i)}
-                      onCheckedChange={() => toggleIngredient(i)}
-                      className="mt-0.5"
-                    />
-                    <label
-                      htmlFor={`ingredient-${i}`}
-                      className={`text-sm cursor-pointer transition-colors ${
-                        checkedIngredients.has(i)
-                          ? "line-through text-muted-foreground/40"
-                          : "text-muted-foreground"
-                      }`}
-                    >
-                      {item}
-                    </label>
-                  </li>
-                ))}
-              </ul>
+              <IngredientList
+                ingredients={scaledIngredients}
+                checkedIngredients={checkedIngredients}
+                onToggle={toggleIngredient}
+              />
             </div>
 
             {/* Instructions */}
