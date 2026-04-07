@@ -244,7 +244,7 @@ const MealPlanner = () => {
       <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'DM Sans',system-ui,sans-serif;padding:2.5rem;color:#2b2b2b;max-width:900px;margin:0 auto}
+        body{font-family:'DM Sans',system-ui,sans-serif;padding:2rem;color:#2b2b2b;max-width:900px;margin:0 auto}
         .logo{font-size:1.5rem;font-weight:600;letter-spacing:-0.02em;margin-bottom:0.25rem}
         .subtitle{font-size:1.1rem;color:#666;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid #e8e4df}
         .section-title{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:#888;margin:1.5rem 0 0.75rem}
@@ -255,6 +255,9 @@ const MealPlanner = () => {
         .slot{min-width:120px}
         .recipe-name{font-weight:500}
         .empty{color:#bbb}
+        /* Page 1: Meal Planner */
+        .planner-page{page-break-after:always}
+        /* Shopping list */
         ul{list-style:none;padding:0}
         li{padding:0.35rem 0;border-bottom:1px solid #f0ece7;font-size:0.85rem;display:flex;align-items:center;gap:0.5rem}
         li::before{content:"☐";color:#aaa}
@@ -265,16 +268,25 @@ const MealPlanner = () => {
         .price-card .total{font-size:0.8rem;color:#666;margin-top:0.15rem}
         .price-card .badge{font-size:0.55rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;color:#888;margin-bottom:0.15rem}
         .disclaimer{margin-top:1.5rem;padding-top:1rem;border-top:2px solid #e8e4df;font-size:0.75rem;color:#999;font-style:italic}
-        @media print{body{padding:1.5rem}}
+        @media print{
+          body{padding:1.5rem}
+          @page{size:A4;margin:15mm}
+          .planner-page{page-break-after:always}
+        }
       </style></head><body>
-      <div class="logo">Great Food Recipes</div>
-      <div class="subtitle">Weekly Meal Plan</div>
-      <table><thead><tr><th>Day</th><th>Breakfast</th><th>Lunch</th><th>Dinner</th></tr></thead>
-      <tbody>${mealRows}</tbody></table>
-      <div class="section-title">Shopping List · ${mergedIngredients.length} item${mergedIngredients.length !== 1 ? "s" : ""}</div>
-      <ul>${mergedIngredients.map((item) => `<li>${item}</li>`).join("")}</ul>
-      ${priceCards ? `<div class="section-title">Estimated Prices</div><div class="prices-grid">${priceCards}</div>` : ""}
-      <div class="disclaimer">Prices are estimates — visit supermarket website for current prices.</div>
+      <div class="planner-page">
+        <div class="logo">Great Food Recipes</div>
+        <div class="subtitle">Weekly Meal Plan</div>
+        <table><thead><tr><th>Day</th><th>Lunch</th><th>Dinner</th></tr></thead>
+        <tbody>${mealRows}</tbody></table>
+      </div>
+      <div class="shopping-page">
+        <div class="logo">Great Food Recipes</div>
+        <div class="section-title">Shopping List · ${mergedIngredients.length} item${mergedIngredients.length !== 1 ? "s" : ""}</div>
+        <ul>${mergedIngredients.map((item) => `<li>${item}</li>`).join("")}</ul>
+        ${priceCards ? `<div class="section-title">Estimated Prices</div><div class="prices-grid">${priceCards}</div>` : ""}
+        <div class="disclaimer">Prices are estimates — visit supermarket website for current prices.</div>
+      </div>
       </body></html>`);
     printWindow.document.close();
     printWindow.print();
