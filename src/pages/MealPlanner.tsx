@@ -274,12 +274,12 @@ const MealPlanner = () => {
         .price-card .badge{font-size:0.55rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;color:#888;margin-bottom:0.15rem}
         .disclaimer{margin-top:1rem;padding-top:0.75rem;border-top:2px solid #e8e4df;font-size:0.7rem;color:#999;font-style:italic}
         @media print{
-          @page{size:A4;margin:12mm 15mm}
-          body{padding:0}
-          .planner-page{page-break-after:always;padding:0}
-          .shopping-page{page-break-before:always;page-break-inside:avoid}
+          @page{size:A4;margin:10mm 12mm}
+          body{padding:0!important;margin:0!important}
+          .logo{margin-top:0}
+          .planner-page{page-break-after:always;padding:0;margin:0}
+          .shopping-page{page-break-inside:avoid;padding:0;margin:0}
         }
-        /* Screen fallback */
         @media screen{
           body{padding:2rem;max-width:900px;margin:0 auto}
         }
