@@ -240,38 +240,48 @@ const MealPlanner = () => {
         }).join("")
       : "";
 
+    // Split shopping list into two columns
+    const half = Math.ceil(mergedIngredients.length / 2);
+    const col1 = mergedIngredients.slice(0, half);
+    const col2 = mergedIngredients.slice(half);
+
     printWindow.document.write(`<!DOCTYPE html><html><head><title>Weekly Meal Plan</title>
       <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'DM Sans',system-ui,sans-serif;padding:2rem;color:#2b2b2b;max-width:900px;margin:0 auto}
-        .logo{font-size:1.5rem;font-weight:600;letter-spacing:-0.02em;margin-bottom:0.25rem}
-        .subtitle{font-size:1.1rem;color:#666;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid #e8e4df}
-        .section-title{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:#888;margin:1.5rem 0 0.75rem}
-        table{width:100%;border-collapse:collapse;font-size:0.85rem}
-        th,td{border:1px solid #e8e4df;padding:0.5rem 0.6rem;text-align:left}
-        th{background:#faf9f7;font-weight:600;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em}
-        .day-cell{font-weight:600;width:100px}
-        .slot{min-width:120px}
-        .recipe-name{font-weight:500}
+        body{font-family:'DM Sans',system-ui,sans-serif;color:#2b2b2b;width:100%;margin:0}
+        .logo{font-size:1.6rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.25rem}
+        .subtitle{font-size:1.1rem;color:#666;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:2px solid #e8e4df}
+        .section-title{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:#888;margin:1.2rem 0 0.6rem;font-weight:600}
+        table{width:100%;border-collapse:collapse;font-size:1rem}
+        th,td{border:1px solid #d4d0cb;padding:0.65rem 0.8rem;text-align:left}
+        th{background:#f5f3f0;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.06em;color:#2b2b2b}
+        .day-cell{font-weight:700;font-size:1rem}
+        .slot{}
+        .recipe-name{font-weight:500;font-size:0.95rem}
         .empty{color:#bbb}
-        /* Page 1: Meal Planner */
-        .planner-page{page-break-after:always}
-        /* Shopping list */
+        /* Two-column shopping list */
+        .shopping-columns{display:flex;gap:1.5rem}
+        .shopping-col{flex:1}
         ul{list-style:none;padding:0}
-        li{padding:0.35rem 0;border-bottom:1px solid #f0ece7;font-size:0.85rem;display:flex;align-items:center;gap:0.5rem}
-        li::before{content:"☐";color:#aaa}
+        li{padding:0.3rem 0;border-bottom:1px solid #f0ece7;font-size:0.85rem;display:flex;align-items:center;gap:0.4rem}
+        li::before{content:"☐";color:#aaa;font-size:0.9rem}
         .prices-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-top:0.75rem}
         .price-card{border:1px solid #e8e4df;padding:0.5rem;text-align:center}
         .price-card.cheapest{border-color:#2b2b2b;background:#faf9f7}
         .price-card .name{font-size:0.8rem;font-weight:600}
         .price-card .total{font-size:0.8rem;color:#666;margin-top:0.15rem}
         .price-card .badge{font-size:0.55rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;color:#888;margin-bottom:0.15rem}
-        .disclaimer{margin-top:1.5rem;padding-top:1rem;border-top:2px solid #e8e4df;font-size:0.75rem;color:#999;font-style:italic}
+        .disclaimer{margin-top:1rem;padding-top:0.75rem;border-top:2px solid #e8e4df;font-size:0.7rem;color:#999;font-style:italic}
         @media print{
-          body{padding:1.5rem}
-          @page{size:A4;margin:15mm}
-          .planner-page{page-break-after:always}
+          @page{size:A4;margin:12mm 15mm}
+          body{padding:0}
+          .planner-page{page-break-after:always;padding:0}
+          .shopping-page{page-break-before:always;page-break-inside:avoid}
+        }
+        /* Screen fallback */
+        @media screen{
+          body{padding:2rem;max-width:900px;margin:0 auto}
         }
       </style></head><body>
       <div class="planner-page">
@@ -283,7 +293,10 @@ const MealPlanner = () => {
       <div class="shopping-page">
         <div class="logo">Great Food Recipes</div>
         <div class="section-title">Shopping List · ${mergedIngredients.length} item${mergedIngredients.length !== 1 ? "s" : ""}</div>
-        <ul>${mergedIngredients.map((item) => `<li>${item}</li>`).join("")}</ul>
+        <div class="shopping-columns">
+          <ul class="shopping-col">${col1.map((item) => `<li>${item}</li>`).join("")}</ul>
+          <ul class="shopping-col">${col2.map((item) => `<li>${item}</li>`).join("")}</ul>
+        </div>
         ${priceCards ? `<div class="section-title">Estimated Prices</div><div class="prices-grid">${priceCards}</div>` : ""}
         <div class="disclaimer">Prices are estimates — visit supermarket website for current prices.</div>
       </div>
