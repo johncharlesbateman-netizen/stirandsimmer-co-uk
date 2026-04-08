@@ -401,10 +401,12 @@ const MealPlanner = () => {
 
         {/* Ingredient editing tip */}
         {hasRecipes && (
-          <p className="text-xs text-muted-foreground/50 italic mb-8 flex items-center gap-1.5">
-            <Info className="w-3.5 h-3.5 shrink-0" />
-            Tip: Click on any meal above to edit its ingredients or swap the recipe.
-          </p>
+          <div className="flex items-start gap-3 p-4 mb-8 bg-secondary border border-border">
+            <Info className="w-5 h-5 shrink-0 text-foreground mt-0.5" />
+            <p className="text-sm font-semibold text-foreground">
+              Click on any meal above to edit its ingredients or swap the recipe.
+            </p>
+          </div>
         )}
 
         {/* Shopping list & price comparison */}
