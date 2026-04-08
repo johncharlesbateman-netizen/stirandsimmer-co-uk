@@ -4,7 +4,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { isSectionHeader } from "@/lib/ingredient-utils";
 
-interface Section {
+interface IngredientListProps {
+  ingredients: string[];
+  checkedIngredients: Set<number>;
+  onToggle: (index: number) => void;
+}
+
   header: string | null;
   headerIndex: number | null;
   items: { text: string; originalIndex: number }[];
