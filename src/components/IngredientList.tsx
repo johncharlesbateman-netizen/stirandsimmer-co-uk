@@ -10,6 +10,7 @@ interface IngredientListProps {
   onToggle: (index: number) => void;
 }
 
+interface Section {
   header: string | null;
   headerIndex: number | null;
   items: { text: string; originalIndex: number }[];
