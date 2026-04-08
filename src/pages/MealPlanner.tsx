@@ -191,12 +191,14 @@ const MealPlanner = () => {
         if (!r) continue;
         const slotKey = `${day}::${key}`;
         const checked = selections[slotKey];
+        // Filter out section headers from each ingredient list
+        const filterHeaders = (items: string[]) => items.filter((t) => !isSectionHeader(t));
         if (checked && checked.length > 0) {
           const checkedSet = new Set(checked);
-          filteredLists.push(r.ingredients.filter((_, i) => checkedSet.has(i)));
+          filteredLists.push(filterHeaders(r.ingredients.filter((_, i) => checkedSet.has(i))));
         } else if (checked === undefined) {
           // No selection saved yet — include all (backwards compat)
-          filteredLists.push(r.ingredients);
+          filteredLists.push(filterHeaders(r.ingredients));
         }
         // If checked is empty array → user unchecked everything → include nothing
       }
