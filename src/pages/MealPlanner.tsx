@@ -7,6 +7,7 @@ import Layout from "@/components/Layout";
 import RecipePickerDialog from "@/components/RecipePickerDialog";
 import MealSlotExpanded from "@/components/MealSlotExpanded";
 import { mergeIngredients } from "@/lib/ingredientMerger";
+import { isSectionHeader } from "@/lib/ingredient-utils";
 import { supabase } from "@/integrations/supabase/client";
 import {
   estimateAllPrices,

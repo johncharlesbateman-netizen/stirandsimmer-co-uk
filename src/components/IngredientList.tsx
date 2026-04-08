@@ -2,44 +2,7 @@ import { useState, useMemo } from "react";
 import { ChevronDown } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
-
-interface IngredientListProps {
-  ingredients: string[];
-  checkedIngredients: Set<number>;
-  onToggle: (index: number) => void;
-}
-
-/**
- * Detects whether an ingredient line is a section header.
- * Headers have no leading quantity/unit — e.g. "For the Sauce", "For the Marinade".
- */
-const isSectionHeader = (text: string): boolean => {
-  const trimmed = text.trim();
-  // Matches lines starting with a number, fraction, or common unit abbreviation
-  const startsWithQuantity = /^(\d|½|¼|¾|⅓|⅔|⅛|⅜|⅝|⅞|\.)/i.test(trimmed);
-  if (startsWithQuantity) return false;
-
-  // Common header patterns
-  const headerPatterns = /^(for the |for |the |sauce|salad|marinade|dressing|garnish|topping|filling|glaze|batter|pastry|crust|base|assembly)/i;
-  if (headerPatterns.test(trimmed)) return true;
-
-  // If the line has no quantity words at all and is short, treat as header
-  // Check it doesn't start with common ingredient words that have no quantity
-  const hasNoQuantity = !/^(a |an |some |fresh |large |small |medium |pinch|handful|bunch|splash|drizzle|dash|knob)/i.test(trimmed);
-  const isShortPhrase = trimmed.split(" ").length <= 5;
-  const endsWithColon = trimmed.endsWith(":");
-  
-  if (endsWithColon) return true;
-
-  // Lines that look like "For the X" or similar short label without measurement
-  if (hasNoQuantity && isShortPhrase && !/^(salt|pepper|oil|butter|sugar|flour|egg|water|milk|cream|garlic|onion|lemon|lime|vinegar|honey|mustard|stock|broth)/i.test(trimmed)) {
-    // Additional check: must not contain typical ingredient-only words as the full line
-    const looksLikeLabel = /^(for |the )/i.test(trimmed) || trimmed.endsWith(":");
-    if (looksLikeLabel) return true;
-  }
-
-  return false;
-};
+import { isSectionHeader } from "@/lib/ingredient-utils";
 
 interface Section {
   header: string | null;
