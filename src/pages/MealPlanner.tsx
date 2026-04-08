@@ -429,8 +429,7 @@ const MealPlanner = () => {
               {shoppingListOpen && (
                 <ul className="space-y-2 mt-4 mb-6">
                   {mergedIngredients.map((item, i) => (
-                    <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                      <span className="text-muted-foreground/40 mt-0.5">☐</span>
+                    <li key={i} className="text-sm text-muted-foreground">
                       {item}
                     </li>
                   ))}
