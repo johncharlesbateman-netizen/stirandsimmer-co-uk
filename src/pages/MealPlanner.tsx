@@ -267,8 +267,7 @@ const MealPlanner = () => {
         .shopping-columns{display:flex;gap:1.5rem}
         .shopping-col{flex:1}
         ul{list-style:none;padding:0}
-        li{padding:0.3rem 0;border-bottom:1px solid #f0ece7;font-size:0.85rem;display:flex;align-items:center;gap:0.4rem}
-        li::before{content:"☐";color:#aaa;font-size:0.9rem}
+        li{padding:0.3rem 0;border-bottom:1px solid #f0ece7;font-size:0.85rem}
         .prices-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-top:0.75rem}
         .price-card{border:1px solid #e8e4df;padding:0.5rem;text-align:center}
         .price-card.cheapest{border-color:#2b2b2b;background:#faf9f7}
@@ -429,8 +428,7 @@ const MealPlanner = () => {
               {shoppingListOpen && (
                 <ul className="space-y-2 mt-4 mb-6">
                   {mergedIngredients.map((item, i) => (
-                    <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                      <span className="text-muted-foreground/40 mt-0.5">☐</span>
+                    <li key={i} className="text-sm text-muted-foreground">
                       {item}
                     </li>
                   ))}
