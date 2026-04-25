@@ -136,11 +136,11 @@ const AdminNewRecipe = () => {
         .maybeSingle();
       if (existing) slug = `${slug}-${Date.now().toString(36)}`;
 
-      const { error: insertError } = await supabase.from("recipes").insert({
+      const { error: insertError } = await supabase.from("recipes").insert([{
         ...parsed.data,
         slug,
         image_url,
-      });
+      }]);
 
       if (insertError) throw insertError;
 
