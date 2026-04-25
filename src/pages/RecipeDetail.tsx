@@ -11,12 +11,14 @@ import { categoryLabels } from "@/lib/recipe-utils";
 import { scaleIngredients } from "@/lib/ingredient-scaler";
 import ServingScaler from "@/components/ServingScaler";
 import IngredientList from "@/components/IngredientList";
+import { useAuth } from "@/hooks/useAuth";
 
 type MobileTab = "ingredients" | "method" | "shop";
 
 const RecipeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
+  const { isAdmin } = useAuth();
   const [servings, setServings] = useState<number | null>(null);
   const [checkedIngredients, setCheckedIngredients] = useState<Set<number>>(new Set());
   const [activeTab, setActiveTab] = useState<MobileTab>("ingredients");
@@ -156,19 +158,23 @@ const RecipeDetail = () => {
           <ArrowLeft className="w-4 h-4" />
           Back to Recipes
         </Link>
-        <button
-          onClick={handleShare}
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <Share2 className="w-4 h-4" />
-          Share
-        </button>
-        <Link
-          to={`/admin/recipes/${recipe.slug}/edit`}
-          className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
-        >
-          Edit
-        </Link>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={handleShare}
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Share2 className="w-4 h-4" />
+            Share
+          </button>
+          {isAdmin && (
+            <Link
+              to={`/admin/recipes/${recipe.slug}/edit`}
+              className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              Edit
+            </Link>
+          )}
+        </div>
       </div>
 
       {/* Hero */}
