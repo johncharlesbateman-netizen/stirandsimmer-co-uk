@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Clock, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Tables } from "@/integrations/supabase/types";
 import { categoryLabels } from "@/lib/recipe-utils";
@@ -21,7 +20,6 @@ const floatClasses = [
 
 const RecipeCard = ({ recipe, className, floatDelay = 0 }: RecipeCardProps) => {
   const floatClass = floatClasses[floatDelay % floatClasses.length];
-  const totalTime = (recipe.prep_time_minutes || 0) + (recipe.cook_time_minutes || 0);
 
   return (
     <Link
@@ -45,20 +43,6 @@ const RecipeCard = ({ recipe, className, floatDelay = 0 }: RecipeCardProps) => {
           <p className="text-sm text-muted-foreground line-clamp-2">
             {recipe.description}
           </p>
-          <div className="flex items-center gap-4 text-xs text-muted-foreground pt-1">
-            {totalTime > 0 && (
-              <span className="flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5" />
-                {totalTime} min
-              </span>
-            )}
-            {recipe.servings && (
-              <span className="flex items-center gap-1">
-                <Users className="w-3.5 h-3.5" />
-                Serves {recipe.servings}
-              </span>
-            )}
-          </div>
         </div>
       </article>
     </Link>
