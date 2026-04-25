@@ -137,7 +137,15 @@ const AdminNewRecipe = () => {
       if (existing) slug = `${slug}-${Date.now().toString(36)}`;
 
       const { error: insertError } = await supabase.from("recipes").insert([{
-        ...parsed.data,
+        title: parsed.data.title,
+        category: parsed.data.category,
+        description: parsed.data.description,
+        prep_time_minutes: parsed.data.prep_time_minutes,
+        cook_time_minutes: parsed.data.cook_time_minutes,
+        servings: parsed.data.servings,
+        ingredients: parsed.data.ingredients,
+        instructions: parsed.data.instructions,
+        tips: parsed.data.tips,
         slug,
         image_url,
       }]);
