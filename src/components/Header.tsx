@@ -45,6 +45,14 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
+            {isAdmin && (
+              <Link
+                to="/admin/recipes/new"
+                className="text-sm tracking-wide px-3 py-1.5 rounded-md border border-border hover:bg-secondary transition-colors duration-300"
+              >
+                + New recipe
+              </Link>
+            )}
             {session ? (
               <button
                 onClick={handleSignOut}
@@ -99,6 +107,15 @@ const Header = () => {
               {link.label}
             </Link>
           ))}
+          {isAdmin && (
+            <Link
+              to="/admin/recipes/new"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-lg tracking-wide opacity-100 hover:translate-x-2 transition-transform duration-300"
+            >
+              + New recipe
+            </Link>
+          )}
           {session ? (
             <button
               onClick={handleSignOut}
