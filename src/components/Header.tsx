@@ -6,7 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 const Header = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { session, signOut } = useAuth();
+  const { session, isAdmin, signOut } = useAuth();
 
   const navLinks = [
     { to: "/", label: "Home" },
