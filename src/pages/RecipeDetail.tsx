@@ -163,6 +163,12 @@ const RecipeDetail = () => {
           <Share2 className="w-4 h-4" />
           Share
         </button>
+        <Link
+          to={`/admin/recipes/${recipe.slug}/edit`}
+          className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+        >
+          Edit
+        </Link>
       </div>
 
       {/* Hero */}
