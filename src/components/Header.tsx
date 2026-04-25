@@ -1,10 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const Header = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { session, signOut } = useAuth();
 
   const navLinks = [
     { to: "/", label: "Home" },
@@ -15,6 +17,11 @@ const Header = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleSignOut = async () => {
+    await signOut();
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border transition-all duration-500">
@@ -38,6 +45,23 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
+            {session ? (
+              <button
+                onClick={handleSignOut}
+                className="text-sm tracking-wide opacity-70 hover:opacity-100 transition-opacity duration-300"
+              >
+                Sign out
+              </button>
+            ) : (
+              <Link
+                to="/auth"
+                className={`text-sm tracking-wide transition-all duration-300 hover:opacity-60 hover:tracking-wider ${
+                  isActive("/auth") ? "opacity-100" : "opacity-70"
+                }`}
+              >
+                Sign in
+              </Link>
+            )}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -56,7 +80,7 @@ const Header = () => {
       {/* Mobile Menu */}
       <div 
         className={`md:hidden absolute top-full left-0 right-0 bg-background border-b border-border overflow-hidden transition-all duration-500 ease-out ${
-          mobileMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0 border-b-0'
+          mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 border-b-0'
         }`}
       >
         <nav className="container mx-auto px-6 py-6 flex flex-col gap-4">
@@ -75,6 +99,24 @@ const Header = () => {
               {link.label}
             </Link>
           ))}
+          {session ? (
+            <button
+              onClick={handleSignOut}
+              className="text-left text-lg tracking-wide opacity-70 hover:opacity-100 transition-opacity duration-300"
+            >
+              Sign out
+            </button>
+          ) : (
+            <Link
+              to="/auth"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`text-lg tracking-wide transition-all duration-300 hover:opacity-60 hover:translate-x-2 ${
+                isActive("/auth") ? "opacity-100" : "opacity-70"
+              }`}
+            >
+              Sign in
+            </Link>
+          )}
         </nav>
       </div>
     </header>
