@@ -2,14 +2,13 @@ import { useState, useLayoutEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, Clock, Users, Leaf, Share2, ExternalLink } from "lucide-react";
+import { ArrowLeft, Leaf, Share2, ExternalLink } from "lucide-react";
 import { supermarketLogos } from "@/lib/supermarket-logos";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
 import { scaleIngredients } from "@/lib/ingredient-scaler";
-import ServingScaler from "@/components/ServingScaler";
 import IngredientList from "@/components/IngredientList";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -189,29 +188,6 @@ const RecipeDetail = () => {
 
             {/* Meta */}
             <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
-              {recipe.prep_time_minutes && (
-                <span className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  Prep: {recipe.prep_time_minutes} min
-                </span>
-              )}
-              {recipe.cook_time_minutes && (
-                <span className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  Cook: {recipe.cook_time_minutes} min
-                </span>
-              )}
-              {totalTime > 0 && (
-                <span className="font-medium text-foreground">
-                  Total: {totalTime} min
-                </span>
-              )}
-              {recipe.servings && (
-                <span className="flex items-center gap-2">
-                  <Users className="w-4 h-4" />
-                  Serves {recipe.servings}
-                </span>
-              )}
               {recipe.is_seasonal && (
                 <span className="flex items-center gap-2 text-accent">
                   <Leaf className="w-4 h-4" />
@@ -268,11 +244,6 @@ const RecipeDetail = () => {
               <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
                 Ingredients
               </h2>
-              <ServingScaler
-                servings={currentServings}
-                baseServings={baseServings}
-                onChange={setServings}
-              />
               <IngredientList
                 ingredients={scaledIngredients}
                 checkedIngredients={checkedIngredients}

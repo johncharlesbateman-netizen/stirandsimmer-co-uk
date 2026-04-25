@@ -153,7 +153,6 @@ const RecipePickerDialog = ({ open, onClose, onSelect, dayLabel, mealLabel, defa
                     <p className="text-sm font-medium text-foreground truncate">{recipe.title}</p>
                     <p className="text-xs text-muted-foreground">
                       {categoryLabels[recipe.category]}
-                      {recipe.servings && ` · Serves ${recipe.servings}`}
                     </p>
                   </div>
                 </button>

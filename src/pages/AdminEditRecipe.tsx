@@ -279,21 +279,7 @@ const AdminEditRecipe = () => {
             )}
           </div>
 
-          {/* Times & servings */}
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Prep (min)</label>
-              <Input type="number" min={0} value={prepTime} onChange={(e) => setPrepTime(e.target.value)} />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Cook (min)</label>
-              <Input type="number" min={0} value={cookTime} onChange={(e) => setCookTime(e.target.value)} />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Servings</label>
-              <Input type="number" min={1} value={servings} onChange={(e) => setServings(e.target.value)} />
-            </div>
-          </div>
+          {/* Times & servings — temporarily removed */}
 
           {/* Ingredients */}
           <div>
