@@ -13,6 +13,7 @@ import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import CategoryPage from "./pages/CategoryPage";
 import MealPlanner from "./pages/MealPlanner";
+import AdminNewRecipe from "./pages/AdminNewRecipe";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/recipes/:slug" element={<RecipeDetailRoute />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/meal-planner" element={<MealPlanner />} />
+          <Route path="/admin/recipes/new" element={<AdminNewRecipe />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
