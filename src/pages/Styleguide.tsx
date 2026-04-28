@@ -18,7 +18,7 @@ const Styleguide = () => {
       <Helmet>
         <title>Styleguide — Great Food Recipes</title>
         <meta name="description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
-        <meta name="keywords" content="design system, styleguide, typography, colour palette, editorial layout, Great Food Recipes" />
+        <meta name="keywords" content="design system, styleguide, editorial layout, typography, colour palette, food photography portfolio design" />
         <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/styleguide" />
         <meta property="og:type" content="website" />
