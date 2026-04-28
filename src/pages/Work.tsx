@@ -84,6 +84,7 @@ const Work = () => {
       <Helmet>
         <title>Work — Great Food Recipes</title>
         <meta name="description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
+        <meta name="keywords" content="food photography, editorial photography, restaurant photography, brand campaigns, fine dining, Italian cuisine, artisan bakery, food styling" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/work" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/work" />
@@ -94,6 +95,20 @@ const Work = () => {
         <meta name="twitter:title" content="Work — Great Food Recipes" />
         <meta name="twitter:description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
         <meta name="twitter:image" content={projects[0].image} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Work — Great Food Recipes",
+          "url": "https://greatfoodrecipes.co.uk/work",
+          "description": "Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light.",
+          "hasPart": projects.map((p) => ({
+            "@type": "CreativeWork",
+            "name": p.title,
+            "genre": p.category,
+            "description": p.description,
+            "image": p.image
+          }))
+        })}</script>
       </Helmet>
       {/* Header */}
       <section className="section-breathing pb-16">

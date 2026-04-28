@@ -18,6 +18,7 @@ const Styleguide = () => {
       <Helmet>
         <title>Styleguide — Great Food Recipes</title>
         <meta name="description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
+        <meta name="keywords" content="design system, styleguide, typography, colour palette, editorial layout, Great Food Recipes" />
         <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/styleguide" />
         <meta property="og:type" content="website" />
@@ -27,6 +28,15 @@ const Styleguide = () => {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Styleguide — Great Food Recipes" />
         <meta name="twitter:description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          "name": "Styleguide — Great Food Recipes",
+          "url": "https://greatfoodrecipes.co.uk/styleguide",
+          "description": "Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns.",
+          "about": "Design system documentation",
+          "audience": { "@type": "Audience", "audienceType": "Designers and Developers" }
+        })}</script>
       </Helmet>
       {/* Header */}
       <section className="section-breathing pb-16">
