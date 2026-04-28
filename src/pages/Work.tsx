@@ -85,6 +85,15 @@ const Work = () => {
         <title>Work — Great Food Recipes</title>
         <meta name="description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/work" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://greatfoodrecipes.co.uk/work" />
+        <meta property="og:title" content="Work — Great Food Recipes" />
+        <meta property="og:description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
+        <meta property="og:image" content={projects[0].image} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Work — Great Food Recipes" />
+        <meta name="twitter:description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
+        <meta name="twitter:image" content={projects[0].image} />
       </Helmet>
       {/* Header */}
       <section className="section-breathing pb-16">
