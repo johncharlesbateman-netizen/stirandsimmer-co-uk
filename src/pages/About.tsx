@@ -30,6 +30,7 @@ const About = () => {
       <Helmet>
         <title>About — Great Food Recipes</title>
         <meta name="description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
+        <meta name="keywords" content="about Great Food Recipes, seasonal cooking, home cooks, family recipes, fresh ingredients, recipe philosophy" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/about" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/about" />
@@ -40,6 +41,20 @@ const About = () => {
         <meta name="twitter:title" content="About — Great Food Recipes" />
         <meta name="twitter:description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta name="twitter:image" content={brandImage} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "name": "About — Great Food Recipes",
+          "url": "https://greatfoodrecipes.co.uk/about",
+          "description": "Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for.",
+          "mainEntity": {
+            "@type": "Organization",
+            "name": "Great Food Recipes",
+            "url": "https://greatfoodrecipes.co.uk",
+            "image": brandImage,
+            "description": "We create recipes the same way we enjoy food — with care, curiosity, and a love for fresh, honest ingredients."
+          }
+        })}</script>
       </Helmet>
       {/* Header */}
       <section className="section-breathing pb-16">

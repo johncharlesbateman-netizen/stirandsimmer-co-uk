@@ -12,6 +12,7 @@ const Index = () => {
       <Helmet>
         <title>Great Food Recipes — Delicious Recipes for Every Occasion</title>
         <meta name="description" content="Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love. Discover chicken, beef, seafood, pasta, sweets and more." />
+        <meta name="keywords" content="recipes, easy recipes, home cooking, seasonal recipes, chicken recipes, beef recipes, seafood recipes, pasta recipes, dessert recipes, family meals, British recipes" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk" />
@@ -22,6 +23,23 @@ const Index = () => {
         <meta name="twitter:title" content="Great Food Recipes — Delicious Recipes for Every Occasion" />
         <meta name="twitter:description" content="Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love." />
         <meta name="twitter:image" content={heroImage} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Great Food Recipes",
+          "url": "https://greatfoodrecipes.co.uk",
+          "description": "Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Great Food Recipes",
+            "url": "https://greatfoodrecipes.co.uk"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://greatfoodrecipes.co.uk/recipes?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        })}</script>
       </Helmet>
       {/* Hero Section */}
       <section className="relative h-screen w-screen flex items-center justify-center overflow-hidden" style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', marginTop: '-5rem', width: '100vw' }}>
