@@ -58,7 +58,7 @@ Deno.serve(async (_req) => {
       status: 200,
       headers: {
         "content-type": "application/xml; charset=utf-8",
-        "cache-control": "public, max-age=3600",
+        "cache-control": "public, max-age=300",
       },
     });
   } catch (e) {
