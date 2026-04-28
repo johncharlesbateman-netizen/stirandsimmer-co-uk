@@ -30,7 +30,7 @@ const About = () => {
       <Helmet>
         <title>About — Great Food Recipes</title>
         <meta name="description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
-        <meta name="keywords" content="about Great Food Recipes, food photographer, editorial food photography, seasonal cooking, food styling philosophy, natural light photography" />
+        <meta name="keywords" content="food photographer, editorial food photography, food stylist" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/about" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/about" />

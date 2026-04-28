@@ -84,7 +84,7 @@ const Work = () => {
       <Helmet>
         <title>Work — Great Food Recipes</title>
         <meta name="description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
-        <meta name="keywords" content="food photography portfolio, editorial food photography, restaurant photography, brand campaigns, fine dining photography, artisan bakery photography, food styling, natural light food photography" />
+        <meta name="keywords" content="food photography portfolio, editorial food photography, restaurant photography, brand campaign photography" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/work" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/work" />

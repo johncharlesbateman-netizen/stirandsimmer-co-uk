@@ -12,7 +12,7 @@ const Index = () => {
       <Helmet>
         <title>Great Food Recipes — Delicious Recipes for Every Occasion</title>
         <meta name="description" content="Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love. Discover chicken, beef, seafood, pasta, sweets and more." />
-        <meta name="keywords" content="editorial food photography, food photography portfolio, recipe photography, seasonal cooking, food styling, natural light photography, culinary editorial" />
+        <meta name="keywords" content="editorial food photography, food photography portfolio, food stylist" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk" />
