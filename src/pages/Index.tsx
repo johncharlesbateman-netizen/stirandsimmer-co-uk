@@ -13,6 +13,15 @@ const Index = () => {
         <title>Great Food Recipes — Delicious Recipes for Every Occasion</title>
         <meta name="description" content="Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love. Discover chicken, beef, seafood, pasta, sweets and more." />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://greatfoodrecipes.co.uk" />
+        <meta property="og:title" content="Great Food Recipes — Delicious Recipes for Every Occasion" />
+        <meta property="og:description" content="Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love." />
+        <meta property="og:image" content={heroImage} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Great Food Recipes — Delicious Recipes for Every Occasion" />
+        <meta name="twitter:description" content="Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love." />
+        <meta name="twitter:image" content={heroImage} />
       </Helmet>
       {/* Hero Section */}
       <section className="relative h-screen w-screen flex items-center justify-center overflow-hidden" style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', marginTop: '-5rem', width: '100vw' }}>

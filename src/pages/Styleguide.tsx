@@ -17,7 +17,16 @@ const Styleguide = () => {
     <Layout>
       <Helmet>
         <title>Styleguide — Great Food Recipes</title>
+        <meta name="description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
         <meta name="robots" content="noindex, nofollow" />
+        <link rel="canonical" href="https://greatfoodrecipes.co.uk/styleguide" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://greatfoodrecipes.co.uk/styleguide" />
+        <meta property="og:title" content="Styleguide — Great Food Recipes" />
+        <meta property="og:description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Styleguide — Great Food Recipes" />
+        <meta name="twitter:description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
       </Helmet>
       {/* Header */}
       <section className="section-breathing pb-16">
