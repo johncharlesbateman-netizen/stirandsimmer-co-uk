@@ -143,11 +143,8 @@ const RecipeDetail = () => {
         <meta name="twitter:description" content={recipe.description} />
         {recipe.image_url && <meta name="twitter:image" content={recipe.image_url} />}
         <link rel="canonical" href={pageUrl} />
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       {/* Back Link & Share */}
       <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-8 flex items-center justify-between">
         <Link
