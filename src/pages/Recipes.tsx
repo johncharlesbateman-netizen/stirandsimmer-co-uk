@@ -116,7 +116,7 @@ const Recipes = () => {
           name="description"
           content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions."
         />
-        <link rel="canonical" href="https://greatfoodrecipes.co.uk/recipes" />
+        <link rel="canonical" href="https://www.greatfoodrecipes.co.uk/recipes" />
       </Helmet>
 
       {/* Header */}
