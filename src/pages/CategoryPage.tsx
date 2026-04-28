@@ -42,7 +42,7 @@ const CategoryPage = () => {
       <Helmet>
         <title>{label} Recipes — Great Food Recipes</title>
         <meta name="description" content={categoryMetaDescriptions[category]} />
-        <link rel="canonical" href={`https://greatfoodrecipes.co.uk/recipes/category/${slug}`} />
+        <link rel="canonical" href={`https://www.greatfoodrecipes.co.uk/recipes/category/${slug}`} />
       </Helmet>
 
       {/* Header */}

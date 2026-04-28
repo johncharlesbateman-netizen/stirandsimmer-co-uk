@@ -85,9 +85,9 @@ const Work = () => {
         <title>Work — Editorial Food Photography Portfolio | Great Food Recipes</title>
         <meta name="description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
         <meta name="keywords" content="food photography portfolio, editorial food photography, restaurant photography, brand campaign photography" />
-        <link rel="canonical" href="https://greatfoodrecipes.co.uk/work" />
+        <link rel="canonical" href="https://www.greatfoodrecipes.co.uk/work" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://greatfoodrecipes.co.uk/work" />
+        <meta property="og:url" content="https://www.greatfoodrecipes.co.uk/work" />
         <meta property="og:title" content="Work — Editorial Food Photography Portfolio | Great Food Recipes" />
         <meta property="og:description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
         <meta property="og:image" content={projects[0].image} />
@@ -99,7 +99,7 @@ const Work = () => {
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           "name": "Work — Great Food Recipes",
-          "url": "https://greatfoodrecipes.co.uk/work",
+          "url": "https://www.greatfoodrecipes.co.uk/work",
           "description": "Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light.",
           "hasPart": projects.map((p) => ({
             "@type": "CreativeWork",

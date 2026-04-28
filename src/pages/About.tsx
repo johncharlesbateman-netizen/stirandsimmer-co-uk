@@ -31,9 +31,9 @@ const About = () => {
         <title>About — Editorial Food Photographer | Great Food Recipes</title>
         <meta name="description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta name="keywords" content="food photographer, editorial food photography, food stylist" />
-        <link rel="canonical" href="https://greatfoodrecipes.co.uk/about" />
+        <link rel="canonical" href="https://www.greatfoodrecipes.co.uk/about" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://greatfoodrecipes.co.uk/about" />
+        <meta property="og:url" content="https://www.greatfoodrecipes.co.uk/about" />
         <meta property="og:title" content="About — Editorial Food Photographer | Great Food Recipes" />
         <meta property="og:description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta property="og:image" content={brandImage} />
@@ -45,12 +45,12 @@ const About = () => {
           "@context": "https://schema.org",
           "@type": "AboutPage",
           "name": "About — Great Food Recipes",
-          "url": "https://greatfoodrecipes.co.uk/about",
+          "url": "https://www.greatfoodrecipes.co.uk/about",
           "description": "Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for.",
           "mainEntity": {
             "@type": "Organization",
             "name": "Great Food Recipes",
-            "url": "https://greatfoodrecipes.co.uk",
+            "url": "https://www.greatfoodrecipes.co.uk",
             "image": brandImage,
             "description": "We create recipes the same way we enjoy food — with care, curiosity, and a love for fresh, honest ingredients."
           }

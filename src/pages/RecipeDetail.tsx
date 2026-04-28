@@ -122,13 +122,13 @@ const RecipeDetail = () => {
     author: {
       "@type": "Organization",
       name: "Great Food Recipes",
-      url: "https://greatfoodrecipes.co.uk",
+      url: "https://www.greatfoodrecipes.co.uk",
     },
     datePublished: recipe.created_at,
     dateModified: recipe.updated_at,
   };
 
-  const pageUrl = `https://greatfoodrecipes.co.uk/recipes/${recipe.slug}`;
+  const pageUrl = `https://www.greatfoodrecipes.co.uk/recipes/${recipe.slug}`;
   const shareUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-recipe?slug=${recipe.slug}`;
 
   const handleShare = async () => {
