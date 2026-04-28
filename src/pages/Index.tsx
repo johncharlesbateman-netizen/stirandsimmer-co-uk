@@ -10,18 +10,18 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Great Food Recipes — Delicious Recipes for Every Occasion</title>
-        <meta name="description" content="Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love. Discover chicken, beef, seafood, pasta, sweets and more." />
+        <title>Great Food Recipes — Editorial Food Photography Portfolio</title>
+        <meta name="description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
         <meta name="keywords" content="editorial food photography, food photography portfolio, food stylist" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk" />
-        <meta property="og:title" content="Great Food Recipes — Delicious Recipes for Every Occasion" />
-        <meta property="og:description" content="Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love." />
+        <meta property="og:title" content="Great Food Recipes — Editorial Food Photography Portfolio" />
+        <meta property="og:description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
         <meta property="og:image" content={heroImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Great Food Recipes — Delicious Recipes for Every Occasion" />
-        <meta name="twitter:description" content="Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love." />
+        <meta name="twitter:title" content="Great Food Recipes — Editorial Food Photography Portfolio" />
+        <meta name="twitter:description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
         <meta name="twitter:image" content={heroImage} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",

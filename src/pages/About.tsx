@@ -28,17 +28,17 @@ const About = () => {
   return (
     <Layout>
       <Helmet>
-        <title>About — Great Food Recipes</title>
+        <title>About — Editorial Food Photographer | Great Food Recipes</title>
         <meta name="description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta name="keywords" content="food photographer, editorial food photography, food stylist" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/about" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/about" />
-        <meta property="og:title" content="About — Great Food Recipes" />
+        <meta property="og:title" content="About — Editorial Food Photographer | Great Food Recipes" />
         <meta property="og:description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta property="og:image" content={brandImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About — Great Food Recipes" />
+        <meta name="twitter:title" content="About — Editorial Food Photographer | Great Food Recipes" />
         <meta name="twitter:description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta name="twitter:image" content={brandImage} />
         <script type="application/ld+json">{JSON.stringify({
