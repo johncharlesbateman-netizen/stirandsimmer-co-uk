@@ -47,9 +47,8 @@ Deno.serve(async (_req) => {
     }
 
     for (const r of recipes ?? []) {
-      const lastmod = (r.updated_at ?? today).toString().split("T")[0];
       urls.push(
-        `  <url>\n    <loc>${SITE}/recipes/${r.slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`
+        `  <url>\n    <loc>${SITE}/recipes/${r.slug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>`
       );
     }
 
