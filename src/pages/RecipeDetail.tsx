@@ -90,17 +90,29 @@ const RecipeDetail = () => {
 
   const totalTime = (recipe.prep_time_minutes || 0) + (recipe.cook_time_minutes || 0);
 
+  // Extract key ingredients (first 3-4 main ingredients, stripped of quantities)
+  const keyIngredients = ingredients
+    .filter((i) => !/^(for the |for |the )/i.test(i.trim()))
+    .slice(0, 4)
+    .map((i) => i.replace(/^[\d\s\/.,⅓½¼¾⅔⅛⅜⅝⅞-]+\s*(g|kg|ml|l|tsp|tbsp|cup|cups|oz|lb|pinch|clove|cloves|slice|slices)?\s*/i, "").split(",")[0].trim())
+    .filter(Boolean);
+
+  const enhancedDescription = keyIngredients.length
+    ? `${recipe.description} Made with ${keyIngredients.join(", ")}.`.slice(0, 300)
+    : recipe.description;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Recipe",
     name: recipe.title,
-    description: recipe.description,
+    description: enhancedDescription,
     ...(recipe.image_url && { image: recipe.image_url }),
     ...(recipe.prep_time_minutes && { prepTime: `PT${recipe.prep_time_minutes}M` }),
     ...(recipe.cook_time_minutes && { cookTime: `PT${recipe.cook_time_minutes}M` }),
     ...(totalTime > 0 && { totalTime: `PT${totalTime}M` }),
     ...(recipe.servings && { recipeYield: `${recipe.servings} servings` }),
     recipeCategory: categoryLabels[recipe.category],
+    recipeCuisine: "British",
     recipeIngredient: ingredients,
     recipeInstructions: instructions.map((step, i) => ({
       "@type": "HowToStep",
@@ -131,16 +143,18 @@ const RecipeDetail = () => {
   return (
     <Layout>
       <Helmet>
-        <title>{recipe.title} — Great Food Recipes</title>
-        <meta name="description" content={recipe.description} />
+        <title>{`${recipe.title} | Great Food Recipes`}</title>
+        <meta name="description" content={enhancedDescription} />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content={recipe.title} />
-        <meta property="og:description" content={recipe.description} />
+        <meta property="og:title" content={`${recipe.title} | Great Food Recipes`} />
+        <meta property="og:description" content={enhancedDescription} />
         <meta property="og:url" content={pageUrl} />
+        <meta property="og:site_name" content="Great Food Recipes" />
         {recipe.image_url && <meta property="og:image" content={recipe.image_url} />}
+        {recipe.image_url && <meta property="og:image:alt" content={recipe.title} />}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={recipe.title} />
-        <meta name="twitter:description" content={recipe.description} />
+        <meta name="twitter:title" content={`${recipe.title} | Great Food Recipes`} />
+        <meta name="twitter:description" content={enhancedDescription} />
         {recipe.image_url && <meta name="twitter:image" content={recipe.image_url} />}
         <link rel="canonical" href={pageUrl} />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
