@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
 import { scaleIngredients } from "@/lib/ingredient-scaler";
 import { buildSeoTitle, buildSeoDescription } from "@/lib/seo";
+import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 import IngredientList from "@/components/IngredientList";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -162,6 +163,16 @@ const RecipeDetail = () => {
         <meta name="twitter:description" content={seoDescription} />
         {recipe.image_url && <meta name="twitter:image" content={recipe.image_url} />}
         <link rel="canonical" href={pageUrl} />
+        {recipe.image_url && (
+          <link
+            rel="preload"
+            as="image"
+            href={optimisedImage(recipe.image_url, { width: 1600 })}
+            imageSrcSet={responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000])}
+            imageSizes="(max-width: 1024px) 100vw, 1024px"
+            fetchPriority="high"
+          />
+        )}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
       {/* Back Link & Share */}
@@ -221,8 +232,15 @@ const RecipeDetail = () => {
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
             <div className="max-w-4xl aspect-[16/9] overflow-hidden bg-muted">
               <img
-                src={recipe.image_url}
+                src={optimisedImage(recipe.image_url, { width: 1600 })}
+                srcSet={responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000])}
+                sizes="(max-width: 1024px) 100vw, 1024px"
                 alt={recipe.title}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                width={1600}
+                height={900}
                 className="w-full h-full object-cover"
               />
             </div>
