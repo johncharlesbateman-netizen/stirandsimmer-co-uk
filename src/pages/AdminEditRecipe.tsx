@@ -25,6 +25,8 @@ const recipeSchema = z.object({
   ingredients: z.array(z.string().trim().min(1)).min(1, "At least one ingredient required"),
   instructions: z.array(z.string().trim().min(1)).min(1, "At least one instruction required"),
   tips: z.string().trim().max(2000).nullable(),
+  seo_title: z.string().trim().max(70).nullable(),
+  seo_description: z.string().trim().max(170).nullable(),
 });
 
 const slugify = (s: string) =>
@@ -49,6 +51,8 @@ const AdminEditRecipe = () => {
   const [ingredients, setIngredients] = useState<string[]>([""]);
   const [instructions, setInstructions] = useState<string[]>([""]);
   const [tips, setTips] = useState("");
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
@@ -79,6 +83,8 @@ const AdminEditRecipe = () => {
       setIngredients(Array.isArray(data.ingredients) && data.ingredients.length > 0 ? data.ingredients as string[] : [""]);
       setInstructions(Array.isArray(data.instructions) && data.instructions.length > 0 ? data.instructions as string[] : [""]);
       setTips(data.tips || "");
+      setSeoTitle((data as { seo_title?: string | null }).seo_title || "");
+      setSeoDescription((data as { seo_description?: string | null }).seo_description || "");
       setExistingImageUrl(data.image_url);
       setImagePreview(data.image_url);
       setLoading(false);
@@ -137,6 +143,8 @@ const AdminEditRecipe = () => {
         ingredients: ingredients.map((s) => s.trim()).filter(Boolean),
         instructions: instructions.map((s) => s.trim()).filter(Boolean),
         tips: tips.trim() || null,
+        seo_title: seoTitle.trim() || null,
+        seo_description: seoDescription.trim() || null,
       };
 
       const parsed = recipeSchema.safeParse(cleaned);
@@ -176,6 +184,8 @@ const AdminEditRecipe = () => {
         ingredients: parsed.data.ingredients,
         instructions: parsed.data.instructions,
         tips: parsed.data.tips,
+        seo_title: parsed.data.seo_title,
+        seo_description: parsed.data.seo_description,
         image_url,
       }).eq("slug", slug);
 
