@@ -90,9 +90,15 @@ const RecipeGalleryItem = ({
       <figure className="relative">
         <div className={cn("overflow-hidden bg-muted", layout.aspect)}>
           <img
-            src={recipe.image_url || "/placeholder.svg"}
+            src={recipe.image_url ? optimisedImage(recipe.image_url, { width: 1200 }) : "/placeholder.svg"}
+            srcSet={recipe.image_url ? responsiveSrcSet(recipe.image_url, [600, 900, 1200, 1600]) : undefined}
+            sizes="(max-width: 768px) 100vw, 50vw"
             alt={recipe.title}
             loading={floatDelay === 0 ? "eager" : "lazy"}
+            fetchPriority={floatDelay === 0 ? "high" : "auto"}
+            decoding="async"
+            width={1200}
+            height={900}
             className="w-full h-full object-cover editorial-image"
           />
           <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
