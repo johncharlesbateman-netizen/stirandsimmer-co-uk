@@ -110,7 +110,7 @@ const RecipeDetail = () => {
     "@context": "https://schema.org",
     "@type": "Recipe",
     name: recipe.title,
-    description: enhancedDescription,
+    description: structuredDescription,
     ...(recipe.image_url && { image: recipe.image_url }),
     ...(recipe.prep_time_minutes && { prepTime: `PT${recipe.prep_time_minutes}M` }),
     ...(recipe.cook_time_minutes && { cookTime: `PT${recipe.cook_time_minutes}M` }),
@@ -148,18 +148,18 @@ const RecipeDetail = () => {
   return (
     <Layout>
       <Helmet>
-        <title>{`${recipe.title} | Great Food Recipes`}</title>
-        <meta name="description" content={enhancedDescription} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content={`${recipe.title} | Great Food Recipes`} />
-        <meta property="og:description" content={enhancedDescription} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
         <meta property="og:url" content={pageUrl} />
         <meta property="og:site_name" content="Great Food Recipes" />
         {recipe.image_url && <meta property="og:image" content={recipe.image_url} />}
         {recipe.image_url && <meta property="og:image:alt" content={recipe.title} />}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${recipe.title} | Great Food Recipes`} />
-        <meta name="twitter:description" content={enhancedDescription} />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
         {recipe.image_url && <meta name="twitter:image" content={recipe.image_url} />}
         <link rel="canonical" href={pageUrl} />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
