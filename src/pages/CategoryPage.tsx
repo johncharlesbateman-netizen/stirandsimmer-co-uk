@@ -11,6 +11,28 @@ import {
   categorySlugs,
 } from "@/lib/recipe-utils";
 
+import categoryChicken from "@/assets/category-chicken.jpg";
+import categoryBeef from "@/assets/category-beef.jpg";
+import categoryLamb from "@/assets/category-lamb.jpg";
+import categoryPork from "@/assets/category-pork.jpg";
+import categorySpicy from "@/assets/category-spicy.jpg";
+import categorySeafood from "@/assets/category-seafood.jpg";
+import categoryLunch from "@/assets/category-lunch.jpg";
+import categorySweets from "@/assets/category-sweets.jpg";
+import categoryPasta from "@/assets/category-pasta.jpg";
+
+const categoryImages: Record<string, string> = {
+  chicken: categoryChicken,
+  beef: categoryBeef,
+  lamb: categoryLamb,
+  pork: categoryPork,
+  spicy: categorySpicy,
+  seafood: categorySeafood,
+  lunch_suggestions: categoryLunch,
+  sweets: categorySweets,
+  pasta: categoryPasta,
+};
+
 
 const CategoryPage = () => {
   const { slug } = useParams<{ slug: string }>();
