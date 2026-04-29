@@ -75,6 +75,15 @@ const Contact = () => {
         <title>Contact — Great Food Recipes</title>
         <meta name="description" content="Get in touch with Great Food Recipes. We'd love to hear from you — questions, suggestions, or just to say hello." />
         <link rel="canonical" href="https://www.greatfoodrecipes.co.uk/contact" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.greatfoodrecipes.co.uk/contact" />
+        <meta property="og:title" content="Contact — Great Food Recipes" />
+        <meta property="og:description" content="Get in touch with Great Food Recipes. We'd love to hear from you — questions, suggestions, or just to say hello." />
+        <meta property="og:image" content={contactBehindScenes} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact — Great Food Recipes" />
+        <meta name="twitter:description" content="Get in touch with Great Food Recipes. We'd love to hear from you — questions, suggestions, or just to say hello." />
+        <meta name="twitter:image" content={contactBehindScenes} />
       </Helmet>
       {/* Header */}
       <section className="section-breathing pb-16">

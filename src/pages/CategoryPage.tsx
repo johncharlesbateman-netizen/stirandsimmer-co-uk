@@ -11,6 +11,28 @@ import {
   categorySlugs,
 } from "@/lib/recipe-utils";
 
+import categoryChicken from "@/assets/category-chicken.jpg";
+import categoryBeef from "@/assets/category-beef.jpg";
+import categoryLamb from "@/assets/category-lamb.jpg";
+import categoryPork from "@/assets/category-pork.jpg";
+import categorySpicy from "@/assets/category-spicy.jpg";
+import categorySeafood from "@/assets/category-seafood.jpg";
+import categoryLunch from "@/assets/category-lunch.jpg";
+import categorySweets from "@/assets/category-sweets.jpg";
+import categoryPasta from "@/assets/category-pasta.jpg";
+
+const categoryImages: Record<string, string> = {
+  chicken: categoryChicken,
+  beef: categoryBeef,
+  lamb: categoryLamb,
+  pork: categoryPork,
+  spicy: categorySpicy,
+  seafood: categorySeafood,
+  lunch_suggestions: categoryLunch,
+  sweets: categorySweets,
+  pasta: categoryPasta,
+};
+
 
 const CategoryPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -43,6 +65,15 @@ const CategoryPage = () => {
         <title>{label} Recipes — Great Food Recipes</title>
         <meta name="description" content={categoryMetaDescriptions[category]} />
         <link rel="canonical" href={`https://www.greatfoodrecipes.co.uk/recipes/category/${slug}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://www.greatfoodrecipes.co.uk/recipes/category/${slug}`} />
+        <meta property="og:title" content={`${label} Recipes — Great Food Recipes`} />
+        <meta property="og:description" content={categoryMetaDescriptions[category]} />
+        <meta property="og:image" content={categoryImages[category] || ""} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${label} Recipes — Great Food Recipes`} />
+        <meta name="twitter:description" content={categoryMetaDescriptions[category]} />
+        <meta name="twitter:image" content={categoryImages[category] || ""} />
       </Helmet>
 
       {/* Header */}

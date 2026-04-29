@@ -117,6 +117,15 @@ const Recipes = () => {
           content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions."
         />
         <link rel="canonical" href="https://www.greatfoodrecipes.co.uk/recipes" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.greatfoodrecipes.co.uk/recipes" />
+        <meta property="og:title" content="Recipes — Great Food Recipes" />
+        <meta property="og:description" content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions." />
+        <meta property="og:image" content={categoryChicken} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Recipes — Great Food Recipes" />
+        <meta name="twitter:description" content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions." />
+        <meta name="twitter:image" content={categoryChicken} />
       </Helmet>
 
       {/* Header */}
