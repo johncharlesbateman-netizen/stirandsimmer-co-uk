@@ -4,6 +4,7 @@ import { Search, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
 import type { Database } from "@/integrations/supabase/types";
+import { optimisedImage } from "@/lib/image-utils";
 
 type RecipeCategory = Database["public"]["Enums"]["recipe_category"];
 
@@ -144,8 +145,12 @@ const RecipePickerDialog = ({ open, onClose, onSelect, dayLabel, mealLabel, defa
                 >
                   {recipe.image_url && (
                     <img
-                      src={recipe.image_url}
+                      src={optimisedImage(recipe.image_url, { width: 96, height: 96 })}
                       alt=""
+                      loading="lazy"
+                      decoding="async"
+                      width={48}
+                      height={48}
                       className="w-12 h-12 object-cover flex-shrink-0"
                     />
                   )}
