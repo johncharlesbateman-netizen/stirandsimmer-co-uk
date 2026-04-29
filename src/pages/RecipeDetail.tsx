@@ -163,6 +163,16 @@ const RecipeDetail = () => {
         <meta name="twitter:description" content={seoDescription} />
         {recipe.image_url && <meta name="twitter:image" content={recipe.image_url} />}
         <link rel="canonical" href={pageUrl} />
+        {recipe.image_url && (
+          <link
+            rel="preload"
+            as="image"
+            href={optimisedImage(recipe.image_url, { width: 1600 })}
+            imageSrcSet={responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000])}
+            imageSizes="(max-width: 1024px) 100vw, 1024px"
+            fetchPriority="high"
+          />
+        )}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
       {/* Back Link & Share */}
