@@ -5,6 +5,7 @@ import { Tables } from "@/integrations/supabase/types";
 import { categoryLabels } from "@/lib/recipe-utils";
 import { cn } from "@/lib/utils";
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
+import { buildRecipeAltText } from "@/lib/seo";
 
 const floatClasses = [
   "floating-item",
@@ -94,7 +95,7 @@ const RecipeGalleryItem = ({
             src={recipe.image_url ? optimisedImage(recipe.image_url, { width: 1200 }) : "/placeholder.svg"}
             srcSet={recipe.image_url ? responsiveSrcSet(recipe.image_url, [600, 900, 1200, 1600]) : undefined}
             sizes="(max-width: 768px) 100vw, 50vw"
-            alt={recipe.title}
+            alt={buildRecipeAltText(recipe.title, (recipe.ingredients as string[] | null) ?? [])}
             loading={floatDelay === 0 ? "eager" : "lazy"}
             fetchPriority={floatDelay === 0 ? "high" : "auto"}
             decoding="async"

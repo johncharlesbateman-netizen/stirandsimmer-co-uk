@@ -11,6 +11,7 @@ import { categoryLabels } from "@/lib/recipe-utils";
 import { scaleIngredients } from "@/lib/ingredient-scaler";
 import { buildSeoTitle, buildSeoDescription } from "@/lib/seo";
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
+import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
 import { useAuth } from "@/hooks/useAuth";
 
