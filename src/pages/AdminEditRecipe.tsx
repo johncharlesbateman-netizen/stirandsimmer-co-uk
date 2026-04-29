@@ -25,6 +25,8 @@ const recipeSchema = z.object({
   ingredients: z.array(z.string().trim().min(1)).min(1, "At least one ingredient required"),
   instructions: z.array(z.string().trim().min(1)).min(1, "At least one instruction required"),
   tips: z.string().trim().max(2000).nullable(),
+  seo_title: z.string().trim().max(70).nullable(),
+  seo_description: z.string().trim().max(170).nullable(),
 });
 
 const slugify = (s: string) =>
@@ -49,6 +51,8 @@ const AdminEditRecipe = () => {
   const [ingredients, setIngredients] = useState<string[]>([""]);
   const [instructions, setInstructions] = useState<string[]>([""]);
   const [tips, setTips] = useState("");
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
@@ -79,6 +83,8 @@ const AdminEditRecipe = () => {
       setIngredients(Array.isArray(data.ingredients) && data.ingredients.length > 0 ? data.ingredients as string[] : [""]);
       setInstructions(Array.isArray(data.instructions) && data.instructions.length > 0 ? data.instructions as string[] : [""]);
       setTips(data.tips || "");
+      setSeoTitle((data as { seo_title?: string | null }).seo_title || "");
+      setSeoDescription((data as { seo_description?: string | null }).seo_description || "");
       setExistingImageUrl(data.image_url);
       setImagePreview(data.image_url);
       setLoading(false);
@@ -137,6 +143,8 @@ const AdminEditRecipe = () => {
         ingredients: ingredients.map((s) => s.trim()).filter(Boolean),
         instructions: instructions.map((s) => s.trim()).filter(Boolean),
         tips: tips.trim() || null,
+        seo_title: seoTitle.trim() || null,
+        seo_description: seoDescription.trim() || null,
       };
 
       const parsed = recipeSchema.safeParse(cleaned);
@@ -176,6 +184,8 @@ const AdminEditRecipe = () => {
         ingredients: parsed.data.ingredients,
         instructions: parsed.data.instructions,
         tips: parsed.data.tips,
+        seo_title: parsed.data.seo_title,
+        seo_description: parsed.data.seo_description,
         image_url,
       }).eq("slug", slug);
 
@@ -349,6 +359,48 @@ const AdminEditRecipe = () => {
               rows={3}
               className="w-full px-3 py-2 rounded-md border border-input bg-background text-sm resize-y"
             />
+          </div>
+
+          {/* SEO Settings */}
+          <div className="space-y-4 pt-6 border-t border-border">
+            <div>
+              <h2 className="font-display text-2xl mb-1">SEO settings</h2>
+              <p className="text-xs text-muted-foreground">
+                Optional. Leave blank to auto-generate from the recipe title, prep time and key ingredients.
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                Meta title{" "}
+                <span className={`text-xs ${seoTitle.length > 60 ? "text-destructive" : "text-muted-foreground"}`}>
+                  ({seoTitle.length}/60)
+                </span>
+              </label>
+              <Input
+                value={seoTitle}
+                onChange={(e) => setSeoTitle(e.target.value)}
+                placeholder="Slow-roasted lamb shoulder (4 hr) | Great Food Recipes"
+                maxLength={70}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                Meta description{" "}
+                <span className={`text-xs ${seoDescription.length > 155 ? "text-destructive" : "text-muted-foreground"}`}>
+                  ({seoDescription.length}/155)
+                </span>
+              </label>
+              <textarea
+                value={seoDescription}
+                onChange={(e) => setSeoDescription(e.target.value)}
+                placeholder="Tender, fall-apart lamb shoulder with garlic, rosemary and red wine. Ready in 4 hours."
+                maxLength={170}
+                rows={3}
+                className="w-full px-3 py-2 rounded-md border border-input bg-background text-sm resize-y"
+              />
+            </div>
           </div>
 
           {/* Submit */}

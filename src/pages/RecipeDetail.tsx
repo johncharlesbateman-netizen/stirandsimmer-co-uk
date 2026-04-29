@@ -9,6 +9,7 @@ import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
 import { scaleIngredients } from "@/lib/ingredient-scaler";
+import { buildSeoTitle, buildSeoDescription } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -90,22 +91,26 @@ const RecipeDetail = () => {
 
   const totalTime = (recipe.prep_time_minutes || 0) + (recipe.cook_time_minutes || 0);
 
-  // Extract key ingredients (first 3-4 main ingredients, stripped of quantities)
-  const keyIngredients = ingredients
-    .filter((i) => !/^(for the |for |the )/i.test(i.trim()))
-    .slice(0, 4)
-    .map((i) => i.replace(/^[\d\s\/.,⅓½¼¾⅔⅛⅜⅝⅞-]+\s*(g|kg|ml|l|tsp|tbsp|cup|cups|oz|lb|pinch|clove|cloves|slice|slices)?\s*/i, "").split(",")[0].trim())
-    .filter(Boolean);
-
-  const enhancedDescription = keyIngredients.length
-    ? `${recipe.description} Made with ${keyIngredients.join(", ")}.`.slice(0, 300)
-    : recipe.description;
+  const seoTitle = buildSeoTitle(
+    (recipe as { seo_title?: string | null }).seo_title,
+    recipe.title,
+    totalTime,
+  );
+  const seoDescription = buildSeoDescription(
+    (recipe as { seo_description?: string | null }).seo_description,
+    recipe.title,
+    recipe.description,
+    ingredients,
+    totalTime,
+  );
+  // Richer description used for structured data (not constrained to 155 chars).
+  const structuredDescription = recipe.description;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Recipe",
     name: recipe.title,
-    description: enhancedDescription,
+    description: structuredDescription,
     ...(recipe.image_url && { image: recipe.image_url }),
     ...(recipe.prep_time_minutes && { prepTime: `PT${recipe.prep_time_minutes}M` }),
     ...(recipe.cook_time_minutes && { cookTime: `PT${recipe.cook_time_minutes}M` }),
@@ -143,18 +148,18 @@ const RecipeDetail = () => {
   return (
     <Layout>
       <Helmet>
-        <title>{`${recipe.title} | Great Food Recipes`}</title>
-        <meta name="description" content={enhancedDescription} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content={`${recipe.title} | Great Food Recipes`} />
-        <meta property="og:description" content={enhancedDescription} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
         <meta property="og:url" content={pageUrl} />
         <meta property="og:site_name" content="Great Food Recipes" />
         {recipe.image_url && <meta property="og:image" content={recipe.image_url} />}
         {recipe.image_url && <meta property="og:image:alt" content={recipe.title} />}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${recipe.title} | Great Food Recipes`} />
-        <meta name="twitter:description" content={enhancedDescription} />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
         {recipe.image_url && <meta name="twitter:image" content={recipe.image_url} />}
         <link rel="canonical" href={pageUrl} />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>

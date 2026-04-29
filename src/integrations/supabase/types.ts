@@ -41,6 +41,8 @@ export type Database = {
           instructions: Json
           is_seasonal: boolean | null
           prep_time_minutes: number | null
+          seo_description: string | null
+          seo_title: string | null
           servings: number | null
           slug: string
           tips: string | null
@@ -58,6 +60,8 @@ export type Database = {
           instructions?: Json
           is_seasonal?: boolean | null
           prep_time_minutes?: number | null
+          seo_description?: string | null
+          seo_title?: string | null
           servings?: number | null
           slug: string
           tips?: string | null
@@ -75,6 +79,8 @@ export type Database = {
           instructions?: Json
           is_seasonal?: boolean | null
           prep_time_minutes?: number | null
+          seo_description?: string | null
+          seo_title?: string | null
           servings?: number | null
           slug?: string
           tips?: string | null
