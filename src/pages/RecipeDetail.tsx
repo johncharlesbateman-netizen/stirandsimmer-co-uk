@@ -107,6 +107,7 @@ const RecipeDetail = () => {
   );
   // Richer description used for structured data (not constrained to 155 chars).
   const structuredDescription = recipe.description;
+  const imageAlt = buildRecipeAltText(recipe.title, ingredients);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -158,7 +159,7 @@ const RecipeDetail = () => {
         <meta property="og:url" content={pageUrl} />
         <meta property="og:site_name" content="Great Food Recipes" />
         {recipe.image_url && <meta property="og:image" content={recipe.image_url} />}
-        {recipe.image_url && <meta property="og:image:alt" content={recipe.title} />}
+        {recipe.image_url && <meta property="og:image:alt" content={imageAlt} />}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
@@ -236,7 +237,7 @@ const RecipeDetail = () => {
                 src={optimisedImage(recipe.image_url, { width: 1600 })}
                 srcSet={responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000])}
                 sizes="(max-width: 1024px) 100vw, 1024px"
-                alt={recipe.title}
+                alt={imageAlt}
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
