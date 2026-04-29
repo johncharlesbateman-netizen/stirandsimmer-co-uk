@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { categoryLabels } from "@/lib/recipe-utils";
 import { cn } from "@/lib/utils";
+import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 
 const floatClasses = [
   "floating-item",
