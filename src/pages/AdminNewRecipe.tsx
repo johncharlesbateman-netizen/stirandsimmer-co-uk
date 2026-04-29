@@ -318,6 +318,48 @@ const AdminNewRecipe = () => {
             />
           </div>
 
+          {/* SEO Settings */}
+          <div className="space-y-4 pt-6 border-t border-border">
+            <div>
+              <h2 className="font-display text-2xl mb-1">SEO settings</h2>
+              <p className="text-xs text-muted-foreground">
+                Optional. Leave blank to auto-generate from the recipe title, prep time and key ingredients.
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                Meta title{" "}
+                <span className={`text-xs ${seoTitle.length > 60 ? "text-destructive" : "text-muted-foreground"}`}>
+                  ({seoTitle.length}/60)
+                </span>
+              </label>
+              <Input
+                value={seoTitle}
+                onChange={(e) => setSeoTitle(e.target.value)}
+                placeholder="Slow-roasted lamb shoulder (4 hr) | Great Food Recipes"
+                maxLength={70}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                Meta description{" "}
+                <span className={`text-xs ${seoDescription.length > 155 ? "text-destructive" : "text-muted-foreground"}`}>
+                  ({seoDescription.length}/155)
+                </span>
+              </label>
+              <textarea
+                value={seoDescription}
+                onChange={(e) => setSeoDescription(e.target.value)}
+                placeholder="Tender, fall-apart lamb shoulder with garlic, rosemary and red wine. Ready in 4 hours."
+                maxLength={170}
+                rows={3}
+                className="w-full px-3 py-2 rounded-md border border-input bg-background text-sm resize-y"
+              />
+            </div>
+          </div>
+
           {/* Submit */}
           <div className="flex gap-3 pt-4 border-t border-border">
             <Button type="submit" disabled={submitting}>
