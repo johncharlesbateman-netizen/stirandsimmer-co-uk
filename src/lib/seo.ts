@@ -30,6 +30,33 @@ const getKeyIngredients = (ingredients: string[], max = 3): string[] =>
     .map(stripQuantity)
     .filter(Boolean);
 
+/**
+ * Build descriptive alt text for a recipe image, e.g.
+ *   "Homemade beef lasagne with beef mince, tomato passata and mozzarella"
+ * Falls back to just the title when no usable ingredients are present.
+ * Kept under ~125 chars so it works well with screen readers.
+ */
+export const buildRecipeAltText = (
+  title: string,
+  ingredients: string[] = [],
+): string => {
+  const cleanTitle = title.trim();
+  const key = getKeyIngredients(ingredients, 3)
+    .map((i) => i.toLowerCase())
+    // Filter out anything already mentioned in the title.
+    .filter((i) => !cleanTitle.toLowerCase().includes(i.split(" ")[0]));
+
+  if (!key.length) return cleanTitle;
+
+  const list =
+    key.length === 1
+      ? key[0]
+      : `${key.slice(0, -1).join(", ")} and ${key[key.length - 1]}`;
+
+  const alt = `${cleanTitle} with ${list}`;
+  return alt.length > 125 ? alt.slice(0, 122).replace(/[,;\s]+$/, "") + "…" : alt;
+};
+
 export const buildSeoTitle = (
   customTitle: string | null | undefined,
   recipeTitle: string,

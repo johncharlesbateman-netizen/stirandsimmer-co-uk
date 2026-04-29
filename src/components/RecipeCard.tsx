@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Tables } from "@/integrations/supabase/types";
 import { categoryLabels } from "@/lib/recipe-utils";
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
+import { buildRecipeAltText } from "@/lib/seo";
 
 interface RecipeCardProps {
   recipe: Tables<"recipes">;
@@ -33,7 +34,7 @@ const RecipeCard = ({ recipe, className, floatDelay = 0 }: RecipeCardProps) => {
             src={recipe.image_url ? optimisedImage(recipe.image_url, { width: 800 }) : "/placeholder.svg"}
             srcSet={recipe.image_url ? responsiveSrcSet(recipe.image_url, [400, 600, 800, 1200]) : undefined}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-            alt={recipe.title}
+            alt={buildRecipeAltText(recipe.title, (recipe.ingredients as string[] | null) ?? [])}
             loading="lazy"
             decoding="async"
             width={800}
