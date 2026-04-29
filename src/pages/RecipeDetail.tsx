@@ -9,6 +9,7 @@ import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
 import { scaleIngredients } from "@/lib/ingredient-scaler";
+import { buildSeoTitle, buildSeoDescription } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -90,16 +91,20 @@ const RecipeDetail = () => {
 
   const totalTime = (recipe.prep_time_minutes || 0) + (recipe.cook_time_minutes || 0);
 
-  // Extract key ingredients (first 3-4 main ingredients, stripped of quantities)
-  const keyIngredients = ingredients
-    .filter((i) => !/^(for the |for |the )/i.test(i.trim()))
-    .slice(0, 4)
-    .map((i) => i.replace(/^[\d\s\/.,⅓½¼¾⅔⅛⅜⅝⅞-]+\s*(g|kg|ml|l|tsp|tbsp|cup|cups|oz|lb|pinch|clove|cloves|slice|slices)?\s*/i, "").split(",")[0].trim())
-    .filter(Boolean);
-
-  const enhancedDescription = keyIngredients.length
-    ? `${recipe.description} Made with ${keyIngredients.join(", ")}.`.slice(0, 300)
-    : recipe.description;
+  const seoTitle = buildSeoTitle(
+    (recipe as { seo_title?: string | null }).seo_title,
+    recipe.title,
+    totalTime,
+  );
+  const seoDescription = buildSeoDescription(
+    (recipe as { seo_description?: string | null }).seo_description,
+    recipe.title,
+    recipe.description,
+    ingredients,
+    totalTime,
+  );
+  // Richer description used for structured data (not constrained to 155 chars).
+  const structuredDescription = recipe.description;
 
   const jsonLd = {
     "@context": "https://schema.org",
