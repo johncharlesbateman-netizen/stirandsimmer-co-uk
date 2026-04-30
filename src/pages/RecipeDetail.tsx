@@ -127,6 +127,8 @@ const RecipeDetail = () => {
   const ingredients = (recipe?.ingredients as string[]) || [];
   const instructions = (recipe?.instructions as string[]) || [];
   const scaledIngredients = scaleIngredients(ingredients, baseServings, currentServings);
+  const smartScaledIngredients = scaleIngredientsSmart(ingredients, baseServings, currentServings);
+  const isScaled = currentServings !== baseServings;
 
   if (isLoading) {
     return (
