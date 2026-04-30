@@ -76,19 +76,21 @@ const FeaturedRecipes = () => {
   );
 };
 
-const RecipeGalleryItem = ({
-  recipe,
-  layout,
-  floatDelay,
-}: {
+type RecipeGalleryItemProps = {
   recipe: Tables<"recipes">;
   layout: (typeof layouts)[number];
   floatDelay: number;
-}) => {
+};
+
+const RecipeGalleryItem = forwardRef<HTMLAnchorElement, RecipeGalleryItemProps>(({
+  recipe,
+  layout,
+  floatDelay,
+}, ref) => {
   const floatClass = floatClasses[floatDelay % floatClasses.length];
 
   return (
-    <Link to={`/recipes/${recipe.slug}`} className={cn("group block", floatClass)}>
+    <Link ref={ref} to={`/recipes/${recipe.slug}`} className={cn("group block", floatClass)}>
       <figure className="relative">
         <div className={cn("overflow-hidden bg-muted", layout.aspect)}>
           <img
