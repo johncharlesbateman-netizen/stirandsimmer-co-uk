@@ -31,6 +31,8 @@ const RecipeDetail = () => {
   const [servings, setServings] = useState<number | null>(null);
   const [checkedIngredients, setCheckedIngredients] = useState<Set<number>>(new Set());
   const [activeTab, setActiveTab] = useState<MobileTab>("ingredients");
+  const [printWithImage, setPrintWithImage] = useState(false);
+  const [qrDataUrl, setQrDataUrl] = useState<string>("");
 
   // Scroll to top and reset state when navigating to a new recipe
   useLayoutEffect(() => {
