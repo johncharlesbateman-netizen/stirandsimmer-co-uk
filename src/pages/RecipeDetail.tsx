@@ -210,13 +210,21 @@ const RecipeDetail = () => {
           Back to Recipes
         </Link>
         <div className="flex items-center gap-4">
-          <button
-            onClick={() => window.print()}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Printer className="w-4 h-4" />
-            Print Recipe
-          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none">
+              <Printer className="w-4 h-4" />
+              Print Recipe
+              <ChevronDown className="w-3 h-3" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-background">
+              <DropdownMenuItem onClick={() => handlePrint(false)}>
+                Print without image
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handlePrint(true)}>
+                Print with image
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <button
             onClick={handleShare}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
