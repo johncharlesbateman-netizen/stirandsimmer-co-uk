@@ -74,6 +74,52 @@ const RecipeDetail = () => {
     enabled: !!slug,
   });
 
+  // Related recipes: same category first, fall back to other recipes
+  const { data: relatedRecipes = [] } = useQuery({
+    queryKey: ["related-recipes", recipe?.id, recipe?.category],
+    queryFn: async () => {
+      if (!recipe) return [];
+      // Try same category first
+      const { data: sameCat } = await supabase
+        .from("recipes")
+        .select("*")
+        .eq("category", recipe.category)
+        .neq("id", recipe.id)
+        .limit(6);
+
+      let pool = sameCat ?? [];
+
+      if (pool.length < 3) {
+        const { data: others } = await supabase
+          .from("recipes")
+          .select("*")
+          .neq("id", recipe.id)
+          .neq("category", recipe.category)
+          .limit(6);
+        pool = [...pool, ...(others ?? [])];
+      }
+
+      // Score by shared ingredients to surface most-similar first
+      const baseIngredients = new Set(
+        ((recipe.ingredients as string[]) ?? []).map((i) =>
+          i.toLowerCase().replace(/[^a-z\s]/g, "").trim(),
+        ),
+      );
+      const scored = pool.map((r) => {
+        const ings = ((r.ingredients as string[]) ?? []).map((i) =>
+          i.toLowerCase().replace(/[^a-z\s]/g, "").trim(),
+        );
+        const overlap = ings.filter((i) =>
+          [...baseIngredients].some((b) => b && i && (b.includes(i) || i.includes(b))),
+        ).length;
+        return { recipe: r, score: overlap };
+      });
+      scored.sort((a, b) => b.score - a.score);
+      return scored.slice(0, 3).map((s) => s.recipe);
+    },
+    enabled: !!recipe,
+  });
+
   const baseServings = recipe?.servings || 2;
   const currentServings = servings ?? baseServings;
   const scaleFactor = currentServings / baseServings;
@@ -407,6 +453,55 @@ const RecipeDetail = () => {
 
         </div>
       </section>
+
+      {/* You Might Also Like */}
+      {relatedRecipes.length > 0 && (
+        <section className="no-print pb-20 md:pb-32 border-t border-border">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-16 md:pt-20">
+            <h2 className="heading-section mb-10">You Might Also Like</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+              {relatedRecipes.map((r) => {
+                const rPrep = r.prep_time_minutes || 0;
+                return (
+                  <Link
+                    key={r.id}
+                    to={`/recipes/${r.slug}`}
+                    className="group block"
+                  >
+                    <article className="space-y-4">
+                      <div className="aspect-[4/3] overflow-hidden bg-muted relative">
+                        <img
+                          src={r.image_url ? optimisedImage(r.image_url, { width: 800 }) : "/placeholder.svg"}
+                          srcSet={r.image_url ? responsiveSrcSet(r.image_url, [400, 600, 800, 1200]) : undefined}
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          alt={buildRecipeAltText(r.title, (r.ingredients as string[] | null) ?? [])}
+                          loading="lazy"
+                          decoding="async"
+                          width={800}
+                          height={600}
+                          className="w-full h-full object-cover editorial-image"
+                        />
+                        <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
+                      </div>
+                      <div className="space-y-2">
+                        <p className="micro-caption">{categoryLabels[r.category]}</p>
+                        <h3 className="font-display text-xl md:text-2xl group-hover:text-accent transition-colors">
+                          {r.title}
+                        </h3>
+                        {rPrep > 0 && (
+                          <p className="text-sm text-muted-foreground">
+                            Prep {rPrep} min
+                          </p>
+                        )}
+                      </div>
+                    </article>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Print-only recipe card */}
       <div
