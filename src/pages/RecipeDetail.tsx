@@ -1,8 +1,9 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, Leaf, Share2, ExternalLink, Printer } from "lucide-react";
+import QRCode from "qrcode";
+import { ArrowLeft, Leaf, Share2, ExternalLink, Printer, ChevronDown } from "lucide-react";
 import { supermarketLogos } from "@/lib/supermarket-logos";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
@@ -14,6 +15,12 @@ import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
 import { useAuth } from "@/hooks/useAuth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 type MobileTab = "ingredients" | "method" | "shop";
 
@@ -24,6 +31,8 @@ const RecipeDetail = () => {
   const [servings, setServings] = useState<number | null>(null);
   const [checkedIngredients, setCheckedIngredients] = useState<Set<number>>(new Set());
   const [activeTab, setActiveTab] = useState<MobileTab>("ingredients");
+  const [printWithImage, setPrintWithImage] = useState(false);
+  const [qrDataUrl, setQrDataUrl] = useState<string>("");
 
   // Scroll to top and reset state when navigating to a new recipe
   useLayoutEffect(() => {
@@ -31,6 +40,15 @@ const RecipeDetail = () => {
     setServings(null);
     setCheckedIngredients(new Set());
     setActiveTab("ingredients");
+  }, [slug]);
+
+  // Generate QR code for the print view linking back to this recipe
+  useEffect(() => {
+    if (!slug) return;
+    const url = `https://www.greatfoodrecipes.co.uk/recipes/${slug}`;
+    QRCode.toDataURL(url, { margin: 1, width: 240 })
+      .then(setQrDataUrl)
+      .catch(() => setQrDataUrl(""));
   }, [slug]);
 
   const toggleIngredient = (index: number) => {
@@ -148,6 +166,11 @@ const RecipeDetail = () => {
     }
   };
 
+  const handlePrint = (withImage: boolean) => {
+    setPrintWithImage(withImage);
+    setTimeout(() => window.print(), 50);
+  };
+
   return (
     <Layout>
       <Helmet>
@@ -187,13 +210,21 @@ const RecipeDetail = () => {
           Back to Recipes
         </Link>
         <div className="flex items-center gap-4">
-          <button
-            onClick={() => window.print()}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Printer className="w-4 h-4" />
-            Print Recipe
-          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none">
+              <Printer className="w-4 h-4" />
+              Print Recipe
+              <ChevronDown className="w-3 h-3" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-background">
+              <DropdownMenuItem onClick={() => handlePrint(false)}>
+                Print without image
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handlePrint(true)}>
+                Print with image
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <button
             onClick={handleShare}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -378,46 +409,65 @@ const RecipeDetail = () => {
       </section>
 
       {/* Print-only recipe card */}
-      <div className="print-recipe-card" aria-hidden="true">
-        <h1>{recipe.title}</h1>
-        {recipe.description && <p className="print-description">{recipe.description}</p>}
-        {recipe.image_url && (
-          <img src={recipe.image_url} alt={imageAlt} className="print-image" />
-        )}
-        <div className="print-meta">
-          {recipe.prep_time_minutes ? (
-            <div><strong>Prep</strong>{recipe.prep_time_minutes} min</div>
-          ) : null}
-          {recipe.cook_time_minutes ? (
-            <div><strong>Cook</strong>{recipe.cook_time_minutes} min</div>
-          ) : null}
-          {totalTime > 0 ? (
-            <div><strong>Total</strong>{totalTime} min</div>
-          ) : null}
-          {recipe.servings ? (
-            <div><strong>Servings</strong>{currentServings}</div>
-          ) : null}
+      <div
+        className={`print-recipe-card ${printWithImage ? "" : "print-no-image"}`}
+        aria-hidden="true"
+      >
+        <div className="print-section">
+          <h1>{recipe.title}</h1>
+          {recipe.description && <p className="print-description">{recipe.description}</p>}
+          {recipe.image_url && (
+            <img src={recipe.image_url} alt={imageAlt} className="print-image" />
+          )}
+          <div className="print-meta">
+            {recipe.prep_time_minutes ? (
+              <div><strong>Prep</strong>{recipe.prep_time_minutes} min</div>
+            ) : null}
+            {recipe.cook_time_minutes ? (
+              <div><strong>Cook</strong>{recipe.cook_time_minutes} min</div>
+            ) : null}
+            {totalTime > 0 ? (
+              <div><strong>Total</strong>{totalTime} min</div>
+            ) : null}
+            {recipe.servings ? (
+              <div><strong>Servings</strong>{currentServings}</div>
+            ) : null}
+          </div>
         </div>
 
-        <h2>Ingredients</h2>
-        <ul className="print-ingredients">
-          {scaledIngredients.map((ing, i) => (
-            <li key={i}>{ing}</li>
-          ))}
-        </ul>
+        <section className="print-section">
+          <h2>Ingredients</h2>
+          <ul className="print-ingredients">
+            {scaledIngredients.map((ing, i) => (
+              <li key={i}>{ing}</li>
+            ))}
+          </ul>
+        </section>
 
-        <h2>Method</h2>
-        <ol className="print-instructions">
-          {instructions.map((step, i) => (
-            <li key={i}>{step}</li>
-          ))}
-        </ol>
+        <section>
+          <h2>Method</h2>
+          <ol className="print-instructions">
+            {instructions.map((step, i) => (
+              <li key={i}>{step}</li>
+            ))}
+          </ol>
+        </section>
 
         {recipe.tips && (
-          <>
+          <section className="print-section">
             <h2>Chef's Tips</h2>
             <p>{recipe.tips}</p>
-          </>
+          </section>
+        )}
+
+        {qrDataUrl && (
+          <div className="print-qr">
+            <img src={qrDataUrl} alt="Scan to view recipe online" />
+            <p>
+              Scan to view this recipe online
+              <span>{pageUrl}</span>
+            </p>
+          </div>
         )}
 
         <div className="print-footer">greatfoodrecipes.co.uk</div>

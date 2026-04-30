@@ -363,6 +363,12 @@
     object-fit: cover;
     margin-bottom: 12pt;
     page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Hide image when print-no-image flag is set on the card */
+  .print-recipe-card.print-no-image .print-image {
+    display: none !important;
   }
 
   .print-recipe-card .print-meta {
@@ -374,6 +380,8 @@
     border-bottom: 1pt solid #999;
     margin-bottom: 14pt;
     font-size: 10pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .print-recipe-card .print-meta strong {
@@ -393,17 +401,27 @@
     padding-bottom: 4pt;
     border-bottom: 1pt solid #ccc;
     page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Keep each section together where possible */
+  .print-recipe-card .print-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .print-recipe-card .print-ingredients {
     list-style: disc;
     padding-left: 18pt;
     margin: 0 0 12pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .print-recipe-card .print-ingredients li {
     margin-bottom: 4pt;
     page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .print-recipe-card .print-instructions {
@@ -415,6 +433,37 @@
   .print-recipe-card .print-instructions li {
     margin-bottom: 8pt;
     page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-recipe-card .print-qr {
+    margin-top: 18pt;
+    padding-top: 12pt;
+    border-top: 0.5pt solid #ccc;
+    display: flex;
+    align-items: center;
+    gap: 12pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-recipe-card .print-qr img {
+    width: 25mm;
+    height: 25mm;
+  }
+
+  .print-recipe-card .print-qr p {
+    margin: 0;
+    font-size: 9pt;
+    color: #333;
+  }
+
+  .print-recipe-card .print-qr p span {
+    display: block;
+    font-size: 8pt;
+    color: #666;
+    margin-top: 2pt;
+    word-break: break-all;
   }
 
   .print-recipe-card .print-footer {
