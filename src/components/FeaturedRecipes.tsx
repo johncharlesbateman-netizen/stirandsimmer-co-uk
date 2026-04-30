@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
@@ -115,6 +115,7 @@ const RecipeGalleryItem = ({
       </figure>
     </Link>
   );
-};
+});
+RecipeGalleryItem.displayName = "RecipeGalleryItem";
 
 export default FeaturedRecipes;
