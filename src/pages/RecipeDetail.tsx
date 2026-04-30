@@ -188,6 +188,13 @@ const RecipeDetail = () => {
         </Link>
         <div className="flex items-center gap-4">
           <button
+            onClick={() => window.print()}
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Printer className="w-4 h-4" />
+            Print Recipe
+          </button>
+          <button
             onClick={handleShare}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
