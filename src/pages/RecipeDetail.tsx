@@ -42,6 +42,15 @@ const RecipeDetail = () => {
     setActiveTab("ingredients");
   }, [slug]);
 
+  // Generate QR code for the print view linking back to this recipe
+  useEffect(() => {
+    if (!slug) return;
+    const url = `https://www.greatfoodrecipes.co.uk/recipes/${slug}`;
+    QRCode.toDataURL(url, { margin: 1, width: 240 })
+      .then(setQrDataUrl)
+      .catch(() => setQrDataUrl(""));
+  }, [slug]);
+
   const toggleIngredient = (index: number) => {
     setCheckedIngredients((prev) => {
       const next = new Set(prev);
