@@ -367,10 +367,17 @@ const RecipeDetail = () => {
                 Ingredients
               </h2>
               <IngredientList
-                ingredients={scaledIngredients}
+                ingredients={smartScaledIngredients}
                 checkedIngredients={checkedIngredients}
                 onToggle={toggleIngredient}
               />
+              {isScaled && (
+                <p className="mt-6 text-xs text-muted-foreground border-l-2 border-accent/40 pl-3 leading-relaxed">
+                  <strong className="text-foreground">Cooking time may vary</strong> — check
+                  your dish rather than relying on the original times when scaling
+                  servings.
+                </p>
+              )}
             </div>
 
             {/* Instructions */}
