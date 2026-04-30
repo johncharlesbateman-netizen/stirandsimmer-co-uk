@@ -8,7 +8,7 @@ import { supermarketLogos } from "@/lib/supermarket-logos";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
-import { categoryLabels } from "@/lib/recipe-utils";
+import { categoryLabels, categoryToSlug } from "@/lib/recipe-utils";
 import { scaleIngredients, scaleIngredientsSmart } from "@/lib/ingredient-scaler";
 import { buildSeoTitle, buildSeoDescription } from "@/lib/seo";
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
