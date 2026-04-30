@@ -2,7 +2,7 @@ import { useState, useLayoutEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, Leaf, Share2, ExternalLink } from "lucide-react";
+import { ArrowLeft, Leaf, Share2, ExternalLink, Printer } from "lucide-react";
 import { supermarketLogos } from "@/lib/supermarket-logos";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
@@ -188,6 +188,13 @@ const RecipeDetail = () => {
         </Link>
         <div className="flex items-center gap-4">
           <button
+            onClick={() => window.print()}
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Printer className="w-4 h-4" />
+            Print Recipe
+          </button>
+          <button
             onClick={handleShare}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
@@ -369,6 +376,52 @@ const RecipeDetail = () => {
 
         </div>
       </section>
+
+      {/* Print-only recipe card */}
+      <div className="print-recipe-card" aria-hidden="true">
+        <h1>{recipe.title}</h1>
+        {recipe.description && <p className="print-description">{recipe.description}</p>}
+        {recipe.image_url && (
+          <img src={recipe.image_url} alt={imageAlt} className="print-image" />
+        )}
+        <div className="print-meta">
+          {recipe.prep_time_minutes ? (
+            <div><strong>Prep</strong>{recipe.prep_time_minutes} min</div>
+          ) : null}
+          {recipe.cook_time_minutes ? (
+            <div><strong>Cook</strong>{recipe.cook_time_minutes} min</div>
+          ) : null}
+          {totalTime > 0 ? (
+            <div><strong>Total</strong>{totalTime} min</div>
+          ) : null}
+          {recipe.servings ? (
+            <div><strong>Servings</strong>{currentServings}</div>
+          ) : null}
+        </div>
+
+        <h2>Ingredients</h2>
+        <ul className="print-ingredients">
+          {scaledIngredients.map((ing, i) => (
+            <li key={i}>{ing}</li>
+          ))}
+        </ul>
+
+        <h2>Method</h2>
+        <ol className="print-instructions">
+          {instructions.map((step, i) => (
+            <li key={i}>{step}</li>
+          ))}
+        </ol>
+
+        {recipe.tips && (
+          <>
+            <h2>Chef's Tips</h2>
+            <p>{recipe.tips}</p>
+          </>
+        )}
+
+        <div className="print-footer">greatfoodrecipes.co.uk</div>
+      </div>
     </Layout>
   );
 };
