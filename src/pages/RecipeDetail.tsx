@@ -409,46 +409,65 @@ const RecipeDetail = () => {
       </section>
 
       {/* Print-only recipe card */}
-      <div className="print-recipe-card" aria-hidden="true">
-        <h1>{recipe.title}</h1>
-        {recipe.description && <p className="print-description">{recipe.description}</p>}
-        {recipe.image_url && (
-          <img src={recipe.image_url} alt={imageAlt} className="print-image" />
-        )}
-        <div className="print-meta">
-          {recipe.prep_time_minutes ? (
-            <div><strong>Prep</strong>{recipe.prep_time_minutes} min</div>
-          ) : null}
-          {recipe.cook_time_minutes ? (
-            <div><strong>Cook</strong>{recipe.cook_time_minutes} min</div>
-          ) : null}
-          {totalTime > 0 ? (
-            <div><strong>Total</strong>{totalTime} min</div>
-          ) : null}
-          {recipe.servings ? (
-            <div><strong>Servings</strong>{currentServings}</div>
-          ) : null}
+      <div
+        className={`print-recipe-card ${printWithImage ? "" : "print-no-image"}`}
+        aria-hidden="true"
+      >
+        <div className="print-section">
+          <h1>{recipe.title}</h1>
+          {recipe.description && <p className="print-description">{recipe.description}</p>}
+          {recipe.image_url && (
+            <img src={recipe.image_url} alt={imageAlt} className="print-image" />
+          )}
+          <div className="print-meta">
+            {recipe.prep_time_minutes ? (
+              <div><strong>Prep</strong>{recipe.prep_time_minutes} min</div>
+            ) : null}
+            {recipe.cook_time_minutes ? (
+              <div><strong>Cook</strong>{recipe.cook_time_minutes} min</div>
+            ) : null}
+            {totalTime > 0 ? (
+              <div><strong>Total</strong>{totalTime} min</div>
+            ) : null}
+            {recipe.servings ? (
+              <div><strong>Servings</strong>{currentServings}</div>
+            ) : null}
+          </div>
         </div>
 
-        <h2>Ingredients</h2>
-        <ul className="print-ingredients">
-          {scaledIngredients.map((ing, i) => (
-            <li key={i}>{ing}</li>
-          ))}
-        </ul>
+        <section className="print-section">
+          <h2>Ingredients</h2>
+          <ul className="print-ingredients">
+            {scaledIngredients.map((ing, i) => (
+              <li key={i}>{ing}</li>
+            ))}
+          </ul>
+        </section>
 
-        <h2>Method</h2>
-        <ol className="print-instructions">
-          {instructions.map((step, i) => (
-            <li key={i}>{step}</li>
-          ))}
-        </ol>
+        <section>
+          <h2>Method</h2>
+          <ol className="print-instructions">
+            {instructions.map((step, i) => (
+              <li key={i}>{step}</li>
+            ))}
+          </ol>
+        </section>
 
         {recipe.tips && (
-          <>
+          <section className="print-section">
             <h2>Chef's Tips</h2>
             <p>{recipe.tips}</p>
-          </>
+          </section>
+        )}
+
+        {qrDataUrl && (
+          <div className="print-qr">
+            <img src={qrDataUrl} alt="Scan to view recipe online" />
+            <p>
+              Scan to view this recipe online
+              <span>{pageUrl}</span>
+            </p>
+          </div>
         )}
 
         <div className="print-footer">greatfoodrecipes.co.uk</div>
