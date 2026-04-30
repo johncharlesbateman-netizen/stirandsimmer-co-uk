@@ -2,7 +2,7 @@ import { useState, useLayoutEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, Leaf, Share2, ExternalLink } from "lucide-react";
+import { ArrowLeft, Leaf, Share2, ExternalLink, Printer } from "lucide-react";
 import { supermarketLogos } from "@/lib/supermarket-logos";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
