@@ -376,6 +376,52 @@ const RecipeDetail = () => {
 
         </div>
       </section>
+
+      {/* Print-only recipe card */}
+      <div className="print-recipe-card" aria-hidden="true">
+        <h1>{recipe.title}</h1>
+        {recipe.description && <p className="print-description">{recipe.description}</p>}
+        {recipe.image_url && (
+          <img src={recipe.image_url} alt={imageAlt} className="print-image" />
+        )}
+        <div className="print-meta">
+          {recipe.prep_time_minutes ? (
+            <div><strong>Prep</strong>{recipe.prep_time_minutes} min</div>
+          ) : null}
+          {recipe.cook_time_minutes ? (
+            <div><strong>Cook</strong>{recipe.cook_time_minutes} min</div>
+          ) : null}
+          {totalTime > 0 ? (
+            <div><strong>Total</strong>{totalTime} min</div>
+          ) : null}
+          {recipe.servings ? (
+            <div><strong>Servings</strong>{currentServings}</div>
+          ) : null}
+        </div>
+
+        <h2>Ingredients</h2>
+        <ul className="print-ingredients">
+          {scaledIngredients.map((ing, i) => (
+            <li key={i}>{ing}</li>
+          ))}
+        </ul>
+
+        <h2>Method</h2>
+        <ol className="print-instructions">
+          {instructions.map((step, i) => (
+            <li key={i}>{step}</li>
+          ))}
+        </ol>
+
+        {recipe.tips && (
+          <>
+            <h2>Chef's Tips</h2>
+            <p>{recipe.tips}</p>
+          </>
+        )}
+
+        <div className="print-footer">greatfoodrecipes.co.uk</div>
+      </div>
     </Layout>
   );
 };
