@@ -74,6 +74,52 @@ const RecipeDetail = () => {
     enabled: !!slug,
   });
 
+  // Related recipes: same category first, fall back to other recipes
+  const { data: relatedRecipes = [] } = useQuery({
+    queryKey: ["related-recipes", recipe?.id, recipe?.category],
+    queryFn: async () => {
+      if (!recipe) return [];
+      // Try same category first
+      const { data: sameCat } = await supabase
+        .from("recipes")
+        .select("*")
+        .eq("category", recipe.category)
+        .neq("id", recipe.id)
+        .limit(6);
+
+      let pool = sameCat ?? [];
+
+      if (pool.length < 3) {
+        const { data: others } = await supabase
+          .from("recipes")
+          .select("*")
+          .neq("id", recipe.id)
+          .neq("category", recipe.category)
+          .limit(6);
+        pool = [...pool, ...(others ?? [])];
+      }
+
+      // Score by shared ingredients to surface most-similar first
+      const baseIngredients = new Set(
+        ((recipe.ingredients as string[]) ?? []).map((i) =>
+          i.toLowerCase().replace(/[^a-z\s]/g, "").trim(),
+        ),
+      );
+      const scored = pool.map((r) => {
+        const ings = ((r.ingredients as string[]) ?? []).map((i) =>
+          i.toLowerCase().replace(/[^a-z\s]/g, "").trim(),
+        );
+        const overlap = ings.filter((i) =>
+          [...baseIngredients].some((b) => b && i && (b.includes(i) || i.includes(b))),
+        ).length;
+        return { recipe: r, score: overlap };
+      });
+      scored.sort((a, b) => b.score - a.score);
+      return scored.slice(0, 3).map((s) => s.recipe);
+    },
+    enabled: !!recipe,
+  });
+
   const baseServings = recipe?.servings || 2;
   const currentServings = servings ?? baseServings;
   const scaleFactor = currentServings / baseServings;
