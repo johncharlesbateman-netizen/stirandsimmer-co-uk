@@ -300,3 +300,142 @@
     @apply py-20 md:py-32 lg:py-40;
   }
 }
+
+/* Print-friendly recipe card */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  /* Hide everything by default */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Show only the print card and its descendants */
+  .print-recipe-card,
+  .print-recipe-card * {
+    visibility: visible;
+  }
+
+  .print-recipe-card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Hide controls inside the printable area */
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+
+  .print-recipe-card h1 {
+    font-family: 'Boska', serif;
+    font-size: 24pt;
+    margin: 0 0 8pt 0;
+    color: black;
+  }
+
+  .print-recipe-card .print-description {
+    font-size: 11pt;
+    margin: 0 0 12pt 0;
+    color: #333;
+  }
+
+  .print-recipe-card .print-image {
+    width: 100%;
+    max-height: 90mm;
+    object-fit: cover;
+    margin-bottom: 12pt;
+    page-break-inside: avoid;
+  }
+
+  .print-recipe-card .print-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16pt;
+    padding: 8pt 0;
+    border-top: 1pt solid #999;
+    border-bottom: 1pt solid #999;
+    margin-bottom: 14pt;
+    font-size: 10pt;
+  }
+
+  .print-recipe-card .print-meta strong {
+    display: block;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 2pt;
+  }
+
+  .print-recipe-card h2 {
+    font-family: 'Boska', serif;
+    font-size: 14pt;
+    margin: 14pt 0 8pt 0;
+    padding-bottom: 4pt;
+    border-bottom: 1pt solid #ccc;
+    page-break-after: avoid;
+  }
+
+  .print-recipe-card .print-ingredients {
+    list-style: disc;
+    padding-left: 18pt;
+    margin: 0 0 12pt 0;
+  }
+
+  .print-recipe-card .print-ingredients li {
+    margin-bottom: 4pt;
+    page-break-inside: avoid;
+  }
+
+  .print-recipe-card .print-instructions {
+    list-style: decimal;
+    padding-left: 18pt;
+    margin: 0;
+  }
+
+  .print-recipe-card .print-instructions li {
+    margin-bottom: 8pt;
+    page-break-inside: avoid;
+  }
+
+  .print-recipe-card .print-footer {
+    position: fixed;
+    bottom: 5mm;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 8pt;
+    color: #666;
+    border-top: 0.5pt solid #ccc;
+    padding-top: 4pt;
+  }
+}
+
+/* Hide print-only block on screen */
+.print-recipe-card {
+  display: none;
+}
+@media print {
+  .print-recipe-card {
+    display: block;
+  }
+}
