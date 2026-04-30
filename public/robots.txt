@@ -4,4 +4,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /auth
 
-Sitemap: https://greatfoodrecipes.co.uk/sitemap.xml
+Sitemap: https://www.greatfoodrecipes.co.uk/sitemap.xml
