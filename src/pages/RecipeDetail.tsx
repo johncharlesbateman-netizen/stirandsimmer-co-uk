@@ -432,39 +432,6 @@ const RecipeDetail = () => {
               )}
             </div>
 
-            {/* Supermarket Cards */}
-            <div className={`order-3 ${activeTab === "shop" ? "block" : "hidden"} md:col-span-12 md:block`}>
-              <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
-                Shop the Ingredients
-              </h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {([
-                  { name: "Tesco", id: "tesco" as const, url: "https://www.tesco.com/" },
-                  { name: "Sainsbury's", id: "sainsburys" as const, url: "https://www.sainsburys.co.uk/" },
-                  { name: "ASDA", id: "asda" as const, url: "https://www.asda.com/" },
-                  { name: "Waitrose", id: "waitrose" as const, url: "https://www.waitrose.com/" },
-                  { name: "Morrisons", id: "morrisons" as const, url: "https://www.morrisons.com/" },
-                  { name: "Aldi", id: "aldi" as const, url: "https://www.aldi.co.uk/" },
-                  { name: "Lidl", id: "lidl" as const, url: "https://www.lidl.co.uk/" },
-                  { name: "Booths", id: "booths" as const, url: "https://www.booths.co.uk/" },
-                  { name: "Ocado", id: "ocado" as const, url: "https://www.ocado.com/" },
-                ]).map((market) => (
-                  <a
-                    key={market.name}
-                    href={market.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center gap-2 p-5 border border-border hover:border-muted-foreground/40 hover:bg-secondary hover:shadow-sm transition-all duration-200 text-center group last:col-span-2 last:max-w-[50%] last:mx-auto md:last:col-span-1 md:last:max-w-none"
-                  >
-                    <img src={supermarketLogos[market.id]} alt={market.name} className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200" loading="lazy" width={40} height={40} />
-                    <span className="text-sm font-semibold text-foreground">{market.name}</span>
-                    <span className="inline-flex items-center gap-1 text-xs text-muted-foreground group-hover:text-foreground transition-colors">
-                      Shop now <ExternalLink className="w-3 h-3" />
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </div>
           </div>
 
         </div>
@@ -472,7 +439,7 @@ const RecipeDetail = () => {
 
       {/* You Might Also Like */}
       {relatedRecipes.length > 0 && (
-        <section className="no-print pb-20 md:pb-32 border-t border-border">
+        <section className="no-print pb-12 md:pb-20 border-t border-border">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-16 md:pt-20">
             <h2 className="heading-section mb-10">You Might Also Like</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
@@ -504,6 +471,11 @@ const RecipeDetail = () => {
                         <h3 className="font-display text-xl md:text-2xl group-hover:text-accent transition-colors">
                           {r.title}
                         </h3>
+                        {r.description && (
+                          <p className="text-sm text-muted-foreground line-clamp-3">
+                            {r.description}
+                          </p>
+                        )}
                         {rPrep > 0 && (
                           <p className="text-sm text-muted-foreground">
                             Prep {rPrep} min
@@ -518,6 +490,44 @@ const RecipeDetail = () => {
           </div>
         </section>
       )}
+
+      {/* Supermarket Cards */}
+      <section className={`no-print pb-20 md:pb-32 ${activeTab === "shop" ? "block" : "hidden"} md:block`}>
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <div className="max-w-4xl">
+            <h2 className="heading-section mb-6 pb-4 border-b border-border">
+              Shop the Ingredients
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {([
+                { name: "Tesco", id: "tesco" as const, url: "https://www.tesco.com/" },
+                { name: "Sainsbury's", id: "sainsburys" as const, url: "https://www.sainsburys.co.uk/" },
+                { name: "ASDA", id: "asda" as const, url: "https://www.asda.com/" },
+                { name: "Waitrose", id: "waitrose" as const, url: "https://www.waitrose.com/" },
+                { name: "Morrisons", id: "morrisons" as const, url: "https://www.morrisons.com/" },
+                { name: "Aldi", id: "aldi" as const, url: "https://www.aldi.co.uk/" },
+                { name: "Lidl", id: "lidl" as const, url: "https://www.lidl.co.uk/" },
+                { name: "Booths", id: "booths" as const, url: "https://www.booths.co.uk/" },
+                { name: "Ocado", id: "ocado" as const, url: "https://www.ocado.com/" },
+              ]).map((market) => (
+                <a
+                  key={market.name}
+                  href={market.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-2 p-5 border border-border hover:border-muted-foreground/40 hover:bg-secondary hover:shadow-sm transition-all duration-200 text-center group last:col-span-2 last:max-w-[50%] last:mx-auto md:last:col-span-1 md:last:max-w-none"
+                >
+                  <img src={supermarketLogos[market.id]} alt={market.name} className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200" loading="lazy" width={40} height={40} />
+                  <span className="text-sm font-semibold text-foreground">{market.name}</span>
+                  <span className="inline-flex items-center gap-1 text-xs text-muted-foreground group-hover:text-foreground transition-colors">
+                    Shop now <ExternalLink className="w-3 h-3" />
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Print-only recipe card */}
       <div
