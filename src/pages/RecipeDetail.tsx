@@ -166,6 +166,11 @@ const RecipeDetail = () => {
     }
   };
 
+  const handlePrint = (withImage: boolean) => {
+    setPrintWithImage(withImage);
+    setTimeout(() => window.print(), 50);
+  };
+
   return (
     <Layout>
       <Helmet>
