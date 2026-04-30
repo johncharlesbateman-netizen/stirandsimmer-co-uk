@@ -295,7 +295,14 @@ const RecipeDetail = () => {
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-4xl">
-            <p className="micro-caption mb-4">{categoryLabels[recipe.category]}</p>
+            <p className="micro-caption mb-4">
+              <Link
+                to={`/recipes/category/${categoryToSlug[recipe.category]}`}
+                className="editorial-link hover:text-foreground transition-colors"
+              >
+                {categoryLabels[recipe.category]}
+              </Link>
+            </p>
             <h1 className="heading-display mb-6">{recipe.title}</h1>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
               {recipe.description}
