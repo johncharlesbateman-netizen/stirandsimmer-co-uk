@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels } from "@/lib/recipe-utils";
-import { scaleIngredients } from "@/lib/ingredient-scaler";
+import { scaleIngredients, scaleIngredientsSmart } from "@/lib/ingredient-scaler";
 import { buildSeoTitle, buildSeoDescription } from "@/lib/seo";
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
@@ -127,6 +127,8 @@ const RecipeDetail = () => {
   const ingredients = (recipe?.ingredients as string[]) || [];
   const instructions = (recipe?.instructions as string[]) || [];
   const scaledIngredients = scaleIngredients(ingredients, baseServings, currentServings);
+  const smartScaledIngredients = scaleIngredientsSmart(ingredients, baseServings, currentServings);
+  const isScaled = currentServings !== baseServings;
 
   if (isLoading) {
     return (
@@ -365,10 +367,17 @@ const RecipeDetail = () => {
                 Ingredients
               </h2>
               <IngredientList
-                ingredients={scaledIngredients}
+                ingredients={smartScaledIngredients}
                 checkedIngredients={checkedIngredients}
                 onToggle={toggleIngredient}
               />
+              {isScaled && (
+                <p className="mt-6 text-xs text-muted-foreground border-l-2 border-accent/40 pl-3 leading-relaxed">
+                  <strong className="text-foreground">Cooking time may vary</strong> — check
+                  your dish rather than relying on the original times when scaling
+                  servings.
+                </p>
+              )}
             </div>
 
             {/* Instructions */}

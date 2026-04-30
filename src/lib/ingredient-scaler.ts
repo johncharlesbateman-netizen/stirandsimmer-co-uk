@@ -1,10 +1,10 @@
 /**
  * Scale the numeric quantities in an ingredient string by a multiplier.
  *
- * Examples:
- *   scaleIngredient("2 Chicken Breasts", 2) → "4 Chicken Breasts"
- *   scaleIngredient("1 ½ Tsp Cumin", 0.5) → "¾ Tsp Cumin"
- *   scaleIngredient("0.5 Tsp Salt", 2) → "1 Tsp Salt"
+ * Some ingredients do not scale linearly:
+ *   - Seasonings (salt, pepper, spices) → reduced rate (75% of linear) + "adjust to taste" note
+ *   - Leavening agents (baking powder/soda, yeast) → linear scale + warning to verify
+ *   - Garnishes (to garnish, to serve, to decorate) → "adjust to taste" instead of a scaled amount
  */
 
 /** Unicode fraction map */
@@ -22,12 +22,75 @@ const NUM_TO_FRAC: [number, string][] = [
   [0.875, "⅞"],
 ];
 
+export type ScalingKind = "linear" | "seasoning" | "leavening" | "garnish";
+
+export interface ScaledIngredient {
+  text: string;
+  kind: ScalingKind;
+  /** Optional advisory note shown next to the ingredient. */
+  note?: string;
+}
+
+/** Reduced-scale factor applied to seasonings instead of the full multiplier. */
+const SEASONING_SCALE_DAMPING = 0.75;
+
+/** Seasoning keywords (whole-word match, case-insensitive). */
+const SEASONING_KEYWORDS = [
+  "salt", "pepper", "peppercorn", "peppercorns",
+  "chilli", "chili", "cayenne", "paprika", "smoked paprika",
+  "cumin", "coriander seed", "ground coriander",
+  "cinnamon", "nutmeg", "clove", "cloves", "allspice",
+  "cardamom", "turmeric", "ginger powder", "ground ginger",
+  "garlic powder", "onion powder",
+  "oregano", "thyme", "rosemary", "sage", "tarragon",
+  "bay leaf", "bay leaves",
+  "garam masala", "curry powder", "five spice", "ras el hanout",
+  "mustard powder", "white pepper", "black pepper",
+  "vanilla extract", "vanilla essence",
+  "saffron", "sumac", "fennel seeds", "fenugreek",
+  "msg", "stock cube", "stock cubes",
+];
+
+/** Leavening agents (whole-word match). */
+const LEAVENING_KEYWORDS = [
+  "baking powder", "baking soda", "bicarbonate of soda",
+  "bicarb", "yeast", "dried yeast", "fresh yeast", "active dry yeast",
+  "self-raising", "self raising",
+];
+
+/** Garnish phrases — these usually appear as suffixes ("...to garnish"). */
+const GARNISH_PHRASES = [
+  "to garnish", "for garnish", "to serve", "for serving",
+  "to decorate", "for decoration", "to taste",
+];
+
+function matchesKeyword(text: string, keywords: string[]): boolean {
+  const lower = text.toLowerCase();
+  return keywords.some((kw) => {
+    const escaped = kw.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
+    const re = new RegExp(`\\b${escaped}\\b`, "i");
+    return re.test(lower);
+  });
+}
+
+function matchesPhrase(text: string, phrases: string[]): boolean {
+  const lower = text.toLowerCase();
+  return phrases.some((p) => lower.includes(p));
+}
+
+export function classifyIngredient(ingredient: string): ScalingKind {
+  // Garnish/serving suffixes take precedence — quantity is decorative.
+  if (matchesPhrase(ingredient, GARNISH_PHRASES)) return "garnish";
+  if (matchesKeyword(ingredient, LEAVENING_KEYWORDS)) return "leavening";
+  if (matchesKeyword(ingredient, SEASONING_KEYWORDS)) return "seasoning";
+  return "linear";
+}
+
 function toFraction(n: number): string {
   if (n <= 0) return "";
   const whole = Math.floor(n);
   const remainder = n - whole;
 
-  // Find closest fraction
   if (remainder < 0.05) return whole === 0 ? "" : `${whole}`;
 
   let bestFrac = "";
@@ -41,7 +104,6 @@ function toFraction(n: number): string {
   }
 
   if (bestDiff > 0.08) {
-    // No good fraction match — use decimal
     return n % 1 === 0 ? `${n}` : `${+n.toFixed(2)}`;
   }
 
@@ -49,9 +111,7 @@ function toFraction(n: number): string {
   return `${whole} ${bestFrac}`;
 }
 
-/** Parse a leading quantity from an ingredient string, return [numericValue, restOfString] */
 function parseLeadingQty(text: string): [number | null, string] {
-  // Match patterns like: "1 ½", "1½", "0.5", "1/2", "½", "1 1/2", "1 1⁄2"
   const fracChars = Object.keys(FRAC_TO_NUM).join("");
   const re = new RegExp(
     `^(\\d+(?:\\.\\d+)?)?\\s*([${fracChars}])|^(\\d+(?:\\.\\d+)?)\\s*[/⁄]\\s*(\\d+(?:\\.\\d+)?)|^(\\d+(?:\\.\\d+)?)\\s+(\\d+)\\s*[/⁄]\\s*(\\d+)|^(\\d+(?:\\.\\d+)?)`
@@ -64,18 +124,14 @@ function parseLeadingQty(text: string): [number | null, string] {
   const matchLen = m[0].length;
 
   if (m[1] !== undefined || m[2] !== undefined) {
-    // "1 ½" or "½"
     const whole = m[1] ? parseFloat(m[1]) : 0;
     const frac = m[2] ? FRAC_TO_NUM[m[2]] || 0 : 0;
     value = whole + frac;
   } else if (m[3] !== undefined && m[4] !== undefined) {
-    // "1/2"
     value = parseFloat(m[3]) / parseFloat(m[4]);
   } else if (m[5] !== undefined && m[6] !== undefined && m[7] !== undefined) {
-    // "1 1/2"
     value = parseFloat(m[5]) + parseFloat(m[6]) / parseFloat(m[7]);
   } else if (m[8] !== undefined) {
-    // plain number
     value = parseFloat(m[8]);
   } else {
     return [null, text];
@@ -90,17 +146,85 @@ export function scaleIngredient(ingredient: string, multiplier: number): string 
 
   const trimmed = ingredient.trim();
   const [qty, rest] = parseLeadingQty(trimmed);
-
-  if (qty === null) return ingredient; // no quantity found
+  if (qty === null) return ingredient;
 
   const scaled = qty * multiplier;
   const formatted = toFraction(scaled);
-
   return formatted ? `${formatted} ${rest}` : rest;
 }
 
-export function scaleIngredients(ingredients: string[], baseServings: number, targetServings: number): string[] {
+/**
+ * Scale a single ingredient with classification awareness.
+ * - garnish: do not scale numerically; replace amount with "to taste".
+ * - seasoning: scale at SEASONING_SCALE_DAMPING of the linear multiplier; add "adjust to taste".
+ * - leavening: scale linearly but warn — leavening doesn't always scale predictably.
+ * - linear: standard scale.
+ */
+export function scaleIngredientSmart(
+  ingredient: string,
+  multiplier: number,
+): ScaledIngredient {
+  const kind = classifyIngredient(ingredient);
+
+  if (multiplier === 1) {
+    return {
+      text: ingredient,
+      kind,
+      note:
+        kind === "seasoning"
+          ? "adjust to taste"
+          : kind === "leavening"
+            ? "verify when scaling"
+            : kind === "garnish"
+              ? "to taste"
+              : undefined,
+    };
+  }
+
+  if (kind === "garnish") {
+    // Strip leading quantity if any and present as "to taste".
+    const [qty, rest] = parseLeadingQty(ingredient.trim());
+    const body = qty !== null ? rest : ingredient;
+    return { text: body, kind, note: "adjust to taste" };
+  }
+
+  const effectiveMultiplier =
+    kind === "seasoning"
+      ? 1 + (multiplier - 1) * SEASONING_SCALE_DAMPING
+      : multiplier;
+
+  const text = scaleIngredient(ingredient, effectiveMultiplier);
+
+  return {
+    text,
+    kind,
+    note:
+      kind === "seasoning"
+        ? "adjust to taste"
+        : kind === "leavening"
+          ? "scaled — verify before baking"
+          : undefined,
+  };
+}
+
+export function scaleIngredients(
+  ingredients: string[],
+  baseServings: number,
+  targetServings: number,
+): string[] {
   if (baseServings <= 0 || targetServings <= 0) return ingredients;
   const multiplier = targetServings / baseServings;
   return ingredients.map((ing) => scaleIngredient(ing, multiplier));
+}
+
+/** Smart scaler returning kind + note metadata for each ingredient. */
+export function scaleIngredientsSmart(
+  ingredients: string[],
+  baseServings: number,
+  targetServings: number,
+): ScaledIngredient[] {
+  const safeBase = baseServings > 0 ? baseServings : 1;
+  const safeTarget = targetServings > 0 ? targetServings : safeBase;
+  const multiplier = safeTarget / safeBase;
+  return ingredients.map((ing) => scaleIngredientSmart(ing, multiplier));
 }
