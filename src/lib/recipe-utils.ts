@@ -72,3 +72,17 @@ export const allCategories: RecipeCategory[] = [
   "lunch_suggestions",
   "sweets",
 ];
+
+/** Heuristic difficulty derived from total time and instruction count. */
+export function deriveDifficulty(
+  prepMinutes: number | null | undefined,
+  cookMinutes: number | null | undefined,
+  steps: number | null | undefined,
+): "Easy" | "Medium" | "Hard" {
+  const total = (prepMinutes || 0) + (cookMinutes || 0);
+  const stepCount = steps || 0;
+  const score = total / 15 + stepCount / 4;
+  if (score <= 4) return "Easy";
+  if (score <= 8) return "Medium";
+  return "Hard";
+}
