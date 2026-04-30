@@ -42,7 +42,7 @@ const Index = () => {
         })}</script>
       </Helmet>
       {/* Hero Section */}
-      <section className="relative h-screen w-screen flex items-center justify-center overflow-hidden" style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', marginTop: '-5rem', width: '100vw' }}>
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden" style={{ marginTop: '-5rem' }}>
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
