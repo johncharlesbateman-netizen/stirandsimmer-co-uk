@@ -55,7 +55,7 @@ const CollectionTiles = ({
                 key={c.slug}
                 to={`/collections/${c.slug}`}
                 aria-label={`${c.title} collection — ${count} ${count === 1 ? "recipe" : "recipes"}`}
-                className="group relative block overflow-hidden border border-border/40 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 min-h-[300px]"
+                className="group relative block overflow-hidden border border-border/40 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 min-h-[420px]"
               >
                 {/* Background image */}
                 <img
@@ -71,7 +71,7 @@ const CollectionTiles = ({
                   className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/20 transition-opacity duration-500 group-hover:from-black/90 group-hover:via-black/55"
                 />
 
-                <div className="relative p-6 md:p-7 flex flex-col h-full min-h-[300px] text-white">
+                <div className="relative p-6 md:p-7 flex flex-col h-full min-h-[420px] text-white">
                   <div className="flex items-start justify-between mb-auto">
                     <div className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/15 backdrop-blur-sm ring-1 ring-white/25">
                       <Icon className="w-5 h-5" strokeWidth={1.75} aria-hidden />
