@@ -32,6 +32,7 @@ export type Database = {
       recipes: {
         Row: {
           category: Database["public"]["Enums"]["recipe_category"]
+          collections: string[]
           cook_time_minutes: number | null
           created_at: string
           description: string
@@ -51,6 +52,7 @@ export type Database = {
         }
         Insert: {
           category: Database["public"]["Enums"]["recipe_category"]
+          collections?: string[]
           cook_time_minutes?: number | null
           created_at?: string
           description: string
@@ -70,6 +72,7 @@ export type Database = {
         }
         Update: {
           category?: Database["public"]["Enums"]["recipe_category"]
+          collections?: string[]
           cook_time_minutes?: number | null
           created_at?: string
           description?: string

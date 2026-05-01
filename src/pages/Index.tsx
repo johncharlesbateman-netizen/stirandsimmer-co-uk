@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import FeaturedRecipes from "@/components/FeaturedRecipes";
+import CollectionTiles from "@/components/CollectionTiles";
 import { Link } from "react-router-dom";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
@@ -97,6 +98,9 @@ const Index = () => {
 
       {/* Featured Recipes from Database */}
       <FeaturedRecipes />
+
+      {/* Curated Collections */}
+      <CollectionTiles />
 
       {/* CTA Section */}
       <section className="section-breathing border-t border-border">

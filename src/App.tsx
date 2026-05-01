@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import CategoryPage from "./pages/CategoryPage";
+import Collections from "./pages/Collections";
 import MealPlanner from "./pages/MealPlanner";
 import AdminNewRecipe from "./pages/AdminNewRecipe";
 import AdminEditRecipe from "./pages/AdminEditRecipe";
@@ -44,6 +45,8 @@ const App = () => (
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/recipes/category/:slug" element={<CategoryPage />} />
             <Route path="/recipes/:slug" element={<RecipeDetailRoute />} />
+            <Route path="/collections" element={<Collections />} />
+            <Route path="/collections/:slug" element={<Collections />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />

@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Upload, X, Plus, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { allCategories, categoryLabels } from "@/lib/recipe-utils";
+import { collections, collectionNames } from "@/lib/collections";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +28,7 @@ const recipeSchema = z.object({
   tips: z.string().trim().max(2000).nullable(),
   seo_title: z.string().trim().max(70).nullable(),
   seo_description: z.string().trim().max(170).nullable(),
+  collections: z.array(z.string()).default([]),
 });
 
 const slugify = (s: string) =>
@@ -53,6 +55,7 @@ const AdminEditRecipe = () => {
   const [tips, setTips] = useState("");
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
+  const [recipeCollections, setRecipeCollections] = useState<string[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
@@ -85,6 +88,11 @@ const AdminEditRecipe = () => {
       setTips(data.tips || "");
       setSeoTitle((data as { seo_title?: string | null }).seo_title || "");
       setSeoDescription((data as { seo_description?: string | null }).seo_description || "");
+      setRecipeCollections(
+        Array.isArray((data as { collections?: string[] | null }).collections)
+          ? ((data as { collections?: string[] | null }).collections as string[])
+          : [],
+      );
       setExistingImageUrl(data.image_url);
       setImagePreview(data.image_url);
       setLoading(false);
@@ -145,6 +153,7 @@ const AdminEditRecipe = () => {
         tips: tips.trim() || null,
         seo_title: seoTitle.trim() || null,
         seo_description: seoDescription.trim() || null,
+        collections: recipeCollections.filter((c) => collectionNames.includes(c)),
       };
 
       const parsed = recipeSchema.safeParse(cleaned);
@@ -186,6 +195,7 @@ const AdminEditRecipe = () => {
         tips: parsed.data.tips,
         seo_title: parsed.data.seo_title,
         seo_description: parsed.data.seo_description,
+        collections: parsed.data.collections,
         image_url,
       }).eq("slug", slug);
 
@@ -359,6 +369,48 @@ const AdminEditRecipe = () => {
               rows={3}
               className="w-full px-3 py-2 rounded-md border border-input bg-background text-sm resize-y"
             />
+          </div>
+
+          {/* Collections */}
+          <div className="space-y-3 pt-6 border-t border-border">
+            <div>
+              <h2 className="font-display text-2xl mb-1">Collections</h2>
+              <p className="text-xs text-muted-foreground">
+                Recipes were auto-assigned based on their attributes — tick or untick to override.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {collections.map((c) => {
+                const checked = recipeCollections.includes(c.name);
+                return (
+                  <label
+                    key={c.slug}
+                    className={`flex items-start gap-3 p-3 border rounded-md cursor-pointer transition-colors ${
+                      checked ? "border-foreground bg-secondary" : "border-border hover:bg-secondary/50"
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={(e) => {
+                        setRecipeCollections((prev) =>
+                          e.target.checked
+                            ? [...prev, c.name]
+                            : prev.filter((n) => n !== c.name),
+                        );
+                      }}
+                      className="mt-0.5"
+                    />
+                    <span>
+                      <span className="block text-sm font-medium">{c.title}</span>
+                      <span className="block text-xs text-muted-foreground mt-0.5">
+                        {c.tagline}
+                      </span>
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
           </div>
 
           {/* SEO Settings */}
