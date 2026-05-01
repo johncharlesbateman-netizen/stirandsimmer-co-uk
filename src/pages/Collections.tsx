@@ -88,27 +88,40 @@ const CollectionsIndex = () => {
 
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
             {collections.map((c) => {
               const count = counts?.[c.name] ?? 0;
+              const Icon = c.icon;
               return (
                 <Link
                   key={c.slug}
                   to={`/collections/${c.slug}`}
-                  className="group block p-8 md:p-10 border border-border bg-secondary transition-all duration-500 hover:shadow-lg"
+                  className={`group relative block overflow-hidden border border-border/40 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 ${c.background} ${c.foreground}`}
                 >
-                  <p className="micro-caption mb-4 opacity-70">
-                    {count} {count === 1 ? "recipe" : "recipes"}
-                  </p>
-                  <h2 className="font-display text-2xl md:text-3xl mb-3 transition-transform duration-500 group-hover:translate-x-1">
-                    {c.title}
-                  </h2>
-                  <p className="text-sm md:text-base opacity-80 leading-relaxed mb-6">
-                    {c.description}
-                  </p>
-                  <span className="inline-block text-xs tracking-[0.2em] uppercase opacity-70 group-hover:opacity-100 transition-opacity">
-                    View collection →
-                  </span>
+                  <div
+                    aria-hidden
+                    className="absolute -top-20 -right-20 w-48 h-48 rounded-full opacity-10 transition-transform duration-700 group-hover:scale-125 bg-current"
+                  />
+                  <div className="relative p-7 md:p-8 flex flex-col h-full min-h-[260px]">
+                    <div className="flex items-start justify-between mb-5">
+                      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full shadow-sm ${c.accent}`}>
+                        <Icon className="w-5 h-5" strokeWidth={1.75} aria-hidden />
+                      </div>
+                      <span className="text-[11px] tracking-[0.18em] uppercase opacity-70">
+                        {count} {count === 1 ? "recipe" : "recipes"}
+                      </span>
+                    </div>
+                    <h2 className="font-display text-2xl md:text-3xl mb-3 leading-tight transition-transform duration-500 group-hover:translate-x-1">
+                      {c.title}
+                    </h2>
+                    <p className="text-sm md:text-base opacity-80 leading-relaxed mb-6">
+                      {c.description}
+                    </p>
+                    <span className="mt-auto inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">
+                      View collection
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </span>
+                  </div>
                 </Link>
               );
             })}
