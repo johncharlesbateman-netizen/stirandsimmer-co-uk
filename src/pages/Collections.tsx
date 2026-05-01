@@ -159,7 +159,7 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
   });
 
   const otherCollections = useMemo(
-    () => collections.filter((c) => c.slug !== def.slug),
+    () => collections.filter((c) => c.slug !== def.slug).slice(0, 3),
     [def.slug],
   );
 
@@ -223,20 +223,32 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
       </section>
 
       {/* Other collections */}
-      <section className="py-12 md:py-16 border-t border-border bg-secondary/30">
+      <section className="py-16 md:py-20 border-t border-border bg-secondary/30">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <p className="micro-caption mb-8">Other Collections</p>
+          <div className="text-center mb-10 md:mb-12">
+            <p className="micro-caption mb-3">Keep Exploring</p>
+            <h2 className="heading-editorial">You Might Also Like</h2>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {otherCollections.map((c) => (
               <Link
                 key={c.slug}
                 to={`/collections/${c.slug}`}
-                className="group block p-6 border border-border bg-background hover:shadow-md transition-all"
+                className="group relative block overflow-hidden min-h-[260px] md:min-h-[300px]"
               >
-                <h3 className="font-display text-xl mb-2 group-hover:translate-x-1 transition-transform">
-                  {c.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">{c.tagline}</p>
+                <img
+                  src={c.image}
+                  alt={c.title}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />
+                <div className="relative h-full flex flex-col justify-end p-6 text-primary-foreground min-h-[260px] md:min-h-[300px]">
+                  <h3 className="font-display text-2xl mb-2">{c.title}</h3>
+                  <p className="text-sm text-primary-foreground/85 leading-relaxed">
+                    {c.tagline}
+                  </p>
+                </div>
               </Link>
             ))}
           </div>
