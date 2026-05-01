@@ -81,24 +81,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Intro / Quote band */}
-      <section className="relative bg-secondary/40 border-y border-border overflow-hidden">
-        {/* subtle radial texture */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.07] [background-image:radial-gradient(hsl(var(--foreground))_1px,transparent_1px)] [background-size:22px_22px]"
-        />
-        <div className="relative container mx-auto px-6 md:px-12 lg:px-20 py-10 md:py-14">
-          <div className="max-w-3xl">
-            <p className="heading-section text-muted-foreground leading-relaxed">
-              We believe food is more than fuel — it's a celebration of
-              <span className="text-foreground"> tradition</span>,
-              <span className="text-foreground"> creativity</span>, and
-              <span className="text-foreground"> togetherness</span>.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* Collections Teaser */}
       <section className="relative overflow-hidden">
