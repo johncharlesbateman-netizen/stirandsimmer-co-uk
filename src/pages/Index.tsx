@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
-import CollectionTiles from "@/components/CollectionTiles";
 import { Link } from "react-router-dom";
+import collectionsTeaser from "@/assets/collections-teaser.jpg";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
@@ -100,8 +100,37 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Curated Collections */}
-      <CollectionTiles eyebrow="" heading="" intro="" />
+      {/* Collections Teaser */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={collectionsTeaser}
+            alt="A warm, atmospheric table set with pasta, salad, bread and wine"
+            className="w-full h-full object-cover"
+            loading="lazy"
+            width={1920}
+            height={1080}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/75" />
+        </div>
+        <div className="relative container mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-36 text-center text-primary-foreground">
+          <p className="text-xs md:text-sm tracking-[0.3em] uppercase mb-6 opacity-90">
+            Recipe Collections
+          </p>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight max-w-3xl mx-auto">
+            Discover Your Next Favourite Meal
+          </h2>
+          <p className="text-base md:text-lg font-body max-w-2xl mx-auto mb-10 text-primary-foreground/85 leading-relaxed">
+            From weeknight suppers to romantic dinners, we've curated the perfect collection for every occasion. Find your inspiration.
+          </p>
+          <Link
+            to="/collections"
+            className="inline-block px-10 py-4 bg-background text-foreground text-sm tracking-wider uppercase hover:opacity-90 transition-opacity"
+          >
+            Explore Collections
+          </Link>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="section-breathing border-t border-border">
