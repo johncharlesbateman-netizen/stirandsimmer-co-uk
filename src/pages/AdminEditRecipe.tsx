@@ -153,6 +153,7 @@ const AdminEditRecipe = () => {
         tips: tips.trim() || null,
         seo_title: seoTitle.trim() || null,
         seo_description: seoDescription.trim() || null,
+        collections: recipeCollections.filter((c) => collectionNames.includes(c)),
       };
 
       const parsed = recipeSchema.safeParse(cleaned);
@@ -194,6 +195,7 @@ const AdminEditRecipe = () => {
         tips: parsed.data.tips,
         seo_title: parsed.data.seo_title,
         seo_description: parsed.data.seo_description,
+        collections: parsed.data.collections,
         image_url,
       }).eq("slug", slug);
 
