@@ -4,23 +4,26 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border">
+    <footer className="border-t border-border bg-background">
       <div className="container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
           <div className="space-y-4">
             <h3 className="font-display text-xl">Great Food Recipes</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+            <p className="text-sm text-muted-foreground leading-relaxed">
               Delicious recipes crafted with love, flavour, and fresh ingredients.
             </p>
           </div>
 
           {/* Navigation */}
-          <div className="space-y-4">
+          <div className="space-y-4 md:pl-4 lg:pl-8">
             <h4 className="micro-caption">Navigate</h4>
             <nav className="flex flex-col gap-3">
               <Link to="/recipes" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
                 Recipes
+              </Link>
+              <Link to="/collections" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
+                Collections
               </Link>
               <Link to="/about" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
                 About
