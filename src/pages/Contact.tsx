@@ -1,6 +1,7 @@
 import { useState } from "react";
 import contactBehindScenes from "@/assets/contact-behind-scenes.jpg";
 import { Helmet } from "react-helmet-async";
+import { Instagram, MailCheck } from "lucide-react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +22,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -31,7 +33,6 @@ const Contact = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
     if (errors[name as keyof ContactFormData]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -41,7 +42,6 @@ const Contact = () => {
     e.preventDefault();
     setErrors({});
 
-    // Validate form
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
@@ -76,12 +76,8 @@ const Contact = () => {
 
       if (error) throw error;
 
-      toast({
-        title: "Message sent",
-        description: "Thanks for reaching out — we'll get back to you soon.",
-      });
-
       setFormData({ name: "", email: "", message: "" });
+      setIsSubmitted(true);
     } catch (err) {
       console.error("Contact form submission failed", err);
       toast({
@@ -118,81 +114,110 @@ const Contact = () => {
             <div className="md:col-span-7">
               <h1 className="heading-display mb-6">Contact</h1>
               <p className="text-lg text-muted-foreground mb-12 max-w-lg">
-                Have a recipe request or a question? 
+                Have a recipe request or a question?
                 Drop us a message and we'll get back to you within 48 hours.
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="micro-caption">
-                      Name
-                    </Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Your name"
-                      className="bg-transparent border-border focus:border-foreground transition-colors"
-                    />
-                    {errors.name && (
-                      <p className="text-sm text-destructive">{errors.name}</p>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="micro-caption">
-                      Email
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="your@email.com"
-                      className="bg-transparent border-border focus:border-foreground transition-colors"
-                    />
-                    {errors.email && (
-                      <p className="text-sm text-destructive">{errors.email}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="message" className="micro-caption">
-                    Message
-                  </Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Ask us anything about a recipe, suggest a dish, or just say hello…"
-                    rows={6}
-                    className="bg-transparent border-border focus:border-foreground transition-colors resize-none"
-                  />
-                  {errors.message && (
-                    <p className="text-sm text-destructive">{errors.message}</p>
-                  )}
-                </div>
-
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full md:w-auto px-12 py-6 h-auto bg-foreground text-background text-sm tracking-wider uppercase hover:opacity-80 transition-opacity disabled:opacity-50"
+              {isSubmitted ? (
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className="border border-foreground/15 bg-muted/40 px-8 py-10 md:px-10 md:py-12 flex flex-col items-start gap-6 max-w-xl"
                 >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </Button>
-              </form>
+                  <div className="flex items-center justify-center w-14 h-14 rounded-full bg-foreground text-background">
+                    <MailCheck className="w-6 h-6" aria-hidden="true" />
+                  </div>
+                  <div className="space-y-3">
+                    <h2 className="font-display text-2xl md:text-3xl">
+                      Thank you for your message!
+                    </h2>
+                    <p className="text-muted-foreground leading-relaxed">
+                      We'll be in touch soon — usually within 48 hours.
+                      In the meantime, why not browse the latest recipes?
+                    </p>
+                  </div>
+                  <Button
+                    type="button"
+                    onClick={() => setIsSubmitted(false)}
+                    variant="outline"
+                    className="text-sm tracking-wider uppercase"
+                  >
+                    Send another message
+                  </Button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="name" className="micro-caption">
+                        Name
+                      </Label>
+                      <Input
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Your name"
+                        className="bg-transparent border-border focus:border-foreground transition-colors"
+                      />
+                      {errors.name && (
+                        <p className="text-sm text-destructive">{errors.name}</p>
+                      )}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="micro-caption">
+                        Email
+                      </Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="your@email.com"
+                        className="bg-transparent border-border focus:border-foreground transition-colors"
+                      />
+                      {errors.email && (
+                        <p className="text-sm text-destructive">{errors.email}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="message" className="micro-caption">
+                      Message
+                    </Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Ask us anything about a recipe, suggest a dish, or just say hello…"
+                      rows={6}
+                      className="bg-transparent border-border focus:border-foreground transition-colors resize-none"
+                    />
+                    {errors.message && (
+                      <p className="text-sm text-destructive">{errors.message}</p>
+                    )}
+                  </div>
+
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full md:w-auto px-12 py-6 h-auto bg-foreground text-background text-sm tracking-wider uppercase hover:opacity-80 transition-opacity disabled:opacity-50"
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </Button>
+                </form>
+              )}
             </div>
 
             {/* Contact Info */}
             <div className="md:col-span-4 md:col-start-9 space-y-12 md:pt-32">
               <div>
                 <h3 className="micro-caption mb-4">Email</h3>
-                <a 
-                   href="mailto:hello@greatfoodrecipes.co.uk" 
+                <a
+                   href="mailto:hello@greatfoodrecipes.co.uk"
                    className="text-lg editorial-link"
                  >
                    hello@greatfoodrecipes.co.uk
@@ -208,15 +233,24 @@ const Contact = () => {
               <div>
                 <h3 className="micro-caption mb-4">Social</h3>
                 <div className="space-y-2">
-                  <a 
-                    href="https://www.instagram.com/Great.Food.Recipes/" 
-                    target="_blank" 
+                  <a
+                    href="https://www.instagram.com/Great.Food.Recipes/"
+                    target="_blank"
                     rel="noopener noreferrer"
-                    className="block text-lg editorial-link w-fit"
+                    className="inline-flex items-center gap-2 text-lg editorial-link w-fit"
                   >
-                    @Great.Food.Recipes
+                    <Instagram className="w-5 h-5" aria-hidden="true" />
+                    <span>@Great.Food.Recipes</span>
                   </a>
                 </div>
+              </div>
+
+              <div>
+                <h3 className="micro-caption mb-4">Response Time</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  We love hearing from fellow food lovers and will do our best
+                  to get back to you within 48 hours.
+                </p>
               </div>
             </div>
           </div>
