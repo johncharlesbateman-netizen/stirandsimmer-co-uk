@@ -81,6 +81,7 @@ const Index = () => {
         </div>
       </section>
 
+      <div className="h-7 bg-background" aria-hidden />
 
       {/* Collections Teaser */}
       <section className="relative overflow-hidden">
