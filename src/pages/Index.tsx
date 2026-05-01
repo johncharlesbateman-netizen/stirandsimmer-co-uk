@@ -116,10 +116,10 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-breathing border-t border-border">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 text-center">
-          <h2 className="heading-editorial mb-6">Got a question? We'd love to help</h2>
-          <p className="text-muted-foreground mb-10 max-w-md mx-auto">
+      <section className="bg-secondary/50 border-y border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20 text-center">
+          <h2 className="heading-editorial mb-5">Got a question? We'd love to help</h2>
+          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
             Whether you need advice on a recipe, a cooking tip, or just want to chat about food — drop us a line.
           </p>
           <Link
