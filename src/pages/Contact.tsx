@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -55,16 +56,42 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
-    // Simulate form submission (replace with actual backend integration)
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const idempotencyKey = `contact-${crypto.randomUUID()}`;
+      const { error } = await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "contact-form-notification",
+          idempotencyKey,
+          templateData: {
+            name: formData.name,
+            email: formData.email,
+            message: formData.message,
+            submittedAt: new Date().toLocaleString("en-GB", {
+              dateStyle: "long",
+              timeStyle: "short",
+            }),
+          },
+        },
+      });
 
-    toast({
-      title: "Message sent",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
+      if (error) throw error;
 
-    setFormData({ name: "", email: "", message: "" });
-    setIsSubmitting(false);
+      toast({
+        title: "Message sent",
+        description: "Thanks for reaching out — we'll get back to you soon.",
+      });
+
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      console.error("Contact form submission failed", err);
+      toast({
+        title: "Something went wrong",
+        description: "Your message couldn't be sent. Please try again or email us directly at hello@greatfoodrecipes.co.uk.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
