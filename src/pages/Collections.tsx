@@ -229,12 +229,12 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
             <p className="micro-caption mb-3">Keep Exploring</p>
             <h2 className="heading-editorial">You Might Also Like</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch">
             {otherCollections.map((c) => (
               <Link
                 key={c.slug}
                 to={`/collections/${c.slug}`}
-                className="group relative block overflow-hidden min-h-[260px] md:min-h-[300px]"
+                className="group relative block overflow-hidden h-[300px] md:h-[320px]"
               >
                 <img
                   src={c.image}
@@ -243,7 +243,7 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />
-                <div className="relative h-full flex flex-col justify-end p-6 text-primary-foreground min-h-[260px] md:min-h-[300px]">
+                <div className="absolute inset-x-0 bottom-0 p-6 text-primary-foreground">
                   <h3 className="font-display text-2xl mb-2">{c.title}</h3>
                   <p className="text-sm text-primary-foreground/85 leading-relaxed">
                     {c.tagline}
