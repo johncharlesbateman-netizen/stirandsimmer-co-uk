@@ -1,19 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { allCategories, categoryLabels, categoryToSlug } from "@/lib/recipe-utils";
 
 const Header = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
   const { session, isAdmin, signOut } = useAuth();
 
   const navLinks = [
@@ -26,7 +18,6 @@ const Header = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
-  const isCategoriesActive = location.pathname.startsWith("/recipes/category/");
 
   const handleSignOut = async () => {
     await signOut();
@@ -55,27 +46,6 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
-
-            {/* Categories dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                className={`inline-flex items-center gap-1 text-sm tracking-wide transition-all duration-300 hover:opacity-60 focus:outline-none ${
-                  isCategoriesActive ? "opacity-100" : "opacity-70"
-                }`}
-              >
-                Categories
-                <ChevronDown className="w-3 h-3" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-background min-w-[200px]">
-                {allCategories.map((cat) => (
-                  <DropdownMenuItem key={cat} asChild>
-                    <Link to={`/recipes/category/${categoryToSlug[cat]}`} className="cursor-pointer">
-                      {categoryLabels[cat]}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
 
             {isAdmin && (
               <Link
@@ -139,33 +109,6 @@ const Header = () => {
               {link.label}
             </Link>
           ))}
-
-          {/* Mobile categories accordion */}
-          <button
-            onClick={() => setMobileCategoriesOpen((o) => !o)}
-            className={`flex items-center justify-between text-lg tracking-wide transition-opacity duration-300 ${
-              isCategoriesActive ? "opacity-100" : "opacity-70"
-            }`}
-          >
-            <span>Categories</span>
-            <ChevronDown
-              className={`w-4 h-4 transition-transform duration-200 ${mobileCategoriesOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-          {mobileCategoriesOpen && (
-            <div className="flex flex-col gap-3 pl-4 border-l border-border">
-              {allCategories.map((cat) => (
-                <Link
-                  key={cat}
-                  to={`/recipes/category/${categoryToSlug[cat]}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-base tracking-wide opacity-70 hover:opacity-100 transition-opacity"
-                >
-                  {categoryLabels[cat]}
-                </Link>
-              ))}
-            </div>
-          )}
 
           {isAdmin && (
             <Link
