@@ -229,12 +229,13 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
             <p className="micro-caption mb-3">Keep Exploring</p>
             <h2 className="heading-editorial">You Might Also Like</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {otherCollections.map((c) => (
               <Link
                 key={c.slug}
                 to={`/collections/${c.slug}`}
-                className="group relative block overflow-hidden h-[300px] md:h-[320px]"
+                style={{ height: "250px" }}
+                className="group relative block overflow-hidden"
               >
                 <img
                   src={c.image}
