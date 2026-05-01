@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Upload, X, Plus, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { allCategories, categoryLabels } from "@/lib/recipe-utils";
+import { collections, collectionNames } from "@/lib/collections";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +28,7 @@ const recipeSchema = z.object({
   tips: z.string().trim().max(2000).nullable(),
   seo_title: z.string().trim().max(70).nullable(),
   seo_description: z.string().trim().max(170).nullable(),
+  collections: z.array(z.string()).default([]),
 });
 
 const slugify = (s: string) =>
@@ -53,6 +55,7 @@ const AdminEditRecipe = () => {
   const [tips, setTips] = useState("");
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
+  const [recipeCollections, setRecipeCollections] = useState<string[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
@@ -85,6 +88,11 @@ const AdminEditRecipe = () => {
       setTips(data.tips || "");
       setSeoTitle((data as { seo_title?: string | null }).seo_title || "");
       setSeoDescription((data as { seo_description?: string | null }).seo_description || "");
+      setRecipeCollections(
+        Array.isArray((data as { collections?: string[] | null }).collections)
+          ? ((data as { collections?: string[] | null }).collections as string[])
+          : [],
+      );
       setExistingImageUrl(data.image_url);
       setImagePreview(data.image_url);
       setLoading(false);
