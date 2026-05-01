@@ -5,7 +5,6 @@
 import {
   Clock,
   UtensilsCrossed,
-  Leaf,
   Heart,
   Fish,
   Cake,
@@ -169,3 +168,17 @@ export const collections: CollectionDef[] = [
       "https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
 ];
+
+export const collectionNames: string[] = collections.map((c) => c.name);
+
+export const collectionBySlug: Record<CollectionSlug, CollectionDef> =
+  Object.fromEntries(collections.map((c) => [c.slug, c])) as Record<
+    CollectionSlug,
+    CollectionDef
+  >;
+
+export const collectionByName: Record<string, CollectionDef> =
+  Object.fromEntries(collections.map((c) => [c.name, c]));
+
+export const isCollectionSlug = (s: string | undefined): s is CollectionSlug =>
+  !!s && s in collectionBySlug;
