@@ -175,24 +175,54 @@ const RecipeDetail = () => {
   const structuredDescription = recipe.description;
   const imageAlt = buildRecipeAltText(recipe.title, ingredients);
 
+  // Build keywords from category + first few key ingredients (de-duplicated, lowercase).
+  const keywordParts = [
+    categoryLabels[recipe.category],
+    ...ingredients
+      .slice(0, 6)
+      .map((i) =>
+        i
+          .replace(
+            /^[\d\s/.,⅓½¼¾⅔⅛⅜⅝⅞-]+\s*(g|kg|ml|l|tsp|tbsp|cup|cups|oz|lb|pinch|clove|cloves|slice|slices)?\s*/i,
+            "",
+          )
+          .split(",")[0]
+          .trim()
+          .toLowerCase(),
+      ),
+  ].filter(Boolean);
+  const keywords = Array.from(new Set(keywordParts)).slice(0, 8).join(", ");
+
+  const prepTimeIso = recipe.prep_time_minutes
+    ? `PT${recipe.prep_time_minutes}M`
+    : "PT0M";
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Recipe",
     name: recipe.title,
     description: structuredDescription,
-    ...(recipe.image_url && { image: recipe.image_url }),
-    ...(recipe.prep_time_minutes && { prepTime: `PT${recipe.prep_time_minutes}M` }),
+    ...(recipe.image_url && { image: [recipe.image_url] }),
+    prepTime: prepTimeIso,
     ...(recipe.cook_time_minutes && { cookTime: `PT${recipe.cook_time_minutes}M` }),
     ...(totalTime > 0 && { totalTime: `PT${totalTime}M` }),
     ...(recipe.servings && { recipeYield: `${recipe.servings} servings` }),
     recipeCategory: categoryLabels[recipe.category],
     recipeCuisine: "British",
+    keywords,
     recipeIngredient: ingredients,
     recipeInstructions: instructions.map((step, i) => ({
       "@type": "HowToStep",
+      name: `Step ${i + 1}`,
       position: i + 1,
       text: step,
+      ...(recipe.image_url && { image: recipe.image_url }),
+      url: `${pageUrl}#step-${i + 1}`,
     })),
+    nutrition: {
+      "@type": "NutritionInformation",
+      servingSize: recipe.servings ? `1 of ${recipe.servings} servings` : "1 serving",
+    },
     author: {
       "@type": "Organization",
       name: "Great Food Recipes",
