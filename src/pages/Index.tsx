@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
-import FeaturedRecipes from "@/components/FeaturedRecipes";
 import CollectionTiles from "@/components/CollectionTiles";
 import { Link } from "react-router-dom";
 
@@ -82,25 +81,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Intro Text */}
-      <section className="section-breathing">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="max-w-3xl">
-            <p className="heading-section text-muted-foreground leading-relaxed">
-              We believe food is more than fuel — it's a celebration of 
-              <span className="text-foreground"> tradition</span>, 
-              <span className="text-foreground"> creativity</span>, and 
-              <span className="text-foreground"> togetherness</span>.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Recipes from Database */}
-      <FeaturedRecipes />
-
       {/* Curated Collections */}
-      <CollectionTiles />
+      <CollectionTiles eyebrow="" heading="" intro="" />
 
       {/* CTA Section */}
       <section className="section-breathing border-t border-border">
