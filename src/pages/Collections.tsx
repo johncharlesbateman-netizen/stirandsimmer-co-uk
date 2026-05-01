@@ -67,7 +67,7 @@ const CollectionsIndex = () => {
         <title>Recipe Collections — Great Food Recipes</title>
         <meta
           name="description"
-          content="Browse curated recipe collections — Weeknight Suppers, Italian Meals, Vegetarian Options and Romantic Meals. Hand-picked for every occasion."
+          content="Browse curated recipe collections — Weeknight Suppers, Italian Meals, Romantic Meals, Sunday Roasts and more. Hand-picked for every occasion."
         />
         <link
           rel="canonical"
@@ -96,31 +96,41 @@ const CollectionsIndex = () => {
                 <Link
                   key={c.slug}
                   to={`/collections/${c.slug}`}
-                  className={`group relative block overflow-hidden border border-border/40 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 ${c.background} ${c.foreground}`}
+                  aria-label={`${c.title} collection — ${count} ${count === 1 ? "recipe" : "recipes"}`}
+                  className="group relative block overflow-hidden border border-border/40 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 min-h-[340px]"
                 >
+                  <img
+                    src={c.image}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+                  />
                   <div
                     aria-hidden
-                    className="absolute -top-20 -right-20 w-48 h-48 rounded-full opacity-10 transition-transform duration-700 group-hover:scale-125 bg-current"
+                    className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/20 transition-opacity duration-500 group-hover:from-black/90 group-hover:via-black/55"
                   />
-                  <div className="relative p-7 md:p-8 flex flex-col h-full min-h-[260px]">
-                    <div className="flex items-start justify-between mb-5">
-                      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full shadow-sm ${c.accent}`}>
+                  <div className="relative p-7 md:p-8 flex flex-col h-full min-h-[340px] text-white">
+                    <div className="flex items-start justify-between mb-auto">
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/15 backdrop-blur-sm ring-1 ring-white/25">
                         <Icon className="w-5 h-5" strokeWidth={1.75} aria-hidden />
                       </div>
-                      <span className="text-[11px] tracking-[0.18em] uppercase opacity-70">
+                      <span className="text-[10px] tracking-[0.2em] uppercase opacity-90 mt-1">
                         {count} {count === 1 ? "recipe" : "recipes"}
                       </span>
                     </div>
-                    <h2 className="font-display text-2xl md:text-3xl mb-3 leading-tight transition-transform duration-500 group-hover:translate-x-1">
-                      {c.title}
-                    </h2>
-                    <p className="text-sm md:text-base opacity-80 leading-relaxed mb-6">
-                      {c.description}
-                    </p>
-                    <span className="mt-auto inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">
-                      View collection
-                      <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                    </span>
+                    <div className="mt-6">
+                      <h2 className="font-display text-2xl md:text-3xl mb-3 leading-tight transition-transform duration-500 group-hover:translate-x-1">
+                        {c.title}
+                      </h2>
+                      <p className="text-sm md:text-base opacity-85 leading-relaxed mb-6">
+                        {c.description}
+                      </p>
+                      <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase opacity-90 group-hover:opacity-100 transition-opacity">
+                        View collection
+                        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                      </span>
+                    </div>
                   </div>
                 </Link>
               );
