@@ -63,7 +63,7 @@ const Contact = () => {
       description: "Thank you for reaching out. I'll get back to you soon.",
     });
 
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setFormData({ name: "", email: "", message: "" });
     setIsSubmitting(false);
   };
 
@@ -133,23 +133,6 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="subject" className="micro-caption">
-                    Subject
-                  </Label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    placeholder="What's this about?"
-                    className="bg-transparent border-border focus:border-foreground transition-colors"
-                  />
-                  {errors.subject && (
-                    <p className="text-sm text-destructive">{errors.subject}</p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
                   <Label htmlFor="message" className="micro-caption">
                     Message
                   </Label>
@@ -158,7 +141,7 @@ const Contact = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Tell me about your project..."
+                    placeholder="Ask us anything about a recipe, suggest a dish, or just say hello…"
                     rows={6}
                     className="bg-transparent border-border focus:border-foreground transition-colors resize-none"
                   />
@@ -204,7 +187,7 @@ const Contact = () => {
                     rel="noopener noreferrer"
                     className="block text-lg editorial-link w-fit"
                   >
-                    Instagram
+                    @Great.Food.Recipes
                   </a>
                 </div>
               </div>
