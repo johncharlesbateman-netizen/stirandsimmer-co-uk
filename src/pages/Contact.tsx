@@ -12,7 +12,6 @@ import { z } from "zod";
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  subject: z.string().trim().min(1, "Subject is required").max(200, "Subject must be less than 200 characters"),
   message: z.string().trim().min(1, "Message is required").max(2000, "Message must be less than 2000 characters"),
 });
 
@@ -24,7 +23,6 @@ const Contact = () => {
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
-    subject: "",
     message: "",
   });
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
@@ -65,7 +63,7 @@ const Contact = () => {
       description: "Thank you for reaching out. I'll get back to you soon.",
     });
 
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setFormData({ name: "", email: "", message: "" });
     setIsSubmitting(false);
   };
 
@@ -135,23 +133,6 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="subject" className="micro-caption">
-                    Subject
-                  </Label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    placeholder="What's this about?"
-                    className="bg-transparent border-border focus:border-foreground transition-colors"
-                  />
-                  {errors.subject && (
-                    <p className="text-sm text-destructive">{errors.subject}</p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
                   <Label htmlFor="message" className="micro-caption">
                     Message
                   </Label>
@@ -160,7 +141,7 @@ const Contact = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Tell me about your project..."
+                    placeholder="Ask us anything about a recipe, suggest a dish, or just say hello…"
                     rows={6}
                     className="bg-transparent border-border focus:border-foreground transition-colors resize-none"
                   />
@@ -206,7 +187,7 @@ const Contact = () => {
                     rel="noopener noreferrer"
                     className="block text-lg editorial-link w-fit"
                   >
-                    Instagram
+                    @Great.Food.Recipes
                   </a>
                 </div>
               </div>
