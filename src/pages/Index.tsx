@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
-import FeaturedRecipes from "@/components/FeaturedRecipes";
 import CollectionTiles from "@/components/CollectionTiles";
 import { Link } from "react-router-dom";
 
@@ -96,11 +95,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Recipes from Database */}
-      <FeaturedRecipes />
-
       {/* Curated Collections */}
-      <CollectionTiles />
+      <CollectionTiles eyebrow="" heading="" intro="" />
 
       {/* CTA Section */}
       <section className="section-breathing border-t border-border">
