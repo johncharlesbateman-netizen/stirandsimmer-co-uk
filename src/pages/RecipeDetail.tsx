@@ -235,8 +235,8 @@ const RecipeDetail = () => {
     dateModified: recipe.updated_at,
   };
 
-  const pageUrl = `https://www.greatfoodrecipes.co.uk/recipes/${recipe.slug}`;
-  const shareUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-recipe?slug=${recipe.slug}`;
+
+
 
   const handleShare = async () => {
     try {
