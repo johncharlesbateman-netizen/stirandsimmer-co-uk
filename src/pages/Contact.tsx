@@ -191,14 +191,6 @@ const Contact = () => {
                   </a>
                 </div>
               </div>
-
-              <div>
-                <h3 className="micro-caption mb-4">Response Time</h3>
-                <p className="text-muted-foreground">
-                  I typically respond within 48 hours. 
-                  For urgent inquiries, please mention it in your message.
-                </p>
-              </div>
             </div>
           </div>
         </div>
