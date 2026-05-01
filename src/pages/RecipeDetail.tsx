@@ -175,6 +175,9 @@ const RecipeDetail = () => {
   const structuredDescription = recipe.description;
   const imageAlt = buildRecipeAltText(recipe.title, ingredients);
 
+  const pageUrl = `https://www.greatfoodrecipes.co.uk/recipes/${recipe.slug}`;
+  const shareUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-recipe?slug=${recipe.slug}`;
+
   // Build keywords from category + first few key ingredients (de-duplicated, lowercase).
   const keywordParts = [
     categoryLabels[recipe.category],
