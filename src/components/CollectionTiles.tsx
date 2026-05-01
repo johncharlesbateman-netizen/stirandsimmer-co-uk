@@ -19,13 +19,15 @@ const CollectionTiles = ({
   return (
     <section className="section-breathing border-t border-border">
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
-        <div className="max-w-2xl mb-12">
-          {eyebrow && <p className="micro-caption mb-4">{eyebrow}</p>}
-          <HeadingTag className="heading-editorial mb-4">{heading}</HeadingTag>
-          {intro && (
-            <p className="text-muted-foreground text-lg leading-relaxed">{intro}</p>
-          )}
-        </div>
+        {(eyebrow || heading || intro) && (
+          <div className="max-w-2xl mb-12">
+            {eyebrow && <p className="micro-caption mb-4">{eyebrow}</p>}
+            {heading && <HeadingTag className="heading-editorial mb-4">{heading}</HeadingTag>}
+            {intro && (
+              <p className="text-muted-foreground text-lg leading-relaxed">{intro}</p>
+            )}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
           {collections.map((c) => {
