@@ -67,7 +67,7 @@ const CollectionsIndex = () => {
         <title>Recipe Collections — Great Food Recipes</title>
         <meta
           name="description"
-          content="Browse curated recipe collections — Weeknight Suppers, Italian Meals, Vegetarian Options and Romantic Meals. Hand-picked for every occasion."
+          content="Browse curated recipe collections — Weeknight Suppers, Italian Meals, Romantic Meals, Sunday Roasts and more. Hand-picked for every occasion."
         />
         <link
           rel="canonical"
