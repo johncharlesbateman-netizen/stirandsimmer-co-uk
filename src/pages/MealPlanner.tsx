@@ -300,6 +300,7 @@ const MealPlanner = () => {
     if (!confirm("Clear the entire week's plan?")) return;
     setPlan(emptyWeek());
     setSelections({});
+    setNotes({});
     setShoppingChecked(new Set());
     setActiveSlot(null);
     setEditingIngredients(null);
