@@ -3,7 +3,6 @@ import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import collectionsTeaser from "@/assets/collections-teaser.jpg";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
-import CollectionTiles from "@/components/CollectionTiles";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
@@ -133,13 +132,6 @@ const Index = () => {
           </Link>
         </div>
       </section>
-
-      {/* Collection cards preview — taglines + recipe counts */}
-      <CollectionTiles
-        eyebrow="Browse by collection"
-        heading="Find your next favourite recipe"
-        intro="Each card shows a short description and how many recipes are inside, so you know what to expect before you click through."
-      />
 
       {/* CTA Section */}
       <section className="bg-secondary/50 border-y border-border">
