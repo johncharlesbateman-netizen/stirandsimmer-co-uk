@@ -406,6 +406,11 @@ const RecipeDetail = () => {
               <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
                 Ingredients
               </h2>
+              <ServingScaler
+                servings={currentServings}
+                baseServings={baseServings}
+                onChange={setServings}
+              />
               <IngredientList
                 ingredients={smartScaledIngredients}
                 checkedIngredients={checkedIngredients}
