@@ -418,7 +418,12 @@ const MealPlanner = () => {
         </section>
 
         {/* Week heading */}
-        <p className="micro-caption mb-3">This week</p>
+        <div className="flex items-baseline justify-between gap-3 mb-3 flex-wrap">
+          <p className="micro-caption">This week</p>
+          <p className="text-[11px] text-muted-foreground/80 italic">
+            Tip: typed meal ideas stay as personal notes — only ingredients from saved recipes are added to your shopping list.
+          </p>
+        </div>
 
         {/* Week grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 mb-10">
