@@ -1,13 +1,40 @@
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import collectionsTeaser from "@/assets/collections-teaser.jpg";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
+import { collections } from "@/lib/collections";
+import { supabase } from "@/integrations/supabase/client";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
+// Fallback values used until the live count loads (and if the query ever fails).
+const FALLBACK_RECIPE_COUNT = 114;
+
 
 const Index = () => {
+  const [recipeCount, setRecipeCount] = useState<number>(FALLBACK_RECIPE_COUNT);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { count, error } = await supabase
+        .from("recipes")
+        .select("*", { count: "exact", head: true });
+      if (!cancelled && !error && typeof count === "number" && count > 0) {
+        setRecipeCount(count);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Round down to a friendly milestone (e.g. 114 -> "110+") for the hero copy.
+  const roundedRecipes = Math.floor(recipeCount / 10) * 10;
+  const collectionCount = collections.length;
+
   return (
     <Layout>
       <Helmet>
@@ -68,17 +95,70 @@ const Index = () => {
           >
             Recipes that bring people together around the table
           </h1>
-          <p 
+          <p
             className="text-lg md:text-xl font-body tracking-wide opacity-0 animate-fade-in max-w-2xl mx-auto"
             style={{ animationDelay: "0.6s", animationFillMode: "forwards" }}
           >
             Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love.
           </p>
+
+          <div
+            className="mt-10 flex flex-col items-center gap-4 opacity-0 animate-fade-in"
+            style={{ animationDelay: "0.8s", animationFillMode: "forwards" }}
+          >
+            <Link
+              to="/recipes"
+              className="inline-block px-10 py-4 bg-background text-foreground text-sm tracking-wider uppercase hover:opacity-90 transition-opacity"
+            >
+              Explore all {roundedRecipes}+ recipes
+            </Link>
+            <p className="text-xs md:text-sm tracking-[0.2em] uppercase text-primary-foreground/80">
+              Over {roundedRecipes} tried-and-tested recipes · free to browse
+            </p>
+          </div>
         </div>
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
           <div className="w-px h-16 bg-primary-foreground/50 animate-pulse" />
+        </div>
+      </section>
+
+      {/* At-a-glance counter strip */}
+      <section aria-label="Site at a glance" className="bg-background border-y border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-8">
+          <ul className="grid grid-cols-3 gap-4 md:gap-8 text-center divide-x divide-border">
+            <li className="px-2">
+              <Link to="/recipes" className="block group">
+                <div className="font-display text-3xl md:text-4xl text-foreground group-hover:opacity-70 transition-opacity">
+                  {recipeCount}
+                </div>
+                <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
+                  Recipes
+                </div>
+              </Link>
+            </li>
+            <li className="px-2">
+              <Link to="/collections" className="block group">
+                <div className="font-display text-3xl md:text-4xl text-foreground group-hover:opacity-70 transition-opacity">
+                  {collectionCount}
+                </div>
+                <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
+                  Meal Ideas
+                </div>
+              </Link>
+            </li>
+            <li className="px-2">
+              <Link to="/meal-planner" className="block group">
+                <div className="font-display text-3xl md:text-4xl text-foreground group-hover:opacity-70 transition-opacity">
+                  7
+                </div>
+                <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
+                  Day Planner
+                </div>
+              </Link>
+            </li>
+          </ul>
         </div>
       </section>
 
