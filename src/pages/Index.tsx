@@ -82,21 +82,7 @@ const Index = () => {
         </div>
       </section>
 
-      <div className="h-7 bg-background" aria-hidden />
-
-      {/* Weekly Meal Planner Promo */}
-      <MealPlannerPromo />
-
-      {/* Decorative separator */}
-      <div className="bg-background py-10" aria-hidden>
-        <div className="container mx-auto px-6 flex items-center justify-center gap-5">
-          <span className="h-px flex-1 max-w-[140px] bg-border" />
-          <span className="text-muted-foreground/60 text-lg leading-none" aria-hidden>
-            ✦
-          </span>
-          <span className="h-px flex-1 max-w-[140px] bg-border" />
-        </div>
-      </div>
+      <div className="h-2 bg-background" aria-hidden />
 
       {/* Collections Teaser */}
       <section className="relative overflow-hidden">
