@@ -33,6 +33,23 @@ const categoryImages: Record<string, string> = {
 
 type FilterCategory = typeof allCategories[number] | null;
 
+// Categories shown as large image tiles (the visual primary filter).
+const PRIMARY_CATEGORIES: typeof allCategories[number][] = [
+  "chicken",
+  "beef",
+  "lamb",
+  "pork",
+  "seafood",
+  "pasta",
+];
+
+// Categories shown as text chips beneath the tiles (secondary filters).
+const SECONDARY_CATEGORIES: typeof allCategories[number][] = [
+  "spicy",
+  "lunch_suggestions",
+  "sweets",
+];
+
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<FilterCategory>(null);
