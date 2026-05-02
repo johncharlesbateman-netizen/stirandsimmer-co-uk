@@ -53,6 +53,19 @@ const SECONDARY_CATEGORIES: typeof allCategories[number][] = [
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<FilterCategory>(null);
+  const [showAll, setShowAll] = useState(false);
+
+  const INITIAL_VISIBLE = 12;
+
+  // Reset "show all" whenever the filter or search changes.
+  const setActiveFilterAndReset = (next: FilterCategory) => {
+    setActiveFilter(next);
+    setShowAll(false);
+  };
+  const setSearchQueryAndReset = (next: string) => {
+    setSearchQuery(next);
+    setShowAll(false);
+  };
 
   const { data: recipes, isLoading } = useQuery({
     queryKey: ["recipes", "all"],
@@ -124,6 +137,7 @@ const Recipes = () => {
   const clearAll = () => {
     setSearchQuery("");
     setActiveFilter(null);
+    setShowAll(false);
   };
 
   return (
@@ -169,12 +183,12 @@ const Recipes = () => {
                 type="text"
                 placeholder="Search by ingredient, name or keyword…"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => setSearchQueryAndReset(e.target.value)}
                 className="w-full pl-10 pr-10 py-2.5 bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-foreground/20 transition-all"
               />
               {searchQuery && (
                 <button
-                  onClick={() => setSearchQuery("")}
+                  onClick={() => setSearchQueryAndReset("")}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <X className="w-4 h-4" />
@@ -202,7 +216,7 @@ const Recipes = () => {
                 return (
                   <button
                     key={cat}
-                    onClick={() => setActiveFilter(isActive ? null : cat)}
+                    onClick={() => setActiveFilterAndReset(isActive ? null : cat)}
                     aria-pressed={isActive}
                     className={`group relative aspect-square overflow-hidden rounded-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 ${
                       isActive
@@ -244,7 +258,7 @@ const Recipes = () => {
               Also browse
             </span>
             <button
-              onClick={() => setActiveFilter(null)}
+              onClick={() => setActiveFilterAndReset(null)}
               className={`px-3 py-1.5 text-xs tracking-wider uppercase font-medium border transition-colors ${
                 activeFilter === null
                   ? "bg-foreground text-background border-foreground"
@@ -259,7 +273,7 @@ const Recipes = () => {
               return (
                 <button
                   key={cat}
-                  onClick={() => setActiveFilter(isActive ? null : cat)}
+                  onClick={() => setActiveFilterAndReset(isActive ? null : cat)}
                   className={`px-3 py-1.5 text-xs tracking-wider uppercase font-medium border transition-colors ${
                     isActive
                       ? "bg-foreground text-background border-foreground"
@@ -288,41 +302,87 @@ const Recipes = () => {
       {/* Recipe Grid */}
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="space-y-4 animate-pulse">
-                  <div className="aspect-[4/3] bg-muted" />
-                  <div className="h-3 w-20 bg-muted rounded" />
-                  <div className="h-6 w-3/4 bg-muted rounded" />
-                  <div className="h-4 w-full bg-muted rounded" />
-                </div>
-              ))}
-            </div>
-          ) : matchesSearch.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-              {matchesSearch.map((recipe, index) => (
-                <RecipeCard key={recipe.id} recipe={recipe} floatDelay={index} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20">
-              <p className="heading-section text-muted-foreground mb-4">
-                No recipes found
-              </p>
-              <p className="text-muted-foreground mb-6">
-                Try a different search term or clear your filters.
-              </p>
-              {hasActiveFilters && (
-                <button
-                  onClick={clearAll}
-                  className="text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-                >
-                  Clear all filters
-                </button>
-              )}
-            </div>
-          )}
+          {(() => {
+            // Build a contextual heading + subtitle based on the current filter/search.
+            let heading = "Latest recipes";
+            let subtitle: string | null = "Sorted by newest first";
+            if (searchQuery.trim()) {
+              heading = `Results for “${searchQuery.trim()}”`;
+              subtitle = matchesSearch.length
+                ? `${matchesSearch.length} ${matchesSearch.length === 1 ? "match" : "matches"}`
+                : null;
+            } else if (activeFilter) {
+              heading = `${categoryLabels[activeFilter]} recipes`;
+              subtitle = `${matchesSearch.length} ${matchesSearch.length === 1 ? "recipe" : "recipes"}`;
+            }
+
+            const visible = showAll ? matchesSearch : matchesSearch.slice(0, INITIAL_VISIBLE);
+            const remaining = matchesSearch.length - visible.length;
+
+            return (
+              <>
+                {!isLoading && matchesSearch.length > 0 && (
+                  <div className="mb-8 md:mb-10 flex items-end justify-between gap-4">
+                    <div>
+                      <h2 className="heading-section">{heading}</h2>
+                      {subtitle && (
+                        <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {isLoading ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                    {Array.from({ length: 6 }).map((_, i) => (
+                      <div key={i} className="space-y-4 animate-pulse">
+                        <div className="aspect-[4/3] bg-muted" />
+                        <div className="h-3 w-20 bg-muted rounded" />
+                        <div className="h-6 w-3/4 bg-muted rounded" />
+                        <div className="h-4 w-full bg-muted rounded" />
+                      </div>
+                    ))}
+                  </div>
+                ) : matchesSearch.length > 0 ? (
+                  <>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                      {visible.map((recipe, index) => (
+                        <RecipeCard key={recipe.id} recipe={recipe} floatDelay={index} />
+                      ))}
+                    </div>
+
+                    {remaining > 0 && (
+                      <div className="mt-12 md:mt-16 text-center">
+                        <button
+                          onClick={() => setShowAll(true)}
+                          className="inline-block px-8 py-4 bg-foreground text-background text-sm tracking-wider uppercase hover:opacity-80 transition-opacity"
+                        >
+                          Show {remaining} more
+                        </button>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="text-center py-20">
+                    <p className="heading-section text-muted-foreground mb-4">
+                      No recipes found
+                    </p>
+                    <p className="text-muted-foreground mb-6">
+                      Try a different search term or clear your filters.
+                    </p>
+                    {hasActiveFilters && (
+                      <button
+                        onClick={clearAll}
+                        className="text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+                      >
+                        Clear all filters
+                      </button>
+                    )}
+                  </div>
+                )}
+              </>
+            );
+          })()}
         </div>
       </section>
 
