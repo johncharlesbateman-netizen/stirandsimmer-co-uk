@@ -14,6 +14,27 @@ const FALLBACK_RECIPE_COUNT = 114;
 
 
 const Index = () => {
+  const [recipeCount, setRecipeCount] = useState<number>(FALLBACK_RECIPE_COUNT);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { count, error } = await supabase
+        .from("recipes")
+        .select("*", { count: "exact", head: true });
+      if (!cancelled && !error && typeof count === "number" && count > 0) {
+        setRecipeCount(count);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Round down to a friendly milestone (e.g. 114 -> "110+") for the hero copy.
+  const roundedRecipes = Math.floor(recipeCount / 10) * 10;
+  const collectionCount = collections.length;
+
   return (
     <Layout>
       <Helmet>
