@@ -119,6 +119,11 @@ const Index = () => {
         </div>
       </section>
 
+      <div className="h-2 bg-background" aria-hidden />
+
+      {/* Weekly Meal Planner Promo */}
+      <MealPlannerPromo />
+
       {/* CTA Section */}
       <section className="bg-secondary/50 border-y border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20 text-center">
