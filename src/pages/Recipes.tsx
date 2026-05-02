@@ -272,7 +272,7 @@ const Recipes = () => {
               return (
                 <button
                   key={cat}
-                  onClick={() => setActiveFilter(isActive ? null : cat)}
+                  onClick={() => setActiveFilterAndReset(isActive ? null : cat)}
                   className={`px-3 py-1.5 text-xs tracking-wider uppercase font-medium border transition-colors ${
                     isActive
                       ? "bg-foreground text-background border-foreground"
