@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
-import { Search, Printer, Trash2, X, Plus, Check } from "lucide-react";
+import { Search, Printer, Trash2, X, Plus, Check, BookOpen, Pencil, ShoppingBasket } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
