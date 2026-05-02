@@ -408,6 +408,8 @@ const MealPlanner = () => {
                 {MEALS.map(({ key, label }) => {
                   const slot = plan[day.full][key];
                   const isActive = activeSlot?.day === day.full && activeSlot?.meal === key;
+                  const noteKey = `${day.full}::${key}`;
+                  const noteValue = notes[noteKey] ?? "";
                   return (
                     <div key={key} className="px-2 py-2 border-b border-border/40 last:border-b-0">
                       <div className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground/60 mb-1">
@@ -432,17 +434,28 @@ const MealPlanner = () => {
                           </button>
                         </div>
                       ) : (
-                        <button
-                          onClick={() => openSlot(day.full, key)}
-                          className={cn(
-                            "block w-full text-left text-[11px] border border-dashed rounded-md px-2 py-1.5 transition-colors",
-                            isActive
-                              ? "border-planner text-planner bg-planner-soft"
-                              : "border-border text-muted-foreground hover:border-planner hover:text-planner hover:bg-planner-soft"
-                          )}
-                        >
-                          + Add
-                        </button>
+                        <div className="space-y-1">
+                          <textarea
+                            value={noteValue}
+                            onChange={(e) =>
+                              setNotes((prev) => ({ ...prev, [noteKey]: e.target.value }))
+                            }
+                            placeholder="Type a meal idea…"
+                            rows={2}
+                            className="w-full text-[11px] leading-snug bg-transparent border-none outline-none resize-none placeholder:text-muted-foreground/50 focus:bg-secondary/40 rounded p-1 -m-1 transition-colors"
+                          />
+                          <button
+                            onClick={() => openSlot(day.full, key)}
+                            className={cn(
+                              "block w-full text-left text-[10px] border border-dashed rounded-md px-2 py-1 transition-colors",
+                              isActive
+                                ? "border-planner text-planner bg-planner-soft"
+                                : "border-border text-muted-foreground hover:border-planner hover:text-planner hover:bg-planner-soft"
+                            )}
+                          >
+                            + Find a recipe
+                          </button>
+                        </div>
                       )}
                     </div>
                   );
