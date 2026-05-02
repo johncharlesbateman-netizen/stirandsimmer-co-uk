@@ -1,10 +1,16 @@
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import collectionsTeaser from "@/assets/collections-teaser.jpg";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
+import { collections } from "@/lib/collections";
+import { supabase } from "@/integrations/supabase/client";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
+
+// Fallback values used until the live count loads (and if the query ever fails).
+const FALLBACK_RECIPE_COUNT = 114;
 
 
 const Index = () => {
