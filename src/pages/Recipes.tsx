@@ -215,7 +215,7 @@ const Recipes = () => {
                 return (
                   <button
                     key={cat}
-                    onClick={() => setActiveFilter(isActive ? null : cat)}
+                    onClick={() => setActiveFilterAndReset(isActive ? null : cat)}
                     aria-pressed={isActive}
                     className={`group relative aspect-square overflow-hidden rounded-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 ${
                       isActive
