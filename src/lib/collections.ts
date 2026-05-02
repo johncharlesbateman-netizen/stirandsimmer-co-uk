@@ -9,11 +9,8 @@ import {
   Fish,
   Cake,
   Zap,
-  Soup,
-  Drumstick,
   Croissant,
   Salad,
-  Beef,
   type LucideIcon,
 } from "lucide-react";
 
@@ -24,9 +21,6 @@ export type CollectionSlug =
   | "fish-and-seafood"
   | "sweets-and-desserts"
   | "quick-and-easy"
-  | "sunday-roasts"
-  | "soups-and-starters"
-  | "chicken-dishes"
   | "baking-and-bread"
   | "healthy-eating";
 
