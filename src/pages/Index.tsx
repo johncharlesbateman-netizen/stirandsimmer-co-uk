@@ -3,6 +3,7 @@ import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import collectionsTeaser from "@/assets/collections-teaser.jpg";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
+import CollectionTiles from "@/components/CollectionTiles";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
@@ -115,11 +116,14 @@ const Index = () => {
           <p className="text-xs md:text-sm tracking-[0.3em] uppercase mb-6 opacity-90">
             Recipe Collections
           </p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight max-w-3xl mx-auto">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl mb-5 leading-tight max-w-3xl mx-auto">
             Discover Your Next Favourite Meal
           </h2>
-          <p className="text-base md:text-lg font-body max-w-2xl mx-auto mb-10 text-primary-foreground/85 leading-relaxed">
-            From weeknight suppers to romantic dinners, we've curated the perfect collection for every occasion. Find your inspiration.
+          <p className="text-base md:text-lg font-body max-w-2xl mx-auto mb-4 text-primary-foreground/90 leading-relaxed italic">
+            Handpicked recipes grouped by ingredient, occasion and cuisine — find exactly what you're looking for.
+          </p>
+          <p className="text-sm md:text-base font-body max-w-2xl mx-auto mb-10 text-primary-foreground/75 leading-relaxed">
+            From weeknight suppers to romantic dinners, we've curated the perfect collection for every occasion.
           </p>
           <Link
             to="/collections"
@@ -129,6 +133,13 @@ const Index = () => {
           </Link>
         </div>
       </section>
+
+      {/* Collection cards preview — taglines + recipe counts */}
+      <CollectionTiles
+        eyebrow="Browse by collection"
+        heading="Find your next favourite recipe"
+        intro="Each card shows a short description and how many recipes are inside, so you know what to expect before you click through."
+      />
 
       {/* CTA Section */}
       <section className="bg-secondary/50 border-y border-border">
