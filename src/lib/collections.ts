@@ -61,7 +61,7 @@ export const collections: CollectionDef[] = [
     slug: "italian-meals",
     name: "Italian Meals",
     title: "Italian Meals",
-    tagline: "Pasta, risotto and the flavours of Italy",
+    tagline: "Quick midweek suppers to proper Sunday bowls",
     description:
       "From silky carbonara to creamy risotto and slow-cooked ragù — classic Italian dishes you can make at home.",
     icon: UtensilsCrossed,
@@ -83,7 +83,7 @@ export const collections: CollectionDef[] = [
     slug: "fish-and-seafood",
     name: "Fish & Seafood",
     title: "Fish & Seafood",
-    tagline: "Fresh from the sea — light and vibrant",
+    tagline: "Light, healthy and full of flavour",
     description:
       "Pan-fried scallops, prawn linguine, herb-crusted salmon and more — bright, flavourful seafood dishes.",
     icon: Fish,
@@ -138,7 +138,7 @@ export const collections: CollectionDef[] = [
     slug: "chicken-dishes",
     name: "Chicken Dishes",
     title: "Chicken Dishes",
-    tagline: "From comforting roasts to fragrant curries",
+    tagline: "From simple traybakes to showstopping roasts",
     description:
       "The most versatile bird in the kitchen — golden roasts, sticky glazes, fragrant curries and more.",
     icon: Drumstick,
