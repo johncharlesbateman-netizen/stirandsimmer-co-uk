@@ -667,6 +667,58 @@ const MealPlanner = () => {
                   </button>
                 </div>
               )}
+
+              {/* Desserts box — quick picker for sweet recipes */}
+              <div className="mt-6 pt-5 border-t border-border">
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="font-serif text-base font-medium" style={{ fontFamily: "'Boska', serif" }}>
+                    Desserts
+                  </h4>
+                  <span className="text-[11px] text-muted-foreground">
+                    {activeSlot ? "Pick one to add" : "Select a slot first"}
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground mb-3">
+                  Browse all our dessert recipes and drop one straight into your week.
+                </p>
+                <div className="flex flex-col gap-2 max-h-72 overflow-y-auto pr-1">
+                  {allRecipes.filter((r) => r.category === "sweets").length === 0 ? (
+                    <p className="text-sm text-muted-foreground italic text-center py-4">
+                      No desserts found.
+                    </p>
+                  ) : (
+                    allRecipes
+                      .filter((r) => r.category === "sweets")
+                      .map((recipe) => (
+                        <div
+                          key={recipe.id}
+                          className="border border-border rounded-lg p-2.5 flex items-center gap-3 hover:border-planner hover:bg-planner-soft transition-colors"
+                        >
+                          <div className="w-10 h-10 rounded-md bg-secondary overflow-hidden flex-shrink-0">
+                            {recipe.image_url ? (
+                              <img src={recipe.image_url} alt="" className="w-full h-full object-cover" />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center text-lg">🍰</div>
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-medium truncate">{recipe.title}</div>
+                            <div className="text-xs text-muted-foreground">
+                              {recipe.servings ? `${recipe.servings} servings` : "—"}
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => assignToActiveSlot(recipe)}
+                            disabled={!activeSlot}
+                            className="bg-planner text-planner-foreground rounded-md px-2.5 py-1.5 text-xs font-medium hover:bg-planner-accent transition-colors disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
+                          >
+                            Add
+                          </button>
+                        </div>
+                      ))
+                  )}
+                </div>
+              </div>
             </div>
           </div>
 
