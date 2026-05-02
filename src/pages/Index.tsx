@@ -113,7 +113,7 @@ const Index = () => {
         </div>
         <div className="relative container mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-36 text-center text-primary-foreground">
           <p className="text-xs md:text-sm tracking-[0.3em] uppercase mb-6 opacity-90">
-            Recipe Collections
+            Meal Ideas
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl mb-5 leading-tight max-w-3xl mx-auto">
             Discover Your Next Favourite Meal
@@ -128,7 +128,7 @@ const Index = () => {
             to="/collections"
             className="inline-block px-10 py-4 bg-background text-foreground text-sm tracking-wider uppercase hover:opacity-90 transition-opacity"
           >
-            Explore Collections
+            Explore Meal Ideas
           </Link>
         </div>
       </section>

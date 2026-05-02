@@ -21,15 +21,15 @@ const Collections = () => {
       return (
         <Layout>
           <div className="container mx-auto px-6 md:px-12 lg:px-20 py-20 text-center">
-            <h1 className="heading-display mb-4">Collection not found</h1>
+            <h1 className="heading-display mb-4">Meal idea not found</h1>
             <p className="text-muted-foreground mb-8">
-              We don't have a collection at this address.
+              We don't have a meal idea at this address.
             </p>
             <Link
               to="/collections"
               className="text-sm tracking-wider uppercase underline underline-offset-4"
             >
-              Browse all collections
+              Browse all meal ideas
             </Link>
           </div>
         </Layout>
@@ -64,10 +64,10 @@ const CollectionsIndex = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Recipe Collections — Great Food Recipes</title>
+        <title>Meal Ideas — Great Food Recipes</title>
         <meta
           name="description"
-          content="Browse curated recipe collections — Weeknight Suppers, Italian Meals, Romantic Meals, Sunday Roasts and more. Hand-picked for every occasion."
+          content="Browse our handpicked meal ideas — Weeknight Suppers, Italian Meals, Romantic Meals, Sunday Roasts and more. Hand-picked for every occasion."
         />
         <link
           rel="canonical"
@@ -77,10 +77,10 @@ const CollectionsIndex = () => {
 
       <section className="py-12 md:py-16 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <p className="micro-caption mb-4">Collections</p>
-          <h1 className="heading-display mb-6">Recipe Collections</h1>
+          <p className="micro-caption mb-4">Meal Ideas</p>
+          <h1 className="heading-display mb-6">Meal Ideas</h1>
           <p className="text-muted-foreground text-lg max-w-2xl">
-            Curated groups of recipes for every kind of meal. Pick a collection
+            Curated groups of recipes for every kind of meal. Pick a meal idea
             to see the recipes inside.
           </p>
         </div>
@@ -127,7 +127,7 @@ const CollectionsIndex = () => {
                         {c.description}
                       </p>
                       <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase opacity-90 group-hover:opacity-100 transition-opacity">
-                        View collection
+                        View meal idea
                         <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                       </span>
                     </div>
@@ -166,7 +166,7 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
   return (
     <Layout>
       <Helmet>
-        <title>{def.title} — Recipe Collection — Great Food Recipes</title>
+        <title>{def.title} — Meal Ideas — Great Food Recipes</title>
         <meta name="description" content={def.description} />
         <link
           rel="canonical"
@@ -181,7 +181,7 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
             to="/collections"
             className="micro-caption mb-4 inline-block hover:opacity-70 transition-opacity"
           >
-            ← All Collections
+            ← All Meal Ideas
           </Link>
           <h1 className="heading-display mb-6">{def.title}</h1>
           <p className="text-muted-foreground text-lg max-w-2xl">
@@ -212,7 +212,7 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
           ) : (
             <div className="text-center py-16">
               <p className="heading-section text-muted-foreground mb-4">
-                No recipes in this collection yet
+                No recipes in this meal idea yet
               </p>
               <p className="text-muted-foreground">
                 Check back soon — we're always adding new dishes.
