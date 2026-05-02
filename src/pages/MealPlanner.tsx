@@ -504,7 +504,7 @@ const MealPlanner = () => {
                                 : "border-border text-muted-foreground hover:border-planner hover:text-planner hover:bg-planner-soft"
                             )}
                           >
-                            + Find a recipe
+                            + Add recipe & ingredients
                           </button>
                         </div>
                       )}
