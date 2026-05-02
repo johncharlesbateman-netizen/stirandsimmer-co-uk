@@ -113,39 +113,6 @@ export const collections: CollectionDef[] = [
       "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
-    slug: "sunday-roasts",
-    name: "Sunday Roasts",
-    title: "Sunday Roasts",
-    tagline: "Show-stopping centrepieces for the family table",
-    description:
-      "Slow-roasted joints, crisp potatoes and proper trimmings — the British weekend tradition done right.",
-    icon: Beef,
-    image:
-      "https://images.pexels.com/photos/6210747/pexels-photo-6210747.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    slug: "soups-and-starters",
-    name: "Soups & Starters",
-    title: "Soups & Starters",
-    tagline: "Light beginnings and warming bowls",
-    description:
-      "Silky soups, elegant terrines and tempting nibbles to open a meal on the right note.",
-    icon: Soup,
-    image:
-      "https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    slug: "chicken-dishes",
-    name: "Chicken Dishes",
-    title: "Chicken Dishes",
-    tagline: "From simple traybakes to showstopping roasts",
-    description:
-      "The most versatile bird in the kitchen — golden roasts, sticky glazes, fragrant curries and more.",
-    icon: Drumstick,
-    image:
-      "https://images.pexels.com/photos/2673353/pexels-photo-2673353.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
     slug: "baking-and-bread",
     name: "Baking & Bread",
     title: "Baking & Bread",
