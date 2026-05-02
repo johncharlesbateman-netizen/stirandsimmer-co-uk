@@ -182,7 +182,7 @@ const Recipes = () => {
                 type="text"
                 placeholder="Search by ingredient, name or keyword…"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => setSearchQueryAndReset(e.target.value)}
                 className="w-full pl-10 pr-10 py-2.5 bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-foreground/20 transition-all"
               />
               {searchQuery && (
