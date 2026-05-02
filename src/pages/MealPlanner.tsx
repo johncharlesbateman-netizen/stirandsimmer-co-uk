@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
-import { Search, Printer, Trash2, X, Plus, Check } from "lucide-react";
+import { Search, Printer, Trash2, X, Plus, Check, BookOpen, Pencil, ShoppingBasket } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
@@ -371,8 +371,59 @@ const MealPlanner = () => {
           </div>
         </section>
 
+        {/* How it works — three steps so first-time visitors understand the flow */}
+        <section
+          aria-label="How the meal planner works"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8"
+        >
+          {[
+            {
+              n: 1,
+              icon: BookOpen,
+              title: "Add recipes to days",
+              body: "Tap “+ Add recipe & ingredients” on any slot, or type your own meal idea straight into the slot.",
+            },
+            {
+              n: 2,
+              icon: Pencil,
+              title: "Tweak ingredients",
+              body: "Adjust quantities or remove items you already have, then save them to your shopping list.",
+            },
+            {
+              n: 3,
+              icon: ShoppingBasket,
+              title: "Shop & cook",
+              body: "Your weekly shopping list builds itself. Print it, tick items off, and you're set.",
+            },
+          ].map((step) => {
+            const Icon = step.icon;
+            return (
+              <div
+                key={step.n}
+                className="bg-card border border-border rounded-xl p-4 flex gap-3 items-start"
+              >
+                <div className="shrink-0 w-9 h-9 rounded-full bg-planner-soft text-planner flex items-center justify-center">
+                  <Icon className="w-4 h-4" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground mb-0.5">
+                    Step {step.n}
+                  </div>
+                  <div className="text-sm font-medium leading-snug mb-1">{step.title}</div>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{step.body}</p>
+                </div>
+              </div>
+            );
+          })}
+        </section>
+
         {/* Week heading */}
-        <p className="micro-caption mb-3">This week</p>
+        <div className="flex items-baseline justify-between gap-3 mb-3 flex-wrap">
+          <p className="micro-caption">This week</p>
+          <p className="text-[11px] text-muted-foreground/80 italic">
+            Tip: typed meal ideas stay as personal notes — only ingredients from saved recipes are added to your shopping list.
+          </p>
+        </div>
 
         {/* Week grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 mb-10">
@@ -453,7 +504,7 @@ const MealPlanner = () => {
                                 : "border-border text-muted-foreground hover:border-planner hover:text-planner hover:bg-planner-soft"
                             )}
                           >
-                            + Find a recipe
+                            + Add recipe & ingredients
                           </button>
                         </div>
                       )}
