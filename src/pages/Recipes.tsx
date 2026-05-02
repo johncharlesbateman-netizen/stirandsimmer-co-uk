@@ -53,6 +53,19 @@ const SECONDARY_CATEGORIES: typeof allCategories[number][] = [
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<FilterCategory>(null);
+  const [showAll, setShowAll] = useState(false);
+
+  const INITIAL_VISIBLE = 12;
+
+  // Reset "show all" whenever the filter or search changes.
+  const setActiveFilterAndReset = (next: FilterCategory) => {
+    setActiveFilter(next);
+    setShowAll(false);
+  };
+  const setSearchQueryAndReset = (next: string) => {
+    setSearchQuery(next);
+    setShowAll(false);
+  };
 
   const { data: recipes, isLoading } = useQuery({
     queryKey: ["recipes", "all"],
