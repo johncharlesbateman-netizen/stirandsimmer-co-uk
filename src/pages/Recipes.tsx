@@ -137,6 +137,7 @@ const Recipes = () => {
   const clearAll = () => {
     setSearchQuery("");
     setActiveFilter(null);
+    setShowAll(false);
   };
 
   return (
