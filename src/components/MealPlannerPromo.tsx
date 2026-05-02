@@ -3,16 +3,6 @@ import { CalendarDays, ArrowRight } from "lucide-react";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-// Sample meals shown in the preview grid (illustrative only)
-const previewMeals: Record<string, { lunch: string; dinner: string }> = {
-  Mon: { lunch: "Halloumi salad", dinner: "Lemon chicken" },
-  Tue: { lunch: "Tomato soup", dinner: "Beef ragu" },
-  Wed: { lunch: "Pesto pasta", dinner: "Thai curry" },
-  Thu: { lunch: "Chickpea bowl", dinner: "Sea bass" },
-  Fri: { lunch: "Steak sandwich", dinner: "Pizza night" },
-  Sat: { lunch: "Brunch eggs", dinner: "Sunday roast" },
-  Sun: { lunch: "Leftovers", dinner: "Risotto" },
-};
 
 // Warm palette
 const BROWN = "#2C2416";
@@ -130,24 +120,32 @@ const MealPlannerPromo = () => {
                     <div className="space-y-1.5">
                       <div
                         className="rounded p-1.5 md:p-2 min-h-[52px] md:min-h-[64px] flex items-center justify-center text-center transition-colors"
-                        style={{ backgroundColor: BROWN_LIGHT }}
+                        style={{
+                          backgroundColor: `${BROWN_LIGHT}80`,
+                          border: `1px dashed ${CREAM}26`,
+                        }}
                       >
                         <span
-                          className="text-[9px] md:text-[11px] leading-tight"
-                          style={{ color: `${CREAM}E6` }}
+                          className="text-base md:text-lg leading-none"
+                          style={{ color: `${CREAM}40` }}
+                          aria-hidden
                         >
-                          {previewMeals[day].lunch}
+                          +
                         </span>
                       </div>
                       <div
                         className="rounded p-1.5 md:p-2 min-h-[52px] md:min-h-[64px] flex items-center justify-center text-center transition-colors"
-                        style={{ backgroundColor: BROWN_LIGHTER }}
+                        style={{
+                          backgroundColor: `${BROWN_LIGHTER}80`,
+                          border: `1px dashed ${CREAM}26`,
+                        }}
                       >
                         <span
-                          className="text-[9px] md:text-[11px] leading-tight"
-                          style={{ color: CREAM }}
+                          className="text-base md:text-lg leading-none"
+                          style={{ color: `${CREAM}40` }}
+                          aria-hidden
                         >
-                          {previewMeals[day].dinner}
+                          +
                         </span>
                       </div>
                     </div>
