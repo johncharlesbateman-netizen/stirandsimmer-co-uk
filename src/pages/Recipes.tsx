@@ -257,7 +257,7 @@ const Recipes = () => {
               Also browse
             </span>
             <button
-              onClick={() => setActiveFilter(null)}
+              onClick={() => setActiveFilterAndReset(null)}
               className={`px-3 py-1.5 text-xs tracking-wider uppercase font-medium border transition-colors ${
                 activeFilter === null
                   ? "bg-foreground text-background border-foreground"
