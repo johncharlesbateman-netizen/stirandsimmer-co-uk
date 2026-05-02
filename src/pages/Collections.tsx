@@ -21,15 +21,15 @@ const Collections = () => {
       return (
         <Layout>
           <div className="container mx-auto px-6 md:px-12 lg:px-20 py-20 text-center">
-            <h1 className="heading-display mb-4">Collection not found</h1>
+            <h1 className="heading-display mb-4">Meal idea not found</h1>
             <p className="text-muted-foreground mb-8">
-              We don't have a collection at this address.
+              We don't have a meal idea at this address.
             </p>
             <Link
               to="/collections"
               className="text-sm tracking-wider uppercase underline underline-offset-4"
             >
-              Browse all collections
+              Browse all meal ideas
             </Link>
           </div>
         </Layout>
