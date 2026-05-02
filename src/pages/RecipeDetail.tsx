@@ -14,6 +14,7 @@ import { buildSeoTitle, buildSeoDescription } from "@/lib/seo";
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
+import ServingScaler from "@/components/ServingScaler";
 import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
@@ -406,6 +407,11 @@ const RecipeDetail = () => {
               <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
                 Ingredients
               </h2>
+              <ServingScaler
+                servings={currentServings}
+                baseServings={baseServings}
+                onChange={setServings}
+              />
               <IngredientList
                 ingredients={smartScaledIngredients}
                 checkedIngredients={checkedIngredients}
