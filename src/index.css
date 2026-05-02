@@ -43,6 +43,12 @@
     --olive: 82 25% 40%;
     --wine: 345 35% 35%;
 
+    /* Meal planner green */
+    --planner: 145 40% 28%;
+    --planner-foreground: 36 33% 97%;
+    --planner-soft: 145 30% 92%;
+    --planner-accent: 145 50% 40%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
@@ -88,6 +94,11 @@
     --terracotta: 16 45% 55%;
     --olive: 82 25% 50%;
     --wine: 345 35% 45%;
+
+    --planner: 145 40% 35%;
+    --planner-foreground: 36 33% 97%;
+    --planner-soft: 145 25% 18%;
+    --planner-accent: 145 50% 50%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
