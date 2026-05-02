@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import collectionsTeaser from "@/assets/collections-teaser.jpg";
+import MealPlannerPromo from "@/components/MealPlannerPromo";
 
 const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
@@ -82,6 +83,9 @@ const Index = () => {
       </section>
 
       <div className="h-7 bg-background" aria-hidden />
+
+      {/* Weekly Meal Planner Promo */}
+      <MealPlannerPromo />
 
       {/* Collections Teaser */}
       <section className="relative overflow-hidden">

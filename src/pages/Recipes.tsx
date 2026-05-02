@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Search, X } from "lucide-react";
 import Layout from "@/components/Layout";
 import RecipeCard from "@/components/RecipeCard";
+import FloatingMealPlannerButton from "@/components/FloatingMealPlannerButton";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels, categoryToSlug, allCategories } from "@/lib/recipe-utils";
 
@@ -255,6 +256,8 @@ const Recipes = () => {
           )}
         </div>
       </section>
+
+      <FloatingMealPlannerButton />
     </Layout>
   );
 };
