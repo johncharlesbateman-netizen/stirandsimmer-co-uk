@@ -49,6 +49,7 @@ const MEALS: { key: MealType; label: string }[] = [
 const STORAGE_KEY = "gfr-meal-plan";
 const SELECTIONS_KEY = "gfr-ingredient-selections";
 const SHOPPING_CHECKED_KEY = "gfr-shopping-checked";
+const NOTES_KEY = "gfr-meal-notes";
 
 const emptyWeek = (): WeekPlan =>
   Object.fromEntries(DAYS.map((d) => [d.full, { lunch: null, dinner: null }])) as WeekPlan;
@@ -108,6 +109,14 @@ const MealPlanner = () => {
     } catch { return {}; }
   });
 
+  /* Free-text notes per slot — visitors can type their own meal ideas */
+  const [notes, setNotes] = useState<Record<string, string>>(() => {
+    try {
+      const saved = localStorage.getItem(NOTES_KEY);
+      return saved ? JSON.parse(saved) : {};
+    } catch { return {}; }
+  });
+
   const weekDates = useMemo(getWeekDates, []);
   const todayIdx = useMemo(() => {
     const today = new Date();
@@ -121,6 +130,7 @@ const MealPlanner = () => {
   useEffect(() => {
     localStorage.setItem(SHOPPING_CHECKED_KEY, JSON.stringify(Array.from(shoppingChecked)));
   }, [shoppingChecked]);
+  useEffect(() => { localStorage.setItem(NOTES_KEY, JSON.stringify(notes)); }, [notes]);
 
   /* Recipes */
   const { data: allRecipes = [] } = useQuery({
@@ -290,6 +300,7 @@ const MealPlanner = () => {
     if (!confirm("Clear the entire week's plan?")) return;
     setPlan(emptyWeek());
     setSelections({});
+    setNotes({});
     setShoppingChecked(new Set());
     setActiveSlot(null);
     setEditingIngredients(null);
@@ -397,6 +408,8 @@ const MealPlanner = () => {
                 {MEALS.map(({ key, label }) => {
                   const slot = plan[day.full][key];
                   const isActive = activeSlot?.day === day.full && activeSlot?.meal === key;
+                  const noteKey = `${day.full}::${key}`;
+                  const noteValue = notes[noteKey] ?? "";
                   return (
                     <div key={key} className="px-2 py-2 border-b border-border/40 last:border-b-0">
                       <div className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground/60 mb-1">
@@ -421,17 +434,28 @@ const MealPlanner = () => {
                           </button>
                         </div>
                       ) : (
-                        <button
-                          onClick={() => openSlot(day.full, key)}
-                          className={cn(
-                            "block w-full text-left text-[11px] border border-dashed rounded-md px-2 py-1.5 transition-colors",
-                            isActive
-                              ? "border-planner text-planner bg-planner-soft"
-                              : "border-border text-muted-foreground hover:border-planner hover:text-planner hover:bg-planner-soft"
-                          )}
-                        >
-                          + Add
-                        </button>
+                        <div className="space-y-1">
+                          <textarea
+                            value={noteValue}
+                            onChange={(e) =>
+                              setNotes((prev) => ({ ...prev, [noteKey]: e.target.value }))
+                            }
+                            placeholder="Type a meal idea…"
+                            rows={2}
+                            className="w-full text-[11px] leading-snug bg-transparent border-none outline-none resize-none placeholder:text-muted-foreground/50 focus:bg-secondary/40 rounded p-1 -m-1 transition-colors"
+                          />
+                          <button
+                            onClick={() => openSlot(day.full, key)}
+                            className={cn(
+                              "block w-full text-left text-[10px] border border-dashed rounded-md px-2 py-1 transition-colors",
+                              isActive
+                                ? "border-planner text-planner bg-planner-soft"
+                                : "border-border text-muted-foreground hover:border-planner hover:text-planner hover:bg-planner-soft"
+                            )}
+                          >
+                            + Find a recipe
+                          </button>
+                        </div>
                       )}
                     </div>
                   );
