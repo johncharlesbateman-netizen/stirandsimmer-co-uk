@@ -46,6 +46,12 @@ export default {
         terracotta: "hsl(var(--terracotta))",
         olive: "hsl(var(--olive))",
         wine: "hsl(var(--wine))",
+        planner: {
+          DEFAULT: "hsl(var(--planner))",
+          foreground: "hsl(var(--planner-foreground))",
+          soft: "hsl(var(--planner-soft))",
+          accent: "hsl(var(--planner-accent))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
