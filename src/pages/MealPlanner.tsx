@@ -49,6 +49,7 @@ const MEALS: { key: MealType; label: string }[] = [
 const STORAGE_KEY = "gfr-meal-plan";
 const SELECTIONS_KEY = "gfr-ingredient-selections";
 const SHOPPING_CHECKED_KEY = "gfr-shopping-checked";
+const NOTES_KEY = "gfr-meal-notes";
 
 const emptyWeek = (): WeekPlan =>
   Object.fromEntries(DAYS.map((d) => [d.full, { lunch: null, dinner: null }])) as WeekPlan;
@@ -108,6 +109,14 @@ const MealPlanner = () => {
     } catch { return {}; }
   });
 
+  /* Free-text notes per slot — visitors can type their own meal ideas */
+  const [notes, setNotes] = useState<Record<string, string>>(() => {
+    try {
+      const saved = localStorage.getItem(NOTES_KEY);
+      return saved ? JSON.parse(saved) : {};
+    } catch { return {}; }
+  });
+
   const weekDates = useMemo(getWeekDates, []);
   const todayIdx = useMemo(() => {
     const today = new Date();
@@ -121,6 +130,7 @@ const MealPlanner = () => {
   useEffect(() => {
     localStorage.setItem(SHOPPING_CHECKED_KEY, JSON.stringify(Array.from(shoppingChecked)));
   }, [shoppingChecked]);
+  useEffect(() => { localStorage.setItem(NOTES_KEY, JSON.stringify(notes)); }, [notes]);
 
   /* Recipes */
   const { data: allRecipes = [] } = useQuery({
