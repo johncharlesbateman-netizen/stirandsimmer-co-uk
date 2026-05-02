@@ -95,12 +95,27 @@ const Index = () => {
           >
             Recipes that bring people together around the table
           </h1>
-          <p 
+          <p
             className="text-lg md:text-xl font-body tracking-wide opacity-0 animate-fade-in max-w-2xl mx-auto"
             style={{ animationDelay: "0.6s", animationFillMode: "forwards" }}
           >
             Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love.
           </p>
+
+          <div
+            className="mt-10 flex flex-col items-center gap-4 opacity-0 animate-fade-in"
+            style={{ animationDelay: "0.8s", animationFillMode: "forwards" }}
+          >
+            <Link
+              to="/recipes"
+              className="inline-block px-10 py-4 bg-background text-foreground text-sm tracking-wider uppercase hover:opacity-90 transition-opacity"
+            >
+              Explore all {roundedRecipes}+ recipes
+            </Link>
+            <p className="text-xs md:text-sm tracking-[0.2em] uppercase text-primary-foreground/80">
+              Over {roundedRecipes} tried-and-tested recipes · free to browse
+            </p>
+          </div>
         </div>
 
         {/* Scroll Indicator */}
