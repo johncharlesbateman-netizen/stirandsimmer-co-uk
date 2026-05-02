@@ -189,8 +189,60 @@ const Recipes = () => {
             </button>
           </div>
 
-          {/* Category filter buttons */}
-          <div className="flex flex-wrap gap-2">
+          {/* Primary visual category tiles */}
+          <div>
+            <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-4">
+              Browse by main ingredient
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+              {PRIMARY_CATEGORIES.map((cat) => {
+                const count = categoryCounts[cat] || 0;
+                const isActive = activeFilter === cat;
+                const img = categoryImages[cat];
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveFilter(isActive ? null : cat)}
+                    aria-pressed={isActive}
+                    className={`group relative aspect-square overflow-hidden rounded-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 ${
+                      isActive
+                        ? "ring-2 ring-foreground shadow-lg"
+                        : "ring-1 ring-border hover:ring-foreground/40"
+                    }`}
+                  >
+                    <img
+                      src={img}
+                      alt=""
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div
+                      className={`absolute inset-0 transition-colors ${
+                        isActive
+                          ? "bg-gradient-to-t from-black/85 via-black/40 to-black/20"
+                          : "bg-gradient-to-t from-black/75 via-black/30 to-transparent group-hover:from-black/80"
+                      }`}
+                      aria-hidden
+                    />
+                    <div className="absolute inset-x-0 bottom-0 p-3 md:p-4 text-left text-white">
+                      <div className="font-display text-lg md:text-xl leading-tight">
+                        {categoryLabels[cat]}
+                      </div>
+                      <div className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-white/80 mt-0.5">
+                        {count} {count === 1 ? "recipe" : "recipes"}
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Secondary text chips */}
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs tracking-[0.2em] uppercase text-muted-foreground mr-1">
+              Also browse
+            </span>
             <button
               onClick={() => setActiveFilter(null)}
               className={`px-3 py-1.5 text-xs tracking-wider uppercase font-medium border transition-colors ${
@@ -201,7 +253,7 @@ const Recipes = () => {
             >
               All{recipes ? ` (${matchesSearch.length})` : ""}
             </button>
-            {allCategories.map((cat) => {
+            {SECONDARY_CATEGORIES.map((cat) => {
               const count = categoryCounts[cat] || 0;
               const isActive = activeFilter === cat;
               return (
