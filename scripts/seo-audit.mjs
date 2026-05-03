@@ -52,7 +52,7 @@ async function fetchAllRecipes() {
   let from = 0;
   while (true) {
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/recipes?select=slug,title,description,image_url,prep_time_minutes,cook_time_minutes,servings,ingredients,instructions,seo_title,seo_description,category`,
+      `${SUPABASE_URL}/rest/v1/recipes?select=*`,
       {
         headers: {
           apikey: SUPABASE_KEY,
