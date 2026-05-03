@@ -23,17 +23,34 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// Legacy slugs that were renamed entirely (old slug -> current slug).
+// Applied AFTER normalising punctuation, so keys here are the normalised form.
 const legacyRecipeSlugMap: Record<string, string> = {
   "sirloin-steak-with-peppercorn-sauce": "steak-au-poivre-and-french-fries-with-green-salad",
   "keema-rice": "savoury-rice",
-  "prawn,avocado-and-mango-salad": "prawn-avocado-and-mango-salad",
+};
+
+// Normalise a slug to match the canonical DB slug format:
+// lowercase, URL-decoded, strip diacritics/punctuation (commas, ampersands,
+// accented characters), collapse repeated dashes.
+const normaliseSlug = (slug: string) => {
+  let decoded = slug;
+  try {
+    decoded = decodeURIComponent(slug);
+  } catch {
+    decoded = slug;
+  }
+  return decoded
+    .toLowerCase()
+    .replace(/[^a-z0-9-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 };
 
 const getCanonicalRecipeSlug = (slug?: string) => {
   if (!slug) return "";
-
-  const normalisedSlug = decodeURIComponent(slug).toLowerCase();
-  return legacyRecipeSlugMap[normalisedSlug] ?? normalisedSlug;
+  const normalised = normaliseSlug(slug);
+  return legacyRecipeSlugMap[normalised] ?? normalised;
 };
 
 const RecipeDetailRoute = () => {
