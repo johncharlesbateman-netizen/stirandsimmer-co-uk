@@ -19,7 +19,6 @@ const Styleguide = () => {
         <title>Styleguide — Portfolio Design System | Great Food Recipes</title>
         <meta name="description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
         <meta name="keywords" content="food photography portfolio design system, editorial layout" />
-        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/styleguide" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/styleguide" />
