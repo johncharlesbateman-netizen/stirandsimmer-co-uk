@@ -1,39 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  This is a sitemap index. The actual list of URLs is generated dynamically
+  by the `sitemap` edge function so it always reflects the current set of
+  recipes, categories and pages without needing a redeploy.
+-->
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
-    <loc>https://greatfoodrecipes.co.uk/booking-services-sitemap.xml</loc>
-    <lastmod>2026-04-29</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://greatfoodrecipes.co.uk/dynamic-recipes-1-sitemap.xml</loc>
-    <lastmod>2026-04-05</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://greatfoodrecipes.co.uk/dynamic-recipes-2-sitemap.xml</loc>
-    <lastmod>2026-04-03</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://greatfoodrecipes.co.uk/dynamic-recipes-3-sitemap.xml</loc>
-    <lastmod>2026-04-26</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://greatfoodrecipes.co.uk/dynamic-recipes-4-sitemap.xml</loc>
-    <lastmod>2026-04-03</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://greatfoodrecipes.co.uk/dynamic-recipes-5-sitemap.xml</loc>
-    <lastmod>2026-04-25</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://greatfoodrecipes.co.uk/dynamic-recipes-6-sitemap.xml</loc>
-    <lastmod>2026-04-03</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://greatfoodrecipes.co.uk/dynamic-recipes-7-sitemap.xml</loc>
-    <lastmod>2026-04-03</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://greatfoodrecipes.co.uk/dynamic-recipes-8-sitemap.xml</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://xlekynbjvcfbfqycjnpj.supabase.co/functions/v1/sitemap</loc>
   </sitemap>
 </sitemapindex>
