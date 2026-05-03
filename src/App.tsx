@@ -94,6 +94,9 @@ const App = () => (
             <Route path="/recipes-1/:slug" element={<LegacyRecipeRedirect />} />
             <Route path="/recipes-1-1/:slug" element={<LegacyRecipeRedirect />} />
             <Route path="/recipes/:slug" element={<CanonicalRecipeSlugRedirect />} />
+            {/* Legacy top-level recipe URLs with no current equivalent → send to recipes listing */}
+            <Route path="/pork-curry-with-" element={<Navigate to="/recipes" replace />} />
+            <Route path="/lamb-and-apricot-biryani" element={<Navigate to="/recipes" replace />} />
             <Route path="/collections" element={<Collections />} />
             <Route path="/collections/:slug" element={<Collections />} />
             <Route path="/contact" element={<Contact />} />
