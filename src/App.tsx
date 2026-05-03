@@ -18,6 +18,7 @@ import Collections from "./pages/Collections";
 import MealPlanner from "./pages/MealPlanner";
 import AdminNewRecipe from "./pages/AdminNewRecipe";
 import AdminEditRecipe from "./pages/AdminEditRecipe";
+import AdminSeoStatus from "./pages/AdminSeoStatus";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
