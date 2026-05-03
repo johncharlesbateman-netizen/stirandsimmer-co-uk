@@ -46,7 +46,7 @@ const RecipeDetail = () => {
   // Generate QR code for the print view linking back to this recipe
   useEffect(() => {
     if (!slug) return;
-    const url = `https://www.greatfoodrecipes.co.uk/recipes/${slug}`;
+    const url = `https://greatfoodrecipes.co.uk/recipes/${slug}`;
     QRCode.toDataURL(url, { margin: 1, width: 240 })
       .then(setQrDataUrl)
       .catch(() => setQrDataUrl(""));
@@ -176,7 +176,7 @@ const RecipeDetail = () => {
   const structuredDescription = recipe.description;
   const imageAlt = buildRecipeAltText(recipe.title, ingredients);
 
-  const pageUrl = `https://www.greatfoodrecipes.co.uk/recipes/${recipe.slug}`;
+  const pageUrl = `https://greatfoodrecipes.co.uk/recipes/${recipe.slug}`;
   const shareUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-recipe?slug=${recipe.slug}`;
 
   // Build keywords from category + first few key ingredients (de-duplicated, lowercase).
@@ -230,7 +230,7 @@ const RecipeDetail = () => {
     author: {
       "@type": "Organization",
       name: "Great Food Recipes",
-      url: "https://www.greatfoodrecipes.co.uk",
+      url: "https://greatfoodrecipes.co.uk",
     },
     datePublished: recipe.created_at,
     dateModified: recipe.updated_at,
