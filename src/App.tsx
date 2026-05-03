@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useParams } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import RequireAdmin from "./components/RequireAdmin";
 import { AuthProvider } from "./hooks/useAuth";
@@ -23,10 +23,39 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+const legacyRecipeSlugMap: Record<string, string> = {
+  "sirloin-steak-with-peppercorn-sauce": "steak-au-poivre-and-french-fries-with-green-salad",
+  "keema-rice": "savoury-rice",
+  "prawn,avocado-and-mango-salad": "prawn-avocado-and-mango-salad",
+};
+
+const getCanonicalRecipeSlug = (slug?: string) => {
+  if (!slug) return "";
+
+  const normalisedSlug = decodeURIComponent(slug).toLowerCase();
+  return legacyRecipeSlugMap[normalisedSlug] ?? normalisedSlug;
+};
+
 const RecipeDetailRoute = () => {
   const { slug } = useParams<{ slug: string }>();
 
   return <RecipeDetail key={slug ?? "recipe-detail"} />;
+};
+
+const LegacyRecipeRedirect = () => {
+  const { slug } = useParams<{ slug: string }>();
+  return <Navigate to={`/recipes/${getCanonicalRecipeSlug(slug)}`} replace />;
+};
+
+const CanonicalRecipeSlugRedirect = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const canonicalSlug = getCanonicalRecipeSlug(slug);
+
+  if (!slug || canonicalSlug === slug) {
+    return <RecipeDetail key={slug ?? "recipe-detail"} />;
+  }
+
+  return <Navigate to={`/recipes/${canonicalSlug}`} replace />;
 };
 
 const App = () => (
@@ -44,7 +73,9 @@ const App = () => (
             <Route path="/styleguide" element={<Styleguide />} />
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/recipes/category/:slug" element={<CategoryPage />} />
-            <Route path="/recipes/:slug" element={<RecipeDetailRoute />} />
+            <Route path="/recipes-1/:slug" element={<LegacyRecipeRedirect />} />
+            <Route path="/recipes-1-1/:slug" element={<LegacyRecipeRedirect />} />
+            <Route path="/recipes/:slug" element={<CanonicalRecipeSlugRedirect />} />
             <Route path="/collections" element={<Collections />} />
             <Route path="/collections/:slug" element={<Collections />} />
             <Route path="/contact" element={<Contact />} />
