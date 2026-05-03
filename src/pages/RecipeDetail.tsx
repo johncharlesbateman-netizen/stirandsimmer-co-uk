@@ -497,6 +497,14 @@ const RecipeDetail = () => {
 
           </div>
 
+          {/* Serving Suggestions — adds unique on-page text for SEO */}
+          <div className="max-w-4xl mt-16 pt-12 border-t border-border">
+            <h2 className="heading-section mb-4">Serving Suggestions</h2>
+            <p className="text-base text-muted-foreground leading-relaxed max-w-2xl">
+              {buildServingSuggestion(recipe.title, recipe.category)}
+            </p>
+          </div>
+
         </div>
       </section>
 
