@@ -1,0 +1,68 @@
+name: SEO Rich Results
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Daily at 06:00 UTC — catches regressions from data changes
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      sample_size:
+        description: "Number of recipe URLs to validate"
+        required: false
+        default: "10"
+      check_all:
+        description: "Validate every recipe (overrides sample_size)"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  static-audit:
+    name: Static SEO audit (DB-backed)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Write .env
+        run: |
+          {
+            echo "VITE_SUPABASE_URL=${{ secrets.VITE_SUPABASE_URL }}"
+            echo "VITE_SUPABASE_PUBLISHABLE_KEY=${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}"
+          } > .env
+      - name: Run audit
+        run: node scripts/seo-audit.mjs --fail
+
+  rich-results:
+    name: Live Rich Results validation
+    runs-on: ubuntu-latest
+    needs: static-audit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@^1.48.0
+          npx playwright install --with-deps chromium
+      - name: Write .env
+        run: |
+          {
+            echo "VITE_SUPABASE_URL=${{ secrets.VITE_SUPABASE_URL }}"
+            echo "VITE_SUPABASE_PUBLISHABLE_KEY=${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}"
+          } > .env
+      - name: Validate live recipe URLs
+        env:
+          SITE_URL: ${{ vars.SITE_URL || 'https://greatfoodrecipes.co.uk' }}
+          SAMPLE_SIZE: ${{ inputs.sample_size || '10' }}
+        run: |
+          if [ "${{ inputs.check_all }}" = "true" ]; then
+            node scripts/validate-rich-results.mjs --all
+          else
+            node scripts/validate-rich-results.mjs
+          fi
