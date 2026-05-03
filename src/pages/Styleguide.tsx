@@ -20,9 +20,9 @@ const Styleguide = () => {
         <meta name="description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
         <meta name="keywords" content="food photography portfolio design system, editorial layout" />
         <meta name="robots" content="noindex, nofollow" />
-        <link rel="canonical" href="https://www.greatfoodrecipes.co.uk/styleguide" />
+        <link rel="canonical" href="https://greatfoodrecipes.co.uk/styleguide" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.greatfoodrecipes.co.uk/styleguide" />
+        <meta property="og:url" content="https://greatfoodrecipes.co.uk/styleguide" />
         <meta property="og:title" content="Styleguide — Portfolio Design System | Great Food Recipes" />
         <meta property="og:description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
         <meta name="twitter:card" content="summary" />
@@ -32,7 +32,7 @@ const Styleguide = () => {
           "@context": "https://schema.org",
           "@type": "TechArticle",
           "name": "Styleguide — Great Food Recipes",
-          "url": "https://www.greatfoodrecipes.co.uk/styleguide",
+          "url": "https://greatfoodrecipes.co.uk/styleguide",
           "description": "Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns.",
           "about": "Design system documentation",
           "audience": { "@type": "Audience", "audienceType": "Designers and Developers" }

@@ -64,9 +64,9 @@ const CategoryPage = () => {
       <Helmet>
         <title>{label} Recipes — Great Food Recipes</title>
         <meta name="description" content={categoryMetaDescriptions[category]} />
-        <link rel="canonical" href={`https://www.greatfoodrecipes.co.uk/recipes/category/${slug}`} />
+        <link rel="canonical" href={`https://greatfoodrecipes.co.uk/recipes/category/${slug}`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://www.greatfoodrecipes.co.uk/recipes/category/${slug}`} />
+        <meta property="og:url" content={`https://greatfoodrecipes.co.uk/recipes/category/${slug}`} />
         <meta property="og:title" content={`${label} Recipes — Great Food Recipes`} />
         <meta property="og:description" content={categoryMetaDescriptions[category]} />
         <meta property="og:image" content={categoryImages[category] || ""} />

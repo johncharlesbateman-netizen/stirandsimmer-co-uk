@@ -71,7 +71,7 @@ const CollectionsIndex = () => {
         />
         <link
           rel="canonical"
-          href="https://www.greatfoodrecipes.co.uk/collections"
+          href="https://greatfoodrecipes.co.uk/collections"
         />
       </Helmet>
 
@@ -170,7 +170,7 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
         <meta name="description" content={def.description} />
         <link
           rel="canonical"
-          href={`https://www.greatfoodrecipes.co.uk/collections/${def.slug}`}
+          href={`https://greatfoodrecipes.co.uk/collections/${def.slug}`}
         />
       </Helmet>
 
