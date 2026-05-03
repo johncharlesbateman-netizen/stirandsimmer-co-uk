@@ -110,6 +110,92 @@ const buildSeoDescription = (custom, _title, desc, ings, totalMin) => {
   return truncate(parts.join(" "), DESC_LIMIT);
 };
 
+// ----- DB column → JSON-LD property mapping --------------------------
+// Each JSON-LD property lists the DB column names it may live under, in
+// priority order. Override with SCHEMA_FIELD_MAP env var (JSON), e.g.:
+//   SCHEMA_FIELD_MAP='{"prepTime":["prep_minutes","prep"]}'
+// to support schemas where columns are named differently.
+const DEFAULT_FIELD_MAP = {
+  name: ["title", "name", "recipe_name"],
+  description: ["description", "summary", "intro"],
+  image: ["image_url", "image", "hero_image", "photo_url", "cover_image"],
+  prepTime: ["prep_time_minutes", "prep_minutes", "prep_time", "prepTime", "prep"],
+  cookTime: ["cook_time_minutes", "cook_minutes", "cook_time", "cookTime", "cook"],
+  totalTime: ["total_time_minutes", "total_minutes", "total_time", "totalTime"],
+  recipeYield: ["servings", "yield", "serves", "recipe_yield"],
+  recipeIngredient: ["ingredients", "ingredient_list", "recipe_ingredient"],
+  recipeInstructions: ["instructions", "steps", "method", "directions", "recipe_instructions"],
+};
+
+function loadFieldMap() {
+  const merged = { ...DEFAULT_FIELD_MAP };
+  if (process.env.SCHEMA_FIELD_MAP) {
+    try {
+      const overrides = JSON.parse(process.env.SCHEMA_FIELD_MAP);
+      for (const [k, v] of Object.entries(overrides)) {
+        merged[k] = [...(Array.isArray(v) ? v : [v]), ...(merged[k] || [])];
+      }
+    } catch (e) {
+      console.warn(`Ignoring invalid SCHEMA_FIELD_MAP: ${e.message}`);
+    }
+  }
+  return merged;
+}
+const FIELD_MAP = loadFieldMap();
+
+const pickFirst = (row, candidates) => {
+  for (const key of candidates) {
+    const v = row?.[key];
+    if (v == null) continue;
+    if (typeof v === "string" && v.trim() === "") continue;
+    if (Array.isArray(v) && v.length === 0) continue;
+    return v;
+  }
+  return null;
+};
+
+const toMinutes = (v) => {
+  if (v == null) return 0;
+  if (typeof v === "number") return v;
+  if (typeof v === "string") {
+    // Accept "PT45M", "PT1H30M", "45 min", "45"
+    const iso = v.match(/^PT(?:(\d+)H)?(?:(\d+)M)?/i);
+    if (iso) return (Number(iso[1] || 0) * 60) + Number(iso[2] || 0);
+    const num = parseInt(v, 10);
+    if (!isNaN(num)) return num;
+  }
+  return 0;
+};
+
+// Resolve every required property from the row using the field map.
+function mapRowToSchema(r) {
+  const ingredients = pickFirst(r, FIELD_MAP.recipeIngredient) || [];
+  const instructions = pickFirst(r, FIELD_MAP.recipeInstructions) || [];
+  const image = pickFirst(r, FIELD_MAP.image);
+  const servings = pickFirst(r, FIELD_MAP.recipeYield);
+  const prep = toMinutes(pickFirst(r, FIELD_MAP.prepTime));
+  const cook = toMinutes(pickFirst(r, FIELD_MAP.cookTime));
+  const explicitTotal = toMinutes(pickFirst(r, FIELD_MAP.totalTime));
+  const total = explicitTotal || (prep + cook);
+
+  return {
+    ingredients: Array.isArray(ingredients) ? ingredients : [],
+    instructions: Array.isArray(instructions) ? instructions : [],
+    prep, cook, total,
+    schema: {
+      name: pickFirst(r, FIELD_MAP.name),
+      description: pickFirst(r, FIELD_MAP.description),
+      image: image ? (Array.isArray(image) ? image : [image]) : null,
+      prepTime: prep ? `PT${prep}M` : null,
+      cookTime: cook ? `PT${cook}M` : null,
+      totalTime: total ? `PT${total}M` : null,
+      recipeYield: servings ? (typeof servings === "string" ? servings : `${servings} servings`) : null,
+      recipeIngredient: Array.isArray(ingredients) && ingredients.length ? ingredients : null,
+      recipeInstructions: Array.isArray(instructions) && instructions.length ? instructions : null,
+    },
+  };
+}
+
 // ----- audit a single recipe -----
 const REQUIRED_SCHEMA_FIELDS = [
   "name", "description", "image", "prepTime", "cookTime",
@@ -118,24 +204,7 @@ const REQUIRED_SCHEMA_FIELDS = [
 
 function auditRecipe(r) {
   const issues = [];
-  const ingredients = Array.isArray(r.ingredients) ? r.ingredients : [];
-  const instructions = Array.isArray(r.instructions) ? r.instructions : [];
-  const prep = r.prep_time_minutes ?? 0;
-  const cook = r.cook_time_minutes ?? 0;
-  const total = prep + cook;
-
-  // Build the JSON-LD the page would emit
-  const schema = {
-    name: r.title,
-    description: r.description,
-    image: r.image_url ? [r.image_url] : null,
-    prepTime: prep ? `PT${prep}M` : null,
-    cookTime: cook ? `PT${cook}M` : null,
-    totalTime: total ? `PT${total}M` : null,
-    recipeYield: r.servings ? `${r.servings} servings` : null,
-    recipeIngredient: ingredients.length ? ingredients : null,
-    recipeInstructions: instructions.length ? instructions : null,
-  };
+  const { ingredients, instructions, total, schema } = mapRowToSchema(r);
 
   for (const f of REQUIRED_SCHEMA_FIELDS) {
     if (!schema[f]) issues.push(`schema.${f} missing`);
