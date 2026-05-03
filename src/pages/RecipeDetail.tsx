@@ -10,7 +10,7 @@ import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels, categoryToSlug } from "@/lib/recipe-utils";
 import { scaleIngredients, scaleIngredientsSmart } from "@/lib/ingredient-scaler";
-import { buildSeoTitle, buildSeoDescription } from "@/lib/seo";
+import { buildSeoTitle, buildSeoDescription, buildRecipeIntro, buildServingSuggestion } from "@/lib/seo";
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
@@ -338,12 +338,36 @@ const RecipeDetail = () => {
               </Link>
             </p>
             <h1 className="heading-display mb-6">{recipe.title}</h1>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
+            <p className="text-lg text-muted-foreground mb-6 max-w-2xl">
               {recipe.description}
             </p>
 
+            {/* Intro paragraph — adds unique on-page content for SEO */}
+            <p className="text-base text-muted-foreground/90 mb-8 max-w-2xl leading-relaxed">
+              {buildRecipeIntro(
+                recipe.title,
+                recipe.description ?? "",
+                ingredients,
+                recipe.category,
+                totalTime,
+                recipe.servings,
+              )}
+            </p>
+
             {/* Meta */}
-            <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
+              {recipe.prep_time_minutes ? (
+                <span><strong className="text-foreground font-medium">Prep</strong> {recipe.prep_time_minutes} min</span>
+              ) : null}
+              {recipe.cook_time_minutes ? (
+                <span><strong className="text-foreground font-medium">Cook</strong> {recipe.cook_time_minutes} min</span>
+              ) : null}
+              {totalTime > 0 ? (
+                <span><strong className="text-foreground font-medium">Total</strong> {totalTime} min</span>
+              ) : null}
+              {recipe.servings ? (
+                <span><strong className="text-foreground font-medium">Serves</strong> {recipe.servings}</span>
+              ) : null}
               {recipe.is_seasonal && (
                 <span className="flex items-center gap-2 text-accent">
                   <Leaf className="w-4 h-4" />
@@ -471,6 +495,14 @@ const RecipeDetail = () => {
               )}
             </div>
 
+          </div>
+
+          {/* Serving Suggestions — adds unique on-page text for SEO */}
+          <div className="max-w-4xl mt-16 pt-12 border-t border-border">
+            <h2 className="heading-section mb-4">Serving Suggestions</h2>
+            <p className="text-base text-muted-foreground leading-relaxed max-w-2xl">
+              {buildServingSuggestion(recipe.title, recipe.category)}
+            </p>
           </div>
 
         </div>
