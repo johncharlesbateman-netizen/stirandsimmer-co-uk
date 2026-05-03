@@ -28,6 +28,7 @@ const queryClient = new QueryClient();
 const legacyRecipeSlugMap: Record<string, string> = {
   "sirloin-steak-with-peppercorn-sauce": "steak-au-poivre-and-french-fries-with-green-salad",
   "keema-rice": "savoury-rice",
+  "creme-br-l-e": "creme-brle",
 };
 
 // Normalise a slug to match the canonical DB slug format:
