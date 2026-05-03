@@ -210,8 +210,10 @@ function auditRecipe(r) {
     if (!schema[f]) issues.push(`schema.${f} missing`);
   }
 
-  const seoTitle = buildSeoTitle(r.seo_title, r.title, total);
-  const seoDesc = buildSeoDescription(r.seo_description, r.title, r.description, ingredients, total);
+  const titleSrc = schema.name || r.title || "";
+  const descSrc = schema.description || r.description || "";
+  const seoTitle = buildSeoTitle(r.seo_title, titleSrc, total);
+  const seoDesc = buildSeoDescription(r.seo_description, titleSrc, descSrc, ingredients, total);
 
   if (!seoTitle) issues.push("meta title empty");
   else if (seoTitle.length > TITLE_LIMIT) issues.push(`meta title ${seoTitle.length} > ${TITLE_LIMIT}`);
@@ -220,7 +222,7 @@ function auditRecipe(r) {
 
   return {
     slug: r.slug,
-    title: r.title,
+    title: titleSrc,
     url: `/recipes/${r.slug}`,
     seoTitle, seoTitleLen: seoTitle?.length ?? 0,
     seoDesc, seoDescLen: seoDesc?.length ?? 0,
