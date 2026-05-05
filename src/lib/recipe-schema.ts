@@ -107,6 +107,7 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
     recipeCategory:
       categoryLabels[category as keyof typeof categoryLabels] || category,
     recipeCuisine: cuisine,
+    ...(keywords && { keywords }),
     recipeIngredient: ingredients,
     recipeInstructions: instructions.map((step, i) => ({
       "@type": "HowToStep",
