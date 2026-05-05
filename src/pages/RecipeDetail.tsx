@@ -643,6 +643,8 @@ const RecipeDetail = () => {
 
         <div className="print-footer">greatfoodrecipes.co.uk</div>
       </div>
+
+      <NewsletterSignup />
     </Layout>
   );
 };
