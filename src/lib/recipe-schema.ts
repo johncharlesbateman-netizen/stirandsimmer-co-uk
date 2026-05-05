@@ -20,6 +20,8 @@ export interface RecipeSchemaInput {
   updatedAt?: string;
   /** Optional explicit calories per serving. */
   caloriesPerServing?: number | null;
+  /** Comma-separated keyword string. */
+  keywords?: string;
   siteUrl?: string;
 }
 
