@@ -44,6 +44,8 @@ const Index = () => {
     <Layout>
       <Helmet>
         <title>Great Food Recipes — Editorial Food Photography Portfolio</title>
+        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
+        <link rel="preload" as="image" href={heroImage} imageSrcSet={heroImageSrcSet} imageSizes="100vw" fetchPriority="high" />
         <meta name="description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
         <meta name="keywords" content="editorial food photography, food photography portfolio, food stylist" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/" />
