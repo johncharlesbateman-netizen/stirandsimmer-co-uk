@@ -212,6 +212,7 @@ const RecipeDetail = () => {
     servings: recipe.servings,
     createdAt: recipe.created_at,
     updatedAt: recipe.updated_at,
+    keywords,
   });
 
 
