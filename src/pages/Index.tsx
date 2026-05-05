@@ -68,6 +68,13 @@ const Index = () => {
             "query-input": "required name=search_term_string"
           }
         })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Great Food Recipes",
+          "url": "https://www.greatfoodrecipes.co.uk",
+          "description": "A UK recipe site with free curated recipes for every occasion."
+        })}</script>
       </Helmet>
       {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden" style={{ marginTop: '-5rem' }}>
