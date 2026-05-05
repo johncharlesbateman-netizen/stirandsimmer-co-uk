@@ -265,6 +265,8 @@ const Contact = () => {
               src={contactBehindScenes}
               alt="Behind the scenes at Great Food Recipes — chef plating a dish in the kitchen"
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <p className="micro-caption mt-4">Behind the scenes — In the kitchen</p>
