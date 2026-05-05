@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import collectionsTeaser from "@/assets/collections-teaser.jpg";
+import collectionsTeaser800 from "@/assets/collections-teaser-800.jpg";
+import collectionsTeaser1200 from "@/assets/collections-teaser-1200.jpg";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { collections } from "@/lib/collections";
