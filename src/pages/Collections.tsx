@@ -101,7 +101,7 @@ const CollectionsIndex = () => {
                 >
                   <img
                     src={c.image}
-                    alt=""
+                    alt={`${c.title} recipe collection`}
                     loading="lazy"
                     decoding="async"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
