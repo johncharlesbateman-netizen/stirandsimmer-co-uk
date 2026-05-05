@@ -355,10 +355,12 @@
     display: none !important;
   }
 
-  .print-recipe-card h1 {
+  .print-recipe-card .print-title {
     font-family: 'Boska', serif;
     font-size: 24pt;
     margin: 0 0 8pt 0;
+    padding-bottom: 0;
+    border-bottom: 0;
     color: black;
   }
 

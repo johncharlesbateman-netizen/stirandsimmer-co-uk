@@ -488,7 +488,7 @@ const RecipeDetail = () => {
               {/* Tips */}
               {recipe.tips && (
                 <div className="mt-12 p-6 bg-secondary border border-border">
-                  <p className="micro-caption mb-3">Chef's Tips</p>
+                  <h2 className="micro-caption mb-3">Chef's Tips</h2>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {recipe.tips}
                   </p>
@@ -607,7 +607,7 @@ const RecipeDetail = () => {
         aria-hidden="true"
       >
         <div className="print-section">
-          <h1>{recipe.title}</h1>
+          <h2 className="print-title">{recipe.title}</h2>
           {recipe.description && <p className="print-description">{recipe.description}</p>}
           {recipe.image_url && (
             <img src={recipe.image_url} alt={imageAlt} className="print-image" />
