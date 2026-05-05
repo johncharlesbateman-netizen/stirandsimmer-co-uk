@@ -87,7 +87,13 @@ const Index = () => {
         <div className="absolute inset-0">
           <img
             src={heroImage}
+            srcSet={heroImageSrcSet}
+            sizes="100vw"
             alt="Rustic table laid with freshly cooked dishes, herbs and warm natural light"
+            fetchPriority="high"
+            decoding="async"
+            width={1600}
+            height={1067}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/60" />
