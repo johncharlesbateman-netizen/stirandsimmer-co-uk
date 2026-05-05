@@ -1,5 +1,5 @@
-@import url('https://api.fontshare.com/v2/css?f[]=boska@400,500,700,400i,500i,700i&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+/* Font stylesheets are loaded via <link> tags in index.html for parallel,
+   non-render-blocking delivery (improves FCP/LCP). */
 
 @tailwind base;
 @tailwind components;
