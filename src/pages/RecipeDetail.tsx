@@ -607,7 +607,7 @@ const RecipeDetail = () => {
         aria-hidden="true"
       >
         <div className="print-section">
-          <h2>{recipe.title}</h2>
+          <h2 className="print-title">{recipe.title}</h2>
           {recipe.description && <p className="print-description">{recipe.description}</p>}
           {recipe.image_url && (
             <img src={recipe.image_url} alt={imageAlt} className="print-image" />
