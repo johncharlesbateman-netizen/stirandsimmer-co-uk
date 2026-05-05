@@ -263,7 +263,7 @@ const Contact = () => {
           <div className="aspect-[21/9] overflow-hidden">
             <img
               src={contactBehindScenes}
-              alt="Behind the scenes"
+              alt="Behind the scenes at Great Food Recipes — chef plating a dish in the kitchen"
               className="w-full h-full object-cover"
             />
           </div>
