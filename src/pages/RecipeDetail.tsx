@@ -199,44 +199,20 @@ const RecipeDetail = () => {
   ].filter(Boolean);
   const keywords = Array.from(new Set(keywordParts)).slice(0, 8).join(", ");
 
-  const prepTimeIso = recipe.prep_time_minutes
-    ? `PT${recipe.prep_time_minutes}M`
-    : "PT0M";
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Recipe",
-    name: recipe.title,
+  const jsonLd = buildRecipeJsonLd({
+    title: recipe.title,
+    slug: recipe.slug,
     description: structuredDescription,
-    ...(recipe.image_url && { image: [recipe.image_url] }),
-    prepTime: prepTimeIso,
-    ...(recipe.cook_time_minutes && { cookTime: `PT${recipe.cook_time_minutes}M` }),
-    ...(totalTime > 0 && { totalTime: `PT${totalTime}M` }),
-    ...(recipe.servings && { recipeYield: `${recipe.servings} servings` }),
-    recipeCategory: categoryLabels[recipe.category],
-    recipeCuisine: "British",
-    keywords,
-    recipeIngredient: ingredients,
-    recipeInstructions: instructions.map((step, i) => ({
-      "@type": "HowToStep",
-      name: `Step ${i + 1}`,
-      position: i + 1,
-      text: step,
-      ...(recipe.image_url && { image: recipe.image_url }),
-      url: `${pageUrl}#step-${i + 1}`,
-    })),
-    nutrition: {
-      "@type": "NutritionInformation",
-      servingSize: recipe.servings ? `1 of ${recipe.servings} servings` : "1 serving",
-    },
-    author: {
-      "@type": "Organization",
-      name: "Great Food Recipes",
-      url: "https://greatfoodrecipes.co.uk",
-    },
-    datePublished: recipe.created_at,
-    dateModified: recipe.updated_at,
-  };
+    imageUrl: recipe.image_url,
+    category: recipe.category,
+    ingredients,
+    instructions,
+    prepMinutes: recipe.prep_time_minutes,
+    cookMinutes: recipe.cook_time_minutes,
+    servings: recipe.servings,
+    createdAt: recipe.created_at,
+    updatedAt: recipe.updated_at,
+  });
 
 
 
