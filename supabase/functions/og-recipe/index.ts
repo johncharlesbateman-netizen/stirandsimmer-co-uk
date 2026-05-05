@@ -32,7 +32,7 @@ Deno.serve(async (req) => {
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>${escapeHtml(title)} — Great Food Recipes</title>
+  <title>${escapeHtml(title)} — Stir &amp; Simmer</title>
   <meta name="description" content="${escapeHtml(description)}" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="${escapeHtml(title)}" />
