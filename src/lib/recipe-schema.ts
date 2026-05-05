@@ -79,6 +79,7 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
     createdAt,
     updatedAt,
     caloriesPerServing,
+    keywords,
     siteUrl = SITE,
   } = input;
 
