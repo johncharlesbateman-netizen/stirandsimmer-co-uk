@@ -93,6 +93,8 @@ const About = () => {
                   src={brandImage}
                   alt="Great Food Recipes kitchen with fresh ingredients laid out on a wooden bench"
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
