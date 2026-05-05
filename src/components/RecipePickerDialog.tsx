@@ -146,7 +146,7 @@ const RecipePickerDialog = ({ open, onClose, onSelect, dayLabel, mealLabel, defa
                   {recipe.image_url && (
                     <img
                       src={optimisedImage(recipe.image_url, { width: 96, height: 96 })}
-                      alt=""
+                      alt={recipe.title}
                       loading="lazy"
                       decoding="async"
                       width={48}
