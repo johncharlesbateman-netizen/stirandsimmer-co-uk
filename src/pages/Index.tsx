@@ -220,6 +220,8 @@ const Index = () => {
           </Link>
         </div>
       </section>
+
+      <NewsletterSignup />
     </Layout>
   );
 };
