@@ -28,28 +28,28 @@ const About = () => {
   return (
     <Layout>
       <Helmet>
-        <title>About — Editorial Food Photographer | Great Food Recipes</title>
-        <meta name="description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
+        <title>About — Editorial Food Photographer | Stir & Simmer</title>
+        <meta name="description" content="Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta name="keywords" content="food photographer, editorial food photography, food stylist" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/about" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/about" />
-        <meta property="og:title" content="About — Editorial Food Photographer | Great Food Recipes" />
-        <meta property="og:description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
+        <meta property="og:title" content="About — Editorial Food Photographer | Stir & Simmer" />
+        <meta property="og:description" content="Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta property="og:image" content={brandImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About — Editorial Food Photographer | Great Food Recipes" />
-        <meta name="twitter:description" content="Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
+        <meta name="twitter:title" content="About — Editorial Food Photographer | Stir & Simmer" />
+        <meta name="twitter:description" content="Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta name="twitter:image" content={brandImage} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "AboutPage",
-          "name": "About — Great Food Recipes",
+          "name": "About — Stir & Simmer",
           "url": "https://greatfoodrecipes.co.uk/about",
-          "description": "Learn about Great Food Recipes — who we are, our passion for fresh seasonal cooking, and who our recipes are made for.",
+          "description": "Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for.",
           "mainEntity": {
             "@type": "Organization",
-            "name": "Great Food Recipes",
+            "name": "Stir & Simmer",
             "url": "https://greatfoodrecipes.co.uk",
             "image": brandImage,
             "description": "We create recipes the same way we enjoy food — with care, curiosity, and a love for fresh, honest ingredients."
@@ -91,7 +91,7 @@ const About = () => {
               <div className="aspect-[3/4] bg-muted overflow-hidden">
                 <img
                   src={brandImage}
-                  alt="Great Food Recipes kitchen with fresh ingredients laid out on a wooden bench"
+                  alt="Stir & Simmer kitchen with fresh ingredients laid out on a wooden bench"
                   className="w-full h-full object-cover"
                   loading="lazy"
                   decoding="async"
@@ -135,7 +135,7 @@ const About = () => {
                 with intention, fresh ingredients, and a little bit of joy."
               </p>
               <footer className="mt-8">
-                <p className="micro-caption">— Great Food Recipes</p>
+                <p className="micro-caption">— Stir & Simmer</p>
               </footer>
           </blockquote>
         </div>

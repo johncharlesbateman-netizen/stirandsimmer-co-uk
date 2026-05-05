@@ -242,7 +242,7 @@ const RecipeDetail = () => {
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
         <meta property="og:url" content={pageUrl} />
-        <meta property="og:site_name" content="Great Food Recipes" />
+        <meta property="og:site_name" content="Stir & Simmer" />
         {recipe.image_url && <meta property="og:image" content={recipe.image_url} />}
         {recipe.image_url && <meta property="og:image:alt" content={imageAlt} />}
         <meta name="twitter:card" content="summary_large_image" />

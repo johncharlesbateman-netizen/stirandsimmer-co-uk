@@ -93,17 +93,17 @@ const Contact = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Contact — Great Food Recipes</title>
-        <meta name="description" content="Get in touch with Great Food Recipes. We'd love to hear from you — questions, suggestions, or just to say hello." />
+        <title>Contact — Stir & Simmer</title>
+        <meta name="description" content="Get in touch with Stir & Simmer. We'd love to hear from you — questions, suggestions, or just to say hello." />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/contact" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/contact" />
-        <meta property="og:title" content="Contact — Great Food Recipes" />
-        <meta property="og:description" content="Get in touch with Great Food Recipes. We'd love to hear from you — questions, suggestions, or just to say hello." />
+        <meta property="og:title" content="Contact — Stir & Simmer" />
+        <meta property="og:description" content="Get in touch with Stir & Simmer. We'd love to hear from you — questions, suggestions, or just to say hello." />
         <meta property="og:image" content={contactBehindScenes} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Contact — Great Food Recipes" />
-        <meta name="twitter:description" content="Get in touch with Great Food Recipes. We'd love to hear from you — questions, suggestions, or just to say hello." />
+        <meta name="twitter:title" content="Contact — Stir & Simmer" />
+        <meta name="twitter:description" content="Get in touch with Stir & Simmer. We'd love to hear from you — questions, suggestions, or just to say hello." />
         <meta name="twitter:image" content={contactBehindScenes} />
       </Helmet>
       {/* Header */}
@@ -263,7 +263,7 @@ const Contact = () => {
           <div className="aspect-[21/9] overflow-hidden">
             <img
               src={contactBehindScenes}
-              alt="Behind the scenes at Great Food Recipes — chef plating a dish in the kitchen"
+              alt="Behind the scenes at Stir & Simmer — chef plating a dish in the kitchen"
               className="w-full h-full object-cover"
               loading="lazy"
               decoding="async"

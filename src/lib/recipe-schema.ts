@@ -95,7 +95,7 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
     ...(imageUrl && { image: [imageUrl] }),
     author: {
       "@type": "Organization",
-      name: "Great Food Recipes",
+      name: "Stir & Simmer",
       url: siteUrl,
     },
     ...(createdAt && { datePublished: createdAt }),

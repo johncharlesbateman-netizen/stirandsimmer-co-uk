@@ -337,7 +337,7 @@ const AdminNewRecipe = () => {
               <Input
                 value={seoTitle}
                 onChange={(e) => setSeoTitle(e.target.value)}
-                placeholder="Slow-roasted lamb shoulder (4 hr) | Great Food Recipes"
+                placeholder="Slow-roasted lamb shoulder (4 hr) | Stir & Simmer"
                 maxLength={70}
               />
             </div>

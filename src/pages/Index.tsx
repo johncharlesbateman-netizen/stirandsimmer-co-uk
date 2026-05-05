@@ -46,7 +46,7 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Great Food Recipes — Editorial Food Photography Portfolio</title>
+        <title>Stir & Simmer — Editorial Food Photography Portfolio</title>
         <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
         <link rel="preload" as="image" href={heroImage} imageSrcSet={heroImageSrcSet} imageSizes="100vw" fetchPriority="high" />
         <meta name="description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
@@ -54,22 +54,22 @@ const Index = () => {
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/" />
-        <meta property="og:title" content="Great Food Recipes — Editorial Food Photography Portfolio" />
+        <meta property="og:title" content="Stir & Simmer — Editorial Food Photography Portfolio" />
         <meta property="og:description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
         <meta property="og:image" content={heroImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Great Food Recipes — Editorial Food Photography Portfolio" />
+        <meta name="twitter:title" content="Stir & Simmer — Editorial Food Photography Portfolio" />
         <meta name="twitter:description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
         <meta name="twitter:image" content={heroImage} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          "name": "Great Food Recipes",
+          "name": "Stir & Simmer",
           "url": "https://greatfoodrecipes.co.uk",
           "description": "Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love.",
           "publisher": {
             "@type": "Organization",
-            "name": "Great Food Recipes",
+            "name": "Stir & Simmer",
             "url": "https://greatfoodrecipes.co.uk"
           },
           "potentialAction": {
@@ -81,7 +81,7 @@ const Index = () => {
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          "name": "Great Food Recipes",
+          "name": "Stir & Simmer",
           "url": "https://www.greatfoodrecipes.co.uk",
           "description": "A UK recipe site with free curated recipes for every occasion."
         })}</script>
@@ -110,7 +110,7 @@ const Index = () => {
             className="text-sm md:text-base tracking-[0.3em] uppercase mb-4 opacity-0 animate-fade-in"
             style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}
           >
-            Great Food Recipes
+            Stir & Simmer
           </p>
           <h1 
             className="font-display text-4xl md:text-6xl lg:text-7xl mb-6 opacity-0 animate-fade-in leading-tight"

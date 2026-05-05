@@ -112,7 +112,7 @@ const BlogPost = () => {
     author: { "@type": "Person", name: post.author },
     publisher: {
       "@type": "Organization",
-      name: "Great Food Recipes",
+      name: "Stir & Simmer",
       url: "https://greatfoodrecipes.co.uk",
     },
     mainEntityOfPage: pageUrl,
@@ -121,7 +121,7 @@ const BlogPost = () => {
   return (
     <Layout>
       <Helmet>
-        <title>{`${post.title} | Great Food Recipes`}</title>
+        <title>{`${post.title} | Stir & Simmer`}</title>
         <meta name="description" content={post.excerpt} />
         <link rel="canonical" href={pageUrl} />
         <meta property="og:type" content="article" />

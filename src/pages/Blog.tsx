@@ -29,18 +29,18 @@ const Blog = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Blog — Stories, Tips & Kitchen Notes | Great Food Recipes</title>
+        <title>Blog — Stories, Tips & Kitchen Notes | Stir & Simmer</title>
         <meta
           name="description"
-          content="Stories, cooking tips, seasonal ideas and kitchen notes from the team at Great Food Recipes — short reads to help you cook with more confidence."
+          content="Stories, cooking tips, seasonal ideas and kitchen notes from the team at Stir & Simmer — short reads to help you cook with more confidence."
         />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/blog" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/blog" />
-        <meta property="og:title" content="Blog — Great Food Recipes" />
+        <meta property="og:title" content="Blog — Stir & Simmer" />
         <meta
           property="og:description"
-          content="Stories, cooking tips, seasonal ideas and kitchen notes from the team at Great Food Recipes."
+          content="Stories, cooking tips, seasonal ideas and kitchen notes from the team at Stir & Simmer."
         />
       </Helmet>
 

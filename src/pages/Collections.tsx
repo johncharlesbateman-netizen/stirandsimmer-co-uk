@@ -64,7 +64,7 @@ const CollectionsIndex = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Meal Ideas — Great Food Recipes</title>
+        <title>Meal Ideas — Stir & Simmer</title>
         <meta
           name="description"
           content="Browse our handpicked meal ideas — Weeknight Suppers, Italian Meals, Romantic Meals, Sunday Roasts and more. Hand-picked for every occasion."
@@ -166,7 +166,7 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
   return (
     <Layout>
       <Helmet>
-        <title>{def.title} — Meal Ideas — Great Food Recipes</title>
+        <title>{def.title} — Meal Ideas — Stir & Simmer</title>
         <meta name="description" content={def.description} />
         <link
           rel="canonical"

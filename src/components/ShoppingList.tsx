@@ -184,7 +184,7 @@ const ShoppingList = ({ ingredients, scaleFactor = 1, recipeName = "Recipe" }: S
           body { padding: 1.5rem; }
         }
       </style></head><body>
-      <div class="logo">Great Food Recipes</div>
+      <div class="logo">Stir & Simmer</div>
       <div class="recipe-name">${recipeName}</div>
 
       <div class="section-title">Shopping List · ${items.length} item${items.length !== 1 ? "s" : ""}</div>
