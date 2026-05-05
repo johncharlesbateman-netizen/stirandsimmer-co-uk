@@ -3,6 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { collections } from "@/lib/collections";
 import { supabase } from "@/integrations/supabase/client";
 
+// Build a responsive srcset for Pexels image URLs by replacing the `w=` param.
+const pexelsSrcSet = (url: string): string | undefined => {
+  if (!url.includes("images.pexels.com")) return undefined;
+  return [400, 600, 800, 1200, 1600]
+    .map((w) => `${url.replace(/([?&])w=\d+/, `$1w=${w}`)} ${w}w`)
+    .join(", ");
+};
+
 interface CollectionTilesProps {
   eyebrow?: string;
   heading?: string;
