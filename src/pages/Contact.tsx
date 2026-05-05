@@ -82,7 +82,7 @@ const Contact = () => {
       console.error("Contact form submission failed", err);
       toast({
         title: "Something went wrong",
-        description: "Your message couldn't be sent. Please try again or email us directly at hello@greatfoodrecipes.co.uk.",
+        description: "Your message couldn't be sent. Please try again or email us directly at hello@stirandsimmer.co.uk.",
         variant: "destructive",
       });
     } finally {
@@ -217,10 +217,10 @@ const Contact = () => {
               <div>
                 <h3 className="micro-caption mb-4">Email</h3>
                 <a
-                   href="mailto:hello@greatfoodrecipes.co.uk"
+                   href="mailto:hello@stirandsimmer.co.uk"
                    className="text-lg editorial-link"
                  >
-                   hello@greatfoodrecipes.co.uk
+                   hello@stirandsimmer.co.uk
                 </a>
               </div>
 
