@@ -9,8 +9,8 @@ const SITE = "https://greatfoodrecipes.co.uk";
 
 const STATIC_URLS = [
   { path: "/", changefreq: "weekly", priority: "1.0" },
-  { path: "/recipes", changefreq: "weekly", priority: "0.9" },
-  { path: "/collections", changefreq: "weekly", priority: "0.7" },
+  { path: "/recipes", changefreq: "weekly", priority: "0.8" },
+  { path: "/collections", changefreq: "weekly", priority: "0.8" },
   { path: "/meal-planner", changefreq: "monthly", priority: "0.6" },
   { path: "/about", changefreq: "monthly", priority: "0.5" },
   { path: "/contact", changefreq: "monthly", priority: "0.4" },
@@ -41,7 +41,6 @@ export async function generateSitemap() {
   }
 
   const today = new Date().toISOString().split("T")[0];
-  const fmt = (d) => (d ? new Date(d).toISOString().split("T")[0] : today);
 
   const entry = (loc, lastmod, freq, pri) =>
     `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${pri}</priority>\n  </url>`;
@@ -49,7 +48,7 @@ export async function generateSitemap() {
   const parts = [];
   for (const u of STATIC_URLS) parts.push(entry(SITE + u.path, today, u.changefreq, u.priority));
   for (const slug of CATEGORY_SLUGS) parts.push(entry(`${SITE}/recipes/category/${slug}`, today, "weekly", "0.8"));
-  for (const r of recipes ?? []) parts.push(entry(`${SITE}/recipes/${r.slug}`, fmt(r.updated_at), "weekly", "0.8"));
+  for (const r of recipes ?? []) parts.push(entry(`${SITE}/recipes/${r.slug}`, today, "weekly", "0.6"));
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${parts.join("\n")}\n</urlset>\n`;
 
