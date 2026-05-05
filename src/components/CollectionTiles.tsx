@@ -3,6 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { collections } from "@/lib/collections";
 import { supabase } from "@/integrations/supabase/client";
 
+// Build a responsive srcset for Pexels image URLs by replacing the `w=` param.
+const pexelsSrcSet = (url: string): string | undefined => {
+  if (!url.includes("images.pexels.com")) return undefined;
+  return [400, 600, 800, 1200, 1600]
+    .map((w) => `${url.replace(/([?&])w=\d+/, `$1w=${w}`)} ${w}w`)
+    .join(", ");
+};
+
 interface CollectionTilesProps {
   eyebrow?: string;
   heading?: string;
@@ -60,9 +68,13 @@ const CollectionTiles = ({
                 {/* Background image */}
                 <img
                   src={c.image}
+                  srcSet={pexelsSrcSet(c.image)}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                   alt={`${c.title} recipe collection`}
                   loading="lazy"
                   decoding="async"
+                  width={800}
+                  height={600}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
                 />
                 {/* Dark gradient overlay for legibility */}

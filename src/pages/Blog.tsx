@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
+import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", {
@@ -86,10 +87,14 @@ const Blog = () => {
                   <article className="space-y-4">
                     <div className="aspect-[4/3] overflow-hidden bg-muted relative">
                       <img
-                        src={post.image_url || "/placeholder.svg"}
+                        src={post.image_url ? optimisedImage(post.image_url, { width: 800 }) : "/placeholder.svg"}
+                        srcSet={post.image_url ? responsiveSrcSet(post.image_url, [400, 600, 800, 1200]) : undefined}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                         alt={post.title}
                         loading="lazy"
                         decoding="async"
+                        width={800}
+                        height={600}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>

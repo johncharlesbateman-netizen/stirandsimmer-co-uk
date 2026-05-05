@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import collectionsTeaser from "@/assets/collections-teaser.jpg";
+import collectionsTeaser800 from "@/assets/collections-teaser-800.jpg";
+import collectionsTeaser1200 from "@/assets/collections-teaser-1200.jpg";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { collections } from "@/lib/collections";
@@ -181,12 +183,15 @@ const Index = () => {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={collectionsTeaser}
+            src={collectionsTeaser1200}
+            srcSet={`${collectionsTeaser800} 800w, ${collectionsTeaser1200} 1200w, ${collectionsTeaser} 1600w`}
+            sizes="100vw"
             alt="A warm, atmospheric table set with pasta, salad, bread and wine"
             className="w-full h-full object-cover"
             loading="lazy"
-            width={1920}
-            height={1080}
+            decoding="async"
+            width={1600}
+            height={821}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/75" />
         </div>

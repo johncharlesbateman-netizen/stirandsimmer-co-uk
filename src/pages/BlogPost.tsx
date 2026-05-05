@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", {
@@ -168,11 +169,16 @@ const BlogPost = () => {
             <div className="container mx-auto px-6 md:px-12 lg:px-20">
               <div className="max-w-4xl aspect-[16/9] overflow-hidden bg-muted">
                 <img
-                  src={post.image_url}
+                  src={optimisedImage(post.image_url, { width: 1200 })}
+                  srcSet={responsiveSrcSet(post.image_url, [600, 900, 1200, 1600])}
+                  sizes="(max-width: 768px) 100vw, 80vw"
                   alt={post.title}
                   className="w-full h-full object-cover"
                   loading="eager"
+                  fetchPriority="high"
                   decoding="async"
+                  width={1200}
+                  height={675}
                 />
               </div>
             </div>
