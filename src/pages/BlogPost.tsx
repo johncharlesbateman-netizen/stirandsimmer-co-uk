@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", {
