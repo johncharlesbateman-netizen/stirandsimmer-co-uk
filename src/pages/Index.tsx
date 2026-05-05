@@ -51,9 +51,9 @@ const Index = () => {
         <link rel="preload" as="image" href={heroImage} imageSrcSet={heroImageSrcSet} imageSizes="100vw" fetchPriority="high" />
         <meta name="description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
         <meta name="keywords" content="editorial food photography, food photography portfolio, food stylist" />
-        <link rel="canonical" href="https://greatfoodrecipes.co.uk/" />
+        <link rel="canonical" href="https://stirandsimmer.co.uk/" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://greatfoodrecipes.co.uk/" />
+        <meta property="og:url" content="https://stirandsimmer.co.uk/" />
         <meta property="og:title" content="Stir & Simmer — Editorial Food Photography Portfolio" />
         <meta property="og:description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
         <meta property="og:image" content={heroImage} />
@@ -65,16 +65,16 @@ const Index = () => {
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Stir & Simmer",
-          "url": "https://greatfoodrecipes.co.uk",
+          "url": "https://stirandsimmer.co.uk",
           "description": "Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love.",
           "publisher": {
             "@type": "Organization",
             "name": "Stir & Simmer",
-            "url": "https://greatfoodrecipes.co.uk"
+            "url": "https://stirandsimmer.co.uk"
           },
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://greatfoodrecipes.co.uk/recipes?q={search_term_string}",
+            "target": "https://stirandsimmer.co.uk/recipes?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         })}</script>
@@ -82,7 +82,7 @@ const Index = () => {
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "Stir & Simmer",
-          "url": "https://www.greatfoodrecipes.co.uk",
+          "url": "https://www.stirandsimmer.co.uk",
           "description": "A UK recipe site with free curated recipes for every occasion."
         })}</script>
       </Helmet>
