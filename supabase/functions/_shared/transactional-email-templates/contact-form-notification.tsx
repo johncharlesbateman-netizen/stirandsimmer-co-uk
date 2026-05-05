@@ -72,7 +72,7 @@ export const template = {
   component: ContactFormNotificationEmail,
   subject: (data: Record<string, any>) =>
     `New contact form message${data?.name ? ` from ${data.name}` : ''}`,
-  to: 'hello@greatfoodrecipes.co.uk',
+  to: 'hello@stirandsimmer.co.uk',
   displayName: 'Contact form notification',
   previewData: {
     name: 'Jane Smith',
