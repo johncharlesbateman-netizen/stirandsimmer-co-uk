@@ -576,7 +576,7 @@ const MealPlanner = () => {
                     >
                       <div className="w-10 h-10 rounded-md bg-secondary overflow-hidden flex-shrink-0">
                         {recipe.image_url ? (
-                          <img src={recipe.image_url} alt={recipe.title} className="w-full h-full object-cover" />
+<img src={recipe.image_url} alt={recipe.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-lg">🍽️</div>
                         )}
@@ -696,7 +696,7 @@ const MealPlanner = () => {
                         >
                           <div className="w-10 h-10 rounded-md bg-secondary overflow-hidden flex-shrink-0">
                             {recipe.image_url ? (
-                              <img src={recipe.image_url} alt={recipe.title} className="w-full h-full object-cover" />
+                              <img src={recipe.image_url} alt={recipe.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center text-lg">🍰</div>
                             )}
