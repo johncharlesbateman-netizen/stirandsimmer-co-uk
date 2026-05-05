@@ -8,7 +8,11 @@ import NewsletterSignup from "@/components/NewsletterSignup";
 import { collections } from "@/lib/collections";
 import { supabase } from "@/integrations/supabase/client";
 
-const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
+const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb";
+const heroImage = `${heroPexelsBase}&w=1600`;
+const heroImageSrcSet = [640, 960, 1280, 1600, 1920]
+  .map((w) => `${heroPexelsBase}&w=${w} ${w}w`)
+  .join(", ");
 
 // Fallback values used until the live count loads (and if the query ever fails).
 const FALLBACK_RECIPE_COUNT = 114;
