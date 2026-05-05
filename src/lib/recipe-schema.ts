@@ -1,0 +1,128 @@
+// Reusable Schema.org Recipe JSON-LD builder.
+// Use buildRecipeJsonLd() from any page that renders a recipe so every
+// new recipe gets consistent, rich-results-eligible structured data.
+
+import { categoryLabels } from "@/lib/recipe-utils";
+
+export interface RecipeSchemaInput {
+  title: string;
+  slug: string;
+  description: string;
+  imageUrl?: string | null;
+  category: string;
+  cuisine?: string;
+  ingredients: string[];
+  instructions: string[];
+  prepMinutes?: number | null;
+  cookMinutes?: number | null;
+  servings?: number | null;
+  createdAt?: string;
+  updatedAt?: string;
+  /** Optional explicit calories per serving. */
+  caloriesPerServing?: number | null;
+  /** Comma-separated keyword string. */
+  keywords?: string;
+  siteUrl?: string;
+}
+
+const SITE = "https://greatfoodrecipes.co.uk";
+
+/** Rough per-serving calorie estimate by category, used only when no
+ * explicit value is provided. Better than omitting nutrition entirely
+ * for Google rich-results eligibility. */
+const CATEGORY_CALORIES: Record<string, number> = {
+  chicken: 480,
+  beef: 620,
+  lamb: 640,
+  pork: 580,
+  spicy: 520,
+  seafood: 420,
+  pasta: 560,
+  lunch_suggestions: 380,
+  sweets: 340,
+  desserts: 380,
+  starters: 260,
+  sides: 220,
+  salads: 280,
+  soups: 260,
+  cakes: 360,
+  breakfast: 420,
+  drinks: 140,
+  sandwiches: 460,
+  mains: 540,
+};
+
+const isoDuration = (mins?: number | null) =>
+  mins && mins > 0 ? `PT${mins}M` : undefined;
+
+export const estimateCalories = (
+  category: string,
+  explicit?: number | null,
+): number => {
+  if (explicit && explicit > 0) return explicit;
+  return CATEGORY_CALORIES[(category || "").toLowerCase()] || 450;
+};
+
+export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
+  const {
+    title,
+    slug,
+    description,
+    imageUrl,
+    category,
+    cuisine = "British",
+    ingredients,
+    instructions,
+    prepMinutes,
+    cookMinutes,
+    servings,
+    createdAt,
+    updatedAt,
+    caloriesPerServing,
+    keywords,
+    siteUrl = SITE,
+  } = input;
+
+  const totalMinutes = (prepMinutes || 0) + (cookMinutes || 0);
+  const pageUrl = `${siteUrl}/recipes/${slug}`;
+  const calories = estimateCalories(category, caloriesPerServing);
+
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Recipe",
+    name: title,
+    description,
+    ...(imageUrl && { image: [imageUrl] }),
+    author: {
+      "@type": "Organization",
+      name: "Great Food Recipes",
+      url: siteUrl,
+    },
+    ...(createdAt && { datePublished: createdAt }),
+    ...(updatedAt && { dateModified: updatedAt }),
+    ...(isoDuration(prepMinutes) && { prepTime: isoDuration(prepMinutes) }),
+    ...(isoDuration(cookMinutes) && { cookTime: isoDuration(cookMinutes) }),
+    ...(totalMinutes > 0 && { totalTime: `PT${totalMinutes}M` }),
+    ...(servings && { recipeYield: `${servings} servings` }),
+    recipeCategory:
+      categoryLabels[category as keyof typeof categoryLabels] || category,
+    recipeCuisine: cuisine,
+    ...(keywords && { keywords }),
+    recipeIngredient: ingredients,
+    recipeInstructions: instructions.map((step, i) => ({
+      "@type": "HowToStep",
+      name: `Step ${i + 1}`,
+      position: i + 1,
+      text: step,
+      url: `${pageUrl}#step-${i + 1}`,
+      ...(imageUrl && { image: imageUrl }),
+    })),
+    nutrition: {
+      "@type": "NutritionInformation",
+      calories: `${calories} kcal`,
+      servingSize: servings ? `1 of ${servings} servings` : "1 serving",
+    },
+  };
+
+  return schema;
+};
