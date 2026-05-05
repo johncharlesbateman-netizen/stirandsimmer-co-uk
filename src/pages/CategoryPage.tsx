@@ -62,16 +62,16 @@ const CategoryPage = () => {
   return (
     <Layout>
       <Helmet>
-        <title>{label} Recipes — Great Food Recipes</title>
+        <title>{label} Recipes — Stir & Simmer</title>
         <meta name="description" content={categoryMetaDescriptions[category]} />
         <link rel="canonical" href={`https://greatfoodrecipes.co.uk/recipes/category/${slug}`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://greatfoodrecipes.co.uk/recipes/category/${slug}`} />
-        <meta property="og:title" content={`${label} Recipes — Great Food Recipes`} />
+        <meta property="og:title" content={`${label} Recipes — Stir & Simmer`} />
         <meta property="og:description" content={categoryMetaDescriptions[category]} />
         <meta property="og:image" content={categoryImages[category] || ""} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${label} Recipes — Great Food Recipes`} />
+        <meta name="twitter:title" content={`${label} Recipes — Stir & Simmer`} />
         <meta name="twitter:description" content={categoryMetaDescriptions[category]} />
         <meta name="twitter:image" content={categoryImages[category] || ""} />
       </Helmet>

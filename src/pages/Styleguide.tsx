@@ -16,23 +16,23 @@ const Styleguide = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Styleguide — Portfolio Design System | Great Food Recipes</title>
-        <meta name="description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
+        <title>Styleguide — Portfolio Design System | Stir & Simmer</title>
+        <meta name="description" content="Internal design system reference for Stir & Simmer — colours, typography, spacing and editorial layout patterns." />
         <meta name="keywords" content="food photography portfolio design system, editorial layout" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/styleguide" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/styleguide" />
-        <meta property="og:title" content="Styleguide — Portfolio Design System | Great Food Recipes" />
-        <meta property="og:description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
+        <meta property="og:title" content="Styleguide — Portfolio Design System | Stir & Simmer" />
+        <meta property="og:description" content="Internal design system reference for Stir & Simmer — colours, typography, spacing and editorial layout patterns." />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Styleguide — Portfolio Design System | Great Food Recipes" />
-        <meta name="twitter:description" content="Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns." />
+        <meta name="twitter:title" content="Styleguide — Portfolio Design System | Stir & Simmer" />
+        <meta name="twitter:description" content="Internal design system reference for Stir & Simmer — colours, typography, spacing and editorial layout patterns." />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "TechArticle",
-          "name": "Styleguide — Great Food Recipes",
+          "name": "Styleguide — Stir & Simmer",
           "url": "https://greatfoodrecipes.co.uk/styleguide",
-          "description": "Internal design system reference for Great Food Recipes — colours, typography, spacing and editorial layout patterns.",
+          "description": "Internal design system reference for Stir & Simmer — colours, typography, spacing and editorial layout patterns.",
           "about": "Design system documentation",
           "audience": { "@type": "Audience", "audienceType": "Designers and Developers" }
         })}</script>

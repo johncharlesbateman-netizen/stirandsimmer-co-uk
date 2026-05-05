@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="font-display text-xl">Great Food Recipes</h3>
+            <h3 className="font-display text-xl">Stir & Simmer</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Delicious recipes crafted with love, flavour, and fresh ingredients.
             </p>
@@ -56,7 +56,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground">
-            © {currentYear} Great Food Recipes. All rights reserved.
+            © {currentYear} Stir & Simmer. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground">
             Crafted with intention

@@ -2,7 +2,7 @@
 // Generates concise, unique meta titles (<60 chars) and descriptions (<155 chars)
 // when an admin hasn't supplied custom values.
 
-const SITE_SUFFIX = " | Great Food Recipes";
+const SITE_SUFFIX = " | Stir & Simmer";
 const TITLE_LIMIT = 60;
 const DESC_MIN = 140;
 const DESC_MAX = 160;
@@ -60,7 +60,7 @@ export const buildRecipeAltText = (
 
 /**
  * Builds a unique <title> in the format:
- *   "[Recipe Name] Recipe | Great Food Recipes"
+ *   "[Recipe Name] Recipe | Stir & Simmer"
  * Falls back to a truncated form if the full title would exceed 60 chars.
  * Admin-supplied seo_title still wins.
  */
@@ -150,7 +150,7 @@ export const buildSeoDescription = (
     if (c.length >= DESC_MIN && c.length <= DESC_MAX) return c;
   }
   const padPhrases = [
-    " A reliable favourite from Great Food Recipes.",
+    " A reliable favourite from Stir & Simmer.",
     " Step-by-step instructions and tips included.",
     " Tried, tested and family-approved.",
   ];

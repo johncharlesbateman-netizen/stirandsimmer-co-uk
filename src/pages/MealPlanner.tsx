@@ -320,7 +320,7 @@ const MealPlanner = () => {
       h1{font-size:1.4rem;margin-bottom:1rem}
       li{padding:.4rem 0;border-bottom:1px solid #eee;list-style:none}
       li::before{content:"☐ ";color:#999}</style></head><body>
-      <h1>Shopping List — Great Food Recipes</h1><ul>${mergedShoppingList.map((i) => `<li>${i}</li>`).join("")}</ul></body></html>`);
+      <h1>Shopping List — Stir & Simmer</h1><ul>${mergedShoppingList.map((i) => `<li>${i}</li>`).join("")}</ul></body></html>`);
     w.document.close();
     w.print();
   };
@@ -330,7 +330,7 @@ const MealPlanner = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Weekly Meal Planner — Great Food Recipes</title>
+        <title>Weekly Meal Planner — Stir & Simmer</title>
         <meta name="description" content="Plan your week's meals, edit ingredients to suit what you have, and build a shopping list automatically." />
       </Helmet>
 

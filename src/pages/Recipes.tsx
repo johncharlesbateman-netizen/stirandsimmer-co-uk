@@ -143,7 +143,7 @@ const Recipes = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Recipes — Great Food Recipes</title>
+        <title>Recipes — Stir & Simmer</title>
         <meta
           name="description"
           content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions."
@@ -151,11 +151,11 @@ const Recipes = () => {
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/recipes" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://greatfoodrecipes.co.uk/recipes" />
-        <meta property="og:title" content="Recipes — Great Food Recipes" />
+        <meta property="og:title" content="Recipes — Stir & Simmer" />
         <meta property="og:description" content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions." />
         <meta property="og:image" content={categoryChicken} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Recipes — Great Food Recipes" />
+        <meta name="twitter:title" content="Recipes — Stir & Simmer" />
         <meta name="twitter:description" content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions." />
         <meta name="twitter:image" content={categoryChicken} />
       </Helmet>
