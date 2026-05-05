@@ -4,6 +4,7 @@ import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import collectionsTeaser from "@/assets/collections-teaser.jpg";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
+import NewsletterSignup from "@/components/NewsletterSignup";
 import { collections } from "@/lib/collections";
 import { supabase } from "@/integrations/supabase/client";
 
