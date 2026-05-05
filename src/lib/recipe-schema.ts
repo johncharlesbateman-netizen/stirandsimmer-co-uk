@@ -25,7 +25,7 @@ export interface RecipeSchemaInput {
   siteUrl?: string;
 }
 
-const SITE = "https://greatfoodrecipes.co.uk";
+const SITE = "https://stirandsimmer.co.uk";
 
 /** Rough per-serving calorie estimate by category, used only when no
  * explicit value is provided. Better than omitting nutrition entirely

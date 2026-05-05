@@ -100,7 +100,7 @@ const BlogPost = () => {
     );
   }
 
-  const pageUrl = `https://greatfoodrecipes.co.uk/blog/${post.slug}`;
+  const pageUrl = `https://stirandsimmer.co.uk/blog/${post.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -113,7 +113,7 @@ const BlogPost = () => {
     publisher: {
       "@type": "Organization",
       name: "Stir & Simmer",
-      url: "https://greatfoodrecipes.co.uk",
+      url: "https://stirandsimmer.co.uk",
     },
     mainEntityOfPage: pageUrl,
   };

@@ -148,9 +148,9 @@ const Recipes = () => {
           name="description"
           content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions."
         />
-        <link rel="canonical" href="https://greatfoodrecipes.co.uk/recipes" />
+        <link rel="canonical" href="https://stirandsimmer.co.uk/recipes" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://greatfoodrecipes.co.uk/recipes" />
+        <meta property="og:url" content="https://stirandsimmer.co.uk/recipes" />
         <meta property="og:title" content="Recipes — Stir & Simmer" />
         <meta property="og:description" content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions." />
         <meta property="og:image" content={categoryChicken} />
