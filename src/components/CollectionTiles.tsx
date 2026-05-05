@@ -60,9 +60,13 @@ const CollectionTiles = ({
                 {/* Background image */}
                 <img
                   src={c.image}
+                  srcSet={pexelsSrcSet(c.image)}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                   alt={`${c.title} recipe collection`}
                   loading="lazy"
                   decoding="async"
+                  width={800}
+                  height={600}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
                 />
                 {/* Dark gradient overlay for legibility */}
