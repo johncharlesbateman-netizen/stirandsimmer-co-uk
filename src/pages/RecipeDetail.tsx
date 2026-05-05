@@ -171,6 +171,7 @@ const RecipeDetail = () => {
     recipe.description,
     ingredients,
     totalTime,
+    recipe.category,
   );
   // Richer description used for structured data (not constrained to 155 chars).
   const structuredDescription = recipe.description;

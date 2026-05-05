@@ -4,7 +4,8 @@
 
 const SITE_SUFFIX = " | Great Food Recipes";
 const TITLE_LIMIT = 60;
-const DESC_LIMIT = 155;
+const DESC_MIN = 140;
+const DESC_MAX = 160;
 
 const truncate = (text: string, limit: number): string => {
   if (text.length <= limit) return text;
@@ -57,46 +58,110 @@ export const buildRecipeAltText = (
   return alt.length > 125 ? alt.slice(0, 122).replace(/[,;\s]+$/, "") + "…" : alt;
 };
 
+/**
+ * Builds a unique <title> in the format:
+ *   "[Recipe Name] Recipe | Great Food Recipes"
+ * Falls back to a truncated form if the full title would exceed 60 chars.
+ * Admin-supplied seo_title still wins.
+ */
 export const buildSeoTitle = (
   customTitle: string | null | undefined,
   recipeTitle: string,
-  totalMinutes: number,
+  _totalMinutes: number,
 ): string => {
   if (customTitle?.trim()) return truncate(customTitle.trim(), TITLE_LIMIT);
 
-  const base = recipeTitle.trim();
-  // Try adding a benefit (prep/cook time) if it fits.
-  if (totalMinutes > 0) {
-    const withTime = `${base} (${totalMinutes} min)${SITE_SUFFIX}`;
-    if (withTime.length <= TITLE_LIMIT) return withTime;
-  }
-  const withSuffix = `${base}${SITE_SUFFIX}`;
-  if (withSuffix.length <= TITLE_LIMIT) return withSuffix;
-  return truncate(base, TITLE_LIMIT);
+  const base = recipeTitle.trim().replace(/\s+recipe$/i, "");
+  const full = `${base} Recipe${SITE_SUFFIX}`;
+  if (full.length <= TITLE_LIMIT) return full;
+
+  const noSuffix = `${base} Recipe`;
+  if (noSuffix.length <= TITLE_LIMIT) return noSuffix;
+
+  return truncate(noSuffix, TITLE_LIMIT);
 };
 
+const audienceForCategory = (category: string): string => {
+  const cat = (category || "").toLowerCase();
+  const map: Record<string, string> = {
+    chicken: "perfect for a family midweek dinner",
+    beef: "ideal for a hearty weekend meal",
+    lamb: "great for a special Sunday lunch",
+    pork: "perfect for a comforting family dinner",
+    spicy: "ideal for spice lovers and weeknight dinners",
+    seafood: "perfect for a light, fresh dinner",
+    pasta: "ideal for a quick, satisfying weeknight meal",
+    lunch_suggestions: "perfect for an easy midweek lunch",
+    sweets: "ideal for a special treat or weekend baking",
+    desserts: "perfect for entertaining or a weekend treat",
+    starters: "ideal for dinner parties and special occasions",
+    sides: "perfect alongside roasts and grilled mains",
+    salads: "ideal for a fresh, light lunch",
+    soups: "perfect for a cosy lunch or starter",
+    cakes: "ideal for afternoon tea or celebrations",
+    breakfast: "perfect for a relaxed weekend brunch",
+    drinks: "ideal for entertaining or a quiet evening in",
+    sandwiches: "perfect for lunchboxes and quick meals",
+    mains: "perfect for a family dinner",
+  };
+  return map[cat] || "perfect for any occasion";
+};
+
+/**
+ * Builds a meta description targeting 140–160 characters that mentions the
+ * dish, key ingredients, total time and intended audience. Admin-supplied
+ * seo_description still wins.
+ */
 export const buildSeoDescription = (
   customDescription: string | null | undefined,
   recipeTitle: string,
   description: string,
   ingredients: string[],
   totalMinutes: number,
+  category: string = "",
 ): string => {
   if (customDescription?.trim()) {
-    return truncate(customDescription.trim(), DESC_LIMIT);
+    return truncate(customDescription.trim(), DESC_MAX);
   }
 
-  const keyIngredients = getKeyIngredients(ingredients);
-  const parts: string[] = [description.trim()];
+  const cleanTitle = recipeTitle.trim().replace(/\s+recipe$/i, "");
+  const key = getKeyIngredients(ingredients, 3);
+  const ingList = key.length
+    ? key.length === 1
+      ? key[0].toLowerCase()
+      : `${key.slice(0, -1).map((i) => i.toLowerCase()).join(", ")} and ${key[key.length - 1].toLowerCase()}`
+    : "";
 
-  if (keyIngredients.length) {
-    parts.push(`Made with ${keyIngredients.join(", ")}.`);
-  }
-  if (totalMinutes > 0) {
-    parts.push(`Ready in ${totalMinutes} min.`);
-  }
+  const audience = audienceForCategory(category);
+  const timePhrase = totalMinutes > 0 ? `Ready in ${totalMinutes} minutes` : "Easy to make";
 
-  return truncate(parts.join(" "), DESC_LIMIT);
+  const candidates: string[] = [];
+  if (ingList) {
+    candidates.push(`Easy homemade ${cleanTitle} recipe with ${ingList}. ${timePhrase}, ${audience}.`);
+    candidates.push(`Make this ${cleanTitle} recipe featuring ${ingList}. ${timePhrase}, ${audience}.`);
+  }
+  const desc = description.trim().replace(/\.$/, "");
+  if (desc) {
+    candidates.push(`${cleanTitle} recipe — ${desc}. ${timePhrase}, ${audience}.`);
+  }
+  candidates.push(`Easy ${cleanTitle} recipe. ${timePhrase}, ${audience}.`);
+
+  for (const c of candidates) {
+    if (c.length >= DESC_MIN && c.length <= DESC_MAX) return c;
+  }
+  const padPhrases = [
+    " A reliable favourite from Great Food Recipes.",
+    " Step-by-step instructions and tips included.",
+    " Tried, tested and family-approved.",
+  ];
+  for (const c of candidates) {
+    for (const p of padPhrases) {
+      const padded = c + p;
+      if (padded.length >= DESC_MIN && padded.length <= DESC_MAX) return padded;
+    }
+  }
+  const longest = [...candidates].sort((a, b) => b.length - a.length)[0];
+  return truncate(longest, DESC_MAX);
 };
 
 /**
