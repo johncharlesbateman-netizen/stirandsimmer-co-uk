@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
+import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", {
