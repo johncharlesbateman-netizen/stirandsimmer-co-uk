@@ -50,7 +50,7 @@ Deno.serve(async (_req) => {
 
     for (const r of recipes ?? []) {
       urls.push(
-        `  <url>\n    <loc>${SITE}/recipes/${r.slug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>`
+        `  <url>\n    <loc>${SITE}/recipes/${r.slug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.6</priority>\n  </url>`
       );
     }
 
