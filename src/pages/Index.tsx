@@ -8,7 +8,11 @@ import NewsletterSignup from "@/components/NewsletterSignup";
 import { collections } from "@/lib/collections";
 import { supabase } from "@/integrations/supabase/client";
 
-const heroImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920";
+const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb";
+const heroImage = `${heroPexelsBase}&w=1600`;
+const heroImageSrcSet = [640, 960, 1280, 1600, 1920]
+  .map((w) => `${heroPexelsBase}&w=${w} ${w}w`)
+  .join(", ");
 
 // Fallback values used until the live count loads (and if the query ever fails).
 const FALLBACK_RECIPE_COUNT = 114;
@@ -40,6 +44,8 @@ const Index = () => {
     <Layout>
       <Helmet>
         <title>Great Food Recipes — Editorial Food Photography Portfolio</title>
+        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
+        <link rel="preload" as="image" href={heroImage} imageSrcSet={heroImageSrcSet} imageSizes="100vw" fetchPriority="high" />
         <meta name="description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
         <meta name="keywords" content="editorial food photography, food photography portfolio, food stylist" />
         <link rel="canonical" href="https://greatfoodrecipes.co.uk/" />
@@ -83,7 +89,13 @@ const Index = () => {
         <div className="absolute inset-0">
           <img
             src={heroImage}
+            srcSet={heroImageSrcSet}
+            sizes="100vw"
             alt="Rustic table laid with freshly cooked dishes, herbs and warm natural light"
+            fetchPriority="high"
+            decoding="async"
+            width={1600}
+            height={1067}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/60" />
