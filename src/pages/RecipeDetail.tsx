@@ -642,7 +642,7 @@ const RecipeDetail = () => {
           </div>
         )}
 
-        <div className="print-footer">greatfoodrecipes.co.uk</div>
+        <div className="print-footer">stirandsimmer.co.uk</div>
       </div>
 
       <NewsletterSignup />
