@@ -2,19 +2,20 @@ import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
-import collectionsTeaser from "@/assets/collections-teaser.jpg";
-import collectionsTeaser800 from "@/assets/collections-teaser-800.jpg";
-import collectionsTeaser1200 from "@/assets/collections-teaser-1200.jpg";
+import collectionsTeaser from "@/assets/collections-teaser.webp";
+import collectionsTeaser800 from "@/assets/collections-teaser-800.webp";
+import collectionsTeaser1200 from "@/assets/collections-teaser-1200.webp";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { collections } from "@/lib/collections";
 import { supabase } from "@/integrations/supabase/client";
 
-const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb";
-const heroImage = `${heroPexelsBase}&w=1600`;
-const heroImageSrcSet = [640, 960, 1280, 1600, 1920]
+const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp";
+const heroImage = `${heroPexelsBase}&w=1280`;
+const heroImageSrcSet = [480, 768, 1024, 1280, 1600]
   .map((w) => `${heroPexelsBase}&w=${w} ${w}w`)
   .join(", ");
+const heroImageSizes = "(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1600px";
 
 // Fallback values used until the live count loads (and if the query ever fails).
 const FALLBACK_RECIPE_COUNT = 114;
