@@ -129,7 +129,7 @@ const Index = () => {
             >
               Explore all {roundedRecipes}+ recipes
             </Link>
-            <p className="text-xs md:text-sm tracking-[0.2em] uppercase text-primary-foreground/80">
+            <p className="tracking-[0.2em] uppercase text-primary-foreground/80" style={{ fontSize: "13px" }}>
               Over {roundedRecipes} tried-and-tested recipes · free to browse
             </p>
           </div>
