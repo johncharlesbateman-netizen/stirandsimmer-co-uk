@@ -34,9 +34,9 @@ const Blog = () => {
           name="description"
           content="Stories, cooking tips, seasonal ideas and kitchen notes from the team at Stir & Simmer — short reads to help you cook with more confidence."
         />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/blog" />
+        <link rel="canonical" href="https://www.stirandsimmer.co.uk/blog" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://stirandsimmer.co.uk/blog" />
+        <meta property="og:url" content="https://www.stirandsimmer.co.uk/blog" />
         <meta property="og:title" content="Blog — Stir & Simmer" />
         <meta
           property="og:description"

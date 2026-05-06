@@ -64,9 +64,9 @@ const CategoryPage = () => {
       <Helmet>
         <title>{label} Recipes — Stir & Simmer</title>
         <meta name="description" content={categoryMetaDescriptions[category]} />
-        <link rel="canonical" href={`https://stirandsimmer.co.uk/recipes/category/${slug}`} />
+        <link rel="canonical" href={`https://www.stirandsimmer.co.uk/recipes/category/${slug}`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://stirandsimmer.co.uk/recipes/category/${slug}`} />
+        <meta property="og:url" content={`https://www.stirandsimmer.co.uk/recipes/category/${slug}`} />
         <meta property="og:title" content={`${label} Recipes — Stir & Simmer`} />
         <meta property="og:description" content={categoryMetaDescriptions[category]} />
         <meta property="og:image" content={categoryImages[category] || ""} />

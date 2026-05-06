@@ -19,9 +19,9 @@ const Styleguide = () => {
         <title>Styleguide — Portfolio Design System | Stir & Simmer</title>
         <meta name="description" content="Internal design system reference for Stir & Simmer — colours, typography, spacing and editorial layout patterns." />
         <meta name="keywords" content="food photography portfolio design system, editorial layout" />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/styleguide" />
+        <link rel="canonical" href="https://www.stirandsimmer.co.uk/styleguide" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://stirandsimmer.co.uk/styleguide" />
+        <meta property="og:url" content="https://www.stirandsimmer.co.uk/styleguide" />
         <meta property="og:title" content="Styleguide — Portfolio Design System | Stir & Simmer" />
         <meta property="og:description" content="Internal design system reference for Stir & Simmer — colours, typography, spacing and editorial layout patterns." />
         <meta name="twitter:card" content="summary" />
@@ -31,7 +31,7 @@ const Styleguide = () => {
           "@context": "https://schema.org",
           "@type": "TechArticle",
           "name": "Styleguide — Stir & Simmer",
-          "url": "https://stirandsimmer.co.uk/styleguide",
+          "url": "https://www.stirandsimmer.co.uk/styleguide",
           "description": "Internal design system reference for Stir & Simmer — colours, typography, spacing and editorial layout patterns.",
           "about": "Design system documentation",
           "audience": { "@type": "Audience", "audienceType": "Designers and Developers" }
