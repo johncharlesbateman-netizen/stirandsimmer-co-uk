@@ -37,17 +37,6 @@ export interface CollectionDef {
 // Curated Pexels imagery — photographed, on-topic and appetising.
 export const collections: CollectionDef[] = [
   {
-    slug: "weeknight-suppers",
-    name: "Weeknight Suppers",
-    title: "Weeknight Suppers",
-    tagline: "Quick, comforting meals for busy nights",
-    description:
-      "Fuss-free recipes that come together quickly with everyday ingredients — perfect for school nights and after-work cooking.",
-    icon: Clock,
-    image:
-      "https://images.pexels.com/photos/2092897/pexels-photo-2092897.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
     slug: "italian-meals",
     name: "Italian Meals",
     title: "Italian Meals",
