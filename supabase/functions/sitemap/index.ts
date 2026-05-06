@@ -54,9 +54,16 @@ Deno.serve(async (_req) => {
       );
     }
 
-    for (const r of recipes ?? []) {
+    for (const slug of COLLECTION_SLUGS) {
       urls.push(
-        `  <url>\n    <loc>${SITE}/recipes/${r.slug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.6</priority>\n  </url>`
+        `  <url>\n    <loc>${SITE}/collections/${slug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`
+      );
+    }
+
+    for (const r of recipes ?? []) {
+      const lastmod = r.updated_at ? new Date(r.updated_at).toISOString().split("T")[0] : today;
+      urls.push(
+        `  <url>\n    <loc>${SITE}/recipes/${r.slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`
       );
     }
 
