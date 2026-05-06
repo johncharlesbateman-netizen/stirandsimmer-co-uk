@@ -344,7 +344,7 @@ const RecipeDetail = () => {
       </div>
 
       {/* Hero */}
-      <section className="py-12 md:py-16">
+      <section className="py-6 md:py-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-4xl">
             <p className="micro-caption mb-4">
