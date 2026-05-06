@@ -172,12 +172,21 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
   return (
     <Layout>
       <Helmet>
-        <title>{def.title} — Meal Ideas — Stir & Simmer</title>
+        <title>{`${def.title} | Stir & Simmer`}</title>
         <meta name="description" content={def.description} />
         <link
           rel="canonical"
           href={`https://stirandsimmer.co.uk/collections/${def.slug}`}
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://stirandsimmer.co.uk/collections/${def.slug}`} />
+        <meta property="og:title" content={`${def.title} | Stir & Simmer`} />
+        <meta property="og:description" content={def.description} />
+        {def.image && <meta property="og:image" content={def.image} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${def.title} | Stir & Simmer`} />
+        <meta name="twitter:description" content={def.description} />
+        {def.image && <meta name="twitter:image" content={def.image} />}
       </Helmet>
 
       {/* Header */}
