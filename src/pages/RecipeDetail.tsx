@@ -56,6 +56,29 @@ const RecipeDetail = () => {
       .catch(() => setQrDataUrl(""));
   }, [slug]);
 
+  // Show "Jump to Recipe" pill on mobile after the user scrolls past the hero,
+  // and hide it once the recipe card is in view.
+  useEffect(() => {
+    const onScroll = () => {
+      const el = recipeCardRef.current;
+      if (!el) {
+        setShowJumpToRecipe(false);
+        return;
+      }
+      const rect = el.getBoundingClientRect();
+      const scrolled = window.scrollY > 280;
+      const cardInView = rect.top < window.innerHeight * 0.6;
+      setShowJumpToRecipe(scrolled && !cardInView);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [slug, recipe?.id]);
+
+  const jumpToRecipe = () => {
+    recipeCardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const toggleIngredient = (index: number) => {
     setCheckedIngredients((prev) => {
       const next = new Set(prev);
