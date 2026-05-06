@@ -28,17 +28,17 @@ const About = () => {
   return (
     <Layout>
       <Helmet>
-        <title>About — Editorial Food Photographer | Stir & Simmer</title>
+        <title>About Us | Stir & Simmer</title>
         <meta name="description" content="Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta name="keywords" content="food photographer, editorial food photography, food stylist" />
         <link rel="canonical" href="https://stirandsimmer.co.uk/about" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/about" />
-        <meta property="og:title" content="About — Editorial Food Photographer | Stir & Simmer" />
+        <meta property="og:title" content="About Us | Stir & Simmer" />
         <meta property="og:description" content="Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta property="og:image" content={brandImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About — Editorial Food Photographer | Stir & Simmer" />
+        <meta name="twitter:title" content="About Us | Stir & Simmer" />
         <meta name="twitter:description" content="Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta name="twitter:image" content={brandImage} />
         <script type="application/ld+json">{JSON.stringify({

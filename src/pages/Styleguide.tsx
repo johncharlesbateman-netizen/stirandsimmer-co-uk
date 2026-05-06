@@ -16,16 +16,16 @@ const Styleguide = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Styleguide — Portfolio Design System | Stir & Simmer</title>
+        <title>Styleguide | Stir & Simmer</title>
         <meta name="description" content="Internal design system reference for Stir & Simmer — colours, typography, spacing and editorial layout patterns." />
         <meta name="keywords" content="food photography portfolio design system, editorial layout" />
         <link rel="canonical" href="https://stirandsimmer.co.uk/styleguide" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/styleguide" />
-        <meta property="og:title" content="Styleguide — Portfolio Design System | Stir & Simmer" />
+        <meta property="og:title" content="Styleguide | Stir & Simmer" />
         <meta property="og:description" content="Internal design system reference for Stir & Simmer — colours, typography, spacing and editorial layout patterns." />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Styleguide — Portfolio Design System | Stir & Simmer" />
+        <meta name="twitter:title" content="Styleguide | Stir & Simmer" />
         <meta name="twitter:description" content="Internal design system reference for Stir & Simmer — colours, typography, spacing and editorial layout patterns." />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",

@@ -143,20 +143,20 @@ const Recipes = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Recipes — Stir & Simmer</title>
+        <title>All Recipes | Stir & Simmer</title>
         <meta
           name="description"
-          content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions."
+          content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta and sweet bakes. Fresh ingredients, bold flavours and simple, reliable methods."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/recipes" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/recipes" />
-        <meta property="og:title" content="Recipes — Stir & Simmer" />
-        <meta property="og:description" content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions." />
+        <meta property="og:title" content="All Recipes | Stir & Simmer" />
+        <meta property="og:description" content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta and sweet bakes. Fresh ingredients, bold flavours and simple, reliable methods." />
         <meta property="og:image" content={categoryChicken} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Recipes — Stir & Simmer" />
-        <meta name="twitter:description" content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta, sweets and more. Fresh ingredients, bold flavours, simple instructions." />
+        <meta name="twitter:title" content="All Recipes | Stir & Simmer" />
+        <meta name="twitter:description" content="Browse over 100 free recipes — chicken, beef, lamb, seafood, pasta and sweet bakes. Fresh ingredients, bold flavours and simple, reliable methods." />
         <meta name="twitter:image" content={categoryChicken} />
       </Helmet>
 

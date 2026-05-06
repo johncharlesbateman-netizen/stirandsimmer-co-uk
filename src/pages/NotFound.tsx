@@ -12,7 +12,8 @@ const NotFound = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted">
       <Helmet>
-        <title>Page Not Found — Stir & Simmer</title>
+        <title>Page Not Found | Stir & Simmer</title>
+        <meta name="description" content="The page you're looking for can't be found. Head back to Stir & Simmer for our latest recipes, meal ideas and kitchen inspiration." />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <div className="text-center">

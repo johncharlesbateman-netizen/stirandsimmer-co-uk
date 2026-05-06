@@ -82,17 +82,17 @@ const Work = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Work — Editorial Food Photography Portfolio | Stir & Simmer</title>
+        <title>Our Work | Stir & Simmer</title>
         <meta name="description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
         <meta name="keywords" content="food photography portfolio, editorial food photography, restaurant photography, brand campaign photography" />
         <link rel="canonical" href="https://stirandsimmer.co.uk/work" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/work" />
-        <meta property="og:title" content="Work — Editorial Food Photography Portfolio | Stir & Simmer" />
+        <meta property="og:title" content="Our Work | Stir & Simmer" />
         <meta property="og:description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
         <meta property="og:image" content={projects[0].image} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Work — Editorial Food Photography Portfolio | Stir & Simmer" />
+        <meta name="twitter:title" content="Our Work | Stir & Simmer" />
         <meta name="twitter:description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
         <meta name="twitter:image" content={projects[0].image} />
         <script type="application/ld+json">{JSON.stringify({

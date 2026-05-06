@@ -5,7 +5,8 @@
 const SITE_SUFFIX = " | Stir & Simmer";
 const TITLE_LIMIT = 60;
 const DESC_MIN = 140;
-const DESC_MAX = 160;
+const DESC_MAX = 155;
+const CTA = " Get the full recipe at Stir & Simmer.";
 
 const truncate = (text: string, limit: number): string => {
   if (text.length <= limit) return text;
@@ -119,49 +120,47 @@ export const buildSeoDescription = (
   ingredients: string[],
   totalMinutes: number,
   category: string = "",
+  servings: number | null = null,
 ): string => {
   if (customDescription?.trim()) {
     return truncate(customDescription.trim(), DESC_MAX);
   }
 
   const cleanTitle = recipeTitle.trim().replace(/\s+recipe$/i, "");
-  const key = getKeyIngredients(ingredients, 3);
-  const ingList = key.length
-    ? key.length === 1
-      ? key[0].toLowerCase()
-      : `${key.slice(0, -1).map((i) => i.toLowerCase()).join(", ")} and ${key[key.length - 1].toLowerCase()}`
-    : "";
-
+  const key = getKeyIngredients(ingredients, 2);
+  const keyIng = key[0]?.toLowerCase() || "";
   const audience = audienceForCategory(category);
-  const timePhrase = totalMinutes > 0 ? `Ready in ${totalMinutes} minutes` : "Easy to make";
 
-  const candidates: string[] = [];
-  if (ingList) {
-    candidates.push(`Easy homemade ${cleanTitle} recipe with ${ingList}. ${timePhrase}, ${audience}.`);
-    candidates.push(`Make this ${cleanTitle} recipe featuring ${ingList}. ${timePhrase}, ${audience}.`);
-  }
+  // Detail clause: prefer time, then servings, then a key ingredient
+  const detail = totalMinutes > 0
+    ? `Ready in just ${totalMinutes} minutes.`
+    : servings
+      ? `Serves ${servings}.`
+      : keyIng
+        ? `Made with ${keyIng}.`
+        : "Easy to make at home.";
+
+  // Lead: appetising one-liner. Use admin description if present, else generated.
   const desc = description.trim().replace(/\.$/, "");
-  if (desc) {
-    candidates.push(`${cleanTitle} recipe — ${desc}. ${timePhrase}, ${audience}.`);
+  const leads: string[] = [];
+  if (desc) leads.push(`${desc}.`);
+  leads.push(`A ${cleanTitle} made from scratch — ${audience}.`);
+  if (keyIng) leads.push(`A flavour-packed ${cleanTitle} built around ${keyIng}.`);
+
+  // Try every lead with detail + CTA, pick first in 140–155 window.
+  const candidates: string[] = [];
+  for (const lead of leads) {
+    candidates.push(`${lead} ${detail}${CTA}`);
+    candidates.push(`${lead} ${detail} ${audience.charAt(0).toUpperCase() + audience.slice(1)}.${CTA}`);
   }
-  candidates.push(`Easy ${cleanTitle} recipe. ${timePhrase}, ${audience}.`);
 
   for (const c of candidates) {
     if (c.length >= DESC_MIN && c.length <= DESC_MAX) return c;
   }
-  const padPhrases = [
-    " A reliable favourite from Stir & Simmer.",
-    " Step-by-step instructions and tips included.",
-    " Tried, tested and family-approved.",
-  ];
-  for (const c of candidates) {
-    for (const p of padPhrases) {
-      const padded = c + p;
-      if (padded.length >= DESC_MIN && padded.length <= DESC_MAX) return padded;
-    }
-  }
-  const longest = [...candidates].sort((a, b) => b.length - a.length)[0];
-  return truncate(longest, DESC_MAX);
+  // Fallback: pick the closest under the max (or truncate longest).
+  const within = candidates.filter((c) => c.length <= DESC_MAX);
+  if (within.length) return within.sort((a, b) => b.length - a.length)[0];
+  return truncate(candidates[0], DESC_MAX);
 };
 
 /**
