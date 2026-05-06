@@ -399,7 +399,7 @@ const RecipeDetail = () => {
 
       {/* Image */}
       {recipe.image_url && (
-        <section className="pb-12">
+        <section className="pb-8 md:pb-12">
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
             <div className="max-w-4xl aspect-[16/9] overflow-hidden bg-muted">
               <img
