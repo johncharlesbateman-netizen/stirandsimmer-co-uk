@@ -14,7 +14,7 @@ const STATIC_URLS = [
   { path: "/meal-planner", changefreq: "monthly", priority: "0.6" },
   { path: "/about", changefreq: "monthly", priority: "0.5" },
   { path: "/contact", changefreq: "monthly", priority: "0.4" },
-  { path: "/blog", changefreq: "weekly", priority: "0.6" },
+  
 ];
 
 const CATEGORY_SLUGS = [

@@ -11,7 +11,7 @@ const STATIC_URLS: Array<{ loc: string; changefreq: string; priority: string }> 
   { loc: `${SITE}/meal-planner`, changefreq: "monthly", priority: "0.6" },
   { loc: `${SITE}/about`, changefreq: "monthly", priority: "0.5" },
   { loc: `${SITE}/contact`, changefreq: "monthly", priority: "0.4" },
-  { loc: `${SITE}/blog`, changefreq: "weekly", priority: "0.6" },
+  
 ];
 
 const CATEGORY_SLUGS = [
