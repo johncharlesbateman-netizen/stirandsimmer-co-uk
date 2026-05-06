@@ -102,17 +102,6 @@ export const collections: CollectionDef[] = [
     image:
       "https://images.pexels.com/photos/1387070/pexels-photo-1387070.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
-  {
-    slug: "healthy-eating",
-    name: "Healthy Eating",
-    title: "Healthy Eating",
-    tagline: "Nourishing dishes that don't skimp on flavour",
-    description:
-      "Vibrant salads, grilled fish, lean proteins and seasonal veg — wholesome cooking for everyday wellbeing.",
-    icon: Salad,
-    image:
-      "https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
 ];
 
 export const collectionNames: string[] = collections.map((c) => c.name);
