@@ -23,6 +23,8 @@ import Auth from "./pages/Auth";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
+import Privacy from "./pages/Privacy";
+import ExitIntentPopup from "./components/ExitIntentPopup";
 
 const queryClient = new QueryClient();
 
