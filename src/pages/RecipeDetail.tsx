@@ -73,7 +73,7 @@ const RecipeDetail = () => {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [slug, recipe?.id]);
+  }, [slug]);
 
   const jumpToRecipe = () => {
     recipeCardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
