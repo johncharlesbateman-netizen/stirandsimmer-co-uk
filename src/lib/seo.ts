@@ -157,6 +157,23 @@ export const buildSeoDescription = (
   for (const c of candidates) {
     if (c.length >= DESC_MIN && c.length <= DESC_MAX) return c;
   }
+  // Pad shorter candidates with a brief tagline so they reach the 140-char minimum.
+  const padPhrases = [
+    " A real winner.",
+    " Simple and satisfying.",
+    " A weeknight favourite.",
+    " A reliable midweek favourite.",
+    " A weeknight winner from our kitchen.",
+    " Tried, tested and family-approved.",
+  ];
+  for (const c of candidates) {
+    if (c.length > DESC_MAX) continue;
+    for (const p of padPhrases) {
+      // Insert before the CTA so the soft CTA stays at the end.
+      const padded = c.replace(CTA, p + CTA);
+      if (padded.length >= DESC_MIN && padded.length <= DESC_MAX) return padded;
+    }
+  }
   // Fallback: pick the closest under the max (or truncate longest).
   const within = candidates.filter((c) => c.length <= DESC_MAX);
   if (within.length) return within.sort((a, b) => b.length - a.length)[0];
