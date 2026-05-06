@@ -8,6 +8,7 @@ import collectionsTeaser1200 from "@/assets/collections-teaser-1200.webp";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { collections } from "@/lib/collections";
+import { allCategories, categoryLabels, categoryToSlug } from "@/lib/recipe-utils";
 import { supabase } from "@/integrations/supabase/client";
 
 const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp";
