@@ -47,20 +47,20 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Stir & Simmer — Editorial Food Photography Portfolio</title>
+        <title>Stir & Simmer | Delicious Recipes for Every Occasion</title>
         <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
         <link rel="preload" as="image" href={heroImage} imageSrcSet={heroImageSrcSet} imageSizes="100vw" fetchPriority="high" />
-        <meta name="description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
-        <meta name="keywords" content="editorial food photography, food photography portfolio, food stylist" />
+        <meta name="description" content="Discover easy, flavour-packed recipes for every occasion. From quick weeknight dinners to impressive desserts — Stir & Simmer has something for everyone." />
+        <meta name="keywords" content="recipes, easy recipes, dinner recipes, dessert recipes, quick meals" />
         <link rel="canonical" href="https://stirandsimmer.co.uk/" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/" />
-        <meta property="og:title" content="Stir & Simmer — Editorial Food Photography Portfolio" />
-        <meta property="og:description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
+        <meta property="og:title" content="Stir & Simmer | Delicious Recipes for Every Occasion" />
+        <meta property="og:description" content="Discover easy, flavour-packed recipes for every occasion. From quick weeknight dinners to impressive desserts — Stir & Simmer has something for everyone." />
         <meta property="og:image" content={heroImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Stir & Simmer — Editorial Food Photography Portfolio" />
-        <meta name="twitter:description" content="An editorial food photography portfolio — natural light, considered styling and visual stories crafted for restaurants, brands and editorial titles." />
+        <meta name="twitter:title" content="Stir & Simmer | Delicious Recipes for Every Occasion" />
+        <meta name="twitter:description" content="Discover easy, flavour-packed recipes for every occasion. From quick weeknight dinners to impressive desserts — Stir & Simmer has something for everyone." />
         <meta name="twitter:image" content={heroImage} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
