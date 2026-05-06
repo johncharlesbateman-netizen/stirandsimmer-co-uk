@@ -696,7 +696,12 @@ const RecipeDetail = () => {
         <div className="print-footer">stirandsimmer.co.uk</div>
       </div>
 
-      <NewsletterSignup />
+      <NewsletterSignup
+        variant="compact"
+        eyebrow="Enjoyed this recipe?"
+        headline="Get new recipes straight to your inbox"
+        description="Join our weekly newsletter for fresh recipes, seasonal ideas and kitchen tips. No spam, unsubscribe anytime."
+      />
     </Layout>
   );
 };
