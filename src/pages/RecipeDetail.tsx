@@ -301,17 +301,17 @@ const RecipeDetail = () => {
       </button>
 
       {/* Back Link & Share */}
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-8 flex items-center justify-between">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-8 flex items-center justify-between gap-4 flex-wrap">
         <Link
           to="/recipes"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-2 min-h-[44px] py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Recipes
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <DropdownMenu>
-            <DropdownMenuTrigger className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none">
+            <DropdownMenuTrigger className="inline-flex items-center gap-2 min-h-[44px] px-2 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none">
               <Printer className="w-4 h-4" />
               Print Recipe
               <ChevronDown className="w-3 h-3" />
