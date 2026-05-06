@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useEffect } from "react";
+import { useState, useLayoutEffect, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
@@ -36,6 +36,8 @@ const RecipeDetail = () => {
   const [activeTab, setActiveTab] = useState<MobileTab>("ingredients");
   const [printWithImage, setPrintWithImage] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
+  const [showJumpToRecipe, setShowJumpToRecipe] = useState(false);
+  const recipeCardRef = useRef<HTMLDivElement | null>(null);
 
   // Scroll to top and reset state when navigating to a new recipe
   useLayoutEffect(() => {
@@ -53,6 +55,29 @@ const RecipeDetail = () => {
       .then(setQrDataUrl)
       .catch(() => setQrDataUrl(""));
   }, [slug]);
+
+  // Show "Jump to Recipe" pill on mobile after the user scrolls past the hero,
+  // and hide it once the recipe card is in view.
+  useEffect(() => {
+    const onScroll = () => {
+      const el = recipeCardRef.current;
+      if (!el) {
+        setShowJumpToRecipe(false);
+        return;
+      }
+      const rect = el.getBoundingClientRect();
+      const scrolled = window.scrollY > 280;
+      const cardInView = rect.top < window.innerHeight * 0.6;
+      setShowJumpToRecipe(scrolled && !cardInView);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [slug]);
+
+  const jumpToRecipe = () => {
+    recipeCardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const toggleIngredient = (index: number) => {
     setCheckedIngredients((prev) => {
@@ -262,18 +287,31 @@ const RecipeDetail = () => {
         )}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
+
+      {/* Sticky "Jump to Recipe" — mobile only, appears after scrolling past hero */}
+      <button
+        type="button"
+        onClick={jumpToRecipe}
+        aria-label="Jump to recipe"
+        className={`no-print md:hidden fixed left-1/2 -translate-x-1/2 bottom-6 z-40 inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-5 py-3 rounded-full bg-foreground text-background text-sm font-medium shadow-lg transition-all duration-200 ${
+          showJumpToRecipe ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"
+        }`}
+      >
+        Jump to Recipe ↓
+      </button>
+
       {/* Back Link & Share */}
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-8 flex items-center justify-between">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-8 flex items-center justify-between gap-4 flex-wrap">
         <Link
           to="/recipes"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-2 min-h-[44px] py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Recipes
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <DropdownMenu>
-            <DropdownMenuTrigger className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none">
+            <DropdownMenuTrigger className="inline-flex items-center gap-2 min-h-[44px] px-2 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none">
               <Printer className="w-4 h-4" />
               Print Recipe
               <ChevronDown className="w-3 h-3" />
@@ -289,7 +327,7 @@ const RecipeDetail = () => {
           </DropdownMenu>
           <button
             onClick={handleShare}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 min-h-[44px] px-2 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <Share2 className="w-4 h-4" />
             Share
@@ -297,7 +335,7 @@ const RecipeDetail = () => {
           {isAdmin && (
             <Link
               to={`/admin/recipes/${recipe.slug}/edit`}
-              className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+              className="inline-flex items-center gap-2 min-h-[44px] px-2 py-2 text-sm text-primary hover:text-primary/80 transition-colors"
             >
               Edit
             </Link>
@@ -306,7 +344,7 @@ const RecipeDetail = () => {
       </div>
 
       {/* Hero */}
-      <section className="py-12 md:py-16">
+      <section className="py-6 md:py-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-4xl">
             <p className="micro-caption mb-4">
@@ -361,9 +399,9 @@ const RecipeDetail = () => {
 
       {/* Image */}
       {recipe.image_url && (
-        <section className="pb-12">
+        <section className="pb-8 md:pb-12">
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
-            <div className="max-w-4xl aspect-[16/9] overflow-hidden bg-muted">
+            <div className="max-w-4xl aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-muted">
               <img
                 src={optimisedImage(recipe.image_url, { width: 1600 })}
                 srcSet={responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000])}
@@ -394,7 +432,7 @@ const RecipeDetail = () => {
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`flex-1 py-3 text-sm font-medium transition-colors ${
+                className={`flex-1 min-h-[44px] py-3 text-sm font-medium transition-colors ${
                   activeTab === tab.key
                     ? "border-b-2 border-foreground text-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -405,7 +443,7 @@ const RecipeDetail = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 max-w-4xl">
+          <div ref={recipeCardRef} id="recipe-card" className="scroll-mt-20 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 max-w-4xl">
             {/* Ingredients — order-2 on mobile (after image+info), order-1 on md */}
             <div className={`order-1 ${activeTab === "ingredients" ? "block" : "hidden"} md:col-span-4 md:order-1 md:block`}>
               <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
