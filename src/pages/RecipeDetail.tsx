@@ -327,7 +327,7 @@ const RecipeDetail = () => {
           </DropdownMenu>
           <button
             onClick={handleShare}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 min-h-[44px] px-2 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <Share2 className="w-4 h-4" />
             Share
@@ -335,7 +335,7 @@ const RecipeDetail = () => {
           {isAdmin && (
             <Link
               to={`/admin/recipes/${recipe.slug}/edit`}
-              className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+              className="inline-flex items-center gap-2 min-h-[44px] px-2 py-2 text-sm text-primary hover:text-primary/80 transition-colors"
             >
               Edit
             </Link>
