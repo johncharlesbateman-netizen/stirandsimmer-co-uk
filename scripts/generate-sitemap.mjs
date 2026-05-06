@@ -9,16 +9,22 @@ const SITE = "https://stirandsimmer.co.uk";
 
 const STATIC_URLS = [
   { path: "/", changefreq: "weekly", priority: "1.0" },
-  { path: "/recipes", changefreq: "weekly", priority: "0.8" },
+  { path: "/recipes", changefreq: "daily", priority: "0.9" },
   { path: "/collections", changefreq: "weekly", priority: "0.8" },
   { path: "/meal-planner", changefreq: "monthly", priority: "0.6" },
   { path: "/about", changefreq: "monthly", priority: "0.5" },
   { path: "/contact", changefreq: "monthly", priority: "0.4" },
+  { path: "/blog", changefreq: "weekly", priority: "0.6" },
 ];
 
 const CATEGORY_SLUGS = [
   "chicken", "beef", "lamb", "pork", "spicy",
   "seafood", "pasta", "lunch-suggestions", "sweets",
+];
+
+const COLLECTION_SLUGS = [
+  "weeknight-suppers", "italian-meals", "romantic-meals", "fish-and-seafood",
+  "sweets-and-desserts", "quick-and-easy", "baking-and-bread", "healthy-eating",
 ];
 
 export async function generateSitemap() {
