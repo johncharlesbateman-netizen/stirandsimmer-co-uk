@@ -401,7 +401,7 @@ const RecipeDetail = () => {
       {recipe.image_url && (
         <section className="pb-8 md:pb-12">
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
-            <div className="max-w-4xl aspect-[16/9] overflow-hidden bg-muted">
+            <div className="max-w-4xl aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-muted">
               <img
                 src={optimisedImage(recipe.image_url, { width: 1600 })}
                 srcSet={responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000])}
