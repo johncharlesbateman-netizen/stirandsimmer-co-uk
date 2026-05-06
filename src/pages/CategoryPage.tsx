@@ -59,22 +59,34 @@ const CategoryPage = () => {
 
   const label = categoryLabels[category];
   const description = categoryDescriptions[category];
+  const recipeCount = recipes?.length ?? 0;
+
+  const seoTitle = `${label} Recipes | Stir & Simmer`;
+  const baseDesc = categoryMetaDescriptions[category];
+  // Insert dynamic count when available, while staying within ~155 chars.
+  const seoDescription = (() => {
+    if (!recipeCount) return baseDesc;
+    const withCount = `Browse ${recipeCount} ${label.toLowerCase()} recipes — ${baseDesc.replace(/^[^—]+—\s*/, "")}`;
+    return withCount.length <= 155 ? withCount : baseDesc;
+  })();
+  const canonicalUrl = `https://stirandsimmer.co.uk/recipes/category/${slug}`;
+  const ogImage = categoryImages[category] || "https://stirandsimmer.co.uk/og-image.jpg";
 
   return (
     <Layout>
       <Helmet>
-        <title>{label} Recipes — Stir & Simmer</title>
-        <meta name="description" content={categoryMetaDescriptions[category]} />
-        <link rel="canonical" href={`https://stirandsimmer.co.uk/recipes/category/${slug}`} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://stirandsimmer.co.uk/recipes/category/${slug}`} />
-        <meta property="og:title" content={`${label} Recipes — Stir & Simmer`} />
-        <meta property="og:description" content={categoryMetaDescriptions[category]} />
-        <meta property="og:image" content={categoryImages[category] || ""} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:image" content={ogImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${label} Recipes — Stir & Simmer`} />
-        <meta name="twitter:description" content={categoryMetaDescriptions[category]} />
-        <meta name="twitter:image" content={categoryImages[category] || ""} />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
       {/* Header */}
