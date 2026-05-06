@@ -291,26 +291,30 @@
     animation-delay: 2.5s;
   }
 
-  /* Large editorial headings */
+  /* Large editorial headings — capped per design spec */
   .heading-display {
     font-family: 'Boska', serif;
-    @apply text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-tight;
+    font-size: clamp(2rem, 5vw, 3rem); /* 32px → 48px */
+    @apply font-medium tracking-tight leading-tight;
   }
 
   .heading-editorial {
     font-family: 'Boska', serif;
-    @apply text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight;
+    font-size: clamp(1.5rem, 3.5vw, 2rem); /* 24px → 32px */
+    @apply font-medium tracking-tight leading-tight;
   }
 
   .heading-section {
     font-family: 'Boska', serif;
-    @apply text-2xl md:text-3xl font-medium;
+    font-size: clamp(1.25rem, 3vw, 1.75rem); /* 20px → 28px */
+    @apply font-medium leading-snug;
   }
 
   /* Body text styles */
   .body-editorial {
     font-family: 'DM Sans', sans-serif;
-    @apply text-base md:text-lg leading-relaxed;
+    font-size: 1rem; /* 16px */
+    @apply leading-relaxed;
   }
 
   /* Breathing space */

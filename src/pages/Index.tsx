@@ -114,8 +114,8 @@ const Index = () => {
             Stir & Simmer
           </p>
           <h1 
-            className="font-display text-4xl md:text-6xl lg:text-7xl mb-6 opacity-0 animate-fade-in leading-tight"
-            style={{ animationDelay: "0.4s", animationFillMode: "forwards" }}
+            className="font-display mb-6 opacity-0 animate-fade-in leading-tight"
+            style={{ animationDelay: "0.4s", animationFillMode: "forwards", fontSize: "clamp(2rem, 5vw, 3rem)" }}
           >
             Recipes that bring people together around the table
           </h1>
@@ -129,7 +129,7 @@ const Index = () => {
             >
               Explore all {roundedRecipes}+ recipes
             </Link>
-            <p className="text-xs md:text-sm tracking-[0.2em] uppercase text-primary-foreground/80">
+            <p className="tracking-[0.2em] uppercase text-primary-foreground/80" style={{ fontSize: "13px" }}>
               Over {roundedRecipes} tried-and-tested recipes · free to browse
             </p>
           </div>
