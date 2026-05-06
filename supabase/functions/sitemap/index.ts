@@ -6,16 +6,22 @@ const SITE = "https://stirandsimmer.co.uk";
 
 const STATIC_URLS: Array<{ loc: string; changefreq: string; priority: string }> = [
   { loc: `${SITE}/`, changefreq: "weekly", priority: "1.0" },
-  { loc: `${SITE}/recipes`, changefreq: "weekly", priority: "0.8" },
+  { loc: `${SITE}/recipes`, changefreq: "daily", priority: "0.9" },
   { loc: `${SITE}/collections`, changefreq: "weekly", priority: "0.8" },
   { loc: `${SITE}/meal-planner`, changefreq: "monthly", priority: "0.6" },
   { loc: `${SITE}/about`, changefreq: "monthly", priority: "0.5" },
   { loc: `${SITE}/contact`, changefreq: "monthly", priority: "0.4" },
+  { loc: `${SITE}/blog`, changefreq: "weekly", priority: "0.6" },
 ];
 
 const CATEGORY_SLUGS = [
   "chicken", "beef", "lamb", "pork", "spicy",
   "seafood", "pasta", "lunch-suggestions", "sweets",
+];
+
+const COLLECTION_SLUGS = [
+  "weeknight-suppers", "italian-meals", "romantic-meals", "fish-and-seafood",
+  "sweets-and-desserts", "quick-and-easy", "baking-and-bread", "healthy-eating",
 ];
 
 Deno.serve(async (_req) => {
@@ -48,9 +54,16 @@ Deno.serve(async (_req) => {
       );
     }
 
-    for (const r of recipes ?? []) {
+    for (const slug of COLLECTION_SLUGS) {
       urls.push(
-        `  <url>\n    <loc>${SITE}/recipes/${r.slug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.6</priority>\n  </url>`
+        `  <url>\n    <loc>${SITE}/collections/${slug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`
+      );
+    }
+
+    for (const r of recipes ?? []) {
+      const lastmod = r.updated_at ? new Date(r.updated_at).toISOString().split("T")[0] : today;
+      urls.push(
+        `  <url>\n    <loc>${SITE}/recipes/${r.slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`
       );
     }
 
