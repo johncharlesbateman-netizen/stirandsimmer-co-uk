@@ -6,12 +6,19 @@ const Privacy = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Privacy Policy — Stir & Simmer</title>
+        <title>Privacy Policy | Stir & Simmer</title>
         <meta
           name="description"
-          content="How Stir & Simmer collects, uses and protects your personal data, including newsletter subscriptions and cookies."
+          content="How Stir & Simmer collects, uses and protects your personal data, including newsletter subscriptions, cookies and your rights under UK GDPR."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/privacy" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://stirandsimmer.co.uk/privacy" />
+        <meta property="og:title" content="Privacy Policy | Stir & Simmer" />
+        <meta property="og:description" content="How Stir & Simmer collects, uses and protects your personal data, including newsletter subscriptions, cookies and your rights under UK GDPR." />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Privacy Policy | Stir & Simmer" />
+        <meta name="twitter:description" content="How Stir & Simmer collects, uses and protects your personal data, including newsletter subscriptions, cookies and your rights under UK GDPR." />
       </Helmet>
 
       <article className="container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24 max-w-3xl">
