@@ -85,9 +85,9 @@ const Work = () => {
         <title>Work — Editorial Food Photography Portfolio | Stir & Simmer</title>
         <meta name="description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
         <meta name="keywords" content="food photography portfolio, editorial food photography, restaurant photography, brand campaign photography" />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/work" />
+        <link rel="canonical" href="https://www.stirandsimmer.co.uk/work" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://stirandsimmer.co.uk/work" />
+        <meta property="og:url" content="https://www.stirandsimmer.co.uk/work" />
         <meta property="og:title" content="Work — Editorial Food Photography Portfolio | Stir & Simmer" />
         <meta property="og:description" content="Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light." />
         <meta property="og:image" content={projects[0].image} />
@@ -99,7 +99,7 @@ const Work = () => {
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           "name": "Work — Stir & Simmer",
-          "url": "https://stirandsimmer.co.uk/work",
+          "url": "https://www.stirandsimmer.co.uk/work",
           "description": "Selected food photography projects — editorial collaborations, brand campaigns and fine dining experiences captured with natural light.",
           "hasPart": projects.map((p) => ({
             "@type": "CreativeWork",

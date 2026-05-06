@@ -95,9 +95,9 @@ const Contact = () => {
       <Helmet>
         <title>Contact — Stir & Simmer</title>
         <meta name="description" content="Get in touch with Stir & Simmer. We'd love to hear from you — questions, suggestions, or just to say hello." />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/contact" />
+        <link rel="canonical" href="https://www.stirandsimmer.co.uk/contact" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://stirandsimmer.co.uk/contact" />
+        <meta property="og:url" content="https://www.stirandsimmer.co.uk/contact" />
         <meta property="og:title" content="Contact — Stir & Simmer" />
         <meta property="og:description" content="Get in touch with Stir & Simmer. We'd love to hear from you — questions, suggestions, or just to say hello." />
         <meta property="og:image" content={contactBehindScenes} />

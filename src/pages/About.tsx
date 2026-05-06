@@ -31,9 +31,9 @@ const About = () => {
         <title>About — Editorial Food Photographer | Stir & Simmer</title>
         <meta name="description" content="Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta name="keywords" content="food photographer, editorial food photography, food stylist" />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/about" />
+        <link rel="canonical" href="https://www.stirandsimmer.co.uk/about" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://stirandsimmer.co.uk/about" />
+        <meta property="og:url" content="https://www.stirandsimmer.co.uk/about" />
         <meta property="og:title" content="About — Editorial Food Photographer | Stir & Simmer" />
         <meta property="og:description" content="Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
         <meta property="og:image" content={brandImage} />
@@ -45,12 +45,12 @@ const About = () => {
           "@context": "https://schema.org",
           "@type": "AboutPage",
           "name": "About — Stir & Simmer",
-          "url": "https://stirandsimmer.co.uk/about",
+          "url": "https://www.stirandsimmer.co.uk/about",
           "description": "Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for.",
           "mainEntity": {
             "@type": "Organization",
             "name": "Stir & Simmer",
-            "url": "https://stirandsimmer.co.uk",
+            "url": "https://www.stirandsimmer.co.uk",
             "image": brandImage,
             "description": "We create recipes the same way we enjoy food — with care, curiosity, and a love for fresh, honest ingredients."
           }
