@@ -29,19 +29,22 @@ const Blog = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Blog — Stories, Tips & Kitchen Notes | Stir & Simmer</title>
+        <title>Blog | Stir & Simmer</title>
         <meta
           name="description"
-          content="Stories, cooking tips, seasonal ideas and kitchen notes from the team at Stir & Simmer — short reads to help you cook with more confidence."
+          content="Stories, cooking tips, seasonal ideas and kitchen notes from the team at Stir & Simmer — short reads to help you cook with more confidence at home."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/blog" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/blog" />
-        <meta property="og:title" content="Blog — Stir & Simmer" />
+        <meta property="og:title" content="Blog | Stir & Simmer" />
         <meta
           property="og:description"
-          content="Stories, cooking tips, seasonal ideas and kitchen notes from the team at Stir & Simmer."
+          content="Stories, cooking tips, seasonal ideas and kitchen notes from the team at Stir & Simmer — short reads to help you cook with more confidence at home."
         />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Blog | Stir & Simmer" />
+        <meta name="twitter:description" content="Stories, cooking tips, seasonal ideas and kitchen notes from the team at Stir & Simmer — short reads to help you cook with more confidence at home." />
       </Helmet>
 
       {/* Header */}
