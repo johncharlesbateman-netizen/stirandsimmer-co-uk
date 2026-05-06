@@ -44,13 +44,13 @@ const Footer = () => {
             <div className="space-y-3 text-sm">
               <a href="mailto:hello@stirandsimmer.co.uk" className="block opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">hello@stirandsimmer.co.uk</a>
               <a
-                href="https://www.instagram.com/Great.Food.Recipes/"
+                href="https://www.instagram.com/stirandsimmeruk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
               >
                 <Instagram className="w-4 h-4" aria-hidden="true" />
-                <span>@Great.Food.Recipes</span>
+                <span>@stirandsimmeruk</span>
               </a>
             </div>
           </div>
