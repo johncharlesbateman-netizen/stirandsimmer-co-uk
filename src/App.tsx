@@ -20,8 +20,6 @@ import AdminNewRecipe from "./pages/AdminNewRecipe";
 import AdminEditRecipe from "./pages/AdminEditRecipe";
 import AdminSeoStatus from "./pages/AdminSeoStatus";
 import Auth from "./pages/Auth";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
 import ExitIntentPopup from "./components/ExitIntentPopup";
@@ -106,8 +104,6 @@ const App = () => (
             <Route path="/collections/:slug" element={<Collections />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/auth" element={<Auth />} />
             <Route
               path="/admin/recipes/new"
