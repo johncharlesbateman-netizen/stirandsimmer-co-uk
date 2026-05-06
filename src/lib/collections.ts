@@ -3,26 +3,22 @@
 // so it must match the values used by the auto-assignment seed.
 
 import {
-  Clock,
   UtensilsCrossed,
   Heart,
   Fish,
   Cake,
   Zap,
   Croissant,
-  Salad,
   type LucideIcon,
 } from "lucide-react";
 
 export type CollectionSlug =
-  | "weeknight-suppers"
   | "italian-meals"
   | "romantic-meals"
   | "fish-and-seafood"
   | "sweets-and-desserts"
   | "quick-and-easy"
-  | "baking-and-bread"
-  | "healthy-eating";
+  | "baking-and-bread";
 
 export interface CollectionDef {
   slug: CollectionSlug;
