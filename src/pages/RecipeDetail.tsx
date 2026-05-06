@@ -430,7 +430,7 @@ const RecipeDetail = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 max-w-4xl">
+          <div ref={recipeCardRef} id="recipe-card" className="scroll-mt-20 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 max-w-4xl">
             {/* Ingredients — order-2 on mobile (after image+info), order-1 on md */}
             <div className={`order-1 ${activeTab === "ingredients" ? "block" : "hidden"} md:col-span-4 md:order-1 md:block`}>
               <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
