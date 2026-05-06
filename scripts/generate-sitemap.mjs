@@ -54,7 +54,11 @@ export async function generateSitemap() {
   const parts = [];
   for (const u of STATIC_URLS) parts.push(entry(SITE + u.path, today, u.changefreq, u.priority));
   for (const slug of CATEGORY_SLUGS) parts.push(entry(`${SITE}/recipes/category/${slug}`, today, "weekly", "0.8"));
-  for (const r of recipes ?? []) parts.push(entry(`${SITE}/recipes/${r.slug}`, today, "weekly", "0.6"));
+  for (const slug of COLLECTION_SLUGS) parts.push(entry(`${SITE}/collections/${slug}`, today, "weekly", "0.7"));
+  for (const r of recipes ?? []) {
+    const lastmod = r.updated_at ? new Date(r.updated_at).toISOString().split("T")[0] : today;
+    parts.push(entry(`${SITE}/recipes/${r.slug}`, lastmod, "weekly", "0.7"));
+  }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${parts.join("\n")}\n</urlset>\n`;
 
@@ -62,7 +66,7 @@ export async function generateSitemap() {
   const outPath = resolve(__dirname, "../public/sitemap.xml");
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, xml, "utf-8");
-  console.log(`[sitemap] Wrote ${recipes?.length ?? 0} recipes + ${STATIC_URLS.length} static + ${CATEGORY_SLUGS.length} categories → public/sitemap.xml`);
+  console.log(`[sitemap] Wrote ${recipes?.length ?? 0} recipes + ${STATIC_URLS.length} static + ${CATEGORY_SLUGS.length} categories + ${COLLECTION_SLUGS.length} collections → public/sitemap.xml`);
 }
 
 // Allow running standalone: `node scripts/generate-sitemap.mjs`
