@@ -3,26 +3,22 @@
 // so it must match the values used by the auto-assignment seed.
 
 import {
-  Clock,
   UtensilsCrossed,
   Heart,
   Fish,
   Cake,
   Zap,
   Croissant,
-  Salad,
   type LucideIcon,
 } from "lucide-react";
 
 export type CollectionSlug =
-  | "weeknight-suppers"
   | "italian-meals"
   | "romantic-meals"
   | "fish-and-seafood"
   | "sweets-and-desserts"
   | "quick-and-easy"
-  | "baking-and-bread"
-  | "healthy-eating";
+  | "baking-and-bread";
 
 export interface CollectionDef {
   slug: CollectionSlug;
@@ -40,17 +36,6 @@ export interface CollectionDef {
 
 // Curated Pexels imagery — photographed, on-topic and appetising.
 export const collections: CollectionDef[] = [
-  {
-    slug: "weeknight-suppers",
-    name: "Weeknight Suppers",
-    title: "Weeknight Suppers",
-    tagline: "Quick, comforting meals for busy nights",
-    description:
-      "Fuss-free recipes that come together quickly with everyday ingredients — perfect for school nights and after-work cooking.",
-    icon: Clock,
-    image:
-      "https://images.pexels.com/photos/2092897/pexels-photo-2092897.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
   {
     slug: "italian-meals",
     name: "Italian Meals",
@@ -116,17 +101,6 @@ export const collections: CollectionDef[] = [
     icon: Croissant,
     image:
       "https://images.pexels.com/photos/1387070/pexels-photo-1387070.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    slug: "healthy-eating",
-    name: "Healthy Eating",
-    title: "Healthy Eating",
-    tagline: "Nourishing dishes that don't skimp on flavour",
-    description:
-      "Vibrant salads, grilled fish, lean proteins and seasonal veg — wholesome cooking for everyday wellbeing.",
-    icon: Salad,
-    image:
-      "https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
 ];
 
