@@ -14,7 +14,7 @@ const Header = () => {
     { to: "/collections", label: "Meal Ideas" },
     { to: "/meal-planner", label: "Meal Planner" },
     { to: "/about", label: "About" },
-    { to: "/blog", label: "Blog" },
+    
     { to: "/contact", label: "Contact" },
   ];
 
