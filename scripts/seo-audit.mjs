@@ -73,7 +73,7 @@ async function fetchAllRecipes() {
 }
 
 // ----- mirror of src/lib/seo.ts helpers -----
-const SITE_SUFFIX = " | Great Food Recipes";
+const SITE_SUFFIX = " | Stir & Simmer";
 const truncate = (text, limit) => {
   if (text.length <= limit) return text;
   const sliced = text.slice(0, limit - 1);
