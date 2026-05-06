@@ -234,13 +234,13 @@ const Contact = () => {
                 <h3 className="micro-caption mb-4">Social</h3>
                 <div className="space-y-2">
                   <a
-                    href="https://www.instagram.com/Great.Food.Recipes/"
+                    href="https://www.instagram.com/stirandsimmeruk"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-lg editorial-link w-fit"
                   >
                     <Instagram className="w-5 h-5" aria-hidden="true" />
-                    <span>@Great.Food.Recipes</span>
+                    <span>@stirandsimmeruk</span>
                   </a>
                 </div>
               </div>
