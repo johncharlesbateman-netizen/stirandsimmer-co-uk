@@ -159,9 +159,11 @@ export const buildSeoDescription = (
   }
   // Pad shorter candidates with a brief tagline so they reach the 140-char minimum.
   const padPhrases = [
+    " A real winner.",
+    " Simple and satisfying.",
+    " A weeknight favourite.",
     " A reliable midweek favourite.",
     " A weeknight winner from our kitchen.",
-    " A simple, satisfying dish to share.",
     " Tried, tested and family-approved.",
   ];
   for (const c of candidates) {
