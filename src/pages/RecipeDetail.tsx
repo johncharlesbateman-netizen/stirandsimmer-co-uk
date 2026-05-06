@@ -432,7 +432,7 @@ const RecipeDetail = () => {
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`flex-1 py-3 text-sm font-medium transition-colors ${
+                className={`flex-1 min-h-[44px] py-3 text-sm font-medium transition-colors ${
                   activeTab === tab.key
                     ? "border-b-2 border-foreground text-foreground"
                     : "text-muted-foreground hover:text-foreground"
