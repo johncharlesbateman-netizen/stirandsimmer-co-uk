@@ -2,7 +2,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.4";
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
 const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY")!;
-const siteUrl = "https://stirandsimmer.co.uk";
+const siteUrl = "https://www.stirandsimmer.co.uk";
 
 Deno.serve(async (req) => {
   const url = new URL(req.url);
