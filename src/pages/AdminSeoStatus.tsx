@@ -435,7 +435,7 @@ const AdminSeoStatus = () => {
                     <Button variant="outline" asChild>
                       <a
                         href={`https://search.google.com/test/rich-results?url=${encodeURIComponent(
-                          `https://www.stirandsimmer.co.uk${selected.url}`,
+                          `https://stirandsimmer.co.uk${selected.url}`,
                         )}`}
                         target="_blank"
                         rel="noreferrer"
