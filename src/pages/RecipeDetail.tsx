@@ -535,7 +535,15 @@ const RecipeDetail = () => {
       {relatedRecipes.length > 0 && (
         <section className="no-print pb-12 md:pb-20 border-t border-border">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-16 md:pt-20">
-            <h2 className="heading-section mb-10">You Might Also Like</h2>
+            <div className="mb-10 flex items-end justify-between gap-6 flex-wrap">
+              <h2 className="heading-section">You Might Also Like</h2>
+              <Link
+                to={`/recipes/category/${categoryToSlug[recipe.category]}`}
+                className="inline-flex items-center gap-2 min-h-[44px] py-2 text-sm text-muted-foreground hover:text-foreground transition-colors editorial-link"
+              >
+                More {categoryLabels[recipe.category]} recipes →
+              </Link>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
               {relatedRecipes.map((r) => {
                 const rPrep = r.prep_time_minutes || 0;
