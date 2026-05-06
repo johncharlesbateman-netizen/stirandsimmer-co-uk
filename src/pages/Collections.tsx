@@ -104,6 +104,8 @@ const CollectionsIndex = () => {
                     alt={`${c.title} recipe collection`}
                     loading="lazy"
                     decoding="async"
+                    width={800}
+                    height={600}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
                   />
                   <div
@@ -241,6 +243,9 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
                   src={c.image}
                   alt={c.title}
                   loading="lazy"
+                  decoding="async"
+                  width={800}
+                  height={600}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />

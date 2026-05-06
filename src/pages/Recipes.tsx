@@ -228,6 +228,9 @@ const Recipes = () => {
                       src={img}
                       alt={`${categoryLabels[cat]} recipes — collection of ${categoryLabels[cat].toLowerCase()} dishes`}
                       loading="lazy"
+                      decoding="async"
+                      width={800}
+                      height={600}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div

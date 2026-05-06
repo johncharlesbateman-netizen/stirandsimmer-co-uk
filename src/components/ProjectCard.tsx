@@ -55,6 +55,9 @@ const ProjectCard = ({
             src={image}
             alt={title}
             loading="lazy"
+            decoding="async"
+            width={800}
+            height={600}
             className="w-full h-full object-cover editorial-image"
           />
           

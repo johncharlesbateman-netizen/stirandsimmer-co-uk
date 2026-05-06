@@ -267,6 +267,8 @@ const Contact = () => {
               className="w-full h-full object-cover"
               loading="lazy"
               decoding="async"
+              width={1200}
+              height={900}
             />
           </div>
           <p className="micro-caption mt-4">Behind the scenes — In the kitchen</p>

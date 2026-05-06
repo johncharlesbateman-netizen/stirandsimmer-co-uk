@@ -51,6 +51,10 @@ const ImageWithCaption = ({
           src={src}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          fetchPriority={priority ? "high" : "auto"}
+          width={1200}
+          height={900}
           className="w-full h-full object-cover editorial-image"
         />
       </div>
