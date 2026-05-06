@@ -58,7 +58,7 @@ jobs:
           } > .env
       - name: Validate live recipe URLs
         env:
-          SITE_URL: ${{ vars.SITE_URL || 'https://greatfoodrecipes.co.uk' }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://stirandsimmer.co.uk' }}
           SAMPLE_SIZE: ${{ inputs.sample_size || '10' }}
         run: |
           if [ "${{ inputs.check_all }}" = "true" ]; then
