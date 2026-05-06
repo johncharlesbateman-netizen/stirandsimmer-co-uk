@@ -36,6 +36,8 @@ const RecipeDetail = () => {
   const [activeTab, setActiveTab] = useState<MobileTab>("ingredients");
   const [printWithImage, setPrintWithImage] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
+  const [showJumpToRecipe, setShowJumpToRecipe] = useState(false);
+  const recipeCardRef = useRef<HTMLDivElement | null>(null);
 
   // Scroll to top and reset state when navigating to a new recipe
   useLayoutEffect(() => {
