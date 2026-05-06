@@ -5,7 +5,8 @@
 const SITE_SUFFIX = " | Stir & Simmer";
 const TITLE_LIMIT = 60;
 const DESC_MIN = 140;
-const DESC_MAX = 160;
+const DESC_MAX = 155;
+const CTA = " Get the full recipe at Stir & Simmer.";
 
 const truncate = (text: string, limit: number): string => {
   if (text.length <= limit) return text;
