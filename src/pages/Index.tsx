@@ -8,6 +8,7 @@ import collectionsTeaser1200 from "@/assets/collections-teaser-1200.webp";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { collections } from "@/lib/collections";
+import { allCategories, categoryLabels, categoryToSlug } from "@/lib/recipe-utils";
 import { supabase } from "@/integrations/supabase/client";
 
 const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp";
@@ -179,6 +180,39 @@ const Index = () => {
       </section>
 
       <div className="h-2 bg-background" aria-hidden />
+
+      {/* Browse by Category */}
+      <section aria-labelledby="browse-by-category" className="bg-background border-b border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
+          <div className="mb-10 flex items-end justify-between gap-6 flex-wrap">
+            <div>
+              <p className="micro-caption mb-3">Browse</p>
+              <h2 id="browse-by-category" className="heading-section">Recipes by Category</h2>
+            </div>
+            <Link
+              to="/recipes"
+              className="inline-flex items-center gap-2 min-h-[44px] py-2 text-sm text-muted-foreground hover:text-foreground transition-colors editorial-link"
+            >
+              See all recipes →
+            </Link>
+          </div>
+          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+            {allCategories.map((cat) => (
+              <li key={cat}>
+                <Link
+                  to={`/recipes/category/${categoryToSlug[cat]}`}
+                  className="flex items-center justify-center text-center min-h-[64px] px-4 py-3 border border-border bg-background hover:border-foreground/40 hover:bg-secondary transition-all duration-200"
+                >
+                  <span className="font-display text-lg md:text-xl">
+                    {categoryLabels[cat]}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
 
       {/* Collections Teaser */}
       <section className="relative overflow-hidden">

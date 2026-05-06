@@ -17,6 +17,7 @@ import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
 import ServingScaler from "@/components/ServingScaler";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
@@ -347,14 +348,18 @@ const RecipeDetail = () => {
       <section className="py-6 md:py-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-4xl">
-            <p className="micro-caption mb-4">
-              <Link
-                to={`/recipes/category/${categoryToSlug[recipe.category]}`}
-                className="editorial-link hover:text-foreground transition-colors"
-              >
-                {categoryLabels[recipe.category]}
-              </Link>
-            </p>
+            <Breadcrumbs
+              className="mb-6 no-print"
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Recipes", href: "/recipes" },
+                {
+                  label: categoryLabels[recipe.category],
+                  href: `/recipes/category/${categoryToSlug[recipe.category]}`,
+                },
+                { label: recipe.title },
+              ]}
+            />
             <h1 className="heading-display mb-6">{recipe.title}</h1>
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl">
               {recipe.description}
@@ -530,7 +535,15 @@ const RecipeDetail = () => {
       {relatedRecipes.length > 0 && (
         <section className="no-print pb-12 md:pb-20 border-t border-border">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-16 md:pt-20">
-            <h2 className="heading-section mb-10">You Might Also Like</h2>
+            <div className="mb-10 flex items-end justify-between gap-6 flex-wrap">
+              <h2 className="heading-section">You Might Also Like</h2>
+              <Link
+                to={`/recipes/category/${categoryToSlug[recipe.category]}`}
+                className="inline-flex items-center gap-2 min-h-[44px] py-2 text-sm text-muted-foreground hover:text-foreground transition-colors editorial-link"
+              >
+                More {categoryLabels[recipe.category]} recipes →
+              </Link>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
               {relatedRecipes.map((r) => {
                 const rPrep = r.prep_time_minutes || 0;

@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import RecipeCard from "@/components/RecipeCard";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import {
   categoryLabels,
@@ -79,9 +80,14 @@ const CategoryPage = () => {
       {/* Header */}
       <section className="py-12 md:py-16 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <p className="micro-caption mb-4">
-            <Link to="/recipes" className="editorial-link">Recipes</Link> / {label}
-          </p>
+          <Breadcrumbs
+            className="mb-4"
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Recipes", href: "/recipes" },
+              { label: `${label} Recipes` },
+            ]}
+          />
           <h1 className="heading-display mb-6">{label} Recipes</h1>
           <p className="text-muted-foreground text-lg max-w-2xl">{description}</p>
         </div>
