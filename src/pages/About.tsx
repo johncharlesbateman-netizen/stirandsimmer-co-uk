@@ -127,12 +127,8 @@ const About = () => {
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <blockquote className="max-w-3xl">
               <p className="heading-editorial text-muted-foreground italic leading-relaxed">
-                "Good food doesn't need to be complicated. It needs to be made 
-                with intention, fresh ingredients, and a little bit of joy."
+                "The best cooking happens when you stop worrying about getting it perfect and just start enjoying the process."
               </p>
-              <footer className="mt-8">
-                <p className="micro-caption">— Stir & Simmer</p>
-              </footer>
           </blockquote>
         </div>
       </section>
