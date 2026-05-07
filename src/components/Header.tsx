@@ -37,37 +37,17 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
-              const isPlanner = link.to === "/meal-planner";
-              if (isPlanner) {
-                return (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className={`inline-flex items-center gap-2 text-sm tracking-wide px-3 py-1.5 rounded-full bg-planner-soft text-planner border border-planner/20 hover:bg-planner hover:text-planner-foreground transition-colors duration-300 ${
-                      isActive(link.to) ? "bg-planner text-planner-foreground" : ""
-                    }`}
-                  >
-                    <span
-                      className="w-1.5 h-1.5 rounded-full bg-planner"
-                      aria-hidden
-                    />
-                    {link.label}
-                  </Link>
-                );
-              }
-              return (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`text-sm tracking-wide transition-all duration-300 hover:opacity-60 hover:tracking-wider ${
-                    isActive(link.to) ? "opacity-100" : "opacity-70"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`text-sm tracking-wide transition-all duration-300 hover:opacity-60 hover:tracking-wider ${
+                  isActive(link.to) ? "opacity-100" : "opacity-70"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
 
             {isAdmin && (
               <Link
