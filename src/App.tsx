@@ -13,6 +13,8 @@ import Styleguide from "./pages/Styleguide";
 import Contact from "./pages/Contact";
 import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
+import Guides from "./pages/Guides";
+import GuideDetail from "./pages/GuideDetail";
 import CategoryPage from "./pages/CategoryPage";
 import Collections from "./pages/Collections";
 import MealPlanner from "./pages/MealPlanner";
