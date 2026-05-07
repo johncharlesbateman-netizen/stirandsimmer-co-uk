@@ -63,6 +63,7 @@ const GuideDetail = () => {
   }
 
   const canonical = `https://stirandsimmer.co.uk/guides/${guide.slug}`;
+  const heroImage = guide.image_url || guideImageBySlug[guide.slug];
 
   return (
     <Layout>
