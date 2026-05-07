@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { renderGuideBody, formatGuideDate } from "@/lib/guide-utils";
+import { guideImageBySlug } from "@/lib/guide-images";
 
 const GuideDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -62,6 +63,7 @@ const GuideDetail = () => {
   }
 
   const canonical = `https://stirandsimmer.co.uk/guides/${guide.slug}`;
+  const heroImage = guide.image_url || guideImageBySlug[guide.slug];
 
   return (
     <Layout>
@@ -73,7 +75,7 @@ const GuideDetail = () => {
         <meta property="og:url" content={canonical} />
         <meta property="og:title" content={guide.title} />
         <meta property="og:description" content={guide.intro} />
-        {guide.image_url && <meta property="og:image" content={guide.image_url} />}
+        {heroImage && <meta property="og:image" content={heroImage} />}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -89,7 +91,7 @@ const GuideDetail = () => {
               url: "https://stirandsimmer.co.uk",
             },
             mainEntityOfPage: canonical,
-            ...(guide.image_url ? { image: guide.image_url } : {}),
+            ...(heroImage ? { image: heroImage } : {}),
           })}
         </script>
       </Helmet>
@@ -111,10 +113,10 @@ const GuideDetail = () => {
               Last updated {formatGuideDate(guide.last_updated_at)}
             </p>
 
-            {guide.image_url && (
+            {heroImage && (
               <div className="aspect-[16/9] overflow-hidden bg-muted mb-12">
                 <img
-                  src={guide.image_url}
+                  src={heroImage}
                   alt={guide.title}
                   className="w-full h-full object-cover"
                 />
