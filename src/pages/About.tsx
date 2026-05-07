@@ -125,9 +125,17 @@ const About = () => {
               {/* Why Stir & Simmer */}
               <div>
                 <h3 className="micro-caption mb-4">Why Stir & Simmer</h3>
-                <p className="text-sm text-muted-foreground">Built in the UK, written for home cooks</p>
-                <p className="text-sm text-muted-foreground">Recipes tested before they're published</p>
-                <p className="text-sm text-muted-foreground">No subscriptions, no paywalls — ever</p>
+                <ul className="space-y-4">
+                  <li className="text-sm text-muted-foreground">
+                    <span className="text-foreground font-medium">Built in the UK</span> — written for home cooks who shop at Tesco, Sainsbury's and the corner shop, not Borough Market.
+                  </li>
+                  <li className="text-sm text-muted-foreground">
+                    <span className="text-foreground font-medium">Properly tested</span> — every recipe is cooked, eaten, tweaked and cooked again before it goes live.
+                  </li>
+                  <li className="text-sm text-muted-foreground">
+                    <span className="text-foreground font-medium">No paywalls, ever</span> — no subscriptions, no locked content, no "premium" recipes. Just food.
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
