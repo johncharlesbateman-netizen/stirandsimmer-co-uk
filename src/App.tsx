@@ -24,7 +24,6 @@ import AdminSeoStatus from "./pages/AdminSeoStatus";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
-import ExitIntentPopup from "./components/ExitIntentPopup";
 
 const queryClient = new QueryClient();
 
@@ -125,7 +124,6 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <ExitIntentPopup />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
