@@ -367,16 +367,11 @@ const RecipeDetail = () => {
             </p>
 
             {/* Intro paragraph — adds unique on-page content for SEO */}
-            <p className="text-base text-muted-foreground/90 mb-8 max-w-2xl leading-relaxed">
-              {buildRecipeIntro(
-                recipe.title,
-                recipe.description ?? "",
-                ingredients,
-                recipe.category,
-                totalTime,
-                recipe.servings,
-              )}
-            </p>
+            {recipe.intro ? (
+              <p className="text-base text-muted-foreground/90 mb-8 max-w-2xl leading-relaxed">
+                {recipe.intro}
+              </p>
+            ) : null}
 
             {/* Meta */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
