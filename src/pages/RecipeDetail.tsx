@@ -593,10 +593,11 @@ const RecipeDetail = () => {
       <section className={`no-print pb-20 md:pb-32 ${activeTab === "shop" ? "block" : "hidden"} md:block`}>
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-4xl">
-            <h2 className="heading-section mb-6 pb-4 border-b border-border">
-              Shop the Ingredients
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="flex items-baseline justify-between mb-3 pb-2 border-b border-border">
+              <h2 className="micro-caption">Shop the Ingredients</h2>
+              <span className="text-xs text-muted-foreground">Tap a supermarket</span>
+            </div>
+            <div className="flex gap-4 md:gap-6 overflow-x-auto md:flex-wrap md:justify-start pb-2 -mx-2 px-2 md:mx-0 md:px-0">
               {([
                 { name: "Tesco", id: "tesco" as const, url: "https://www.tesco.com/groceries" },
                 { name: "Sainsbury's", id: "sainsburys" as const, url: "https://www.sainsburys.co.uk/gol-ui/groceries" },
@@ -613,12 +614,19 @@ const RecipeDetail = () => {
                   href={market.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center gap-2 p-5 border border-border hover:border-muted-foreground/40 hover:bg-secondary hover:shadow-sm transition-all duration-200 text-center group last:col-span-2 last:max-w-[50%] last:mx-auto md:last:col-span-1 md:last:max-w-none"
+                  title={`Shop at ${market.name}`}
+                  className="flex flex-col items-center gap-1.5 shrink-0 group"
                 >
-                  <img src={supermarketLogos[market.id]} alt={market.name} className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200" loading="lazy" width={40} height={40} />
-                  <span className="text-sm font-semibold text-foreground">{market.name}</span>
-                  <span className="inline-flex items-center gap-1 text-xs text-muted-foreground group-hover:text-foreground transition-colors">
-                    Shop now <ExternalLink className="w-3 h-3" />
+                  <img
+                    src={supermarketLogos[market.id]}
+                    alt={market.name}
+                    className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200"
+                    loading="lazy"
+                    width={32}
+                    height={32}
+                  />
+                  <span className="text-[11px] text-muted-foreground group-hover:text-foreground transition-colors whitespace-nowrap">
+                    Shop now
                   </span>
                 </a>
               ))}
