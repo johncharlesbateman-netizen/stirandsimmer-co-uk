@@ -211,6 +211,7 @@ export type Database = {
           image_url: string | null
           ingredients: Json
           instructions: Json
+          intro: string | null
           is_seasonal: boolean | null
           prep_time_minutes: number | null
           seo_description: string | null
@@ -231,6 +232,7 @@ export type Database = {
           image_url?: string | null
           ingredients?: Json
           instructions?: Json
+          intro?: string | null
           is_seasonal?: boolean | null
           prep_time_minutes?: number | null
           seo_description?: string | null
@@ -251,6 +253,7 @@ export type Database = {
           image_url?: string | null
           ingredients?: Json
           instructions?: Json
+          intro?: string | null
           is_seasonal?: boolean | null
           prep_time_minutes?: number | null
           seo_description?: string | null
