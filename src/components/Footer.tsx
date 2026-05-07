@@ -23,6 +23,9 @@ const Footer = () => {
               <Link to="/recipes" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
                 Recipes
               </Link>
+              <Link to="/guides" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
+                Guides
+              </Link>
               <Link to="/collections" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
                 Meal Ideas
               </Link>
