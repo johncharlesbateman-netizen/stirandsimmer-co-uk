@@ -46,14 +46,17 @@ const About = () => {
           "@type": "AboutPage",
           "name": "About — Stir & Simmer",
           "url": "https://stirandsimmer.co.uk/about",
-          "description": "Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for.",
-          "mainEntity": {
-            "@type": "Organization",
-            "name": "Stir & Simmer",
-            "url": "https://stirandsimmer.co.uk",
-            "image": brandImage,
-            "description": "We create recipes the same way we enjoy food — with care, curiosity, and a love for fresh, honest ingredients."
-          }
+          "description": "Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for."
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Stir & Simmer",
+          "url": "https://stirandsimmer.co.uk",
+          "logo": "https://stirandsimmer.co.uk/favicon.ico",
+          "image": brandImage,
+          "description": "A UK recipe site for home cooks. Honest, tested recipes using everyday supermarket ingredients.",
+          "sameAs": []
         })}</script>
       </Helmet>
       {/* Header */}
