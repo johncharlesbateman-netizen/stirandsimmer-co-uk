@@ -77,15 +77,8 @@ const About = () => {
                   Every recipe here is written to work first time. Clear steps, honest portions, and the kind of tips that only come from actually making the dish — not just writing about it.
                 </p>
               </div>
-
-              {/* Why We Built This */}
-              <div className="mt-16 pt-12 border-t border-border">
-                <h2 className="heading-section mb-6">Why We Built This</h2>
-                <p className="body-editorial text-muted-foreground">
-                  Most recipe sites are built to impress. We built Stir & Simmer to be useful. No restaurant techniques, no obscure ingredients, no recipes that only work if you have a free afternoon. Just honest food, tested in a real kitchen, written for people who actually have to get dinner on the table.
-                </p>
-              </div>
             </div>
+
 
             {/* Sidebar */}
             <div className="md:col-span-4 md:col-start-9 space-y-12">
@@ -137,6 +130,14 @@ const About = () => {
                 </ul>
               </div>
             </div>
+          </div>
+
+          {/* Why We Built This */}
+          <div className="mt-16 md:mt-20 pt-12 border-t border-border max-w-3xl">
+            <h2 className="heading-section mb-6">Why We Built This</h2>
+            <p className="body-editorial text-muted-foreground">
+              Most recipe sites are built to impress. We built Stir & Simmer to be useful. No restaurant techniques, no obscure ingredients, no recipes that only work if you have a free afternoon. Just honest food, tested in a real kitchen, written for people who actually have to get dinner on the table.
+            </p>
           </div>
         </div>
       </section>
