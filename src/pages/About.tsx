@@ -79,6 +79,7 @@ const About = () => {
               </div>
             </div>
 
+
             {/* Sidebar */}
             <div className="md:col-span-4 md:col-start-9 space-y-12">
               {/* Portrait */}
