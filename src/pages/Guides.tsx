@@ -71,21 +71,26 @@ const Guides = () => {
                 >
                   <article className="space-y-4">
                     <div className="aspect-[4/3] overflow-hidden bg-muted relative">
-                      {guide.image_url ? (
-                        <img
-                          src={guide.image_url}
-                          alt={guide.title}
-                          loading="lazy"
-                          decoding="async"
-                          className="w-full h-full object-cover editorial-image"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-muted">
-                          <span className="text-xs tracking-[0.2em] uppercase text-muted-foreground">
-                            Guide
-                          </span>
-                        </div>
-                      )}
+                      {(() => {
+                        const src = guide.image_url || guideImageBySlug[guide.slug];
+                        return src ? (
+                          <img
+                            src={src}
+                            alt={guide.title}
+                            loading="lazy"
+                            decoding="async"
+                            width={1280}
+                            height={960}
+                            className="w-full h-full object-cover editorial-image"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center bg-muted">
+                            <span className="text-xs tracking-[0.2em] uppercase text-muted-foreground">
+                              Guide
+                            </span>
+                          </div>
+                        );
+                      })()}
                       <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
                     </div>
                     <div className="space-y-2">
