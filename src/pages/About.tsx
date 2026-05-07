@@ -66,21 +66,15 @@ const About = () => {
               
               <div className="space-y-8 body-editorial text-muted-foreground">
                 <p className="text-foreground text-xl md:text-2xl font-display leading-relaxed">
-                  We create recipes the same way we enjoy food — with care, 
-                  curiosity, and a love for fresh, honest ingredients.
+                  Stir & Simmer is a UK recipe site built for people who love good food but live real lives.
                 </p>
                 
                 <p>
-                  From rustic comfort food to modern weeknight meals, our collection 
-                  covers everything you need to bring incredible flavours to your table. 
-                  We focus on seasonal ingredients and simple techniques 
-                  that make every meal memorable.
+                  We started this site because we believe the best meals aren't always the most complicated ones. A properly made pasta, a slow-cooked weekend stew, a weeknight curry that actually delivers — that's what cooking is really about. No cheffy showboating, no ingredients you can't find at your local supermarket.
                 </p>
                 
                 <p>
-                  We believe cooking should be joyful, not stressful. That's why every 
-                  recipe comes with clear instructions, and we're always adding helpful 
-                  tips so you can cook with confidence every single time.
+                  Every recipe here is written to work first time. Clear steps, honest portions, and the kind of tips that only come from actually making the dish — not just writing about it.
                 </p>
               </div>
             </div>
