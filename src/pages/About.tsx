@@ -57,7 +57,7 @@ const About = () => {
         })}</script>
       </Helmet>
       {/* Header */}
-      <section className="section-breathing pb-16">
+      <section className="section-breathing pb-0">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
             {/* Main Content */}
@@ -119,12 +119,35 @@ const About = () => {
       </section>
 
       {/* Carousel Section */}
-      <section className="py-16">
+      <section className="pt-8 pb-12">
         <InfiniteCarousel images={carouselImages} />
       </section>
 
+      {/* Three Column Highlights */}
+      <section className="py-12 border-t border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
+            <div>
+              <div className="text-4xl mb-4" aria-hidden="true">🍳</div>
+              <h3 className="heading-section mb-2">Real Recipes</h3>
+              <p className="text-sm text-muted-foreground">Tested in a home kitchen, not a TV studio</p>
+            </div>
+            <div>
+              <div className="text-4xl mb-4" aria-hidden="true">🛒</div>
+              <h3 className="heading-section mb-2">Normal Ingredients</h3>
+              <p className="text-sm text-muted-foreground">Everything from your local supermarket</p>
+            </div>
+            <div>
+              <div className="text-4xl mb-4" aria-hidden="true">📅</div>
+              <h3 className="heading-section mb-2">New Every Week</h3>
+              <p className="text-sm text-muted-foreground">Fresh recipes added regularly</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Quote Section */}
-      <section className="section-breathing border-t border-border">
+      <section className="py-16 border-t border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <blockquote className="max-w-3xl">
               <p className="heading-editorial text-muted-foreground italic leading-relaxed">
