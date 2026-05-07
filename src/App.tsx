@@ -24,7 +24,6 @@ import AdminSeoStatus from "./pages/AdminSeoStatus";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
-import ExitIntentPopup from "./components/ExitIntentPopup";
 
 const queryClient = new QueryClient();
 
