@@ -110,6 +110,13 @@ const About = () => {
                 />
               </div>
 
+              {/* UK trust line */}
+              <div className="border-l-2 border-foreground pl-4">
+                <p className="text-sm text-foreground leading-relaxed">
+                  Proudly UK-based. Every recipe uses grams, millilitres and degrees Celsius, with ingredients you'll actually find at Tesco, Sainsbury's, Aldi, Lidl, Morrisons or Waitrose.
+                </p>
+              </div>
+
               {/* Client Types */}
               <div>
                 <h3 className="micro-caption mb-6">We Cook For</h3>
