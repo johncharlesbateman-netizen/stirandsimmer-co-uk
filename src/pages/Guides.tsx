@@ -4,13 +4,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { formatGuideDate } from "@/lib/guide-utils";
-import guideMidweek from "@/assets/guide-midweek-dinners.jpg";
-import guideJune from "@/assets/guide-june-seasonal.jpg";
-
-const guideImageBySlug: Record<string, string> = {
-  "midweek-dinners-under-30-minutes": guideMidweek,
-  "whats-in-season-june-uk": guideJune,
-};
+import { guideImageBySlug } from "@/lib/guide-images";
 
 const Guides = () => {
   const { data: guides, isLoading } = useQuery({
