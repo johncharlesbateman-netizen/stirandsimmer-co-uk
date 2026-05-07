@@ -158,6 +158,48 @@ export type Database = {
         }
         Relationships: []
       }
+      guides: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          image_url: string | null
+          intro: string
+          last_updated_at: string
+          published: boolean
+          published_at: string
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          intro: string
+          last_updated_at?: string
+          published?: boolean
+          published_at?: string
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          intro?: string
+          last_updated_at?: string
+          published?: boolean
+          published_at?: string
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       recipes: {
         Row: {
           category: Database["public"]["Enums"]["recipe_category"]
