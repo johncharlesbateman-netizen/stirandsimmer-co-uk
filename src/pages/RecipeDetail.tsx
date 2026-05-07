@@ -12,7 +12,7 @@ import { categoryLabels, categoryToSlug } from "@/lib/recipe-utils";
 import { scaleIngredients, scaleIngredientsSmart } from "@/lib/ingredient-scaler";
 import { buildSeoTitle, buildSeoDescription, buildRecipeIntro, buildServingSuggestion } from "@/lib/seo";
 import { buildRecipeJsonLd } from "@/lib/recipe-schema";
-import NewsletterSignup from "@/components/NewsletterSignup";
+
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
@@ -697,12 +697,6 @@ const RecipeDetail = () => {
         <div className="print-footer">stirandsimmer.co.uk</div>
       </div>
 
-      <NewsletterSignup
-        variant="compact"
-        eyebrow="Enjoyed this recipe?"
-        headline="Get new recipes straight to your inbox"
-        description="Join our weekly newsletter for fresh recipes, seasonal ideas and kitchen tips. No spam, unsubscribe anytime."
-      />
     </Layout>
   );
 };
