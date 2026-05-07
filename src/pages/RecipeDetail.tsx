@@ -615,17 +615,19 @@ const RecipeDetail = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   title={`Shop at ${market.name}`}
-                  className="flex flex-col items-center gap-1.5 shrink-0 group"
+                  aria-label={`Shop ingredients at ${market.name} (opens in a new tab)`}
+                  className="flex flex-col items-center gap-1.5 shrink-0 group rounded-sm p-1 -m-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <img
                     src={supermarketLogos[market.id]}
-                    alt={market.name}
+                    alt=""
+                    aria-hidden="true"
                     className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200"
                     loading="lazy"
                     width={32}
                     height={32}
                   />
-                  <span className="text-[11px] text-muted-foreground group-hover:text-foreground transition-colors whitespace-nowrap">
+                  <span className="text-[11px] text-muted-foreground group-hover:text-foreground group-focus-visible:text-foreground transition-colors whitespace-nowrap">
                     Shop now
                   </span>
                 </a>
