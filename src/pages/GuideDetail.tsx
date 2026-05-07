@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { renderGuideBody, formatGuideDate } from "@/lib/guide-utils";
+import { guideImageBySlug } from "@/lib/guide-images";
 
 const GuideDetail = () => {
   const { slug } = useParams<{ slug: string }>();
