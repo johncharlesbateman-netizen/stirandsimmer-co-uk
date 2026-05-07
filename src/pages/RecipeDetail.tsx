@@ -12,7 +12,7 @@ import { categoryLabels, categoryToSlug } from "@/lib/recipe-utils";
 import { scaleIngredients, scaleIngredientsSmart } from "@/lib/ingredient-scaler";
 import { buildSeoTitle, buildSeoDescription, buildRecipeIntro, buildServingSuggestion } from "@/lib/seo";
 import { buildRecipeJsonLd } from "@/lib/recipe-schema";
-import NewsletterSignup from "@/components/NewsletterSignup";
+
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
