@@ -106,11 +106,12 @@ const About = () => {
                 </ul>
               </div>
 
-              {/* Location */}
+              {/* Why Stir & Simmer */}
               <div>
-                <h3 className="micro-caption mb-4">Reach</h3>
-                <p className="text-sm text-muted-foreground">Available online, everywhere</p>
-                <p className="text-sm text-muted-foreground">New recipes every week</p>
+                <h3 className="micro-caption mb-4">Why Stir & Simmer</h3>
+                <p className="text-sm text-muted-foreground">Built in the UK, written for home cooks</p>
+                <p className="text-sm text-muted-foreground">Recipes tested before they're published</p>
+                <p className="text-sm text-muted-foreground">No subscriptions, no paywalls — ever</p>
               </div>
             </div>
           </div>
