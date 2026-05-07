@@ -57,7 +57,7 @@ const About = () => {
         })}</script>
       </Helmet>
       {/* Header */}
-      <section className="section-breathing pb-0">
+      <section className="pt-12 md:pt-16 pb-0">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
             {/* Main Content */}
@@ -76,6 +76,22 @@ const About = () => {
                 <p>
                   Every recipe here is written to work first time. Clear steps, honest portions, and the kind of tips that only come from actually making the dish — not just writing about it.
                 </p>
+              </div>
+
+              {/* Meet the cook */}
+              <div className="mt-16 pt-12 border-t border-border">
+                <h2 className="micro-caption mb-6">Meet the Cook</h2>
+                <div className="flex items-start gap-6">
+                  <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-muted overflow-hidden flex-shrink-0 flex items-center justify-center text-muted-foreground text-2xl font-display">
+                    [photo]
+                  </div>
+                  <div>
+                    <h3 className="font-display text-xl text-foreground mb-2">[Your Name]</h3>
+                    <p className="body-editorial text-muted-foreground">
+                      Hi, I'm [Your Name] — the cook, writer, and washer-up behind Stir & Simmer. I've been cooking for family and friends out of a small UK kitchen for years, and every recipe here is one I've made (and remade) until it genuinely works.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -109,9 +125,17 @@ const About = () => {
               {/* Why Stir & Simmer */}
               <div>
                 <h3 className="micro-caption mb-4">Why Stir & Simmer</h3>
-                <p className="text-sm text-muted-foreground">Built in the UK, written for home cooks</p>
-                <p className="text-sm text-muted-foreground">Recipes tested before they're published</p>
-                <p className="text-sm text-muted-foreground">No subscriptions, no paywalls — ever</p>
+                <ul className="space-y-4">
+                  <li className="text-sm text-muted-foreground">
+                    <span className="text-foreground font-medium">Built in the UK</span> — written for home cooks who shop at Tesco, Sainsbury's and the corner shop, not Borough Market.
+                  </li>
+                  <li className="text-sm text-muted-foreground">
+                    <span className="text-foreground font-medium">Properly tested</span> — every recipe is cooked, eaten, tweaked and cooked again before it goes live.
+                  </li>
+                  <li className="text-sm text-muted-foreground">
+                    <span className="text-foreground font-medium">No paywalls, ever</span> — no subscriptions, no locked content, no "premium" recipes. Just food.
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
