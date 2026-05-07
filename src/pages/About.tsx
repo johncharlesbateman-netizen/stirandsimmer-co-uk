@@ -57,7 +57,7 @@ const About = () => {
         })}</script>
       </Helmet>
       {/* Header */}
-      <section className="section-breathing pb-0">
+      <section className="pt-12 md:pt-16 pb-0">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
             {/* Main Content */}
