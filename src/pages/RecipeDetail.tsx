@@ -598,15 +598,15 @@ const RecipeDetail = () => {
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {([
-                { name: "Tesco", id: "tesco" as const, url: "https://www.tesco.com/" },
-                { name: "Sainsbury's", id: "sainsburys" as const, url: "https://www.sainsburys.co.uk/" },
-                { name: "ASDA", id: "asda" as const, url: "https://www.asda.com/" },
-                { name: "Waitrose", id: "waitrose" as const, url: "https://www.waitrose.com/" },
-                { name: "Morrisons", id: "morrisons" as const, url: "https://www.morrisons.com/" },
-                { name: "Aldi", id: "aldi" as const, url: "https://www.aldi.co.uk/" },
-                { name: "Lidl", id: "lidl" as const, url: "https://www.lidl.co.uk/" },
-                { name: "Booths", id: "booths" as const, url: "https://www.booths.co.uk/" },
-                { name: "Ocado", id: "ocado" as const, url: "https://www.ocado.com/" },
+                { name: "Tesco", id: "tesco" as const, url: "https://www.tesco.com/groceries" },
+                { name: "Sainsbury's", id: "sainsburys" as const, url: "https://www.sainsburys.co.uk/gol-ui/groceries" },
+                { name: "ASDA", id: "asda" as const, url: "https://groceries.asda.com" },
+                { name: "Waitrose", id: "waitrose" as const, url: "https://www.waitrose.com/ecom/shop" },
+                { name: "Morrisons", id: "morrisons" as const, url: "https://groceries.morrisons.com" },
+                { name: "Aldi", id: "aldi" as const, url: "https://www.aldi.co.uk/c/groceries" },
+                { name: "Lidl", id: "lidl" as const, url: "https://www.lidl.co.uk" },
+                { name: "Booths", id: "booths" as const, url: "https://www.booths.co.uk/shop" },
+                { name: "Ocado", id: "ocado" as const, url: "https://www.ocado.com" },
               ]).map((market) => (
                 <a
                   key={market.name}
