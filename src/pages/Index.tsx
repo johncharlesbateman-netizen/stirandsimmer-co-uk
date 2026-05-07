@@ -6,7 +6,7 @@ import collectionsTeaser from "@/assets/collections-teaser.webp";
 import collectionsTeaser800 from "@/assets/collections-teaser-800.webp";
 import collectionsTeaser1200 from "@/assets/collections-teaser-1200.webp";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
-import NewsletterSignup from "@/components/NewsletterSignup";
+
 import { collections } from "@/lib/collections";
 
 import { supabase } from "@/integrations/supabase/client";
