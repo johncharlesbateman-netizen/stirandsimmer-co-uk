@@ -37,6 +37,13 @@ export const companionRecipes: CompanionRecipe[] = [
       "Toasted sesame seeds",
       "Spring onion, finely sliced",
     ],
+    steps: [
+      { text: "Heat the grill to high. Halve the aubergines lengthways and score the flesh in a diamond pattern." },
+      { text: "Brush with a little oil and grill, cut-side up, until softened and lightly charred.", durationSeconds: 600 },
+      { text: "Whisk the miso, mirin, sake and sugar together in a small bowl." },
+      { text: "Spoon the glaze generously over the aubergines and return to the grill until caramelised and bubbling.", durationSeconds: 240 },
+      { text: "Rest for a moment, then scatter with sesame seeds and spring onion before serving." },
+    ],
   },
   {
     id: "harissa-lamb-flatbreads",
