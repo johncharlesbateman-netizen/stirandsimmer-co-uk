@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import ScreenShell from "@/components/pass/ScreenShell";
 import AuthGuard from "@/components/pass/AuthGuard";
 import { useAuth } from "@/hooks/useAuth";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
 const AVATARS = ["👨‍🍳", "👩‍🍳", "🧑‍🍳", "🔥"];
@@ -17,7 +16,7 @@ const STYLES = [
 ];
 
 function ProfileSetupInner() {
-  const { user, profile, refreshProfile } = useAuth();
+  const { profile, updateProfile } = useAuth();
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState(profile?.avatar ?? AVATARS[0]);
   const [style, setStyle] = useState<string | null>(profile?.cooking_style ?? null);
@@ -25,7 +24,6 @@ function ProfileSetupInner() {
   const [busy, setBusy] = useState(false);
 
   const submit = async () => {
-    if (!user) return;
     if (!name.trim()) {
       toast({ title: "Add your chef name", variant: "destructive" });
       return;
@@ -35,21 +33,7 @@ function ProfileSetupInner() {
       return;
     }
     setBusy(true);
-    const { error } = await supabase.from("profiles").upsert(
-      {
-        user_id: user.id,
-        chef_name: name.trim(),
-        avatar,
-        cooking_style: style,
-      },
-      { onConflict: "user_id" }
-    );
-    if (error) {
-      toast({ title: "Could not save", description: error.message, variant: "destructive" });
-      setBusy(false);
-      return;
-    }
-    await refreshProfile();
+    await updateProfile({ chef_name: name.trim(), avatar, cooking_style: style });
     navigate("/home", { replace: true });
   };
 
