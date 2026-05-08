@@ -71,13 +71,12 @@ export interface VerifyResult {
 }
 
 export async function verifyDish(challengeId: string, photoUrl: string): Promise<VerifyResult> {
-  // @ts-expect-error rpc not in generated types yet
   const { data, error } = await supabase.rpc("verify_dish", {
     p_challenge_id: challengeId,
     p_photo_url: photoUrl,
   });
   if (error) throw error;
-  return data as VerifyResult;
+  return data as unknown as VerifyResult;
 }
 
 export function isChallengeLocked(c: Challenge, totalPoints: number) {
