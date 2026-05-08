@@ -57,11 +57,21 @@ const CompanionRecipeDetail = () => {
       <div className="px-6 py-8">
         <button
           type="button"
+          onClick={() => setCooking(true)}
           className="block w-full rounded-xl bg-companion-amber px-4 py-3.5 text-center text-sm font-medium text-white transition-colors hover:bg-companion-amber-soft"
         >
           Start cooking
         </button>
       </div>
+
+      {cooking && (
+        <CookingMode
+          recipeName={recipe.name}
+          emoji={recipe.emoji}
+          steps={recipe.steps}
+          onClose={() => setCooking(false)}
+        />
+      )}
     </div>
   );
 };
