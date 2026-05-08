@@ -51,7 +51,7 @@ export default function Signup() {
           <ArrowLeft size={22} strokeWidth={1.5} />
         </Link>
 
-        <h1 className="text-[1.75rem] leading-tight mb-3">Join The Pass</h1>
+        <h1 className="text-[1.75rem] leading-tight mb-3">Join the Pass</h1>
         <p className="pass-muted text-[14px] leading-relaxed mb-10 max-w-[34ch]">
           Create your account to start earning points and unlocking chef secrets.
         </p>
