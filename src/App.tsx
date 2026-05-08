@@ -24,6 +24,12 @@ import AdminSeoStatus from "./pages/AdminSeoStatus";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
+import CompanionLayout from "./features/companion/CompanionLayout";
+import CompanionHome from "./features/companion/CompanionHome";
+import CompanionExplore from "./features/companion/CompanionExplore";
+import CompanionJourney from "./features/companion/CompanionJourney";
+import CompanionProfile from "./features/companion/CompanionProfile";
+import CompanionRecipeDetail from "./features/companion/CompanionRecipeDetail";
 
 const queryClient = new QueryClient();
 
