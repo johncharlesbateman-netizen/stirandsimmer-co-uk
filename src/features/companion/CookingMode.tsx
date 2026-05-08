@@ -37,7 +37,8 @@ const renderHighlighted = (text: string, highlights?: string[]) => {
   );
 };
 
-const CookingMode = ({ recipeName, emoji, steps, onClose, onLog }: CookingModeProps) => {
+const CookingMode = ({ recipeId, recipeName, emoji, steps, onClose }: CookingModeProps) => {
+  const [showLogPrompt, setShowLogPrompt] = useState(false);
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState(false);
   const total = steps.length;
