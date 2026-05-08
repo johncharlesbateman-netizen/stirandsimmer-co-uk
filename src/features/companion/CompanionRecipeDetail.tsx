@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ChefHat, Clock, Flame } from "lucide-react";
 import { companionRecipes } from "./data";
+import CookingMode from "./CookingMode";
 
 const CompanionRecipeDetail = () => {
   const { id } = useParams<{ id: string }>();
   const recipe = companionRecipes.find((r) => r.id === id) ?? companionRecipes[0];
+  const [cooking, setCooking] = useState(false);
 
   return (
     <div>
@@ -54,11 +57,21 @@ const CompanionRecipeDetail = () => {
       <div className="px-6 py-8">
         <button
           type="button"
+          onClick={() => setCooking(true)}
           className="block w-full rounded-xl bg-companion-amber px-4 py-3.5 text-center text-sm font-medium text-white transition-colors hover:bg-companion-amber-soft"
         >
           Start cooking
         </button>
       </div>
+
+      {cooking && (
+        <CookingMode
+          recipeName={recipe.name}
+          emoji={recipe.emoji}
+          steps={recipe.steps}
+          onClose={() => setCooking(false)}
+        />
+      )}
     </div>
   );
 };

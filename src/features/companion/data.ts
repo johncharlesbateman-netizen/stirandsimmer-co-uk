@@ -1,3 +1,9 @@
+export type CookingStep = {
+  text: string;
+  /** Optional countdown for this step, in seconds */
+  durationSeconds?: number;
+};
+
 export type CompanionRecipe = {
   id: string;
   emoji: string;
@@ -8,6 +14,7 @@ export type CompanionRecipe = {
   spice: "Mild" | "Medium" | "Hot";
   difficulty: "Easy" | "Medium" | "Hard";
   ingredients: string[];
+  steps: CookingStep[];
 };
 
 export const companionRecipes: CompanionRecipe[] = [
@@ -30,6 +37,13 @@ export const companionRecipes: CompanionRecipe[] = [
       "Toasted sesame seeds",
       "Spring onion, finely sliced",
     ],
+    steps: [
+      { text: "Heat the grill to high. Halve the aubergines lengthways and score the flesh in a diamond pattern." },
+      { text: "Brush with a little oil and grill, cut-side up, until softened and lightly charred.", durationSeconds: 600 },
+      { text: "Whisk the miso, mirin, sake and sugar together in a small bowl." },
+      { text: "Spoon the glaze generously over the aubergines and return to the grill until caramelised and bubbling.", durationSeconds: 240 },
+      { text: "Rest for a moment, then scatter with sesame seeds and spring onion before serving." },
+    ],
   },
   {
     id: "harissa-lamb-flatbreads",
@@ -49,6 +63,12 @@ export const companionRecipes: CompanionRecipe[] = [
       "Handful mint and coriander",
       "1 red onion, pickled",
     ],
+    steps: [
+      { text: "Warm a heavy frying pan over a high heat and brown the lamb mince, breaking it up as it cooks.", durationSeconds: 360 },
+      { text: "Stir the rose harissa through the lamb and season generously." },
+      { text: "Char the flatbreads in a dry pan or under the grill until lightly blistered.", durationSeconds: 120 },
+      { text: "Spread each flatbread with yoghurt, top with the harissa lamb and finish with herbs and pickled onion." },
+    ],
   },
   {
     id: "thai-coconut-curry",
@@ -67,6 +87,12 @@ export const companionRecipes: CompanionRecipe[] = [
       "1 aubergine, diced",
       "Fish sauce, palm sugar, lime",
       "Thai basil",
+    ],
+    steps: [
+      { text: "Heat a splash of oil in a wok and fry the green curry paste until fragrant.", durationSeconds: 90 },
+      { text: "Pour in the coconut milk and bring to a gentle simmer, stirring to combine." },
+      { text: "Add the chicken and aubergine and simmer until the chicken is cooked through and tender.", durationSeconds: 900 },
+      { text: "Season with fish sauce, palm sugar and a squeeze of lime, then scatter with Thai basil to serve." },
     ],
   },
 ];
