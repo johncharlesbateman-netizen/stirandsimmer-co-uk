@@ -1,94 +1,62 @@
-import { createContext, ReactNode, useContext, useEffect, useState, useCallback } from "react";
-
-export interface ChefProfile {
-  user_id: string;
-  chef_name: string | null;
-  avatar: string | null;
-  cooking_style: string | null;
-  total_points: number;
-  level: number;
-}
+import { useState, useEffect, createContext, useContext, ReactNode } from "react";
+import { Session, User } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
 
 interface AuthContextValue {
-  session: { user: { id: string } } | null;
-  user: { id: string } | null;
-  profile: ChefProfile | null;
+  session: Session | null;
+  user: User | null;
+  isAdmin: boolean;
   loading: boolean;
-  refreshProfile: () => Promise<void>;
-  updateProfile: (patch: Partial<ChefProfile>) => Promise<void>;
   signOut: () => Promise<void>;
-}
-
-const STORAGE_KEY = "pass_demo_profile";
-
-function uuid() {
-  if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID();
-  return "demo-" + Math.random().toString(36).slice(2);
-}
-
-function loadProfile(): ChefProfile | null {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as ChefProfile) : null;
-  } catch {
-    return null;
-  }
-}
-
-function saveProfile(p: ChefProfile) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
 }
 
 const AuthContext = createContext<AuthContextValue>({
   session: null,
   user: null,
-  profile: null,
+  isAdmin: false,
   loading: true,
-  refreshProfile: async () => {},
-  updateProfile: async () => {},
   signOut: async () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [profile, setProfile] = useState<ChefProfile | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setProfile(loadProfile());
-    setLoading(false);
-  }, []);
+    // Set up listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
+      setSession(newSession);
+      if (newSession?.user) {
+        // Defer admin check to avoid deadlocks
+        setTimeout(async () => {
+          const { data } = await supabase.rpc("is_admin");
+          setIsAdmin(!!data);
+        }, 0);
+      } else {
+        setIsAdmin(false);
+      }
+    });
 
-  const refreshProfile = useCallback(async () => {
-    setProfile(loadProfile());
-  }, []);
+    // THEN check existing session
+    supabase.auth.getSession().then(async ({ data: { session: existing } }) => {
+      setSession(existing);
+      if (existing?.user) {
+        const { data } = await supabase.rpc("is_admin");
+        setIsAdmin(!!data);
+      }
+      setLoading(false);
+    });
 
-  const updateProfile = useCallback(async (patch: Partial<ChefProfile>) => {
-    const current = loadProfile() ?? {
-      user_id: uuid(),
-      chef_name: null,
-      avatar: null,
-      cooking_style: null,
-      total_points: 0,
-      level: 1,
-    };
-    const next = { ...current, ...patch };
-    saveProfile(next);
-    setProfile(next);
+    return () => subscription.unsubscribe();
   }, []);
 
   const signOut = async () => {
-    localStorage.removeItem(STORAGE_KEY);
-    setProfile(null);
+    await supabase.auth.signOut();
   };
 
-  // Always provide a synthetic session so guarded screens render.
-  const userId = profile?.user_id ?? "demo-anon";
-  const session = { user: { id: userId } };
-
   return (
-    <AuthContext.Provider
-      value={{ session, user: session.user, profile, loading, refreshProfile, updateProfile, signOut }}
-    >
+    <AuthContext.Provider value={{ session, user: session?.user ?? null, isAdmin, loading, signOut }}>
       {children}
     </AuthContext.Provider>
   );

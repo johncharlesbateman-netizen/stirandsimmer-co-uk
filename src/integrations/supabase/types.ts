@@ -71,130 +71,6 @@ export type Database = {
         }
         Relationships: []
       }
-      challenge_progress: {
-        Row: {
-          challenge_id: string
-          completed: boolean
-          completed_at: string | null
-          id: string
-          updated_at: string
-          user_id: string
-          verified_count: number
-        }
-        Insert: {
-          challenge_id: string
-          completed?: boolean
-          completed_at?: string | null
-          id?: string
-          updated_at?: string
-          user_id: string
-          verified_count?: number
-        }
-        Update: {
-          challenge_id?: string
-          completed?: boolean
-          completed_at?: string | null
-          id?: string
-          updated_at?: string
-          user_id?: string
-          verified_count?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "challenge_progress_challenge_id_fkey"
-            columns: ["challenge_id"]
-            isOneToOne: false
-            referencedRelation: "challenges"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      challenges: {
-        Row: {
-          cook_time_minutes: number
-          created_at: string
-          cuisine_region: string
-          description: string
-          id: string
-          is_locked_until_points: number
-          points_reward: number
-          recipe_name: string
-          recipe_url: string
-          required_count: number
-          sort_order: number
-          title: string
-          unlock_reward_id: string | null
-        }
-        Insert: {
-          cook_time_minutes?: number
-          created_at?: string
-          cuisine_region: string
-          description: string
-          id?: string
-          is_locked_until_points?: number
-          points_reward?: number
-          recipe_name: string
-          recipe_url: string
-          required_count?: number
-          sort_order?: number
-          title: string
-          unlock_reward_id?: string | null
-        }
-        Update: {
-          cook_time_minutes?: number
-          created_at?: string
-          cuisine_region?: string
-          description?: string
-          id?: string
-          is_locked_until_points?: number
-          points_reward?: number
-          recipe_name?: string
-          recipe_url?: string
-          required_count?: number
-          sort_order?: number
-          title?: string
-          unlock_reward_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "challenges_unlock_reward_id_fkey"
-            columns: ["unlock_reward_id"]
-            isOneToOne: false
-            referencedRelation: "secrets_pass"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      cooked_dishes: {
-        Row: {
-          cooked_at: string
-          id: string
-          photo_url: string | null
-          photo_verified: boolean
-          recipe_id: string
-          recipe_name: string | null
-          user_id: string
-        }
-        Insert: {
-          cooked_at?: string
-          id?: string
-          photo_url?: string | null
-          photo_verified?: boolean
-          recipe_id: string
-          recipe_name?: string | null
-          user_id: string
-        }
-        Update: {
-          cooked_at?: string
-          id?: string
-          photo_url?: string | null
-          photo_verified?: boolean
-          recipe_id?: string
-          recipe_name?: string | null
-          user_id?: string
-        }
-        Relationships: []
-      }
       email_send_log: {
         Row: {
           created_at: string
@@ -282,105 +158,6 @@ export type Database = {
         }
         Relationships: []
       }
-      guides: {
-        Row: {
-          body: string
-          created_at: string
-          id: string
-          image_url: string | null
-          intro: string
-          last_updated_at: string
-          published: boolean
-          published_at: string
-          slug: string
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          body: string
-          created_at?: string
-          id?: string
-          image_url?: string | null
-          intro: string
-          last_updated_at?: string
-          published?: boolean
-          published_at?: string
-          slug: string
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          body?: string
-          created_at?: string
-          id?: string
-          image_url?: string | null
-          intro?: string
-          last_updated_at?: string
-          published?: boolean
-          published_at?: string
-          slug?: string
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      profiles: {
-        Row: {
-          avatar: string | null
-          chef_name: string | null
-          cooking_style: string | null
-          created_at: string
-          dietary: string | null
-          first_name: string | null
-          id: string
-          level: number
-          onboarding_completed: boolean
-          regions: string[]
-          skill_level: string | null
-          spice_tolerance: string | null
-          time_available: string | null
-          total_points: number
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          avatar?: string | null
-          chef_name?: string | null
-          cooking_style?: string | null
-          created_at?: string
-          dietary?: string | null
-          first_name?: string | null
-          id?: string
-          level?: number
-          onboarding_completed?: boolean
-          regions?: string[]
-          skill_level?: string | null
-          spice_tolerance?: string | null
-          time_available?: string | null
-          total_points?: number
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          avatar?: string | null
-          chef_name?: string | null
-          cooking_style?: string | null
-          created_at?: string
-          dietary?: string | null
-          first_name?: string | null
-          id?: string
-          level?: number
-          onboarding_completed?: boolean
-          regions?: string[]
-          skill_level?: string | null
-          spice_tolerance?: string | null
-          time_available?: string | null
-          total_points?: number
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
       recipes: {
         Row: {
           category: Database["public"]["Enums"]["recipe_category"]
@@ -392,7 +169,6 @@ export type Database = {
           image_url: string | null
           ingredients: Json
           instructions: Json
-          intro: string | null
           is_seasonal: boolean | null
           prep_time_minutes: number | null
           seo_description: string | null
@@ -413,7 +189,6 @@ export type Database = {
           image_url?: string | null
           ingredients?: Json
           instructions?: Json
-          intro?: string | null
           is_seasonal?: boolean | null
           prep_time_minutes?: number | null
           seo_description?: string | null
@@ -434,7 +209,6 @@ export type Database = {
           image_url?: string | null
           ingredients?: Json
           instructions?: Json
-          intro?: string | null
           is_seasonal?: boolean | null
           prep_time_minutes?: number | null
           seo_description?: string | null
@@ -444,30 +218,6 @@ export type Database = {
           tips?: string | null
           title?: string
           updated_at?: string
-        }
-        Relationships: []
-      }
-      secrets_pass: {
-        Row: {
-          content: string
-          created_at: string
-          id: string
-          is_welcome: boolean
-          title: string
-        }
-        Insert: {
-          content: string
-          created_at?: string
-          id?: string
-          is_welcome?: boolean
-          title: string
-        }
-        Update: {
-          content?: string
-          created_at?: string
-          id?: string
-          is_welcome?: boolean
-          title?: string
         }
         Relationships: []
       }
@@ -495,86 +245,6 @@ export type Database = {
         }
         Relationships: []
       }
-      unlocked_secrets: {
-        Row: {
-          id: string
-          secret_id: string
-          unlocked_at: string
-          user_id: string
-        }
-        Insert: {
-          id?: string
-          secret_id: string
-          unlocked_at?: string
-          user_id: string
-        }
-        Update: {
-          id?: string
-          secret_id?: string
-          unlocked_at?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "unlocked_secrets_secret_id_fkey"
-            columns: ["secret_id"]
-            isOneToOne: false
-            referencedRelation: "secrets_pass"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      verifications: {
-        Row: {
-          challenge_id: string
-          id: string
-          photo_url: string
-          points_awarded: number
-          recipe_name: string
-          recipe_url: string
-          unlocked_secret_id: string | null
-          user_id: string
-          verified_at: string
-        }
-        Insert: {
-          challenge_id: string
-          id?: string
-          photo_url: string
-          points_awarded?: number
-          recipe_name: string
-          recipe_url: string
-          unlocked_secret_id?: string | null
-          user_id: string
-          verified_at?: string
-        }
-        Update: {
-          challenge_id?: string
-          id?: string
-          photo_url?: string
-          points_awarded?: number
-          recipe_name?: string
-          recipe_url?: string
-          unlocked_secret_id?: string | null
-          user_id?: string
-          verified_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "verifications_challenge_id_fkey"
-            columns: ["challenge_id"]
-            isOneToOne: false
-            referencedRelation: "challenges"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "verifications_unlocked_secret_id_fkey"
-            columns: ["unlocked_secret_id"]
-            isOneToOne: false
-            referencedRelation: "secrets_pass"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
     }
     Views: {
       [_ in never]: never
@@ -589,7 +259,6 @@ export type Database = {
         Returns: number
       }
       is_admin: { Args: never; Returns: boolean }
-      level_for_points: { Args: { p: number }; Returns: number }
       move_to_dlq: {
         Args: {
           dlq_name: string
@@ -606,10 +275,6 @@ export type Database = {
           msg_id: number
           read_ct: number
         }[]
-      }
-      verify_dish: {
-        Args: { p_challenge_id: string; p_photo_url: string }
-        Returns: Json
       }
     }
     Enums: {
