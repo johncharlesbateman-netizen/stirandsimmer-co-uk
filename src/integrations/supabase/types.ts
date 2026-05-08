@@ -200,6 +200,48 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          created_at: string
+          dietary: string | null
+          first_name: string | null
+          id: string
+          onboarding_completed: boolean
+          regions: string[]
+          skill_level: string | null
+          spice_tolerance: string | null
+          time_available: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          dietary?: string | null
+          first_name?: string | null
+          id?: string
+          onboarding_completed?: boolean
+          regions?: string[]
+          skill_level?: string | null
+          spice_tolerance?: string | null
+          time_available?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          dietary?: string | null
+          first_name?: string | null
+          id?: string
+          onboarding_completed?: boolean
+          regions?: string[]
+          skill_level?: string | null
+          spice_tolerance?: string | null
+          time_available?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       recipes: {
         Row: {
           category: Database["public"]["Enums"]["recipe_category"]

@@ -30,6 +30,12 @@ import CompanionExplore from "./features/companion/CompanionExplore";
 import CompanionJourney from "./features/companion/CompanionJourney";
 import CompanionProfile from "./features/companion/CompanionProfile";
 import CompanionRecipeDetail from "./features/companion/CompanionRecipeDetail";
+import { OnboardingProvider } from "./features/onboarding/OnboardingContext";
+import OnboardingWelcome from "./features/onboarding/OnboardingWelcome";
+import OnboardingSignup from "./features/onboarding/OnboardingSignup";
+import OnboardingPreferences from "./features/onboarding/OnboardingPreferences";
+import OnboardingRegions from "./features/onboarding/OnboardingRegions";
+import OnboardingDone from "./features/onboarding/OnboardingDone";
 
 const queryClient = new QueryClient();
 
@@ -127,6 +133,20 @@ const App = () => (
               element={<RequireAdmin><AdminSeoStatus /></RequireAdmin>}
             />
             <Route path="/privacy" element={<Privacy />} />
+            <Route
+              path="/onboarding/*"
+              element={
+                <OnboardingProvider>
+                  <Routes>
+                    <Route index element={<OnboardingWelcome />} />
+                    <Route path="signup" element={<OnboardingSignup />} />
+                    <Route path="preferences" element={<OnboardingPreferences />} />
+                    <Route path="regions" element={<OnboardingRegions />} />
+                    <Route path="done" element={<OnboardingDone />} />
+                  </Routes>
+                </OnboardingProvider>
+              }
+            />
             <Route path="/app" element={<CompanionLayout />}>
               <Route index element={<CompanionHome />} />
               <Route path="explore" element={<CompanionExplore />} />
