@@ -1,5 +1,8 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate, NavLink, Outlet } from "react-router-dom";
 import { Compass, Home, Sparkles, User } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 const navItems = [
   { to: "/app", end: true, label: "Home", Icon: Home },
@@ -9,6 +12,35 @@ const navItems = [
 ];
 
 const CompanionLayout = () => {
+  const { user, loading } = useAuth();
+  const [checking, setChecking] = useState(true);
+  const [needsOnboarding, setNeedsOnboarding] = useState(false);
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) {
+      setNeedsOnboarding(true);
+      setChecking(false);
+      return;
+    }
+    supabase
+      .from("profiles")
+      .select("onboarding_completed")
+      .eq("user_id", user.id)
+      .maybeSingle()
+      .then(({ data }) => {
+        setNeedsOnboarding(!data?.onboarding_completed);
+        setChecking(false);
+      });
+  }, [user, loading]);
+
+  if (loading || checking) {
+    return <div className="min-h-screen bg-companion-bg" />;
+  }
+  if (needsOnboarding) {
+    return <Navigate to="/onboarding" replace />;
+  }
+
   return (
     <div className="min-h-screen bg-companion-bg text-companion-fg">
       <div className="mx-auto flex min-h-screen max-w-md flex-col">
