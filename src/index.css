@@ -1,514 +1,144 @@
-/* Font stylesheets are loaded via <link> tags in index.html for parallel,
-   non-render-blocking delivery (improves FCP/LCP). */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Food Photographer Portfolio — Editorial Design System
-   All colors are HSL for theming consistency
-*/
+/* The Pass — dark cinematic design system. All HSL. */
 
 @layer base {
   :root {
-    /* Off-white warm background */
-    --background: 36 33% 97%;
-    --foreground: 0 0% 17%;
+    /* Core */
+    --background: 45 33% 5%;        /* #111008 */
+    --foreground: 41 81% 76%;       /* #F5D78E */
 
-    /* Cards with subtle warmth */
-    --card: 36 33% 97%;
-    --card-foreground: 0 0% 17%;
+    --card: 31 100% 5%;             /* #1a0e00 */
+    --card-foreground: 41 81% 76%;
 
-    --popover: 36 33% 97%;
-    --popover-foreground: 0 0% 17%;
+    --popover: 31 100% 5%;
+    --popover-foreground: 41 81% 76%;
 
-    /* Charcoal primary */
-    --primary: 0 0% 17%;
-    --primary-foreground: 36 33% 97%;
+    --primary: 31 78% 45%;          /* #C97B1A amber */
+    --primary-foreground: 45 33% 5%;
 
-    /* Warm cream secondary */
-    --secondary: 36 20% 92%;
-    --secondary-foreground: 0 0% 17%;
+    --secondary: 31 60% 12%;
+    --secondary-foreground: 41 81% 76%;
 
-    /* Muted tones */
-    --muted: 36 15% 90%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 31 30% 12%;
+    --muted-foreground: 41 30% 55%;
 
-    /* Terracotta accent */
-    --accent: 16 45% 55%;
-    --accent-foreground: 36 33% 97%;
+    --accent: 31 78% 45%;
+    --accent-foreground: 45 33% 5%;
 
-    /* Earthy tones */
-    --terracotta: 16 45% 55%;
-    --olive: 82 25% 40%;
-    --wine: 345 35% 35%;
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 41 81% 90%;
 
-    /* Meal planner green */
-    --planner: 145 40% 28%;
-    --planner-foreground: 36 33% 97%;
-    --planner-soft: 145 30% 92%;
-    --planner-accent: 145 50% 40%;
+    --border: 41 50% 25%;           /* base; alpha applied via utility */
+    --input: 31 100% 5%;
+    --ring: 31 78% 45%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 36 15% 85%;
-    --input: 36 15% 85%;
-    --ring: 0 0% 17%;
-
-    --radius: 0.25rem;
-
-    /* Sidebar */
-    --sidebar-background: 36 33% 97%;
-    --sidebar-foreground: 0 0% 17%;
-    --sidebar-primary: 0 0% 17%;
-    --sidebar-primary-foreground: 36 33% 97%;
-    --sidebar-accent: 36 20% 92%;
-    --sidebar-accent-foreground: 0 0% 17%;
-    --sidebar-border: 36 15% 85%;
-    --sidebar-ring: 0 0% 17%;
-  }
-
-  .dark {
-    --background: 0 0% 8%;
-    --foreground: 36 33% 95%;
-
-    --card: 0 0% 10%;
-    --card-foreground: 36 33% 95%;
-
-    --popover: 0 0% 10%;
-    --popover-foreground: 36 33% 95%;
-
-    --primary: 36 33% 95%;
-    --primary-foreground: 0 0% 8%;
-
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 36 33% 95%;
-
-    --muted: 0 0% 18%;
-    --muted-foreground: 36 15% 60%;
-
-    --accent: 16 45% 55%;
-    --accent-foreground: 36 33% 97%;
-
-    --terracotta: 16 45% 55%;
-    --olive: 82 25% 50%;
-    --wine: 345 35% 45%;
-
-    --planner: 145 40% 35%;
-    --planner-foreground: 36 33% 97%;
-    --planner-soft: 145 25% 18%;
-    --planner-accent: 145 50% 50%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 36 33% 95%;
-
-    --sidebar-background: 0 0% 10%;
-    --sidebar-foreground: 36 33% 95%;
-    --sidebar-primary: 36 33% 95%;
-    --sidebar-primary-foreground: 0 0% 8%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 36 33% 95%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 36 33% 95%;
+    --radius: 0.875rem;             /* ~14px */
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: rgba(245, 215, 142, 0.15);
   }
 
-  html {
-    scroll-behavior: auto;
-    overflow-x: hidden;
-    font-size: 16px;
+  html, body, #root {
+    background-color: #111008;
+    color: #F5D78E;
+    min-height: 100vh;
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    line-height: 1.5;
-    overflow-x: hidden;
-  }
-
-  p {
-    font-size: 1rem;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Boska', serif;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
   }
 
-  /* Smooth transitions for all interactive elements */
-  a, button {
-    @apply transition-all duration-300 ease-out;
-  }
-
-  section {
-    opacity: 1;
-    transform: none;
-  }
-
-  @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-behavior: smooth;
-    }
-
-    section {
-      @apply animate-fade-in;
-    }
-  }
-
-  @media (max-width: 767px), (prefers-reduced-motion: reduce) {
-    section {
-      animation: none !important;
-    }
-  }
-
-  /* Images with smooth loading */
-  img {
-    @apply transition-opacity duration-500 ease-out;
+  ::selection {
+    background: rgba(201, 123, 26, 0.35);
+    color: #F5D78E;
   }
 }
 
 @layer components {
-  /* Editorial micro-caption style */
-  .micro-caption {
-    @apply text-xs tracking-wider uppercase text-muted-foreground;
-    font-family: 'DM Sans', sans-serif;
-    letter-spacing: 0.1em;
+  .pass-eyebrow {
+    @apply text-[11px] uppercase tracking-[0.22em] text-[rgba(245,215,142,0.55)];
   }
 
-  /* Elegant link underline animation */
-  .editorial-link {
-    @apply relative inline-block;
+  .pass-divider {
+    height: 1px;
+    background: rgba(245, 215, 142, 0.15);
   }
 
-  .editorial-link::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-full h-px bg-foreground origin-bottom-right transition-transform duration-500 ease-out scale-x-0;
+  .pass-card {
+    background: #1a0e00;
+    border: 1px solid rgba(245, 215, 142, 0.15);
+    border-radius: 14px;
   }
 
-  .editorial-link:hover::after {
-    @apply origin-bottom-left scale-x-100;
+  .pass-input {
+    background: #1e1100;
+    border: 1px solid rgba(245, 215, 142, 0.15);
+    color: #F5D78E;
+    border-radius: 12px;
+    transition: border-color 200ms ease;
   }
 
-  /* Image with editorial treatment */
-  .editorial-image {
-    @apply transition-all duration-700 ease-out;
+  .pass-input::placeholder {
+    color: rgba(245, 215, 142, 0.35);
   }
 
-  .editorial-image:hover {
-    @apply scale-[1.02];
+  .pass-input:focus {
+    outline: none;
+    border-color: #C97B1A;
   }
 
-  /* Gentle hover lift effect */
-  .hover-lift {
-    @apply transition-all duration-500 ease-out;
+  .pass-btn-primary {
+    background: #C97B1A;
+    color: #111008;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: background-color 200ms ease, transform 120ms ease;
   }
 
-  .hover-lift:hover {
-    @apply -translate-y-1;
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+  .pass-btn-primary:hover:not(:disabled) {
+    background: #d98a26;
   }
 
-  /* Subtle text reveal on hover */
-  .text-reveal {
-    @apply transition-all duration-300 ease-out;
+  .pass-btn-primary:active:not(:disabled) {
+    transform: scale(0.98);
   }
 
-  .text-reveal:hover {
-    @apply tracking-wide;
+  .pass-btn-primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
   }
 
-  /* Smooth button interactions */
-  .btn-smooth {
-    @apply relative overflow-hidden transition-all duration-500 ease-out;
+  .pass-btn-ghost {
+    background: transparent;
+    color: #F5D78E;
+    border: 1px solid rgba(245, 215, 142, 0.3);
+    border-radius: 12px;
+    font-weight: 500;
+    transition: border-color 200ms ease;
   }
 
-  .btn-smooth::before {
-    content: '';
-    @apply absolute inset-0 bg-foreground/5 translate-y-full transition-transform duration-500 ease-out;
+  .pass-btn-ghost:hover {
+    border-color: #C97B1A;
   }
 
-  .btn-smooth:hover::before {
-    @apply translate-y-0;
-  }
-
-  /* Fade up on scroll placeholder */
-  .fade-up {
-    @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
-  }
-
-  .fade-up.visible {
-    @apply opacity-100 translate-y-0;
-  }
-}
-
-@layer utilities {
-  /* Floating animation - like floating on water */
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-8px);
-    }
-  }
-  
-  .floating-item {
-    animation: float 6s ease-in-out infinite;
-  }
-  
-  .floating-item-delay-1 {
-    animation: float 6s ease-in-out infinite;
-    animation-delay: 0.5s;
-  }
-  
-  .floating-item-delay-2 {
-    animation: float 6s ease-in-out infinite;
-    animation-delay: 1s;
-  }
-  
-  .floating-item-delay-3 {
-    animation: float 6s ease-in-out infinite;
-    animation-delay: 1.5s;
-  }
-  
-  .floating-item-delay-4 {
-    animation: float 6s ease-in-out infinite;
-    animation-delay: 2s;
-  }
-  
-  .floating-item-delay-5 {
-    animation: float 6s ease-in-out infinite;
-    animation-delay: 2.5s;
-  }
-
-  /* Large editorial headings — capped per design spec */
-  .heading-display {
-    font-family: 'Boska', serif;
-    font-size: clamp(2rem, 5vw, 3rem); /* 32px → 48px */
-    @apply font-medium tracking-tight leading-tight;
-  }
-
-  .heading-editorial {
-    font-family: 'Boska', serif;
-    font-size: clamp(1.5rem, 3.5vw, 2rem); /* 24px → 32px */
-    @apply font-medium tracking-tight leading-tight;
-  }
-
-  .heading-section {
-    font-family: 'Boska', serif;
-    font-size: clamp(1.25rem, 3vw, 1.75rem); /* 20px → 28px */
-    @apply font-medium leading-snug;
-  }
-
-  /* Body text styles */
-  .body-editorial {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem; /* 16px */
-    @apply leading-relaxed;
-  }
-
-  /* Breathing space */
-  .section-breathing {
-    @apply py-20 md:py-32 lg:py-40;
-  }
-}
-
-/* Print-friendly recipe card */
-@media print {
-  @page {
-    size: A4;
-    margin: 15mm;
-  }
-
-  body {
-    background: white !important;
-    color: black !important;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11pt;
-    line-height: 1.5;
-  }
-
-  /* Hide everything by default */
-  body * {
-    visibility: hidden;
-  }
-
-  /* Show only the print card and its descendants */
-  .print-recipe-card,
-  .print-recipe-card * {
-    visibility: visible;
-  }
-
-  .print-recipe-card {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    background: white !important;
-    color: black !important;
-  }
-
-  /* Hide controls inside the printable area */
-  .no-print,
-  .no-print * {
-    display: none !important;
-  }
-
-  .print-recipe-card .print-title {
-    font-family: 'Boska', serif;
-    font-size: 24pt;
-    margin: 0 0 8pt 0;
-    padding-bottom: 0;
-    border-bottom: 0;
-    color: black;
-  }
-
-  .print-recipe-card .print-description {
-    font-size: 11pt;
-    margin: 0 0 12pt 0;
-    color: #333;
-  }
-
-  .print-recipe-card .print-image {
-    width: 100%;
-    max-height: 90mm;
-    object-fit: cover;
-    margin-bottom: 12pt;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  /* Hide image when print-no-image flag is set on the card */
-  .print-recipe-card.print-no-image .print-image {
-    display: none !important;
-  }
-
-  .print-recipe-card .print-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16pt;
-    padding: 8pt 0;
-    border-top: 1pt solid #999;
-    border-bottom: 1pt solid #999;
-    margin-bottom: 14pt;
-    font-size: 10pt;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  .print-recipe-card .print-meta strong {
-    display: block;
-    font-size: 8pt;
-    text-transform: uppercase;
-    letter-spacing: 0.5pt;
-    color: #666;
-    font-weight: 600;
-    margin-bottom: 2pt;
-  }
-
-  .print-recipe-card h2 {
-    font-family: 'Boska', serif;
-    font-size: 14pt;
-    margin: 14pt 0 8pt 0;
-    padding-bottom: 4pt;
-    border-bottom: 1pt solid #ccc;
-    page-break-after: avoid;
-    break-after: avoid;
-  }
-
-  /* Keep each section together where possible */
-  .print-recipe-card .print-section {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  .print-recipe-card .print-ingredients {
-    list-style: disc;
-    padding-left: 18pt;
-    margin: 0 0 12pt 0;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  .print-recipe-card .print-ingredients li {
-    margin-bottom: 4pt;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  .print-recipe-card .print-instructions {
-    list-style: decimal;
-    padding-left: 18pt;
-    margin: 0;
-  }
-
-  .print-recipe-card .print-instructions li {
-    margin-bottom: 8pt;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  .print-recipe-card .print-qr {
-    margin-top: 18pt;
-    padding-top: 12pt;
-    border-top: 0.5pt solid #ccc;
-    display: flex;
-    align-items: center;
-    gap: 12pt;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  .print-recipe-card .print-qr img {
-    width: 25mm;
-    height: 25mm;
-  }
-
-  .print-recipe-card .print-qr p {
-    margin: 0;
-    font-size: 9pt;
-    color: #333;
-  }
-
-  .print-recipe-card .print-qr p span {
-    display: block;
-    font-size: 8pt;
-    color: #666;
-    margin-top: 2pt;
-    word-break: break-all;
-  }
-
-  .print-recipe-card .print-footer {
-    position: fixed;
-    bottom: 5mm;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 8pt;
-    color: #666;
-    border-top: 0.5pt solid #ccc;
-    padding-top: 4pt;
-  }
-}
-
-/* Hide print-only block on screen */
-.print-recipe-card {
-  display: none;
-}
-@media print {
-  .print-recipe-card {
-    display: block;
+  .pass-muted {
+    color: rgba(245, 215, 142, 0.45);
   }
 }
