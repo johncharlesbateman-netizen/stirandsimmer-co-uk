@@ -452,18 +452,21 @@ export type Database = {
           content: string
           created_at: string
           id: string
+          is_welcome: boolean
           title: string
         }
         Insert: {
           content: string
           created_at?: string
           id?: string
+          is_welcome?: boolean
           title: string
         }
         Update: {
           content?: string
           created_at?: string
           id?: string
+          is_welcome?: boolean
           title?: string
         }
         Relationships: []
@@ -586,6 +589,7 @@ export type Database = {
         Returns: number
       }
       is_admin: { Args: never; Returns: boolean }
+      level_for_points: { Args: { p: number }; Returns: number }
       move_to_dlq: {
         Args: {
           dlq_name: string
