@@ -1,3 +1,9 @@
+export type CookingStep = {
+  text: string;
+  /** Optional countdown for this step, in seconds */
+  durationSeconds?: number;
+};
+
 export type CompanionRecipe = {
   id: string;
   emoji: string;
@@ -8,6 +14,7 @@ export type CompanionRecipe = {
   spice: "Mild" | "Medium" | "Hot";
   difficulty: "Easy" | "Medium" | "Hard";
   ingredients: string[];
+  steps: CookingStep[];
 };
 
 export const companionRecipes: CompanionRecipe[] = [
