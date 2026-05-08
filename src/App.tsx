@@ -127,6 +127,13 @@ const App = () => (
               element={<RequireAdmin><AdminSeoStatus /></RequireAdmin>}
             />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/app" element={<CompanionLayout />}>
+              <Route index element={<CompanionHome />} />
+              <Route path="explore" element={<CompanionExplore />} />
+              <Route path="journey" element={<CompanionJourney />} />
+              <Route path="profile" element={<CompanionProfile />} />
+              <Route path="recipe/:id" element={<CompanionRecipeDetail />} />
+            </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
