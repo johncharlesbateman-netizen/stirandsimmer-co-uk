@@ -106,10 +106,7 @@ const CookingMode = ({ recipeId, recipeName, emoji, steps, onClose }: CookingMod
           <div className="space-y-3">
             <button
               type="button"
-              onClick={() => {
-                onLog?.();
-                onClose();
-              }}
+              onClick={() => setShowLogPrompt(true)}
               className="w-full rounded-full bg-[#B45309] px-6 py-4 text-sm font-medium text-white shadow-[0_10px_40px_rgba(180,83,9,0.4)] transition hover:bg-[#a04808]"
             >
               Log this dish
@@ -123,6 +120,16 @@ const CookingMode = ({ recipeId, recipeName, emoji, steps, onClose }: CookingMod
             </button>
           </div>
         </div>
+        {showLogPrompt && (
+          <LogDishPrompt
+            recipeId={recipeId}
+            recipeName={recipeName}
+            onComplete={() => {
+              setShowLogPrompt(false);
+              onClose();
+            }}
+          />
+        )}
       </div>
     );
   }
