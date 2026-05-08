@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Lightbulb, Pause, Play, RotateCcw, Timer } from "lucide-react";
 import type { CookingStep } from "./data";
+import LogDishPrompt from "./LogDishPrompt";
 
 interface CookingModeProps {
+  recipeId: string;
   recipeName: string;
   emoji: string;
   steps: CookingStep[];
   onClose: () => void;
-  onLog?: () => void;
 }
 
 const formatTime = (s: number) => {
