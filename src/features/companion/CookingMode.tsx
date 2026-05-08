@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Lightbulb, Pause, Play, RotateCcw, Timer } from "lucide-react";
 import type { CookingStep } from "./data";
+import LogDishPrompt from "./LogDishPrompt";
 
 interface CookingModeProps {
+  recipeId: string;
   recipeName: string;
   emoji: string;
   steps: CookingStep[];
   onClose: () => void;
-  onLog?: () => void;
 }
 
 const formatTime = (s: number) => {
@@ -36,7 +37,8 @@ const renderHighlighted = (text: string, highlights?: string[]) => {
   );
 };
 
-const CookingMode = ({ recipeName, emoji, steps, onClose, onLog }: CookingModeProps) => {
+const CookingMode = ({ recipeId, recipeName, emoji, steps, onClose }: CookingModeProps) => {
+  const [showLogPrompt, setShowLogPrompt] = useState(false);
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState(false);
   const total = steps.length;
@@ -104,10 +106,7 @@ const CookingMode = ({ recipeName, emoji, steps, onClose, onLog }: CookingModePr
           <div className="space-y-3">
             <button
               type="button"
-              onClick={() => {
-                onLog?.();
-                onClose();
-              }}
+              onClick={() => setShowLogPrompt(true)}
               className="w-full rounded-full bg-[#B45309] px-6 py-4 text-sm font-medium text-white shadow-[0_10px_40px_rgba(180,83,9,0.4)] transition hover:bg-[#a04808]"
             >
               Log this dish
@@ -121,6 +120,16 @@ const CookingMode = ({ recipeName, emoji, steps, onClose, onLog }: CookingModePr
             </button>
           </div>
         </div>
+        {showLogPrompt && (
+          <LogDishPrompt
+            recipeId={recipeId}
+            recipeName={recipeName}
+            onComplete={() => {
+              setShowLogPrompt(false);
+              onClose();
+            }}
+          />
+        )}
       </div>
     );
   }

@@ -71,6 +71,36 @@ export type Database = {
         }
         Relationships: []
       }
+      cooked_dishes: {
+        Row: {
+          cooked_at: string
+          id: string
+          photo_url: string | null
+          photo_verified: boolean
+          recipe_id: string
+          recipe_name: string | null
+          user_id: string
+        }
+        Insert: {
+          cooked_at?: string
+          id?: string
+          photo_url?: string | null
+          photo_verified?: boolean
+          recipe_id: string
+          recipe_name?: string | null
+          user_id: string
+        }
+        Update: {
+          cooked_at?: string
+          id?: string
+          photo_url?: string | null
+          photo_verified?: boolean
+          recipe_id?: string
+          recipe_name?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string

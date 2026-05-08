@@ -66,6 +66,7 @@ const CompanionRecipeDetail = () => {
 
       {cooking && (
         <CookingMode
+          recipeId={recipe.id}
           recipeName={recipe.name}
           emoji={recipe.emoji}
           steps={recipe.steps}
