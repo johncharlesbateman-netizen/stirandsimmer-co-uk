@@ -88,6 +88,12 @@ export const companionRecipes: CompanionRecipe[] = [
       "Fish sauce, palm sugar, lime",
       "Thai basil",
     ],
+    steps: [
+      { text: "Heat a splash of oil in a wok and fry the green curry paste until fragrant.", durationSeconds: 90 },
+      { text: "Pour in the coconut milk and bring to a gentle simmer, stirring to combine." },
+      { text: "Add the chicken and aubergine and simmer until the chicken is cooked through and tender.", durationSeconds: 900 },
+      { text: "Season with fish sauce, palm sugar and a squeeze of lime, then scatter with Thai basil to serve." },
+    ],
   },
 ];
 
