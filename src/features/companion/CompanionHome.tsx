@@ -8,14 +8,11 @@ const CompanionHome = () => {
   const featured = companionRecipes[0];
 
   return (
-    <div className="relative min-h-[calc(100vh-5.5rem)] overflow-hidden">
-      <header className="px-6 pt-10">
-        <p className="text-xs uppercase tracking-[0.25em] text-companion-muted">
+    <div className="relative min-h-[calc(100vh-5.5rem)] overflow-hidden bg-black">
+      <header className="relative z-10 px-6 pt-12 text-center">
+        <p className="text-[10px] uppercase tracking-[0.35em] text-companion-muted/70">
           Good evening
         </p>
-        <h1 className="mt-1 font-display text-2xl text-companion-fg">
-          Tonight's dish awaits
-        </h1>
       </header>
 
       <button
@@ -25,15 +22,16 @@ const CompanionHome = () => {
         aria-label="Reveal tonight's dish"
       >
         <div className="relative flex items-center justify-center">
-          <div className="absolute h-72 w-72 rounded-full bg-companion-amber/25 blur-3xl" />
-          <div className="absolute h-48 w-48 rounded-full bg-companion-amber/40 blur-2xl" />
-          <span className="relative text-[9rem] leading-none drop-shadow-[0_0_40px_rgba(180,83,9,0.6)]">
+          <div className="absolute h-[28rem] w-[28rem] rounded-full bg-companion-amber/20 blur-[120px]" />
+          <div className="absolute h-80 w-80 rounded-full bg-companion-amber/35 blur-[80px]" />
+          <div className="absolute h-56 w-56 rounded-full bg-companion-amber/50 blur-3xl" />
+          <span className="relative text-[11rem] leading-none drop-shadow-[0_0_60px_rgba(180,83,9,0.7)]">
             {featured.emoji}
           </span>
         </div>
-        <div className="mt-16 flex flex-col items-center gap-2 text-companion-muted">
+        <div className="mt-20 flex flex-col items-center gap-2 text-companion-muted/70">
           <ChevronUp className="h-4 w-4 animate-bounce" strokeWidth={1.5} />
-          <span className="text-xs uppercase tracking-[0.3em]">Tap to reveal</span>
+          <span className="text-[10px] uppercase tracking-[0.35em]">Tap to reveal</span>
         </div>
       </button>
 
