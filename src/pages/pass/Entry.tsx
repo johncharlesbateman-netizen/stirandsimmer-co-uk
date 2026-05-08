@@ -70,6 +70,14 @@ export default function Entry() {
           <Link to="/signin" className="pass-btn-ghost py-3.5 text-center text-[15px]">
             Sign in
           </Link>
+          <button
+            onClick={startDemo}
+            disabled={demoBusy}
+            className="pass-btn-ghost py-3.5 text-center text-[14px] mt-2"
+            style={{ borderStyle: "dashed" }}
+          >
+            {demoBusy ? "Starting demo…" : "Try the demo"}
+          </button>
         </div>
       </div>
     </ScreenShell>
