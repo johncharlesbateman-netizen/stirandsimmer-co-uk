@@ -1,10 +1,43 @@
 import { Flame } from "lucide-react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import ScreenShell from "@/components/pass/ScreenShell";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 export default function Entry() {
   const { session, profile, loading } = useAuth();
+  const navigate = useNavigate();
+  const [demoBusy, setDemoBusy] = useState(false);
+
+  const startDemo = async () => {
+    setDemoBusy(true);
+    const { error } = await supabase.auth.signInAnonymously();
+    if (error) {
+      toast({ title: "Could not start demo", description: error.message, variant: "destructive" });
+      setDemoBusy(false);
+      return;
+    }
+    // Seed sample profile data so dashboard isn't empty
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      await supabase.from("profiles").upsert(
+        {
+          user_id: user.id,
+          first_name: "Demo Chef",
+          chef_name: "Demo Chef",
+          avatar: "👨‍🍳",
+          cooking_style: "explorer",
+          total_points: 250,
+          level: 2,
+        },
+        { onConflict: "user_id" }
+      );
+    }
+    navigate("/profile-setup", { replace: true });
+  };
+
   if (!loading && session && profile?.chef_name) return <Navigate to="/home" replace />;
   if (!loading && session) return <Navigate to="/profile-setup" replace />;
 
