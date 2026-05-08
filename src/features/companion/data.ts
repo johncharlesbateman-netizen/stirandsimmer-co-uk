@@ -19,6 +19,35 @@ export type CompanionRecipe = {
 
 export const companionRecipes: CompanionRecipe[] = [
   {
+    id: "chingri-do-piaza",
+    emoji: "🦐",
+    name: "Chingri Do Piaza",
+    region: "Bengal · South Asia",
+    description:
+      "Plump prawns simmered with twice the onions, mustard oil and a whisper of Bengali garam masala. Slow, fragrant, and deeply warming.",
+    time: "45 min",
+    spice: "Medium",
+    difficulty: "Medium",
+    ingredients: [
+      "500g large prawns, peeled and deveined",
+      "3 onions — half finely sliced, half roughly chopped",
+      "3 tbsp mustard oil",
+      "2 tsp ginger-garlic paste",
+      "1 tsp turmeric",
+      "2 green chillies, slit",
+      "1 tsp Bengali garam masala",
+      "Fresh coriander to finish",
+    ],
+    steps: [
+      { text: "Marinate the prawns with turmeric and a pinch of salt for ten minutes.", durationSeconds: 600 },
+      { text: "Heat the mustard oil in a heavy pan until it just smokes, then lower the heat." },
+      { text: "Fry the sliced onions until deeply golden and sweet.", durationSeconds: 480 },
+      { text: "Add the ginger-garlic paste and chopped onions; cook until softened and fragrant." },
+      { text: "Slide in the prawns and chillies, turning gently until they curl and turn pink.", durationSeconds: 240 },
+      { text: "Finish with garam masala, scatter with coriander and serve with steamed rice." },
+    ],
+  },
+  {
     id: "miso-glazed-aubergine",
     emoji: "🍆",
     name: "Miso-Glazed Aubergine",
