@@ -7,7 +7,7 @@ import { fetchChallenges, fetchUnlockedSecrets, fetchAllSecretsMeta } from "@/li
 
 function SecretsInner() {
   const { user } = useAuth();
-  const { data: unlocked = [] } = useQuery({
+  const { data: unlockedFromDb = [] } = useQuery({
     queryKey: ["unlocked-secrets", user?.id],
     queryFn: () => fetchUnlockedSecrets(user!.id),
     enabled: !!user,
@@ -15,6 +15,9 @@ function SecretsInner() {
   const { data: allSecrets = [] } = useQuery({ queryKey: ["secrets-meta"], queryFn: fetchAllSecretsMeta });
   const { data: challenges = [] } = useQuery({ queryKey: ["challenges"], queryFn: fetchChallenges });
 
+  // Welcome secrets are unlocked for everyone from the moment they sign up.
+  const dbUnlockedIds = new Set(unlockedFromDb.map((s) => s.id));
+  const unlocked = allSecrets.filter((s) => s.is_welcome || dbUnlockedIds.has(s.id));
   const unlockedIds = new Set(unlocked.map((s) => s.id));
   const locked = allSecrets.filter((s) => !unlockedIds.has(s.id));
 

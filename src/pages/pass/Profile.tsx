@@ -6,11 +6,12 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { fetchProgress, fetchUnlockedSecrets } from "@/lib/pass";
 
-const STYLE_LABEL: Record<string, string> = {
-  home_cook: "Home cook",
-  explorer: "Explorer",
-  entertainer: "Entertainer",
-  speed_chef: "Speed chef",
+const LEVEL_TITLES: Record<number, string> = {
+  1: "Kitchen Recruit",
+  2: "Home Cook",
+  3: "Skilled Cook",
+  4: "Pass Chef",
+  5: "Master of the Pass",
 };
 
 interface RecentCook {
@@ -71,7 +72,7 @@ function ProfileInner() {
             <div className="flex-1 min-w-0">
               <h1 className="text-[1.25rem] truncate">{profile?.chef_name ?? "Chef"}</h1>
               <p className="pass-muted text-[12px]">
-                {profile?.cooking_style ? STYLE_LABEL[profile.cooking_style] ?? "Cook" : "Cook"} · Level {level}
+                {LEVEL_TITLES[level] ?? "Kitchen Recruit"} · Level {level}
               </p>
             </div>
             <button onClick={signOut} aria-label="Sign out" className="pass-muted">
