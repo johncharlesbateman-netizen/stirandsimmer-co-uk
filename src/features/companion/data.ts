@@ -63,6 +63,12 @@ export const companionRecipes: CompanionRecipe[] = [
       "Handful mint and coriander",
       "1 red onion, pickled",
     ],
+    steps: [
+      { text: "Warm a heavy frying pan over a high heat and brown the lamb mince, breaking it up as it cooks.", durationSeconds: 360 },
+      { text: "Stir the rose harissa through the lamb and season generously." },
+      { text: "Char the flatbreads in a dry pan or under the grill until lightly blistered.", durationSeconds: 120 },
+      { text: "Spread each flatbread with yoghurt, top with the harissa lamb and finish with herbs and pickled onion." },
+    ],
   },
   {
     id: "thai-coconut-curry",
