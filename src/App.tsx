@@ -24,6 +24,12 @@ import AdminSeoStatus from "./pages/AdminSeoStatus";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
+import CompanionLayout from "./features/companion/CompanionLayout";
+import CompanionHome from "./features/companion/CompanionHome";
+import CompanionExplore from "./features/companion/CompanionExplore";
+import CompanionJourney from "./features/companion/CompanionJourney";
+import CompanionProfile from "./features/companion/CompanionProfile";
+import CompanionRecipeDetail from "./features/companion/CompanionRecipeDetail";
 
 const queryClient = new QueryClient();
 
@@ -121,6 +127,13 @@ const App = () => (
               element={<RequireAdmin><AdminSeoStatus /></RequireAdmin>}
             />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/app" element={<CompanionLayout />}>
+              <Route index element={<CompanionHome />} />
+              <Route path="explore" element={<CompanionExplore />} />
+              <Route path="journey" element={<CompanionJourney />} />
+              <Route path="profile" element={<CompanionProfile />} />
+              <Route path="recipe/:id" element={<CompanionRecipeDetail />} />
+            </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
