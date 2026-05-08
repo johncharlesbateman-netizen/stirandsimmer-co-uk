@@ -55,10 +55,19 @@ export async function fetchUnlockedSecrets(userId: string): Promise<SecretRow[]>
   return (data ?? []).map((r: { secret: SecretRow }) => r.secret).filter(Boolean);
 }
 
-export async function fetchAllSecretsMeta(): Promise<{ id: string; title: string }[]> {
-  const { data, error } = await supabase.from("secrets_pass").select("id, title");
+export interface SecretMeta {
+  id: string;
+  title: string;
+  content: string;
+  is_welcome: boolean;
+}
+
+export async function fetchAllSecretsMeta(): Promise<SecretMeta[]> {
+  const { data, error } = await supabase
+    .from("secrets_pass")
+    .select("id, title, content, is_welcome");
   if (error) throw error;
-  return data ?? [];
+  return (data as SecretMeta[]) ?? [];
 }
 
 export interface VerifyResult {

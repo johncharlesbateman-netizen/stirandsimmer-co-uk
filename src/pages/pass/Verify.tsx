@@ -127,7 +127,7 @@ function VerifyInner() {
         <button
           onClick={submit}
           disabled={!file || busy}
-          className="pass-btn-primary py-3.5 text-[15px] mt-auto"
+          className="pass-btn-primary py-3.5 text-[15px] mt-auto disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none"
         >
           {busy ? "Verifying…" : "Submit dish"}
         </button>
