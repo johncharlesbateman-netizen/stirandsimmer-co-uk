@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ChefHat, Clock, Flame } from "lucide-react";
 import { companionRecipes } from "./data";
+import CookingMode from "./CookingMode";
 
 const CompanionRecipeDetail = () => {
   const { id } = useParams<{ id: string }>();
   const recipe = companionRecipes.find((r) => r.id === id) ?? companionRecipes[0];
+  const [cooking, setCooking] = useState(false);
 
   return (
     <div>
