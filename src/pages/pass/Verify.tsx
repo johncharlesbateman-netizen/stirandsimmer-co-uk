@@ -79,7 +79,11 @@ function VerifyInner() {
         </p>
 
         <a
-          href={challenge.recipe_url}
+          href={`https://stirandsimmer.co.uk/recipes/${challenge.recipe_name
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9\s-]/g, "")
+            .replace(/\s+/g, "-")}`}
           target="_blank"
           rel="noopener noreferrer"
           className="pass-btn-ghost inline-flex items-center justify-center gap-2 py-3 text-[14px] mb-8"
