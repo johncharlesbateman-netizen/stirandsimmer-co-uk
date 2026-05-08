@@ -2,6 +2,10 @@ export type CookingStep = {
   text: string;
   /** Optional countdown for this step, in seconds */
   durationSeconds?: number;
+  /** Substrings within `text` to highlight in amber (key ingredients/techniques) */
+  highlights?: string[];
+  /** Optional chef tip shown beneath the step */
+  tip?: string;
 };
 
 export type CompanionRecipe = {
@@ -39,12 +43,36 @@ export const companionRecipes: CompanionRecipe[] = [
       "Fresh coriander to finish",
     ],
     steps: [
-      { text: "Marinate the prawns with turmeric and a pinch of salt for ten minutes.", durationSeconds: 600 },
-      { text: "Heat the mustard oil in a heavy pan until it just smokes, then lower the heat." },
-      { text: "Fry the sliced onions until deeply golden and sweet.", durationSeconds: 480 },
-      { text: "Add the ginger-garlic paste and chopped onions; cook until softened and fragrant." },
-      { text: "Slide in the prawns and chillies, turning gently until they curl and turn pink.", durationSeconds: 240 },
-      { text: "Finish with garam masala, scatter with coriander and serve with steamed rice." },
+      {
+        text: "Marinate the prawns with turmeric and a pinch of salt for ten minutes.",
+        durationSeconds: 600,
+        highlights: ["prawns", "turmeric"],
+        tip: "A short marinade firms the prawns and lifts the colour — don't go longer or the salt will start to draw out moisture.",
+      },
+      {
+        text: "Heat the mustard oil in a heavy pan until it just smokes, then lower the heat.",
+        highlights: ["mustard oil"],
+        tip: "Smoking mustard oil briefly mellows its raw bite. The flavour should still be present but rounded.",
+      },
+      {
+        text: "Fry the sliced onions until deeply golden and sweet.",
+        durationSeconds: 480,
+        highlights: ["sliced onions", "deeply golden"],
+      },
+      {
+        text: "Add the ginger-garlic paste and chopped onions; cook until softened and fragrant.",
+        highlights: ["ginger-garlic paste", "chopped onions"],
+      },
+      {
+        text: "Slide in the prawns and chillies, turning gently until they curl and turn pink.",
+        durationSeconds: 240,
+        highlights: ["prawns", "chillies"],
+        tip: "Pull them off the heat the moment they curl — residual heat finishes the job and keeps them tender.",
+      },
+      {
+        text: "Finish with garam masala, scatter with coriander and serve with steamed rice.",
+        highlights: ["garam masala", "coriander"],
+      },
     ],
   },
   {
