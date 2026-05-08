@@ -10,7 +10,7 @@ import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels, categoryToSlug } from "@/lib/recipe-utils";
 import { scaleIngredients, scaleIngredientsSmart } from "@/lib/ingredient-scaler";
-import { buildSeoTitle, buildSeoDescription, buildRecipeIntro, buildServingSuggestion } from "@/lib/seo";
+import { buildSeoTitle, buildSeoDescription, buildServingSuggestion } from "@/lib/seo";
 import { buildRecipeJsonLd } from "@/lib/recipe-schema";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
@@ -364,18 +364,6 @@ const RecipeDetail = () => {
             <h1 className="heading-display mb-6">{recipe.title}</h1>
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl">
               {recipe.description}
-            </p>
-
-            {/* Intro paragraph — adds unique on-page content for SEO */}
-            <p className="text-base text-muted-foreground/90 mb-8 max-w-2xl leading-relaxed">
-              {buildRecipeIntro(
-                recipe.title,
-                recipe.description ?? "",
-                ingredients,
-                recipe.category,
-                totalTime,
-                recipe.servings,
-              )}
             </p>
 
             {/* Meta */}
