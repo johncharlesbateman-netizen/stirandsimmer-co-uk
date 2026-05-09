@@ -219,12 +219,20 @@ export function scaleIngredients(
 
 /** Smart scaler returning kind + note metadata for each ingredient. */
 export function scaleIngredientsSmart(
-  ingredients: string[],
+  ingredients: unknown[],
   baseServings: number,
   targetServings: number,
 ): ScaledIngredient[] {
   const safeBase = baseServings > 0 ? baseServings : 1;
   const safeTarget = targetServings > 0 ? targetServings : safeBase;
   const multiplier = safeTarget / safeBase;
-  return ingredients.map((ing) => scaleIngredientSmart(ing, multiplier));
+  return (ingredients ?? []).map((ing) => {
+    const str =
+      typeof ing === "string"
+        ? ing
+        : ing && typeof ing === "object"
+          ? `${(ing as { amount?: unknown }).amount ?? ""} ${(ing as { item?: unknown }).item ?? ""}`.trim()
+          : String(ing ?? "");
+    return scaleIngredientSmart(str, multiplier);
+  });
 }
