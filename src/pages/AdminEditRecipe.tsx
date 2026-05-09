@@ -97,6 +97,9 @@ const AdminEditRecipe = () => {
           ? ((data as { collections?: string[] | null }).collections as string[])
           : [],
       );
+      setCuisineRegion(
+        sanitiseCuisineRegions((data as { cuisine_region?: unknown }).cuisine_region),
+      );
       setExistingImageUrl(data.image_url);
       setImagePreview(data.image_url);
       setLoading(false);
