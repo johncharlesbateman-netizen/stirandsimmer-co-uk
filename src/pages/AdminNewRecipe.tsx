@@ -29,6 +29,7 @@ const recipeSchema = z.object({
   tips: z.string().trim().max(2000).nullable(),
   seo_title: z.string().trim().max(70).nullable(),
   seo_description: z.string().trim().max(170).nullable(),
+  cuisine_region: z.array(z.enum(CUISINE_REGIONS)).default([]),
 });
 
 const slugify = (s: string) =>
