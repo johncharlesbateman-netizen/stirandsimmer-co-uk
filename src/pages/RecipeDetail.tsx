@@ -28,6 +28,27 @@ import {
 
 type MobileTab = "ingredients" | "method" | "shop";
 
+const normaliseIngredientText = (ingredient: unknown): string => {
+  if (typeof ingredient === "string") return ingredient.trim();
+
+  if (ingredient && typeof ingredient === "object") {
+    const obj = ingredient as { text?: unknown; item?: unknown; amount?: unknown };
+    if (typeof obj.text === "string" && obj.text.trim()) return obj.text.trim();
+
+    const amount = obj.amount == null ? "" : String(obj.amount).trim();
+    const item = typeof obj.item === "string" ? obj.item.trim() : "";
+    return `${amount} ${item}`.trim();
+  }
+
+  return "";
+};
+
+const normaliseIngredients = (ingredients: unknown[] | null | undefined): string[] =>
+  (ingredients ?? []).map(normaliseIngredientText).filter(Boolean);
+
+const normaliseIngredientForMatch = (ingredient: unknown): string =>
+  normaliseIngredientText(ingredient).toLowerCase().replace(/[^a-z\s]/g, "").trim();
+
 const RecipeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
@@ -130,14 +151,10 @@ const RecipeDetail = () => {
 
       // Score by shared ingredients to surface most-similar first
       const baseIngredients = new Set(
-        ((recipe.ingredients as string[]) ?? []).map((i) =>
-          i.toLowerCase().replace(/[^a-z\s]/g, "").trim(),
-        ),
+        ((recipe.ingredients as unknown[]) ?? []).map(normaliseIngredientForMatch).filter(Boolean),
       );
       const scored = pool.map((r) => {
-        const ings = ((r.ingredients as string[]) ?? []).map((i) =>
-          i.toLowerCase().replace(/[^a-z\s]/g, "").trim(),
-        );
+        const ings = ((r.ingredients as unknown[]) ?? []).map(normaliseIngredientForMatch).filter(Boolean);
         const overlap = ings.filter((i) =>
           [...baseIngredients].some((b) => b && i && (b.includes(i) || i.includes(b))),
         ).length;
@@ -153,7 +170,7 @@ const RecipeDetail = () => {
   const currentServings = servings ?? baseServings;
   const scaleFactor = currentServings / baseServings;
 
-  const ingredients = (recipe?.ingredients as string[]) || [];
+  const ingredients = normaliseIngredients(recipe?.ingredients as unknown[] | null | undefined);
   const instructions = (recipe?.instructions as string[]) || [];
   const scaledIngredients = scaleIngredients(ingredients, baseServings, currentServings);
   const smartScaledIngredients = scaleIngredientsSmart(ingredients, baseServings, currentServings);
@@ -548,7 +565,7 @@ const RecipeDetail = () => {
                           src={r.image_url ? optimisedImage(r.image_url, { width: 800 }) : "/placeholder.svg"}
                           srcSet={r.image_url ? responsiveSrcSet(r.image_url, [400, 600, 800, 1200]) : undefined}
                           sizes="(max-width: 768px) 100vw, 33vw"
-                          alt={buildRecipeAltText(r.title, (r.ingredients as string[] | null) ?? [])}
+                          alt={buildRecipeAltText(r.title, normaliseIngredients(r.ingredients as unknown[] | null | undefined))}
                           loading="lazy"
                           decoding="async"
                           width={800}
