@@ -204,6 +204,7 @@ const AdminEditRecipe = () => {
         seo_title: parsed.data.seo_title,
         seo_description: parsed.data.seo_description,
         collections: parsed.data.collections,
+        cuisine_region: parsed.data.cuisine_region,
         image_url,
       }).eq("slug", slug);
 
