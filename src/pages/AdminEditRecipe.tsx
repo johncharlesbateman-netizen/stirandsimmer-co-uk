@@ -5,6 +5,8 @@ import { Upload, X, Plus, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { allCategories, categoryLabels } from "@/lib/recipe-utils";
 import { collections, collectionNames } from "@/lib/collections";
+import { CUISINE_REGIONS, sanitiseCuisineRegions, type CuisineRegion } from "@/lib/cuisine-regions";
+import CuisineRegionPicker from "@/components/CuisineRegionPicker";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
