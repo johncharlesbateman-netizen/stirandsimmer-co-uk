@@ -109,6 +109,7 @@ const AdminNewRecipe = () => {
         tips: tips.trim() || null,
         seo_title: seoTitle.trim() || null,
         seo_description: seoDescription.trim() || null,
+        cuisine_region: cuisineRegion,
       };
 
       const parsed = recipeSchema.safeParse(cleaned);
