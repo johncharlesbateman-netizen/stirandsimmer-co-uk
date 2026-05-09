@@ -271,6 +271,15 @@ const AdminEditRecipe = () => {
             </select>
           </div>
 
+          {/* Cuisine regions */}
+          <div>
+            <label className="block text-sm font-medium mb-2">Cuisine regions</label>
+            <p className="text-xs text-muted-foreground mb-3">
+              Tag this recipe with one or more regions. These map to challenge regions in The Daily Pass app.
+            </p>
+            <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
+          </div>
+
           {/* Description */}
           <div>
             <label className="block text-sm font-medium mb-2">Description *</label>
