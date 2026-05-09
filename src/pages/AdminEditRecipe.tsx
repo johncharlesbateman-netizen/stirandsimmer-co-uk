@@ -161,6 +161,7 @@ const AdminEditRecipe = () => {
         seo_title: seoTitle.trim() || null,
         seo_description: seoDescription.trim() || null,
         collections: recipeCollections.filter((c) => collectionNames.includes(c)),
+        cuisine_region: cuisineRegion,
       };
 
       const parsed = recipeSchema.safeParse(cleaned);
