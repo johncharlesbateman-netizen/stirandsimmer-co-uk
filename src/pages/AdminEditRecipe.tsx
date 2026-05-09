@@ -59,6 +59,7 @@ const AdminEditRecipe = () => {
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
   const [recipeCollections, setRecipeCollections] = useState<string[]>([]);
+  const [cuisineRegion, setCuisineRegion] = useState<CuisineRegion[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
