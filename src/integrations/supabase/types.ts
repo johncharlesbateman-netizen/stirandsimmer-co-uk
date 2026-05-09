@@ -387,6 +387,7 @@ export type Database = {
           collections: string[]
           cook_time_minutes: number | null
           created_at: string
+          cuisine_region: string[]
           description: string
           id: string
           image_url: string | null
@@ -408,6 +409,7 @@ export type Database = {
           collections?: string[]
           cook_time_minutes?: number | null
           created_at?: string
+          cuisine_region?: string[]
           description: string
           id?: string
           image_url?: string | null
@@ -429,6 +431,7 @@ export type Database = {
           collections?: string[]
           cook_time_minutes?: number | null
           created_at?: string
+          cuisine_region?: string[]
           description?: string
           id?: string
           image_url?: string | null

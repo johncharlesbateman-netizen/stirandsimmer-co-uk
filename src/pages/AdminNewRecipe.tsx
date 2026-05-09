@@ -4,6 +4,8 @@ import { z } from "zod";
 import { Upload, X, Plus, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { allCategories, categoryLabels } from "@/lib/recipe-utils";
+import { CUISINE_REGIONS, type CuisineRegion } from "@/lib/cuisine-regions";
+import CuisineRegionPicker from "@/components/CuisineRegionPicker";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +29,7 @@ const recipeSchema = z.object({
   tips: z.string().trim().max(2000).nullable(),
   seo_title: z.string().trim().max(70).nullable(),
   seo_description: z.string().trim().max(170).nullable(),
+  cuisine_region: z.array(z.enum(CUISINE_REGIONS)).default([]),
 });
 
 const slugify = (s: string) =>
@@ -51,6 +54,7 @@ const AdminNewRecipe = () => {
   const [tips, setTips] = useState("");
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
+  const [cuisineRegion, setCuisineRegion] = useState<CuisineRegion[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -105,6 +109,7 @@ const AdminNewRecipe = () => {
         tips: tips.trim() || null,
         seo_title: seoTitle.trim() || null,
         seo_description: seoDescription.trim() || null,
+        cuisine_region: cuisineRegion,
       };
 
       const parsed = recipeSchema.safeParse(cleaned);
@@ -154,6 +159,7 @@ const AdminNewRecipe = () => {
         tips: parsed.data.tips,
         seo_title: parsed.data.seo_title,
         seo_description: parsed.data.seo_description,
+        cuisine_region: parsed.data.cuisine_region,
         slug,
         image_url,
       }]);
@@ -207,6 +213,15 @@ const AdminNewRecipe = () => {
                 <option key={c} value={c}>{categoryLabels[c]}</option>
               ))}
             </select>
+          </div>
+
+          {/* Cuisine regions */}
+          <div>
+            <label className="block text-sm font-medium mb-2">Cuisine regions</label>
+            <p className="text-xs text-muted-foreground mb-3">
+              Tag this recipe with one or more regions. These map to challenge regions in The Daily Pass app.
+            </p>
+            <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
           </div>
 
           {/* Description */}

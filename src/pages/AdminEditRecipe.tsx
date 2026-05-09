@@ -5,6 +5,8 @@ import { Upload, X, Plus, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { allCategories, categoryLabels } from "@/lib/recipe-utils";
 import { collections, collectionNames } from "@/lib/collections";
+import { CUISINE_REGIONS, sanitiseCuisineRegions, type CuisineRegion } from "@/lib/cuisine-regions";
+import CuisineRegionPicker from "@/components/CuisineRegionPicker";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,6 +31,7 @@ const recipeSchema = z.object({
   seo_title: z.string().trim().max(70).nullable(),
   seo_description: z.string().trim().max(170).nullable(),
   collections: z.array(z.string()).default([]),
+  cuisine_region: z.array(z.enum(CUISINE_REGIONS)).default([]),
 });
 
 const slugify = (s: string) =>
@@ -56,6 +59,7 @@ const AdminEditRecipe = () => {
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
   const [recipeCollections, setRecipeCollections] = useState<string[]>([]);
+  const [cuisineRegion, setCuisineRegion] = useState<CuisineRegion[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
@@ -92,6 +96,9 @@ const AdminEditRecipe = () => {
         Array.isArray((data as { collections?: string[] | null }).collections)
           ? ((data as { collections?: string[] | null }).collections as string[])
           : [],
+      );
+      setCuisineRegion(
+        sanitiseCuisineRegions((data as { cuisine_region?: unknown }).cuisine_region),
       );
       setExistingImageUrl(data.image_url);
       setImagePreview(data.image_url);
@@ -154,6 +161,7 @@ const AdminEditRecipe = () => {
         seo_title: seoTitle.trim() || null,
         seo_description: seoDescription.trim() || null,
         collections: recipeCollections.filter((c) => collectionNames.includes(c)),
+        cuisine_region: cuisineRegion,
       };
 
       const parsed = recipeSchema.safeParse(cleaned);
@@ -196,6 +204,7 @@ const AdminEditRecipe = () => {
         seo_title: parsed.data.seo_title,
         seo_description: parsed.data.seo_description,
         collections: parsed.data.collections,
+        cuisine_region: parsed.data.cuisine_region,
         image_url,
       }).eq("slug", slug);
 
@@ -260,6 +269,15 @@ const AdminEditRecipe = () => {
                 <option key={c} value={c}>{categoryLabels[c]}</option>
               ))}
             </select>
+          </div>
+
+          {/* Cuisine regions */}
+          <div>
+            <label className="block text-sm font-medium mb-2">Cuisine regions</label>
+            <p className="text-xs text-muted-foreground mb-3">
+              Tag this recipe with one or more regions. These map to challenge regions in The Daily Pass app.
+            </p>
+            <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
           </div>
 
           {/* Description */}
