@@ -25,9 +25,21 @@ const stripQuantity = (ingredient: string): string =>
     .split(",")[0]
     .trim();
 
-const getKeyIngredients = (ingredients: string[], max = 3): string[] =>
-  ingredients
-    .filter((i) => !/^(for the |for |the )/i.test(i.trim()))
+const normaliseIngredient = (i: unknown): string => {
+  if (typeof i === "string") return i;
+  if (i && typeof i === "object") {
+    const obj = i as { item?: unknown; amount?: unknown };
+    const amount = typeof obj.amount === "string" ? obj.amount : "";
+    const item = typeof obj.item === "string" ? obj.item : "";
+    return `${amount} ${item}`.trim();
+  }
+  return "";
+};
+
+const getKeyIngredients = (ingredients: unknown[], max = 3): string[] =>
+  (ingredients ?? [])
+    .map(normaliseIngredient)
+    .filter((i) => i && !/^(for the |for |the )/i.test(i.trim()))
     .slice(0, max)
     .map(stripQuantity)
     .filter(Boolean);
