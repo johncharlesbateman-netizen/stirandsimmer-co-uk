@@ -202,7 +202,7 @@ const RegionPage = () => {
               ))}
             </div>
           ) : filtered.length > 0 ? (
-            mealFiltered ? (
+            mealFiltered && mealFilter ? (
               <>
                 <Link
                   to={`/recipes/region/${region.id}`}
