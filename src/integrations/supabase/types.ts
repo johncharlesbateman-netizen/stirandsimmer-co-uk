@@ -450,6 +450,27 @@ export type Database = {
         }
         Relationships: []
       }
+      region_challenge_history: {
+        Row: {
+          challenge: string
+          id: string
+          region_id: string
+          replaced_at: string
+        }
+        Insert: {
+          challenge: string
+          id?: string
+          region_id: string
+          replaced_at?: string
+        }
+        Update: {
+          challenge?: string
+          id?: string
+          region_id?: string
+          replaced_at?: string
+        }
+        Relationships: []
+      }
       region_challenges: {
         Row: {
           challenge: string
