@@ -380,6 +380,53 @@ export const suggestTags = (recipe: RecipeInput): Suggestion => {
   const suggestedCategory =
     top && top.score >= 3 ? (top.c as TileCategory) : null;
 
+  // ---- Meal type scoring ----
+  const mealTypeScores: Record<MealTypeTag, number> = {
+    mains: 0,
+    lunch: 0,
+    dessert: 0,
+    snack: 0,
+  };
+  const mealTypeMatches: Record<MealTypeTag, string[]> = {
+    mains: [],
+    lunch: [],
+    dessert: [],
+    snack: [],
+  };
+
+  for (const mt of MEAL_TYPE_TAGS) {
+    for (const kw of MEAL_TYPE_KEYWORDS[mt]) {
+      if (containsKeyword(text, kw)) {
+        const inTitle = (recipe.title ?? "").toLowerCase().includes(kw.toLowerCase());
+        mealTypeScores[mt] += inTitle ? 4 : 2;
+        mealTypeMatches[mt].push(kw);
+      }
+    }
+  }
+  for (const c of collections) {
+    const mt = COLLECTION_MEAL_HINTS[c];
+    if (mt) {
+      mealTypeScores[mt] += 5;
+      mealTypeMatches[mt].push(`collection:${c}`);
+    }
+  }
+
+  // Strong category-based hints — the tile category often implies a meal type.
+  if (suggestedCategory === "sweets") mealTypeScores.dessert += 6;
+  if (suggestedCategory === "lunch_suggestions") mealTypeScores.lunch += 6;
+
+  let suggestedMealTypes: MealTypeTag[] = MEAL_TYPE_TAGS
+    .filter((mt) => mealTypeScores[mt] >= 3)
+    .sort((a, b) => mealTypeScores[b] - mealTypeScores[a])
+    .slice(0, 2);
+
+  // Fall back to "mains" — every recipe must have at least one meal type and
+  // most savoury dishes default to mains.
+  if (suggestedMealTypes.length === 0) {
+    suggestedMealTypes = ["mains"];
+    mealTypeMatches.mains.push("default");
+  }
+
   const needsManualReview =
     suggestedCategory === null && suggestedRegions.length === 0;
 
@@ -390,6 +437,8 @@ export const suggestTags = (recipe: RecipeInput): Suggestion => {
     suggestedRegions,
     regionConfidence,
     regionMatches,
+    suggestedMealTypes,
+    mealTypeMatches,
     needsManualReview,
   };
 };
