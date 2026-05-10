@@ -117,7 +117,7 @@ const Index = () => {
             className="font-display mb-6 opacity-0 animate-fade-in leading-tight"
             style={{ animationDelay: "0.4s", animationFillMode: "forwards", fontSize: "clamp(2rem, 5vw, 3rem)" }}
           >
-            Recipes that bring people together around the table
+            Your kitchen. The world's cuisines.
           </h1>
           <div
             className="mt-10 flex flex-col items-center gap-4 opacity-0 animate-fade-in"
@@ -130,7 +130,7 @@ const Index = () => {
               Explore all {roundedRecipes}+ recipes
             </Link>
             <p className="tracking-[0.2em] uppercase text-primary-foreground/80" style={{ fontSize: "13px" }}>
-              Over {roundedRecipes} tried-and-tested recipes · free to browse
+              Over {recipeCount} tried-and-tested recipes · A new challenge every week
             </p>
           </div>
         </div>
