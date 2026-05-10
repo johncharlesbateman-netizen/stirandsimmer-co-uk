@@ -51,15 +51,26 @@ export const RECIPE_TILES: RecipeTile[] = [
     filter: (r) => r.category === "chicken",
   },
   {
-    slug: "beef-and-lamb",
-    label: "Beef and Lamb",
+    slug: "beef",
+    label: "Beef",
     emoji: "🥩",
     description:
-      "Hearty beef and lamb recipes — slow braises, roasts, curries and more.",
-    seoTitle: "Beef and lamb recipes | Stir & Simmer",
+      "Hearty beef recipes — slow braises, roasts, ragùs and more.",
+    seoTitle: "Beef recipes | Stir & Simmer",
     seoDescription:
-      "Hearty beef and lamb recipes for every occasion — slow braises, roasts, curries and more. Tried and tested in a real kitchen.",
-    filter: (r) => r.category === "beef" || r.category === "lamb",
+      "Hearty beef recipes for every occasion — slow braises, roasts, ragùs and more. Tried and tested in a real kitchen.",
+    filter: (r) => r.category === "beef",
+  },
+  {
+    slug: "lamb",
+    label: "Lamb",
+    emoji: "🐑",
+    description:
+      "Tender lamb recipes — slow roasts, fragrant curries and Mediterranean braises.",
+    seoTitle: "Lamb recipes | Stir & Simmer",
+    seoDescription:
+      "Tender lamb recipes — slow roasts, fragrant curries and Mediterranean braises. Tried and tested in a real kitchen.",
+    filter: (r) => r.category === "lamb",
   },
   {
     slug: "fish-and-seafood",
@@ -71,41 +82,6 @@ export const RECIPE_TILES: RecipeTile[] = [
     seoDescription:
       "Fresh and flavourful fish and seafood recipes from Stir & Simmer. From simple weeknight salmon to impressive dinner party dishes.",
     filter: (r) => r.category === "seafood",
-  },
-  {
-    slug: "vegetarian",
-    label: "Vegetarian",
-    emoji: "🥗",
-    description:
-      "Delicious vegetarian recipes that don't compromise on flavour.",
-    seoTitle: "Vegetarian recipes | Stir & Simmer",
-    seoDescription:
-      "Delicious vegetarian recipes that don't compromise on flavour. Tried, tested and loved by meat eaters too.",
-    filter: (r) =>
-      titleMatches(r, [
-        "vegetarian",
-        "vegan",
-        "veggie",
-        "halloumi",
-        "paneer",
-        "mushroom",
-        "aubergine",
-        "courgette",
-        "ribollita",
-      ]) ||
-      r.category === "lunch_suggestions" &&
-        !titleMatches(r, [
-          "chicken",
-          "beef",
-          "lamb",
-          "pork",
-          "bacon",
-          "ham",
-          "fish",
-          "salmon",
-          "prawn",
-          "tuna",
-        ]),
   },
   {
     slug: "pork",
@@ -154,50 +130,6 @@ export const RECIPE_TILES: RecipeTile[] = [
     filter: (r) =>
       r.category === "pasta" ||
       titleMatches(r, ["rice", "risotto", "pilaf", "biryani", "paella"]),
-  },
-  {
-    slug: "soups-and-stews",
-    label: "Soups and Stews",
-    emoji: "🍲",
-    description:
-      "Slow-simmered bowls of comfort — soups, broths, stews and braises.",
-    seoTitle: "Soup and stew recipes | Stir & Simmer",
-    seoDescription:
-      "Slow-simmered soups, broths, stews and braises — comforting recipes for cold evenings and lazy weekends.",
-    filter: (r) =>
-      titleMatches(r, [
-        "soup",
-        "stew",
-        "broth",
-        "casserole",
-        "ribollita",
-        "chowder",
-        "ragù",
-        "ragu",
-      ]),
-  },
-  {
-    slug: "breakfast",
-    label: "Breakfast",
-    emoji: "🍳",
-    description:
-      "Slow weekend brunches and easy weekday starts — recipes to begin the day.",
-    seoTitle: "Breakfast and brunch recipes | Stir & Simmer",
-    seoDescription:
-      "Slow weekend brunches and easy weekday breakfasts — recipes to start the day right.",
-    filter: (r) =>
-      titleMatches(r, [
-        "breakfast",
-        "brunch",
-        "pancake",
-        "waffle",
-        "omelette",
-        "frittata",
-        "granola",
-        "porridge",
-        "toast",
-        "egg",
-      ]),
   },
   {
     slug: "puddings-and-desserts",
