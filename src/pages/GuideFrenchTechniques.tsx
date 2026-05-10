@@ -160,16 +160,16 @@ const GuideFrenchTechniques = () => {
               At a glance — the seven techniques
             </p>
             <ul className="divide-y divide-border/60">
-              {SUMMARY.map((s) => (
+              {TECHNIQUES.map((t) => (
                 <li
-                  key={s.name}
+                  key={t.id}
                   className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-1 sm:gap-6 py-3"
                 >
                   <span className="font-display text-base md:text-lg text-foreground">
-                    {s.name}
+                    {t.name}
                   </span>
                   <span className="text-sm md:text-base text-foreground/80">
-                    {s.short}
+                    {t.summary}
                   </span>
                 </li>
               ))}
@@ -205,20 +205,38 @@ const GuideFrenchTechniques = () => {
                 {t.french}
               </p>
 
-              <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-8">
-                {t.intro}
-              </p>
+              {t.what.split("\n\n").map((para, idx) => (
+                <p
+                  key={idx}
+                  className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6 last:mb-8"
+                >
+                  {para}
+                </p>
+              ))}
 
               <h3 className="font-display text-xl md:text-2xl text-foreground mb-3">
-                How to do it
+                {t.id === "mise-en-place" ? "How to apply it" : t.id === "beurre-blanc" ? "How to make it" : "How to do it"}
               </h3>
               <p className="text-base text-foreground/90 leading-relaxed mb-6">
-                {t.method}
+                {t.how}
               </p>
 
-              <p className="italic text-sm md:text-base text-muted-foreground mb-6">
-                Where you will use it — {t.use}
-              </p>
+              {t.why && (
+                <>
+                  <h3 className="font-display text-xl md:text-2xl text-foreground mb-3">
+                    Why it matters
+                  </h3>
+                  <p className="text-base text-foreground/90 leading-relaxed mb-6">
+                    {t.why}
+                  </p>
+                </>
+              )}
+
+              {t.where && (
+                <p className="italic text-sm md:text-base text-muted-foreground mb-6">
+                  Where you will use it — {t.where}
+                </p>
+              )}
 
               <hr className="border-0 h-px my-8" style={{ backgroundColor: "#e0a558" }} />
 
