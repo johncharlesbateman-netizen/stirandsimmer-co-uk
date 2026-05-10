@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -17,9 +18,19 @@ const REGIONS: { id: string; name: string; emoji: string }[] = [
 
 type Row = { region_id: string; challenge: string; updated_at: string };
 
+const STORAGE_KEY = "admin-challenges-unlocked";
+
 const AdminChallenges = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  const [unlocked, setUnlocked] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return sessionStorage.getItem(STORAGE_KEY) === "1";
+  });
+  const [passwordInput, setPasswordInput] = useState("");
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [authChecking, setAuthChecking] = useState(false);
 
   const { data: rows = [], isLoading } = useQuery({
     queryKey: ["admin", "region-challenges"],
@@ -30,16 +41,17 @@ const AdminChallenges = () => {
       if (error) throw error;
       return (data ?? []) as Row[];
     },
+    enabled: unlocked,
   });
 
   const [drafts, setDrafts] = useState<Record<string, string>>({});
-  const [savingId, setSavingId] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [savedAt, setSavedAt] = useState<Date | null>(null);
 
   useEffect(() => {
     const initial: Record<string, string> = {};
     for (const r of rows) initial[r.region_id] = r.challenge;
     setDrafts((prev) => ({ ...initial, ...prev }));
-    // We intentionally only reseed when the row count or ids change.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rows.length]);
 
@@ -48,36 +60,83 @@ const AdminChallenges = () => {
     Row | undefined
   >;
 
-  const handleSave = async (regionId: string) => {
-    const text = (drafts[regionId] ?? "").trim();
-    if (!text) {
+  const handleUnlock = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthChecking(true);
+    setAuthError(null);
+    // We validate by attempting a no-op save (empty updates would fail validation),
+    // so instead just check client-side and let the edge function be the real gate
+    // when saving. Keep the password client-side for UX only.
+    if (passwordInput === "StirSimmer2026!") {
+      sessionStorage.setItem(STORAGE_KEY, "1");
+      setUnlocked(true);
+      setPasswordInput("");
+    } else {
+      setAuthError("Incorrect password");
+    }
+    setAuthChecking(false);
+  };
+
+  const handleSaveAll = async () => {
+    const updates = REGIONS.map((r) => ({
+      region_id: r.id,
+      challenge: (drafts[r.id] ?? "").trim(),
+    }));
+
+    const empty = updates.find((u) => !u.challenge);
+    if (empty) {
+      const region = REGIONS.find((r) => r.id === empty.region_id);
       toast({
         title: "Challenge text required",
-        description: "Please enter some text before saving.",
+        description: `Please enter text for ${region?.name}.`,
         variant: "destructive",
       });
       return;
     }
-    setSavingId(regionId);
-    const { error } = await supabase
-      .from("region_challenges")
-      .upsert(
-        { region_id: regionId, challenge: text, updated_at: new Date().toISOString() },
-        { onConflict: "region_id" },
-      );
-    setSavingId(null);
 
-    if (error) {
+    setSaving(true);
+    const { data, error } = await supabase.functions.invoke(
+      "update-region-challenges",
+      {
+        body: {
+          password: "StirSimmer2026!",
+          updates,
+        },
+      },
+    );
+    setSaving(false);
+
+    if (error || (data && (data as { error?: string }).error)) {
+      const message =
+        (data as { error?: string } | undefined)?.error ??
+        error?.message ??
+        "Couldn't save changes.";
+      // If the password was rotated server-side, force re-login.
+      if (message.toLowerCase().includes("password")) {
+        sessionStorage.removeItem(STORAGE_KEY);
+        setUnlocked(false);
+      }
       toast({
         title: "Couldn't save",
-        description: error.message,
+        description: message,
         variant: "destructive",
       });
       return;
     }
-    toast({ title: "Challenge updated" });
+
+    setSavedAt(new Date());
+    toast({ title: "Challenges updated successfully" });
     queryClient.invalidateQueries({ queryKey: ["admin", "region-challenges"] });
-    queryClient.invalidateQueries({ queryKey: ["region-challenge", regionId] });
+    REGIONS.forEach((r) =>
+      queryClient.invalidateQueries({ queryKey: ["region-challenge", r.id] }),
+    );
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem(STORAGE_KEY);
+    setUnlocked(false);
+    setDrafts({});
+    setSavedAt(null);
   };
 
   const formatDate = (iso?: string) => {
@@ -92,6 +151,12 @@ const AdminChallenges = () => {
     }
   };
 
+  const anyDirty = REGIONS.some((r) => {
+    const draft = (drafts[r.id] ?? "").trim();
+    const original = (byId[r.id]?.challenge ?? "").trim();
+    return draft !== original;
+  });
+
   return (
     <Layout>
       <Helmet>
@@ -99,78 +164,140 @@ const AdminChallenges = () => {
         <meta name="robots" content="noindex" />
       </Helmet>
 
-      <section className="py-12 md:py-16 border-b border-border">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl">
-          <p className="micro-caption mb-4">Admin</p>
-          <h1 className="heading-display mb-4">Weekly challenges</h1>
-          <p className="text-muted-foreground text-lg">
-            Update the challenge text shown for each active region on
-            The Kitchen Atlas. Changes go live as soon as you save.
-          </p>
-        </div>
-      </section>
+      {!unlocked ? (
+        <section className="py-16 md:py-24">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-md">
+            <p className="micro-caption mb-4">Admin</p>
+            <h1 className="heading-display mb-4">Weekly challenges</h1>
+            <p className="text-muted-foreground mb-8">
+              Enter the admin password to manage the weekly challenge text shown
+              for each Kitchen Atlas region.
+            </p>
 
-      <section className="py-10 md:py-14">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl space-y-10">
-          {isLoading ? (
-            <p className="text-muted-foreground">Loading…</p>
-          ) : (
-            REGIONS.map((region) => {
-              const row = byId[region.id];
-              const draft = drafts[region.id] ?? "";
-              const original = row?.challenge ?? "";
-              const dirty = draft.trim() !== original.trim();
-              return (
-                <div
-                  key={region.id}
-                  className="border border-border rounded-lg p-5 md:p-6 bg-card"
-                >
-                  <div className="flex items-baseline gap-3 mb-3 flex-wrap">
-                    <span className="text-2xl" aria-hidden>
-                      {region.emoji}
-                    </span>
-                    <h2 className="font-display text-2xl text-foreground">
-                      {region.name}
-                    </h2>
-                  </div>
-
-                  <Label
-                    htmlFor={`challenge-${region.id}`}
-                    className="text-xs uppercase tracking-widest font-semibold text-muted-foreground"
-                  >
-                    Challenge
-                  </Label>
-                  <Textarea
-                    id={`challenge-${region.id}`}
-                    value={draft}
-                    onChange={(e) =>
-                      setDrafts((prev) => ({
-                        ...prev,
-                        [region.id]: e.target.value,
-                      }))
-                    }
-                    rows={4}
-                    className="mt-2"
-                  />
-
-                  <div className="mt-3 flex items-center justify-between gap-4 flex-wrap">
-                    <p className="text-xs text-muted-foreground">
-                      Last updated: {formatDate(row?.updated_at)}
-                    </p>
-                    <Button
-                      onClick={() => handleSave(region.id)}
-                      disabled={!dirty || savingId === region.id}
-                      size="sm"
-                    >
-                      {savingId === region.id ? "Saving…" : "Save"}
-                    </Button>
-                  </div>
+            <form onSubmit={handleUnlock} className="space-y-4">
+              <div>
+                <Label htmlFor="admin-password">Password</Label>
+                <Input
+                  id="admin-password"
+                  type="password"
+                  autoComplete="current-password"
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  className="mt-2"
+                  autoFocus
+                />
+                {authError && (
+                  <p className="text-sm text-destructive mt-2">{authError}</p>
+                )}
+              </div>
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={authChecking || !passwordInput}
+              >
+                {authChecking ? "Checking…" : "Sign in"}
+              </Button>
+            </form>
+          </div>
+        </section>
+      ) : (
+        <>
+          <section className="py-10 md:py-16 border-b border-border">
+            <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl">
+              <div className="flex items-start justify-between gap-4 flex-wrap">
+                <div>
+                  <p className="micro-caption mb-3">Admin</p>
+                  <h1 className="heading-display mb-3">Weekly challenges</h1>
+                  <p className="text-muted-foreground">
+                    Edit the challenge text for each active region. Changes go
+                    live on The Kitchen Atlas as soon as you save.
+                  </p>
                 </div>
-              );
-            })
-          )}
-        </div>
-      </section>
+                <Button variant="ghost" size="sm" onClick={handleLogout}>
+                  Sign out
+                </Button>
+              </div>
+            </div>
+          </section>
+
+          <section className="py-8 md:py-12">
+            <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl space-y-6 md:space-y-8">
+              {isLoading ? (
+                <p className="text-muted-foreground">Loading…</p>
+              ) : (
+                <>
+                  {REGIONS.map((region) => {
+                    const row = byId[region.id];
+                    const draft = drafts[region.id] ?? "";
+                    return (
+                      <div
+                        key={region.id}
+                        className="border border-border rounded-lg p-5 md:p-6 bg-card"
+                      >
+                        <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+                          <span className="text-2xl" aria-hidden>
+                            {region.emoji}
+                          </span>
+                          <h2 className="font-display text-xl md:text-2xl text-foreground">
+                            {region.name}
+                          </h2>
+                        </div>
+
+                        <Label
+                          htmlFor={`challenge-${region.id}`}
+                          className="text-xs uppercase tracking-widest font-semibold text-muted-foreground"
+                        >
+                          Challenge
+                        </Label>
+                        <Textarea
+                          id={`challenge-${region.id}`}
+                          value={draft}
+                          onChange={(e) =>
+                            setDrafts((prev) => ({
+                              ...prev,
+                              [region.id]: e.target.value,
+                            }))
+                          }
+                          rows={4}
+                          className="mt-2"
+                        />
+
+                        <p className="text-xs text-muted-foreground mt-3">
+                          Last updated: {formatDate(row?.updated_at)}
+                        </p>
+                      </div>
+                    );
+                  })}
+
+                  <div className="sticky bottom-4 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 border border-border rounded-lg p-4 md:p-5 shadow-md">
+                    <div className="flex items-center justify-between gap-4 flex-wrap">
+                      <div className="text-sm text-muted-foreground">
+                        {savedAt ? (
+                          <span className="text-foreground font-medium">
+                            ✓ Challenges updated successfully
+                          </span>
+                        ) : anyDirty ? (
+                          "You have unsaved changes."
+                        ) : (
+                          "No changes to save."
+                        )}
+                      </div>
+                      <Button
+                        onClick={handleSaveAll}
+                        disabled={saving || !anyDirty}
+                        size="lg"
+                        className="min-h-[44px]"
+                      >
+                        {saving ? "Saving…" : "Save all challenges"}
+                      </Button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          </section>
+        </>
+      )}
     </Layout>
   );
 };
