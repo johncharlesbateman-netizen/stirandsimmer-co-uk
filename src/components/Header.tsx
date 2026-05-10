@@ -100,7 +100,7 @@ const Header = () => {
               to={link.to}
               onClick={() => setMobileMenuOpen(false)}
               className={`text-lg tracking-wide transition-all duration-300 hover:opacity-60 hover:translate-x-2 ${
-                isActive(link.to) ? "opacity-100" : "opacity-70"
+                isActive(link.to) ? "underline underline-offset-4 decoration-foreground/30" : ""
               }`}
               style={{
                 transitionDelay: mobileMenuOpen ? `${index * 50}ms` : "0ms",
