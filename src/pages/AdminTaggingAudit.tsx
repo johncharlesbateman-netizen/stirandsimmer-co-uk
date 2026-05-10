@@ -14,8 +14,10 @@ import {
   TILE_CATEGORIES,
   TILE_CATEGORY_LABELS,
   REGION_TAGS,
+  MEAL_TYPE_TAGS,
   type TileCategory,
   type RegionTag,
+  type MealTypeTag,
 } from "@/lib/recipeTagSuggestions";
 
 const labelForCategory = (cat: string | null | undefined): string => {
