@@ -24,6 +24,8 @@ import AdminEditRecipe from "./pages/AdminEditRecipe";
 import AdminSeoStatus from "./pages/AdminSeoStatus";
 import AdminTaggingAudit from "./pages/AdminTaggingAudit";
 import AdminChallenges from "./pages/AdminChallenges";
+import Guides from "./pages/Guides";
+import GuideMotherSauces from "./pages/GuideMotherSauces";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
