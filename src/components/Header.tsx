@@ -66,7 +66,7 @@ const Header = () => {
               <Link
                 to="/auth"
                 className={`text-sm tracking-wide transition-all duration-300 hover:opacity-60 hover:tracking-wider ${
-                  isActive("/auth") ? "opacity-100" : "opacity-70"
+                  isActive("/auth") ? "underline underline-offset-4 decoration-foreground/30" : ""
                 }`}
               >
                 Sign in
