@@ -30,7 +30,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description: "Honest, seasonal and deeply comforting. The foundation of everything.",
     challenge:
-      "This week — cook a classic British fish dish. Try our Fish Finger Butty or Cider Battered Prawns.",
+      "This week — cook a classic British fish dish. Try our [Fish Finger Butty](/recipes/fish-finger-butty-with-lemon-mayonnaise) or [Cider Battered Prawns](/recipes/cider-battered-prawns-with-aubergine-salad).",
     regionTags: ["british"],
   },
   {
@@ -41,7 +41,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description: "Pasta, sauces and the art of simplicity. Italy feeds the soul.",
     challenge:
-      "This week — cook a pasta dish entirely from scratch. Find our Italian recipes and challenge yourself.",
+      "This week — cook a pasta dish entirely from scratch. Find our [Italian recipes](/recipes/italian) and challenge yourself.",
     regionTags: ["italian"],
   },
   {
@@ -52,7 +52,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description: "Classical techniques that underpin all of western cooking.",
     challenge:
-      "This week — make a classic French sauce from scratch. Browse our French recipe collection to find your starting point.",
+      "This week — make a classic French sauce from scratch. Browse our [French recipe collection](/recipes/french) to find your starting point.",
     regionTags: ["french"],
   },
   {
@@ -63,7 +63,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description: "Bold spices, fragrant herbs and layers of warmth and depth.",
     challenge:
-      "This week — cook a curry entirely from scratch using whole spices, no jars. Find your recipe in our Asian collection.",
+      "This week — cook a curry entirely from scratch using whole spices, no jars. Find your recipe in our [Asian collection](/recipes/asian).",
     regionTags: ["indian", "asian"],
   },
   {
@@ -278,6 +278,43 @@ const REGION_BUTTON_LABEL: Record<string, string> = {
   asia: "Explore all South & Southeast Asian recipes",
 };
 
+// Render markdown-style [label](href) links inline. External URLs open in a
+// new tab; internal paths use react-router for client-side navigation.
+const renderChallenge = (text: string) => {
+  const parts: (string | JSX.Element)[] = [];
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
+    const [, label, href] = match;
+    const isInternal = href.startsWith("/");
+    if (isInternal) {
+      parts.push(
+        <Link key={key++} to={href} className="underline underline-offset-2 hover:opacity-80">
+          {label}
+        </Link>,
+      );
+    } else {
+      parts.push(
+        <a
+          key={key++}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2 hover:opacity-80"
+        >
+          {label}
+        </a>,
+      );
+    }
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+  return parts;
+};
+
 const RegionSection = ({ region }: { region: RegionDef }) => {
   const disabled = !region.available;
 
@@ -348,7 +385,9 @@ const RegionSection = ({ region }: { region: RegionDef }) => {
           <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
             Challenge
           </p>
-          <p className="text-base md:text-lg text-foreground">{challengeText}</p>
+          <p className="text-base md:text-lg text-foreground">
+            {renderChallenge(challengeText)}
+          </p>
         </div>
       </div>
     </section>
