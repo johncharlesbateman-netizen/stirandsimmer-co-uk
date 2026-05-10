@@ -103,6 +103,7 @@ const App = () => (
             <Route path="/styleguide" element={<Styleguide />} />
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/recipes/category/:slug" element={<CategoryPage />} />
+            <Route path="/recipes/region/:regionId" element={<RegionPage />} />
             <Route path="/recipes-1/:slug" element={<LegacyRecipeRedirect />} />
             <Route path="/recipes-1-1/:slug" element={<LegacyRecipeRedirect />} />
             <Route path="/recipes/:slug" element={<CanonicalRecipeSlugRedirect />} />
