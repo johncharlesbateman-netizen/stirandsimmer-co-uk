@@ -176,25 +176,20 @@ const KitchenAtlas = () => {
                 "radial-gradient(circle at 20% 40%, rgba(201,123,26,0.08), transparent 40%), radial-gradient(circle at 60% 60%, rgba(201,123,26,0.06), transparent 45%), radial-gradient(circle at 80% 30%, rgba(201,123,26,0.05), transparent 40%)",
             }}
           >
-            {/* Decorative continent blobs (very loose, atmospheric) */}
+            {/* World map silhouette (equirectangular, 1000x500 viewBox) */}
             <svg
               viewBox="0 0 1000 500"
               preserveAspectRatio="xMidYMid meet"
               className="absolute inset-0 w-full h-full"
               aria-hidden
             >
-              <g fill="#3a2410" opacity="0.85">
-                {/* Americas */}
-                <path d="M150,120 q40,-30 80,-10 q30,15 25,55 q-5,40 -30,70 q-15,20 -10,55 q5,40 -20,70 q-30,30 -55,10 q-25,-20 -20,-55 q5,-40 -10,-70 q-20,-40 0,-80 q15,-30 40,-45z" />
-                {/* Europe */}
-                <path d="M470,120 q30,-15 60,-5 q35,10 30,45 q-3,25 -25,40 q-25,15 -50,5 q-30,-12 -30,-45 q0,-25 15,-40z" />
-                {/* Africa */}
-                <path d="M500,210 q35,-10 60,15 q25,25 15,65 q-10,40 -40,70 q-25,25 -55,15 q-25,-10 -25,-50 q0,-45 15,-75 q10,-25 30,-40z" />
-                {/* Asia */}
-                <path d="M620,110 q60,-25 130,-5 q70,20 90,75 q15,50 -25,90 q-40,40 -90,30 q-50,-10 -90,-45 q-40,-35 -30,-80 q5,-35 15,-65z" />
-                {/* SE Asia / Oceania */}
-                <path d="M780,300 q35,-10 55,15 q20,25 -5,55 q-25,30 -55,20 q-25,-8 -25,-45 q0,-30 30,-45z" />
-              </g>
+              <path
+                d={WORLD_MAP_PATH}
+                fill="#3a2410"
+                stroke="#5a3a18"
+                strokeWidth="0.6"
+                strokeLinejoin="round"
+              />
             </svg>
 
             {/* Markers */}
