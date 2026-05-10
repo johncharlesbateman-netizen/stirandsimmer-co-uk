@@ -1,34 +1,33 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { ExternalLink, Pencil } from "lucide-react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { ExternalLink, Pencil, Sparkles, AlertTriangle, Check } from "lucide-react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import {
+  suggestTags,
+  TILE_CATEGORIES,
+  REGION_TAGS,
+  type TileCategory,
+  type RegionTag,
+} from "@/lib/recipeTagSuggestions";
 
 type Recipe = Tables<"recipes">;
 
-const TILE_CATEGORIES = new Set([
-  "chicken",
-  "beef",
-  "lamb",
-  "seafood",
-  "pork",
-  "spicy",
-  "pasta",
-  "sweets",
-]);
-
-const VALID_REGIONS = new Set(["british", "italian", "french", "indian", "asian"]);
+const TILE_CATEGORY_SET = new Set<string>(TILE_CATEGORIES);
+const VALID_REGION_SET = new Set<string>(REGION_TAGS);
 
 type Status = "complete" | "partial" | "missing";
 
 const classify = (r: Recipe): { status: Status; reasons: string[] } => {
   const reasons: string[] = [];
-  const hasTileCategory = r.category && TILE_CATEGORIES.has(r.category);
+  const hasTileCategory = r.category && TILE_CATEGORY_SET.has(r.category);
   const regionTags = ((r.cuisine_region as string[] | null) ?? []).filter(
-    (t) => VALID_REGIONS.has(t),
+    (t) => VALID_REGION_SET.has(t),
   );
   const hasRegion = regionTags.length > 0;
 
@@ -59,12 +58,15 @@ const STATUS_BADGE: Record<Status, string> = {
 };
 
 const AdminTaggingAudit = () => {
+  const queryClient = useQueryClient();
+  const [applying, setApplying] = useState<string | null>(null);
+
   const { data: recipes = [], isLoading } = useQuery({
     queryKey: ["admin-tagging-audit"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
-        .select("id, slug, title, category, cuisine_region")
+        .select("id, slug, title, description, intro, category, cuisine_region, collections")
         .order("title");
       if (error) throw error;
       return (data ?? []) as Recipe[];
@@ -73,15 +75,109 @@ const AdminTaggingAudit = () => {
 
   const rows = useMemo(
     () =>
-      recipes.map((r) => ({ recipe: r, ...classify(r) })),
+      recipes.map((r) => {
+        const { status, reasons } = classify(r);
+        const suggestion = suggestTags({
+          title: r.title,
+          description: r.description,
+          intro: r.intro,
+          collections: (r.collections as string[] | null) ?? [],
+        });
+
+        const currentCategory = r.category as string | null;
+        const currentRegions = ((r.cuisine_region as string[] | null) ?? []).filter(
+          (t) => VALID_REGION_SET.has(t),
+        );
+
+        const categoryNeedsFix =
+          !currentCategory || !TILE_CATEGORY_SET.has(currentCategory);
+        const showCategorySuggestion =
+          categoryNeedsFix &&
+          suggestion.suggestedCategory !== null &&
+          suggestion.suggestedCategory !== currentCategory;
+
+        const newRegionSuggestions = suggestion.suggestedRegions.filter(
+          (r) => !currentRegions.includes(r),
+        );
+        const showRegionSuggestion =
+          (currentRegions.length === 0 || newRegionSuggestions.length > 0) &&
+          newRegionSuggestions.length > 0;
+
+        const hasAnyApplicableSuggestion =
+          showCategorySuggestion || showRegionSuggestion;
+
+        const lowConfidence =
+          status !== "complete" &&
+          !hasAnyApplicableSuggestion;
+
+        return {
+          recipe: r,
+          status,
+          reasons,
+          suggestion,
+          currentCategory,
+          currentRegions,
+          showCategorySuggestion,
+          showRegionSuggestion,
+          newRegionSuggestions,
+          hasAnyApplicableSuggestion,
+          lowConfidence,
+        };
+      }),
     [recipes],
   );
 
   const counts = useMemo(() => {
-    const c = { complete: 0, partial: 0, missing: 0, total: rows.length };
-    for (const row of rows) c[row.status]++;
+    const c = {
+      complete: 0,
+      partial: 0,
+      missing: 0,
+      total: rows.length,
+      withSuggestions: 0,
+      needsManualReview: 0,
+    };
+    for (const row of rows) {
+      c[row.status]++;
+      if (row.hasAnyApplicableSuggestion) c.withSuggestions++;
+      if (row.lowConfidence) c.needsManualReview++;
+    }
     return c;
   }, [rows]);
+
+  const applySuggestion = async (
+    recipe: Recipe,
+    nextCategory: TileCategory | null,
+    nextRegions: RegionTag[],
+  ) => {
+    setApplying(recipe.id);
+    try {
+      const update: { category?: TileCategory; cuisine_region?: string[] } = {};
+      if (nextCategory) update.category = nextCategory;
+      if (nextRegions.length > 0) {
+        const existing = ((recipe.cuisine_region as string[] | null) ?? []).filter(
+          (t) => VALID_REGION_SET.has(t),
+        );
+        const merged = Array.from(new Set([...existing, ...nextRegions]));
+        update.cuisine_region = merged;
+      }
+      if (Object.keys(update).length === 0) return;
+
+      const { error } = await supabase
+        .from("recipes")
+        // category is a USER-DEFINED enum; cast at the call site
+        .update(update as never)
+        .eq("id", recipe.id);
+      if (error) throw error;
+
+      toast.success(`Updated tags for "${recipe.title}"`);
+      await queryClient.invalidateQueries({ queryKey: ["admin-tagging-audit"] });
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Failed to update";
+      toast.error(msg);
+    } finally {
+      setApplying(null);
+    }
+  };
 
   return (
     <Layout>
@@ -96,8 +192,8 @@ const AdminTaggingAudit = () => {
           <h1 className="heading-display mb-4">Recipe tagging audit</h1>
           <p className="text-muted-foreground max-w-2xl mb-6">
             Every recipe in the database with its tile category and cuisine
-            region tags. Use this to spot recipes that need attention before
-            they slip through the Recipes page or Kitchen Atlas filters.
+            region tags. Suggestions are generated from the title, description
+            and collections — review and apply them manually.
           </p>
 
           <div className="flex flex-wrap gap-3 text-sm">
@@ -113,6 +209,14 @@ const AdminTaggingAudit = () => {
             <span className="px-3 py-1.5 rounded-md bg-red-600 text-white">
               Missing: <strong>{counts.missing}</strong>
             </span>
+            <span className="px-3 py-1.5 rounded-md bg-blue-600 text-white inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" /> With suggestions:{" "}
+              <strong>{counts.withSuggestions}</strong>
+            </span>
+            <span className="px-3 py-1.5 rounded-md bg-orange-600 text-white inline-flex items-center gap-1.5">
+              <AlertTriangle className="w-3.5 h-3.5" /> Needs manual review:{" "}
+              <strong>{counts.needsManualReview}</strong>
+            </span>
           </div>
         </div>
       </section>
@@ -123,95 +227,181 @@ const AdminTaggingAudit = () => {
             <p className="text-muted-foreground">Loading recipes…</p>
           ) : (
             <div className="space-y-2">
-              {rows.map(({ recipe, status, reasons }) => {
-                const regions =
-                  ((recipe.cuisine_region as string[] | null) ?? []);
-                return (
-                  <div
-                    key={recipe.id}
-                    className={`rounded-md p-4 ${STATUS_STYLES[status]}`}
-                  >
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-wrap items-center gap-2 mb-2">
-                          <span
-                            className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${STATUS_BADGE[status]}`}
-                          >
-                            {STATUS_LABEL[status]}
-                          </span>
-                          <h2 className="font-display text-base md:text-lg text-foreground truncate">
-                            {recipe.title}
-                          </h2>
-                        </div>
-
-                        <div className="flex flex-wrap gap-2 text-xs">
-                          <span className="inline-flex items-center gap-1.5">
-                            <span className="text-muted-foreground">Category:</span>
-                            {recipe.category &&
-                            TILE_CATEGORIES.has(recipe.category) ? (
-                              <span className="px-2 py-0.5 rounded bg-foreground/10 text-foreground font-mono">
-                                {recipe.category}
-                              </span>
-                            ) : (
-                              <span className="px-2 py-0.5 rounded bg-red-600/15 text-red-700 dark:text-red-300 font-mono">
-                                {recipe.category ?? "—"}
+              {rows.map(
+                ({
+                  recipe,
+                  status,
+                  reasons,
+                  suggestion,
+                  currentRegions,
+                  showCategorySuggestion,
+                  showRegionSuggestion,
+                  newRegionSuggestions,
+                  hasAnyApplicableSuggestion,
+                  lowConfidence,
+                }) => {
+                  const allRegions =
+                    ((recipe.cuisine_region as string[] | null) ?? []);
+                  return (
+                    <div
+                      key={recipe.id}
+                      className={`rounded-md p-4 ${STATUS_STYLES[status]}`}
+                    >
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-wrap items-center gap-2 mb-2">
+                            <span
+                              className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${STATUS_BADGE[status]}`}
+                            >
+                              {STATUS_LABEL[status]}
+                            </span>
+                            {lowConfidence && (
+                              <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-orange-600 text-white inline-flex items-center gap-1">
+                                <AlertTriangle className="w-3 h-3" /> Needs manual review
                               </span>
                             )}
-                          </span>
+                            <h2 className="font-display text-base md:text-lg text-foreground truncate">
+                              {recipe.title}
+                            </h2>
+                          </div>
 
-                          <span className="inline-flex items-center gap-1.5 flex-wrap">
-                            <span className="text-muted-foreground">Regions:</span>
-                            {regions.length === 0 ? (
-                              <span className="px-2 py-0.5 rounded bg-red-600/15 text-red-700 dark:text-red-300 font-mono">
-                                none
+                          <div className="flex flex-wrap gap-2 text-xs">
+                            <span className="inline-flex items-center gap-1.5">
+                              <span className="text-muted-foreground">Category:</span>
+                              {recipe.category &&
+                              TILE_CATEGORY_SET.has(recipe.category) ? (
+                                <span className="px-2 py-0.5 rounded bg-foreground/10 text-foreground font-mono">
+                                  {recipe.category}
+                                </span>
+                              ) : (
+                                <span className="px-2 py-0.5 rounded bg-red-600/15 text-red-700 dark:text-red-300 font-mono">
+                                  {recipe.category ?? "—"}
+                                </span>
+                              )}
+                            </span>
+
+                            <span className="inline-flex items-center gap-1.5 flex-wrap">
+                              <span className="text-muted-foreground">Regions:</span>
+                              {allRegions.length === 0 ? (
+                                <span className="px-2 py-0.5 rounded bg-red-600/15 text-red-700 dark:text-red-300 font-mono">
+                                  none
+                                </span>
+                              ) : (
+                                allRegions.map((tag) => {
+                                  const valid = VALID_REGION_SET.has(tag);
+                                  return (
+                                    <span
+                                      key={tag}
+                                      className={`px-2 py-0.5 rounded font-mono ${
+                                        valid
+                                          ? "bg-foreground/10 text-foreground"
+                                          : "bg-amber-500/20 text-amber-800 dark:text-amber-200"
+                                      }`}
+                                    >
+                                      {tag}
+                                    </span>
+                                  );
+                                })
+                              )}
+                            </span>
+                          </div>
+
+                          {hasAnyApplicableSuggestion && (
+                            <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
+                              <span className="inline-flex items-center gap-1 text-blue-700 dark:text-blue-300 font-semibold uppercase tracking-wider text-[10px]">
+                                <Sparkles className="w-3 h-3" /> Suggested
                               </span>
-                            ) : (
-                              regions.map((tag) => {
-                                const valid = VALID_REGIONS.has(tag);
-                                return (
-                                  <span
-                                    key={tag}
-                                    className={`px-2 py-0.5 rounded font-mono ${
-                                      valid
-                                        ? "bg-foreground/10 text-foreground"
-                                        : "bg-amber-500/20 text-amber-800 dark:text-amber-200"
-                                    }`}
-                                  >
-                                    {tag}
+                              {showCategorySuggestion && (
+                                <span className="inline-flex items-center gap-1.5">
+                                  <span className="text-muted-foreground">Category:</span>
+                                  <span className="px-2 py-0.5 rounded bg-blue-600/15 text-blue-800 dark:text-blue-200 font-mono">
+                                    {suggestion.suggestedCategory}
                                   </span>
-                                );
-                              })
-                            )}
-                          </span>
+                                </span>
+                              )}
+                              {showRegionSuggestion && (
+                                <span className="inline-flex items-center gap-1.5 flex-wrap">
+                                  <span className="text-muted-foreground">Regions:</span>
+                                  {newRegionSuggestions.map((r) => (
+                                    <span
+                                      key={r}
+                                      className="px-2 py-0.5 rounded bg-blue-600/15 text-blue-800 dark:text-blue-200 font-mono"
+                                    >
+                                      +{r}
+                                    </span>
+                                  ))}
+                                </span>
+                              )}
+                              {(suggestion.categoryMatches.length > 0 ||
+                                suggestion.suggestedRegions.length > 0) && (
+                                <span
+                                  className="text-muted-foreground italic"
+                                  title={[
+                                    suggestion.categoryMatches.length > 0
+                                      ? `Category matched: ${suggestion.categoryMatches.join(", ")}`
+                                      : "",
+                                    ...suggestion.suggestedRegions.map(
+                                      (r) =>
+                                        `${r} matched: ${suggestion.regionMatches[r].join(", ")}`,
+                                    ),
+                                  ]
+                                    .filter(Boolean)
+                                    .join(" · ")}
+                                >
+                                  (hover for matched keywords)
+                                </span>
+                              )}
+                            </div>
+                          )}
+
+                          {reasons.length > 0 && (
+                            <p className="text-xs text-muted-foreground mt-2">
+                              {reasons.join(" · ")}
+                            </p>
+                          )}
                         </div>
 
-                        {reasons.length > 0 && (
-                          <p className="text-xs text-muted-foreground mt-2">
-                            {reasons.join(" · ")}
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-2 shrink-0">
-                        <Link
-                          to={`/recipes/${recipe.slug}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" /> View
-                        </Link>
-                        <Link
-                          to={`/admin/recipes/${recipe.slug}/edit`}
-                          className="inline-flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-md bg-foreground text-background hover:opacity-90"
-                        >
-                          <Pencil className="w-3.5 h-3.5" /> Edit
-                        </Link>
+                        <div className="flex items-center gap-2 shrink-0 flex-wrap">
+                          {hasAnyApplicableSuggestion && (
+                            <Button
+                              size="sm"
+                              variant="default"
+                              disabled={applying === recipe.id}
+                              onClick={() =>
+                                applySuggestion(
+                                  recipe,
+                                  showCategorySuggestion
+                                    ? suggestion.suggestedCategory
+                                    : null,
+                                  showRegionSuggestion ? newRegionSuggestions : [],
+                                )
+                              }
+                              className="h-8 text-xs gap-1"
+                            >
+                              <Check className="w-3.5 h-3.5" />
+                              {applying === recipe.id ? "Applying…" : "Apply"}
+                            </Button>
+                          )}
+                          <Link
+                            to={`/recipes/${recipe.slug}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" /> View
+                          </Link>
+                          <Link
+                            to={`/admin/recipes/${recipe.slug}/edit`}
+                            className="inline-flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-md bg-foreground text-background hover:opacity-90"
+                          >
+                            <Pencil className="w-3.5 h-3.5" /> Edit
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                },
+              )}
             </div>
           )}
         </div>
