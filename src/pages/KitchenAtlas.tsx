@@ -237,35 +237,6 @@ const KitchenAtlas = () => {
           </div>
         </div>
       </section>
-
-      {/* WEEKLY CHALLENGE BANNER */}
-      <section
-        className="w-full py-10 md:py-14"
-        style={{ backgroundColor: "#C97B1A", color: "#1a0e00" }}
-      >
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div className="max-w-3xl">
-            <p className="text-xs uppercase tracking-widest font-semibold mb-2 opacity-80">
-              This week's challenge
-            </p>
-            <h2 className="font-display text-2xl md:text-3xl mb-3">
-              Cook 3 Italian classics this week
-            </h2>
-            <p className="text-base md:text-lg">
-              Carbonara, Arrabbiata or Ribollita — find all three on Stir &
-              Simmer and challenge yourself to cook them all before Sunday.
-            </p>
-          </div>
-          <Link
-            to="/recipes/region/italy"
-            className="self-start md:self-auto inline-flex items-center gap-2 px-5 py-3 rounded-md font-medium transition-colors"
-            style={{ backgroundColor: "#1a0e00", color: "#f5e9d7" }}
-          >
-            Browse Italian recipes <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
-
       {/* REGION SECTIONS — light */}
       <div className="bg-background">
         {REGIONS.filter((r) => r.available).map((region) => (
