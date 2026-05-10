@@ -216,12 +216,7 @@ const Contact = () => {
             <div className="md:col-span-4 md:col-start-9 space-y-12 md:pt-32">
               <div>
                 <h3 className="micro-caption mb-4">Email</h3>
-                <a
-                   href="mailto:hello@stirandsimmer.co.uk"
-                   className="text-lg editorial-link"
-                 >
-                   hello@stirandsimmer.co.uk
-                </a>
+                <p className="text-lg">hello@stirandsimmer.co.uk</p>
               </div>
 
               <div>
