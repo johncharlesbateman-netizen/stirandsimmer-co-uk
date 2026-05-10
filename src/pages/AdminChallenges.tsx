@@ -17,6 +17,7 @@ const REGIONS: { id: string; name: string; emoji: string }[] = [
 ];
 
 type Row = { region_id: string; challenge: string; updated_at: string };
+type HistoryRow = { region_id: string; challenge: string; replaced_at: string };
 
 const STORAGE_KEY = "admin-challenges-unlocked";
 
