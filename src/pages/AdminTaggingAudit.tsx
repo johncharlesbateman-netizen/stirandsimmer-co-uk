@@ -40,12 +40,18 @@ const classify = (r: Recipe): { status: Status; reasons: string[] } => {
     (t) => VALID_REGION_SET.has(t),
   );
   const hasRegion = regionTags.length > 0;
+  const mealTags = (((r as { meal_types?: string[] | null }).meal_types) ?? []).filter(
+    (t) => VALID_MEAL_SET.has(t),
+  );
+  const hasMeal = mealTags.length > 0;
 
   if (!hasTileCategory) reasons.push("No tile category");
   if (!hasRegion) reasons.push("No cuisine region");
+  if (!hasMeal) reasons.push("No meal type");
 
-  if (!hasTileCategory && !hasRegion) return { status: "missing", reasons };
-  if (!hasTileCategory || !hasRegion) return { status: "partial", reasons };
+  const present = [hasTileCategory, hasRegion, hasMeal].filter(Boolean).length;
+  if (present === 0) return { status: "missing", reasons };
+  if (present < 3) return { status: "partial", reasons };
   return { status: "complete", reasons };
 };
 
