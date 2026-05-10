@@ -11,10 +11,16 @@ import { toast } from "sonner";
 import {
   suggestTags,
   TILE_CATEGORIES,
+  TILE_CATEGORY_LABELS,
   REGION_TAGS,
   type TileCategory,
   type RegionTag,
 } from "@/lib/recipeTagSuggestions";
+
+const labelForCategory = (cat: string | null | undefined): string => {
+  if (!cat) return "—";
+  return (TILE_CATEGORY_LABELS as Record<string, string>)[cat] ?? cat;
+};
 
 type Recipe = Tables<"recipes">;
 
@@ -324,11 +330,11 @@ const AdminTaggingAudit = () => {
                               {recipe.category &&
                               TILE_CATEGORY_SET.has(recipe.category) ? (
                                 <span className="px-2 py-0.5 rounded bg-foreground/10 text-foreground font-mono">
-                                  {recipe.category}
+                                  {labelForCategory(recipe.category)}
                                 </span>
                               ) : (
                                 <span className="px-2 py-0.5 rounded bg-red-600/15 text-red-700 dark:text-red-300 font-mono">
-                                  {recipe.category ?? "—"}
+                                  {recipe.category ? labelForCategory(recipe.category) : "—"}
                                 </span>
                               )}
                             </span>
@@ -368,7 +374,7 @@ const AdminTaggingAudit = () => {
                                 <span className="inline-flex items-center gap-1.5">
                                   <span className="text-muted-foreground">Category:</span>
                                   <span className="px-2 py-0.5 rounded bg-blue-600/15 text-blue-800 dark:text-blue-200 font-mono">
-                                    {suggestion.suggestedCategory}
+                                    {labelForCategory(suggestion.suggestedCategory)}
                                   </span>
                                 </span>
                               )}

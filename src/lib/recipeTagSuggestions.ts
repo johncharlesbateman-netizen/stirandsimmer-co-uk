@@ -11,7 +11,8 @@ export type TileCategory =
   | "seafood"
   | "spicy"
   | "pasta"
-  | "sweets";
+  | "sweets"
+  | "lunch_suggestions";
 
 export type RegionTag = "british" | "italian" | "french" | "indian" | "asian";
 
@@ -24,7 +25,21 @@ export const TILE_CATEGORIES: TileCategory[] = [
   "spicy",
   "pasta",
   "sweets",
+  "lunch_suggestions",
 ];
+
+// Display labels matching the public tile slugs used in the navigation.
+export const TILE_CATEGORY_LABELS: Record<TileCategory, string> = {
+  chicken: "chicken",
+  beef: "beef",
+  lamb: "lamb",
+  pork: "pork",
+  seafood: "fish-and-seafood",
+  spicy: "spicy",
+  pasta: "pasta-and-rice",
+  sweets: "puddings-and-desserts",
+  lunch_suggestions: "quick-meals",
+};
 
 export const REGION_TAGS: RegionTag[] = [
   "british",
@@ -145,6 +160,12 @@ const CATEGORY_KEYWORDS: Record<TileCategory, string[]> = {
     "crème brûlée", "creme brulee", "tarte tatin", "spotted dick",
     "victoria sponge", "battenberg", "eton mess", "treacle",
     "pavlova", "fudge", "toffee", "meringue", "panna",
+  ],
+  lunch_suggestions: [
+    "lunch", "sandwich", "toastie", "toasted sandwich", "wrap",
+    "baguette", "panini", "ciabatta sandwich", "salad bowl",
+    "quick lunch", "midweek lunch", "light lunch", "packed lunch",
+    "ploughman", "soup", "frittata", "omelette", "quiche",
   ],
 };
 
@@ -270,6 +291,7 @@ export const suggestTags = (recipe: RecipeInput): Suggestion => {
     spicy: 0,
     pasta: 0,
     sweets: 0,
+    lunch_suggestions: 0,
   };
   const categoryMatches: Record<TileCategory, string[]> = {
     chicken: [],
@@ -280,6 +302,7 @@ export const suggestTags = (recipe: RecipeInput): Suggestion => {
     spicy: [],
     pasta: [],
     sweets: [],
+    lunch_suggestions: [],
   };
 
   for (const cat of TILE_CATEGORIES) {
