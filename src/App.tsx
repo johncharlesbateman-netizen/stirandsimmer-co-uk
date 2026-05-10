@@ -22,6 +22,7 @@ import MealPlanner from "./pages/MealPlanner";
 import AdminNewRecipe from "./pages/AdminNewRecipe";
 import AdminEditRecipe from "./pages/AdminEditRecipe";
 import AdminSeoStatus from "./pages/AdminSeoStatus";
+import AdminTaggingAudit from "./pages/AdminTaggingAudit";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
