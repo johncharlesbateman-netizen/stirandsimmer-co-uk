@@ -22,6 +22,7 @@ import MealPlanner from "./pages/MealPlanner";
 import AdminNewRecipe from "./pages/AdminNewRecipe";
 import AdminEditRecipe from "./pages/AdminEditRecipe";
 import AdminSeoStatus from "./pages/AdminSeoStatus";
+import AdminTaggingAudit from "./pages/AdminTaggingAudit";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
@@ -127,6 +128,10 @@ const App = () => (
             <Route
               path="/admin/seo"
               element={<RequireAdmin><AdminSeoStatus /></RequireAdmin>}
+            />
+            <Route
+              path="/admin/tagging-audit"
+              element={<RequireAdmin><AdminTaggingAudit /></RequireAdmin>}
             />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
