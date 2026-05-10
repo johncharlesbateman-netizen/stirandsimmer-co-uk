@@ -573,6 +573,15 @@ const AdminTaggingAudit = () => {
                                   (hover for matched keywords)
                                 </span>
                               )}
+                              <label className="ml-auto inline-flex items-center gap-1.5 cursor-pointer select-none text-[11px] font-medium text-foreground">
+                                <Checkbox
+                                  checked={approved.has(recipe.id)}
+                                  onCheckedChange={() => toggleApproved(recipe.id)}
+                                  disabled={bulkApplying}
+                                  aria-label={`Approve suggestion for ${recipe.title}`}
+                                />
+                                Approve suggestion
+                              </label>
                             </div>
                           )}
 
