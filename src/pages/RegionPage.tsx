@@ -56,15 +56,15 @@ const REGIONS: Record<string, RegionDef> = {
   },
   asia: {
     id: "asia",
-    name: "South & Southeast Asia",
+    name: "South and Southeast Asia",
     emoji: "🌶️",
     description:
       "Bold spices, fragrant herbs and layers of warmth and depth — curries, stir fries and slow-simmered classics from across the region.",
     regionTags: ["indian", "asian"],
     seoTitle:
-      "South & Southeast Asian recipes — The Kitchen Atlas | Stir & Simmer",
+      "South and Southeast Asian recipes — The Kitchen Atlas | Stir & Simmer",
     seoDescription:
-      "South & Southeast Asian recipes from The Kitchen Atlas — curries, stir fries and bold, fragrant cooking from across the region.",
+      "South and Southeast Asian recipes from The Kitchen Atlas — curries, stir fries and bold, fragrant cooking from across the region.",
   },
 };
 

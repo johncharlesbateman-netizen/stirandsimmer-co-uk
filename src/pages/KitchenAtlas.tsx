@@ -57,7 +57,7 @@ const REGIONS: RegionDef[] = [
   },
   {
     id: "asia",
-    name: "South & Southeast Asia",
+    name: "South and Southeast Asia",
     emoji: "🌶️",
     bg: "#5c1a3a",
     available: true,
@@ -275,7 +275,7 @@ const REGION_BUTTON_LABEL: Record<string, string> = {
   uk: "Explore all United Kingdom recipes",
   italy: "Explore all Italian recipes",
   france: "Explore all French recipes",
-  asia: "Explore all South & Southeast Asian recipes",
+  asia: "Explore all South and Southeast Asian recipes",
 };
 
 // Render markdown-style [label](href) links inline. External URLs open in a
