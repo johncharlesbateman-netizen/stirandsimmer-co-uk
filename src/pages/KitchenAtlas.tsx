@@ -150,10 +150,10 @@ const KitchenAtlas = () => {
       </section>
 
       {/* MAP */}
-      <section style={{ backgroundColor: "#120a00" }} className="hidden md:block py-12 md:py-16">
+      <section style={{ backgroundColor: "#120a00" }} className="py-8 md:py-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div
-            className="relative mx-auto rounded-xl overflow-hidden hidden md:block"
+            className="relative mx-auto rounded-xl overflow-hidden block"
             style={{
               backgroundColor: "#1a0e00",
               maxWidth: "1100px",
