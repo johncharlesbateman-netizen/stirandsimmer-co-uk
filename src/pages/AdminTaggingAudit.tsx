@@ -11,10 +11,16 @@ import { toast } from "sonner";
 import {
   suggestTags,
   TILE_CATEGORIES,
+  TILE_CATEGORY_LABELS,
   REGION_TAGS,
   type TileCategory,
   type RegionTag,
 } from "@/lib/recipeTagSuggestions";
+
+const labelForCategory = (cat: string | null | undefined): string => {
+  if (!cat) return "—";
+  return (TILE_CATEGORY_LABELS as Record<string, string>)[cat] ?? cat;
+};
 
 type Recipe = Tables<"recipes">;
 
