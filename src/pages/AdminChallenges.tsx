@@ -17,6 +17,7 @@ const REGIONS: { id: string; name: string; emoji: string }[] = [
 ];
 
 type Row = { region_id: string; challenge: string; updated_at: string };
+type HistoryRow = { region_id: string; challenge: string; replaced_at: string };
 
 const STORAGE_KEY = "admin-challenges-unlocked";
 
@@ -43,6 +44,31 @@ const AdminChallenges = () => {
     },
     enabled: unlocked,
   });
+
+  const { data: history = [] } = useQuery({
+    queryKey: ["admin", "region-challenge-history"],
+    queryFn: async () => {
+      const fourWeeksAgo = new Date(
+        Date.now() - 28 * 24 * 60 * 60 * 1000,
+      ).toISOString();
+      const { data, error } = await supabase
+        .from("region_challenge_history")
+        .select("region_id, challenge, replaced_at")
+        .gte("replaced_at", fourWeeksAgo)
+        .order("replaced_at", { ascending: false });
+      if (error) throw error;
+      return (data ?? []) as HistoryRow[];
+    },
+    enabled: unlocked,
+  });
+
+  const historyByRegion = REGIONS.reduce<Record<string, HistoryRow[]>>(
+    (acc, r) => {
+      acc[r.id] = history.filter((h) => h.region_id === r.id);
+      return acc;
+    },
+    {},
+  );
 
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
@@ -127,6 +153,9 @@ const AdminChallenges = () => {
     setSavedAt(new Date());
     toast({ title: "Challenges updated successfully" });
     queryClient.invalidateQueries({ queryKey: ["admin", "region-challenges"] });
+    queryClient.invalidateQueries({
+      queryKey: ["admin", "region-challenge-history"],
+    });
     REGIONS.forEach((r) =>
       queryClient.invalidateQueries({ queryKey: ["region-challenge", r.id] }),
     );
@@ -265,6 +294,31 @@ const AdminChallenges = () => {
                         <p className="text-xs text-muted-foreground mt-3">
                           Last updated: {formatDate(row?.updated_at)}
                         </p>
+
+                        {historyByRegion[region.id]?.length > 0 && (
+                          <div className="mt-5 pt-4 border-t border-border">
+                            <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground mb-3">
+                              Last 4 weeks
+                            </p>
+                            <ul className="space-y-3">
+                              {historyByRegion[region.id]
+                                .slice(0, 4)
+                                .map((h) => (
+                                  <li
+                                    key={`${h.region_id}-${h.replaced_at}`}
+                                    className="text-sm"
+                                  >
+                                    <p className="text-foreground whitespace-pre-wrap">
+                                      {h.challenge}
+                                    </p>
+                                    <p className="text-xs text-muted-foreground mt-1">
+                                      Replaced {formatDate(h.replaced_at)}
+                                    </p>
+                                  </li>
+                                ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
                     );
                   })}

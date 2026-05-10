@@ -58,7 +58,45 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
+    // Fetch existing rows so we can record any that are about to change
+    // into the history log.
+    const { data: existing, error: existingError } = await supabase
+      .from("region_challenges")
+      .select("region_id, challenge")
+      .in("region_id", cleaned.map((u) => u.region_id));
+
+    if (existingError) {
+      console.error("read existing error", existingError);
+      return json({ error: existingError.message }, 500);
+    }
+
+    const existingById = new Map(
+      (existing ?? []).map((r) => [r.region_id, r.challenge as string]),
+    );
+
     const now = new Date().toISOString();
+
+    const historyRows = cleaned
+      .filter((u) => {
+        const prev = existingById.get(u.region_id);
+        return prev !== undefined && prev.trim() !== u.challenge.trim();
+      })
+      .map((u) => ({
+        region_id: u.region_id,
+        challenge: existingById.get(u.region_id)!,
+        replaced_at: now,
+      }));
+
+    if (historyRows.length > 0) {
+      const { error: historyError } = await supabase
+        .from("region_challenge_history")
+        .insert(historyRows);
+      if (historyError) {
+        console.error("history insert error", historyError);
+        return json({ error: historyError.message }, 500);
+      }
+    }
+
     const rows = cleaned.map((u) => ({
       region_id: u.region_id,
       challenge: u.challenge,
