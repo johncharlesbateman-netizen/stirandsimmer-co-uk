@@ -112,10 +112,10 @@ const KitchenAtlas = () => {
   return (
     <Layout>
       <Helmet>
-        <title>The Kitchen Atlas — explore world cuisines and weekly cooking challenges | Stir & Simmer</title>
+        <title>The Kitchen Atlas — explore world cuisines and weekly cooking challenges | Stir and Simmer</title>
         <meta
           name="description"
-          content="Explore six world cuisine regions and discover weekly cooking challenges — all linked to tried and tested recipes on Stir & Simmer."
+          content="Explore six world cuisine regions and discover weekly cooking challenges — all linked to tried and tested recipes on Stir and Simmer."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/kitchen-atlas" />
         <meta property="og:title" content="The Kitchen Atlas | Stir & Simmer" />
