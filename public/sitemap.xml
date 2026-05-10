@@ -19,6 +19,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://stirandsimmer.co.uk/guides</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/guides/mother-sauces</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://stirandsimmer.co.uk/collections</loc>
     <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>

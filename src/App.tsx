@@ -24,6 +24,8 @@ import AdminEditRecipe from "./pages/AdminEditRecipe";
 import AdminSeoStatus from "./pages/AdminSeoStatus";
 import AdminTaggingAudit from "./pages/AdminTaggingAudit";
 import AdminChallenges from "./pages/AdminChallenges";
+import Guides from "./pages/Guides";
+import GuideMotherSauces from "./pages/GuideMotherSauces";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
@@ -115,6 +117,8 @@ const App = () => (
             <Route path="/collections" element={<Collections />} />
             <Route path="/collections/:slug" element={<Collections />} />
             <Route path="/kitchen-atlas" element={<KitchenAtlas />} />
+            <Route path="/guides" element={<Guides />} />
+            <Route path="/guides/mother-sauces" element={<GuideMotherSauces />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />
