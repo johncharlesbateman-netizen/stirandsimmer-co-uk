@@ -11,6 +11,13 @@ const GUIDES = [
       "Master these five and you hold the keys to almost every classic sauce in western cuisine.",
     eyebrow: "French technique",
   },
+  {
+    slug: "french-techniques",
+    title: "French cooking techniques every home cook should know",
+    description:
+      "Seven essential French techniques — mise en place, julienne, brunoise, chiffonade, beurre blanc, flambé and déglaze — explained simply.",
+    eyebrow: "French technique",
+  },
 ];
 
 const Guides = () => {
