@@ -51,15 +51,26 @@ export const RECIPE_TILES: RecipeTile[] = [
     filter: (r) => r.category === "chicken",
   },
   {
-    slug: "beef-and-lamb",
-    label: "Beef and Lamb",
+    slug: "beef",
+    label: "Beef",
     emoji: "🥩",
     description:
-      "Hearty beef and lamb recipes — slow braises, roasts, curries and more.",
-    seoTitle: "Beef and lamb recipes | Stir & Simmer",
+      "Hearty beef recipes — slow braises, roasts, ragùs and more.",
+    seoTitle: "Beef recipes | Stir & Simmer",
     seoDescription:
-      "Hearty beef and lamb recipes for every occasion — slow braises, roasts, curries and more. Tried and tested in a real kitchen.",
-    filter: (r) => r.category === "beef" || r.category === "lamb",
+      "Hearty beef recipes for every occasion — slow braises, roasts, ragùs and more. Tried and tested in a real kitchen.",
+    filter: (r) => r.category === "beef",
+  },
+  {
+    slug: "lamb",
+    label: "Lamb",
+    emoji: "🐑",
+    description:
+      "Tender lamb recipes — slow roasts, fragrant curries and Mediterranean braises.",
+    seoTitle: "Lamb recipes | Stir & Simmer",
+    seoDescription:
+      "Tender lamb recipes — slow roasts, fragrant curries and Mediterranean braises. Tried and tested in a real kitchen.",
+    filter: (r) => r.category === "lamb",
   },
   {
     slug: "fish-and-seafood",
