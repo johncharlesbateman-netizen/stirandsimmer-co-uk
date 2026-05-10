@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import CategoryPage from "./pages/CategoryPage";
+import { TILES_BY_SLUG } from "./lib/recipe-tiles";
 import Collections from "./pages/Collections";
 import KitchenAtlas from "./pages/KitchenAtlas";
 import MealPlanner from "./pages/MealPlanner";
@@ -72,6 +73,12 @@ const LegacyRecipeRedirect = () => {
 const CanonicalRecipeSlugRedirect = () => {
   const { slug } = useParams<{ slug: string }>();
   const canonicalSlug = getCanonicalRecipeSlug(slug);
+
+  // If the slug matches a category tile, render the category landing instead
+  // of treating it as a recipe-detail slug.
+  if (slug && TILES_BY_SLUG[slug]) {
+    return <CategoryPage key={slug} />;
+  }
 
   if (!slug || canonicalSlug === slug) {
     return <RecipeDetail key={slug ?? "recipe-detail"} />;
