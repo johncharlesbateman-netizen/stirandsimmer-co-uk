@@ -1,10 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { Button } from "@/components/ui/button";
 import { WORLD_MAP_PATH } from "@/assets/world-map-path";
+import { supabase } from "@/integrations/supabase/client";
 
 
 type RegionDef = {
@@ -278,6 +280,23 @@ const REGION_BUTTON_LABEL: Record<string, string> = {
 
 const RegionSection = ({ region }: { region: RegionDef }) => {
   const disabled = !region.available;
+
+  const { data: liveChallenge } = useQuery({
+    queryKey: ["region-challenge", region.id],
+    enabled: !disabled,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("region_challenges")
+        .select("challenge")
+        .eq("region_id", region.id)
+        .maybeSingle();
+      if (error) throw error;
+      return data?.challenge ?? null;
+    },
+  });
+
+  const challengeText = liveChallenge ?? region.challenge;
+
   return (
     <section
       id={`region-${region.id}`}
@@ -329,7 +348,7 @@ const RegionSection = ({ region }: { region: RegionDef }) => {
           <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
             Challenge
           </p>
-          <p className="text-base md:text-lg text-foreground">{region.challenge}</p>
+          <p className="text-base md:text-lg text-foreground">{challengeText}</p>
         </div>
       </div>
     </section>
