@@ -8,6 +8,8 @@ const STATIC_URLS: Array<{ loc: string; changefreq: string; priority: string }> 
   { loc: `${SITE}/`, changefreq: "weekly", priority: "1.0" },
   { loc: `${SITE}/recipes`, changefreq: "daily", priority: "0.9" },
   { loc: `${SITE}/kitchen-atlas`, changefreq: "weekly", priority: "0.8" },
+  { loc: `${SITE}/guides`, changefreq: "weekly", priority: "0.7" },
+  { loc: `${SITE}/guides/mother-sauces`, changefreq: "monthly", priority: "0.7" },
   { loc: `${SITE}/collections`, changefreq: "weekly", priority: "0.8" },
   { loc: `${SITE}/meal-planner`, changefreq: "monthly", priority: "0.6" },
   { loc: `${SITE}/about`, changefreq: "monthly", priority: "0.5" },
