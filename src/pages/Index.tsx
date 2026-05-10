@@ -123,12 +123,6 @@ const Index = () => {
           >
             <Link
               to="/recipes"
-              className="inline-block px-10 py-4 border border-primary-foreground/80 text-primary-foreground text-sm tracking-wider uppercase hover:bg-primary-foreground/10 transition-colors"
-            >
-              Explore all {recipeCount} recipes
-            </Link>
-            <Link
-              to="/recipes"
               className="tracking-[0.2em] uppercase text-primary-foreground/80 hover:text-primary-foreground transition-colors"
               style={{ fontSize: "13px" }}
             >
