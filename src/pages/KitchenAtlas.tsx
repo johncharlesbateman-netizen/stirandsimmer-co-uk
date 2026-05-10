@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Lock, Clock, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { optimisedImage } from "@/lib/image-utils";
@@ -234,27 +235,30 @@ const KitchenAtlas = () => {
             })}
           </div>
 
-          {/* REGION CARD GRID (also serves as mobile fallback for the map) */}
-          <div className="mt-10 grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-4">
+        </div>
+      </section>
+
+      {/* REGION CARD GRID — light section */}
+      <section className="bg-background py-10 md:py-14 border-b border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-4">
             {REGIONS.map((r) => (
               <button
                 key={r.id}
                 onClick={() => r.available && scrollToRegion(r.id)}
                 disabled={!r.available}
-                className={`text-left rounded-lg p-3 md:p-5 transition-transform ${
-                  r.available ? "hover:-translate-y-1 cursor-pointer" : "cursor-not-allowed"
+                className={`text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden transition-all ${
+                  r.available
+                    ? "hover:-translate-y-1 hover:shadow-md cursor-pointer"
+                    : "cursor-not-allowed opacity-60"
                 }`}
-                style={{
-                  backgroundColor: r.bg,
-                  opacity: r.available ? 1 : 0.45,
-                  color: "#f5e9d7",
-                }}
+                style={{ borderTop: `4px solid ${r.bg}` }}
               >
                 <div className="text-xl md:text-3xl mb-1.5 md:mb-2">{r.emoji}</div>
-                <div className="font-display text-xs md:text-lg leading-tight">
+                <div className="font-display text-xs md:text-lg leading-tight text-foreground">
                   {r.name}
                 </div>
-                <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 opacity-80">
+                <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 text-muted-foreground">
                   {r.available ? "Explore →" : "Coming soon"}
                 </div>
               </button>
@@ -291,8 +295,8 @@ const KitchenAtlas = () => {
         </div>
       </section>
 
-      {/* REGION SECTIONS */}
-      <div style={{ backgroundColor: "#120a00" }}>
+      {/* REGION SECTIONS — light */}
+      <div className="bg-background">
         {REGIONS.filter((r) => r.available).map((region) => (
           <RegionSection
             key={region.id}
@@ -302,22 +306,18 @@ const KitchenAtlas = () => {
         ))}
 
         {/* COMING SOON PANELS */}
-        <section className="container mx-auto px-6 md:px-12 lg:px-20 py-12">
+        <section className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {REGIONS.filter((r) => !r.available).map((r) => (
               <div
                 key={r.id}
-                className="rounded-lg p-8 text-center"
-                style={{
-                  backgroundColor: r.bg,
-                  opacity: 0.45,
-                  color: "#f5e9d7",
-                }}
+                className="rounded-lg p-8 text-center bg-card border border-border"
+                style={{ borderTop: `4px solid ${r.bg}`, opacity: 0.85 }}
               >
-                <Lock className="w-6 h-6 mx-auto mb-3 opacity-80" />
+                <Lock className="w-6 h-6 mx-auto mb-3 text-muted-foreground" />
                 <div className="text-3xl mb-2">{r.emoji}</div>
-                <h3 className="font-display text-xl mb-2">{r.name}</h3>
-                <p className="text-sm opacity-80">
+                <h3 className="font-display text-xl mb-2 text-foreground">{r.name}</h3>
+                <p className="text-sm text-muted-foreground">
                   Coming soon — more regions launching shortly
                 </p>
               </div>
@@ -355,29 +355,22 @@ const RegionSection = ({
   return (
     <section
       id={`region-${region.id}`}
-      className="scroll-mt-24 py-12 md:py-16 border-l-4"
-      style={{
-        borderColor: region.bg,
-        backgroundColor: "#1a0e00",
-        marginBottom: "1px",
-      }}
+      className="scroll-mt-24 py-12 md:py-16 bg-background border-b border-border border-l-4"
+      style={{ borderLeftColor: region.bg }}
     >
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
         <div className="flex items-baseline gap-3 mb-2">
           <span className="text-2xl">{region.emoji}</span>
-          <h2 className="font-display text-3xl md:text-4xl" style={{ color: "#f5e9d7" }}>
+          <h2 className="font-display text-3xl md:text-4xl text-foreground">
             {region.name}
           </h2>
         </div>
-        <p className="text-base md:text-lg mb-8 max-w-3xl" style={{ color: "#d9c7a8" }}>
+        <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-3xl">
           {region.description}
         </p>
 
         {recipes.length === 0 ? (
-          <div
-            className="rounded-lg p-6 text-sm"
-            style={{ backgroundColor: "#2a1a08", color: "#d9c7a8" }}
-          >
+          <div className="rounded-lg p-6 text-sm bg-secondary text-muted-foreground border border-border">
             No recipes tagged for this region yet. Tag recipes with{" "}
             <code className="opacity-80">{region.regionTags?.join(" or ")}</code>{" "}
             in the admin to see them here.
@@ -386,16 +379,14 @@ const RegionSection = ({
           <div
             ref={scrollerRef}
             className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory"
-            style={{ scrollbarColor: "#C97B1A #1a0e00" }}
           >
             {recipes.map((r) => (
               <Link
                 key={r.id}
                 to={`/recipes/${r.slug}`}
-                className="flex-shrink-0 w-64 md:w-72 snap-start rounded-lg overflow-hidden transition-transform hover:-translate-y-1"
-                style={{ backgroundColor: "#2a1a08" }}
+                className="flex-shrink-0 w-64 md:w-72 snap-start rounded-lg overflow-hidden bg-card border border-border transition-all hover:-translate-y-1 hover:shadow-md"
               >
-                <div className="aspect-[4/3] overflow-hidden bg-black/30">
+                <div className="aspect-[4/3] overflow-hidden bg-muted">
                   {r.image_url ? (
                     <img
                       src={optimisedImage(r.image_url, { width: 600 })}
@@ -406,23 +397,17 @@ const RegionSection = ({
                   ) : null}
                 </div>
                 <div className="p-4">
-                  <h3
-                    className="font-display text-lg leading-snug mb-2 line-clamp-2"
-                    style={{ color: "#f5e9d7" }}
-                  >
+                  <h3 className="font-display text-lg leading-snug mb-2 line-clamp-2 text-foreground">
                     {r.title}
                   </h3>
-                  <div
-                    className="flex items-center gap-3 text-xs"
-                    style={{ color: "#d9c7a8" }}
-                  >
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
                     {r.prep_time_minutes ? (
                       <span className="inline-flex items-center gap-1">
                         <Clock className="w-3.5 h-3.5" />
                         {r.prep_time_minutes} min prep
                       </span>
                     ) : null}
-                    <span className="opacity-80">View recipe →</span>
+                    <span>View recipe →</span>
                   </div>
                 </div>
               </Link>
@@ -430,24 +415,22 @@ const RegionSection = ({
           </div>
         )}
 
-        {/* Challenge callout */}
+        {/* Challenge callout — light warm amber */}
         <div
-          className="mt-8 rounded-lg p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
-          style={{ backgroundColor: "#f5e0c2", color: "#1a0e00" }}
+          className="mt-8 rounded-lg p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border border-border"
+          style={{ backgroundColor: "#FDF3E7" }}
         >
           <div>
-            <p className="text-xs uppercase tracking-widest font-semibold mb-1 opacity-70">
+            <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
               Challenge
             </p>
-            <p className="text-base md:text-lg">{region.challenge}</p>
+            <p className="text-base md:text-lg text-foreground">{region.challenge}</p>
           </div>
-          <Link
-            to="/recipes"
-            className="self-start md:self-auto whitespace-nowrap inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium"
-            style={{ backgroundColor: "#1a0e00", color: "#f5e9d7" }}
-          >
-            See all {region.name} recipes <ArrowRight className="w-4 h-4" />
-          </Link>
+          <Button asChild variant="default" className="self-start md:self-auto whitespace-nowrap">
+            <Link to="/recipes">
+              See all {region.name} recipes <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
