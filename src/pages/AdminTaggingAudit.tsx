@@ -1,12 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ExternalLink, Pencil, Sparkles, AlertTriangle, Check } from "lucide-react";
+import { ExternalLink, Pencil, Sparkles, AlertTriangle, Check, Wand2 } from "lucide-react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import {
   suggestTags,
