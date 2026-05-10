@@ -87,6 +87,11 @@ const REGIONS: Record<string, RegionDef> = {
 
 const RegionPage = () => {
   const { regionId } = useParams<{ regionId: string }>();
+  const [searchParams] = useSearchParams();
+  const mealParamRaw = searchParams.get("meal");
+  const mealFilter: MealType | null = isMealType(mealParamRaw)
+    ? mealParamRaw
+    : null;
   const region = regionId ? REGIONS[regionId] : undefined;
 
   const { data: recipes, isLoading } = useQuery({
