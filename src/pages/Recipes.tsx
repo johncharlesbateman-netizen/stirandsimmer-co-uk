@@ -37,13 +37,13 @@ const Recipes = () => {
         <title>All recipes — browse by category | Stir & Simmer</title>
         <meta
           name="description"
-          content="Browse over 100 free recipes by category — chicken, beef and lamb, fish and seafood, vegetarian, pasta, quick meals and more."
+          content="Browse over 100 free recipes by category — chicken, beef, lamb, fish and seafood, pork, pasta, quick meals and more."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/recipes" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/recipes" />
         <meta property="og:title" content="All recipes — browse by category | Stir & Simmer" />
-        <meta property="og:description" content="Browse over 100 free recipes by category — chicken, beef and lamb, fish and seafood, vegetarian, pasta, quick meals and more." />
+        <meta property="og:description" content="Browse over 100 free recipes by category — chicken, beef, lamb, fish and seafood, pork, pasta, quick meals and more." />
       </Helmet>
 
       {/* Header */}
