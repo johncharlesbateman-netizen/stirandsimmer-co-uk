@@ -34,6 +34,7 @@ const recipeSchema = z.object({
   seo_description: z.string().trim().max(170).nullable(),
   collections: z.array(z.string()).default([]),
   cuisine_region: z.array(z.enum(CUISINE_REGIONS)).default([]),
+  meal_types: z.array(z.enum(MEAL_TYPES)).min(1, "Pick at least one meal type"),
 });
 
 const slugify = (s: string) =>
