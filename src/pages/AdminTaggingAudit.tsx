@@ -131,7 +131,7 @@ const AdminTaggingAudit = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
-        .select("id, slug, title, description, intro, category, cuisine_region, collections")
+        .select("id, slug, title, description, intro, category, cuisine_region, meal_types, collections")
         .order("title");
       if (error) throw error;
       return (data ?? []) as Recipe[];
