@@ -10,16 +10,24 @@ import { RECIPE_TILES } from "@/lib/recipe-tiles";
 
 type Recipe = Tables<"recipes">;
 
+// Lightweight subset of fields required by all RECIPE_TILES filter functions.
+type CountRecipe = Pick<
+  Recipe,
+  "id" | "category" | "cuisine_region" | "prep_time_minutes" | "cook_time_minutes" | "title" | "description"
+>;
+
 const Recipes = () => {
   const { data: recipes = [] } = useQuery({
-    queryKey: ["recipes", "all-for-tiles"],
+    queryKey: ["recipes", "counts-only"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
-        .select("*")
+        .select(
+          "id, category, cuisine_region, prep_time_minutes, cook_time_minutes, title, description"
+        )
         .order("created_at", { ascending: false });
       if (error) throw error;
-      return (data ?? []) as Recipe[];
+      return (data ?? []) as unknown as Recipe[];
     },
   });
 
