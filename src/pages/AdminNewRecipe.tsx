@@ -5,7 +5,9 @@ import { Upload, X, Plus, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { allCategories, categoryLabels } from "@/lib/recipe-utils";
 import { CUISINE_REGIONS, type CuisineRegion } from "@/lib/cuisine-regions";
+import { MEAL_TYPES, type MealType } from "@/lib/meal-types";
 import CuisineRegionPicker from "@/components/CuisineRegionPicker";
+import MealTypePicker from "@/components/MealTypePicker";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +32,7 @@ const recipeSchema = z.object({
   seo_title: z.string().trim().max(70).nullable(),
   seo_description: z.string().trim().max(170).nullable(),
   cuisine_region: z.array(z.enum(CUISINE_REGIONS)).default([]),
+  meal_types: z.array(z.enum(MEAL_TYPES)).min(1, "Pick at least one meal type"),
 });
 
 const slugify = (s: string) =>
@@ -55,6 +58,7 @@ const AdminNewRecipe = () => {
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
   const [cuisineRegion, setCuisineRegion] = useState<CuisineRegion[]>([]);
+  const [mealTypes, setMealTypes] = useState<MealType[]>(["mains"]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -110,6 +114,7 @@ const AdminNewRecipe = () => {
         seo_title: seoTitle.trim() || null,
         seo_description: seoDescription.trim() || null,
         cuisine_region: cuisineRegion,
+        meal_types: mealTypes,
       };
 
       const parsed = recipeSchema.safeParse(cleaned);
@@ -160,6 +165,7 @@ const AdminNewRecipe = () => {
         seo_title: parsed.data.seo_title,
         seo_description: parsed.data.seo_description,
         cuisine_region: parsed.data.cuisine_region,
+        meal_types: parsed.data.meal_types,
         slug,
         image_url,
       }]);
@@ -222,6 +228,15 @@ const AdminNewRecipe = () => {
               Tag this recipe with one or more regions. These map to challenge regions in The Daily Pass app.
             </p>
             <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
+          </div>
+
+          {/* Meal types */}
+          <div>
+            <label className="block text-sm font-medium mb-2">Meal types *</label>
+            <p className="text-xs text-muted-foreground mb-3">
+              Pick at least one meal type. Recipes can belong to more than one (e.g. a soup could be both lunch and mains).
+            </p>
+            <MealTypePicker value={mealTypes} onChange={setMealTypes} />
           </div>
 
           {/* Description */}

@@ -202,6 +202,54 @@ const COLLECTION_CATEGORY_HINTS: Record<string, TileCategory> = {
   baking: "sweets",
 };
 
+export type MealTypeTag = "mains" | "lunch" | "dessert" | "snack";
+
+export const MEAL_TYPE_TAGS: MealTypeTag[] = ["mains", "lunch", "dessert", "snack"];
+
+const MEAL_TYPE_KEYWORDS: Record<MealTypeTag, string[]> = {
+  mains: [
+    "main", "mains", "main course", "dinner", "supper", "roast",
+    "curry", "stew", "casserole", "risotto", "lasagne", "lasagna",
+    "pie", "ragu", "ragù", "bolognese", "carbonara",
+  ],
+  lunch: [
+    "lunch", "sandwich", "toastie", "toasted sandwich", "wrap",
+    "panini", "ploughman", "salad bowl", "quick lunch", "midweek lunch",
+    "light lunch", "packed lunch", "soup", "frittata", "omelette",
+    "quiche", "baguette",
+  ],
+  dessert: [
+    "dessert", "pudding", "cake", "tart", "cheesecake", "brownie",
+    "cookie", "biscuit", "biscotti", "ice cream", "sorbet", "gelato",
+    "mousse", "trifle", "crumble", "tiramisu", "panna cotta", "cannoli",
+    "macaron", "éclair", "eclair", "profiterole", "mille-feuille",
+    "crème brûlée", "creme brulee", "tarte tatin", "spotted dick",
+    "victoria sponge", "battenberg", "eton mess", "pavlova",
+    "meringue", "custard", "clafoutis",
+  ],
+  snack: [
+    "snack", "snacks", "nibbles", "canapé", "canape", "bite-size",
+    "bites", "crisps", "popcorn", "trail mix", "samosa", "pakora",
+    "bhaji", "spring roll", "dim sum", "scone", "scones",
+    "muffin", "muffins",
+  ],
+};
+
+const COLLECTION_MEAL_HINTS: Record<string, MealTypeTag> = {
+  mains: "mains",
+  dinner: "mains",
+  lunch: "lunch",
+  lunches: "lunch",
+  "lunch suggestions": "lunch",
+  desserts: "dessert",
+  dessert: "dessert",
+  "sweets & desserts": "dessert",
+  sweets: "dessert",
+  baking: "dessert",
+  snacks: "snack",
+  snack: "snack",
+};
+
 export type Suggestion = {
   suggestedCategory: TileCategory | null;
   categoryConfidence: number;
@@ -209,6 +257,8 @@ export type Suggestion = {
   suggestedRegions: RegionTag[];
   regionConfidence: Record<RegionTag, number>;
   regionMatches: Record<RegionTag, string[]>;
+  suggestedMealTypes: MealTypeTag[];
+  mealTypeMatches: Record<MealTypeTag, string[]>;
   needsManualReview: boolean;
 };
 
@@ -330,6 +380,53 @@ export const suggestTags = (recipe: RecipeInput): Suggestion => {
   const suggestedCategory =
     top && top.score >= 3 ? (top.c as TileCategory) : null;
 
+  // ---- Meal type scoring ----
+  const mealTypeScores: Record<MealTypeTag, number> = {
+    mains: 0,
+    lunch: 0,
+    dessert: 0,
+    snack: 0,
+  };
+  const mealTypeMatches: Record<MealTypeTag, string[]> = {
+    mains: [],
+    lunch: [],
+    dessert: [],
+    snack: [],
+  };
+
+  for (const mt of MEAL_TYPE_TAGS) {
+    for (const kw of MEAL_TYPE_KEYWORDS[mt]) {
+      if (containsKeyword(text, kw)) {
+        const inTitle = (recipe.title ?? "").toLowerCase().includes(kw.toLowerCase());
+        mealTypeScores[mt] += inTitle ? 4 : 2;
+        mealTypeMatches[mt].push(kw);
+      }
+    }
+  }
+  for (const c of collections) {
+    const mt = COLLECTION_MEAL_HINTS[c];
+    if (mt) {
+      mealTypeScores[mt] += 5;
+      mealTypeMatches[mt].push(`collection:${c}`);
+    }
+  }
+
+  // Strong category-based hints — the tile category often implies a meal type.
+  if (suggestedCategory === "sweets") mealTypeScores.dessert += 6;
+  if (suggestedCategory === "lunch_suggestions") mealTypeScores.lunch += 6;
+
+  let suggestedMealTypes: MealTypeTag[] = MEAL_TYPE_TAGS
+    .filter((mt) => mealTypeScores[mt] >= 3)
+    .sort((a, b) => mealTypeScores[b] - mealTypeScores[a])
+    .slice(0, 2);
+
+  // Fall back to "mains" — every recipe must have at least one meal type and
+  // most savoury dishes default to mains.
+  if (suggestedMealTypes.length === 0) {
+    suggestedMealTypes = ["mains"];
+    mealTypeMatches.mains.push("default");
+  }
+
   const needsManualReview =
     suggestedCategory === null && suggestedRegions.length === 0;
 
@@ -340,6 +437,8 @@ export const suggestTags = (recipe: RecipeInput): Suggestion => {
     suggestedRegions,
     regionConfidence,
     regionMatches,
+    suggestedMealTypes,
+    mealTypeMatches,
     needsManualReview,
   };
 };

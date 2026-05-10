@@ -14,8 +14,10 @@ import {
   TILE_CATEGORIES,
   TILE_CATEGORY_LABELS,
   REGION_TAGS,
+  MEAL_TYPE_TAGS,
   type TileCategory,
   type RegionTag,
+  type MealTypeTag,
 } from "@/lib/recipeTagSuggestions";
 
 const labelForCategory = (cat: string | null | undefined): string => {
@@ -27,6 +29,7 @@ type Recipe = Tables<"recipes">;
 
 const TILE_CATEGORY_SET = new Set<string>(TILE_CATEGORIES);
 const VALID_REGION_SET = new Set<string>(REGION_TAGS);
+const VALID_MEAL_SET = new Set<string>(MEAL_TYPE_TAGS);
 
 type Status = "complete" | "partial" | "missing";
 
@@ -37,12 +40,18 @@ const classify = (r: Recipe): { status: Status; reasons: string[] } => {
     (t) => VALID_REGION_SET.has(t),
   );
   const hasRegion = regionTags.length > 0;
+  const mealTags = (((r as { meal_types?: string[] | null }).meal_types) ?? []).filter(
+    (t) => VALID_MEAL_SET.has(t),
+  );
+  const hasMeal = mealTags.length > 0;
 
   if (!hasTileCategory) reasons.push("No tile category");
   if (!hasRegion) reasons.push("No cuisine region");
+  if (!hasMeal) reasons.push("No meal type");
 
-  if (!hasTileCategory && !hasRegion) return { status: "missing", reasons };
-  if (!hasTileCategory || !hasRegion) return { status: "partial", reasons };
+  const present = [hasTileCategory, hasRegion, hasMeal].filter(Boolean).length;
+  if (present === 0) return { status: "missing", reasons };
+  if (present < 3) return { status: "partial", reasons };
   return { status: "complete", reasons };
 };
 
@@ -122,7 +131,7 @@ const AdminTaggingAudit = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
-        .select("id, slug, title, description, intro, category, cuisine_region, collections")
+        .select("id, slug, title, description, intro, category, cuisine_region, meal_types, collections")
         .order("title");
       if (error) throw error;
       return (data ?? []) as Recipe[];
@@ -144,6 +153,9 @@ const AdminTaggingAudit = () => {
         const currentRegions = ((r.cuisine_region as string[] | null) ?? []).filter(
           (t) => VALID_REGION_SET.has(t),
         );
+        const currentMealTypes = (
+          ((r as { meal_types?: string[] | null }).meal_types) ?? []
+        ).filter((t) => VALID_MEAL_SET.has(t)) as MealTypeTag[];
 
         const categoryNeedsFix =
           !currentCategory || !TILE_CATEGORY_SET.has(currentCategory);
@@ -159,8 +171,14 @@ const AdminTaggingAudit = () => {
           (currentRegions.length === 0 || newRegionSuggestions.length > 0) &&
           newRegionSuggestions.length > 0;
 
+        const newMealTypeSuggestions = suggestion.suggestedMealTypes.filter(
+          (m) => !currentMealTypes.includes(m),
+        );
+        const showMealTypeSuggestion =
+          currentMealTypes.length === 0 && newMealTypeSuggestions.length > 0;
+
         const hasAnyApplicableSuggestion =
-          showCategorySuggestion || showRegionSuggestion;
+          showCategorySuggestion || showRegionSuggestion || showMealTypeSuggestion;
 
         const lowConfidence =
           status !== "complete" &&
@@ -175,9 +193,12 @@ const AdminTaggingAudit = () => {
           suggestion,
           currentCategory,
           currentRegions,
+          currentMealTypes,
           showCategorySuggestion,
           showRegionSuggestion,
+          showMealTypeSuggestion,
           newRegionSuggestions,
+          newMealTypeSuggestions,
           hasAnyApplicableSuggestion,
           lowConfidence,
           consistencyIssues,
@@ -209,23 +230,32 @@ const AdminTaggingAudit = () => {
     recipe: Recipe,
     nextCategory: TileCategory | null,
     nextRegions: RegionTag[],
+    nextMealTypes: MealTypeTag[] = [],
   ) => {
     setApplying(recipe.id);
     try {
-      const update: { category?: TileCategory; cuisine_region?: string[] } = {};
+      const update: {
+        category?: TileCategory;
+        cuisine_region?: string[];
+        meal_types?: string[];
+      } = {};
       if (nextCategory) update.category = nextCategory;
       if (nextRegions.length > 0) {
         const existing = ((recipe.cuisine_region as string[] | null) ?? []).filter(
           (t) => VALID_REGION_SET.has(t),
         );
-        const merged = Array.from(new Set([...existing, ...nextRegions]));
-        update.cuisine_region = merged;
+        update.cuisine_region = Array.from(new Set([...existing, ...nextRegions]));
+      }
+      if (nextMealTypes.length > 0) {
+        const existing = (
+          ((recipe as { meal_types?: string[] | null }).meal_types) ?? []
+        ).filter((t) => VALID_MEAL_SET.has(t));
+        update.meal_types = Array.from(new Set([...existing, ...nextMealTypes]));
       }
       if (Object.keys(update).length === 0) return;
 
       const { error } = await supabase
         .from("recipes")
-        // category is a USER-DEFINED enum; cast at the call site
         .update(update as never)
         .eq("id", recipe.id);
       if (error) throw error;
@@ -269,6 +299,7 @@ const AdminTaggingAudit = () => {
       recipe: Recipe;
       nextCategory: TileCategory | null;
       nextRegions: RegionTag[];
+      nextMealTypes: MealTypeTag[];
     }>,
   ) => {
     if (targets.length === 0) return;
@@ -277,16 +308,25 @@ const AdminTaggingAudit = () => {
     let ok = 0;
     let failed = 0;
     for (let i = 0; i < targets.length; i++) {
-      const { recipe, nextCategory, nextRegions } = targets[i];
+      const { recipe, nextCategory, nextRegions, nextMealTypes } = targets[i];
       try {
-        const update: { category?: TileCategory; cuisine_region?: string[] } = {};
+        const update: {
+          category?: TileCategory;
+          cuisine_region?: string[];
+          meal_types?: string[];
+        } = {};
         if (nextCategory) update.category = nextCategory;
         if (nextRegions.length > 0) {
           const existing = ((recipe.cuisine_region as string[] | null) ?? []).filter(
             (t) => VALID_REGION_SET.has(t),
           );
-          const merged = Array.from(new Set([...existing, ...nextRegions]));
-          update.cuisine_region = merged;
+          update.cuisine_region = Array.from(new Set([...existing, ...nextRegions]));
+        }
+        if (nextMealTypes.length > 0) {
+          const existing = (
+            ((recipe as { meal_types?: string[] | null }).meal_types) ?? []
+          ).filter((t) => VALID_MEAL_SET.has(t));
+          update.meal_types = Array.from(new Set([...existing, ...nextMealTypes]));
         }
         if (Object.keys(update).length > 0) {
           const { error } = await supabase
@@ -320,6 +360,7 @@ const AdminTaggingAudit = () => {
         recipe: r.recipe,
         nextCategory: r.showCategorySuggestion ? r.suggestion.suggestedCategory : null,
         nextRegions: r.showRegionSuggestion ? r.newRegionSuggestions : [],
+        nextMealTypes: r.showMealTypeSuggestion ? r.newMealTypeSuggestions : [],
       }));
     return applyRowsInSeries(targets);
   };
@@ -329,6 +370,7 @@ const AdminTaggingAudit = () => {
       recipe: r.recipe,
       nextCategory: r.showCategorySuggestion ? r.suggestion.suggestedCategory : null,
       nextRegions: r.showRegionSuggestion ? r.newRegionSuggestions : [],
+      nextMealTypes: r.showMealTypeSuggestion ? r.newMealTypeSuggestions : [],
     }));
     if (targets.length === 0) {
       toast.info("No suggestions to apply.");

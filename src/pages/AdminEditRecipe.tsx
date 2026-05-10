@@ -6,7 +6,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { allCategories, categoryLabels } from "@/lib/recipe-utils";
 import { collections, collectionNames } from "@/lib/collections";
 import { CUISINE_REGIONS, sanitiseCuisineRegions, type CuisineRegion } from "@/lib/cuisine-regions";
+import { MEAL_TYPES, sanitiseMealTypes, type MealType } from "@/lib/meal-types";
 import CuisineRegionPicker from "@/components/CuisineRegionPicker";
+import MealTypePicker from "@/components/MealTypePicker";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,6 +34,7 @@ const recipeSchema = z.object({
   seo_description: z.string().trim().max(170).nullable(),
   collections: z.array(z.string()).default([]),
   cuisine_region: z.array(z.enum(CUISINE_REGIONS)).default([]),
+  meal_types: z.array(z.enum(MEAL_TYPES)).min(1, "Pick at least one meal type"),
 });
 
 const slugify = (s: string) =>
@@ -60,6 +63,7 @@ const AdminEditRecipe = () => {
   const [seoDescription, setSeoDescription] = useState("");
   const [recipeCollections, setRecipeCollections] = useState<string[]>([]);
   const [cuisineRegion, setCuisineRegion] = useState<CuisineRegion[]>([]);
+  const [mealTypes, setMealTypes] = useState<MealType[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
@@ -100,6 +104,8 @@ const AdminEditRecipe = () => {
       setCuisineRegion(
         sanitiseCuisineRegions((data as { cuisine_region?: unknown }).cuisine_region),
       );
+      const seededMeal = sanitiseMealTypes((data as { meal_types?: unknown }).meal_types);
+      setMealTypes(seededMeal.length > 0 ? seededMeal : ["mains"]);
       setExistingImageUrl(data.image_url);
       setImagePreview(data.image_url);
       setLoading(false);
@@ -162,6 +168,7 @@ const AdminEditRecipe = () => {
         seo_description: seoDescription.trim() || null,
         collections: recipeCollections.filter((c) => collectionNames.includes(c)),
         cuisine_region: cuisineRegion,
+        meal_types: mealTypes,
       };
 
       const parsed = recipeSchema.safeParse(cleaned);
@@ -205,6 +212,7 @@ const AdminEditRecipe = () => {
         seo_description: parsed.data.seo_description,
         collections: parsed.data.collections,
         cuisine_region: parsed.data.cuisine_region,
+        meal_types: parsed.data.meal_types,
         image_url,
       }).eq("slug", slug);
 
@@ -278,6 +286,15 @@ const AdminEditRecipe = () => {
               Tag this recipe with one or more regions. These map to challenge regions in The Daily Pass app.
             </p>
             <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
+          </div>
+
+          {/* Meal types */}
+          <div>
+            <label className="block text-sm font-medium mb-2">Meal types *</label>
+            <p className="text-xs text-muted-foreground mb-3">
+              Pick at least one meal type. Recipes can belong to more than one.
+            </p>
+            <MealTypePicker value={mealTypes} onChange={setMealTypes} />
           </div>
 
           {/* Description */}

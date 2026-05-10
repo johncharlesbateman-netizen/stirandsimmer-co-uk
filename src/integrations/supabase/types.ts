@@ -395,6 +395,7 @@ export type Database = {
           instructions: Json
           intro: string | null
           is_seasonal: boolean | null
+          meal_types: string[]
           prep_time_minutes: number | null
           seo_description: string | null
           seo_title: string | null
@@ -417,6 +418,7 @@ export type Database = {
           instructions?: Json
           intro?: string | null
           is_seasonal?: boolean | null
+          meal_types?: string[]
           prep_time_minutes?: number | null
           seo_description?: string | null
           seo_title?: string | null
@@ -439,6 +441,7 @@ export type Database = {
           instructions?: Json
           intro?: string | null
           is_seasonal?: boolean | null
+          meal_types?: string[]
           prep_time_minutes?: number | null
           seo_description?: string | null
           seo_title?: string | null
