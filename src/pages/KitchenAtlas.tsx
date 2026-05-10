@@ -30,7 +30,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description: "Honest, seasonal and deeply comforting. The foundation of everything.",
     challenge:
-      "This week — cook a classic British fish dish. Try our Fish Finger Butty or Cider Battered Prawns.",
+      "This week — cook a classic British fish dish. Try our [Fish Finger Butty](/recipes/fish-finger-butty-with-lemon-mayonnaise) or [Cider Battered Prawns](/recipes/cider-battered-prawns-with-aubergine-salad).",
     regionTags: ["british"],
   },
   {
@@ -41,7 +41,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description: "Pasta, sauces and the art of simplicity. Italy feeds the soul.",
     challenge:
-      "This week — cook a pasta dish entirely from scratch. Find our Italian recipes and challenge yourself.",
+      "This week — cook a pasta dish entirely from scratch. Find our [Italian recipes](/recipes/italian) and challenge yourself.",
     regionTags: ["italian"],
   },
   {
@@ -52,7 +52,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description: "Classical techniques that underpin all of western cooking.",
     challenge:
-      "This week — make a classic French sauce from scratch. Browse our French recipe collection to find your starting point.",
+      "This week — make a classic French sauce from scratch. Browse our [French recipe collection](/recipes/french) to find your starting point.",
     regionTags: ["french"],
   },
   {
@@ -63,7 +63,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description: "Bold spices, fragrant herbs and layers of warmth and depth.",
     challenge:
-      "This week — cook a curry entirely from scratch using whole spices, no jars. Find your recipe in our Asian collection.",
+      "This week — cook a curry entirely from scratch using whole spices, no jars. Find your recipe in our [Asian collection](/recipes/asian).",
     regionTags: ["indian", "asian"],
   },
   {
