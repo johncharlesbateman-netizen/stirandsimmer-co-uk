@@ -247,29 +247,9 @@ const KitchenAtlas = () => {
       </section>
       {/* REGION SECTIONS — light */}
       <div className="bg-background">
-        {REGIONS.filter((r) => r.available).map((region) => (
+        {REGIONS.map((region) => (
           <RegionSection key={region.id} region={region} />
         ))}
-
-        {/* COMING SOON PANELS */}
-        <section className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {REGIONS.filter((r) => !r.available).map((r) => (
-              <div
-                key={r.id}
-                className="rounded-lg p-8 text-center bg-card border border-border"
-                style={{ borderTop: `4px solid ${r.bg}`, opacity: 0.85 }}
-              >
-                <Lock className="w-6 h-6 mx-auto mb-3 text-muted-foreground" />
-                <div className="text-3xl mb-2">{r.emoji}</div>
-                <h3 className="font-display text-xl mb-2 text-foreground">{r.name}</h3>
-                <p className="text-sm text-muted-foreground">
-                  Coming soon — more regions launching shortly
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
       </div>
 
       {/* FOOTER CTA */}
