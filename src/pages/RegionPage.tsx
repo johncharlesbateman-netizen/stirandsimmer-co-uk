@@ -202,22 +202,110 @@ const RegionPage = () => {
               ))}
             </div>
           ) : filtered.length > 0 ? (
-            <>
-              <p className="text-sm text-muted-foreground mb-8">
-                {filtered.length}{" "}
-                {filtered.length === 1 ? "recipe" : "recipes"}
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                {filtered.map((recipe, index) => (
-                  <RecipeCard
-                    key={recipe.id}
-                    recipe={recipe}
-                    floatDelay={index}
-                    showMeta
-                  />
-                ))}
-              </div>
-            </>
+            mealFiltered ? (
+              <>
+                <Link
+                  to={`/recipes/region/${region.id}`}
+                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
+                >
+                  <ArrowLeft className="w-4 h-4" /> All {region.adjective} recipes
+                </Link>
+                <h2 className="heading-section mb-2">
+                  {region.adjective} {MEAL_TYPE_PLURAL[mealFilter]}
+                </h2>
+                <p className="text-sm text-muted-foreground mb-8">
+                  {mealFiltered.length}{" "}
+                  {mealFiltered.length === 1 ? "recipe" : "recipes"}
+                </p>
+                {mealFiltered.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                    {mealFiltered.map((recipe, index) => (
+                      <RecipeCard
+                        key={recipe.id}
+                        recipe={recipe}
+                        floatDelay={index}
+                        showMeta
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground">
+                    No {region.adjective} {MEAL_TYPE_PLURAL[mealFilter]} yet.
+                  </p>
+                )}
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-muted-foreground mb-10">
+                  {filtered.length}{" "}
+                  {filtered.length === 1 ? "recipe" : "recipes"}
+                </p>
+                {renderedSections.map((section) => {
+                  const visible = section.recipes.slice(0, MEAL_SECTION_MAX);
+                  const hasMore = section.recipes.length > MEAL_SECTION_MAX;
+                  return (
+                    <div key={section.meal} className="mb-14 md:mb-20">
+                      <div className="flex items-end justify-between gap-4 mb-6 md:mb-8">
+                        <h2 className="heading-section">
+                          {region.adjective} {MEAL_TYPE_PLURAL[section.meal]}
+                        </h2>
+                        {hasMore && (
+                          <Link
+                            to={`/recipes/region/${region.id}?meal=${section.meal}`}
+                            className="hidden md:inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors whitespace-nowrap"
+                          >
+                            See all {region.adjective}{" "}
+                            {MEAL_TYPE_PLURAL[section.meal]}
+                            <ArrowRight className="w-4 h-4" />
+                          </Link>
+                        )}
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                        {visible.map((recipe, index) => (
+                          <RecipeCard
+                            key={recipe.id}
+                            recipe={recipe}
+                            floatDelay={index}
+                            showMeta
+                          />
+                        ))}
+                      </div>
+                      {hasMore && (
+                        <div className="mt-6 md:hidden">
+                          <Link
+                            to={`/recipes/region/${region.id}?meal=${section.meal}`}
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+                          >
+                            See all {region.adjective}{" "}
+                            {MEAL_TYPE_PLURAL[section.meal]}
+                            <ArrowRight className="w-4 h-4" />
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+                {generalRecipes.length > 0 && (
+                  <div>
+                    {renderedSections.length > 0 && (
+                      <h2 className="heading-section mb-6 md:mb-8">
+                        More {region.adjective} recipes
+                      </h2>
+                    )}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                      {generalRecipes.map((recipe, index) => (
+                        <RecipeCard
+                          key={recipe.id}
+                          recipe={recipe}
+                          floatDelay={index}
+                          showMeta
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
+            )
           ) : (
             <div className="text-center py-16">
               <p className="heading-section text-muted-foreground mb-3">
