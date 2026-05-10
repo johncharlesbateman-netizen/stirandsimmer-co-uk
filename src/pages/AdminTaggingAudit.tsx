@@ -340,6 +340,7 @@ const AdminTaggingAudit = () => {
     return applyRowsInSeries(targets);
   };
 
+  return (
     <Layout>
       <Helmet>
         <title>Recipe tagging audit | Admin | Stir & Simmer</title>
