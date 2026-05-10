@@ -285,13 +285,15 @@ const AdminTaggingAudit = () => {
                   newRegionSuggestions,
                   hasAnyApplicableSuggestion,
                   lowConfidence,
+                  consistencyIssues,
                 }) => {
                   const allRegions =
                     ((recipe.cuisine_region as string[] | null) ?? []);
+                  const hasInconsistency = consistencyIssues.length > 0;
                   return (
                     <div
                       key={recipe.id}
-                      className={`rounded-md p-4 ${STATUS_STYLES[status]}`}
+                      className={`rounded-md p-4 ${STATUS_STYLES[status]} ${hasInconsistency ? "ring-2 ring-purple-500" : ""}`}
                     >
                       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
                         <div className="flex-1 min-w-0">
