@@ -348,7 +348,9 @@ const RegionSection = ({ region }: { region: RegionDef }) => {
           <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
             Challenge
           </p>
-          <p className="text-base md:text-lg text-foreground">{challengeText}</p>
+          <p className="text-base md:text-lg text-foreground">
+            {renderChallenge(challengeText)}
+          </p>
         </div>
       </div>
     </section>
