@@ -165,6 +165,7 @@ const AdminNewRecipe = () => {
         seo_title: parsed.data.seo_title,
         seo_description: parsed.data.seo_description,
         cuisine_region: parsed.data.cuisine_region,
+        meal_types: parsed.data.meal_types,
         slug,
         image_url,
       }]);
