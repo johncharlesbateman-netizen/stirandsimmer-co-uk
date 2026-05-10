@@ -104,6 +104,8 @@ const AdminEditRecipe = () => {
       setCuisineRegion(
         sanitiseCuisineRegions((data as { cuisine_region?: unknown }).cuisine_region),
       );
+      const seededMeal = sanitiseMealTypes((data as { meal_types?: unknown }).meal_types);
+      setMealTypes(seededMeal.length > 0 ? seededMeal : ["mains"]);
       setExistingImageUrl(data.image_url);
       setImagePreview(data.image_url);
       setLoading(false);
