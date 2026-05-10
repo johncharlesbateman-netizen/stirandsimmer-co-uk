@@ -131,7 +131,7 @@ const Header = () => {
               to="/auth"
               onClick={() => setMobileMenuOpen(false)}
               className={`text-lg tracking-wide transition-all duration-300 hover:opacity-60 hover:translate-x-2 ${
-                isActive("/auth") ? "opacity-100" : "opacity-70"
+                isActive("/auth") ? "underline underline-offset-4 decoration-foreground/30" : ""
               }`}
             >
               Sign in
