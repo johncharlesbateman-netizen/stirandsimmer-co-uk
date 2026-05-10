@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import CategoryPage from "./pages/CategoryPage";
+import RegionPage from "./pages/RegionPage";
 import { TILES_BY_SLUG } from "./lib/recipe-tiles";
 import Collections from "./pages/Collections";
 import KitchenAtlas from "./pages/KitchenAtlas";
