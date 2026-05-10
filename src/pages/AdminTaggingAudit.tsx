@@ -330,11 +330,11 @@ const AdminTaggingAudit = () => {
                               {recipe.category &&
                               TILE_CATEGORY_SET.has(recipe.category) ? (
                                 <span className="px-2 py-0.5 rounded bg-foreground/10 text-foreground font-mono">
-                                  {recipe.category}
+                                  {labelForCategory(recipe.category)}
                                 </span>
                               ) : (
                                 <span className="px-2 py-0.5 rounded bg-red-600/15 text-red-700 dark:text-red-300 font-mono">
-                                  {recipe.category ?? "—"}
+                                  {recipe.category ? labelForCategory(recipe.category) : "—"}
                                 </span>
                               )}
                             </span>
