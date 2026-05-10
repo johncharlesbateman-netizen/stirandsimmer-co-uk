@@ -138,10 +138,7 @@ const App = () => (
               path="/admin/tagging-audit"
               element={<RequireAdmin><AdminTaggingAudit /></RequireAdmin>}
             />
-            <Route
-              path="/admin/challenges"
-              element={<RequireAdmin><AdminChallenges /></RequireAdmin>}
-            />
+            <Route path="/admin/challenges" element={<AdminChallenges />} />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
