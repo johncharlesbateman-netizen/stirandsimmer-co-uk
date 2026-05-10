@@ -278,6 +278,43 @@ const REGION_BUTTON_LABEL: Record<string, string> = {
   asia: "Explore all South & Southeast Asian recipes",
 };
 
+// Render markdown-style [label](href) links inline. External URLs open in a
+// new tab; internal paths use react-router for client-side navigation.
+const renderChallenge = (text: string) => {
+  const parts: (string | JSX.Element)[] = [];
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
+    const [, label, href] = match;
+    const isInternal = href.startsWith("/");
+    if (isInternal) {
+      parts.push(
+        <Link key={key++} to={href} className="underline underline-offset-2 hover:opacity-80">
+          {label}
+        </Link>,
+      );
+    } else {
+      parts.push(
+        <a
+          key={key++}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2 hover:opacity-80"
+        >
+          {label}
+        </a>,
+      );
+    }
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+  return parts;
+};
+
 const RegionSection = ({ region }: { region: RegionDef }) => {
   const disabled = !region.available;
 
