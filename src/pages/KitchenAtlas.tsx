@@ -8,6 +8,7 @@ import NewsletterSignup from "@/components/NewsletterSignup";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { optimisedImage } from "@/lib/image-utils";
+import { WORLD_MAP_PATH } from "@/assets/world-map-path";
 
 type Recipe = Tables<"recipes">;
 
