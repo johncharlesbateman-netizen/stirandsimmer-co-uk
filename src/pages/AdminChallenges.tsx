@@ -12,7 +12,7 @@ const REGIONS: { id: string; name: string; emoji: string }[] = [
   { id: "uk", name: "United Kingdom", emoji: "🇬🇧" },
   { id: "italy", name: "Italy", emoji: "🇮🇹" },
   { id: "france", name: "France", emoji: "🇫🇷" },
-  { id: "asia", name: "South & Southeast Asia", emoji: "🌶️" },
+  { id: "asia", name: "South and Southeast Asia", emoji: "🌶️" },
 ];
 
 type Row = { region_id: string; challenge: string; updated_at: string };

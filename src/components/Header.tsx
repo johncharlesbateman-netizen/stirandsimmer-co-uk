@@ -69,7 +69,7 @@ const Header = () => {
                   isActive("/auth") ? "underline underline-offset-4 decoration-foreground/30" : ""
                 }`}
               >
-                Sign in
+                Sign In
               </Link>
             )}
           </nav>
@@ -134,7 +134,7 @@ const Header = () => {
                 isActive("/auth") ? "underline underline-offset-4 decoration-foreground/30" : ""
               }`}
             >
-              Sign in
+              Sign In
             </Link>
           )}
         </nav>
