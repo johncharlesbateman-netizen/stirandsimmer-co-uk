@@ -1,124 +1,79 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
+import { ArrowLeft } from "lucide-react";
 import Layout from "@/components/Layout";
 import RecipeCard from "@/components/RecipeCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
-import {
-  categoryLabels,
-  categoryDescriptions,
-  categoryMetaDescriptions,
-  categorySlugs,
-} from "@/lib/recipe-utils";
+import { Tables } from "@/integrations/supabase/types";
+import { getTileBySlug } from "@/lib/recipe-tiles";
 
-import categoryChicken from "@/assets/category-chicken.jpg";
-import categoryBeef from "@/assets/category-beef.jpg";
-import categoryLamb from "@/assets/category-lamb.jpg";
-import categoryPork from "@/assets/category-pork.jpg";
-import categorySpicy from "@/assets/category-spicy.jpg";
-import categorySeafood from "@/assets/category-seafood.jpg";
-import categoryLunch from "@/assets/category-lunch.jpg";
-import categorySweets from "@/assets/category-sweets.jpg";
-import categoryPasta from "@/assets/category-pasta.jpg";
-
-const categoryImages: Record<string, string> = {
-  chicken: categoryChicken,
-  beef: categoryBeef,
-  lamb: categoryLamb,
-  pork: categoryPork,
-  spicy: categorySpicy,
-  seafood: categorySeafood,
-  lunch_suggestions: categoryLunch,
-  sweets: categorySweets,
-  pasta: categoryPasta,
-};
-
+type Recipe = Tables<"recipes">;
 
 const CategoryPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const category = slug ? categorySlugs[slug] : undefined;
+  const tile = getTileBySlug(slug);
 
   const { data: recipes, isLoading } = useQuery({
-    queryKey: ["recipes", category],
+    queryKey: ["recipes", "tile", "all"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
         .select("*")
-        .eq("category", category!)
         .order("created_at", { ascending: false });
       if (error) throw error;
-      return data;
+      return (data ?? []) as Recipe[];
     },
-    enabled: !!category,
   });
 
-  if (!category) {
+  if (!tile) {
     return <Navigate to="/recipes" replace />;
   }
 
-  const label = categoryLabels[category];
-  const description = categoryDescriptions[category];
-  const recipeCount = recipes?.length ?? 0;
-
-  const seoTitle = `${label} Recipes | Stir & Simmer`;
-  const baseDesc = categoryMetaDescriptions[category];
-  // Insert dynamic count when available, while staying within ~155 chars.
-  const seoDescription = (() => {
-    if (!recipeCount) return baseDesc;
-    const withCount = `Browse ${recipeCount} ${label.toLowerCase()} recipes — ${baseDesc.replace(/^[^—]+—\s*/, "")}`;
-    return withCount.length <= 155 ? withCount : baseDesc;
-  })();
-  const canonicalUrl = `https://stirandsimmer.co.uk/recipes/category/${slug}`;
-  const ogImage = categoryImages[category] || "https://stirandsimmer.co.uk/og-image.jpg";
+  const filtered = (recipes ?? []).filter(tile.filter);
+  const canonicalUrl = `https://stirandsimmer.co.uk/recipes/${tile.slug}`;
 
   return (
     <Layout>
       <Helmet>
-        <title>{seoTitle}</title>
-        <meta name="description" content={seoDescription} />
+        <title>{tile.seoTitle}</title>
+        <meta name="description" content={tile.seoDescription} />
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:title" content={seoTitle} />
-        <meta property="og:description" content={seoDescription} />
-        <meta property="og:image" content={ogImage} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content={ogImage} />
+        <meta property="og:title" content={tile.seoTitle} />
+        <meta property="og:description" content={tile.seoDescription} />
       </Helmet>
 
       {/* Header */}
-      <section className="py-12 md:py-16 border-b border-border">
+      <section className="py-10 md:py-14 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <Breadcrumbs
             className="mb-4"
             items={[
               { label: "Home", href: "/" },
               { label: "Recipes", href: "/recipes" },
-              { label: `${label} Recipes` },
+              { label: tile.label },
             ]}
           />
-          <h1 className="heading-display mb-6">{label} Recipes</h1>
-          <p className="text-muted-foreground text-lg max-w-2xl">{description}</p>
-        </div>
-      </section>
-
-      {/* Browse All Link */}
-      <section className="py-6 border-b border-border">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <Link
             to="/recipes"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors editorial-link"
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
           >
-            ← Browse All Recipes
+            <ArrowLeft className="w-4 h-4" /> Back to all categories
           </Link>
+          <h1 className="heading-display mb-4">
+            {tile.slug === "all" ? "All recipes" : `${tile.label} recipes`}
+          </h1>
+          <p className="text-muted-foreground text-lg max-w-2xl">
+            {tile.description}
+          </p>
         </div>
       </section>
 
-      {/* Recipe Grid */}
-      <section className="py-12 md:py-16">
+      {/* Recipe grid */}
+      <section className="py-10 md:py-14">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
@@ -131,16 +86,38 @@ const CategoryPage = () => {
                 </div>
               ))}
             </div>
-          ) : recipes && recipes.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-              {recipes.map((recipe, index) => (
-                <RecipeCard key={recipe.id} recipe={recipe} floatDelay={index} showMeta />
-              ))}
-            </div>
+          ) : filtered.length > 0 ? (
+            <>
+              <p className="text-sm text-muted-foreground mb-8">
+                {filtered.length}{" "}
+                {filtered.length === 1 ? "recipe" : "recipes"}
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                {filtered.map((recipe, index) => (
+                  <RecipeCard
+                    key={recipe.id}
+                    recipe={recipe}
+                    floatDelay={index}
+                    showMeta
+                  />
+                ))}
+              </div>
+            </>
           ) : (
-            <div className="text-center py-20">
-              <p className="heading-section text-muted-foreground mb-4">No {label.toLowerCase()} recipes yet</p>
-              <p className="text-muted-foreground">Recipes are being added — check back soon!</p>
+            <div className="text-center py-16">
+              <p className="heading-section text-muted-foreground mb-3">
+                No recipes here yet
+              </p>
+              <p className="text-muted-foreground mb-6">
+                We're adding new {tile.label.toLowerCase()} recipes all the
+                time — check back soon.
+              </p>
+              <Link
+                to="/recipes"
+                className="text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+              >
+                ← Back to all categories
+              </Link>
             </div>
           )}
         </div>
