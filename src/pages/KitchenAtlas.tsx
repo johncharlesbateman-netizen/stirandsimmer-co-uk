@@ -1,10 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { Button } from "@/components/ui/button";
 import { WORLD_MAP_PATH } from "@/assets/world-map-path";
+import { supabase } from "@/integrations/supabase/client";
 
 
 type RegionDef = {
