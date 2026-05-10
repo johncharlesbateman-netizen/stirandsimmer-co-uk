@@ -1,17 +1,11 @@
-import { useEffect, useMemo, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { Lock, Clock, ArrowRight } from "lucide-react";
+import { Lock, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
-import { Tables } from "@/integrations/supabase/types";
-import { optimisedImage } from "@/lib/image-utils";
 import { WORLD_MAP_PATH } from "@/assets/world-map-path";
 
-type Recipe = Tables<"recipes">;
 
 type RegionDef = {
   id: string;
@@ -33,7 +27,8 @@ const REGIONS: RegionDef[] = [
     bg: "#1a3a5c",
     available: true,
     description: "Honest, seasonal and deeply comforting. The foundation of everything.",
-    challenge: "This week — cook a classic British pie from scratch.",
+    challenge:
+      "This week — cook a classic British fish dish. Try our Fish Finger Butty or Cider Battered Prawns.",
     regionTags: ["british"],
   },
   {
@@ -43,7 +38,8 @@ const REGIONS: RegionDef[] = [
     bg: "#8B3A2A",
     available: true,
     description: "Pasta, sauces and the art of simplicity. Italy feeds the soul.",
-    challenge: "This week — master a hand-made pasta dish.",
+    challenge:
+      "This week — cook a pasta dish entirely from scratch. Find our Italian recipes and challenge yourself.",
     regionTags: ["italian"],
   },
   {
@@ -53,7 +49,8 @@ const REGIONS: RegionDef[] = [
     bg: "#1a3a7c",
     available: true,
     description: "Classical techniques that underpin all of western cooking.",
-    challenge: "This week — make one of the five French mother sauces from scratch.",
+    challenge:
+      "This week — make a classic French sauce from scratch. Browse our French recipe collection to find your starting point.",
     regionTags: ["french"],
   },
   {
@@ -63,7 +60,8 @@ const REGIONS: RegionDef[] = [
     bg: "#5c1a3a",
     available: true,
     description: "Bold spices, fragrant herbs and layers of warmth and depth.",
-    challenge: "This week — cook a curry entirely from scratch, no jars.",
+    challenge:
+      "This week — cook a curry entirely from scratch using whole spices, no jars. Find your recipe in our Asian collection.",
     regionTags: ["indian", "asian"],
   },
   {
@@ -100,29 +98,6 @@ const scrollToRegion = (id: string) => {
 };
 
 const KitchenAtlas = () => {
-  const { data: recipes = [] } = useQuery({
-    queryKey: ["kitchen-atlas-recipes"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("recipes")
-        .select("*")
-        .order("created_at", { ascending: false });
-      if (error) throw error;
-      return (data ?? []) as Recipe[];
-    },
-  });
-
-  const recipesByRegion = useMemo(() => {
-    const map: Record<string, Recipe[]> = {};
-    for (const region of REGIONS) {
-      if (!region.regionTags) continue;
-      map[region.id] = recipes.filter((r) => {
-        const tags = (r.cuisine_region as string[] | null) ?? [];
-        return region.regionTags!.some((t) => tags.includes(t));
-      });
-    }
-    return map;
-  }, [recipes]);
 
   return (
     <Layout>
@@ -294,11 +269,7 @@ const KitchenAtlas = () => {
       {/* REGION SECTIONS — light */}
       <div className="bg-background">
         {REGIONS.filter((r) => r.available).map((region) => (
-          <RegionSection
-            key={region.id}
-            region={region}
-            recipes={recipesByRegion[region.id] ?? []}
-          />
+          <RegionSection key={region.id} region={region} />
         ))}
 
         {/* COMING SOON PANELS */}
@@ -339,15 +310,14 @@ const KitchenAtlas = () => {
   );
 };
 
-const RegionSection = ({
-  region,
-  recipes,
-}: {
-  region: RegionDef;
-  recipes: Recipe[];
-}) => {
-  const scrollerRef = useRef<HTMLDivElement>(null);
+const REGION_BUTTON_LABEL: Record<string, string> = {
+  uk: "Explore all United Kingdom recipes",
+  italy: "Explore all Italian recipes",
+  france: "Explore all French recipes",
+  asia: "Explore all South & Southeast Asian recipes",
+};
 
+const RegionSection = ({ region }: { region: RegionDef }) => {
   return (
     <section
       id={`region-${region.id}`}
@@ -365,68 +335,26 @@ const RegionSection = ({
           {region.description}
         </p>
 
-        {recipes.length === 0 ? (
-          <div className="rounded-lg p-6 text-sm bg-secondary text-muted-foreground border border-border">
-            No recipes tagged for this region yet. Tag recipes with{" "}
-            <code className="opacity-80">{region.regionTags?.join(" or ")}</code>{" "}
-            in the admin to see them here.
-          </div>
-        ) : (
-          <div
-            ref={scrollerRef}
-            className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory"
-          >
-            {recipes.map((r) => (
-              <Link
-                key={r.id}
-                to={`/recipes/${r.slug}`}
-                className="flex-shrink-0 w-64 md:w-72 snap-start rounded-lg overflow-hidden bg-card border border-border transition-all hover:-translate-y-1 hover:shadow-md"
-              >
-                <div className="aspect-[4/3] overflow-hidden bg-muted">
-                  {r.image_url ? (
-                    <img
-                      src={optimisedImage(r.image_url, { width: 600 })}
-                      alt={r.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : null}
-                </div>
-                <div className="p-4">
-                  <h3 className="font-display text-lg leading-snug mb-2 line-clamp-2 text-foreground">
-                    {r.title}
-                  </h3>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    {r.prep_time_minutes ? (
-                      <span className="inline-flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5" />
-                        {r.prep_time_minutes} min prep
-                      </span>
-                    ) : null}
-                    <span>View recipe →</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+        <Button
+          asChild
+          size="lg"
+          className="w-full md:w-auto whitespace-normal md:whitespace-nowrap text-base"
+        >
+          <Link to={`/recipes/region/${region.id}`}>
+            {REGION_BUTTON_LABEL[region.id] ?? `Explore all ${region.name} recipes`}{" "}
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </Button>
 
         {/* Challenge callout — light warm amber */}
         <div
-          className="mt-8 rounded-lg p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border border-border"
+          className="mt-8 rounded-lg p-5 md:p-6 border border-border"
           style={{ backgroundColor: "#FDF3E7" }}
         >
-          <div>
-            <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
-              Challenge
-            </p>
-            <p className="text-base md:text-lg text-foreground">{region.challenge}</p>
-          </div>
-          <Button asChild variant="default" className="self-start md:self-auto whitespace-nowrap">
-            <Link to={`/recipes/region/${region.id}`}>
-              See all {region.name} recipes <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Button>
+          <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
+            Challenge
+          </p>
+          <p className="text-base md:text-lg text-foreground">{region.challenge}</p>
         </div>
       </div>
     </section>
