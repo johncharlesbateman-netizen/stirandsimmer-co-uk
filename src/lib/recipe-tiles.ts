@@ -84,41 +84,6 @@ export const RECIPE_TILES: RecipeTile[] = [
     filter: (r) => r.category === "seafood",
   },
   {
-    slug: "vegetarian",
-    label: "Vegetarian",
-    emoji: "🥗",
-    description:
-      "Delicious vegetarian recipes that don't compromise on flavour.",
-    seoTitle: "Vegetarian recipes | Stir & Simmer",
-    seoDescription:
-      "Delicious vegetarian recipes that don't compromise on flavour. Tried, tested and loved by meat eaters too.",
-    filter: (r) =>
-      titleMatches(r, [
-        "vegetarian",
-        "vegan",
-        "veggie",
-        "halloumi",
-        "paneer",
-        "mushroom",
-        "aubergine",
-        "courgette",
-        "ribollita",
-      ]) ||
-      r.category === "lunch_suggestions" &&
-        !titleMatches(r, [
-          "chicken",
-          "beef",
-          "lamb",
-          "pork",
-          "bacon",
-          "ham",
-          "fish",
-          "salmon",
-          "prawn",
-          "tuna",
-        ]),
-  },
-  {
     slug: "pork",
     label: "Pork",
     emoji: "🥓",
