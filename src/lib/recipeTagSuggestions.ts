@@ -202,6 +202,54 @@ const COLLECTION_CATEGORY_HINTS: Record<string, TileCategory> = {
   baking: "sweets",
 };
 
+export type MealTypeTag = "mains" | "lunch" | "dessert" | "snack";
+
+export const MEAL_TYPE_TAGS: MealTypeTag[] = ["mains", "lunch", "dessert", "snack"];
+
+const MEAL_TYPE_KEYWORDS: Record<MealTypeTag, string[]> = {
+  mains: [
+    "main", "mains", "main course", "dinner", "supper", "roast",
+    "curry", "stew", "casserole", "risotto", "lasagne", "lasagna",
+    "pie", "ragu", "ragù", "bolognese", "carbonara",
+  ],
+  lunch: [
+    "lunch", "sandwich", "toastie", "toasted sandwich", "wrap",
+    "panini", "ploughman", "salad bowl", "quick lunch", "midweek lunch",
+    "light lunch", "packed lunch", "soup", "frittata", "omelette",
+    "quiche", "baguette",
+  ],
+  dessert: [
+    "dessert", "pudding", "cake", "tart", "cheesecake", "brownie",
+    "cookie", "biscuit", "biscotti", "ice cream", "sorbet", "gelato",
+    "mousse", "trifle", "crumble", "tiramisu", "panna cotta", "cannoli",
+    "macaron", "éclair", "eclair", "profiterole", "mille-feuille",
+    "crème brûlée", "creme brulee", "tarte tatin", "spotted dick",
+    "victoria sponge", "battenberg", "eton mess", "pavlova",
+    "meringue", "custard", "clafoutis",
+  ],
+  snack: [
+    "snack", "snacks", "nibbles", "canapé", "canape", "bite-size",
+    "bites", "crisps", "popcorn", "trail mix", "samosa", "pakora",
+    "bhaji", "spring roll", "dim sum", "scone", "scones",
+    "muffin", "muffins",
+  ],
+};
+
+const COLLECTION_MEAL_HINTS: Record<string, MealTypeTag> = {
+  mains: "mains",
+  dinner: "mains",
+  lunch: "lunch",
+  lunches: "lunch",
+  "lunch suggestions": "lunch",
+  desserts: "dessert",
+  dessert: "dessert",
+  "sweets & desserts": "dessert",
+  sweets: "dessert",
+  baking: "dessert",
+  snacks: "snack",
+  snack: "snack",
+};
+
 export type Suggestion = {
   suggestedCategory: TileCategory | null;
   categoryConfidence: number;
@@ -209,6 +257,8 @@ export type Suggestion = {
   suggestedRegions: RegionTag[];
   regionConfidence: Record<RegionTag, number>;
   regionMatches: Record<RegionTag, string[]>;
+  suggestedMealTypes: MealTypeTag[];
+  mealTypeMatches: Record<MealTypeTag, string[]>;
   needsManualReview: boolean;
 };
 
