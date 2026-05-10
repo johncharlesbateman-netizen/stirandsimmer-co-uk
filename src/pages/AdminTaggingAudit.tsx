@@ -29,6 +29,7 @@ type Recipe = Tables<"recipes">;
 
 const TILE_CATEGORY_SET = new Set<string>(TILE_CATEGORIES);
 const VALID_REGION_SET = new Set<string>(REGION_TAGS);
+const VALID_MEAL_SET = new Set<string>(MEAL_TYPE_TAGS);
 
 type Status = "complete" | "partial" | "missing";
 
