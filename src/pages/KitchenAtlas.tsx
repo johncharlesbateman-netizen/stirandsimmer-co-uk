@@ -1,17 +1,11 @@
-import { useEffect, useMemo, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { Lock, Clock, ArrowRight } from "lucide-react";
+import { Lock, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
-import { Tables } from "@/integrations/supabase/types";
-import { optimisedImage } from "@/lib/image-utils";
 import { WORLD_MAP_PATH } from "@/assets/world-map-path";
 
-type Recipe = Tables<"recipes">;
 
 type RegionDef = {
   id: string;
