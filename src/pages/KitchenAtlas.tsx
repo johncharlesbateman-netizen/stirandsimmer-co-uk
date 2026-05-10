@@ -234,27 +234,30 @@ const KitchenAtlas = () => {
             })}
           </div>
 
-          {/* REGION CARD GRID (also serves as mobile fallback for the map) */}
-          <div className="mt-10 grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-4">
+        </div>
+      </section>
+
+      {/* REGION CARD GRID — light section */}
+      <section className="bg-background py-10 md:py-14 border-b border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-4">
             {REGIONS.map((r) => (
               <button
                 key={r.id}
                 onClick={() => r.available && scrollToRegion(r.id)}
                 disabled={!r.available}
-                className={`text-left rounded-lg p-3 md:p-5 transition-transform ${
-                  r.available ? "hover:-translate-y-1 cursor-pointer" : "cursor-not-allowed"
+                className={`text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden transition-all ${
+                  r.available
+                    ? "hover:-translate-y-1 hover:shadow-md cursor-pointer"
+                    : "cursor-not-allowed opacity-60"
                 }`}
-                style={{
-                  backgroundColor: r.bg,
-                  opacity: r.available ? 1 : 0.45,
-                  color: "#f5e9d7",
-                }}
+                style={{ borderTop: `4px solid ${r.bg}` }}
               >
                 <div className="text-xl md:text-3xl mb-1.5 md:mb-2">{r.emoji}</div>
-                <div className="font-display text-xs md:text-lg leading-tight">
+                <div className="font-display text-xs md:text-lg leading-tight text-foreground">
                   {r.name}
                 </div>
-                <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 opacity-80">
+                <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 text-muted-foreground">
                   {r.available ? "Explore →" : "Coming soon"}
                 </div>
               </button>
