@@ -39,6 +39,43 @@ const classify = (r: Recipe): { status: Status; reasons: string[] } => {
   return { status: "complete", reasons };
 };
 
+// Cross-tag consistency rules. Returns a list of human-readable issues.
+const checkConsistency = (r: Recipe): string[] => {
+  const issues: string[] = [];
+  const category = r.category as string | null;
+  const regions = ((r.cuisine_region as string[] | null) ?? []).filter((t) =>
+    VALID_REGION_SET.has(t),
+  );
+  const collections = ((r.collections as string[] | null) ?? []).map((c) =>
+    c.toLowerCase(),
+  );
+
+  // Rule 1: spicy must have a cuisine region
+  if (category === "spicy" && regions.length === 0) {
+    issues.push('Tagged "spicy" but has no cuisine region');
+  }
+
+  // Rule 2: pasta must include italian or asian
+  if (category === "pasta") {
+    const ok = regions.includes("italian") || regions.includes("asian");
+    if (!ok) {
+      issues.push(
+        'Tagged "pasta" but cuisine region is not "italian" or "asian"',
+      );
+    }
+  }
+
+  // Rule 3: "Sweets & Desserts" collection should have category "sweets"
+  const inDessertCollection = collections.includes("sweets & desserts");
+  if (inDessertCollection && category !== "sweets") {
+    issues.push(
+      'In "Sweets & Desserts" collection but category is not "sweets"',
+    );
+  }
+
+  return issues;
+};
+
 const STATUS_STYLES: Record<Status, string> = {
   complete: "border-l-4 border-l-green-600 bg-green-50 dark:bg-green-950/20",
   partial: "border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/20",
