@@ -95,42 +95,21 @@ const Header = () => {
         }`}
       >
         <nav className="container mx-auto px-6 py-6 flex flex-col gap-4">
-          {navLinks.map((link, index) => {
-            const isPlanner = link.to === "/meal-planner";
-            if (isPlanner) {
-              return (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`inline-flex items-center gap-2 self-start text-lg tracking-wide px-3 py-1.5 rounded-full bg-planner-soft text-planner border border-planner/20 transition-all duration-300 hover:translate-x-2 ${
-                    isActive(link.to) ? "bg-planner text-planner-foreground" : ""
-                  }`}
-                  style={{
-                    transitionDelay: mobileMenuOpen ? `${index * 50}ms` : "0ms",
-                  }}
-                >
-                  <span className="w-2 h-2 rounded-full bg-planner" aria-hidden />
-                  {link.label}
-                </Link>
-              );
-            }
-            return (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`text-lg tracking-wide transition-all duration-300 hover:opacity-60 hover:translate-x-2 ${
-                  isActive(link.to) ? "opacity-100" : "opacity-70"
-                }`}
-                style={{
-                  transitionDelay: mobileMenuOpen ? `${index * 50}ms` : "0ms",
-                }}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          {navLinks.map((link, index) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              onClick={() => setMobileMenuOpen(false)}
+              className={`text-lg tracking-wide transition-all duration-300 hover:opacity-60 hover:translate-x-2 ${
+                isActive(link.to) ? "opacity-100" : "opacity-70"
+              }`}
+              style={{
+                transitionDelay: mobileMenuOpen ? `${index * 50}ms` : "0ms",
+              }}
+            >
+              {link.label}
+            </Link>
+          ))}
 
           {isAdmin && (
             <Link
