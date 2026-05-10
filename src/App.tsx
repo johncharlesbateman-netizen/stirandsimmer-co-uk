@@ -103,6 +103,7 @@ const App = () => (
             <Route path="/lamb-and-apricot-biryani" element={<Navigate to="/recipes" replace />} />
             <Route path="/collections" element={<Collections />} />
             <Route path="/collections/:slug" element={<Collections />} />
+            <Route path="/kitchen-atlas" element={<KitchenAtlas />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />
