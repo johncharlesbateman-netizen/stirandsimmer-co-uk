@@ -282,28 +282,32 @@ const RegionSection = ({ region }: { region: RegionDef }) => {
     <section
       id={`region-${region.id}`}
       className="scroll-mt-24 py-5 md:py-6 bg-background border-b border-border border-l-4"
-      style={{ borderLeftColor: region.bg, opacity: disabled ? 0.5 : 1 }}
+      style={{ borderLeftColor: region.bg, opacity: disabled ? 0.55 : 1 }}
       aria-disabled={disabled || undefined}
     >
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
-        <div className="flex items-baseline gap-3 mb-2">
+        <div className="flex items-baseline gap-3 mb-2 flex-wrap">
           <span className="text-2xl">{region.emoji}</span>
           <h2 className="font-display text-3xl md:text-4xl text-foreground">
             {region.name}
           </h2>
+          {disabled && (
+            <span className="text-xs uppercase tracking-widest font-semibold text-muted-foreground border border-border rounded-full px-2.5 py-1">
+              Coming soon
+            </span>
+          )}
         </div>
         <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-3xl">
           {region.description}
         </p>
 
         {disabled ? (
-          <Button
-            size="lg"
-            disabled
-            className="w-full md:w-auto whitespace-normal md:whitespace-nowrap text-base cursor-not-allowed"
+          <span
+            className="inline-flex items-center justify-center w-full md:w-auto whitespace-normal md:whitespace-nowrap text-base rounded-md px-8 py-3 font-medium border border-border bg-muted text-muted-foreground cursor-not-allowed select-none"
+            aria-disabled="true"
           >
             Coming soon
-          </Button>
+          </span>
         ) : (
           <Button
             asChild
@@ -320,7 +324,7 @@ const RegionSection = ({ region }: { region: RegionDef }) => {
         {/* Challenge callout — light warm amber */}
         <div
           className="mt-8 rounded-lg p-5 md:p-6 border border-border"
-          style={{ backgroundColor: disabled ? "#F1ECE3" : "#FDF3E7" }}
+          style={{ backgroundColor: disabled ? "#F7F4EE" : "#FDF3E7" }}
         >
           <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
             Challenge
