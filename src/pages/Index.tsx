@@ -40,8 +40,6 @@ const Index = () => {
     };
   }, []);
 
-  // Round down to a friendly milestone (e.g. 114 -> "110+") for the hero copy.
-  const roundedRecipes = Math.floor(recipeCount / 10) * 10;
   const collectionCount = collections.length;
 
   return (
