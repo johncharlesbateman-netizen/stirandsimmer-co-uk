@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import CategoryPage from "./pages/CategoryPage";
+import RegionPage from "./pages/RegionPage";
 import { TILES_BY_SLUG } from "./lib/recipe-tiles";
 import Collections from "./pages/Collections";
 import KitchenAtlas from "./pages/KitchenAtlas";
@@ -102,6 +103,7 @@ const App = () => (
             <Route path="/styleguide" element={<Styleguide />} />
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/recipes/category/:slug" element={<CategoryPage />} />
+            <Route path="/recipes/region/:regionId" element={<RegionPage />} />
             <Route path="/recipes-1/:slug" element={<LegacyRecipeRedirect />} />
             <Route path="/recipes-1-1/:slug" element={<LegacyRecipeRedirect />} />
             <Route path="/recipes/:slug" element={<CanonicalRecipeSlugRedirect />} />

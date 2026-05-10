@@ -227,27 +227,38 @@ const KitchenAtlas = () => {
       <section className="bg-background py-10 md:py-14 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-4">
-            {REGIONS.map((r) => (
-              <button
-                key={r.id}
-                onClick={() => r.available && scrollToRegion(r.id)}
-                disabled={!r.available}
-                className={`text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden transition-all ${
-                  r.available
-                    ? "hover:-translate-y-1 hover:shadow-md cursor-pointer"
-                    : "cursor-not-allowed opacity-60"
-                }`}
-                style={{ borderTop: `4px solid ${r.bg}` }}
-              >
-                <div className="text-xl md:text-3xl mb-1.5 md:mb-2">{r.emoji}</div>
-                <div className="font-display text-xs md:text-lg leading-tight text-foreground">
-                  {r.name}
+            {REGIONS.map((r) =>
+              r.available ? (
+                <Link
+                  key={r.id}
+                  to={`/recipes/region/${r.id}`}
+                  className="text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden transition-all hover:-translate-y-1 hover:shadow-md cursor-pointer block"
+                  style={{ borderTop: `4px solid ${r.bg}` }}
+                >
+                  <div className="text-xl md:text-3xl mb-1.5 md:mb-2">{r.emoji}</div>
+                  <div className="font-display text-xs md:text-lg leading-tight text-foreground">
+                    {r.name}
+                  </div>
+                  <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 text-muted-foreground">
+                    Explore →
+                  </div>
+                </Link>
+              ) : (
+                <div
+                  key={r.id}
+                  className="text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden cursor-not-allowed opacity-60"
+                  style={{ borderTop: `4px solid ${r.bg}` }}
+                >
+                  <div className="text-xl md:text-3xl mb-1.5 md:mb-2">{r.emoji}</div>
+                  <div className="font-display text-xs md:text-lg leading-tight text-foreground">
+                    {r.name}
+                  </div>
+                  <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 text-muted-foreground">
+                    Coming soon
+                  </div>
                 </div>
-                <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 text-muted-foreground">
-                  {r.available ? "Explore →" : "Coming soon"}
-                </div>
-              </button>
-            ))}
+              ),
+            )}
           </div>
         </div>
       </section>
@@ -270,13 +281,13 @@ const KitchenAtlas = () => {
               Simmer and challenge yourself to cook them all before Sunday.
             </p>
           </div>
-          <button
-            onClick={() => scrollToRegion("italy")}
+          <Link
+            to="/recipes/region/italy"
             className="self-start md:self-auto inline-flex items-center gap-2 px-5 py-3 rounded-md font-medium transition-colors"
             style={{ backgroundColor: "#1a0e00", color: "#f5e9d7" }}
           >
             Browse Italian recipes <ArrowRight className="w-4 h-4" />
-          </button>
+          </Link>
         </div>
       </section>
 
@@ -412,7 +423,7 @@ const RegionSection = ({
             <p className="text-base md:text-lg text-foreground">{region.challenge}</p>
           </div>
           <Button asChild variant="default" className="self-start md:self-auto whitespace-nowrap">
-            <Link to="/recipes">
+            <Link to={`/recipes/region/${region.id}`}>
               See all {region.name} recipes <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
