@@ -227,27 +227,38 @@ const KitchenAtlas = () => {
       <section className="bg-background py-10 md:py-14 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-4">
-            {REGIONS.map((r) => (
-              <button
-                key={r.id}
-                onClick={() => r.available && scrollToRegion(r.id)}
-                disabled={!r.available}
-                className={`text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden transition-all ${
-                  r.available
-                    ? "hover:-translate-y-1 hover:shadow-md cursor-pointer"
-                    : "cursor-not-allowed opacity-60"
-                }`}
-                style={{ borderTop: `4px solid ${r.bg}` }}
-              >
-                <div className="text-xl md:text-3xl mb-1.5 md:mb-2">{r.emoji}</div>
-                <div className="font-display text-xs md:text-lg leading-tight text-foreground">
-                  {r.name}
+            {REGIONS.map((r) =>
+              r.available ? (
+                <Link
+                  key={r.id}
+                  to={`/recipes/region/${r.id}`}
+                  className="text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden transition-all hover:-translate-y-1 hover:shadow-md cursor-pointer block"
+                  style={{ borderTop: `4px solid ${r.bg}` }}
+                >
+                  <div className="text-xl md:text-3xl mb-1.5 md:mb-2">{r.emoji}</div>
+                  <div className="font-display text-xs md:text-lg leading-tight text-foreground">
+                    {r.name}
+                  </div>
+                  <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 text-muted-foreground">
+                    Explore →
+                  </div>
+                </Link>
+              ) : (
+                <div
+                  key={r.id}
+                  className="text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden cursor-not-allowed opacity-60"
+                  style={{ borderTop: `4px solid ${r.bg}` }}
+                >
+                  <div className="text-xl md:text-3xl mb-1.5 md:mb-2">{r.emoji}</div>
+                  <div className="font-display text-xs md:text-lg leading-tight text-foreground">
+                    {r.name}
+                  </div>
+                  <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 text-muted-foreground">
+                    Coming soon
+                  </div>
                 </div>
-                <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 text-muted-foreground">
-                  {r.available ? "Explore →" : "Coming soon"}
-                </div>
-              </button>
-            ))}
+              ),
+            )}
           </div>
         </div>
       </section>
