@@ -201,35 +201,20 @@ const KitchenAtlas = () => {
                 <button
                   key={r.id}
                   onClick={() => scrollToRegion(r.id)}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 group"
+                  className="absolute -translate-x-1/2 -translate-y-1/2"
                   style={{ top: pos.top, left: pos.left }}
                   aria-label={`Jump to ${r.name}`}
                 >
                   <span
-                    className={`block rounded-full ${
-                      r.available ? "animate-pulse" : ""
-                    }`}
+                    className="block rounded-full animate-pulse"
                     style={{
-                      width: "18px",
-                      height: "18px",
-                      backgroundColor: r.available ? "#C97B1A" : "#4a3a2a",
-                      boxShadow: r.available
-                        ? "0 0 20px 4px rgba(201,123,26,0.5)"
-                        : "none",
-                      opacity: r.available ? 1 : 0.5,
+                      width: "16px",
+                      height: "16px",
+                      backgroundColor: "#C97B1A",
+                      boxShadow: "0 0 18px 4px rgba(201,123,26,0.55)",
+                      opacity: r.available ? 1 : 0.55,
                     }}
                   />
-                  <span
-                    className="absolute left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap text-xs font-medium px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{
-                      backgroundColor: "#1a0e00",
-                      color: r.available ? "#f5e9d7" : "#7a6a55",
-                      border: "1px solid rgba(201,123,26,0.3)",
-                    }}
-                  >
-                    {r.name}
-                    {!r.available && " — Coming soon"}
-                  </span>
                 </button>
               );
             })}
