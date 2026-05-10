@@ -153,6 +153,9 @@ const AdminTaggingAudit = () => {
         const currentRegions = ((r.cuisine_region as string[] | null) ?? []).filter(
           (t) => VALID_REGION_SET.has(t),
         );
+        const currentMealTypes = (
+          ((r as { meal_types?: string[] | null }).meal_types) ?? []
+        ).filter((t) => VALID_MEAL_SET.has(t)) as MealTypeTag[];
 
         const categoryNeedsFix =
           !currentCategory || !TILE_CATEGORY_SET.has(currentCategory);
@@ -168,8 +171,14 @@ const AdminTaggingAudit = () => {
           (currentRegions.length === 0 || newRegionSuggestions.length > 0) &&
           newRegionSuggestions.length > 0;
 
+        const newMealTypeSuggestions = suggestion.suggestedMealTypes.filter(
+          (m) => !currentMealTypes.includes(m),
+        );
+        const showMealTypeSuggestion =
+          currentMealTypes.length === 0 && newMealTypeSuggestions.length > 0;
+
         const hasAnyApplicableSuggestion =
-          showCategorySuggestion || showRegionSuggestion;
+          showCategorySuggestion || showRegionSuggestion || showMealTypeSuggestion;
 
         const lowConfidence =
           status !== "complete" &&
@@ -184,9 +193,12 @@ const AdminTaggingAudit = () => {
           suggestion,
           currentCategory,
           currentRegions,
+          currentMealTypes,
           showCategorySuggestion,
           showRegionSuggestion,
+          showMealTypeSuggestion,
           newRegionSuggestions,
+          newMealTypeSuggestions,
           hasAnyApplicableSuggestion,
           lowConfidence,
           consistencyIssues,
