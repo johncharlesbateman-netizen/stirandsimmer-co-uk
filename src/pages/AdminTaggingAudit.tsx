@@ -383,6 +383,56 @@ const AdminTaggingAudit = () => {
               <strong>{counts.inconsistencies}</strong>
             </span>
           </div>
+
+          <div className="mt-6 flex flex-wrap items-center gap-2 p-3 rounded-md bg-muted/40 border border-border">
+            <span className="text-sm font-medium mr-2">
+              Bulk actions:
+            </span>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={approveAllVisible}
+              disabled={bulkApplying || suggestableRows.length === 0}
+              className="h-8 text-xs"
+            >
+              Approve all suggestions ({suggestableRows.length})
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={clearApprovals}
+              disabled={bulkApplying || approved.size === 0}
+              className="h-8 text-xs"
+            >
+              Clear approvals
+            </Button>
+            <Button
+              size="sm"
+              variant="default"
+              onClick={applyApproved}
+              disabled={bulkApplying || approved.size === 0}
+              className="h-8 text-xs gap-1"
+            >
+              <Check className="w-3.5 h-3.5" />
+              Apply approved tags ({approved.size})
+            </Button>
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={applyAllSuggestions}
+              disabled={bulkApplying || suggestableRows.length === 0}
+              className="h-8 text-xs gap-1"
+              title="Apply every suggested tag in one go — useful when suggestions are clearly correct (e.g. all pasta recipes → italian + pasta-and-rice)"
+            >
+              <Wand2 className="w-3.5 h-3.5" />
+              Apply to all ({suggestableRows.length})
+            </Button>
+            {bulkProgress && (
+              <span className="text-xs text-muted-foreground ml-2">
+                Applying… {bulkProgress.done} / {bulkProgress.total}
+              </span>
+            )}
+          </div>
         </div>
       </section>
 
