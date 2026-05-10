@@ -70,6 +70,10 @@ const REGIONS: RegionDef[] = [
     emoji: "🇯🇵",
     bg: "#7c1a1a",
     available: false,
+    description:
+      "Precision, balance and the art of umami. Japanese cooking at its finest.",
+    challenge:
+      "Coming soon — master the art of ramen, sushi and teriyaki.",
   },
   {
     id: "mexico",
@@ -77,6 +81,10 @@ const REGIONS: RegionDef[] = [
     emoji: "🇲🇽",
     bg: "#1a5c2a",
     available: false,
+    description:
+      "Vibrant, smoky and deeply satisfying. The bold flavours of Mexican cooking.",
+    challenge:
+      "Coming soon — cook authentic tacos, mole and ceviche from scratch.",
   },
 ];
 
