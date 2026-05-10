@@ -374,7 +374,7 @@ const AdminTaggingAudit = () => {
                                 <span className="inline-flex items-center gap-1.5">
                                   <span className="text-muted-foreground">Category:</span>
                                   <span className="px-2 py-0.5 rounded bg-blue-600/15 text-blue-800 dark:text-blue-200 font-mono">
-                                    {suggestion.suggestedCategory}
+                                    {labelForCategory(suggestion.suggestedCategory)}
                                   </span>
                                 </span>
                               )}
