@@ -147,6 +147,8 @@ const AdminTaggingAudit = () => {
           status !== "complete" &&
           !hasAnyApplicableSuggestion;
 
+        const consistencyIssues = checkConsistency(r);
+
         return {
           recipe: r,
           status,
@@ -159,6 +161,7 @@ const AdminTaggingAudit = () => {
           newRegionSuggestions,
           hasAnyApplicableSuggestion,
           lowConfidence,
+          consistencyIssues,
         };
       }),
     [recipes],
@@ -172,11 +175,13 @@ const AdminTaggingAudit = () => {
       total: rows.length,
       withSuggestions: 0,
       needsManualReview: 0,
+      inconsistencies: 0,
     };
     for (const row of rows) {
       c[row.status]++;
       if (row.hasAnyApplicableSuggestion) c.withSuggestions++;
       if (row.lowConfidence) c.needsManualReview++;
+      if (row.consistencyIssues.length > 0) c.inconsistencies++;
     }
     return c;
   }, [rows]);
