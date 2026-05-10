@@ -104,6 +104,18 @@ const STATUS_BADGE: Record<Status, string> = {
 const AdminTaggingAudit = () => {
   const queryClient = useQueryClient();
   const [applying, setApplying] = useState<string | null>(null);
+  const [approved, setApproved] = useState<Set<string>>(new Set());
+  const [bulkApplying, setBulkApplying] = useState(false);
+  const [bulkProgress, setBulkProgress] = useState<{ done: number; total: number } | null>(null);
+
+  const toggleApproved = (id: string) => {
+    setApproved((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
 
   const { data: recipes = [], isLoading } = useQuery({
     queryKey: ["admin-tagging-audit"],
