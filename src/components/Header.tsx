@@ -12,10 +12,8 @@ const Header = () => {
     { to: "/", label: "Home" },
     { to: "/recipes", label: "Recipes" },
     { to: "/kitchen-atlas", label: "Kitchen Atlas" },
-    { to: "/guides", label: "Guides" },
     { to: "/meal-planner", label: "Meal Planner" },
     { to: "/about", label: "About" },
-    
     { to: "/contact", label: "Contact" },
   ];
 
@@ -42,7 +40,7 @@ const Header = () => {
                 key={link.to}
                 to={link.to}
                 className={`text-sm tracking-wide transition-all duration-300 hover:opacity-60 hover:tracking-wider ${
-                  isActive(link.to) ? "opacity-100" : "opacity-70"
+                  isActive(link.to) ? "underline underline-offset-4 decoration-foreground/30" : ""
                 }`}
               >
                 {link.label}
@@ -68,7 +66,7 @@ const Header = () => {
               <Link
                 to="/auth"
                 className={`text-sm tracking-wide transition-all duration-300 hover:opacity-60 hover:tracking-wider ${
-                  isActive("/auth") ? "opacity-100" : "opacity-70"
+                  isActive("/auth") ? "underline underline-offset-4 decoration-foreground/30" : ""
                 }`}
               >
                 Sign in
@@ -102,7 +100,7 @@ const Header = () => {
               to={link.to}
               onClick={() => setMobileMenuOpen(false)}
               className={`text-lg tracking-wide transition-all duration-300 hover:opacity-60 hover:translate-x-2 ${
-                isActive(link.to) ? "opacity-100" : "opacity-70"
+                isActive(link.to) ? "underline underline-offset-4 decoration-foreground/30" : ""
               }`}
               style={{
                 transitionDelay: mobileMenuOpen ? `${index * 50}ms` : "0ms",
@@ -133,7 +131,7 @@ const Header = () => {
               to="/auth"
               onClick={() => setMobileMenuOpen(false)}
               className={`text-lg tracking-wide transition-all duration-300 hover:opacity-60 hover:translate-x-2 ${
-                isActive("/auth") ? "opacity-100" : "opacity-70"
+                isActive("/auth") ? "underline underline-offset-4 decoration-foreground/30" : ""
               }`}
             >
               Sign in
