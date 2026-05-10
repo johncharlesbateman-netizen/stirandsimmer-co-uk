@@ -294,6 +294,31 @@ const AdminChallenges = () => {
                         <p className="text-xs text-muted-foreground mt-3">
                           Last updated: {formatDate(row?.updated_at)}
                         </p>
+
+                        {historyByRegion[region.id]?.length > 0 && (
+                          <div className="mt-5 pt-4 border-t border-border">
+                            <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground mb-3">
+                              Last 4 weeks
+                            </p>
+                            <ul className="space-y-3">
+                              {historyByRegion[region.id]
+                                .slice(0, 4)
+                                .map((h) => (
+                                  <li
+                                    key={`${h.region_id}-${h.replaced_at}`}
+                                    className="text-sm"
+                                  >
+                                    <p className="text-foreground whitespace-pre-wrap">
+                                      {h.challenge}
+                                    </p>
+                                    <p className="text-xs text-muted-foreground mt-1">
+                                      Replaced {formatDate(h.replaced_at)}
+                                    </p>
+                                  </li>
+                                ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
