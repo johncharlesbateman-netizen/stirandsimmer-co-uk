@@ -45,6 +45,31 @@ const AdminChallenges = () => {
     enabled: unlocked,
   });
 
+  const { data: history = [] } = useQuery({
+    queryKey: ["admin", "region-challenge-history"],
+    queryFn: async () => {
+      const fourWeeksAgo = new Date(
+        Date.now() - 28 * 24 * 60 * 60 * 1000,
+      ).toISOString();
+      const { data, error } = await supabase
+        .from("region_challenge_history")
+        .select("region_id, challenge, replaced_at")
+        .gte("replaced_at", fourWeeksAgo)
+        .order("replaced_at", { ascending: false });
+      if (error) throw error;
+      return (data ?? []) as HistoryRow[];
+    },
+    enabled: unlocked,
+  });
+
+  const historyByRegion = REGIONS.reduce<Record<string, HistoryRow[]>>(
+    (acc, r) => {
+      acc[r.id] = history.filter((h) => h.region_id === r.id);
+      return acc;
+    },
+    {},
+  );
+
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
   const [savedAt, setSavedAt] = useState<Date | null>(null);
