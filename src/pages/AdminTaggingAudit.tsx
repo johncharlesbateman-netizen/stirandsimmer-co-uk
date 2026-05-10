@@ -412,6 +412,20 @@ const AdminTaggingAudit = () => {
                               {reasons.join(" · ")}
                             </p>
                           )}
+
+                          {hasInconsistency && (
+                            <ul className="mt-2 space-y-1">
+                              {consistencyIssues.map((issue) => (
+                                <li
+                                  key={issue}
+                                  className="text-xs text-purple-800 dark:text-purple-200 inline-flex items-start gap-1.5"
+                                >
+                                  <AlertTriangle className="w-3 h-3 mt-0.5 shrink-0" />
+                                  <span>{issue}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                         </div>
 
                         <div className="flex items-center gap-2 shrink-0 flex-wrap">
