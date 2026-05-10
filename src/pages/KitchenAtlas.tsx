@@ -298,11 +298,7 @@ const KitchenAtlas = () => {
       {/* REGION SECTIONS — light */}
       <div className="bg-background">
         {REGIONS.filter((r) => r.available).map((region) => (
-          <RegionSection
-            key={region.id}
-            region={region}
-            recipes={recipesByRegion[region.id] ?? []}
-          />
+          <RegionSection key={region.id} region={region} />
         ))}
 
         {/* COMING SOON PANELS */}
