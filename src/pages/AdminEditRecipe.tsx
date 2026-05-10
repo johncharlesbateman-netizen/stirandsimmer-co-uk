@@ -288,6 +288,15 @@ const AdminEditRecipe = () => {
             <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
           </div>
 
+          {/* Meal types */}
+          <div>
+            <label className="block text-sm font-medium mb-2">Meal types *</label>
+            <p className="text-xs text-muted-foreground mb-3">
+              Pick at least one meal type. Recipes can belong to more than one.
+            </p>
+            <MealTypePicker value={mealTypes} onChange={setMealTypes} />
+          </div>
+
           {/* Description */}
           <div>
             <label className="block text-sm font-medium mb-2">Description *</label>
