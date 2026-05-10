@@ -343,15 +343,14 @@ const KitchenAtlas = () => {
   );
 };
 
-const RegionSection = ({
-  region,
-  recipes,
-}: {
-  region: RegionDef;
-  recipes: Recipe[];
-}) => {
-  const scrollerRef = useRef<HTMLDivElement>(null);
+const REGION_BUTTON_LABEL: Record<string, string> = {
+  uk: "Explore all United Kingdom recipes",
+  italy: "Explore all Italian recipes",
+  france: "Explore all French recipes",
+  asia: "Explore all South & Southeast Asian recipes",
+};
 
+const RegionSection = ({ region }: { region: RegionDef }) => {
   return (
     <section
       id={`region-${region.id}`}
@@ -369,68 +368,26 @@ const RegionSection = ({
           {region.description}
         </p>
 
-        {recipes.length === 0 ? (
-          <div className="rounded-lg p-6 text-sm bg-secondary text-muted-foreground border border-border">
-            No recipes tagged for this region yet. Tag recipes with{" "}
-            <code className="opacity-80">{region.regionTags?.join(" or ")}</code>{" "}
-            in the admin to see them here.
-          </div>
-        ) : (
-          <div
-            ref={scrollerRef}
-            className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory"
-          >
-            {recipes.map((r) => (
-              <Link
-                key={r.id}
-                to={`/recipes/${r.slug}`}
-                className="flex-shrink-0 w-64 md:w-72 snap-start rounded-lg overflow-hidden bg-card border border-border transition-all hover:-translate-y-1 hover:shadow-md"
-              >
-                <div className="aspect-[4/3] overflow-hidden bg-muted">
-                  {r.image_url ? (
-                    <img
-                      src={optimisedImage(r.image_url, { width: 600 })}
-                      alt={r.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : null}
-                </div>
-                <div className="p-4">
-                  <h3 className="font-display text-lg leading-snug mb-2 line-clamp-2 text-foreground">
-                    {r.title}
-                  </h3>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    {r.prep_time_minutes ? (
-                      <span className="inline-flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5" />
-                        {r.prep_time_minutes} min prep
-                      </span>
-                    ) : null}
-                    <span>View recipe →</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+        <Button
+          asChild
+          size="lg"
+          className="w-full md:w-auto whitespace-normal md:whitespace-nowrap text-base"
+        >
+          <Link to={`/recipes/region/${region.id}`}>
+            {REGION_BUTTON_LABEL[region.id] ?? `Explore all ${region.name} recipes`}{" "}
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </Button>
 
         {/* Challenge callout — light warm amber */}
         <div
-          className="mt-8 rounded-lg p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border border-border"
+          className="mt-8 rounded-lg p-5 md:p-6 border border-border"
           style={{ backgroundColor: "#FDF3E7" }}
         >
-          <div>
-            <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
-              Challenge
-            </p>
-            <p className="text-base md:text-lg text-foreground">{region.challenge}</p>
-          </div>
-          <Button asChild variant="default" className="self-start md:self-auto whitespace-nowrap">
-            <Link to={`/recipes/region/${region.id}`}>
-              See all {region.name} recipes <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Button>
+          <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
+            Challenge
+          </p>
+          <p className="text-base md:text-lg text-foreground">{region.challenge}</p>
         </div>
       </div>
     </section>
