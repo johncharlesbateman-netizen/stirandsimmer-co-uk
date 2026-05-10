@@ -291,6 +291,7 @@ export const suggestTags = (recipe: RecipeInput): Suggestion => {
     spicy: 0,
     pasta: 0,
     sweets: 0,
+    lunch_suggestions: 0,
   };
   const categoryMatches: Record<TileCategory, string[]> = {
     chicken: [],
@@ -301,6 +302,7 @@ export const suggestTags = (recipe: RecipeInput): Suggestion => {
     spicy: [],
     pasta: [],
     sweets: [],
+    lunch_suggestions: [],
   };
 
   for (const cat of TILE_CATEGORIES) {
