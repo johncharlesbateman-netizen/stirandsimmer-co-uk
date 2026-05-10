@@ -292,7 +292,7 @@ const RegionSection = ({ region }: { region: RegionDef }) => {
   return (
     <section
       id={`region-${region.id}`}
-      className="scroll-mt-24 py-12 md:py-16 bg-background border-b border-border border-l-4"
+      className="scroll-mt-24 py-5 md:py-6 bg-background border-b border-border border-l-4"
       style={{ borderLeftColor: region.bg }}
     >
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
