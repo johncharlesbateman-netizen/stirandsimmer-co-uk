@@ -1,12 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ExternalLink, Pencil, Sparkles, AlertTriangle, Check } from "lucide-react";
+import { ExternalLink, Pencil, Sparkles, AlertTriangle, Check, Wand2 } from "lucide-react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import {
   suggestTags,
@@ -103,6 +104,18 @@ const STATUS_BADGE: Record<Status, string> = {
 const AdminTaggingAudit = () => {
   const queryClient = useQueryClient();
   const [applying, setApplying] = useState<string | null>(null);
+  const [approved, setApproved] = useState<Set<string>>(new Set());
+  const [bulkApplying, setBulkApplying] = useState(false);
+  const [bulkProgress, setBulkProgress] = useState<{ done: number; total: number } | null>(null);
+
+  const toggleApproved = (id: string) => {
+    setApproved((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
 
   const { data: recipes = [], isLoading } = useQuery({
     queryKey: ["admin-tagging-audit"],
@@ -227,6 +240,106 @@ const AdminTaggingAudit = () => {
     }
   };
 
+  // Rows that currently have an applicable suggestion.
+  const suggestableRows = useMemo(
+    () => rows.filter((r) => r.hasAnyApplicableSuggestion),
+    [rows],
+  );
+
+  // Drop approvals for rows that no longer have a pending suggestion (e.g. after refetch).
+  useEffect(() => {
+    setApproved((prev) => {
+      const validIds = new Set(suggestableRows.map((r) => r.recipe.id));
+      const next = new Set<string>();
+      prev.forEach((id) => {
+        if (validIds.has(id)) next.add(id);
+      });
+      return next.size === prev.size ? prev : next;
+    });
+  }, [suggestableRows]);
+
+  const approveAllVisible = () => {
+    setApproved(new Set(suggestableRows.map((r) => r.recipe.id)));
+  };
+  const clearApprovals = () => setApproved(new Set());
+
+  // Apply a list of row payloads in series. Returns count of successes/failures.
+  const applyRowsInSeries = async (
+    targets: Array<{
+      recipe: Recipe;
+      nextCategory: TileCategory | null;
+      nextRegions: RegionTag[];
+    }>,
+  ) => {
+    if (targets.length === 0) return;
+    setBulkApplying(true);
+    setBulkProgress({ done: 0, total: targets.length });
+    let ok = 0;
+    let failed = 0;
+    for (let i = 0; i < targets.length; i++) {
+      const { recipe, nextCategory, nextRegions } = targets[i];
+      try {
+        const update: { category?: TileCategory; cuisine_region?: string[] } = {};
+        if (nextCategory) update.category = nextCategory;
+        if (nextRegions.length > 0) {
+          const existing = ((recipe.cuisine_region as string[] | null) ?? []).filter(
+            (t) => VALID_REGION_SET.has(t),
+          );
+          const merged = Array.from(new Set([...existing, ...nextRegions]));
+          update.cuisine_region = merged;
+        }
+        if (Object.keys(update).length > 0) {
+          const { error } = await supabase
+            .from("recipes")
+            .update(update as never)
+            .eq("id", recipe.id);
+          if (error) throw error;
+        }
+        ok++;
+      } catch (e) {
+        failed++;
+        console.error("Failed to apply tags for", recipe.title, e);
+      }
+      setBulkProgress({ done: i + 1, total: targets.length });
+    }
+    setBulkApplying(false);
+    setBulkProgress(null);
+    setApproved(new Set());
+    await queryClient.invalidateQueries({ queryKey: ["admin-tagging-audit"] });
+    if (failed === 0) {
+      toast.success(`Applied tags to ${ok} recipe${ok === 1 ? "" : "s"}`);
+    } else {
+      toast.error(`Applied ${ok}, failed ${failed}. Check console for details.`);
+    }
+  };
+
+  const applyApproved = () => {
+    const targets = suggestableRows
+      .filter((r) => approved.has(r.recipe.id))
+      .map((r) => ({
+        recipe: r.recipe,
+        nextCategory: r.showCategorySuggestion ? r.suggestion.suggestedCategory : null,
+        nextRegions: r.showRegionSuggestion ? r.newRegionSuggestions : [],
+      }));
+    return applyRowsInSeries(targets);
+  };
+
+  const applyAllSuggestions = () => {
+    const targets = suggestableRows.map((r) => ({
+      recipe: r.recipe,
+      nextCategory: r.showCategorySuggestion ? r.suggestion.suggestedCategory : null,
+      nextRegions: r.showRegionSuggestion ? r.newRegionSuggestions : [],
+    }));
+    if (targets.length === 0) {
+      toast.info("No suggestions to apply.");
+      return;
+    }
+    if (!window.confirm(`Apply suggested tags to all ${targets.length} recipes with suggestions?`)) {
+      return;
+    }
+    return applyRowsInSeries(targets);
+  };
+
   return (
     <Layout>
       <Helmet>
@@ -269,6 +382,56 @@ const AdminTaggingAudit = () => {
               <AlertTriangle className="w-3.5 h-3.5" /> Inconsistencies:{" "}
               <strong>{counts.inconsistencies}</strong>
             </span>
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center gap-2 p-3 rounded-md bg-muted/40 border border-border">
+            <span className="text-sm font-medium mr-2">
+              Bulk actions:
+            </span>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={approveAllVisible}
+              disabled={bulkApplying || suggestableRows.length === 0}
+              className="h-8 text-xs"
+            >
+              Approve all suggestions ({suggestableRows.length})
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={clearApprovals}
+              disabled={bulkApplying || approved.size === 0}
+              className="h-8 text-xs"
+            >
+              Clear approvals
+            </Button>
+            <Button
+              size="sm"
+              variant="default"
+              onClick={applyApproved}
+              disabled={bulkApplying || approved.size === 0}
+              className="h-8 text-xs gap-1"
+            >
+              <Check className="w-3.5 h-3.5" />
+              Apply approved tags ({approved.size})
+            </Button>
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={applyAllSuggestions}
+              disabled={bulkApplying || suggestableRows.length === 0}
+              className="h-8 text-xs gap-1"
+              title="Apply every suggested tag in one go — useful when suggestions are clearly correct (e.g. all pasta recipes → italian + pasta-and-rice)"
+            >
+              <Wand2 className="w-3.5 h-3.5" />
+              Apply to all ({suggestableRows.length})
+            </Button>
+            {bulkProgress && (
+              <span className="text-xs text-muted-foreground ml-2">
+                Applying… {bulkProgress.done} / {bulkProgress.total}
+              </span>
+            )}
           </div>
         </div>
       </section>
@@ -410,6 +573,15 @@ const AdminTaggingAudit = () => {
                                   (hover for matched keywords)
                                 </span>
                               )}
+                              <label className="ml-auto inline-flex items-center gap-1.5 cursor-pointer select-none text-[11px] font-medium text-foreground">
+                                <Checkbox
+                                  checked={approved.has(recipe.id)}
+                                  onCheckedChange={() => toggleApproved(recipe.id)}
+                                  disabled={bulkApplying}
+                                  aria-label={`Approve suggestion for ${recipe.title}`}
+                                />
+                                Approve suggestion
+                              </label>
                             </div>
                           )}
 
