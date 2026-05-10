@@ -98,29 +98,6 @@ const scrollToRegion = (id: string) => {
 };
 
 const KitchenAtlas = () => {
-  const { data: recipes = [] } = useQuery({
-    queryKey: ["kitchen-atlas-recipes"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("recipes")
-        .select("*")
-        .order("created_at", { ascending: false });
-      if (error) throw error;
-      return (data ?? []) as Recipe[];
-    },
-  });
-
-  const recipesByRegion = useMemo(() => {
-    const map: Record<string, Recipe[]> = {};
-    for (const region of REGIONS) {
-      if (!region.regionTags) continue;
-      map[region.id] = recipes.filter((r) => {
-        const tags = (r.cuisine_region as string[] | null) ?? [];
-        return region.regionTags!.some((t) => tags.includes(t));
-      });
-    }
-    return map;
-  }, [recipes]);
 
   return (
     <Layout>
