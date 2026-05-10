@@ -76,7 +76,7 @@ const Recipes = () => {
                 </span>
                 <div>
                   <div className="font-display text-xl md:text-2xl leading-tight">
-                    Browse all {total > 0 ? `${total}+` : "110+"} recipes
+                    Browse all {total} recipes
                   </div>
                   <div className="text-sm md:text-base opacity-80 mt-1">
                     Every recipe in one place — newest first.
