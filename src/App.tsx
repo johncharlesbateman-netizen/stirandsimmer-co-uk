@@ -73,6 +73,12 @@ const CanonicalRecipeSlugRedirect = () => {
   const { slug } = useParams<{ slug: string }>();
   const canonicalSlug = getCanonicalRecipeSlug(slug);
 
+  // If the slug matches a category tile, render the category landing instead
+  // of treating it as a recipe-detail slug.
+  if (slug && TILES_BY_SLUG[slug]) {
+    return <CategoryPage key={slug} />;
+  }
+
   if (!slug || canonicalSlug === slug) {
     return <RecipeDetail key={slug ?? "recipe-detail"} />;
   }
