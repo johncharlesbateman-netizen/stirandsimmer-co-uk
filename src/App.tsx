@@ -15,6 +15,7 @@ import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import CategoryPage from "./pages/CategoryPage";
 import Collections from "./pages/Collections";
+import KitchenAtlas from "./pages/KitchenAtlas";
 import MealPlanner from "./pages/MealPlanner";
 import AdminNewRecipe from "./pages/AdminNewRecipe";
 import AdminEditRecipe from "./pages/AdminEditRecipe";
@@ -102,6 +103,7 @@ const App = () => (
             <Route path="/lamb-and-apricot-biryani" element={<Navigate to="/recipes" replace />} />
             <Route path="/collections" element={<Collections />} />
             <Route path="/collections/:slug" element={<Collections />} />
+            <Route path="/kitchen-atlas" element={<KitchenAtlas />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />

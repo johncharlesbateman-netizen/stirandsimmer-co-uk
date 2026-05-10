@@ -1,0 +1,459 @@
+import { useEffect, useMemo, useRef } from "react";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Lock, Clock, ArrowRight } from "lucide-react";
+import Layout from "@/components/Layout";
+import NewsletterSignup from "@/components/NewsletterSignup";
+import { supabase } from "@/integrations/supabase/client";
+import { Tables } from "@/integrations/supabase/types";
+import { optimisedImage } from "@/lib/image-utils";
+
+type Recipe = Tables<"recipes">;
+
+type RegionDef = {
+  id: string;
+  name: string;
+  emoji: string;
+  bg: string; // hex
+  available: boolean;
+  description?: string;
+  challenge?: string;
+  regionTags?: string[]; // cuisine_region tags to match
+  collectionLink?: string;
+};
+
+const REGIONS: RegionDef[] = [
+  {
+    id: "uk",
+    name: "United Kingdom",
+    emoji: "🇬🇧",
+    bg: "#1a3a5c",
+    available: true,
+    description: "Honest, seasonal and deeply comforting. The foundation of everything.",
+    challenge: "This week — cook a classic British pie from scratch.",
+    regionTags: ["british"],
+  },
+  {
+    id: "italy",
+    name: "Italy",
+    emoji: "🇮🇹",
+    bg: "#8B3A2A",
+    available: true,
+    description: "Pasta, sauces and the art of simplicity. Italy feeds the soul.",
+    challenge: "This week — master a hand-made pasta dish.",
+    regionTags: ["italian"],
+  },
+  {
+    id: "france",
+    name: "France",
+    emoji: "🇫🇷",
+    bg: "#1a3a7c",
+    available: true,
+    description: "Classical techniques that underpin all of western cooking.",
+    challenge: "This week — make one of the five French mother sauces from scratch.",
+    regionTags: ["french"],
+  },
+  {
+    id: "asia",
+    name: "South & Southeast Asia",
+    emoji: "🌶️",
+    bg: "#5c1a3a",
+    available: true,
+    description: "Bold spices, fragrant herbs and layers of warmth and depth.",
+    challenge: "This week — cook a curry entirely from scratch, no jars.",
+    regionTags: ["indian", "asian"],
+  },
+  {
+    id: "japan",
+    name: "Japan",
+    emoji: "🇯🇵",
+    bg: "#7c1a1a",
+    available: false,
+  },
+  {
+    id: "mexico",
+    name: "Mexico",
+    emoji: "🇲🇽",
+    bg: "#1a5c2a",
+    available: false,
+  },
+];
+
+// Approximate map positions (% of map area) for the markers.
+const MAP_POSITIONS: Record<string, { top: string; left: string }> = {
+  uk: { top: "30%", left: "47%" },
+  france: { top: "36%", left: "49%" },
+  italy: { top: "40%", left: "52%" },
+  asia: { top: "55%", left: "70%" },
+  japan: { top: "44%", left: "82%" },
+  mexico: { top: "52%", left: "20%" },
+};
+
+const scrollToRegion = (id: string) => {
+  const el = document.getElementById(`region-${id}`);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
+const KitchenAtlas = () => {
+  const { data: recipes = [] } = useQuery({
+    queryKey: ["kitchen-atlas-recipes"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("recipes")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return (data ?? []) as Recipe[];
+    },
+  });
+
+  const recipesByRegion = useMemo(() => {
+    const map: Record<string, Recipe[]> = {};
+    for (const region of REGIONS) {
+      if (!region.regionTags) continue;
+      map[region.id] = recipes.filter((r) => {
+        const tags = (r.cuisine_region as string[] | null) ?? [];
+        return region.regionTags!.some((t) => tags.includes(t));
+      });
+    }
+    return map;
+  }, [recipes]);
+
+  return (
+    <Layout>
+      <Helmet>
+        <title>The Kitchen Atlas — explore world cuisines and weekly cooking challenges | Stir & Simmer</title>
+        <meta
+          name="description"
+          content="Explore six world cuisine regions and discover weekly cooking challenges — all linked to tried and tested recipes on Stir & Simmer."
+        />
+        <link rel="canonical" href="https://stirandsimmer.co.uk/kitchen-atlas" />
+        <meta property="og:title" content="The Kitchen Atlas | Stir & Simmer" />
+        <meta property="og:description" content="Explore six world cuisine regions and discover weekly cooking challenges." />
+      </Helmet>
+
+      {/* HERO */}
+      <section
+        className="relative w-full"
+        style={{ backgroundColor: "#1a0e00" }}
+      >
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28 text-center">
+          <p className="micro-caption mb-4" style={{ color: "#C97B1A" }}>
+            New
+          </p>
+          <h1 className="heading-display mb-6" style={{ color: "#f5e9d7" }}>
+            The Kitchen Atlas
+          </h1>
+          <p
+            className="text-lg md:text-xl max-w-2xl mx-auto"
+            style={{ color: "#d9c7a8" }}
+          >
+            Explore the world through food. Six cuisine regions, dozens of
+            recipes, one challenge at a time.
+          </p>
+          <div
+            className="mx-auto mt-8 h-px w-24"
+            style={{ backgroundColor: "#C97B1A" }}
+            aria-hidden
+          />
+        </div>
+      </section>
+
+      {/* MAP */}
+      <section style={{ backgroundColor: "#120a00" }} className="py-12 md:py-16">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <div
+            className="relative mx-auto rounded-xl overflow-hidden hidden md:block"
+            style={{
+              backgroundColor: "#1a0e00",
+              maxWidth: "1100px",
+              aspectRatio: "2 / 1",
+              backgroundImage:
+                "radial-gradient(circle at 20% 40%, rgba(201,123,26,0.08), transparent 40%), radial-gradient(circle at 60% 60%, rgba(201,123,26,0.06), transparent 45%), radial-gradient(circle at 80% 30%, rgba(201,123,26,0.05), transparent 40%)",
+            }}
+          >
+            {/* Decorative continent blobs (very loose, atmospheric) */}
+            <svg
+              viewBox="0 0 1000 500"
+              preserveAspectRatio="xMidYMid meet"
+              className="absolute inset-0 w-full h-full"
+              aria-hidden
+            >
+              <g fill="#3a2410" opacity="0.85">
+                {/* Americas */}
+                <path d="M150,120 q40,-30 80,-10 q30,15 25,55 q-5,40 -30,70 q-15,20 -10,55 q5,40 -20,70 q-30,30 -55,10 q-25,-20 -20,-55 q5,-40 -10,-70 q-20,-40 0,-80 q15,-30 40,-45z" />
+                {/* Europe */}
+                <path d="M470,120 q30,-15 60,-5 q35,10 30,45 q-3,25 -25,40 q-25,15 -50,5 q-30,-12 -30,-45 q0,-25 15,-40z" />
+                {/* Africa */}
+                <path d="M500,210 q35,-10 60,15 q25,25 15,65 q-10,40 -40,70 q-25,25 -55,15 q-25,-10 -25,-50 q0,-45 15,-75 q10,-25 30,-40z" />
+                {/* Asia */}
+                <path d="M620,110 q60,-25 130,-5 q70,20 90,75 q15,50 -25,90 q-40,40 -90,30 q-50,-10 -90,-45 q-40,-35 -30,-80 q5,-35 15,-65z" />
+                {/* SE Asia / Oceania */}
+                <path d="M780,300 q35,-10 55,15 q20,25 -5,55 q-25,30 -55,20 q-25,-8 -25,-45 q0,-30 30,-45z" />
+              </g>
+            </svg>
+
+            {/* Markers */}
+            {REGIONS.map((r) => {
+              const pos = MAP_POSITIONS[r.id];
+              if (!pos) return null;
+              return (
+                <button
+                  key={r.id}
+                  onClick={() => scrollToRegion(r.id)}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 group"
+                  style={{ top: pos.top, left: pos.left }}
+                  aria-label={`Jump to ${r.name}`}
+                >
+                  <span
+                    className={`block rounded-full ${
+                      r.available ? "animate-pulse" : ""
+                    }`}
+                    style={{
+                      width: "18px",
+                      height: "18px",
+                      backgroundColor: r.available ? "#C97B1A" : "#4a3a2a",
+                      boxShadow: r.available
+                        ? "0 0 20px 4px rgba(201,123,26,0.5)"
+                        : "none",
+                      opacity: r.available ? 1 : 0.5,
+                    }}
+                  />
+                  <span
+                    className="absolute left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap text-xs font-medium px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{
+                      backgroundColor: "#1a0e00",
+                      color: r.available ? "#f5e9d7" : "#7a6a55",
+                      border: "1px solid rgba(201,123,26,0.3)",
+                    }}
+                  >
+                    {r.name}
+                    {!r.available && " — Coming soon"}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* REGION CARD GRID (also serves as mobile fallback for the map) */}
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-6 gap-3 md:gap-4">
+            {REGIONS.map((r) => (
+              <button
+                key={r.id}
+                onClick={() => r.available && scrollToRegion(r.id)}
+                disabled={!r.available}
+                className={`text-left rounded-lg p-4 md:p-5 transition-transform ${
+                  r.available ? "hover:-translate-y-1 cursor-pointer" : "cursor-not-allowed"
+                }`}
+                style={{
+                  backgroundColor: r.bg,
+                  opacity: r.available ? 1 : 0.45,
+                  color: "#f5e9d7",
+                }}
+              >
+                <div className="text-2xl md:text-3xl mb-2">{r.emoji}</div>
+                <div className="font-display text-base md:text-lg leading-tight">
+                  {r.name}
+                </div>
+                <div className="text-xs mt-2 opacity-80">
+                  {r.available ? "Explore recipes →" : "Coming soon"}
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WEEKLY CHALLENGE BANNER */}
+      <section
+        className="w-full py-10 md:py-14"
+        style={{ backgroundColor: "#C97B1A", color: "#1a0e00" }}
+      >
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="max-w-3xl">
+            <p className="text-xs uppercase tracking-widest font-semibold mb-2 opacity-80">
+              This week's challenge
+            </p>
+            <h2 className="font-display text-2xl md:text-3xl mb-3">
+              Cook 3 Italian classics this week
+            </h2>
+            <p className="text-base md:text-lg">
+              Carbonara, Arrabbiata or Ribollita — find all three on Stir &
+              Simmer and challenge yourself to cook them all before Sunday.
+            </p>
+          </div>
+          <button
+            onClick={() => scrollToRegion("italy")}
+            className="self-start md:self-auto inline-flex items-center gap-2 px-5 py-3 rounded-md font-medium transition-colors"
+            style={{ backgroundColor: "#1a0e00", color: "#f5e9d7" }}
+          >
+            Browse Italian recipes <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </section>
+
+      {/* REGION SECTIONS */}
+      <div style={{ backgroundColor: "#120a00" }}>
+        {REGIONS.filter((r) => r.available).map((region) => (
+          <RegionSection
+            key={region.id}
+            region={region}
+            recipes={recipesByRegion[region.id] ?? []}
+          />
+        ))}
+
+        {/* COMING SOON PANELS */}
+        <section className="container mx-auto px-6 md:px-12 lg:px-20 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {REGIONS.filter((r) => !r.available).map((r) => (
+              <div
+                key={r.id}
+                className="rounded-lg p-8 text-center"
+                style={{
+                  backgroundColor: r.bg,
+                  opacity: 0.45,
+                  color: "#f5e9d7",
+                }}
+              >
+                <Lock className="w-6 h-6 mx-auto mb-3 opacity-80" />
+                <div className="text-3xl mb-2">{r.emoji}</div>
+                <h3 className="font-display text-xl mb-2">{r.name}</h3>
+                <p className="text-sm opacity-80">
+                  Coming soon — more regions launching shortly
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {/* FOOTER CTA */}
+      <section
+        className="w-full py-16 md:py-20"
+        style={{ backgroundColor: "#1a0e00" }}
+      >
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <NewsletterSignup
+            eyebrow="Weekly Challenge"
+            headline="Never miss a challenge"
+            description="Get this week's culinary challenge delivered to your inbox every Monday morning."
+          />
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+const RegionSection = ({
+  region,
+  recipes,
+}: {
+  region: RegionDef;
+  recipes: Recipe[];
+}) => {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <section
+      id={`region-${region.id}`}
+      className="scroll-mt-24 py-12 md:py-16 border-l-4"
+      style={{
+        borderColor: region.bg,
+        backgroundColor: "#1a0e00",
+        marginBottom: "1px",
+      }}
+    >
+      <div className="container mx-auto px-6 md:px-12 lg:px-20">
+        <div className="flex items-baseline gap-3 mb-2">
+          <span className="text-2xl">{region.emoji}</span>
+          <h2 className="font-display text-3xl md:text-4xl" style={{ color: "#f5e9d7" }}>
+            {region.name}
+          </h2>
+        </div>
+        <p className="text-base md:text-lg mb-8 max-w-3xl" style={{ color: "#d9c7a8" }}>
+          {region.description}
+        </p>
+
+        {recipes.length === 0 ? (
+          <div
+            className="rounded-lg p-6 text-sm"
+            style={{ backgroundColor: "#2a1a08", color: "#d9c7a8" }}
+          >
+            No recipes tagged for this region yet. Tag recipes with{" "}
+            <code className="opacity-80">{region.regionTags?.join(" or ")}</code>{" "}
+            in the admin to see them here.
+          </div>
+        ) : (
+          <div
+            ref={scrollerRef}
+            className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory"
+            style={{ scrollbarColor: "#C97B1A #1a0e00" }}
+          >
+            {recipes.map((r) => (
+              <Link
+                key={r.id}
+                to={`/recipes/${r.slug}`}
+                className="flex-shrink-0 w-64 md:w-72 snap-start rounded-lg overflow-hidden transition-transform hover:-translate-y-1"
+                style={{ backgroundColor: "#2a1a08" }}
+              >
+                <div className="aspect-[4/3] overflow-hidden bg-black/30">
+                  {r.image_url ? (
+                    <img
+                      src={optimisedImage(r.image_url, { width: 600 })}
+                      alt={r.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : null}
+                </div>
+                <div className="p-4">
+                  <h3
+                    className="font-display text-lg leading-snug mb-2 line-clamp-2"
+                    style={{ color: "#f5e9d7" }}
+                  >
+                    {r.title}
+                  </h3>
+                  <div
+                    className="flex items-center gap-3 text-xs"
+                    style={{ color: "#d9c7a8" }}
+                  >
+                    {r.prep_time_minutes ? (
+                      <span className="inline-flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5" />
+                        {r.prep_time_minutes} min prep
+                      </span>
+                    ) : null}
+                    <span className="opacity-80">View recipe →</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* Challenge callout */}
+        <div
+          className="mt-8 rounded-lg p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+          style={{ backgroundColor: "#f5e0c2", color: "#1a0e00" }}
+        >
+          <div>
+            <p className="text-xs uppercase tracking-widest font-semibold mb-1 opacity-70">
+              Challenge
+            </p>
+            <p className="text-base md:text-lg">{region.challenge}</p>
+          </div>
+          <Link
+            to="/recipes"
+            className="self-start md:self-auto whitespace-nowrap inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium"
+            style={{ backgroundColor: "#1a0e00", color: "#f5e9d7" }}
+          >
+            See all {region.name} recipes <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default KitchenAtlas;
