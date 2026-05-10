@@ -15,6 +15,7 @@ import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import CategoryPage from "./pages/CategoryPage";
 import Collections from "./pages/Collections";
+import KitchenAtlas from "./pages/KitchenAtlas";
 import MealPlanner from "./pages/MealPlanner";
 import AdminNewRecipe from "./pages/AdminNewRecipe";
 import AdminEditRecipe from "./pages/AdminEditRecipe";
