@@ -212,6 +212,7 @@ const AdminEditRecipe = () => {
         seo_description: parsed.data.seo_description,
         collections: parsed.data.collections,
         cuisine_region: parsed.data.cuisine_region,
+        meal_types: parsed.data.meal_types,
         image_url,
       }).eq("slug", slug);
 
