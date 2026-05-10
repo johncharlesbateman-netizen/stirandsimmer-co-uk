@@ -235,7 +235,7 @@ const KitchenAtlas = () => {
           </div>
 
           {/* REGION CARD GRID (also serves as mobile fallback for the map) */}
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-6 gap-3 md:gap-4">
+          <div className="mt-10 grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-4">
             {REGIONS.map((r) => (
               <button
                 key={r.id}
