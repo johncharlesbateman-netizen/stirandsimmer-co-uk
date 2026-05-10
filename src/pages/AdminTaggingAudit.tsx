@@ -240,7 +240,106 @@ const AdminTaggingAudit = () => {
     }
   };
 
-  return (
+  // Rows that currently have an applicable suggestion.
+  const suggestableRows = useMemo(
+    () => rows.filter((r) => r.hasAnyApplicableSuggestion),
+    [rows],
+  );
+
+  // Drop approvals for rows that no longer have a pending suggestion (e.g. after refetch).
+  useEffect(() => {
+    setApproved((prev) => {
+      const validIds = new Set(suggestableRows.map((r) => r.recipe.id));
+      const next = new Set<string>();
+      prev.forEach((id) => {
+        if (validIds.has(id)) next.add(id);
+      });
+      return next.size === prev.size ? prev : next;
+    });
+  }, [suggestableRows]);
+
+  const approveAllVisible = () => {
+    setApproved(new Set(suggestableRows.map((r) => r.recipe.id)));
+  };
+  const clearApprovals = () => setApproved(new Set());
+
+  // Apply a list of row payloads in series. Returns count of successes/failures.
+  const applyRowsInSeries = async (
+    targets: Array<{
+      recipe: Recipe;
+      nextCategory: TileCategory | null;
+      nextRegions: RegionTag[];
+    }>,
+  ) => {
+    if (targets.length === 0) return;
+    setBulkApplying(true);
+    setBulkProgress({ done: 0, total: targets.length });
+    let ok = 0;
+    let failed = 0;
+    for (let i = 0; i < targets.length; i++) {
+      const { recipe, nextCategory, nextRegions } = targets[i];
+      try {
+        const update: { category?: TileCategory; cuisine_region?: string[] } = {};
+        if (nextCategory) update.category = nextCategory;
+        if (nextRegions.length > 0) {
+          const existing = ((recipe.cuisine_region as string[] | null) ?? []).filter(
+            (t) => VALID_REGION_SET.has(t),
+          );
+          const merged = Array.from(new Set([...existing, ...nextRegions]));
+          update.cuisine_region = merged;
+        }
+        if (Object.keys(update).length > 0) {
+          const { error } = await supabase
+            .from("recipes")
+            .update(update as never)
+            .eq("id", recipe.id);
+          if (error) throw error;
+        }
+        ok++;
+      } catch (e) {
+        failed++;
+        console.error("Failed to apply tags for", recipe.title, e);
+      }
+      setBulkProgress({ done: i + 1, total: targets.length });
+    }
+    setBulkApplying(false);
+    setBulkProgress(null);
+    setApproved(new Set());
+    await queryClient.invalidateQueries({ queryKey: ["admin-tagging-audit"] });
+    if (failed === 0) {
+      toast.success(`Applied tags to ${ok} recipe${ok === 1 ? "" : "s"}`);
+    } else {
+      toast.error(`Applied ${ok}, failed ${failed}. Check console for details.`);
+    }
+  };
+
+  const applyApproved = () => {
+    const targets = suggestableRows
+      .filter((r) => approved.has(r.recipe.id))
+      .map((r) => ({
+        recipe: r.recipe,
+        nextCategory: r.showCategorySuggestion ? r.suggestion.suggestedCategory : null,
+        nextRegions: r.showRegionSuggestion ? r.newRegionSuggestions : [],
+      }));
+    return applyRowsInSeries(targets);
+  };
+
+  const applyAllSuggestions = () => {
+    const targets = suggestableRows.map((r) => ({
+      recipe: r.recipe,
+      nextCategory: r.showCategorySuggestion ? r.suggestion.suggestedCategory : null,
+      nextRegions: r.showRegionSuggestion ? r.newRegionSuggestions : [],
+    }));
+    if (targets.length === 0) {
+      toast.info("No suggestions to apply.");
+      return;
+    }
+    if (!window.confirm(`Apply suggested tags to all ${targets.length} recipes with suggestions?`)) {
+      return;
+    }
+    return applyRowsInSeries(targets);
+  };
+
     <Layout>
       <Helmet>
         <title>Recipe tagging audit | Admin | Stir & Simmer</title>
