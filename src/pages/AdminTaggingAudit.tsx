@@ -39,6 +39,43 @@ const classify = (r: Recipe): { status: Status; reasons: string[] } => {
   return { status: "complete", reasons };
 };
 
+// Cross-tag consistency rules. Returns a list of human-readable issues.
+const checkConsistency = (r: Recipe): string[] => {
+  const issues: string[] = [];
+  const category = r.category as string | null;
+  const regions = ((r.cuisine_region as string[] | null) ?? []).filter((t) =>
+    VALID_REGION_SET.has(t),
+  );
+  const collections = ((r.collections as string[] | null) ?? []).map((c) =>
+    c.toLowerCase(),
+  );
+
+  // Rule 1: spicy must have a cuisine region
+  if (category === "spicy" && regions.length === 0) {
+    issues.push('Tagged "spicy" but has no cuisine region');
+  }
+
+  // Rule 2: pasta must include italian or asian
+  if (category === "pasta") {
+    const ok = regions.includes("italian") || regions.includes("asian");
+    if (!ok) {
+      issues.push(
+        'Tagged "pasta" but cuisine region is not "italian" or "asian"',
+      );
+    }
+  }
+
+  // Rule 3: "Sweets & Desserts" collection should have category "sweets"
+  const inDessertCollection = collections.includes("sweets & desserts");
+  if (inDessertCollection && category !== "sweets") {
+    issues.push(
+      'In "Sweets & Desserts" collection but category is not "sweets"',
+    );
+  }
+
+  return issues;
+};
+
 const STATUS_STYLES: Record<Status, string> = {
   complete: "border-l-4 border-l-green-600 bg-green-50 dark:bg-green-950/20",
   partial: "border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/20",
@@ -110,6 +147,8 @@ const AdminTaggingAudit = () => {
           status !== "complete" &&
           !hasAnyApplicableSuggestion;
 
+        const consistencyIssues = checkConsistency(r);
+
         return {
           recipe: r,
           status,
@@ -122,6 +161,7 @@ const AdminTaggingAudit = () => {
           newRegionSuggestions,
           hasAnyApplicableSuggestion,
           lowConfidence,
+          consistencyIssues,
         };
       }),
     [recipes],
@@ -135,11 +175,13 @@ const AdminTaggingAudit = () => {
       total: rows.length,
       withSuggestions: 0,
       needsManualReview: 0,
+      inconsistencies: 0,
     };
     for (const row of rows) {
       c[row.status]++;
       if (row.hasAnyApplicableSuggestion) c.withSuggestions++;
       if (row.lowConfidence) c.needsManualReview++;
+      if (row.consistencyIssues.length > 0) c.inconsistencies++;
     }
     return c;
   }, [rows]);
@@ -217,6 +259,10 @@ const AdminTaggingAudit = () => {
               <AlertTriangle className="w-3.5 h-3.5" /> Needs manual review:{" "}
               <strong>{counts.needsManualReview}</strong>
             </span>
+            <span className="px-3 py-1.5 rounded-md bg-purple-600 text-white inline-flex items-center gap-1.5">
+              <AlertTriangle className="w-3.5 h-3.5" /> Inconsistencies:{" "}
+              <strong>{counts.inconsistencies}</strong>
+            </span>
           </div>
         </div>
       </section>
@@ -239,13 +285,15 @@ const AdminTaggingAudit = () => {
                   newRegionSuggestions,
                   hasAnyApplicableSuggestion,
                   lowConfidence,
+                  consistencyIssues,
                 }) => {
                   const allRegions =
                     ((recipe.cuisine_region as string[] | null) ?? []);
+                  const hasInconsistency = consistencyIssues.length > 0;
                   return (
                     <div
                       key={recipe.id}
-                      className={`rounded-md p-4 ${STATUS_STYLES[status]}`}
+                      className={`rounded-md p-4 ${STATUS_STYLES[status]} ${hasInconsistency ? "ring-2 ring-purple-500" : ""}`}
                     >
                       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
                         <div className="flex-1 min-w-0">
@@ -258,6 +306,11 @@ const AdminTaggingAudit = () => {
                             {lowConfidence && (
                               <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-orange-600 text-white inline-flex items-center gap-1">
                                 <AlertTriangle className="w-3 h-3" /> Needs manual review
+                              </span>
+                            )}
+                            {hasInconsistency && (
+                              <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-600 text-white inline-flex items-center gap-1">
+                                <AlertTriangle className="w-3 h-3" /> Inconsistency
                               </span>
                             )}
                             <h2 className="font-display text-base md:text-lg text-foreground truncate">
@@ -358,6 +411,20 @@ const AdminTaggingAudit = () => {
                             <p className="text-xs text-muted-foreground mt-2">
                               {reasons.join(" · ")}
                             </p>
+                          )}
+
+                          {hasInconsistency && (
+                            <ul className="mt-2 space-y-1">
+                              {consistencyIssues.map((issue) => (
+                                <li
+                                  key={issue}
+                                  className="text-xs text-purple-800 dark:text-purple-200 inline-flex items-start gap-1.5"
+                                >
+                                  <AlertTriangle className="w-3 h-3 mt-0.5 shrink-0" />
+                                  <span>{issue}</span>
+                                </li>
+                              ))}
+                            </ul>
                           )}
                         </div>
 
