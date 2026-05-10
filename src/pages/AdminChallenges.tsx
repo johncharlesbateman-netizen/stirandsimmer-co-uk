@@ -153,6 +153,9 @@ const AdminChallenges = () => {
     setSavedAt(new Date());
     toast({ title: "Challenges updated successfully" });
     queryClient.invalidateQueries({ queryKey: ["admin", "region-challenges"] });
+    queryClient.invalidateQueries({
+      queryKey: ["admin", "region-challenge-history"],
+    });
     REGIONS.forEach((r) =>
       queryClient.invalidateQueries({ queryKey: ["region-challenge", r.id] }),
     );
