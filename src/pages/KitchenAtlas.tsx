@@ -423,7 +423,7 @@ const RegionSection = ({
             <p className="text-base md:text-lg text-foreground">{region.challenge}</p>
           </div>
           <Button asChild variant="default" className="self-start md:self-auto whitespace-nowrap">
-            <Link to="/recipes">
+            <Link to={`/recipes/region/${region.id}`}>
               See all {region.name} recipes <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
