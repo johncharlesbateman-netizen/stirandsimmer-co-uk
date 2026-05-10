@@ -33,7 +33,8 @@ const REGIONS: RegionDef[] = [
     bg: "#1a3a5c",
     available: true,
     description: "Honest, seasonal and deeply comforting. The foundation of everything.",
-    challenge: "This week — cook a classic British pie from scratch.",
+    challenge:
+      "This week — cook a classic British fish dish. Try our Fish Finger Butty or Cider Battered Prawns.",
     regionTags: ["british"],
   },
   {
@@ -43,7 +44,8 @@ const REGIONS: RegionDef[] = [
     bg: "#8B3A2A",
     available: true,
     description: "Pasta, sauces and the art of simplicity. Italy feeds the soul.",
-    challenge: "This week — master a hand-made pasta dish.",
+    challenge:
+      "This week — cook a pasta dish entirely from scratch. Find our Italian recipes and challenge yourself.",
     regionTags: ["italian"],
   },
   {
@@ -53,7 +55,8 @@ const REGIONS: RegionDef[] = [
     bg: "#1a3a7c",
     available: true,
     description: "Classical techniques that underpin all of western cooking.",
-    challenge: "This week — make one of the five French mother sauces from scratch.",
+    challenge:
+      "This week — make a classic French sauce from scratch. Browse our French recipe collection to find your starting point.",
     regionTags: ["french"],
   },
   {
@@ -63,7 +66,8 @@ const REGIONS: RegionDef[] = [
     bg: "#5c1a3a",
     available: true,
     description: "Bold spices, fragrant herbs and layers of warmth and depth.",
-    challenge: "This week — cook a curry entirely from scratch, no jars.",
+    challenge:
+      "This week — cook a curry entirely from scratch using whole spices, no jars. Find your recipe in our Asian collection.",
     regionTags: ["indian", "asian"],
   },
   {
