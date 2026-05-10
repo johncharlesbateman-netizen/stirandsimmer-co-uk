@@ -1,12 +1,13 @@
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useParams, Navigate, Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import RecipeCard from "@/components/RecipeCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
+import { MEAL_TYPES, MealType, isMealType } from "@/lib/meal-types";
 
 type Recipe = Tables<"recipes">;
 
@@ -16,9 +17,21 @@ type RegionDef = {
   emoji: string;
   description: string;
   regionTags: string[];
+  /** Adjective form used in section headings, e.g. "British". */
+  adjective: string;
   seoTitle: string;
   seoDescription: string;
 };
+
+const MEAL_TYPE_PLURAL: Record<MealType, string> = {
+  mains: "mains",
+  lunch: "lunches",
+  dessert: "desserts",
+  snack: "snacks",
+};
+
+const MEAL_SECTION_MIN = 3;
+const MEAL_SECTION_MAX = 6;
 
 const REGIONS: Record<string, RegionDef> = {
   uk: {
@@ -28,6 +41,7 @@ const REGIONS: Record<string, RegionDef> = {
     description:
       "Honest, seasonal and deeply comforting British cooking — pies, roasts, puddings and the foundation of everything.",
     regionTags: ["british"],
+    adjective: "British",
     seoTitle: "British recipes — The Kitchen Atlas | Stir & Simmer",
     seoDescription:
       "British recipes from The Kitchen Atlas — honest, seasonal and deeply comforting. Pies, roasts, puddings and more.",
@@ -39,6 +53,7 @@ const REGIONS: Record<string, RegionDef> = {
     description:
       "Pasta, sauces and the art of simplicity. Italian cooking that feeds the soul.",
     regionTags: ["italian"],
+    adjective: "Italian",
     seoTitle: "Italian recipes — The Kitchen Atlas | Stir & Simmer",
     seoDescription:
       "Italian recipes from The Kitchen Atlas — pasta, risotto, sauces and the art of simplicity. Tried and tested in a real kitchen.",
@@ -50,6 +65,7 @@ const REGIONS: Record<string, RegionDef> = {
     description:
       "Classical techniques that underpin all of western cooking — sauces, braises, patisserie and bistro classics.",
     regionTags: ["french"],
+    adjective: "French",
     seoTitle: "French recipes — The Kitchen Atlas | Stir & Simmer",
     seoDescription:
       "French recipes from The Kitchen Atlas — classical techniques, mother sauces, braises, patisserie and bistro classics.",
@@ -61,6 +77,7 @@ const REGIONS: Record<string, RegionDef> = {
     description:
       "Bold spices, fragrant herbs and layers of warmth and depth — curries, stir fries and slow-simmered classics from across the region.",
     regionTags: ["indian", "asian"],
+    adjective: "South and Southeast Asian",
     seoTitle:
       "South and Southeast Asian recipes — The Kitchen Atlas | Stir & Simmer",
     seoDescription:
@@ -70,6 +87,11 @@ const REGIONS: Record<string, RegionDef> = {
 
 const RegionPage = () => {
   const { regionId } = useParams<{ regionId: string }>();
+  const [searchParams] = useSearchParams();
+  const mealParamRaw = searchParams.get("meal");
+  const mealFilter: MealType | null = isMealType(mealParamRaw)
+    ? mealParamRaw
+    : null;
   const region = regionId ? REGIONS[regionId] : undefined;
 
   const { data: recipes, isLoading } = useQuery({
@@ -92,6 +114,39 @@ const RegionPage = () => {
     const tags = (r.cuisine_region as string[] | null) ?? [];
     return region.regionTags.some((t) => tags.includes(t));
   });
+
+  const recipesByMeal: Record<MealType, Recipe[]> = {
+    mains: [],
+    lunch: [],
+    dessert: [],
+    snack: [],
+  };
+  for (const r of filtered) {
+    const mts = ((r.meal_types as string[] | null) ?? []).filter(isMealType);
+    for (const mt of mts) recipesByMeal[mt].push(r);
+  }
+
+  // Sections actually rendered (>= MEAL_SECTION_MIN recipes).
+  const renderedSections: { meal: MealType; recipes: Recipe[] }[] =
+    MEAL_TYPES.map((m) => ({ meal: m, recipes: recipesByMeal[m] })).filter(
+      (s) => s.recipes.length >= MEAL_SECTION_MIN,
+    );
+
+  // Recipes already shown above the fold (limited to MEAL_SECTION_MAX per section).
+  const shownIds = new Set<string>();
+  for (const s of renderedSections) {
+    for (const r of s.recipes.slice(0, MEAL_SECTION_MAX)) shownIds.add(r.id);
+  }
+  // General "more" section: anything in this region not in a rendered section,
+  // plus the overflow from rendered sections (those are reachable via "See all").
+  const generalRecipes = filtered.filter((r) => !shownIds.has(r.id));
+
+  // When ?meal=… is set, render a single flat grid filtered by that meal type.
+  const mealFiltered = mealFilter
+    ? filtered.filter((r) =>
+        ((r.meal_types as string[] | null) ?? []).includes(mealFilter),
+      )
+    : null;
 
   const canonicalUrl = `https://stirandsimmer.co.uk/recipes/region/${region.id}`;
 
@@ -147,22 +202,110 @@ const RegionPage = () => {
               ))}
             </div>
           ) : filtered.length > 0 ? (
-            <>
-              <p className="text-sm text-muted-foreground mb-8">
-                {filtered.length}{" "}
-                {filtered.length === 1 ? "recipe" : "recipes"}
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                {filtered.map((recipe, index) => (
-                  <RecipeCard
-                    key={recipe.id}
-                    recipe={recipe}
-                    floatDelay={index}
-                    showMeta
-                  />
-                ))}
-              </div>
-            </>
+            mealFiltered && mealFilter ? (
+              <>
+                <Link
+                  to={`/recipes/region/${region.id}`}
+                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
+                >
+                  <ArrowLeft className="w-4 h-4" /> All {region.adjective} recipes
+                </Link>
+                <h2 className="heading-section mb-2">
+                  {region.adjective} {MEAL_TYPE_PLURAL[mealFilter]}
+                </h2>
+                <p className="text-sm text-muted-foreground mb-8">
+                  {mealFiltered.length}{" "}
+                  {mealFiltered.length === 1 ? "recipe" : "recipes"}
+                </p>
+                {mealFiltered.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                    {mealFiltered.map((recipe, index) => (
+                      <RecipeCard
+                        key={recipe.id}
+                        recipe={recipe}
+                        floatDelay={index}
+                        showMeta
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground">
+                    No {region.adjective} {MEAL_TYPE_PLURAL[mealFilter]} yet.
+                  </p>
+                )}
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-muted-foreground mb-10">
+                  {filtered.length}{" "}
+                  {filtered.length === 1 ? "recipe" : "recipes"}
+                </p>
+                {renderedSections.map((section) => {
+                  const visible = section.recipes.slice(0, MEAL_SECTION_MAX);
+                  const hasMore = section.recipes.length > MEAL_SECTION_MAX;
+                  return (
+                    <div key={section.meal} className="mb-14 md:mb-20">
+                      <div className="flex items-end justify-between gap-4 mb-6 md:mb-8">
+                        <h2 className="heading-section">
+                          {region.adjective} {MEAL_TYPE_PLURAL[section.meal]}
+                        </h2>
+                        {hasMore && (
+                          <Link
+                            to={`/recipes/region/${region.id}?meal=${section.meal}`}
+                            className="hidden md:inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors whitespace-nowrap"
+                          >
+                            See all {region.adjective}{" "}
+                            {MEAL_TYPE_PLURAL[section.meal]}
+                            <ArrowRight className="w-4 h-4" />
+                          </Link>
+                        )}
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                        {visible.map((recipe, index) => (
+                          <RecipeCard
+                            key={recipe.id}
+                            recipe={recipe}
+                            floatDelay={index}
+                            showMeta
+                          />
+                        ))}
+                      </div>
+                      {hasMore && (
+                        <div className="mt-6 md:hidden">
+                          <Link
+                            to={`/recipes/region/${region.id}?meal=${section.meal}`}
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+                          >
+                            See all {region.adjective}{" "}
+                            {MEAL_TYPE_PLURAL[section.meal]}
+                            <ArrowRight className="w-4 h-4" />
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+                {generalRecipes.length > 0 && (
+                  <div>
+                    {renderedSections.length > 0 && (
+                      <h2 className="heading-section mb-6 md:mb-8">
+                        More {region.adjective} recipes
+                      </h2>
+                    )}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                      {generalRecipes.map((recipe, index) => (
+                        <RecipeCard
+                          key={recipe.id}
+                          recipe={recipe}
+                          floatDelay={index}
+                          showMeta
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
+            )
           ) : (
             <div className="text-center py-16">
               <p className="heading-section text-muted-foreground mb-3">
