@@ -280,6 +280,23 @@ const REGION_BUTTON_LABEL: Record<string, string> = {
 
 const RegionSection = ({ region }: { region: RegionDef }) => {
   const disabled = !region.available;
+
+  const { data: liveChallenge } = useQuery({
+    queryKey: ["region-challenge", region.id],
+    enabled: !disabled,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("region_challenges")
+        .select("challenge")
+        .eq("region_id", region.id)
+        .maybeSingle();
+      if (error) throw error;
+      return data?.challenge ?? null;
+    },
+  });
+
+  const challengeText = liveChallenge ?? region.challenge;
+
   return (
     <section
       id={`region-${region.id}`}
@@ -331,7 +348,7 @@ const RegionSection = ({ region }: { region: RegionDef }) => {
           <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
             Challenge
           </p>
-          <p className="text-base md:text-lg text-foreground">{region.challenge}</p>
+          <p className="text-base md:text-lg text-foreground">{challengeText}</p>
         </div>
       </div>
     </section>
