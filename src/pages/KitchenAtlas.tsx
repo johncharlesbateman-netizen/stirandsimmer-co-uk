@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Lock, Clock, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { optimisedImage } from "@/lib/image-utils";
