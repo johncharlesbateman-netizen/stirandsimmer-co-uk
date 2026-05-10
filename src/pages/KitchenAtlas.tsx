@@ -281,13 +281,13 @@ const KitchenAtlas = () => {
               Simmer and challenge yourself to cook them all before Sunday.
             </p>
           </div>
-          <button
-            onClick={() => scrollToRegion("italy")}
+          <Link
+            to="/recipes/region/italy"
             className="self-start md:self-auto inline-flex items-center gap-2 px-5 py-3 rounded-md font-medium transition-colors"
             style={{ backgroundColor: "#1a0e00", color: "#f5e9d7" }}
           >
             Browse Italian recipes <ArrowRight className="w-4 h-4" />
-          </button>
+          </Link>
         </div>
       </section>
 
