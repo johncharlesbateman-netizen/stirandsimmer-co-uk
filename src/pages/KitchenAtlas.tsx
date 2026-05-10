@@ -277,11 +277,13 @@ const REGION_BUTTON_LABEL: Record<string, string> = {
 };
 
 const RegionSection = ({ region }: { region: RegionDef }) => {
+  const disabled = !region.available;
   return (
     <section
       id={`region-${region.id}`}
       className="scroll-mt-24 py-5 md:py-6 bg-background border-b border-border border-l-4"
-      style={{ borderLeftColor: region.bg }}
+      style={{ borderLeftColor: region.bg, opacity: disabled ? 0.5 : 1 }}
+      aria-disabled={disabled || undefined}
     >
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
         <div className="flex items-baseline gap-3 mb-2">
@@ -294,21 +296,31 @@ const RegionSection = ({ region }: { region: RegionDef }) => {
           {region.description}
         </p>
 
-        <Button
-          asChild
-          size="lg"
-          className="w-full md:w-auto whitespace-normal md:whitespace-nowrap text-base"
-        >
-          <Link to={`/recipes/region/${region.id}`}>
-            {REGION_BUTTON_LABEL[region.id] ?? `Explore all ${region.name} recipes`}{" "}
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </Button>
+        {disabled ? (
+          <Button
+            size="lg"
+            disabled
+            className="w-full md:w-auto whitespace-normal md:whitespace-nowrap text-base cursor-not-allowed"
+          >
+            Coming soon
+          </Button>
+        ) : (
+          <Button
+            asChild
+            size="lg"
+            className="w-full md:w-auto whitespace-normal md:whitespace-nowrap text-base"
+          >
+            <Link to={`/recipes/region/${region.id}`}>
+              {REGION_BUTTON_LABEL[region.id] ?? `Explore all ${region.name} recipes`}{" "}
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Button>
+        )}
 
         {/* Challenge callout — light warm amber */}
         <div
           className="mt-8 rounded-lg p-5 md:p-6 border border-border"
-          style={{ backgroundColor: "#FDF3E7" }}
+          style={{ backgroundColor: disabled ? "#F1ECE3" : "#FDF3E7" }}
         >
           <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
             Challenge
