@@ -230,23 +230,32 @@ const AdminTaggingAudit = () => {
     recipe: Recipe,
     nextCategory: TileCategory | null,
     nextRegions: RegionTag[],
+    nextMealTypes: MealTypeTag[] = [],
   ) => {
     setApplying(recipe.id);
     try {
-      const update: { category?: TileCategory; cuisine_region?: string[] } = {};
+      const update: {
+        category?: TileCategory;
+        cuisine_region?: string[];
+        meal_types?: string[];
+      } = {};
       if (nextCategory) update.category = nextCategory;
       if (nextRegions.length > 0) {
         const existing = ((recipe.cuisine_region as string[] | null) ?? []).filter(
           (t) => VALID_REGION_SET.has(t),
         );
-        const merged = Array.from(new Set([...existing, ...nextRegions]));
-        update.cuisine_region = merged;
+        update.cuisine_region = Array.from(new Set([...existing, ...nextRegions]));
+      }
+      if (nextMealTypes.length > 0) {
+        const existing = (
+          ((recipe as { meal_types?: string[] | null }).meal_types) ?? []
+        ).filter((t) => VALID_MEAL_SET.has(t));
+        update.meal_types = Array.from(new Set([...existing, ...nextMealTypes]));
       }
       if (Object.keys(update).length === 0) return;
 
       const { error } = await supabase
         .from("recipes")
-        // category is a USER-DEFINED enum; cast at the call site
         .update(update as never)
         .eq("id", recipe.id);
       if (error) throw error;
