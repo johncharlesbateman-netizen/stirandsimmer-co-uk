@@ -241,7 +241,7 @@ const KitchenAtlas = () => {
                 key={r.id}
                 onClick={() => r.available && scrollToRegion(r.id)}
                 disabled={!r.available}
-                className={`text-left rounded-lg p-4 md:p-5 transition-transform ${
+                className={`text-left rounded-lg p-3 md:p-5 transition-transform ${
                   r.available ? "hover:-translate-y-1 cursor-pointer" : "cursor-not-allowed"
                 }`}
                 style={{
@@ -250,12 +250,12 @@ const KitchenAtlas = () => {
                   color: "#f5e9d7",
                 }}
               >
-                <div className="text-2xl md:text-3xl mb-2">{r.emoji}</div>
-                <div className="font-display text-base md:text-lg leading-tight">
+                <div className="text-xl md:text-3xl mb-1.5 md:mb-2">{r.emoji}</div>
+                <div className="font-display text-xs md:text-lg leading-tight">
                   {r.name}
                 </div>
-                <div className="text-xs mt-2 opacity-80">
-                  {r.available ? "Explore recipes →" : "Coming soon"}
+                <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 opacity-80">
+                  {r.available ? "Explore →" : "Coming soon"}
                 </div>
               </button>
             ))}
