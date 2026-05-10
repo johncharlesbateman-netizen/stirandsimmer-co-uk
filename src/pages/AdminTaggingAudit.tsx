@@ -299,6 +299,7 @@ const AdminTaggingAudit = () => {
       recipe: Recipe;
       nextCategory: TileCategory | null;
       nextRegions: RegionTag[];
+      nextMealTypes: MealTypeTag[];
     }>,
   ) => {
     if (targets.length === 0) return;
@@ -307,16 +308,25 @@ const AdminTaggingAudit = () => {
     let ok = 0;
     let failed = 0;
     for (let i = 0; i < targets.length; i++) {
-      const { recipe, nextCategory, nextRegions } = targets[i];
+      const { recipe, nextCategory, nextRegions, nextMealTypes } = targets[i];
       try {
-        const update: { category?: TileCategory; cuisine_region?: string[] } = {};
+        const update: {
+          category?: TileCategory;
+          cuisine_region?: string[];
+          meal_types?: string[];
+        } = {};
         if (nextCategory) update.category = nextCategory;
         if (nextRegions.length > 0) {
           const existing = ((recipe.cuisine_region as string[] | null) ?? []).filter(
             (t) => VALID_REGION_SET.has(t),
           );
-          const merged = Array.from(new Set([...existing, ...nextRegions]));
-          update.cuisine_region = merged;
+          update.cuisine_region = Array.from(new Set([...existing, ...nextRegions]));
+        }
+        if (nextMealTypes.length > 0) {
+          const existing = (
+            ((recipe as { meal_types?: string[] | null }).meal_types) ?? []
+          ).filter((t) => VALID_MEAL_SET.has(t));
+          update.meal_types = Array.from(new Set([...existing, ...nextMealTypes]));
         }
         if (Object.keys(update).length > 0) {
           const { error } = await supabase
@@ -350,6 +360,7 @@ const AdminTaggingAudit = () => {
         recipe: r.recipe,
         nextCategory: r.showCategorySuggestion ? r.suggestion.suggestedCategory : null,
         nextRegions: r.showRegionSuggestion ? r.newRegionSuggestions : [],
+        nextMealTypes: r.showMealTypeSuggestion ? r.newMealTypeSuggestions : [],
       }));
     return applyRowsInSeries(targets);
   };
@@ -359,6 +370,7 @@ const AdminTaggingAudit = () => {
       recipe: r.recipe,
       nextCategory: r.showCategorySuggestion ? r.suggestion.suggestedCategory : null,
       nextRegions: r.showRegionSuggestion ? r.newRegionSuggestions : [],
+      nextMealTypes: r.showMealTypeSuggestion ? r.newMealTypeSuggestions : [],
     }));
     if (targets.length === 0) {
       toast.info("No suggestions to apply.");
