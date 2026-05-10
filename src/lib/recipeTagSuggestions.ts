@@ -161,6 +161,12 @@ const CATEGORY_KEYWORDS: Record<TileCategory, string[]> = {
     "victoria sponge", "battenberg", "eton mess", "treacle",
     "pavlova", "fudge", "toffee", "meringue", "panna",
   ],
+  lunch_suggestions: [
+    "lunch", "sandwich", "toastie", "toasted sandwich", "wrap",
+    "baguette", "panini", "ciabatta sandwich", "salad bowl",
+    "quick lunch", "midweek lunch", "light lunch", "packed lunch",
+    "ploughman", "soup", "frittata", "omelette", "quiche",
+  ],
 };
 
 const COLLECTION_REGION_HINTS: Record<string, RegionTag> = {
