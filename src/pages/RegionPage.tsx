@@ -41,6 +41,7 @@ const REGIONS: Record<string, RegionDef> = {
     description:
       "Honest, seasonal and deeply comforting British cooking — pies, roasts, puddings and the foundation of everything.",
     regionTags: ["british"],
+    adjective: "British",
     seoTitle: "British recipes — The Kitchen Atlas | Stir & Simmer",
     seoDescription:
       "British recipes from The Kitchen Atlas — honest, seasonal and deeply comforting. Pies, roasts, puddings and more.",
@@ -52,6 +53,7 @@ const REGIONS: Record<string, RegionDef> = {
     description:
       "Pasta, sauces and the art of simplicity. Italian cooking that feeds the soul.",
     regionTags: ["italian"],
+    adjective: "Italian",
     seoTitle: "Italian recipes — The Kitchen Atlas | Stir & Simmer",
     seoDescription:
       "Italian recipes from The Kitchen Atlas — pasta, risotto, sauces and the art of simplicity. Tried and tested in a real kitchen.",
@@ -63,6 +65,7 @@ const REGIONS: Record<string, RegionDef> = {
     description:
       "Classical techniques that underpin all of western cooking — sauces, braises, patisserie and bistro classics.",
     regionTags: ["french"],
+    adjective: "French",
     seoTitle: "French recipes — The Kitchen Atlas | Stir & Simmer",
     seoDescription:
       "French recipes from The Kitchen Atlas — classical techniques, mother sauces, braises, patisserie and bistro classics.",
@@ -74,6 +77,7 @@ const REGIONS: Record<string, RegionDef> = {
     description:
       "Bold spices, fragrant herbs and layers of warmth and depth — curries, stir fries and slow-simmered classics from across the region.",
     regionTags: ["indian", "asian"],
+    adjective: "South and Southeast Asian",
     seoTitle:
       "South and Southeast Asian recipes — The Kitchen Atlas | Stir & Simmer",
     seoDescription:
