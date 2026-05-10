@@ -259,6 +259,10 @@ const AdminTaggingAudit = () => {
               <AlertTriangle className="w-3.5 h-3.5" /> Needs manual review:{" "}
               <strong>{counts.needsManualReview}</strong>
             </span>
+            <span className="px-3 py-1.5 rounded-md bg-purple-600 text-white inline-flex items-center gap-1.5">
+              <AlertTriangle className="w-3.5 h-3.5" /> Inconsistencies:{" "}
+              <strong>{counts.inconsistencies}</strong>
+            </span>
           </div>
         </div>
       </section>
