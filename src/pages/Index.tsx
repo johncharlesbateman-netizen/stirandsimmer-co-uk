@@ -40,8 +40,6 @@ const Index = () => {
     };
   }, []);
 
-  // Round down to a friendly milestone (e.g. 114 -> "110+") for the hero copy.
-  const roundedRecipes = Math.floor(recipeCount / 10) * 10;
   const collectionCount = collections.length;
 
   return (
@@ -127,10 +125,10 @@ const Index = () => {
               to="/recipes"
               className="inline-block px-10 py-4 bg-background text-foreground text-sm tracking-wider uppercase hover:opacity-90 transition-opacity"
             >
-              Explore all {roundedRecipes}+ recipes
+              Explore all {recipeCount} recipes
             </Link>
             <p className="tracking-[0.2em] uppercase text-primary-foreground/80" style={{ fontSize: "13px" }}>
-              Over {recipeCount} tried-and-tested recipes · A new challenge every week
+              {recipeCount} tried-and-tested recipes · A new challenge every week
             </p>
           </div>
         </div>
