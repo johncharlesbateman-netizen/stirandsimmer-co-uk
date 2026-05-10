@@ -1,12 +1,13 @@
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useParams, Navigate, Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import RecipeCard from "@/components/RecipeCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
+import { MEAL_TYPES, MealType, isMealType } from "@/lib/meal-types";
 
 type Recipe = Tables<"recipes">;
 
@@ -16,9 +17,21 @@ type RegionDef = {
   emoji: string;
   description: string;
   regionTags: string[];
+  /** Adjective form used in section headings, e.g. "British". */
+  adjective: string;
   seoTitle: string;
   seoDescription: string;
 };
+
+const MEAL_TYPE_PLURAL: Record<MealType, string> = {
+  mains: "mains",
+  lunch: "lunches",
+  dessert: "desserts",
+  snack: "snacks",
+};
+
+const MEAL_SECTION_MIN = 3;
+const MEAL_SECTION_MAX = 6;
 
 const REGIONS: Record<string, RegionDef> = {
   uk: {
