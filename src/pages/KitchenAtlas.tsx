@@ -81,13 +81,15 @@ const REGIONS: RegionDef[] = [
 ];
 
 // Approximate map positions (% of map area) for the markers.
+// Positions in % of map area, derived from equirectangular projection
+// fitted to a 1000x500 viewBox (matches WORLD_MAP_PATH).
 const MAP_POSITIONS: Record<string, { top: string; left: string }> = {
-  uk: { top: "30%", left: "47%" },
-  france: { top: "36%", left: "49%" },
-  italy: { top: "40%", left: "52%" },
-  asia: { top: "55%", left: "70%" },
-  japan: { top: "44%", left: "82%" },
-  mexico: { top: "52%", left: "20%" },
+  uk: { top: "21.4%", left: "49.97%" },
+  france: { top: "22.8%", left: "50.67%" },
+  italy: { top: "26.7%", left: "53.47%" },
+  asia: { top: "41.6%", left: "75%" },
+  japan: { top: "30.2%", left: "88.8%" },
+  mexico: { top: "39.2%", left: "22.5%" },
 };
 
 const scrollToRegion = (id: string) => {
