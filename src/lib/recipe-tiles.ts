@@ -132,50 +132,6 @@ export const RECIPE_TILES: RecipeTile[] = [
       titleMatches(r, ["rice", "risotto", "pilaf", "biryani", "paella"]),
   },
   {
-    slug: "soups-and-stews",
-    label: "Soups and Stews",
-    emoji: "🍲",
-    description:
-      "Slow-simmered bowls of comfort — soups, broths, stews and braises.",
-    seoTitle: "Soup and stew recipes | Stir & Simmer",
-    seoDescription:
-      "Slow-simmered soups, broths, stews and braises — comforting recipes for cold evenings and lazy weekends.",
-    filter: (r) =>
-      titleMatches(r, [
-        "soup",
-        "stew",
-        "broth",
-        "casserole",
-        "ribollita",
-        "chowder",
-        "ragù",
-        "ragu",
-      ]),
-  },
-  {
-    slug: "breakfast",
-    label: "Breakfast",
-    emoji: "🍳",
-    description:
-      "Slow weekend brunches and easy weekday starts — recipes to begin the day.",
-    seoTitle: "Breakfast and brunch recipes | Stir & Simmer",
-    seoDescription:
-      "Slow weekend brunches and easy weekday breakfasts — recipes to start the day right.",
-    filter: (r) =>
-      titleMatches(r, [
-        "breakfast",
-        "brunch",
-        "pancake",
-        "waffle",
-        "omelette",
-        "frittata",
-        "granola",
-        "porridge",
-        "toast",
-        "egg",
-      ]),
-  },
-  {
     slug: "puddings-and-desserts",
     label: "Puddings and Desserts",
     emoji: "🍰",
