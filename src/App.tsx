@@ -117,6 +117,8 @@ const App = () => (
             <Route path="/collections" element={<Collections />} />
             <Route path="/collections/:slug" element={<Collections />} />
             <Route path="/kitchen-atlas" element={<KitchenAtlas />} />
+            <Route path="/guides" element={<Guides />} />
+            <Route path="/guides/mother-sauces" element={<GuideMotherSauces />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />
