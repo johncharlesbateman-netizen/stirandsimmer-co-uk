@@ -26,6 +26,7 @@ import AdminTaggingAudit from "./pages/AdminTaggingAudit";
 import AdminChallenges from "./pages/AdminChallenges";
 import Guides from "./pages/Guides";
 import GuideMotherSauces from "./pages/GuideMotherSauces";
+import GuideFrenchTechniques from "./pages/GuideFrenchTechniques";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
@@ -119,6 +120,7 @@ const App = () => (
             <Route path="/kitchen-atlas" element={<KitchenAtlas />} />
             <Route path="/guides" element={<Guides />} />
             <Route path="/guides/mother-sauces" element={<GuideMotherSauces />} />
+            <Route path="/guides/french-techniques" element={<GuideFrenchTechniques />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />
