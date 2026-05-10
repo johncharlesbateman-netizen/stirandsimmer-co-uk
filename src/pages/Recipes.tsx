@@ -9,13 +9,6 @@ import { Tables } from "@/integrations/supabase/types";
 import { RECIPE_TILES } from "@/lib/recipe-tiles";
 
 type Recipe = Tables<"recipes">;
-
-// Lightweight subset of fields required by all RECIPE_TILES filter functions.
-type CountRecipe = Pick<
-  Recipe,
-  "id" | "category" | "cuisine_region" | "prep_time_minutes" | "cook_time_minutes" | "title" | "description"
->;
-
 const Recipes = () => {
   const { data: recipes = [] } = useQuery({
     queryKey: ["recipes", "counts-only"],
