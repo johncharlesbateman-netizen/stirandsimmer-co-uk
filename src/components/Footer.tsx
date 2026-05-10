@@ -26,6 +26,9 @@ const Footer = () => {
               <Link to="/kitchen-atlas" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
                 Kitchen Atlas
               </Link>
+              <Link to="/meal-planner" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
+                Meal Planner
+              </Link>
               <Link to="/about" className="text-sm editorial-link w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">
                 About
               </Link>
@@ -42,7 +45,7 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="micro-caption">Get in Touch</h4>
             <div className="space-y-3 text-sm">
-              <a href="mailto:hello@stirandsimmer.co.uk" className="block opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1">hello@stirandsimmer.co.uk</a>
+              <span className="block opacity-70">hello@stirandsimmer.co.uk</span>
               <a
                 href="https://www.instagram.com/stirandsimmeruk"
                 target="_blank"
