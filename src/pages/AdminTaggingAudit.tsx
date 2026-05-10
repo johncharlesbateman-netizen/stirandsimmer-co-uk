@@ -308,6 +308,11 @@ const AdminTaggingAudit = () => {
                                 <AlertTriangle className="w-3 h-3" /> Needs manual review
                               </span>
                             )}
+                            {hasInconsistency && (
+                              <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-600 text-white inline-flex items-center gap-1">
+                                <AlertTriangle className="w-3 h-3" /> Inconsistency
+                              </span>
+                            )}
                             <h2 className="font-display text-base md:text-lg text-foreground truncate">
                               {recipe.title}
                             </h2>
