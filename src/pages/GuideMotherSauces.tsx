@@ -70,7 +70,7 @@ const GuideMotherSauces = () => {
           name="description"
           content="Béchamel, Velouté, Espagnole, Hollandaise and Sauce Tomat — the five French mother sauces explained with step by step instructions and the mistakes to avoid."
         />
-        <link rel="canonical" href="https://www.stirandsimmer.co.uk/guides/mother-sauces" />
+        <link rel="canonical" href="https://stirandsimmer.co.uk/guides/mother-sauces" />
         <meta property="og:title" content="The five French mother sauces every home cook should know | Stir and Simmer" />
         <meta
           property="og:description"

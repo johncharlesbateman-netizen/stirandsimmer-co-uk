@@ -24,7 +24,7 @@ import { chromium } from "playwright";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const SITE_URL = (process.env.SITE_URL || "https://www.stirandsimmer.co.uk").replace(/\/$/, "");
+const SITE_URL = (process.env.SITE_URL || "https://stirandsimmer.co.uk").replace(/\/$/, "");
 const SAMPLE_SIZE = Number(process.env.SAMPLE_SIZE || 10);
 const TIMEOUT_MS = Number(process.env.PAGE_TIMEOUT_MS || 20000);
 

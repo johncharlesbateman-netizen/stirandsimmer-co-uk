@@ -50,9 +50,9 @@ const Index = () => {
         <link rel="preload" as="image" href={heroImage} imageSrcSet={heroImageSrcSet} imageSizes="100vw" fetchPriority="high" />
         <meta name="description" content="Discover easy, flavour-packed recipes for every occasion. From quick weeknight dinners to impressive desserts — Stir & Simmer has something for everyone." />
         <meta name="keywords" content="recipes, easy recipes, dinner recipes, dessert recipes, quick meals" />
-        <link rel="canonical" href="https://www.stirandsimmer.co.uk/" />
+        <link rel="canonical" href="https://stirandsimmer.co.uk/" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.stirandsimmer.co.uk/" />
+        <meta property="og:url" content="https://stirandsimmer.co.uk/" />
         <meta property="og:title" content="Stir & Simmer | Delicious Recipes for Every Occasion" />
         <meta property="og:description" content="Discover easy, flavour-packed recipes for every occasion. From quick weeknight dinners to impressive desserts — Stir & Simmer has something for everyone." />
         <meta property="og:image" content={heroImage} />
@@ -64,16 +64,16 @@ const Index = () => {
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Stir & Simmer",
-          "url": "https://www.stirandsimmer.co.uk",
+          "url": "https://stirandsimmer.co.uk",
           "description": "Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love.",
           "publisher": {
             "@type": "Organization",
             "name": "Stir & Simmer",
-            "url": "https://www.stirandsimmer.co.uk"
+            "url": "https://stirandsimmer.co.uk"
           },
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://www.stirandsimmer.co.uk/recipes?q={search_term_string}",
+            "target": "https://stirandsimmer.co.uk/recipes?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         })}</script>
@@ -81,7 +81,7 @@ const Index = () => {
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "Stir & Simmer",
-          "url": "https://www.stirandsimmer.co.uk",
+          "url": "https://stirandsimmer.co.uk",
           "description": "A UK recipe site with free curated recipes for every occasion."
         })}</script>
       </Helmet>

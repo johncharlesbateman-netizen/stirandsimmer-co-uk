@@ -117,7 +117,7 @@ const KitchenAtlas = () => {
           name="description"
           content="Explore six world cuisine regions and discover occasional cooking challenges — all linked to tried and tested recipes on Stir and Simmer."
         />
-        <link rel="canonical" href="https://www.stirandsimmer.co.uk/kitchen-atlas" />
+        <link rel="canonical" href="https://stirandsimmer.co.uk/kitchen-atlas" />
         <meta property="og:title" content="The Kitchen Atlas | Stir & Simmer" />
         <meta property="og:description" content="Explore six world cuisine regions and discover occasional cooking challenges." />
       </Helmet>

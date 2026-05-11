@@ -16,7 +16,7 @@ interface BreadcrumbsProps {
   className?: string;
 }
 
-const SITE = "https://www.stirandsimmer.co.uk";
+const SITE = "https://stirandsimmer.co.uk";
 
 /**
  * Semantic breadcrumb navigation + matching BreadcrumbList structured

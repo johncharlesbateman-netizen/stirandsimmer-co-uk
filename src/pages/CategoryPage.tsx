@@ -32,7 +32,7 @@ const CategoryPage = () => {
   }
 
   const filtered = (recipes ?? []).filter(tile.filter);
-  const canonicalUrl = `https://www.stirandsimmer.co.uk/recipes/category/${tile.slug}`;
+  const canonicalUrl = `https://stirandsimmer.co.uk/recipes/category/${tile.slug}`;
 
   return (
     <Layout>
