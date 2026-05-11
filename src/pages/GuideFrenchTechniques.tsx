@@ -275,7 +275,7 @@ const GuideFrenchTechniques = () => {
               Ready to put these techniques into practice?
             </h2>
             <p className="text-base md:text-lg mb-8" style={{ color: "#d9c7a8" }}>
-              Head to The Kitchen Atlas and take on this week's French cooking challenge — designed to use exactly these techniques in real dishes.
+              Head to The Kitchen Atlas and take on the current French cooking challenge — designed to use exactly these techniques in real dishes.
             </p>
             <Button asChild size="lg" variant="secondary">
               <Link to="/kitchen-atlas">

@@ -133,11 +133,11 @@ const NewsletterSignup = ({
             id="newsletter-heading"
             className={isCompact ? "heading-section mb-3" : "heading-editorial mb-4"}
           >
-            {headline || "Get Weekly Recipes Delivered Free"}
+            {headline || "Get Recipes Delivered Free"}
           </h2>
           <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
             {description ||
-              "One short email a week with new recipes, seasonal ideas and the occasional kitchen tip. No spam, unsubscribe anytime."}
+              "An occasional email with new recipes, seasonal ideas and the odd kitchen tip — sent only when we have something worth sharing. No spam, unsubscribe anytime."}
           </p>
 
           {status === "success" ? (

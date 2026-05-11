@@ -222,7 +222,7 @@ const Contact = () => {
               <div>
                 <h3 className="micro-caption mb-4">Based</h3>
                 <p className="text-lg">Online, everywhere</p>
-                <p className="text-muted-foreground mt-2">New recipes published weekly</p>
+                <p className="text-muted-foreground mt-2">New recipes published when we have something worth sharing</p>
               </div>
 
               <div>
