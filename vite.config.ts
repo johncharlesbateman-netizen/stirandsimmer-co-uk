@@ -4,6 +4,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 // @ts-ignore — plain JS module, no types needed
 import { generateSitemap } from "./scripts/generate-sitemap.mjs";
+// @ts-ignore — plain JS module, no types needed
+import { prerenderRoutes } from "./scripts/prerender.mjs";
 
 // Regenerates public/sitemap.xml from the database before each production build.
 const sitemapPlugin = () => ({
@@ -18,6 +20,21 @@ const sitemapPlugin = () => ({
   },
 });
 
+// After the build emits dist/, generates one HTML file per public route with
+// route-specific <title>, description, canonical and OG tags so crawlers see
+// fully-formed metadata in the source HTML.
+const prerenderPlugin = () => ({
+  name: "prerender-meta",
+  apply: "build" as const,
+  async closeBundle() {
+    try {
+      await prerenderRoutes();
+    } catch (e) {
+      console.warn("[prerender] Generation failed:", (e as Error).message);
+    }
+  },
+});
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
@@ -28,6 +45,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === "development" && componentTagger(),
     sitemapPlugin(),
+    prerenderPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {
