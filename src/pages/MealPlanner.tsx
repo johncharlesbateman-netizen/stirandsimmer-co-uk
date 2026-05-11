@@ -132,27 +132,33 @@ const MealPlanner = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
-        .select("id, title, slug, ingredients, servings, image_url, category")
+        .select("*")
         .order("title");
       if (error) throw error;
-      return data as Recipe[];
+      return (data ?? []) as Recipe[];
     },
   });
 
-  const categories = useMemo(() => {
-    const set = new Set<string>();
-    allRecipes.forEach((r) => r.category && set.add(r.category));
-    return ["All", ...Array.from(set).slice(0, 6)];
-  }, [allRecipes]);
+  /* Filter chips mirror the Recipes tile categories exactly. */
+  const filterTiles = useMemo(
+    () =>
+      RECIPE_TILES.filter((t) =>
+        t.slug === "all" ? true : allRecipes.some((r) => t.filter(r)),
+      ),
+    [allRecipes],
+  );
+
+  const activeTile =
+    filterTiles.find((t) => t.slug === activeFilter) ?? filterTiles[0];
 
   const filteredRecipes = useMemo(() => {
     const q = search.trim().toLowerCase();
     return allRecipes.filter((r) => {
-      if (activeFilter !== "All" && r.category !== activeFilter) return false;
+      if (activeTile && !activeTile.filter(r)) return false;
       if (q && !r.title.toLowerCase().includes(q)) return false;
       return true;
     });
-  }, [allRecipes, search, activeFilter]);
+  }, [allRecipes, search, activeTile]);
 
   /* Slot operations */
   const openSlot = (day: string, meal: MealType) => {
