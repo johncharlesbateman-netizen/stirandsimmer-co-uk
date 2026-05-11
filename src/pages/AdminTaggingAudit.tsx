@@ -478,7 +478,10 @@ const AdminTaggingAudit = () => {
         </div>
       </section>
 
+      <QuickMealsTimeAudit />
+
       <section className="py-8 md:py-12">
+
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           {isLoading ? (
             <p className="text-muted-foreground">Loading recipes…</p>
