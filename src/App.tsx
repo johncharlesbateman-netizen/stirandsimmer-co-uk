@@ -102,6 +102,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AuthProvider>
+          <CanonicalRedirect />
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
