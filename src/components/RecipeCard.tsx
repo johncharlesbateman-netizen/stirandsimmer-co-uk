@@ -12,6 +12,8 @@ interface RecipeCardProps {
   floatDelay?: number;
   /** Show prep time and difficulty meta row under the description. */
   showMeta?: boolean;
+  /** Show the internal tile-category label (e.g. "Pasta Heaven"). Off on region pages. */
+  showCategory?: boolean;
 }
 
 const floatClasses = [
