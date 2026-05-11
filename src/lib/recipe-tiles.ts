@@ -99,7 +99,7 @@ export const RECIPE_TILES: RecipeTile[] = [
     label: "Quick Meals",
     emoji: "⚡",
     description:
-      "Fast, flavourful and fuss-free — ready in 30 minutes or less.",
+      "On the table in 30 minutes or less. Fast, flavourful and fuss-free — perfect for busy weeknights.",
     seoTitle:
       "Quick meal recipes — ready in 30 minutes or less | Stir & Simmer",
     seoDescription:

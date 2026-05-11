@@ -110,6 +110,170 @@ const STATUS_BADGE: Record<Status, string> = {
   missing: "bg-red-600 text-white",
 };
 
+type QuickMealRow = {
+  id: string;
+  slug: string;
+  title: string;
+  prep_time_minutes: number | null;
+  cook_time_minutes: number | null;
+  collections: string[] | null;
+};
+
+const QuickMealsTimeAudit = () => {
+  const queryClient = useQueryClient();
+  const [removingId, setRemovingId] = useState<string | null>(null);
+  const [bulkRemoving, setBulkRemoving] = useState(false);
+
+  const { data: rows = [], isLoading } = useQuery({
+    queryKey: ["admin-quick-meals-audit"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("recipes")
+        .select("id, slug, title, prep_time_minutes, cook_time_minutes, collections")
+        .contains("collections", ["Quick & Easy"]);
+      if (error) throw error;
+      return ((data ?? []) as QuickMealRow[])
+        .map((r) => ({
+          ...r,
+          total: (r.prep_time_minutes ?? 0) + (r.cook_time_minutes ?? 0),
+        }))
+        .filter((r) => r.total > 30)
+        .sort((a, b) => b.total - a.total);
+    },
+  });
+
+  const removeTag = async (row: QuickMealRow) => {
+    setRemovingId(row.id);
+    try {
+      const next = (row.collections ?? []).filter((c) => c !== "Quick & Easy");
+      const { error } = await supabase
+        .from("recipes")
+        .update({ collections: next })
+        .eq("id", row.id);
+      if (error) throw error;
+      toast.success(`Removed "Quick & Easy" from "${row.title}"`);
+      await queryClient.invalidateQueries({ queryKey: ["admin-quick-meals-audit"] });
+      await queryClient.invalidateQueries({ queryKey: ["admin-tagging-audit"] });
+    } catch (e: unknown) {
+      toast.error(e instanceof Error ? e.message : "Failed to remove tag");
+    } finally {
+      setRemovingId(null);
+    }
+  };
+
+  const removeAll = async () => {
+    if (rows.length === 0) return;
+    if (!window.confirm(`Remove "Quick & Easy" from ${rows.length} recipes over 30 minutes?`)) return;
+    setBulkRemoving(true);
+    let ok = 0;
+    let failed = 0;
+    for (const row of rows) {
+      try {
+        const next = (row.collections ?? []).filter((c) => c !== "Quick & Easy");
+        const { error } = await supabase
+          .from("recipes")
+          .update({ collections: next })
+          .eq("id", row.id);
+        if (error) throw error;
+        ok++;
+      } catch {
+        failed++;
+      }
+    }
+    setBulkRemoving(false);
+    await queryClient.invalidateQueries({ queryKey: ["admin-quick-meals-audit"] });
+    await queryClient.invalidateQueries({ queryKey: ["admin-tagging-audit"] });
+    if (failed === 0) toast.success(`Removed tag from ${ok} recipes`);
+    else toast.error(`Removed ${ok}, failed ${failed}`);
+  };
+
+  return (
+    <section className="py-8 md:py-12 border-b border-border bg-amber-50/50 dark:bg-amber-950/10">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20">
+        <div className="flex items-start justify-between gap-4 mb-4 flex-wrap">
+          <div>
+            <h2 className="font-display text-xl md:text-2xl mb-1">
+              Quick Meals time audit
+            </h2>
+            <p className="text-sm text-muted-foreground max-w-2xl">
+              Recipes tagged "Quick &amp; Easy" whose total time (prep + cook)
+              exceeds 30 minutes. Remove the tag to keep the Quick Meals
+              category honest.
+            </p>
+          </div>
+          {rows.length > 0 && (
+            <Button
+              size="sm"
+              variant="default"
+              onClick={removeAll}
+              disabled={bulkRemoving}
+              className="h-8 text-xs"
+            >
+              {bulkRemoving ? "Removing…" : `Remove tag from all (${rows.length})`}
+            </Button>
+          )}
+        </div>
+
+        {isLoading ? (
+          <p className="text-sm text-muted-foreground">Loading…</p>
+        ) : rows.length === 0 ? (
+          <p className="text-sm text-muted-foreground">
+            ✓ No quick-meals recipes exceed 30 minutes.
+          </p>
+        ) : (
+          <div className="overflow-x-auto rounded-md border border-border bg-background">
+            <table className="w-full text-sm">
+              <thead className="bg-muted/50 text-xs uppercase tracking-wider text-muted-foreground">
+                <tr>
+                  <th className="text-left px-3 py-2">Title</th>
+                  <th className="text-right px-3 py-2">Prep</th>
+                  <th className="text-right px-3 py-2">Cook</th>
+                  <th className="text-right px-3 py-2">Total</th>
+                  <th className="text-right px-3 py-2">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row) => (
+                  <tr key={row.id} className="border-t border-border">
+                    <td className="px-3 py-2">
+                      <Link
+                        to={`/admin/recipes/${row.slug}/edit`}
+                        className="text-foreground hover:underline"
+                      >
+                        {row.title}
+                      </Link>
+                    </td>
+                    <td className="px-3 py-2 text-right font-mono">
+                      {row.prep_time_minutes ?? 0}m
+                    </td>
+                    <td className="px-3 py-2 text-right font-mono">
+                      {row.cook_time_minutes ?? 0}m
+                    </td>
+                    <td className="px-3 py-2 text-right font-mono font-semibold text-red-700 dark:text-red-300">
+                      {row.total}m
+                    </td>
+                    <td className="px-3 py-2 text-right">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        disabled={removingId === row.id || bulkRemoving}
+                        onClick={() => removeTag(row)}
+                        className="h-7 text-xs"
+                      >
+                        {removingId === row.id ? "Removing…" : "Remove tag"}
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
 const AdminTaggingAudit = () => {
   const queryClient = useQueryClient();
   const [applying, setApplying] = useState<string | null>(null);
@@ -478,7 +642,10 @@ const AdminTaggingAudit = () => {
         </div>
       </section>
 
+      <QuickMealsTimeAudit />
+
       <section className="py-8 md:py-12">
+
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           {isLoading ? (
             <p className="text-muted-foreground">Loading recipes…</p>
