@@ -166,7 +166,7 @@ const RegionPage = () => {
         )
     : null;
 
-  const canonicalUrl = `https://stirandsimmer.co.uk/recipes/region/${region.id}`;
+  const canonicalUrl = `https://www.stirandsimmer.co.uk/recipes/region/${region.id}`;
 
   return (
     <Layout>

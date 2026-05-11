@@ -40,9 +40,9 @@ const Recipes = () => {
           name="description"
           content="Browse over 100 free recipes by category — chicken, beef, lamb, fish and seafood, pork, pasta, quick meals and more."
         />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/recipes" />
+        <link rel="canonical" href="https://www.stirandsimmer.co.uk/recipes" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://stirandsimmer.co.uk/recipes" />
+        <meta property="og:url" content="https://www.stirandsimmer.co.uk/recipes" />
         <meta property="og:title" content="All recipes — browse by category | Stir & Simmer" />
         <meta property="og:description" content="Browse over 100 free recipes by category — chicken, beef, lamb, fish and seafood, pork, pasta, quick meals and more." />
       </Helmet>

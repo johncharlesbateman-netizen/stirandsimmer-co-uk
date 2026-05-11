@@ -29,7 +29,7 @@ const Guides = () => {
           name="description"
           content="Practical kitchen guides from Stir and Simmer — techniques, reference and the craft behind great home cooking."
         />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/guides" />
+        <link rel="canonical" href="https://www.stirandsimmer.co.uk/guides" />
       </Helmet>
 
       <header className="border-b border-border bg-background">
