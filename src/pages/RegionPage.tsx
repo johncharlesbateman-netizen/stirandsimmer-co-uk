@@ -7,7 +7,7 @@ import RecipeCard from "@/components/RecipeCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
-import { MEAL_TYPES, MealType, isMealType } from "@/lib/meal-types";
+import { MealType, isMealType } from "@/lib/meal-types";
 
 type Recipe = Tables<"recipes">;
 
