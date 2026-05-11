@@ -196,22 +196,19 @@ const Index = () => {
         </div>
         <div className="relative container mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-36 text-center text-primary-foreground">
           <p className="text-xs md:text-sm tracking-[0.3em] uppercase mb-6 opacity-90">
-            Meal Ideas
+            Recipes
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl mb-5 leading-tight max-w-3xl mx-auto">
-            Discover Your Next Favourite Meal
+            Discover our Recipes
           </h2>
-          <p className="text-base md:text-lg font-body max-w-2xl mx-auto mb-4 text-primary-foreground/90 leading-relaxed italic">
-            Handpicked recipes grouped by ingredient, occasion and cuisine — find exactly what you're looking for.
-          </p>
-          <p className="text-sm md:text-base font-body max-w-2xl mx-auto mb-10 text-primary-foreground/75 leading-relaxed">
-            From weeknight suppers to romantic dinners, we've curated the perfect collection for every occasion.
+          <p className="text-base md:text-lg font-body max-w-2xl mx-auto mb-10 text-primary-foreground/90 leading-relaxed italic">
+            Browse our full collection of tried-and-tested recipes from around the world.
           </p>
           <Link
             to="/recipes"
             className="inline-block px-10 py-4 bg-background text-foreground text-sm tracking-wider uppercase hover:opacity-90 transition-opacity"
           >
-            Explore Meal Ideas
+            Discover our Recipes
           </Link>
         </div>
       </section>
