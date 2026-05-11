@@ -877,6 +877,7 @@ const AdminTaggingAudit = () => {
       </section>
 
       <QuickMealsTimeAudit />
+      <RegionalMismatchAudit recipes={recipes} />
 
       <section className="py-8 md:py-12">
 
