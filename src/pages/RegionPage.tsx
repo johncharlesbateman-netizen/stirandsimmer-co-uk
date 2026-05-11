@@ -113,7 +113,7 @@ const RegionPage = () => {
   const { regionId } = useParams<{ regionId: string }>();
   const [searchParams] = useSearchParams();
   const mealParamRaw = searchParams.get("meal");
-  const mealFilter: MealType | null = isMealType(mealParamRaw)
+  const sectionFilter: SectionKey | null = isSectionKey(mealParamRaw)
     ? mealParamRaw
     : null;
   const region = regionId ? REGIONS[regionId] : undefined;
@@ -139,37 +139,38 @@ const RegionPage = () => {
     return region.regionTags.some((t) => tags.includes(t));
   });
 
-  const recipesByMeal: Record<MealType, Recipe[]> = {
+  const recipesBySection: Record<SectionKey, Recipe[]> = {
     mains: [],
+    quick: [],
     lunch: [],
     dessert: [],
     snack: [],
   };
   for (const r of filtered) {
     const mts = ((r.meal_types as string[] | null) ?? []).filter(isMealType);
-    for (const mt of mts) recipesByMeal[mt].push(r);
+    for (const mt of mts) recipesBySection[mt].push(r);
+    if (isQuickMeal(r)) recipesBySection.quick.push(r);
   }
 
-  // Sections actually rendered (>= MEAL_SECTION_MIN recipes).
-  const renderedSections: { meal: MealType; recipes: Recipe[] }[] =
-    MEAL_TYPES.map((m) => ({ meal: m, recipes: recipesByMeal[m] })).filter(
+  // Sections actually rendered (>= MEAL_SECTION_MIN recipes), in fixed order.
+  const renderedSections: { key: SectionKey; recipes: Recipe[] }[] =
+    SECTION_ORDER.map((k) => ({ key: k, recipes: recipesBySection[k] })).filter(
       (s) => s.recipes.length >= MEAL_SECTION_MIN,
     );
 
-  // Recipes already shown above the fold (limited to MEAL_SECTION_MAX per section).
-  const shownIds = new Set<string>();
-  for (const s of renderedSections) {
-    for (const r of s.recipes.slice(0, MEAL_SECTION_MAX)) shownIds.add(r.id);
-  }
-  // General "more" section: anything in this region not in a rendered section,
-  // plus the overflow from rendered sections (those are reachable via "See all").
-  const generalRecipes = filtered.filter((r) => !shownIds.has(r.id));
+  // "More recipes" = recipes with no meal_type tag at all.
+  const generalRecipes = filtered.filter((r) => {
+    const mts = ((r.meal_types as string[] | null) ?? []).filter(isMealType);
+    return mts.length === 0;
+  });
 
-  // When ?meal=… is set, render a single flat grid filtered by that meal type.
-  const mealFiltered = mealFilter
-    ? filtered.filter((r) =>
-        ((r.meal_types as string[] | null) ?? []).includes(mealFilter),
-      )
+  // When ?meal=… is set, render a single flat grid filtered by that section.
+  const sectionFiltered = sectionFilter
+    ? sectionFilter === "quick"
+      ? filtered.filter(isQuickMeal)
+      : filtered.filter((r) =>
+          ((r.meal_types as string[] | null) ?? []).includes(sectionFilter),
+        )
     : null;
 
   const canonicalUrl = `https://stirandsimmer.co.uk/recipes/region/${region.id}`;
