@@ -162,8 +162,8 @@ const About = () => {
             </div>
             <div>
               <div className="text-4xl mb-4" aria-hidden="true">📅</div>
-              <h3 className="heading-section mb-2">New Every Week</h3>
-              <p className="text-sm text-muted-foreground">Fresh recipes added regularly</p>
+              <h3 className="heading-section mb-2">Always Growing</h3>
+              <p className="text-sm text-muted-foreground">Fresh recipes added when we have something worth sharing</p>
             </div>
           </div>
         </div>

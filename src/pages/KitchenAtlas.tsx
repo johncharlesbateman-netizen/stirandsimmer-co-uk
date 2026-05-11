@@ -112,14 +112,14 @@ const KitchenAtlas = () => {
   return (
     <Layout>
       <Helmet>
-        <title>The Kitchen Atlas — explore world cuisines and weekly cooking challenges | Stir and Simmer</title>
+        <title>The Kitchen Atlas — explore world cuisines and cooking challenges | Stir and Simmer</title>
         <meta
           name="description"
-          content="Explore six world cuisine regions and discover weekly cooking challenges — all linked to tried and tested recipes on Stir and Simmer."
+          content="Explore six world cuisine regions and discover occasional cooking challenges — all linked to tried and tested recipes on Stir and Simmer."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/kitchen-atlas" />
         <meta property="og:title" content="The Kitchen Atlas | Stir & Simmer" />
-        <meta property="og:description" content="Explore six world cuisine regions and discover weekly cooking challenges." />
+        <meta property="og:description" content="Explore six world cuisine regions and discover occasional cooking challenges." />
       </Helmet>
 
       {/* HERO */}
@@ -261,9 +261,9 @@ const KitchenAtlas = () => {
       >
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <NewsletterSignup
-            eyebrow="Weekly Challenge"
+            eyebrow="Cooking Challenges"
             headline="Never miss a challenge"
-            description="Get this week's culinary challenge delivered to your inbox every Monday morning."
+            description="We'll send the next culinary challenge to your inbox when we have something worth sharing — no fixed schedule, no spam."
           />
         </div>
       </section>

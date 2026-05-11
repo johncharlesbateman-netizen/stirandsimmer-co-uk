@@ -167,7 +167,7 @@ const GuideMotherSauces = () => {
               Ready for the French challenge?
             </h2>
             <p className="text-base md:text-lg mb-8" style={{ color: "#d9c7a8" }}>
-              Head to The Kitchen Atlas and take on this week's French cooking challenge.
+              Head to The Kitchen Atlas and take on the current French cooking challenge.
             </p>
             <Button asChild size="lg" variant="secondary">
               <Link to="/kitchen-atlas">

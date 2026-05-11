@@ -715,7 +715,7 @@ const RecipeDetail = () => {
         variant="compact"
         eyebrow="Enjoyed this recipe?"
         headline="Get new recipes straight to your inbox"
-        description="Join our weekly newsletter for fresh recipes, seasonal ideas and kitchen tips. No spam, unsubscribe anytime."
+        description="Join our occasional newsletter for fresh recipes, seasonal ideas and kitchen tips — sent only when we have something worth sharing. No spam, unsubscribe anytime."
       />
     </Layout>
   );

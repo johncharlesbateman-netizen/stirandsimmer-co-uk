@@ -142,11 +142,11 @@ const ExitIntentPopup = () => {
 
         <p className="micro-caption mb-3">Before you go</p>
         <h2 id="exit-intent-heading" className="font-display text-2xl md:text-3xl mb-3">
-          Get our weekly recipes free
+          Get our recipes by email — free
         </h2>
         <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
           Join thousands of home cooks getting tried-and-tested recipes
-          delivered every week. Unsubscribe anytime.
+          when we have something worth sharing. Unsubscribe anytime.
         </p>
 
         <form
