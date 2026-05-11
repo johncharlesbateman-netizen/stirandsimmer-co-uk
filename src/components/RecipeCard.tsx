@@ -12,6 +12,8 @@ interface RecipeCardProps {
   floatDelay?: number;
   /** Show prep time and difficulty meta row under the description. */
   showMeta?: boolean;
+  /** Show the internal tile-category label (e.g. "Pasta Heaven"). Off on region pages. */
+  showCategory?: boolean;
 }
 
 const floatClasses = [
@@ -23,7 +25,7 @@ const floatClasses = [
   "floating-item-delay-5",
 ];
 
-const RecipeCard = ({ recipe, className, floatDelay = 0, showMeta = false }: RecipeCardProps) => {
+const RecipeCard = ({ recipe, className, floatDelay = 0, showMeta = false, showCategory = true }: RecipeCardProps) => {
   const floatClass = floatClasses[floatDelay % floatClasses.length];
   const prep = recipe.prep_time_minutes || 0;
   const stepCount = Array.isArray(recipe.instructions) ? recipe.instructions.length : 0;
@@ -51,7 +53,7 @@ const RecipeCard = ({ recipe, className, floatDelay = 0, showMeta = false }: Rec
         </div>
 
         <div className="space-y-2">
-          <p className="micro-caption">{categoryLabels[recipe.category]}</p>
+          {showCategory && <p className="micro-caption">{categoryLabels[recipe.category]}</p>}
           <h3 className="font-display text-xl md:text-2xl">{recipe.title}</h3>
           <p className="text-sm text-muted-foreground line-clamp-2">
             {recipe.description}
