@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
-const CANONICAL_HOST = "stirandsimmer.co.uk";
+const CANONICAL_HOST = "www.stirandsimmer.co.uk";
 
 /**
  * Client-side URL normaliser. On the production custom domain, redirects:
- *  - www.stirandsimmer.co.uk → stirandsimmer.co.uk
+ *  - stirandsimmer.co.uk → www.stirandsimmer.co.uk
  *  - any path with a trailing slash (other than "/") → version without it
  * Lovable previews and localhost are left alone.
  */
@@ -14,8 +14,8 @@ const CanonicalRedirect = () => {
     const { hostname, pathname, search, hash, protocol } = window.location;
 
     // Only enforce on the production apex/www domain.
-    const isApex = hostname === CANONICAL_HOST;
-    const isWww = hostname === `www.${CANONICAL_HOST}`;
+    const isApex = hostname === "stirandsimmer.co.uk";
+    const isWww = hostname === CANONICAL_HOST;
     if (!isApex && !isWww) return;
 
     let nextPath = pathname;
@@ -24,7 +24,7 @@ const CanonicalRedirect = () => {
       nextPath = nextPath.replace(/\/+$/, "") || "/";
     }
 
-    const needsHostFix = isWww;
+    const needsHostFix = isApex;
     const needsPathFix = nextPath !== pathname;
     if (!needsHostFix && !needsPathFix) return;
 

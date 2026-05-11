@@ -332,16 +332,16 @@ const MealPlanner = () => {
       <Helmet>
         <title>Weekly Meal Planner | Stir & Simmer</title>
         <meta name="description" content="Plan your week's meals, edit ingredients to match what's in your kitchen, and build a smart shopping list automatically. Free meal planner from Stir & Simmer." />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/meal-planner" />
+        <link rel="canonical" href="https://www.stirandsimmer.co.uk/meal-planner" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://stirandsimmer.co.uk/meal-planner" />
+        <meta property="og:url" content="https://www.stirandsimmer.co.uk/meal-planner" />
         <meta property="og:title" content="Weekly Meal Planner | Stir & Simmer" />
         <meta property="og:description" content="Plan your week's meals, edit ingredients to match what's in your kitchen, and build a smart shopping list automatically. Free meal planner from Stir & Simmer." />
-        <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <meta property="og:image" content="https://www.stirandsimmer.co.uk/og-image.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Weekly Meal Planner | Stir & Simmer" />
         <meta name="twitter:description" content="Plan your week's meals, edit ingredients to match what's in your kitchen, and build a smart shopping list automatically. Free meal planner from Stir & Simmer." />
-        <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <meta name="twitter:image" content="https://www.stirandsimmer.co.uk/og-image.jpg" />
       </Helmet>
 
       <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">

@@ -46,7 +46,7 @@ const Auth = () => {
     <Layout>
       <Helmet>
         <title>Sign in | Stir & Simmer</title>
-        <link rel="canonical" href="https://stirandsimmer.co.uk/auth" />
+        <link rel="canonical" href="https://www.stirandsimmer.co.uk/auth" />
         <meta name="robots" content="noindex,nofollow" />
       </Helmet>
       <div className="max-w-md mx-auto px-6 py-20">

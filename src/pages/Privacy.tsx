@@ -11,9 +11,9 @@ const Privacy = () => {
           name="description"
           content="How Stir & Simmer collects, uses and protects your personal data, including newsletter subscriptions, cookies and your rights under UK GDPR."
         />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/privacy" />
+        <link rel="canonical" href="https://www.stirandsimmer.co.uk/privacy" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://stirandsimmer.co.uk/privacy" />
+        <meta property="og:url" content="https://www.stirandsimmer.co.uk/privacy" />
         <meta property="og:title" content="Privacy Policy | Stir & Simmer" />
         <meta property="og:description" content="How Stir & Simmer collects, uses and protects your personal data, including newsletter subscriptions, cookies and your rights under UK GDPR." />
         <meta name="twitter:card" content="summary" />
@@ -34,7 +34,7 @@ const Privacy = () => {
             collects, uses and protects information about you when you use
             our website at{" "}
             <Link to="/" className="underline hover:text-foreground">
-              stirandsimmer.co.uk
+              www.stirandsimmer.co.uk
             </Link>
             . We are the data controller for the personal data we hold about
             you. We are committed to protecting your privacy in line with
