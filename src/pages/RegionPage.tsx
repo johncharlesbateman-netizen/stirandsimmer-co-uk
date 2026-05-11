@@ -47,7 +47,7 @@ const totalTime = (r: Recipe) =>
 
 const isQuickMeal = (r: Recipe) => {
   const t = totalTime(r);
-  return t > 0 && t <= 30;
+  return t > 0 && t <= 35;
 };
 
 const REGIONS: Record<string, RegionDef> = {
