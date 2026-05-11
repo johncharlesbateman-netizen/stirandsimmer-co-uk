@@ -25,7 +25,7 @@ const floatClasses = [
   "floating-item-delay-5",
 ];
 
-const RecipeCard = ({ recipe, className, floatDelay = 0, showMeta = false }: RecipeCardProps) => {
+const RecipeCard = ({ recipe, className, floatDelay = 0, showMeta = false, showCategory = true }: RecipeCardProps) => {
   const floatClass = floatClasses[floatDelay % floatClasses.length];
   const prep = recipe.prep_time_minutes || 0;
   const stepCount = Array.isArray(recipe.instructions) ? recipe.instructions.length : 0;
