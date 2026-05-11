@@ -208,7 +208,7 @@ const Index = () => {
             From weeknight suppers to romantic dinners, we've curated the perfect collection for every occasion.
           </p>
           <Link
-            to="/collections"
+            to="/recipes"
             className="inline-block px-10 py-4 bg-background text-foreground text-sm tracking-wider uppercase hover:opacity-90 transition-opacity"
           >
             Explore Meal Ideas
