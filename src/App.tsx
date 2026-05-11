@@ -147,6 +147,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ExitIntentPopup />
+          <CookieConsent />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
