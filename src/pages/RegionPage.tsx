@@ -25,12 +25,6 @@ type RegionDef = {
 
 type SectionKey = MealType | "quick";
 
-const MEAL_TYPE_PLURAL: Record<MealType, string> = {
-  mains: "mains",
-  lunch: "lunches",
-  dessert: "desserts",
-  snack: "snacks",
-};
 
 const SECTION_PLURAL: Record<SectionKey, string> = {
   mains: "mains",
