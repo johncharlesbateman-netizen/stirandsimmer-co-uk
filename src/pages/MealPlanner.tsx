@@ -553,20 +553,20 @@ const MealPlanner = () => {
               </div>
 
               {/* Filter chips */}
-              {categories.length > 1 && (
+              {filterTiles.length > 1 && (
                 <div className="flex flex-wrap gap-1.5 mb-4">
-                  {categories.map((cat) => (
+                  {filterTiles.map((tile) => (
                     <button
-                      key={cat}
-                      onClick={() => setActiveFilter(cat)}
+                      key={tile.slug}
+                      onClick={() => setActiveFilter(tile.slug)}
                       className={cn(
                         "px-3 py-1 rounded-full text-xs border transition-colors",
-                        activeFilter === cat
-                          ? "bg-planner text-planner-foreground border-planner"
-                          : "bg-card border-border hover:border-planner hover:text-planner"
+                        activeFilter === tile.slug
+                          ? "bg-foreground text-background border-foreground"
+                          : "bg-card border-border hover:border-foreground hover:text-foreground",
                       )}
                     >
-                      {cat}
+                      {tile.label}
                     </button>
                   ))}
                 </div>
