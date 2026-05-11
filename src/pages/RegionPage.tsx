@@ -243,6 +243,7 @@ const RegionPage = () => {
                         recipe={recipe}
                         floatDelay={index}
                         showMeta
+                        showCategory={false}
                       />
                     ))}
                   </div>
@@ -270,6 +271,7 @@ const RegionPage = () => {
                           recipe={recipe}
                           floatDelay={index}
                           showMeta
+                        showCategory={false}
                         />
                       ))}
                     </div>
@@ -289,6 +291,7 @@ const RegionPage = () => {
                           recipe={recipe}
                           floatDelay={index}
                           showMeta
+                        showCategory={false}
                         />
                       ))}
                     </div>
