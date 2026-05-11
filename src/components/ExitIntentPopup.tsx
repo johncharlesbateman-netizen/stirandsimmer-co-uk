@@ -9,6 +9,8 @@ import {
 } from "@/lib/mailchimp";
 
 const STORAGE_KEY = "ss_exit_intent_v1";
+const COOLDOWN_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+const MIN_DWELL_MS = 60 * 1000; // 60 seconds
 
 const schema = z.object({
   fname: z.string().trim().max(60).optional(),
@@ -16,10 +18,23 @@ const schema = z.object({
   consent: z.literal(true),
 });
 
+const isPreviewEnvironment = () => {
+  if (typeof window === "undefined") return false;
+  const host = window.location.hostname;
+  return (
+    host.endsWith(".lovable.app") ||
+    host.endsWith(".lovable.dev") ||
+    host.endsWith(".lovableproject.com") ||
+    host === "localhost" ||
+    host === "127.0.0.1"
+  );
+};
+
 /**
- * Desktop exit-intent newsletter modal. Shows once per visitor (tracked
- * in localStorage) when the cursor leaves the top edge of the viewport.
- * Disabled on touch devices since exit-intent is unreliable there.
+ * Desktop exit-intent newsletter modal. Shows at most once every 30 days
+ * per visitor (tracked in localStorage), only after 60s of dwell time, and
+ * only on a genuine exit-intent signal (cursor leaving the top of the
+ * viewport). Disabled on touch devices and in the Lovable preview.
  */
 const ExitIntentPopup = () => {
   const [open, setOpen] = useState(false);
@@ -32,9 +47,16 @@ const ExitIntentPopup = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Skip if already shown / dismissed / subscribed.
+    // Never show in the Lovable preview / local dev environments.
+    if (isPreviewEnvironment()) return;
+
+    // Skip if already shown / dismissed within the last 30 days.
     try {
-      if (localStorage.getItem(STORAGE_KEY)) return;
+      const last = localStorage.getItem(STORAGE_KEY);
+      if (last) {
+        const ts = Number(last);
+        if (Number.isFinite(ts) && Date.now() - ts < COOLDOWN_MS) return;
+      }
     } catch {
       return;
     }
@@ -43,12 +65,12 @@ const ExitIntentPopup = () => {
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     if (isTouch) return;
 
-    // Wait at least 10s on the page before arming the trigger so the popup
-    // can never fire instantly on landing.
+    // Require at least 60s on the page before arming the trigger so the
+    // popup never fires on first page load or for quick bounces.
     let armed = false;
     const armTimer = window.setTimeout(() => {
       armed = true;
-    }, 10000);
+    }, MIN_DWELL_MS);
 
     const onMouseLeave = (e: MouseEvent) => {
       if (!armed) return;
