@@ -80,7 +80,7 @@ const MealPlanner = () => {
   const [plan, setPlan] = useState<WeekPlan>(loadSavedPlan);
   const [activeSlot, setActiveSlot] = useState<{ day: string; meal: MealType } | null>(null);
   const [search, setSearch] = useState("");
-  const [activeFilter, setActiveFilter] = useState<string>("All");
+  const [activeFilter, setActiveFilter] = useState<string>("all");
   const [editingIngredients, setEditingIngredients] = useState<{
     items: string[];
     checked: Set<number>;
