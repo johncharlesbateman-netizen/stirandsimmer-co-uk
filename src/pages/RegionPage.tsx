@@ -258,56 +258,28 @@ const RegionPage = () => {
                   {filtered.length}{" "}
                   {filtered.length === 1 ? "recipe" : "recipes"}
                 </p>
-                {renderedSections.map((section) => {
-                  const visible = section.recipes.slice(0, MEAL_SECTION_MAX);
-                  const hasMore = section.recipes.length > MEAL_SECTION_MAX;
-                  return (
-                    <div key={section.key} className="mb-14 md:mb-20">
-                      <div className="flex items-end justify-between gap-4 mb-6 md:mb-8">
-                        <h2 className="heading-section">
-                          {region.adjective} {SECTION_PLURAL[section.key]}
-                        </h2>
-                        {hasMore && (
-                          <Link
-                            to={`/recipes/region/${region.id}?meal=${section.key}`}
-                            className="hidden md:inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors whitespace-nowrap"
-                          >
-                            See all {region.adjective}{" "}
-                            {SECTION_PLURAL[section.key]}
-                            <ArrowRight className="w-4 h-4" />
-                          </Link>
-                        )}
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                        {visible.map((recipe, index) => (
-                          <RecipeCard
-                            key={recipe.id}
-                            recipe={recipe}
-                            floatDelay={index}
-                            showMeta
-                          />
-                        ))}
-                      </div>
-                      {hasMore && (
-                        <div className="mt-6 md:hidden">
-                          <Link
-                            to={`/recipes/region/${region.id}?meal=${section.key}`}
-                            className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-                          >
-                            See all {region.adjective}{" "}
-                            {SECTION_PLURAL[section.key]}
-                            <ArrowRight className="w-4 h-4" />
-                          </Link>
-                        </div>
-                      )}
+                {renderedSections.map((section) => (
+                  <div key={section.key} className="mb-14 md:mb-20">
+                    <h2 className="heading-section mb-6 md:mb-8">
+                      {region.adjective} {SECTION_PLURAL[section.key]}
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                      {section.recipes.map((recipe, index) => (
+                        <RecipeCard
+                          key={recipe.id}
+                          recipe={recipe}
+                          floatDelay={index}
+                          showMeta
+                        />
+                      ))}
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
                 {generalRecipes.length > 0 && (
                   <div>
                     {renderedSections.length > 0 && (
                       <h2 className="heading-section mb-6 md:mb-8">
-                        More recipes
+                        More {region.adjective} recipes
                       </h2>
                     )}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
