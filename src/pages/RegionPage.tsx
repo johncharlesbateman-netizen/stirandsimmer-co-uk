@@ -40,8 +40,7 @@ const SECTION_ORDER: SectionKey[] = ["mains", "quick", "lunch", "dessert"];
 const isSectionKey = (v: unknown): v is SectionKey =>
   v === "quick" || isMealType(v);
 
-const MEAL_SECTION_MIN = 2;
-const MEAL_SECTION_MAX = 6;
+const MEAL_SECTION_MIN = 1;
 
 const totalTime = (r: Recipe) =>
   (r.prep_time_minutes ?? 0) + (r.cook_time_minutes ?? 0);
