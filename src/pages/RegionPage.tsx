@@ -30,12 +30,12 @@ const SECTION_PLURAL: Record<SectionKey, string> = {
   mains: "mains",
   quick: "quick meals",
   lunch: "lunches",
-  dessert: "desserts",
+  dessert: "desserts and sweets",
   snack: "snacks",
 };
 
 // Order in which sections render on the page.
-const SECTION_ORDER: SectionKey[] = ["mains", "quick", "lunch", "dessert"];
+const SECTION_ORDER: SectionKey[] = ["quick", "mains", "dessert", "lunch"];
 
 const isSectionKey = (v: unknown): v is SectionKey =>
   v === "quick" || isMealType(v);
