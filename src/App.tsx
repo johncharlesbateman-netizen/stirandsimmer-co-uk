@@ -32,6 +32,7 @@ import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
 import ExitIntentPopup from "./components/ExitIntentPopup";
 import CookieConsent from "./components/CookieConsent";
+import CanonicalRedirect from "./components/CanonicalRedirect";
 
 const queryClient = new QueryClient();
 
@@ -101,6 +102,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AuthProvider>
+          <CanonicalRedirect />
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />

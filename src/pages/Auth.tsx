@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Loader2 } from "lucide-react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -43,6 +44,11 @@ const Auth = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Sign in | Stir & Simmer</title>
+        <link rel="canonical" href="https://stirandsimmer.co.uk/auth" />
+        <meta name="robots" content="noindex,nofollow" />
+      </Helmet>
       <div className="max-w-md mx-auto px-6 py-20">
         <p className="micro-caption mb-2">Admin</p>
         <h1 className="font-display text-4xl mb-3">Sign in</h1>
