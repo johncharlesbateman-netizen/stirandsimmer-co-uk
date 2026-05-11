@@ -348,33 +348,42 @@ const MealPlanner = () => {
         {/* Hero */}
         <section
           className="rounded-2xl p-6 md:p-10 mb-8 flex flex-wrap items-center justify-between gap-4"
-          style={{
-            background: "linear-gradient(135deg, hsl(var(--planner)) 0%, hsl(var(--planner) / 0.85) 100%)",
-          }}
+          style={{ backgroundColor: "#1a0e00" }}
         >
-          <div className="text-planner-foreground">
-            <h1 className="font-serif text-3xl md:text-4xl font-medium mb-2" style={{ fontFamily: "'Boska', serif" }}>
+          <div>
+            <h1
+              className="heading-display mb-2"
+              style={{ color: "#f5e9d7" }}
+            >
               Plan your week's meals
             </h1>
-            <p className="text-sm md:text-base max-w-md opacity-90 font-light leading-relaxed">
+            <p
+              className="text-sm md:text-base max-w-md font-light leading-relaxed"
+              style={{ color: "#d9c7a8" }}
+            >
               Search our recipes, tweak the ingredients to suit what you have, then build your shopping list automatically.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             <button
               onClick={printWeek}
-              className="inline-flex items-center gap-2 bg-background text-planner px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-planner-soft transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors"
+              style={{ backgroundColor: "#C97B1A", color: "#1a0e00" }}
             >
               <Printer className="w-4 h-4" /> Print my week
             </button>
             <button
               onClick={clearAll}
-              className="inline-flex items-center gap-2 bg-transparent border border-planner-foreground/40 text-planner-foreground px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-planner-foreground/10 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors border"
+              style={{ borderColor: "rgba(245,233,215,0.4)", color: "#f5e9d7" }}
             >
               <Trash2 className="w-4 h-4" /> Clear all
             </button>
             {savedFlash && (
-              <span className="self-center text-sm text-planner-foreground/90 inline-flex items-center gap-1">
+              <span
+                className="self-center text-sm inline-flex items-center gap-1"
+                style={{ color: "#d9c7a8" }}
+              >
                 <Check className="w-4 h-4" /> Saved
               </span>
             )}
