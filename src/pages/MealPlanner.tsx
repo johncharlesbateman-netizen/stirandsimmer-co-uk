@@ -7,18 +7,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { mergeIngredients } from "@/lib/ingredientMerger";
 import { isSectionHeader } from "@/lib/ingredient-utils";
 import { cn } from "@/lib/utils";
+import { RECIPE_TILES } from "@/lib/recipe-tiles";
+import type { Tables } from "@/integrations/supabase/types";
 
 /* ── Types ────────────────────────────────────────────────── */
 
-interface Recipe {
-  id: string;
-  title: string;
-  slug: string;
-  ingredients: string[];
-  servings: number | null;
-  image_url: string | null;
-  category?: string | null;
-}
+type Recipe = Tables<"recipes"> & { ingredients: string[] };
 
 interface AssignedRecipe {
   id: string;
