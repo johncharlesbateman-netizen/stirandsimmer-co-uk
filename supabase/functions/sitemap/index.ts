@@ -10,6 +10,7 @@ const STATIC_URLS: Array<{ loc: string; changefreq: string; priority: string }> 
   { loc: `${SITE}/kitchen-atlas`, changefreq: "weekly", priority: "0.8" },
   { loc: `${SITE}/guides`, changefreq: "weekly", priority: "0.7" },
   { loc: `${SITE}/guides/mother-sauces`, changefreq: "monthly", priority: "0.7" },
+  { loc: `${SITE}/guides/french-techniques`, changefreq: "monthly", priority: "0.7" },
   { loc: `${SITE}/collections`, changefreq: "weekly", priority: "0.8" },
   { loc: `${SITE}/meal-planner`, changefreq: "monthly", priority: "0.6" },
   { loc: `${SITE}/about`, changefreq: "monthly", priority: "0.5" },
