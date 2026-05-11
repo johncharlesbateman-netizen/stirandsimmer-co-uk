@@ -7,18 +7,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { mergeIngredients } from "@/lib/ingredientMerger";
 import { isSectionHeader } from "@/lib/ingredient-utils";
 import { cn } from "@/lib/utils";
+import { RECIPE_TILES } from "@/lib/recipe-tiles";
+import type { Tables } from "@/integrations/supabase/types";
 
 /* ── Types ────────────────────────────────────────────────── */
 
-interface Recipe {
-  id: string;
-  title: string;
-  slug: string;
-  ingredients: string[];
-  servings: number | null;
-  image_url: string | null;
-  category?: string | null;
-}
+type Recipe = Tables<"recipes"> & { ingredients: string[] };
 
 interface AssignedRecipe {
   id: string;
@@ -86,7 +80,7 @@ const MealPlanner = () => {
   const [plan, setPlan] = useState<WeekPlan>(loadSavedPlan);
   const [activeSlot, setActiveSlot] = useState<{ day: string; meal: MealType } | null>(null);
   const [search, setSearch] = useState("");
-  const [activeFilter, setActiveFilter] = useState<string>("All");
+  const [activeFilter, setActiveFilter] = useState<string>("all");
   const [editingIngredients, setEditingIngredients] = useState<{
     items: string[];
     checked: Set<number>;
@@ -138,27 +132,33 @@ const MealPlanner = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
-        .select("id, title, slug, ingredients, servings, image_url, category")
+        .select("*")
         .order("title");
       if (error) throw error;
-      return data as Recipe[];
+      return (data ?? []) as Recipe[];
     },
   });
 
-  const categories = useMemo(() => {
-    const set = new Set<string>();
-    allRecipes.forEach((r) => r.category && set.add(r.category));
-    return ["All", ...Array.from(set).slice(0, 6)];
-  }, [allRecipes]);
+  /* Filter chips mirror the Recipes tile categories exactly. */
+  const filterTiles = useMemo(
+    () =>
+      RECIPE_TILES.filter((t) =>
+        t.slug === "all" ? true : allRecipes.some((r) => t.filter(r)),
+      ),
+    [allRecipes],
+  );
+
+  const activeTile =
+    filterTiles.find((t) => t.slug === activeFilter) ?? filterTiles[0];
 
   const filteredRecipes = useMemo(() => {
     const q = search.trim().toLowerCase();
     return allRecipes.filter((r) => {
-      if (activeFilter !== "All" && r.category !== activeFilter) return false;
+      if (activeTile && !activeTile.filter(r)) return false;
       if (q && !r.title.toLowerCase().includes(q)) return false;
       return true;
     });
-  }, [allRecipes, search, activeFilter]);
+  }, [allRecipes, search, activeTile]);
 
   /* Slot operations */
   const openSlot = (day: string, meal: MealType) => {
@@ -348,33 +348,42 @@ const MealPlanner = () => {
         {/* Hero */}
         <section
           className="rounded-2xl p-6 md:p-10 mb-8 flex flex-wrap items-center justify-between gap-4"
-          style={{
-            background: "linear-gradient(135deg, hsl(var(--planner)) 0%, hsl(var(--planner) / 0.85) 100%)",
-          }}
+          style={{ backgroundColor: "#1a0e00" }}
         >
-          <div className="text-planner-foreground">
-            <h1 className="font-serif text-3xl md:text-4xl font-medium mb-2" style={{ fontFamily: "'Boska', serif" }}>
+          <div>
+            <h1
+              className="heading-display mb-2"
+              style={{ color: "#f5e9d7" }}
+            >
               Plan your week's meals
             </h1>
-            <p className="text-sm md:text-base max-w-md opacity-90 font-light leading-relaxed">
+            <p
+              className="text-sm md:text-base max-w-md font-light leading-relaxed"
+              style={{ color: "#d9c7a8" }}
+            >
               Search our recipes, tweak the ingredients to suit what you have, then build your shopping list automatically.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             <button
               onClick={printWeek}
-              className="inline-flex items-center gap-2 bg-background text-planner px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-planner-soft transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors"
+              style={{ backgroundColor: "#C97B1A", color: "#1a0e00" }}
             >
               <Printer className="w-4 h-4" /> Print my week
             </button>
             <button
               onClick={clearAll}
-              className="inline-flex items-center gap-2 bg-transparent border border-planner-foreground/40 text-planner-foreground px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-planner-foreground/10 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors border"
+              style={{ borderColor: "rgba(245,233,215,0.4)", color: "#f5e9d7" }}
             >
               <Trash2 className="w-4 h-4" /> Clear all
             </button>
             {savedFlash && (
-              <span className="self-center text-sm text-planner-foreground/90 inline-flex items-center gap-1">
+              <span
+                className="self-center text-sm inline-flex items-center gap-1"
+                style={{ color: "#d9c7a8" }}
+              >
                 <Check className="w-4 h-4" /> Saved
               </span>
             )}
@@ -553,20 +562,20 @@ const MealPlanner = () => {
               </div>
 
               {/* Filter chips */}
-              {categories.length > 1 && (
+              {filterTiles.length > 1 && (
                 <div className="flex flex-wrap gap-1.5 mb-4">
-                  {categories.map((cat) => (
+                  {filterTiles.map((tile) => (
                     <button
-                      key={cat}
-                      onClick={() => setActiveFilter(cat)}
+                      key={tile.slug}
+                      onClick={() => setActiveFilter(tile.slug)}
                       className={cn(
                         "px-3 py-1 rounded-full text-xs border transition-colors",
-                        activeFilter === cat
-                          ? "bg-planner text-planner-foreground border-planner"
-                          : "bg-card border-border hover:border-planner hover:text-planner"
+                        activeFilter === tile.slug
+                          ? "bg-foreground text-background border-foreground"
+                          : "bg-card border-border hover:border-foreground hover:text-foreground",
                       )}
                     >
-                      {cat}
+                      {tile.label}
                     </button>
                   ))}
                 </div>
