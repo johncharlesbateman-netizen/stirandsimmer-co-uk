@@ -53,7 +53,7 @@ const RecipeCard = ({ recipe, className, floatDelay = 0, showMeta = false, showC
         </div>
 
         <div className="space-y-2">
-          <p className="micro-caption">{categoryLabels[recipe.category]}</p>
+          {showCategory && <p className="micro-caption">{categoryLabels[recipe.category]}</p>}
           <h3 className="font-display text-xl md:text-2xl">{recipe.title}</h3>
           <p className="text-sm text-muted-foreground line-clamp-2">
             {recipe.description}
