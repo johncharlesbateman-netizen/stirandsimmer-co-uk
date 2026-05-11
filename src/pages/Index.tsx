@@ -152,12 +152,12 @@ const Index = () => {
               </Link>
             </li>
             <li className="px-2">
-              <Link to="/collections" className="block group">
+              <Link to="/recipes" className="block group">
                 <div className="font-display text-3xl md:text-4xl text-foreground group-hover:opacity-70 transition-opacity">
                   {collectionCount}
                 </div>
                 <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
-                  Meal Ideas
+                  Recipes
                 </div>
               </Link>
             </li>
