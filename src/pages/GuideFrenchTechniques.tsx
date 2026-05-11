@@ -118,7 +118,7 @@ const GuideFrenchTechniques = () => {
           name="description"
           content="Seven essential French cooking techniques explained simply — mise en place, julienne, brunoise, chiffonade, beurre blanc, flambé and déglaze. Master these and transform your cooking."
         />
-        <link rel="canonical" href="https://www.stirandsimmer.co.uk/guides/french-techniques" />
+        <link rel="canonical" href="https://stirandsimmer.co.uk/guides/french-techniques" />
         <meta property="og:title" content="French cooking techniques every home cook should know — Stir and Simmer" />
         <meta
           property="og:description"

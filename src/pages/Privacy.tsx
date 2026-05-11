@@ -11,9 +11,9 @@ const Privacy = () => {
           name="description"
           content="How Stir & Simmer collects, uses and protects your personal data, including newsletter subscriptions, cookies and your rights under UK GDPR."
         />
-        <link rel="canonical" href="https://www.stirandsimmer.co.uk/privacy" />
+        <link rel="canonical" href="https://stirandsimmer.co.uk/privacy" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.stirandsimmer.co.uk/privacy" />
+        <meta property="og:url" content="https://stirandsimmer.co.uk/privacy" />
         <meta property="og:title" content="Privacy Policy | Stir & Simmer" />
         <meta property="og:description" content="How Stir & Simmer collects, uses and protects your personal data, including newsletter subscriptions, cookies and your rights under UK GDPR." />
         <meta name="twitter:card" content="summary" />
