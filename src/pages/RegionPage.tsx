@@ -227,7 +227,7 @@ const RegionPage = () => {
               ))}
             </div>
           ) : filtered.length > 0 ? (
-            mealFiltered && mealFilter ? (
+            sectionFiltered && sectionFilter ? (
               <>
                 <Link
                   to={`/recipes/region/${region.id}`}
@@ -236,15 +236,15 @@ const RegionPage = () => {
                   <ArrowLeft className="w-4 h-4" /> All {region.adjective} recipes
                 </Link>
                 <h2 className="heading-section mb-2">
-                  {region.adjective} {MEAL_TYPE_PLURAL[mealFilter]}
+                  {region.adjective} {SECTION_PLURAL[sectionFilter]}
                 </h2>
                 <p className="text-sm text-muted-foreground mb-8">
-                  {mealFiltered.length}{" "}
-                  {mealFiltered.length === 1 ? "recipe" : "recipes"}
+                  {sectionFiltered.length}{" "}
+                  {sectionFiltered.length === 1 ? "recipe" : "recipes"}
                 </p>
-                {mealFiltered.length > 0 ? (
+                {sectionFiltered.length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                    {mealFiltered.map((recipe, index) => (
+                    {sectionFiltered.map((recipe, index) => (
                       <RecipeCard
                         key={recipe.id}
                         recipe={recipe}
@@ -255,7 +255,7 @@ const RegionPage = () => {
                   </div>
                 ) : (
                   <p className="text-muted-foreground">
-                    No {region.adjective} {MEAL_TYPE_PLURAL[mealFilter]} yet.
+                    No {region.adjective} {SECTION_PLURAL[sectionFilter]} yet.
                   </p>
                 )}
               </>
@@ -269,18 +269,18 @@ const RegionPage = () => {
                   const visible = section.recipes.slice(0, MEAL_SECTION_MAX);
                   const hasMore = section.recipes.length > MEAL_SECTION_MAX;
                   return (
-                    <div key={section.meal} className="mb-14 md:mb-20">
+                    <div key={section.key} className="mb-14 md:mb-20">
                       <div className="flex items-end justify-between gap-4 mb-6 md:mb-8">
                         <h2 className="heading-section">
-                          {region.adjective} {MEAL_TYPE_PLURAL[section.meal]}
+                          {region.adjective} {SECTION_PLURAL[section.key]}
                         </h2>
                         {hasMore && (
                           <Link
-                            to={`/recipes/region/${region.id}?meal=${section.meal}`}
+                            to={`/recipes/region/${region.id}?meal=${section.key}`}
                             className="hidden md:inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors whitespace-nowrap"
                           >
                             See all {region.adjective}{" "}
-                            {MEAL_TYPE_PLURAL[section.meal]}
+                            {SECTION_PLURAL[section.key]}
                             <ArrowRight className="w-4 h-4" />
                           </Link>
                         )}
@@ -298,11 +298,11 @@ const RegionPage = () => {
                       {hasMore && (
                         <div className="mt-6 md:hidden">
                           <Link
-                            to={`/recipes/region/${region.id}?meal=${section.meal}`}
+                            to={`/recipes/region/${region.id}?meal=${section.key}`}
                             className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
                           >
                             See all {region.adjective}{" "}
-                            {MEAL_TYPE_PLURAL[section.meal]}
+                            {SECTION_PLURAL[section.key]}
                             <ArrowRight className="w-4 h-4" />
                           </Link>
                         </div>
@@ -314,7 +314,7 @@ const RegionPage = () => {
                   <div>
                     {renderedSections.length > 0 && (
                       <h2 className="heading-section mb-6 md:mb-8">
-                        More {region.adjective} recipes
+                        More recipes
                       </h2>
                     )}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
