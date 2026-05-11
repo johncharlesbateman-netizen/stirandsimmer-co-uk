@@ -274,6 +274,240 @@ const QuickMealsTimeAudit = () => {
   );
 };
 
+// --- Regional mismatch audit ---------------------------------------------
+// Surfaces recipes whose tagged cuisine region has no obvious keyword match in
+// the title/description/intro — a signal that the tag may be wrong.
+
+const REGION_KEYWORDS: Record<string, string[]> = {
+  italian: [
+    "pasta", "spaghetti", "linguine", "penne", "fettuccine", "tagliatelle",
+    "lasagne", "lasagna", "rigatoni", "orecchiette", "pappardelle", "gnocchi",
+    "risotto", "cacio", "pepe", "biscotti", "panna cotta", "tiramisu",
+    "milanese", "bolognese", "primavera", "ragu", "ragù", "carbonara",
+    "parmesan", "parmigiano", "pecorino", "mozzarella", "focaccia",
+    "bruschetta", "pesto", "polenta", "minestrone", "amatriciana",
+    "puttanesca", "arrabbiata", "italian", "sicilian", "tuscan",
+  ],
+  french: [
+    "coq au vin", "bourguignon", "ratatouille", "crème", "creme brulee",
+    "soufflé", "souffle", "bisque", "velouté", "veloute", "beurre blanc",
+    "provençal", "provencal", "tarte", "gratin", "baguette", "quiche",
+    "cassoulet", "mornay", "hollandaise", "bouillabaisse", "confit",
+    "duxelles", "morel", "french", "parisian", "lyonnaise", "niçoise", "nicoise",
+  ],
+  british: [
+    "shepherd's pie", "shepherds pie", "cottage pie", "fish and chips",
+    "yorkshire", "bangers", "mash", "scone", "trifle", "crumble", "custard",
+    "sunday roast", "steak and ale", "toad in the hole", "ploughman",
+    "welsh rarebit", "sticky toffee", "eton mess", "cornish pasty",
+    "bubble and squeak", "british", "english", "irish", "scottish", "welsh",
+  ],
+  indian: [
+    "curry", "masala", "tikka", "tandoori", "biryani", "dal", "naan",
+    "paneer", "jalfrezi", "balti", "korma", "vindaloo", "rogan josh", "saag",
+    "bhuna", "madras", "dosa", "chana", "chaat", "chutney", "ghee",
+    "garam masala", "indian", "punjabi", "bengali", "kerala", "goan",
+  ],
+  asian: [
+    "stir fry", "stir-fry", "stir fried", "wok", "soy sauce", "sesame",
+    "lemongrass", "thai", "chinese", "vietnamese", "japanese", "korean",
+    "pad thai", "pho", "ramen", "udon", "teriyaki", "kimchi", "satay",
+    "sushi", "laksa", "massaman", "char siu", "bao", "dumpling", "miso",
+    "gochujang", "sriracha", "hoisin", "asian", "szechuan", "sichuan",
+  ],
+};
+
+const REGION_LABEL: Record<string, string> = {
+  italian: "Italian",
+  french: "French",
+  british: "British",
+  indian: "Indian",
+  asian: "Asian",
+};
+
+const countKeywordMatches = (text: string, keywords: string[]): string[] => {
+  const lower = text.toLowerCase();
+  const hits: string[] = [];
+  for (const kw of keywords) {
+    if (lower.includes(kw)) hits.push(kw);
+  }
+  return hits;
+};
+
+type RegionMismatchRow = {
+  recipe: Recipe;
+  taggedRegion: string;
+  rivalRegion: string | null;
+  rivalMatches: string[];
+};
+
+const RegionalMismatchAudit = ({ recipes }: { recipes: Recipe[] }) => {
+  const queryClient = useQueryClient();
+  const [removingId, setRemovingId] = useState<string | null>(null);
+
+  const rows: RegionMismatchRow[] = useMemo(() => {
+    const out: RegionMismatchRow[] = [];
+    for (const r of recipes) {
+      const regions = ((r.cuisine_region as string[] | null) ?? []).filter(
+        (t) => REGION_KEYWORDS[t],
+      );
+      if (regions.length === 0) continue;
+      const text = [r.title, r.description, r.intro ?? ""].join(" ");
+      for (const region of regions) {
+        const ownMatches = countKeywordMatches(text, REGION_KEYWORDS[region]);
+        if (ownMatches.length > 0) continue;
+        // No own-keyword match — look for a rival region with stronger signal.
+        let bestRival: { region: string; matches: string[] } | null = null;
+        for (const [other, kws] of Object.entries(REGION_KEYWORDS)) {
+          if (other === region) continue;
+          if (regions.includes(other)) continue; // already tagged with rival
+          const m = countKeywordMatches(text, kws);
+          if (m.length > 0 && (!bestRival || m.length > bestRival.matches.length)) {
+            bestRival = { region: other, matches: m };
+          }
+        }
+        out.push({
+          recipe: r,
+          taggedRegion: region,
+          rivalRegion: bestRival?.region ?? null,
+          rivalMatches: bestRival?.matches ?? [],
+        });
+      }
+    }
+    return out.sort((a, b) =>
+      a.taggedRegion === b.taggedRegion
+        ? a.recipe.title.localeCompare(b.recipe.title)
+        : a.taggedRegion.localeCompare(b.taggedRegion),
+    );
+  }, [recipes]);
+
+  const removeRegion = async (row: RegionMismatchRow) => {
+    setRemovingId(row.recipe.id);
+    try {
+      const next = ((row.recipe.cuisine_region as string[] | null) ?? []).filter(
+        (t) => t !== row.taggedRegion,
+      );
+      const { error } = await supabase
+        .from("recipes")
+        .update({ cuisine_region: next })
+        .eq("id", row.recipe.id);
+      if (error) throw error;
+      toast.success(
+        `Removed "${REGION_LABEL[row.taggedRegion] ?? row.taggedRegion}" from "${row.recipe.title}"`,
+      );
+      await queryClient.invalidateQueries({ queryKey: ["admin-tagging-audit"] });
+    } catch (e: unknown) {
+      toast.error(e instanceof Error ? e.message : "Failed to update");
+    } finally {
+      setRemovingId(null);
+    }
+  };
+
+  return (
+    <section className="py-8 md:py-12 border-b border-border bg-purple-50/50 dark:bg-purple-950/10">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20">
+        <div className="mb-4">
+          <h2 className="font-display text-xl md:text-2xl mb-1">
+            Regional mismatch review
+          </h2>
+          <p className="text-sm text-muted-foreground max-w-2xl">
+            Recipes tagged with a cuisine region whose title, description and
+            intro contain no obvious keywords for that region. Where another
+            region's signature words appear instead, that region is shown as a
+            possible better fit. Review and remove or reassign as needed.
+          </p>
+        </div>
+
+        {rows.length === 0 ? (
+          <p className="text-sm text-muted-foreground">
+            ✓ No regional mismatches detected.
+          </p>
+        ) : (
+          <div className="overflow-x-auto rounded-md border border-border bg-background">
+            <table className="w-full text-sm">
+              <thead className="bg-muted/50 text-xs uppercase tracking-wider text-muted-foreground">
+                <tr>
+                  <th className="text-left px-3 py-2">Recipe</th>
+                  <th className="text-left px-3 py-2">Tagged as</th>
+                  <th className="text-left px-3 py-2">Possible better fit</th>
+                  <th className="text-right px-3 py-2">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row) => (
+                  <tr
+                    key={`${row.recipe.id}-${row.taggedRegion}`}
+                    className="border-t border-border align-top"
+                  >
+                    <td className="px-3 py-2">
+                      <Link
+                        to={`/admin/recipes/${row.recipe.slug}/edit`}
+                        className="text-foreground hover:underline font-medium"
+                      >
+                        {row.recipe.title}
+                      </Link>
+                      <p className="text-xs text-muted-foreground line-clamp-1">
+                        {row.recipe.description}
+                      </p>
+                    </td>
+                    <td className="px-3 py-2">
+                      <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-800 dark:text-amber-200 font-mono text-xs">
+                        {REGION_LABEL[row.taggedRegion] ?? row.taggedRegion}
+                      </span>
+                    </td>
+                    <td className="px-3 py-2">
+                      {row.rivalRegion ? (
+                        <div className="flex flex-col gap-1">
+                          <span className="px-2 py-0.5 rounded bg-blue-600/15 text-blue-800 dark:text-blue-200 font-mono text-xs w-fit">
+                            {REGION_LABEL[row.rivalRegion] ?? row.rivalRegion}
+                          </span>
+                          <span
+                            className="text-[11px] text-muted-foreground italic"
+                            title={row.rivalMatches.join(", ")}
+                          >
+                            matched: {row.rivalMatches.slice(0, 3).join(", ")}
+                            {row.rivalMatches.length > 3 ? "…" : ""}
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-xs text-muted-foreground italic">
+                          no clear signal
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 text-right">
+                      <div className="inline-flex items-center gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          disabled={removingId === row.recipe.id}
+                          onClick={() => removeRegion(row)}
+                          className="h-7 text-xs"
+                          title={`Remove the "${REGION_LABEL[row.taggedRegion]}" tag`}
+                        >
+                          {removingId === row.recipe.id
+                            ? "Removing…"
+                            : `Remove ${REGION_LABEL[row.taggedRegion] ?? row.taggedRegion}`}
+                        </Button>
+                        <Link
+                          to={`/admin/recipes/${row.recipe.slug}/edit`}
+                          className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-md bg-foreground text-background hover:opacity-90"
+                        >
+                          <Pencil className="w-3 h-3" /> Edit
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
 const AdminTaggingAudit = () => {
   const queryClient = useQueryClient();
   const [applying, setApplying] = useState<string | null>(null);
