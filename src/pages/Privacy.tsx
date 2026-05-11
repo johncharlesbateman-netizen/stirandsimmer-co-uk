@@ -34,7 +34,7 @@ const Privacy = () => {
             collects, uses and protects information about you when you use
             our website at{" "}
             <Link to="/" className="underline hover:text-foreground">
-              stirandsimmer.co.uk
+              www.stirandsimmer.co.uk
             </Link>
             . We are the data controller for the personal data we hold about
             you. We are committed to protecting your privacy in line with

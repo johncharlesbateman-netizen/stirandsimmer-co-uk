@@ -708,7 +708,7 @@ const RecipeDetail = () => {
           </div>
         )}
 
-        <div className="print-footer">stirandsimmer.co.uk</div>
+        <div className="print-footer">www.stirandsimmer.co.uk</div>
       </div>
 
       <NewsletterSignup
