@@ -23,6 +23,8 @@ type RegionDef = {
   seoDescription: string;
 };
 
+type SectionKey = MealType | "quick";
+
 const MEAL_TYPE_PLURAL: Record<MealType, string> = {
   mains: "mains",
   lunch: "lunches",
@@ -30,8 +32,30 @@ const MEAL_TYPE_PLURAL: Record<MealType, string> = {
   snack: "snacks",
 };
 
-const MEAL_SECTION_MIN = 3;
+const SECTION_PLURAL: Record<SectionKey, string> = {
+  mains: "mains",
+  quick: "quick meals",
+  lunch: "lunches",
+  dessert: "desserts",
+  snack: "snacks",
+};
+
+// Order in which sections render on the page.
+const SECTION_ORDER: SectionKey[] = ["mains", "quick", "lunch", "dessert"];
+
+const isSectionKey = (v: unknown): v is SectionKey =>
+  v === "quick" || isMealType(v);
+
+const MEAL_SECTION_MIN = 2;
 const MEAL_SECTION_MAX = 6;
+
+const totalTime = (r: Recipe) =>
+  (r.prep_time_minutes ?? 0) + (r.cook_time_minutes ?? 0);
+
+const isQuickMeal = (r: Recipe) => {
+  const t = totalTime(r);
+  return t > 0 && t <= 30;
+};
 
 const REGIONS: Record<string, RegionDef> = {
   uk: {
