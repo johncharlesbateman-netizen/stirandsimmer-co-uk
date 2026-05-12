@@ -174,13 +174,54 @@ function buildPrerenderedHtml(template, meta) {
   ];
 
   if (jsonLd) {
-    tags.push(
-      `<script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, "\\u003c")}</script>`,
-    );
+    const blocks = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+    for (const block of blocks) {
+      tags.push(
+        `<script type="application/ld+json">${JSON.stringify(block).replace(/</g, "\\u003c")}</script>`,
+      );
+    }
   }
 
   return html.replace(/<\/head>/i, `${tags.join("\n    ")}\n  </head>`);
 }
+
+function buildBreadcrumb(items) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      item: it.url,
+    })),
+  };
+}
+
+const HOME_JSONLD = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Stir & Simmer",
+    url: SITE,
+    description:
+      "Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love.",
+    publisher: { "@type": "Organization", name: "Stir & Simmer", url: SITE },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE}/recipes?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Stir & Simmer",
+    url: SITE,
+    logo: `${SITE}/og-image.jpg`,
+    description: "A UK recipe site with free curated recipes for every occasion.",
+  },
+];
 
 function writeRoute(distDir, template, meta) {
   const html = buildPrerenderedHtml(template, meta);
