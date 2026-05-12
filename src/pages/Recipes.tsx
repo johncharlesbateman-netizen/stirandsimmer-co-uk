@@ -212,7 +212,7 @@ const Recipes = () => {
       </section>
 
       <FloatingMealPlannerButton />
-    </Invalid>
+    </Layout>
   );
 };
 
