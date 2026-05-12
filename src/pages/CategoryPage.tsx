@@ -8,8 +8,29 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { getTileBySlug } from "@/lib/recipe-tiles";
+import { MealType, isMealType } from "@/lib/meal-types";
 
 type Recipe = Tables<"recipes">;
+
+type SectionKey = MealType | "quick";
+
+const SECTION_PLURAL: Record<SectionKey, string> = {
+  mains: "Mains",
+  quick: "Quick meals",
+  lunch: "Lunches",
+  dessert: "Desserts and sweets",
+  snack: "Snacks",
+};
+
+const SECTION_ORDER: SectionKey[] = ["quick", "mains", "dessert", "lunch", "snack"];
+
+const totalTime = (r: Recipe) =>
+  (r.prep_time_minutes ?? 0) + (r.cook_time_minutes ?? 0);
+
+const isQuickMeal = (r: Recipe) => {
+  const t = totalTime(r);
+  return t > 0 && t <= 35;
+};
 
 const CategoryPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -87,22 +108,71 @@ const CategoryPage = () => {
               ))}
             </div>
           ) : filtered.length > 0 ? (
-            <>
-              <p className="text-sm text-muted-foreground mb-8">
-                {filtered.length}{" "}
-                {filtered.length === 1 ? "recipe" : "recipes"}
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                {filtered.map((recipe, index) => (
-                  <RecipeCard
-                    key={recipe.id}
-                    recipe={recipe}
-                    floatDelay={index}
-                    showMeta
-                  />
-                ))}
-              </div>
-            </>
+            (() => {
+              const recipesBySection: Record<SectionKey, Recipe[]> = {
+                mains: [], quick: [], lunch: [], dessert: [], snack: [],
+              };
+              for (const r of filtered) {
+                const mts = ((r.meal_types as string[] | null) ?? []).filter(isMealType);
+                if (mts.length > 0) {
+                  for (const mt of mts) recipesBySection[mt].push(r);
+                } else if (isQuickMeal(r)) {
+                  recipesBySection.quick.push(r);
+                }
+              }
+              const renderedSections = SECTION_ORDER
+                .map((k) => ({ key: k, recipes: recipesBySection[k] }))
+                .filter((s) => s.recipes.length > 0);
+              const generalRecipes = filtered.filter((r) => {
+                const mts = ((r.meal_types as string[] | null) ?? []).filter(isMealType);
+                return mts.length === 0 && !isQuickMeal(r);
+              });
+
+              return (
+                <>
+                  <p className="text-sm text-muted-foreground mb-10">
+                    {filtered.length}{" "}
+                    {filtered.length === 1 ? "recipe" : "recipes"}
+                  </p>
+                  {renderedSections.map((section) => (
+                    <div key={section.key} className="mb-14 md:mb-20">
+                      <h2 className="heading-section mb-6 md:mb-8">
+                        {SECTION_PLURAL[section.key]}
+                      </h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                        {section.recipes.map((recipe, index) => (
+                          <RecipeCard
+                            key={recipe.id}
+                            recipe={recipe}
+                            floatDelay={index}
+                            showMeta
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                  {generalRecipes.length > 0 && (
+                    <div>
+                      {renderedSections.length > 0 && (
+                        <h2 className="heading-section mb-6 md:mb-8">
+                          More recipes
+                        </h2>
+                      )}
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                        {generalRecipes.map((recipe, index) => (
+                          <RecipeCard
+                            key={recipe.id}
+                            recipe={recipe}
+                            floatDelay={index}
+                            showMeta
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              );
+            })()
           ) : (
             <div className="text-center py-16">
               <p className="heading-section text-muted-foreground mb-3">
