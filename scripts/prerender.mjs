@@ -174,13 +174,54 @@ function buildPrerenderedHtml(template, meta) {
   ];
 
   if (jsonLd) {
-    tags.push(
-      `<script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, "\\u003c")}</script>`,
-    );
+    const blocks = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+    for (const block of blocks) {
+      tags.push(
+        `<script type="application/ld+json">${JSON.stringify(block).replace(/</g, "\\u003c")}</script>`,
+      );
+    }
   }
 
   return html.replace(/<\/head>/i, `${tags.join("\n    ")}\n  </head>`);
 }
+
+function buildBreadcrumb(items) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      item: it.url,
+    })),
+  };
+}
+
+const HOME_JSONLD = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Stir & Simmer",
+    url: SITE,
+    description:
+      "Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love.",
+    publisher: { "@type": "Organization", name: "Stir & Simmer", url: SITE },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE}/recipes?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Stir & Simmer",
+    url: SITE,
+    logo: `${SITE}/og-image.jpg`,
+    description: "A UK recipe site with free curated recipes for every occasion.",
+  },
+];
 
 function writeRoute(distDir, template, meta) {
   const html = buildPrerenderedHtml(template, meta);
@@ -225,33 +266,61 @@ export async function prerenderRoutes() {
   const routes = [];
 
   for (const r of STATIC_ROUTES) {
-    routes.push({ path: r.path, url: `${SITE}${r.path === "/" ? "/" : r.path}`, title: r.title, description: r.description });
+    const url = `${SITE}${r.path === "/" ? "/" : r.path}`;
+    const route = { path: r.path, url, title: r.title, description: r.description };
+    if (r.path === "/") {
+      route.jsonLd = HOME_JSONLD;
+    } else {
+      route.jsonLd = buildBreadcrumb([
+        { name: "Home", url: `${SITE}/` },
+        { name: r.title.split(" | ")[0].split(" — ")[0].trim(), url },
+      ]);
+    }
+    routes.push(route);
   }
 
   for (const t of CATEGORY_TILES) {
+    const url = `${SITE}/recipes/category/${t.slug}`;
     routes.push({
       path: `/recipes/category/${t.slug}`,
-      url: `${SITE}/recipes/category/${t.slug}`,
+      url,
       title: t.title,
       description: t.description,
+      jsonLd: buildBreadcrumb([
+        { name: "Home", url: `${SITE}/` },
+        { name: "Recipes", url: `${SITE}/recipes` },
+        { name: t.title.split(" | ")[0].split(" — ")[0].trim(), url },
+      ]),
     });
   }
 
   for (const c of COLLECTIONS) {
+    const url = `${SITE}/collections/${c.slug}`;
     routes.push({
       path: `/collections/${c.slug}`,
-      url: `${SITE}/collections/${c.slug}`,
+      url,
       title: `${c.title} — Recipe Collection | Stir & Simmer`,
       description: c.description,
+      jsonLd: buildBreadcrumb([
+        { name: "Home", url: `${SITE}/` },
+        { name: "Collections", url: `${SITE}/collections` },
+        { name: c.title, url },
+      ]),
     });
   }
 
   for (const r of REGIONS) {
+    const url = `${SITE}/recipes/region/${r.slug}`;
     routes.push({
       path: `/recipes/region/${r.slug}`,
-      url: `${SITE}/recipes/region/${r.slug}`,
+      url,
       title: `${r.label} recipes | Stir & Simmer`,
       description: `Explore our collection of ${r.label} recipes — tried and tested in a real kitchen, free to browse.`,
+      jsonLd: buildBreadcrumb([
+        { name: "Home", url: `${SITE}/` },
+        { name: "Kitchen Atlas", url: `${SITE}/kitchen-atlas` },
+        { name: `${r.label} recipes`, url },
+      ]),
     });
   }
 
@@ -271,20 +340,28 @@ export async function prerenderRoutes() {
         const description =
           r.seo_description ||
           (r.description ? r.description.slice(0, 155) : `${r.title} — a tried-and-tested recipe from Stir & Simmer.`);
+        const recipeUrl = `${SITE}/recipes/${r.slug}`;
         routes.push({
           path: `/recipes/${r.slug}`,
-          url: `${SITE}/recipes/${r.slug}`,
+          url: recipeUrl,
           title,
           description,
           image: r.image_url || DEFAULT_OG,
           type: "article",
-          jsonLd: buildRecipeJsonLd({
-            title: r.title,
-            slug: r.slug,
-            description: r.description ?? title,
-            imageUrl: r.image_url,
-            category: r.category,
-          }),
+          jsonLd: [
+            buildRecipeJsonLd({
+              title: r.title,
+              slug: r.slug,
+              description: r.description ?? title,
+              imageUrl: r.image_url,
+              category: r.category,
+            }),
+            buildBreadcrumb([
+              { name: "Home", url: `${SITE}/` },
+              { name: "Recipes", url: `${SITE}/recipes` },
+              { name: r.title, url: recipeUrl },
+            ]),
+          ],
         });
         recipeCount++;
       }

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,11 +20,12 @@ import { TILES_BY_SLUG } from "./lib/recipe-tiles";
 import Collections from "./pages/Collections";
 import KitchenAtlas from "./pages/KitchenAtlas";
 import MealPlanner from "./pages/MealPlanner";
-import AdminNewRecipe from "./pages/AdminNewRecipe";
-import AdminEditRecipe from "./pages/AdminEditRecipe";
-import AdminSeoStatus from "./pages/AdminSeoStatus";
-import AdminTaggingAudit from "./pages/AdminTaggingAudit";
-import AdminChallenges from "./pages/AdminChallenges";
+// Admin routes are lazy-loaded so their bundle isn't shipped to public visitors.
+const AdminNewRecipe = lazy(() => import("./pages/AdminNewRecipe"));
+const AdminEditRecipe = lazy(() => import("./pages/AdminEditRecipe"));
+const AdminSeoStatus = lazy(() => import("./pages/AdminSeoStatus"));
+const AdminTaggingAudit = lazy(() => import("./pages/AdminTaggingAudit"));
+const AdminChallenges = lazy(() => import("./pages/AdminChallenges"));
 import Guides from "./pages/Guides";
 import GuideMotherSauces from "./pages/GuideMotherSauces";
 import GuideFrenchTechniques from "./pages/GuideFrenchTechniques";
@@ -33,6 +35,10 @@ import Privacy from "./pages/Privacy";
 import ExitIntentPopup from "./components/ExitIntentPopup";
 import CookieConsent from "./components/CookieConsent";
 import CanonicalRedirect from "./components/CanonicalRedirect";
+
+const AdminFallback = () => (
+  <div className="container mx-auto px-6 py-20 text-sm text-muted-foreground">Loading…</div>
+);
 
 const queryClient = new QueryClient();
 
@@ -129,21 +135,21 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route
               path="/admin/recipes/new"
-              element={<RequireAdmin><AdminNewRecipe /></RequireAdmin>}
+              element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminNewRecipe /></Suspense></RequireAdmin>}
             />
             <Route
               path="/admin/recipes/:slug/edit"
-              element={<RequireAdmin><AdminEditRecipe /></RequireAdmin>}
+              element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminEditRecipe /></Suspense></RequireAdmin>}
             />
             <Route
               path="/admin/seo"
-              element={<RequireAdmin><AdminSeoStatus /></RequireAdmin>}
+              element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminSeoStatus /></Suspense></RequireAdmin>}
             />
             <Route
               path="/admin/tagging-audit"
-              element={<RequireAdmin><AdminTaggingAudit /></RequireAdmin>}
+              element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminTaggingAudit /></Suspense></RequireAdmin>}
             />
-            <Route path="/admin/challenges" element={<AdminChallenges />} />
+            <Route path="/admin/challenges" element={<Suspense fallback={<AdminFallback />}><AdminChallenges /></Suspense>} />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
