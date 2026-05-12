@@ -119,23 +119,24 @@ const NewsletterSignup = ({
 
   return (
     <section
-      className={`no-print bg-secondary border-t border-border ${className}`}
+      className={`no-print bg-background border-t border-border ${className}`}
       aria-labelledby="newsletter-heading"
     >
       <div
         className={`container mx-auto px-6 md:px-12 lg:px-20 ${
-          isCompact ? "py-12 md:py-14" : "py-16 md:py-20"
+          isCompact ? "py-16 md:py-20" : "py-20 md:py-28"
         }`}
       >
-        <div className="max-w-2xl mx-auto text-center">
-          {eyebrow && <p className="micro-caption mb-4">{eyebrow}</p>}
+        <div className="max-w-xl mx-auto text-center">
+          {eyebrow && <p className="micro-caption mb-5">{eyebrow}</p>}
           <h2
             id="newsletter-heading"
-            className={isCompact ? "heading-section mb-3" : "heading-editorial mb-4"}
+            className={isCompact ? "heading-section mb-4" : "heading-editorial mb-4"}
           >
-            {headline || "Get Recipes Delivered Free"}
+            {headline || "Get recipes delivered free"}
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+          <div className="mx-auto my-6 h-px w-12 bg-foreground/30" aria-hidden="true" />
+          <p className="text-muted-foreground leading-relaxed mb-10 max-w-md mx-auto">
             {description ||
               "An occasional email with new recipes, seasonal ideas and the odd kitchen tip — sent only when we have something worth sharing. No spam, unsubscribe anytime."}
           </p>
@@ -144,7 +145,7 @@ const NewsletterSignup = ({
             <div
               role="status"
               aria-live="polite"
-              className="max-w-md mx-auto p-6 bg-background border border-border text-foreground"
+              className="max-w-md mx-auto px-6 py-8 bg-secondary border border-border text-foreground"
             >
               <p className="text-base">{SUCCESS_MESSAGE}</p>
             </div>
@@ -152,9 +153,9 @@ const NewsletterSignup = ({
             <form
               noValidate
               onSubmit={handleSubmit}
-              className="space-y-4 max-w-md mx-auto text-left"
+              className="space-y-5 max-w-md mx-auto text-left"
             >
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <div className="sm:w-2/5">
                   <label htmlFor="newsletter-fname" className="sr-only">
                     First name (optional)
@@ -168,7 +169,7 @@ const NewsletterSignup = ({
                     placeholder="First name"
                     value={fname}
                     onChange={(e) => setFname(e.target.value)}
-                    className="w-full min-h-[44px] px-4 py-3 bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-foreground/30 transition-shadow"
+                    className="w-full min-h-[48px] px-0 py-3 bg-transparent border-0 border-b border-border text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-foreground transition-colors rounded-none"
                   />
                 </div>
                 <div className="flex-1">
@@ -185,7 +186,7 @@ const NewsletterSignup = ({
                     placeholder="you@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full min-h-[44px] px-4 py-3 bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-foreground/30 transition-shadow"
+                    className="w-full min-h-[48px] px-0 py-3 bg-transparent border-0 border-b border-border text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-foreground transition-colors rounded-none"
                   />
                 </div>
               </div>
@@ -205,7 +206,7 @@ const NewsletterSignup = ({
                 </div>
               )}
 
-              <label className="flex items-start gap-3 text-xs text-muted-foreground leading-relaxed cursor-pointer">
+              <label className="flex items-start gap-3 text-xs text-muted-foreground leading-relaxed cursor-pointer pt-2">
                 <input
                   type="checkbox"
                   name="gdpr[consent]"
@@ -218,7 +219,7 @@ const NewsletterSignup = ({
                 <span>
                   I agree to receive Stir &amp; Simmer's recipe newsletter and
                   accept the{" "}
-                  <Link to="/privacy" className="underline hover:text-foreground">
+                  <Link to="/privacy" className="underline underline-offset-2 hover:text-foreground">
                     privacy policy
                   </Link>
                   . You can unsubscribe at any time.
@@ -231,13 +232,15 @@ const NewsletterSignup = ({
                 </p>
               )}
 
-              <button
-                type="submit"
-                disabled={status === "submitting"}
-                className="w-full min-h-[44px] px-6 py-3 bg-foreground text-background text-sm font-bold tracking-wide hover:bg-foreground/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {status === "submitting" ? "Subscribing…" : "Subscribe"}
-              </button>
+              <div className="pt-3 text-center">
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="inline-block px-10 py-4 bg-foreground text-background text-xs tracking-[0.2em] uppercase hover:opacity-80 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {status === "submitting" ? "Subscribing…" : "Subscribe"}
+                </button>
+              </div>
             </form>
           )}
         </div>
