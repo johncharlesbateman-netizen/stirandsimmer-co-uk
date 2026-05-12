@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
-import NewsletterSignup from "@/components/NewsletterSignup";
 import { Button } from "@/components/ui/button";
 import { WORLD_MAP_PATH } from "@/assets/world-map-path";
 import { supabase } from "@/integrations/supabase/client";
@@ -253,20 +252,6 @@ const KitchenAtlas = () => {
           <RegionSection key={region.id} region={region} />
         ))}
       </div>
-
-      {/* FOOTER CTA */}
-      <section
-        className="w-full py-16 md:py-20"
-        style={{ backgroundColor: "#1a0e00" }}
-      >
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <NewsletterSignup
-            eyebrow="Cooking Challenges"
-            headline="Never miss a challenge"
-            description="We'll send the next culinary challenge to your inbox when we have something worth sharing — no fixed schedule, no spam."
-          />
-        </div>
-      </section>
     </Layout>
   );
 };

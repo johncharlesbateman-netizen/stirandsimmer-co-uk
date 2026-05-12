@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import NewsletterSignup from "./NewsletterSignup";
 
 interface LayoutProps {
   children: ReactNode;
@@ -17,6 +18,7 @@ const Layout = ({ children }: LayoutProps) => {
       </a>
       <Header />
       <main id="main-content" className="flex-1 pt-20">{children}</main>
+      <NewsletterSignup />
       <Footer />
     </div>
   );

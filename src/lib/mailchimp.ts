@@ -1,7 +1,7 @@
 // Mailchimp embedded form configuration.
 export const MAILCHIMP_FORM_ACTION =
-  "https://icloud.us2.list-manage.com/subscribe/post?u=f3e1f2758c381624258b5d2e6&id=a9e02a3666&f_id=0033c2e1f0";
+  "https://strandandsimmer.us5.list-manage.com/subscribe/post?u=0efc8a776a60dde288b0fc0f0&id=cb98e78a54&f_id=00c157e0f0";
 
 // Hidden anti-bot field name (Mailchimp's honeypot).
 export const MAILCHIMP_HIDDEN_BOT_FIELD =
-  "b_f3e1f2758c381624258b5d2e6_a9e02a3666";
+  "b_0efc8a776a60dde288b0fc0f0_cb98e78a54";
