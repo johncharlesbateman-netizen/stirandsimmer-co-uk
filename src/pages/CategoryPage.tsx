@@ -120,13 +120,28 @@ const CategoryPage = () => {
                   recipesBySection.quick.push(r);
                 }
               }
+              const sortRecipes = (arr: Recipe[]) =>
+                [...arr].sort((a, b) => {
+                  const ta = totalTime(a);
+                  const tb = totalTime(b);
+                  // Recipes without a known time sink to the bottom.
+                  const aHas = ta > 0 ? 0 : 1;
+                  const bHas = tb > 0 ? 0 : 1;
+                  if (aHas !== bHas) return aHas - bHas;
+                  if (ta !== tb) return ta - tb;
+                  const da = a.created_at ? new Date(a.created_at).getTime() : 0;
+                  const db = b.created_at ? new Date(b.created_at).getTime() : 0;
+                  return db - da;
+                });
               const renderedSections = SECTION_ORDER
-                .map((k) => ({ key: k, recipes: recipesBySection[k] }))
+                .map((k) => ({ key: k, recipes: sortRecipes(recipesBySection[k]) }))
                 .filter((s) => s.recipes.length > 0);
-              const generalRecipes = filtered.filter((r) => {
-                const mts = ((r.meal_types as string[] | null) ?? []).filter(isMealType);
-                return mts.length === 0 && !isQuickMeal(r);
-              });
+              const generalRecipes = sortRecipes(
+                filtered.filter((r) => {
+                  const mts = ((r.meal_types as string[] | null) ?? []).filter(isMealType);
+                  return mts.length === 0 && !isQuickMeal(r);
+                })
+              );
 
               return (
                 <>
