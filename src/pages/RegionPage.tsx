@@ -159,7 +159,7 @@ const RegionPage = () => {
   // "More recipes" = recipes with no meal_type tag at all.
   const generalRecipes = filtered.filter((r) => {
     const mts = ((r.meal_types as string[] | null) ?? []).filter(isMealType);
-    return mts.length === 0;
+    return mts.length === 0 && !isQuickMeal(r);
   });
 
   // When ?meal=… is set, render a single flat grid filtered by that section.
