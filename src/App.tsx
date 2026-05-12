@@ -135,21 +135,21 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route
               path="/admin/recipes/new"
-              element={<RequireAdmin><AdminNewRecipe /></RequireAdmin>}
+              element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminNewRecipe /></Suspense></RequireAdmin>}
             />
             <Route
               path="/admin/recipes/:slug/edit"
-              element={<RequireAdmin><AdminEditRecipe /></RequireAdmin>}
+              element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminEditRecipe /></Suspense></RequireAdmin>}
             />
             <Route
               path="/admin/seo"
-              element={<RequireAdmin><AdminSeoStatus /></RequireAdmin>}
+              element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminSeoStatus /></Suspense></RequireAdmin>}
             />
             <Route
               path="/admin/tagging-audit"
-              element={<RequireAdmin><AdminTaggingAudit /></RequireAdmin>}
+              element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminTaggingAudit /></Suspense></RequireAdmin>}
             />
-            <Route path="/admin/challenges" element={<AdminChallenges />} />
+            <Route path="/admin/challenges" element={<Suspense fallback={<AdminFallback />}><AdminChallenges /></Suspense>} />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
