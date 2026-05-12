@@ -165,7 +165,10 @@ const RegionPage = () => {
   // When ?meal=… is set, render a single flat grid filtered by that section.
   const sectionFiltered = sectionFilter
     ? sectionFilter === "quick"
-      ? filtered.filter(isQuickMeal)
+      ? filtered.filter((r) => {
+          const mts = ((r.meal_types as string[] | null) ?? []).filter(isMealType);
+          return mts.length === 0 && isQuickMeal(r);
+        })
       : filtered.filter((r) =>
           ((r.meal_types as string[] | null) ?? []).includes(sectionFilter),
         )
