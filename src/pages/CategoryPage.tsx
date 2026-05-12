@@ -8,8 +8,29 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { getTileBySlug } from "@/lib/recipe-tiles";
+import { MealType, isMealType } from "@/lib/meal-types";
 
 type Recipe = Tables<"recipes">;
+
+type SectionKey = MealType | "quick";
+
+const SECTION_PLURAL: Record<SectionKey, string> = {
+  mains: "Mains",
+  quick: "Quick meals",
+  lunch: "Lunches",
+  dessert: "Desserts and sweets",
+  snack: "Snacks",
+};
+
+const SECTION_ORDER: SectionKey[] = ["quick", "mains", "dessert", "lunch", "snack"];
+
+const totalTime = (r: Recipe) =>
+  (r.prep_time_minutes ?? 0) + (r.cook_time_minutes ?? 0);
+
+const isQuickMeal = (r: Recipe) => {
+  const t = totalTime(r);
+  return t > 0 && t <= 35;
+};
 
 const CategoryPage = () => {
   const { slug } = useParams<{ slug: string }>();
