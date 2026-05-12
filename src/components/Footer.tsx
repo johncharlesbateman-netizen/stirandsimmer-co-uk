@@ -48,7 +48,12 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="micro-caption">Get in Touch</h4>
             <div className="space-y-3 text-sm">
-              <span className="block opacity-70">hello@stirandsimmer.co.uk</span>
+              <a
+                href="mailto:hello@stirandsimmer.co.uk"
+                className="block opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
+              >
+                hello@stirandsimmer.co.uk
+              </a>
               <a
                 href="https://www.instagram.com/stirandsimmeruk"
                 target="_blank"
