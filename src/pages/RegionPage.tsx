@@ -141,8 +141,13 @@ const RegionPage = () => {
   };
   for (const r of filtered) {
     const mts = ((r.meal_types as string[] | null) ?? []).filter(isMealType);
-    for (const mt of mts) recipesBySection[mt].push(r);
-    if (isQuickMeal(r)) recipesBySection.quick.push(r);
+    if (mts.length > 0) {
+      // Recipe is classified by meal type — assign there exclusively.
+      for (const mt of mts) recipesBySection[mt].push(r);
+    } else if (isQuickMeal(r)) {
+      // Only untagged short recipes fall into Quick Meals.
+      recipesBySection.quick.push(r);
+    }
   }
 
   // Sections actually rendered (>= MEAL_SECTION_MIN recipes), in fixed order.
