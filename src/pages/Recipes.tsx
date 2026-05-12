@@ -1,7 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Search, X } from "lucide-react";
+import { useMemo, useState } from "react";
 import Layout from "@/components/Layout";
 import FloatingMealPlannerButton from "@/components/FloatingMealPlannerButton";
 import { supabase } from "@/integrations/supabase/client";
@@ -9,20 +10,34 @@ import { Tables } from "@/integrations/supabase/types";
 import { RECIPE_TILES } from "@/lib/recipe-tiles";
 
 type Recipe = Tables<"recipes">;
+
 const Recipes = () => {
   const { data: recipes = [] } = useQuery({
-    queryKey: ["recipes", "counts-only"],
+    queryKey: ["recipes", "search-and-counts"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
         .select(
-          "id, category, cuisine_region, prep_time_minutes, cook_time_minutes, title, description"
+          "id, slug, category, cuisine_region, prep_time_minutes, cook_time_minutes, title, description"
         )
         .order("created_at", { ascending: false });
       if (error) throw error;
       return (data ?? []) as unknown as Recipe[];
     },
   });
+
+  const [query, setQuery] = useState("");
+  const trimmed = query.trim().toLowerCase();
+
+  const results = useMemo(() => {
+    if (trimmed.length < 2) return [];
+    return recipes
+      .filter((r) => {
+        const hay = `${r.title} ${r.description ?? ""}`.toLowerCase();
+        return hay.includes(trimmed);
+      })
+      .slice(0, 30);
+  }, [recipes, trimmed]);
 
   const counts: Record<string, number> = {};
   for (const tile of RECIPE_TILES) {
@@ -52,13 +67,84 @@ const Recipes = () => {
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <p className="micro-caption mb-4">Free Recipes</p>
           <h1 className="heading-display mb-6">Recipes</h1>
-          <p className="text-muted-foreground text-lg max-w-2xl">
+          <p className="text-muted-foreground text-lg max-w-2xl mb-8">
             Pick a category to dive in. Over {total} free recipes
             using local and seasonal produce — from quick lunches to indulgent
             sweets.
           </p>
+
+          {/* Search */}
+          <div className="max-w-xl">
+            <label htmlFor="recipe-search" className="sr-only">
+              Search recipes
+            </label>
+            <div className="relative">
+              <Search
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground"
+                aria-hidden
+              />
+              <input
+                id="recipe-search"
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search recipes by name or ingredient…"
+                className="w-full h-11 rounded-md border border-border bg-background pl-10 pr-10 text-base md:text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              />
+              {query && (
+                <button
+                  type="button"
+                  onClick={() => setQuery("")}
+                  aria-label="Clear search"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-md hover:bg-secondary text-muted-foreground"
+                >
+                  <X className="w-4 h-4" aria-hidden />
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* Search results */}
+      {trimmed.length >= 2 && (
+        <section className="py-10 md:py-14 border-b border-border">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20">
+            <h2 className="heading-md mb-6">
+              {results.length === 0
+                ? `No recipes match “${query}”`
+                : `${results.length} ${results.length === 1 ? "result" : "results"} for “${query}”`}
+            </h2>
+            {results.length > 0 && (
+              <ul className="divide-y divide-border border-y border-border">
+                {results.map((r) => (
+                  <li key={r.id}>
+                    <Link
+                      to={`/recipe/${r.slug}`}
+                      className="group flex items-start justify-between gap-4 py-4 hover:bg-secondary/40 transition-colors px-2 -mx-2 rounded-md"
+                    >
+                      <div className="min-w-0">
+                        <div className="font-display text-lg leading-tight">
+                          {r.title}
+                        </div>
+                        {r.description && (
+                          <div className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                            {r.description}
+                          </div>
+                        )}
+                      </div>
+                      <ArrowRight
+                        className="w-4 h-4 mt-1 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1"
+                        aria-hidden
+                      />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Tile grid */}
       <section className="py-10 md:py-14">
