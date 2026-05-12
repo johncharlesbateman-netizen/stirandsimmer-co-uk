@@ -13,7 +13,6 @@ import { scaleIngredients, scaleIngredientsSmart } from "@/lib/ingredient-scaler
 import { buildSeoTitle, buildSeoDescription, buildServingSuggestion } from "@/lib/seo";
 import { buildRecipeJsonLd } from "@/lib/recipe-schema";
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
-import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
 import ServingScaler from "@/components/ServingScaler";
