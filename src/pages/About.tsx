@@ -78,12 +78,17 @@ const About = () => {
                 </p>
               </div>
 
-              {/* Why We Built This */}
+              {/* How This Started */}
               <div className="mt-16 pt-12 border-t border-border">
-                <h2 className="heading-section mb-6">Why We Built This</h2>
-                <p className="body-editorial text-muted-foreground">
-                  Most recipe sites are built to impress. We built Stir & Simmer to be useful. No restaurant techniques, no obscure ingredients, no recipes that only work if you have a free afternoon. Just honest food, tested in a real kitchen, written for people who actually have to get dinner on the table.
-                </p>
+                <h2 className="heading-section mb-6">How This Started</h2>
+                <div className="space-y-6 body-editorial text-muted-foreground">
+                  <p>
+                    Every recipe on here comes from actually making it — not once, but enough times to know what goes wrong and how to fix it. The portions are honest. The ingredients come from Tesco, Sainsbury's, Aldi or Waitrose. The methods are written for someone who's cooking after work, not performing for a camera.
+                  </p>
+                  <p>
+                    If a dish isn't worth making, it doesn't go on the site.
+                  </p>
+                </div>
               </div>
             </div>
 
