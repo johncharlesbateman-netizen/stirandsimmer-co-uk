@@ -18,7 +18,7 @@ const heroImageSrcSet = [480, 768, 1024, 1280, 1600]
 const heroImageSizes = "(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1600px";
 
 // Fallback values used until the live count loads (and if the query ever fails).
-const FALLBACK_RECIPE_COUNT = 114;
+const FALLBACK_RECIPE_COUNT = 117;
 
 
 const Index = () => {
