@@ -8,6 +8,7 @@ import FloatingMealPlannerButton from "@/components/FloatingMealPlannerButton";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { RECIPE_TILES } from "@/lib/recipe-tiles";
+import { useRecipeCount } from "@/hooks/useRecipeCount";
 
 type Recipe = Tables<"recipes">;
 
