@@ -25,17 +25,19 @@ const Index = () => {
   const [recipeCount, setRecipeCount] = useState<number>(FALLBACK_RECIPE_COUNT);
 
   useEffect(() => {
-    let cancelled = false;
+    const abortCtrl = new AbortController();
     (async () => {
       const { count, error } = await supabase
         .from("recipes")
-        .select("*", { count: "exact", head: true });
-      if (!cancelled && !error && typeof count === "number" && count > 0) {
+        .select("id", { count: "exact" })
+        .abortSignal(abortCtrl.signal)
+        .limit(0);
+      if (!abortCtrl.signal.aborted && !error && typeof count === "number" && count > 0) {
         setRecipeCount(count);
       }
     })();
     return () => {
-      cancelled = true;
+      abortCtrl.abort();
     };
   }, []);
 
