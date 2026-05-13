@@ -46,18 +46,15 @@ const CookieConsent = () => {
   useEffect(() => {
     if (!visible) return;
     const prev = document.body.style.paddingBottom;
-    const prevOverflow = document.body.style.overflow;
     const apply = () => {
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      document.body.style.paddingBottom = isMobile ? "0px" : "120px";
-      document.body.style.overflow = isMobile ? "hidden" : prevOverflow;
+      document.body.style.paddingBottom = isMobile ? "260px" : "150px";
     };
     apply();
     window.addEventListener("resize", apply);
     return () => {
       window.removeEventListener("resize", apply);
       document.body.style.paddingBottom = prev;
-      document.body.style.overflow = prevOverflow;
     };
   }, [visible]);
 
@@ -78,10 +75,10 @@ const CookieConsent = () => {
       aria-modal="true"
       aria-live="polite"
       aria-label="Cookie consent"
-      className="fixed inset-0 z-[55] flex items-end bg-foreground/20 px-4 pb-4 pt-3 md:px-6 md:pb-6"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-[55] px-4 pb-4 pt-3 md:px-6 md:pb-6"
     >
       <div
-        className="mx-auto w-full max-w-3xl rounded-lg border shadow-2xl px-5 py-4 md:px-6 md:py-5"
+        className="pointer-events-auto mx-auto w-full max-w-3xl rounded-lg border shadow-2xl px-5 py-4 md:px-6 md:py-5"
         style={{
           backgroundColor: "#1a0e00",
           color: "#f5ead6",
