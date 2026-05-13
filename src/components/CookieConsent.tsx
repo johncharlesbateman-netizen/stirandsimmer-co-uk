@@ -40,6 +40,24 @@ const CookieConsent = () => {
     }
   }, []);
 
+  // While the banner is visible, reserve space at the bottom of the page
+  // so it doesn't overlap recipe images, links or the meal-planner button
+  // — especially on mobile where the banner can take ~40% of the viewport.
+  useEffect(() => {
+    if (!visible) return;
+    const prev = document.body.style.paddingBottom;
+    const apply = () => {
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      document.body.style.paddingBottom = isMobile ? "260px" : "120px";
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    return () => {
+      window.removeEventListener("resize", apply);
+      document.body.style.paddingBottom = prev;
+    };
+  }, [visible]);
+
   const acceptAll = () => {
     writeChoice("all");
     setVisible(false);
