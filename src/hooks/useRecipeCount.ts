@@ -12,11 +12,15 @@ export function useRecipeCount() {
     queryFn: async () => {
       const { count, error } = await supabase
         .from("recipes")
-        .select("id", { count: "exact", head: true });
+        .select("id", { count: "exact" })
+        .limit(1);
+
       if (error) throw error;
+
       return count ?? 0;
     },
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
+    retry: 1,
   });
 }

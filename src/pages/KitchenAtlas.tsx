@@ -40,7 +40,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description: "Pasta, sauces and the art of simplicity. Italy feeds the soul.",
     challenge:
-      "This week — cook a pasta dish entirely from scratch. Find our [Italian recipes](/recipes/italian) and challenge yourself.",
+      "This week — cook a pasta dish entirely from scratch. Find our [Italian recipes](/recipes/region/italy) and challenge yourself.",
     regionTags: ["italian"],
   },
   {
@@ -51,7 +51,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description: "Classical techniques that underpin all of western cooking.",
     challenge:
-      "This week — make a classic French sauce from scratch. Browse our [French recipe collection](/recipes/french) to find your starting point.",
+      "This week — make a classic French sauce from scratch. Browse our [French recipe collection](/recipes/region/france) to find your starting point.",
     regionTags: ["french"],
   },
   {
@@ -62,7 +62,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description: "Bold spices, fragrant herbs and layers of warmth and depth.",
     challenge:
-      "This week — cook a curry entirely from scratch using whole spices, no jars. Find your recipe in our [Asian collection](/recipes/asian).",
+      "This week — cook a curry entirely from scratch using whole spices, no jars. Find your recipe in our [Asian collection](/recipes/region/asia).",
     regionTags: ["indian", "asian"],
   },
   {

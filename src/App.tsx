@@ -114,6 +114,7 @@ const App = () => (
           <Suspense fallback={<AdminFallback />}>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/index" element={<Navigate to="/" replace />} />
             <Route path="/work" element={<Work />} />
             <Route path="/about" element={<About />} />
             <Route path="/styleguide" element={<Styleguide />} />
