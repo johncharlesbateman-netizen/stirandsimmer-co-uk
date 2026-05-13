@@ -17,6 +17,7 @@ import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
 import ServingScaler from "@/components/ServingScaler";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import RecipeRatings from "@/components/RecipeRatings";
 import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
