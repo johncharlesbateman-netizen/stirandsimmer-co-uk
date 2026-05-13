@@ -31,6 +31,15 @@ const isQuickMeal = (r: Recipe) => {
   return isQuickMealRecipe(r);
 };
 
+const CATEGORY_BY_TILE_SLUG: Partial<Record<string, Recipe["category"]>> = {
+  chicken: "chicken",
+  beef: "beef",
+  lamb: "lamb",
+  "fish-and-seafood": "seafood",
+  pork: "pork",
+  "puddings-and-desserts": "sweets",
+};
+
 const CategoryPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const tile = getTileBySlug(slug);
@@ -40,30 +49,37 @@ const CategoryPage = () => {
     queryFn: async () => {
       if (!tile) return [] as Recipe[];
 
-      const baseQuery = supabase
-        .from("recipes")
-        .select("*")
-        .order("created_at", { ascending: false });
-
       if (tile.slug === "all") {
-        const { data, error } = await baseQuery;
+        const { data, error } = await supabase
+          .from("recipes")
+          .select("*")
+          .order("created_at", { ascending: false });
         if (error) throw error;
         return (data ?? []) as Recipe[];
       }
 
-      if (tile.slug === "quick-meals") {
-        const { data, error } = await baseQuery.lte("prep_time_minutes", 35);
+      const mappedCategory = CATEGORY_BY_TILE_SLUG[tile.slug];
+      if (mappedCategory) {
+        const { data, error } = await supabase
+          .from("recipes")
+          .select("*")
+          .eq("category", mappedCategory)
+          .order("created_at", { ascending: false });
         if (error) throw error;
-        return ((data ?? []) as Recipe[]).filter(isQuickMealRecipe);
+        return (data ?? []) as Recipe[];
       }
 
       const { data, error } = await supabase
         .from("recipes")
         .select("*")
-        .eq("category", tile.slug === "fish-and-seafood" ? "seafood" : tile.slug === "puddings-and-desserts" ? "sweets" : tile.slug === "pasta-and-rice" ? "pasta" : tile.slug)
         .order("created_at", { ascending: false });
       if (error) throw error;
-      return (data ?? []) as Recipe[];
+
+      if (tile.slug === "quick-meals") {
+        return ((data ?? []) as Recipe[]).filter(isQuickMealRecipe);
+      }
+
+      return ((data ?? []) as Recipe[]).filter(tile.filter);
     },
     enabled: !!tile,
   });
