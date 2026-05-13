@@ -105,7 +105,7 @@ const Index = () => {
               className="tracking-[0.2em] uppercase text-primary-foreground/80 hover:text-primary-foreground transition-colors"
               style={{ fontSize: "13px" }}
             >
-              {recipeCount} tried-and-tested recipes
+              {recipeCount !== null ? `${recipeCount} tried-and-tested recipes` : "Tried-and-tested recipes"}
             </Link>
           </div>
         </div>
