@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ArrowRight, Search, X } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Layout from "@/components/Layout";
 import FloatingMealPlannerButton from "@/components/FloatingMealPlannerButton";
 import { supabase } from "@/integrations/supabase/client";
@@ -26,7 +26,16 @@ const Recipes = () => {
     },
   });
 
-  const [query, setQuery] = useState("");
+  // Seed search input from ?q= URL param so the schema.org SearchAction
+  // and external links to /recipes?q=... actually pre-fill the search.
+  const [searchParams] = useSearchParams();
+  const initialQuery = searchParams.get("q") ?? "";
+  const [query, setQuery] = useState(initialQuery);
+  useEffect(() => {
+    const fromUrl = searchParams.get("q") ?? "";
+    if (fromUrl !== query) setQuery(fromUrl);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
   const trimmed = query.trim().toLowerCase();
 
   const results = useMemo(() => {
