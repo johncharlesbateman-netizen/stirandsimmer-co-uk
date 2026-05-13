@@ -53,7 +53,8 @@ const Recipes = () => {
   for (const tile of RECIPE_TILES) {
     counts[tile.slug] = recipes.filter(tile.filter).length;
   }
-  const total = recipes.length;
+  const { data: liveTotal } = useRecipeCount();
+  const total = liveTotal ?? recipes.length;
   const allTile = RECIPE_TILES[0]; // "all"
   const otherTiles = RECIPE_TILES.slice(1);
 
