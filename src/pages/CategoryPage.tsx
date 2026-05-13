@@ -7,7 +7,7 @@ import RecipeCard from "@/components/RecipeCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
-import { getTileBySlug } from "@/lib/recipe-tiles";
+import { getTileBySlug, isQuickMealRecipe } from "@/lib/recipe-tiles";
 import { MealType, isMealType } from "@/lib/meal-types";
 
 type Recipe = Tables<"recipes">;
@@ -28,8 +28,7 @@ const totalTime = (r: Recipe) =>
   (r.prep_time_minutes ?? 0) + (r.cook_time_minutes ?? 0);
 
 const isQuickMeal = (r: Recipe) => {
-  const t = totalTime(r);
-  return t > 0 && t <= 35;
+  return isQuickMealRecipe(r);
 };
 
 const CategoryPage = () => {
@@ -37,22 +36,43 @@ const CategoryPage = () => {
   const tile = getTileBySlug(slug);
 
   const { data: recipes, isLoading } = useQuery({
-    queryKey: ["recipes", "tile", "all"],
+    queryKey: ["recipes", "tile", tile?.slug],
     queryFn: async () => {
+      if (!tile) return [] as Recipe[];
+
+      const baseQuery = supabase
+        .from("recipes")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (tile.slug === "all") {
+        const { data, error } = await baseQuery;
+        if (error) throw error;
+        return (data ?? []) as Recipe[];
+      }
+
+      if (tile.slug === "quick-meals") {
+        const { data, error } = await baseQuery.lte("prep_time_minutes", 35);
+        if (error) throw error;
+        return ((data ?? []) as Recipe[]).filter(isQuickMealRecipe);
+      }
+
       const { data, error } = await supabase
         .from("recipes")
         .select("*")
+        .eq("category", tile.slug === "fish-and-seafood" ? "seafood" : tile.slug === "puddings-and-desserts" ? "sweets" : tile.slug === "pasta-and-rice" ? "pasta" : tile.slug)
         .order("created_at", { ascending: false });
       if (error) throw error;
       return (data ?? []) as Recipe[];
     },
+    enabled: !!tile,
   });
 
   if (!tile) {
     return <Navigate to="/recipes" replace />;
   }
 
-  const filtered = (recipes ?? []).filter(tile.filter);
+  const filtered = recipes ?? [];
   const canonicalUrl = `https://stirandsimmer.co.uk/recipes/category/${tile.slug}`;
 
   return (
