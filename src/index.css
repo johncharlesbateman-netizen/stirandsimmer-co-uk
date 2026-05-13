@@ -169,6 +169,16 @@
     section {
       animation: none !important;
     }
+
+    .floating-item,
+    .floating-item-delay-1,
+    .floating-item-delay-2,
+    .floating-item-delay-3,
+    .floating-item-delay-4,
+    .floating-item-delay-5 {
+      animation: none !important;
+      transform: none !important;
+    }
   }
 
   /* Images with smooth loading */
