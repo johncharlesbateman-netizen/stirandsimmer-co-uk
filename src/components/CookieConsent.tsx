@@ -86,8 +86,8 @@ const CookieConsent = () => {
         }}
       >
         {!showPrefs ? (
-          <div className="flex flex-col md:flex-row md:items-center gap-4">
-            <div className="flex-1 text-sm leading-relaxed" style={{ color: "#f5ead6" }}>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
+            <div className="flex-1 text-[13px] leading-6 md:text-sm md:leading-relaxed" style={{ color: "#f5ead6" }}>
               We use cookies to improve your experience, analyse traffic and
               show relevant content. See our{" "}
               <Link
@@ -99,11 +99,11 @@ const CookieConsent = () => {
               </Link>
               .
             </div>
-            <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-x-5 sm:gap-y-2 md:shrink-0">
+            <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:items-center md:justify-end md:gap-x-5 md:gap-y-2 md:shrink-0">
               <button
                 type="button"
                 onClick={() => setShowPrefs(true)}
-                className="text-left text-sm underline underline-offset-2 hover:opacity-90 sm:text-center"
+                className="col-span-2 text-left text-xs underline underline-offset-2 hover:opacity-90 md:col-span-1 md:text-sm md:text-center"
                 style={{ color: "rgba(245, 234, 214, 0.7)" }}
               >
                 Manage preferences
@@ -111,15 +111,18 @@ const CookieConsent = () => {
               <button
                 type="button"
                 onClick={rejectAll}
-                className="text-left text-sm underline underline-offset-2 hover:opacity-90 sm:text-center"
-                style={{ color: "rgba(245, 234, 214, 0.7)" }}
+                className="inline-flex min-h-10 items-center justify-center rounded-md border px-4 py-2 text-xs font-medium transition-opacity hover:opacity-90 md:min-h-11 md:text-sm"
+                style={{
+                  color: "rgba(245, 234, 214, 0.88)",
+                  borderColor: "rgba(245, 234, 214, 0.18)",
+                }}
               >
                 Reject all
               </button>
               <button
                 type="button"
                 onClick={acceptAll}
-                className="inline-flex min-h-11 items-center justify-center rounded-md px-5 py-2.5 text-sm font-semibold tracking-wide transition-opacity hover:opacity-90"
+                className="inline-flex min-h-10 items-center justify-center rounded-md px-4 py-2 text-xs font-semibold tracking-wide transition-opacity hover:opacity-90 md:min-h-11 md:px-5 md:py-2.5 md:text-sm"
                 style={{ backgroundColor: "#C97B1A", color: "#1a0e00" }}
               >
                 Accept all
