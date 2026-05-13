@@ -590,6 +590,13 @@ const RecipeDetail = () => {
         </div>
       </section>
 
+      {/* Ratings */}
+      <section className="no-print border-t border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-16">
+          <RecipeRatings recipeId={recipe.id} />
+        </div>
+      </section>
+
       {/* You Might Also Like */}
       {relatedRecipes.length > 0 && (
         <section className="no-print pb-12 md:pb-20 border-t border-border">
