@@ -23,6 +23,8 @@ export interface RecipeSchemaInput {
   /** Comma-separated keyword string. */
   keywords?: string;
   siteUrl?: string;
+  /** Aggregate user rating, when at least 1 rating exists. */
+  aggregateRating?: { ratingValue: number; ratingCount: number } | null;
 }
 
 const SITE = "https://stirandsimmer.co.uk";
