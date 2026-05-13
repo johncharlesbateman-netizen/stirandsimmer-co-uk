@@ -166,6 +166,23 @@ const RecipeDetail = () => {
     enabled: !!recipe,
   });
 
+  // Aggregate rating stats — used to show stars in Google search results.
+  const { data: ratingStats } = useQuery({
+    queryKey: ["recipe-rating-stats", recipe?.id],
+    queryFn: async () => {
+      if (!recipe) return null;
+      const { data, error } = await supabase
+        .from("recipe_ratings")
+        .select("rating")
+        .eq("recipe_id", recipe.id);
+      if (error) throw error;
+      if (!data || data.length === 0) return null;
+      const avg = data.reduce((s, r) => s + r.rating, 0) / data.length;
+      return { ratingValue: Math.round(avg * 10) / 10, ratingCount: data.length };
+    },
+    enabled: !!recipe,
+  });
+
   const baseServings = recipe?.servings || 2;
   const currentServings = servings ?? baseServings;
   const scaleFactor = currentServings / baseServings;
