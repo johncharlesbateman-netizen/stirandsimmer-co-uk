@@ -156,7 +156,7 @@ const Index = () => {
                   {collectionCount}
                 </div>
                 <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
-                  Recipes
+                  Collections
                 </div>
               </Link>
             </li>
