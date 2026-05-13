@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import collectionsTeaser from "@/assets/collections-teaser.webp";
@@ -7,8 +6,7 @@ import collectionsTeaser800 from "@/assets/collections-teaser-800.webp";
 import collectionsTeaser1200 from "@/assets/collections-teaser-1200.webp";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
 import { collections } from "@/lib/collections";
-
-import { supabase } from "@/integrations/supabase/client";
+import { useRecipeCount } from "@/hooks/useRecipeCount";
 
 const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp";
 const heroImage = `${heroPexelsBase}&w=1280`;
