@@ -31,7 +31,7 @@ const recipeSchema = z.object({
   tips: z.string().trim().max(2000).nullable(),
   seo_title: z.string().trim().max(70).nullable(),
   seo_description: z.string().trim().max(170).nullable(),
-  cuisine_region: z.array(z.enum(CUISINE_REGIONS)).default([]),
+  cuisine_region: z.array(z.enum(CUISINE_REGIONS)).min(1, "Pick at least one cuisine region"),
   meal_types: z.array(z.enum(MEAL_TYPES)).min(1, "Pick at least one meal type"),
 });
 
@@ -223,7 +223,7 @@ const AdminNewRecipe = () => {
 
           {/* Cuisine regions */}
           <div>
-            <label className="block text-sm font-medium mb-2">Cuisine regions</label>
+            <label className="block text-sm font-medium mb-2">Cuisine regions *</label>
             <p className="text-xs text-muted-foreground mb-3">
               Tag this recipe with one or more regions. These map to challenge regions in The Daily Pass app.
             </p>
