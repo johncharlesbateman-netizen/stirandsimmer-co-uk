@@ -88,6 +88,7 @@ const About = () => {
                   <p>
                     If a dish isn't worth making, it doesn't go on the site.
                   </p>
+                </div>
               </div>
 
               {/* What You'll Find Here */}
