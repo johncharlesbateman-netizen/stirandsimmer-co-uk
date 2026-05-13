@@ -49,11 +49,23 @@ const CategoryPage = () => {
     queryFn: async () => {
       if (!tile) return [] as Recipe[];
 
+      const log = (label: string, data: unknown, error: unknown) => {
+        // eslint-disable-next-line no-console
+        console.log("[CategoryPage]", {
+          tileSlug: tile.slug,
+          branch: label,
+          error,
+          count: Array.isArray(data) ? data.length : null,
+          firstRow: Array.isArray(data) ? data[0] : null,
+        });
+      };
+
       if (tile.slug === "all") {
         const { data, error } = await supabase
           .from("recipes")
           .select("*")
           .order("created_at", { ascending: false });
+        log("all", data, error);
         if (error) throw error;
         return (data ?? []) as Recipe[];
       }
@@ -65,6 +77,7 @@ const CategoryPage = () => {
           .select("*")
           .eq("category", mappedCategory)
           .order("created_at", { ascending: false });
+        log(`category=${mappedCategory}`, data, error);
         if (error) throw error;
         return (data ?? []) as Recipe[];
       }
@@ -73,13 +86,20 @@ const CategoryPage = () => {
         .from("recipes")
         .select("*")
         .order("created_at", { ascending: false });
+      log("fallback-all", data, error);
       if (error) throw error;
 
       if (tile.slug === "quick-meals") {
-        return ((data ?? []) as Recipe[]).filter(isQuickMealRecipe);
+        const filtered = ((data ?? []) as Recipe[]).filter(isQuickMealRecipe);
+        // eslint-disable-next-line no-console
+        console.log("[CategoryPage] quick-meals filtered count:", filtered.length);
+        return filtered;
       }
 
-      return ((data ?? []) as Recipe[]).filter(tile.filter);
+      const filtered = ((data ?? []) as Recipe[]).filter(tile.filter);
+      // eslint-disable-next-line no-console
+      console.log("[CategoryPage] tile.filter count:", filtered.length);
+      return filtered;
     },
     enabled: !!tile,
   });
