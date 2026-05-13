@@ -28,13 +28,6 @@ const titleMatches = (r: Recipe, words: string[]) => {
 const totalTime = (r: Recipe) =>
   (r.prep_time_minutes ?? 0) + (r.cook_time_minutes ?? 0);
 
-export const QUICK_MEAL_MAX_MINUTES = 35;
-
-export const isQuickMealRecipe = (r: Pick<Recipe, "prep_time_minutes" | "cook_time_minutes">) => {
-  const time = totalTime(r as Recipe);
-  return time > 0 && time <= QUICK_MEAL_MAX_MINUTES;
-};
-
 export const RECIPE_TILES: RecipeTile[] = [
   {
     slug: "all",
@@ -111,7 +104,7 @@ export const RECIPE_TILES: RecipeTile[] = [
       "Quick meal recipes — ready in 30 minutes or less | Stir & Simmer",
     seoDescription:
       "Fast, flavourful and fuss-free — our quick meal recipes are ready in 30 minutes or less. Perfect for busy weeknights.",
-    filter: (r) => isQuickMealRecipe(r),
+    filter: (r) => totalTime(r) > 0 && totalTime(r) <= 30,
   },
   {
     slug: "spicy",

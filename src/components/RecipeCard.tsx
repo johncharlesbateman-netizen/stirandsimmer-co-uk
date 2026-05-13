@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Clock, ChefHat } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -31,50 +30,6 @@ const RecipeCard = ({ recipe, className, floatDelay = 0, showMeta = false, showC
   const prep = recipe.prep_time_minutes || 0;
   const stepCount = Array.isArray(recipe.instructions) ? recipe.instructions.length : 0;
   const difficulty = deriveDifficulty(recipe.prep_time_minutes, recipe.cook_time_minutes, stepCount);
-  const transformedSrc = recipe.image_url
-    ? optimisedImage(recipe.image_url, { width: 800 })
-    : "/placeholder.svg";
-  const transformedSrcSet = recipe.image_url
-    ? responsiveSrcSet(recipe.image_url, [400, 600, 800, 1200]) || undefined
-    : undefined;
-  const [imageSrc, setImageSrc] = useState(transformedSrc);
-  const [imageSrcSet, setImageSrcSet] = useState<string | undefined>(transformedSrcSet);
-
-  // eslint-disable-next-line no-console
-  console.log("[RecipeCard]", {
-    id: recipe?.id,
-    slug: recipe?.slug,
-    title: recipe?.title,
-    category: recipe?.category,
-    hasImageUrl: !!recipe?.image_url,
-    rawImageUrl: recipe?.image_url,
-    transformedSrc,
-    transformedSrcSet,
-    hasDescription: !!recipe?.description,
-    descriptionLen: recipe?.description?.length ?? 0,
-  });
-
-  useEffect(() => {
-    setImageSrc(transformedSrc);
-    setImageSrcSet(transformedSrcSet);
-  }, [transformedSrc, transformedSrcSet]);
-
-  const handleImageError = () => {
-    // eslint-disable-next-line no-console
-    console.warn("[RecipeCard] image error", {
-      slug: recipe?.slug,
-      attemptedSrc: imageSrc,
-      rawImageUrl: recipe?.image_url,
-    });
-    if (recipe.image_url && imageSrc !== recipe.image_url) {
-      setImageSrc(recipe.image_url);
-      setImageSrcSet(undefined);
-      return;
-    }
-
-    setImageSrc("/placeholder.svg");
-    setImageSrcSet(undefined);
-  };
 
   return (
     <Link
@@ -84,15 +39,14 @@ const RecipeCard = ({ recipe, className, floatDelay = 0, showMeta = false, showC
       <article className="space-y-4">
         <div className="aspect-[4/3] overflow-hidden bg-muted relative">
           <img
-            src={imageSrc}
-            srcSet={imageSrcSet}
+            src={recipe.image_url ? optimisedImage(recipe.image_url, { width: 800 }) : "/placeholder.svg"}
+            srcSet={recipe.image_url ? responsiveSrcSet(recipe.image_url, [400, 600, 800, 1200]) : undefined}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             alt={buildRecipeAltText(recipe.title, (recipe.ingredients as string[] | null) ?? [])}
             loading="lazy"
             decoding="async"
             width={800}
             height={600}
-            onError={handleImageError}
             className="w-full h-full object-cover editorial-image"
           />
           <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />

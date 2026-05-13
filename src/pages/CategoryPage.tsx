@@ -7,7 +7,7 @@ import RecipeCard from "@/components/RecipeCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
-import { getTileBySlug, isQuickMealRecipe } from "@/lib/recipe-tiles";
+import { getTileBySlug } from "@/lib/recipe-tiles";
 import { MealType, isMealType } from "@/lib/meal-types";
 
 type Recipe = Tables<"recipes">;
@@ -28,16 +28,8 @@ const totalTime = (r: Recipe) =>
   (r.prep_time_minutes ?? 0) + (r.cook_time_minutes ?? 0);
 
 const isQuickMeal = (r: Recipe) => {
-  return isQuickMealRecipe(r);
-};
-
-const CATEGORY_BY_TILE_SLUG: Partial<Record<string, Recipe["category"]>> = {
-  chicken: "chicken",
-  beef: "beef",
-  lamb: "lamb",
-  "fish-and-seafood": "seafood",
-  pork: "pork",
-  "puddings-and-desserts": "sweets",
+  const t = totalTime(r);
+  return t > 0 && t <= 35;
 };
 
 const CategoryPage = () => {
@@ -45,70 +37,22 @@ const CategoryPage = () => {
   const tile = getTileBySlug(slug);
 
   const { data: recipes, isLoading } = useQuery({
-    queryKey: ["recipes", "tile", tile?.slug],
+    queryKey: ["recipes", "tile", "all"],
     queryFn: async () => {
-      if (!tile) return [] as Recipe[];
-
-      const log = (label: string, data: unknown, error: unknown) => {
-        // eslint-disable-next-line no-console
-        console.log("[CategoryPage]", {
-          tileSlug: tile.slug,
-          branch: label,
-          error,
-          count: Array.isArray(data) ? data.length : null,
-          firstRow: Array.isArray(data) ? data[0] : null,
-        });
-      };
-
-      if (tile.slug === "all") {
-        const { data, error } = await supabase
-          .from("recipes")
-          .select("*")
-          .order("created_at", { ascending: false });
-        log("all", data, error);
-        if (error) throw error;
-        return (data ?? []) as Recipe[];
-      }
-
-      const mappedCategory = CATEGORY_BY_TILE_SLUG[tile.slug];
-      if (mappedCategory) {
-        const { data, error } = await supabase
-          .from("recipes")
-          .select("*")
-          .eq("category", mappedCategory)
-          .order("created_at", { ascending: false });
-        log(`category=${mappedCategory}`, data, error);
-        if (error) throw error;
-        return (data ?? []) as Recipe[];
-      }
-
       const { data, error } = await supabase
         .from("recipes")
         .select("*")
         .order("created_at", { ascending: false });
-      log("fallback-all", data, error);
       if (error) throw error;
-
-      if (tile.slug === "quick-meals") {
-        const filtered = ((data ?? []) as Recipe[]).filter(isQuickMealRecipe);
-        // eslint-disable-next-line no-console
-        console.log("[CategoryPage] quick-meals filtered count:", filtered.length);
-        return filtered;
-      }
-
-      const filtered = ((data ?? []) as Recipe[]).filter(tile.filter);
-      // eslint-disable-next-line no-console
-      console.log("[CategoryPage] tile.filter count:", filtered.length);
-      return filtered;
+      return (data ?? []) as Recipe[];
     },
-    enabled: !!tile,
   });
 
   if (!tile) {
     return <Navigate to="/recipes" replace />;
   }
 
-  const filtered = recipes ?? [];
+  const filtered = (recipes ?? []).filter(tile.filter);
   const canonicalUrl = `https://stirandsimmer.co.uk/recipes/category/${tile.slug}`;
 
   return (
