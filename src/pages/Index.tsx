@@ -136,46 +136,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* At-a-glance counter strip */}
-      <section aria-label="Site at a glance" className="bg-background border-y border-border">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-8">
-          <ul className="grid grid-cols-3 gap-4 md:gap-8 text-center divide-x divide-border">
-            <li className="px-2">
-              <Link to="/recipes" className="block group">
-                <div className="font-display text-3xl md:text-4xl text-foreground group-hover:opacity-70 transition-opacity">
-                  {recipeCount}
-                </div>
-                <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
-                  Recipes
-                </div>
-              </Link>
-            </li>
-            <li className="px-2">
-              <Link to="/recipes" className="block group">
-                <div className="font-display text-3xl md:text-4xl text-foreground group-hover:opacity-70 transition-opacity">
-                  {collectionCount}
-                </div>
-                <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
-                  Recipes
-                </div>
-              </Link>
-            </li>
-            <li className="px-2">
-              <Link to="/meal-planner" className="block group">
-                <div className="font-display text-3xl md:text-4xl text-foreground group-hover:opacity-70 transition-opacity">
-                  7
-                </div>
-                <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
-                  Day Planner
-                </div>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="h-2 bg-background" aria-hidden />
-
 
       {/* Collections Teaser */}
       <section className="relative overflow-hidden">
