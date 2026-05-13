@@ -268,6 +268,23 @@ const RecipeDetail = () => {
     keywords,
   });
 
+  // BreadcrumbList JSON-LD — surfaces the breadcrumb trail in Google results.
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://stirandsimmer.co.uk/" },
+      { "@type": "ListItem", position: 2, name: "Recipes", item: "https://stirandsimmer.co.uk/recipes" },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: categoryLabels[recipe.category],
+        item: `https://stirandsimmer.co.uk/recipes/category/${categoryToSlug[recipe.category]}`,
+      },
+      { "@type": "ListItem", position: 4, name: recipe.title, item: pageUrl },
+    ],
+  };
+
 
 
 
