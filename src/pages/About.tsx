@@ -88,7 +88,14 @@ const About = () => {
                   <p>
                     If a dish isn't worth making, it doesn't go on the site.
                   </p>
-                </div>
+              </div>
+
+              {/* What You'll Find Here */}
+              <div className="mt-16 pt-12 border-t border-border">
+                <h2 className="heading-section mb-6">What You'll Find Here</h2>
+                <p className="body-editorial text-muted-foreground">
+                  Quick meals that don't taste like shortcuts. Proper weekend cooking when you have more time. Guides that explain the why, not just the what. And a recipe list that keeps growing — built around what real cooks actually want to eat.
+                </p>
               </div>
             </div>
 
