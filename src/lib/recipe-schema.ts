@@ -83,6 +83,7 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
     caloriesPerServing,
     keywords,
     siteUrl = SITE,
+    aggregateRating,
   } = input;
 
   const totalMinutes = (prepMinutes || 0) + (cookMinutes || 0);
