@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import collectionsTeaser from "@/assets/collections-teaser.webp";
@@ -7,8 +6,7 @@ import collectionsTeaser800 from "@/assets/collections-teaser-800.webp";
 import collectionsTeaser1200 from "@/assets/collections-teaser-1200.webp";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
 import { collections } from "@/lib/collections";
-
-import { supabase } from "@/integrations/supabase/client";
+import { useRecipeCount } from "@/hooks/useRecipeCount";
 
 const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp";
 const heroImage = `${heroPexelsBase}&w=1280`;
@@ -17,29 +15,9 @@ const heroImageSrcSet = [480, 768, 1024, 1280, 1600]
   .join(", ");
 const heroImageSizes = "(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1600px";
 
-// Fallback values used until the live count loads (and if the query ever fails).
-const FALLBACK_RECIPE_COUNT = 117;
-
-
 const Index = () => {
-  const [recipeCount, setRecipeCount] = useState<number>(FALLBACK_RECIPE_COUNT);
-
-  useEffect(() => {
-    const abortCtrl = new AbortController();
-    (async () => {
-      const { count, error } = await supabase
-        .from("recipes")
-        .select("id", { count: "exact" })
-        .abortSignal(abortCtrl.signal)
-        .limit(0);
-      if (!abortCtrl.signal.aborted && !error && typeof count === "number" && count > 0) {
-        setRecipeCount(count);
-      }
-    })();
-    return () => {
-      abortCtrl.abort();
-    };
-  }, []);
+  const { data: liveCount } = useRecipeCount();
+  const recipeCount = liveCount ?? null;
 
   const collectionCount = collections.length;
 
@@ -127,7 +105,7 @@ const Index = () => {
               className="tracking-[0.2em] uppercase text-primary-foreground/80 hover:text-primary-foreground transition-colors"
               style={{ fontSize: "13px" }}
             >
-              {recipeCount} tried-and-tested recipes
+              {recipeCount !== null ? `${recipeCount} tried-and-tested recipes` : "Tried-and-tested recipes"}
             </Link>
           </div>
         </div>
@@ -145,7 +123,7 @@ const Index = () => {
             <li className="px-2">
               <Link to="/recipes" className="block group">
                 <div className="font-display text-3xl md:text-4xl text-foreground group-hover:opacity-70 transition-opacity">
-                  {recipeCount}
+                  {recipeCount !== null ? recipeCount : "—"}
                 </div>
                 <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
                   Recipes
