@@ -19,8 +19,6 @@ const Index = () => {
   const { data: liveCount } = useRecipeCount();
   const recipeCount = liveCount ?? null;
 
-  const collectionCount = collections.length;
-
   return (
     <Layout>
       <Helmet>
