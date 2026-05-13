@@ -330,6 +330,7 @@ const RecipeDetail = () => {
           />
         )}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
       </Helmet>
 
       {/* Sticky "Jump to Recipe" — mobile only, appears after scrolling past hero */}
