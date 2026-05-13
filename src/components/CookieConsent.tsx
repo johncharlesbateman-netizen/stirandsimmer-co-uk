@@ -46,15 +46,18 @@ const CookieConsent = () => {
   useEffect(() => {
     if (!visible) return;
     const prev = document.body.style.paddingBottom;
+    const prevOverflow = document.body.style.overflow;
     const apply = () => {
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      document.body.style.paddingBottom = isMobile ? "260px" : "120px";
+      document.body.style.paddingBottom = isMobile ? "0px" : "120px";
+      document.body.style.overflow = isMobile ? "hidden" : prevOverflow;
     };
     apply();
     window.addEventListener("resize", apply);
     return () => {
       window.removeEventListener("resize", apply);
       document.body.style.paddingBottom = prev;
+      document.body.style.overflow = prevOverflow;
     };
   }, [visible]);
 
@@ -72,12 +75,13 @@ const CookieConsent = () => {
   return (
     <div
       role="dialog"
+      aria-modal="true"
       aria-live="polite"
       aria-label="Cookie consent"
-      className="fixed bottom-0 left-0 right-0 z-[55] px-4 pb-4 pt-3 md:px-6 md:pb-6"
+      className="fixed inset-0 z-[55] flex items-end bg-foreground/20 px-4 pb-4 pt-3 md:px-6 md:pb-6"
     >
       <div
-        className="mx-auto max-w-3xl rounded-lg border shadow-2xl px-5 py-4 md:px-6 md:py-5"
+        className="mx-auto w-full max-w-3xl rounded-lg border shadow-2xl px-5 py-4 md:px-6 md:py-5"
         style={{
           backgroundColor: "#1a0e00",
           color: "#f5ead6",
@@ -98,11 +102,11 @@ const CookieConsent = () => {
               </Link>
               .
             </div>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 md:shrink-0">
+            <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-x-5 sm:gap-y-2 md:shrink-0">
               <button
                 type="button"
                 onClick={() => setShowPrefs(true)}
-                className="text-sm underline underline-offset-2 hover:opacity-90"
+                className="text-left text-sm underline underline-offset-2 hover:opacity-90 sm:text-center"
                 style={{ color: "rgba(245, 234, 214, 0.7)" }}
               >
                 Manage preferences
@@ -110,7 +114,7 @@ const CookieConsent = () => {
               <button
                 type="button"
                 onClick={rejectAll}
-                className="text-sm underline underline-offset-2 hover:opacity-90"
+                className="text-left text-sm underline underline-offset-2 hover:opacity-90 sm:text-center"
                 style={{ color: "rgba(245, 234, 214, 0.7)" }}
               >
                 Reject all
@@ -118,7 +122,7 @@ const CookieConsent = () => {
               <button
                 type="button"
                 onClick={acceptAll}
-                className="inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-semibold tracking-wide transition-opacity hover:opacity-90"
+                className="inline-flex min-h-11 items-center justify-center rounded-md px-5 py-2.5 text-sm font-semibold tracking-wide transition-opacity hover:opacity-90"
                 style={{ backgroundColor: "#C97B1A", color: "#1a0e00" }}
               >
                 Accept all
@@ -144,11 +148,11 @@ const CookieConsent = () => {
                 </span>
               </li>
             </ul>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1">
+            <div className="flex flex-col items-stretch gap-2 pt-1 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-x-5 sm:gap-y-2">
               <button
                 type="button"
                 onClick={() => setShowPrefs(false)}
-                className="text-sm underline underline-offset-2 hover:opacity-90"
+                className="text-left text-sm underline underline-offset-2 hover:opacity-90 sm:text-center"
                 style={{ color: "rgba(245, 234, 214, 0.7)" }}
               >
                 Back
@@ -156,7 +160,7 @@ const CookieConsent = () => {
               <button
                 type="button"
                 onClick={rejectAll}
-                className="text-sm underline underline-offset-2 hover:opacity-90"
+                className="text-left text-sm underline underline-offset-2 hover:opacity-90 sm:text-center"
                 style={{ color: "rgba(245, 234, 214, 0.7)" }}
               >
                 Essential only
@@ -164,7 +168,7 @@ const CookieConsent = () => {
               <button
                 type="button"
                 onClick={acceptAll}
-                className="inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-semibold tracking-wide transition-opacity hover:opacity-90"
+                className="inline-flex min-h-11 items-center justify-center rounded-md px-5 py-2.5 text-sm font-semibold tracking-wide transition-opacity hover:opacity-90"
                 style={{ backgroundColor: "#C97B1A", color: "#1a0e00" }}
               >
                 Accept all
