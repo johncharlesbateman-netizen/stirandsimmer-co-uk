@@ -60,6 +60,12 @@ const RecipeCard = ({ recipe, className, floatDelay = 0, showMeta = false, showC
   }, [transformedSrc, transformedSrcSet]);
 
   const handleImageError = () => {
+    // eslint-disable-next-line no-console
+    console.warn("[RecipeCard] image error", {
+      slug: recipe?.slug,
+      attemptedSrc: imageSrc,
+      rawImageUrl: recipe?.image_url,
+    });
     if (recipe.image_url && imageSrc !== recipe.image_url) {
       setImageSrc(recipe.image_url);
       setImageSrcSet(undefined);
