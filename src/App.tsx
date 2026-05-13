@@ -111,6 +111,7 @@ const App = () => (
         <AuthProvider>
           <CanonicalRedirect />
           <ScrollToTop />
+          <Suspense fallback={<AdminFallback />}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/work" element={<Work />} />
