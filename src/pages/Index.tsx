@@ -136,6 +136,7 @@ const Index = () => {
         </div>
       </section>
 
+      <div className="h-px bg-border" aria-hidden />
 
       {/* Collections Teaser */}
       <section className="relative overflow-hidden">
@@ -153,14 +154,14 @@ const Index = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/75" />
         </div>
-        <div className="relative container mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-36 text-center text-primary-foreground">
-          <p className="text-xs md:text-sm tracking-[0.3em] uppercase mb-6 opacity-90">
+        <div className="relative container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20 text-center text-primary-foreground">
+          <p className="text-xs md:text-sm tracking-[0.3em] uppercase mb-4 opacity-90">
             Recipes
           </p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl mb-5 leading-tight max-w-3xl mx-auto">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight max-w-3xl mx-auto">
             Discover our Recipes
           </h2>
-          <p className="text-base md:text-lg font-body max-w-2xl mx-auto mb-10 text-primary-foreground/90 leading-relaxed italic">
+          <p className="text-base md:text-lg font-body max-w-2xl mx-auto mb-8 text-primary-foreground/90 leading-relaxed italic">
             Browse our full collection of tried-and-tested recipes from around the world.
           </p>
           <Link
@@ -172,16 +173,18 @@ const Index = () => {
         </div>
       </section>
 
-      <div className="h-2 bg-background" aria-hidden />
+      <div className="h-px bg-border" aria-hidden />
 
       {/* Weekly Meal Planner Promo */}
       <MealPlannerPromo />
 
+      <div className="h-px bg-border" aria-hidden />
+
       {/* CTA Section */}
-      <section className="bg-secondary/50 border-y border-border">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20 text-center">
-          <h2 className="heading-editorial mb-5">Got a question? We'd love to help</h2>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+      <section className="bg-secondary/50">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 text-center">
+          <h2 className="heading-editorial mb-4">Got a question? We'd love to help</h2>
+          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
             Whether you need advice on a recipe, a cooking tip, or just want to chat about food — drop us a line.
           </p>
           <Link
