@@ -8,31 +8,30 @@ import ScrollToTop from "./components/ScrollToTop";
 import RequireAdmin from "./components/RequireAdmin";
 import { AuthProvider } from "./hooks/useAuth";
 import Index from "./pages/Index";
+import Work from "./pages/Work";
+import About from "./pages/About";
+import Styleguide from "./pages/Styleguide";
+import Contact from "./pages/Contact";
 import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import CategoryPage from "./pages/CategoryPage";
+import RegionPage from "./pages/RegionPage";
 import { TILES_BY_SLUG } from "./lib/recipe-tiles";
-// Secondary routes — lazy-loaded to keep the initial bundle small.
-const Work = lazy(() => import("./pages/Work"));
-const About = lazy(() => import("./pages/About"));
-const Styleguide = lazy(() => import("./pages/Styleguide"));
-const Contact = lazy(() => import("./pages/Contact"));
-const RegionPage = lazy(() => import("./pages/RegionPage"));
-const Collections = lazy(() => import("./pages/Collections"));
-const KitchenAtlas = lazy(() => import("./pages/KitchenAtlas"));
-const MealPlanner = lazy(() => import("./pages/MealPlanner"));
-const Guides = lazy(() => import("./pages/Guides"));
-const GuideMotherSauces = lazy(() => import("./pages/GuideMotherSauces"));
-const GuideFrenchTechniques = lazy(() => import("./pages/GuideFrenchTechniques"));
-const Auth = lazy(() => import("./pages/Auth"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const Privacy = lazy(() => import("./pages/Privacy"));
+import Collections from "./pages/Collections";
+import KitchenAtlas from "./pages/KitchenAtlas";
+import MealPlanner from "./pages/MealPlanner";
 // Admin routes are lazy-loaded so their bundle isn't shipped to public visitors.
 const AdminNewRecipe = lazy(() => import("./pages/AdminNewRecipe"));
 const AdminEditRecipe = lazy(() => import("./pages/AdminEditRecipe"));
 const AdminSeoStatus = lazy(() => import("./pages/AdminSeoStatus"));
 const AdminTaggingAudit = lazy(() => import("./pages/AdminTaggingAudit"));
 const AdminChallenges = lazy(() => import("./pages/AdminChallenges"));
+import Guides from "./pages/Guides";
+import GuideMotherSauces from "./pages/GuideMotherSauces";
+import GuideFrenchTechniques from "./pages/GuideFrenchTechniques";
+import Auth from "./pages/Auth";
+import NotFound from "./pages/NotFound";
+import Privacy from "./pages/Privacy";
 import ExitIntentPopup from "./components/ExitIntentPopup";
 import CookieConsent from "./components/CookieConsent";
 import CanonicalRedirect from "./components/CanonicalRedirect";
@@ -111,10 +110,8 @@ const App = () => (
         <AuthProvider>
           <CanonicalRedirect />
           <ScrollToTop />
-          <Suspense fallback={<AdminFallback />}>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/index" element={<Navigate to="/" replace />} />
             <Route path="/work" element={<Work />} />
             <Route path="/about" element={<About />} />
             <Route path="/styleguide" element={<Styleguide />} />
@@ -157,7 +154,6 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-          </Suspense>
           <ExitIntentPopup />
           <CookieConsent />
         </AuthProvider>

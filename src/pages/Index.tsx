@@ -1,12 +1,14 @@
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import collectionsTeaser from "@/assets/collections-teaser.webp";
 import collectionsTeaser800 from "@/assets/collections-teaser-800.webp";
 import collectionsTeaser1200 from "@/assets/collections-teaser-1200.webp";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
+import { collections } from "@/lib/collections";
 
-import { useRecipeCount } from "@/hooks/useRecipeCount";
+import { supabase } from "@/integrations/supabase/client";
 
 const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp";
 const heroImage = `${heroPexelsBase}&w=1280`;
@@ -15,9 +17,29 @@ const heroImageSrcSet = [480, 768, 1024, 1280, 1600]
   .join(", ");
 const heroImageSizes = "(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1600px";
 
+// Fallback values used until the live count loads (and if the query ever fails).
+const FALLBACK_RECIPE_COUNT = 114;
+
+
 const Index = () => {
-  const { data: liveCount } = useRecipeCount();
-  const recipeCount = liveCount ?? null;
+  const [recipeCount, setRecipeCount] = useState<number>(FALLBACK_RECIPE_COUNT);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { count, error } = await supabase
+        .from("recipes")
+        .select("*", { count: "exact", head: true });
+      if (!cancelled && !error && typeof count === "number" && count > 0) {
+        setRecipeCount(count);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const collectionCount = collections.length;
 
   return (
     <Layout>
@@ -103,7 +125,7 @@ const Index = () => {
               className="tracking-[0.2em] uppercase text-primary-foreground/80 hover:text-primary-foreground transition-colors"
               style={{ fontSize: "13px" }}
             >
-              {recipeCount !== null ? `${recipeCount} tried-and-tested recipes` : "Tried-and-tested recipes"}
+              {recipeCount} tried-and-tested recipes
             </Link>
           </div>
         </div>
@@ -111,6 +133,44 @@ const Index = () => {
         {/* Scroll Indicator */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
           <div className="w-px h-16 bg-primary-foreground/50 animate-pulse" />
+        </div>
+      </section>
+
+      {/* At-a-glance counter strip */}
+      <section aria-label="Site at a glance" className="bg-background border-y border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-8">
+          <ul className="grid grid-cols-3 gap-4 md:gap-8 text-center divide-x divide-border">
+            <li className="px-2">
+              <Link to="/recipes" className="block group">
+                <div className="font-display text-3xl md:text-4xl text-foreground group-hover:opacity-70 transition-opacity">
+                  {recipeCount}
+                </div>
+                <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
+                  Recipes
+                </div>
+              </Link>
+            </li>
+            <li className="px-2">
+              <Link to="/recipes" className="block group">
+                <div className="font-display text-3xl md:text-4xl text-foreground group-hover:opacity-70 transition-opacity">
+                  {collectionCount}
+                </div>
+                <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
+                  Recipes
+                </div>
+              </Link>
+            </li>
+            <li className="px-2">
+              <Link to="/meal-planner" className="block group">
+                <div className="font-display text-3xl md:text-4xl text-foreground group-hover:opacity-70 transition-opacity">
+                  7
+                </div>
+                <div className="mt-1 text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
+                  Day Planner
+                </div>
+              </Link>
+            </li>
+          </ul>
         </div>
       </section>
 

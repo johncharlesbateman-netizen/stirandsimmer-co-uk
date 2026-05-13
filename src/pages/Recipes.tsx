@@ -1,14 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ArrowRight, Search, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Layout from "@/components/Layout";
 import FloatingMealPlannerButton from "@/components/FloatingMealPlannerButton";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { RECIPE_TILES } from "@/lib/recipe-tiles";
-import { useRecipeCount } from "@/hooks/useRecipeCount";
 
 type Recipe = Tables<"recipes">;
 
@@ -27,16 +26,7 @@ const Recipes = () => {
     },
   });
 
-  // Seed search input from ?q= URL param so the schema.org SearchAction
-  // and external links to /recipes?q=... actually pre-fill the search.
-  const [searchParams] = useSearchParams();
-  const initialQuery = searchParams.get("q") ?? "";
-  const [query, setQuery] = useState(initialQuery);
-  useEffect(() => {
-    const fromUrl = searchParams.get("q") ?? "";
-    if (fromUrl !== query) setQuery(fromUrl);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  const [query, setQuery] = useState("");
   const trimmed = query.trim().toLowerCase();
 
   const results = useMemo(() => {
@@ -53,8 +43,7 @@ const Recipes = () => {
   for (const tile of RECIPE_TILES) {
     counts[tile.slug] = recipes.filter(tile.filter).length;
   }
-  const { data: liveTotal } = useRecipeCount();
-  const total = liveTotal ?? recipes.length;
+  const total = recipes.length;
   const allTile = RECIPE_TILES[0]; // "all"
   const otherTiles = RECIPE_TILES.slice(1);
 

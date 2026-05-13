@@ -17,7 +17,6 @@ import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
 import ServingScaler from "@/components/ServingScaler";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import RecipeRatings from "@/components/RecipeRatings";
 import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
@@ -166,23 +165,6 @@ const RecipeDetail = () => {
     enabled: !!recipe,
   });
 
-  // Aggregate rating stats — used to show stars in Google search results.
-  const { data: ratingStats } = useQuery({
-    queryKey: ["recipe-rating-stats", recipe?.id],
-    queryFn: async () => {
-      if (!recipe) return null;
-      const { data, error } = await supabase
-        .from("recipe_ratings")
-        .select("rating")
-        .eq("recipe_id", recipe.id);
-      if (error) throw error;
-      if (!data || data.length === 0) return null;
-      const avg = data.reduce((s, r) => s + r.rating, 0) / data.length;
-      return { ratingValue: Math.round(avg * 10) / 10, ratingCount: data.length };
-    },
-    enabled: !!recipe,
-  });
-
   const baseServings = recipe?.servings || 2;
   const currentServings = servings ?? baseServings;
   const scaleFactor = currentServings / baseServings;
@@ -284,25 +266,7 @@ const RecipeDetail = () => {
     createdAt: recipe.created_at,
     updatedAt: recipe.updated_at,
     keywords,
-    aggregateRating: ratingStats ?? null,
   });
-
-  // BreadcrumbList JSON-LD — surfaces the breadcrumb trail in Google results.
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://stirandsimmer.co.uk/" },
-      { "@type": "ListItem", position: 2, name: "Recipes", item: "https://stirandsimmer.co.uk/recipes" },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: categoryLabels[recipe.category],
-        item: `https://stirandsimmer.co.uk/recipes/category/${categoryToSlug[recipe.category]}`,
-      },
-      { "@type": "ListItem", position: 4, name: recipe.title, item: pageUrl },
-    ],
-  };
 
 
 
@@ -349,7 +313,6 @@ const RecipeDetail = () => {
           />
         )}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-        <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
       </Helmet>
 
       {/* Sticky "Jump to Recipe" — mobile only, appears after scrolling past hero */}
@@ -360,7 +323,6 @@ const RecipeDetail = () => {
         className={`no-print md:hidden fixed left-1/2 -translate-x-1/2 bottom-6 z-40 inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-5 py-3 rounded-full bg-foreground text-background text-sm font-medium shadow-lg transition-all duration-200 ${
           showJumpToRecipe ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"
         }`}
-        style={{ bottom: "calc(1.5rem + var(--cookie-consent-offset, 0px))" }}
       >
         Jump to Recipe ↓
       </button>
@@ -588,13 +550,6 @@ const RecipeDetail = () => {
             </p>
           </div>
 
-        </div>
-      </section>
-
-      {/* Ratings */}
-      <section className="no-print border-t border-border">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-16">
-          <RecipeRatings recipeId={recipe.id} />
         </div>
       </section>
 

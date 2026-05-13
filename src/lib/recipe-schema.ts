@@ -23,8 +23,6 @@ export interface RecipeSchemaInput {
   /** Comma-separated keyword string. */
   keywords?: string;
   siteUrl?: string;
-  /** Aggregate user rating, when at least 1 rating exists. */
-  aggregateRating?: { ratingValue: number; ratingCount: number } | null;
 }
 
 const SITE = "https://stirandsimmer.co.uk";
@@ -83,7 +81,6 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
     caloriesPerServing,
     keywords,
     siteUrl = SITE,
-    aggregateRating,
   } = input;
 
   const totalMinutes = (prepMinutes || 0) + (cookMinutes || 0);
@@ -125,15 +122,6 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
       calories: `${calories} kcal`,
       servingSize: servings ? `1 of ${servings} servings` : "1 serving",
     },
-    ...(aggregateRating && aggregateRating.ratingCount > 0 && {
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: aggregateRating.ratingValue,
-        ratingCount: aggregateRating.ratingCount,
-        bestRating: 5,
-        worstRating: 1,
-      },
-    }),
   };
 
   return schema;
