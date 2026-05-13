@@ -17,6 +17,7 @@ import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
 import ServingScaler from "@/components/ServingScaler";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import RecipeRatings from "@/components/RecipeRatings";
 import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
@@ -165,6 +166,23 @@ const RecipeDetail = () => {
     enabled: !!recipe,
   });
 
+  // Aggregate rating stats — used to show stars in Google search results.
+  const { data: ratingStats } = useQuery({
+    queryKey: ["recipe-rating-stats", recipe?.id],
+    queryFn: async () => {
+      if (!recipe) return null;
+      const { data, error } = await supabase
+        .from("recipe_ratings")
+        .select("rating")
+        .eq("recipe_id", recipe.id);
+      if (error) throw error;
+      if (!data || data.length === 0) return null;
+      const avg = data.reduce((s, r) => s + r.rating, 0) / data.length;
+      return { ratingValue: Math.round(avg * 10) / 10, ratingCount: data.length };
+    },
+    enabled: !!recipe,
+  });
+
   const baseServings = recipe?.servings || 2;
   const currentServings = servings ?? baseServings;
   const scaleFactor = currentServings / baseServings;
@@ -266,6 +284,7 @@ const RecipeDetail = () => {
     createdAt: recipe.created_at,
     updatedAt: recipe.updated_at,
     keywords,
+    aggregateRating: ratingStats ?? null,
   });
 
   // BreadcrumbList JSON-LD — surfaces the breadcrumb trail in Google results.
@@ -568,6 +587,13 @@ const RecipeDetail = () => {
             </p>
           </div>
 
+        </div>
+      </section>
+
+      {/* Ratings */}
+      <section className="no-print border-t border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-16">
+          <RecipeRatings recipeId={recipe.id} />
         </div>
       </section>
 
