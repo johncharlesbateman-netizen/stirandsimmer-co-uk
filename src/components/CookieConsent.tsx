@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const STORAGE_KEY = "ss_cookie_consent_v1";
+const COOKIE_OFFSET_VAR = "--cookie-consent-offset";
 
 type Choice = "all" | "essential" | null;
 
@@ -31,6 +32,7 @@ const writeChoice = (c: Exclude<Choice, null>) => {
 const CookieConsent = () => {
   const [visible, setVisible] = useState(false);
   const [showPrefs, setShowPrefs] = useState(false);
+  const bannerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (readChoice() === null) {
@@ -40,23 +42,46 @@ const CookieConsent = () => {
     }
   }, []);
 
-  // While the banner is visible, reserve space at the bottom of the page
-  // so it doesn't overlap recipe images, links or the meal-planner button
-  // — especially on mobile where the banner can take ~40% of the viewport.
+  // While the banner is visible, reserve exactly the space it occupies and
+  // expose that offset to other fixed mobile UI so nothing sits underneath it.
   useEffect(() => {
     if (!visible) return;
+
     const prev = document.body.style.paddingBottom;
+    const prevOffset = document.documentElement.style.getPropertyValue(COOKIE_OFFSET_VAR);
+
     const apply = () => {
+      const bannerHeight = bannerRef.current?.getBoundingClientRect().height ?? 0;
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      document.body.style.paddingBottom = isMobile ? "260px" : "150px";
+      const reservedSpace = Math.ceil(bannerHeight) + (isMobile ? 16 : 24);
+
+      document.body.style.paddingBottom = `${reservedSpace}px`;
+      document.documentElement.style.setProperty(COOKIE_OFFSET_VAR, `${reservedSpace}px`);
     };
+
     apply();
+
+    const observer = typeof ResizeObserver !== "undefined"
+      ? new ResizeObserver(() => apply())
+      : null;
+
+    if (bannerRef.current) {
+      observer?.observe(bannerRef.current);
+    }
+
     window.addEventListener("resize", apply);
+
     return () => {
+      observer?.disconnect();
       window.removeEventListener("resize", apply);
       document.body.style.paddingBottom = prev;
+      if (prevOffset) {
+        document.documentElement.style.setProperty(COOKIE_OFFSET_VAR, prevOffset);
+      } else {
+        document.documentElement.style.removeProperty(COOKIE_OFFSET_VAR);
+      }
     };
-  }, [visible]);
+  }, [visible, showPrefs]);
 
   const acceptAll = () => {
     writeChoice("all");
@@ -71,6 +96,7 @@ const CookieConsent = () => {
 
   return (
     <div
+      ref={bannerRef}
       role="dialog"
       aria-modal="true"
       aria-live="polite"
