@@ -40,12 +40,32 @@ const RecipeCard = ({ recipe, className, floatDelay = 0, showMeta = false, showC
   const [imageSrc, setImageSrc] = useState(transformedSrc);
   const [imageSrcSet, setImageSrcSet] = useState<string | undefined>(transformedSrcSet);
 
+  // eslint-disable-next-line no-console
+  console.log("[RecipeCard]", {
+    id: recipe?.id,
+    slug: recipe?.slug,
+    title: recipe?.title,
+    category: recipe?.category,
+    hasImageUrl: !!recipe?.image_url,
+    rawImageUrl: recipe?.image_url,
+    transformedSrc,
+    transformedSrcSet,
+    hasDescription: !!recipe?.description,
+    descriptionLen: recipe?.description?.length ?? 0,
+  });
+
   useEffect(() => {
     setImageSrc(transformedSrc);
     setImageSrcSet(transformedSrcSet);
   }, [transformedSrc, transformedSrcSet]);
 
   const handleImageError = () => {
+    // eslint-disable-next-line no-console
+    console.warn("[RecipeCard] image error", {
+      slug: recipe?.slug,
+      attemptedSrc: imageSrc,
+      rawImageUrl: recipe?.image_url,
+    });
     if (recipe.image_url && imageSrc !== recipe.image_url) {
       setImageSrc(recipe.image_url);
       setImageSrcSet(undefined);
