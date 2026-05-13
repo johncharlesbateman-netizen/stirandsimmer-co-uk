@@ -284,6 +284,7 @@ const RecipeDetail = () => {
     createdAt: recipe.created_at,
     updatedAt: recipe.updated_at,
     keywords,
+    aggregateRating: ratingStats ?? null,
   });
 
   // BreadcrumbList JSON-LD — surfaces the breadcrumb trail in Google results.
