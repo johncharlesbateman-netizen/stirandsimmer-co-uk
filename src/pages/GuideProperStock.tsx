@@ -121,6 +121,52 @@ const GuideProperStock = () => {
           </ul>
         </div>
 
+        {/* The basic method — chicken stock */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            The basic method — chicken stock
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-8">
+            This is the one to learn first. Once you understand it, the others follow naturally.
+          </p>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            What you need
+          </h3>
+          <ul className="space-y-2 text-base md:text-lg text-foreground/90 leading-relaxed mb-8 list-disc pl-6">
+            <li>1 chicken carcass, ideally roasted</li>
+            <li>2 carrots, roughly chopped</li>
+            <li>2 celery sticks, roughly chopped</li>
+            <li>1 onion, halved</li>
+            <li>1 leek, roughly chopped</li>
+            <li>1 bulb of garlic, halved across the middle</li>
+            <li>A few sprigs of thyme</li>
+            <li>2 bay leaves</li>
+            <li>A small bunch of flat leaf parsley stalks</li>
+            <li>10 black peppercorns</li>
+            <li>Cold water to cover</li>
+          </ul>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            Method
+          </h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Place the carcass and all the vegetables in a large pot. Cover with cold water — always start with cold water, never hot, as this helps produce a clearer stock. Bring slowly to a gentle simmer.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            As it heats you'll see a grey foam rise to the surface. Skim this off with a spoon or ladle — it's impurities from the bones and it will cloud your stock and dull the flavour if left.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Once skimmed, reduce to the lowest simmer you can manage. The surface should barely move — just an occasional lazy bubble. Cook for three to four hours.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Do not boil. A rolling boil forces fat and impurities back into the liquid and produces a cloudy, greasy stock.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Strain through a fine sieve into a clean container. Press the solids gently to extract the last of the liquid but don't force them through or the stock will cloud. Discard everything in the sieve — it has given everything it has. Leave to cool, then refrigerate. Once cold, any fat will solidify on the surface and can be lifted off cleanly.
+          </p>
+        </div>
+
         {/* The basics */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
