@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import GuideTOC from "@/components/GuideTOC";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -107,6 +108,8 @@ const GuideMotherSauces = () => {
             </p>
           </div>
         </header>
+
+        <GuideTOC items={SAUCES.map((s) => ({ id: s.id, label: s.name }))} />
 
         {/* Sauce sections */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl">

@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import GuideTOC from "@/components/GuideTOC";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -157,6 +158,8 @@ const GuideFrenchTechniques = () => {
           </div>
         </header>
 
+        <GuideTOC items={TECHNIQUES.map((t) => ({ id: t.id, label: t.name }))} />
+
         {/* At a glance summary */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-16 max-w-3xl">
           <div
@@ -205,7 +208,7 @@ const GuideFrenchTechniques = () => {
               >
                 Technique {i + 1} of 7
               </span>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-1">
+              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-1 scroll-mt-24">
                 {t.name}
               </h2>
               <p className="italic text-sm md:text-base text-muted-foreground mb-6">

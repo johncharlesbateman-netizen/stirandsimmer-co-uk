@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import GuideTOC from "@/components/GuideTOC";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -54,11 +55,20 @@ const GuideHowToUseSpices = () => {
           </div>
         </header>
 
+        <GuideTOC
+          items={[
+              { id: "why-spices-matter", label: "Why spices matter" },
+              { id: "whole-vs-ground", label: "Whole vs ground" },
+              { id: "the-golden-rule-heat-activates-flavour", label: "The golden rule — heat activates flavour" },
+              { id: "spices-every-home-cook-should-have", label: "Spices every home cook should have" },
+              { id: "common-mistakes-to-avoid", label: "Common mistakes to avoid" },
+              { id: "how-to-start-experimenting", label: "How to start experimenting" },
+          ]}
+        />
+
         {/* Why spices matter */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Why spices matter
-          </h2>
+          <h2  id="why-spices-matter" className="font-display text-3xl md:text-4xl text-foreground mb-6">Why spices matter</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             Spices don't just add heat. They add depth, warmth, earthiness, sweetness and complexity. They're the difference between a curry that tastes flat and one that tastes like it's been cooking all day. Understanding a few basics about how to use them will make everything you cook better.
           </p>
@@ -66,9 +76,7 @@ const GuideHowToUseSpices = () => {
 
         {/* Whole vs ground */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Whole vs ground
-          </h2>
+          <h2  id="whole-vs-ground" className="font-display text-3xl md:text-4xl text-foreground mb-6">Whole vs ground</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             Most spices come in two forms — whole and ground.
           </p>
@@ -82,9 +90,7 @@ const GuideHowToUseSpices = () => {
 
         {/* The golden rule */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The golden rule — heat activates flavour
-          </h2>
+          <h2  id="the-golden-rule-heat-activates-flavour" className="font-display text-3xl md:text-4xl text-foreground mb-6">The golden rule — heat activates flavour</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             This is the single most important thing to understand about spices. Heat unlocks their essential oils and transforms raw, dusty powder into something fragrant and alive.
           </p>
@@ -106,9 +112,7 @@ const GuideHowToUseSpices = () => {
 
         {/* Spices every home cook should have */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Spices every home cook should have
-          </h2>
+          <h2  id="spices-every-home-cook-should-have" className="font-display text-3xl md:text-4xl text-foreground mb-6">Spices every home cook should have</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
             You don't need dozens. Start with these and you can make an enormous range of dishes:
           </p>
@@ -131,9 +135,7 @@ const GuideHowToUseSpices = () => {
 
         {/* Common mistakes to avoid */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Common mistakes to avoid
-          </h2>
+          <h2  id="common-mistakes-to-avoid" className="font-display text-3xl md:text-4xl text-foreground mb-6">Common mistakes to avoid</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li><strong className="text-foreground">Adding spices too late</strong> — raw ground spice added at the end of cooking tastes harsh and unfinished. Give them time and heat.</li>
             <li><strong className="text-foreground">Using old spices</strong> — ground spices lose their potency after 12 to 18 months. Smell the jar. If there's nothing there, bin it.</li>
@@ -144,9 +146,7 @@ const GuideHowToUseSpices = () => {
 
         {/* How to start experimenting */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            How to start experimenting
-          </h2>
+          <h2  id="how-to-start-experimenting" className="font-display text-3xl md:text-4xl text-foreground mb-6">How to start experimenting</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             The best way to learn spices is to pick one dish and make it repeatedly, adjusting the spicing each time. A simple dal, a roasted chicken thigh, a tomato sauce — something you make often enough to notice the difference.
           </p>
