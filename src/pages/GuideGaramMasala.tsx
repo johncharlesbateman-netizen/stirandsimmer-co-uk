@@ -125,6 +125,22 @@ const GuideGaramMasala = () => {
           </div>
         </header>
 
+        {/* What it actually is */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            What garam masala actually is
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The name translates from Hindi as "warm spice mixture" — and that word warm is important. It doesn't necessarily mean hot. It refers to spices that are considered warming in Ayurvedic tradition — spices that raise body temperature and aid digestion. Think cinnamon, cardamom, cloves, black pepper. Aromatic, fragrant, complex.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Garam masala is not a curry powder. Curry powder is a British invention designed to approximate the flavour of Indian cooking in a single convenient jar. It typically contains turmeric, which gives it that distinctive yellow colour, along with chilli for heat and various other spices.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Garam masala has no fixed recipe. It is not owned by any single culture, region or cook. It belongs to whoever is making it.
+          </p>
+        </div>
+
         {/* Spice sections */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl">
           {SPICES.map((spice, i) => (
