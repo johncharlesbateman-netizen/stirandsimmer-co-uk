@@ -82,11 +82,12 @@ const REGIONS: RegionDef[] = [
     name: "Mexico",
     emoji: "🇲🇽",
     bg: "#1a5c2a",
-    available: false,
+    available: true,
     description:
       "Vibrant, smoky and deeply satisfying. The bold flavours of Mexican cooking.",
     challenge:
-      "Coming soon — cook authentic tacos, mole and ceviche from scratch.",
+      "This week — make tacos from scratch. Try our [Battered Prawn Tacos](/recipes/battered-prawn-tacos) for a crisp, fresh take.",
+    regionTags: ["mexican"],
   },
 ];
 
