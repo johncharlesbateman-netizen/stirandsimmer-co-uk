@@ -330,7 +330,7 @@ const GuideKitchenKnives = () => {
             The one knife rule
           </h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            If you could only own one knife, make it a 20cm chef's knife in high-carbon stainless steel, full tang, with a handle that suits your hand. Keep it sharp, wash it by hand, store it properly. It will quietly handle nearly everything you ask of it — and it will last for decades.
+            If you could only own one knife, make it a 20cm chef's knife in high-carbon stainless steel, kept sharp. It will do almost everything. A paring knife and a bread knife can follow when budget allows. Everything else is a speciality tool for specific tasks — useful when you need them, unnecessary when you don't.
           </p>
         </div>
 
