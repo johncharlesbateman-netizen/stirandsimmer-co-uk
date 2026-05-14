@@ -168,7 +168,7 @@ const Index = () => {
             to="/recipes"
             className="inline-block px-10 py-4 bg-background text-foreground text-sm tracking-wider uppercase hover:opacity-90 transition-opacity"
           >
-            Discover our Recipes
+            Browse by Category
           </Link>
         </div>
       </section>
