@@ -112,8 +112,8 @@ const Guides = () => {
                 className="group relative block overflow-hidden border border-border/40 min-h-[340px] md:min-h-[380px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
               >
                 <img
-                  src={pexels(g.imageId, 800)}
-                  srcSet={pexelsSrcSet(g.imageId, [400, 600, 800, 1200])}
+                  src={g.image ?? pexels(g.imageId!, 800)}
+                  srcSet={g.image ? undefined : pexelsSrcSet(g.imageId!, [400, 600, 800, 1200])}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   alt={g.imageAlt}
                   loading="lazy"
