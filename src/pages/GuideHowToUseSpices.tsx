@@ -98,6 +98,31 @@ const GuideHowToUseSpices = () => {
           </ul>
         </div>
 
+        {/* Spices every home cook should have */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            Spices every home cook should have
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            You don't need dozens. Start with these and you can make an enormous range of dishes:
+          </p>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li><strong className="text-foreground">Cumin</strong> — earthy, warm, essential for curries, chilli and roasted vegetables.</li>
+            <li><strong className="text-foreground">Coriander</strong> — citrusy and mild, pairs beautifully with cumin.</li>
+            <li><strong className="text-foreground">Smoked paprika</strong> — adds depth and a gentle smokiness without heat.</li>
+            <li><strong className="text-foreground">Turmeric</strong> — earthy and slightly bitter, gives dishes a golden colour.</li>
+            <li><strong className="text-foreground">Chilli flakes</strong> — flexible heat you can control.</li>
+            <li><strong className="text-foreground">Cinnamon</strong> — works in both sweet and savoury dishes.</li>
+            <li>
+              <strong className="text-foreground">Garam masala</strong> — a blended mix of warming spices added at the end of cooking to lift and finish a dish. Every region of India has its own version and every cook their own blend. For a full guide to what it is, how to make it and how to use it, see our dedicated{" "}
+              <Link to="/guides/garam-masala" className="editorial-link text-foreground underline underline-offset-4 hover:no-underline">
+                Garam Masala guide
+              </Link>
+              .
+            </li>
+          </ul>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
