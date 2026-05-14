@@ -253,11 +253,11 @@ const GuideProperStock = () => {
             Common mistakes to avoid
           </h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
-            <li><strong className="text-foreground">Boiling instead of simmering</strong> — the single most common mistake. Cloudy, greasy stock almost always comes from the heat being too high.</li>
-            <li><strong className="text-foreground">Salting the pot</strong> — stock is a building block. Season the finished dish, not the stock, or you'll find yourself trapped when you reduce it.</li>
-            <li><strong className="text-foreground">Too many aromatics</strong> — a bouquet garni, not a herb garden. Strong herbs like rosemary or sage will dominate. Keep it neutral.</li>
-            <li><strong className="text-foreground">Starting with hot water</strong> — cold water draws flavour out gradually as it heats. Hot water seals the bones and gives a thinner result.</li>
-            <li><strong className="text-foreground">Skipping the skim</strong> — a few minutes of skimming early on is the difference between a clear, golden stock and a murky one.</li>
+            <li><strong className="text-foreground">Boiling instead of simmering</strong> — the single most common error. Stock needs patience and a gentle heat.</li>
+            <li><strong className="text-foreground">Not skimming</strong> — those grey impurities matter. Take five minutes at the start to skim properly and your stock will be cleaner and clearer.</li>
+            <li><strong className="text-foreground">Adding salt</strong> — don't season your stock. Season the dish you're making with it. Stock reduces during cooking and salt concentrates — you can easily end up with something unpleasantly salty.</li>
+            <li><strong className="text-foreground">Wasting vegetable trimmings</strong> — carrot peelings, celery leaves, onion skins, leek tops, parsley stalks. Keep a bag in the freezer and add them when you make stock. It costs you nothing.</li>
+            <li><strong className="text-foreground">Using the wrong vegetables</strong> — avoid starchy vegetables like potato, which cloud the stock, and brassicas like broccoli or cabbage, which make it bitter. Stick to the classics.</li>
           </ul>
         </div>
 
