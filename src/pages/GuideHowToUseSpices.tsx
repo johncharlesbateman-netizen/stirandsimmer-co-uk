@@ -74,6 +74,30 @@ const GuideHowToUseSpices = () => {
           </p>
         </div>
 
+        {/* The golden rule */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            The golden rule — heat activates flavour
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            This is the single most important thing to understand about spices. Heat unlocks their essential oils and transforms raw, dusty powder into something fragrant and alive.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            There are three main ways to do this:
+          </p>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">Dry toasting</strong> — add whole spices to a dry pan over medium heat and shake for 60 to 90 seconds until fragrant. Don't walk away — they burn fast. Use this before grinding or to finish a dish.
+            </li>
+            <li>
+              <strong className="text-foreground">Blooming in oil</strong> — add ground or whole spices to hot oil at the start of cooking, before your onions or garlic. Give them 30 to 60 seconds. This is the foundation of most Indian and Middle Eastern cooking.
+            </li>
+            <li>
+              <strong className="text-foreground">Adding mid-cook</strong> — stirring ground spices into onions or a sauce partway through. Less intense than blooming in oil but still effective.
+            </li>
+          </ul>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
