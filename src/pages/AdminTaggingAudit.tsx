@@ -35,8 +35,9 @@ type Status = "complete" | "partial" | "missing";
 
 const classify = (r: Recipe): { status: Status; reasons: string[] } => {
   const reasons: string[] = [];
-  const hasTileCategory = r.category && TILE_CATEGORY_SET.has(r.category);
-  const regionTags = ((r.cuisine_region as string[] | null) ?? []).filter(
+  const cats = (r.categories ?? []) as string[];
+  const hasTileCategory = cats.some((c) => TILE_CATEGORY_SET.has(c));
+  const regionTags = (r.cuisine_region ? [r.cuisine_region] : []).filter(
     (t) => VALID_REGION_SET.has(t),
   );
   const hasRegion = regionTags.length > 0;
@@ -58,8 +59,8 @@ const classify = (r: Recipe): { status: Status; reasons: string[] } => {
 // Cross-tag consistency rules. Returns a list of human-readable issues.
 const checkConsistency = (r: Recipe): string[] => {
   const issues: string[] = [];
-  const category = r.category as string | null;
-  const regions = ((r.cuisine_region as string[] | null) ?? []).filter((t) =>
+  const categories = (r.categories ?? []) as string[];
+  const regions = (r.cuisine_region ? [r.cuisine_region] : []).filter((t) =>
     VALID_REGION_SET.has(t),
   );
   const collections = ((r.collections as string[] | null) ?? []).map((c) =>
@@ -67,12 +68,12 @@ const checkConsistency = (r: Recipe): string[] => {
   );
 
   // Rule 1: spicy must have a cuisine region
-  if (category === "spicy" && regions.length === 0) {
+  if (categories.includes("spicy") && regions.length === 0) {
     issues.push('Tagged "spicy" but has no cuisine region');
   }
 
   // Rule 2: pasta must include italian or asian
-  if (category === "pasta") {
+  if (categories.includes("pasta")) {
     const ok = regions.includes("italian") || regions.includes("asian");
     if (!ok) {
       issues.push(
@@ -81,9 +82,9 @@ const checkConsistency = (r: Recipe): string[] => {
     }
   }
 
-  // Rule 3: "Sweets & Desserts" collection should have category "sweets"
+  // Rule 3: "Sweets & Desserts" collection should include category "sweets"
   const inDessertCollection = collections.includes("sweets & desserts");
-  if (inDessertCollection && category !== "sweets") {
+  if (inDessertCollection && !categories.includes("sweets")) {
     issues.push(
       'In "Sweets & Desserts" collection but category is not "sweets"',
     );
@@ -348,7 +349,7 @@ const RegionalMismatchAudit = ({ recipes }: { recipes: Recipe[] }) => {
   const rows: RegionMismatchRow[] = useMemo(() => {
     const out: RegionMismatchRow[] = [];
     for (const r of recipes) {
-      const regions = ((r.cuisine_region as string[] | null) ?? []).filter(
+      const regions = (r.cuisine_region ? [r.cuisine_region] : []).filter(
         (t) => REGION_KEYWORDS[t],
       );
       if (regions.length === 0) continue;
@@ -384,12 +385,9 @@ const RegionalMismatchAudit = ({ recipes }: { recipes: Recipe[] }) => {
   const removeRegion = async (row: RegionMismatchRow) => {
     setRemovingId(row.recipe.id);
     try {
-      const next = ((row.recipe.cuisine_region as string[] | null) ?? []).filter(
-        (t) => t !== row.taggedRegion,
-      );
       const { error } = await supabase
         .from("recipes")
-        .update({ cuisine_region: next })
+        .update({ cuisine_region: null })
         .eq("id", row.recipe.id);
       if (error) throw error;
       toast.success(
@@ -529,7 +527,7 @@ const AdminTaggingAudit = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
-        .select("id, slug, title, description, intro, category, cuisine_region, meal_types, collections")
+        .select("id, slug, title, description, intro, categories, cuisine_region, meal_types, collections")
         .order("title");
       if (error) throw error;
       return (data ?? []) as Recipe[];
@@ -547,8 +545,9 @@ const AdminTaggingAudit = () => {
           collections: (r.collections as string[] | null) ?? [],
         });
 
-        const currentCategory = r.category as string | null;
-        const currentRegions = ((r.cuisine_region as string[] | null) ?? []).filter(
+        const currentCategories = (r.categories ?? []) as string[];
+        const currentCategory = currentCategories.find((c) => TILE_CATEGORY_SET.has(c)) ?? currentCategories[0] ?? null;
+        const currentRegions = (r.cuisine_region ? [r.cuisine_region] : []).filter(
           (t) => VALID_REGION_SET.has(t),
         );
         const currentMealTypes = (
@@ -633,16 +632,16 @@ const AdminTaggingAudit = () => {
     setApplying(recipe.id);
     try {
       const update: {
-        category?: TileCategory;
-        cuisine_region?: string[];
+        categories?: string[];
+        cuisine_region?: string;
         meal_types?: string[];
       } = {};
-      if (nextCategory) update.category = nextCategory;
-      if (nextRegions.length > 0) {
-        const existing = ((recipe.cuisine_region as string[] | null) ?? []).filter(
-          (t) => VALID_REGION_SET.has(t),
-        );
-        update.cuisine_region = Array.from(new Set([...existing, ...nextRegions]));
+      if (nextCategory) {
+        const existingCats = ((recipe.categories ?? []) as string[]);
+        update.categories = Array.from(new Set([...existingCats, nextCategory]));
+      }
+      if (nextRegions.length > 0 && !recipe.cuisine_region) {
+        update.cuisine_region = nextRegions[0];
       }
       if (nextMealTypes.length > 0) {
         const existing = (
@@ -709,16 +708,16 @@ const AdminTaggingAudit = () => {
       const { recipe, nextCategory, nextRegions, nextMealTypes } = targets[i];
       try {
         const update: {
-          category?: TileCategory;
-          cuisine_region?: string[];
+          categories?: string[];
+          cuisine_region?: string;
           meal_types?: string[];
         } = {};
-        if (nextCategory) update.category = nextCategory;
-        if (nextRegions.length > 0) {
-          const existing = ((recipe.cuisine_region as string[] | null) ?? []).filter(
-            (t) => VALID_REGION_SET.has(t),
-          );
-          update.cuisine_region = Array.from(new Set([...existing, ...nextRegions]));
+        if (nextCategory) {
+          const existingCats = ((recipe.categories ?? []) as string[]);
+          update.categories = Array.from(new Set([...existingCats, nextCategory]));
+        }
+        if (nextRegions.length > 0 && !recipe.cuisine_region) {
+          update.cuisine_region = nextRegions[0];
         }
         if (nextMealTypes.length > 0) {
           const existing = (
@@ -901,7 +900,9 @@ const AdminTaggingAudit = () => {
                   consistencyIssues,
                 }) => {
                   const allRegions =
-                    ((recipe.cuisine_region as string[] | null) ?? []);
+                    (recipe.cuisine_region ? [recipe.cuisine_region] : []);
+                  const recipeCats = ((recipe.categories ?? []) as string[]);
+                  const primaryCat = recipeCats.find((c) => TILE_CATEGORY_SET.has(c)) ?? recipeCats[0] ?? null;
                   const hasInconsistency = consistencyIssues.length > 0;
                   return (
                     <div
@@ -934,14 +935,14 @@ const AdminTaggingAudit = () => {
                           <div className="flex flex-wrap gap-2 text-xs">
                             <span className="inline-flex items-center gap-1.5">
                               <span className="text-muted-foreground">Category:</span>
-                              {recipe.category &&
-                              TILE_CATEGORY_SET.has(recipe.category) ? (
+                              {primaryCat &&
+                              TILE_CATEGORY_SET.has(primaryCat) ? (
                                 <span className="px-2 py-0.5 rounded bg-foreground/10 text-foreground font-mono">
-                                  {labelForCategory(recipe.category)}
+                                  {labelForCategory(primaryCat)}
                                 </span>
                               ) : (
                                 <span className="px-2 py-0.5 rounded bg-red-600/15 text-red-700 dark:text-red-300 font-mono">
-                                  {recipe.category ? labelForCategory(recipe.category) : "—"}
+                                  {primaryCat ? labelForCategory(primaryCat) : "—"}
                                 </span>
                               )}
                             </span>

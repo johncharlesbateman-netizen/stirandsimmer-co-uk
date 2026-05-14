@@ -703,13 +703,13 @@ const MealPlanner = () => {
                   Browse all our dessert recipes and drop one straight into your week.
                 </p>
                 <div className="flex flex-col gap-2 max-h-72 overflow-y-auto pr-1">
-                  {allRecipes.filter((r) => r.category === "sweets").length === 0 ? (
+                  {allRecipes.filter((r) => (r.categories ?? []).includes("sweets")).length === 0 ? (
                     <p className="text-sm text-muted-foreground italic text-center py-4">
                       No desserts found.
                     </p>
                   ) : (
                     allRecipes
-                      .filter((r) => r.category === "sweets")
+                      .filter((r) => (r.categories ?? []).includes("sweets"))
                       .map((recipe) => (
                         <div
                           key={recipe.id}

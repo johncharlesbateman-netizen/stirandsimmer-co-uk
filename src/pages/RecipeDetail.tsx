@@ -549,7 +549,7 @@ const RecipeDetail = () => {
           <div className="max-w-4xl mt-16 pt-12 border-t border-border">
             <h2 className="heading-section mb-4">Serving Suggestions</h2>
             <p className="text-base text-muted-foreground leading-relaxed max-w-2xl">
-              {buildServingSuggestion(recipe.title, recipe.category)}
+              {buildServingSuggestion(recipe.title, recipe.categories?.[0])}
             </p>
           </div>
 
@@ -563,10 +563,10 @@ const RecipeDetail = () => {
             <div className="mb-10 flex items-end justify-between gap-6 flex-wrap">
               <h2 className="heading-section">You Might Also Like</h2>
               <Link
-                to={`/recipes/category/${categoryToSlug[recipe.category]}`}
+                to={`/recipes/category/${categoryToSlug[recipe.categories?.[0]]}`}
                 className="inline-flex items-center gap-2 min-h-[44px] py-2 text-sm text-muted-foreground hover:text-foreground transition-colors editorial-link"
               >
-                More {categoryLabels[recipe.category]} recipes →
+                More {categoryLabels[recipe.categories?.[0]]} recipes →
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
@@ -594,7 +594,7 @@ const RecipeDetail = () => {
                         <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
                       </div>
                       <div className="space-y-2">
-                        <p className="micro-caption">{categoryLabels[r.category]}</p>
+                        <p className="micro-caption">{categoryLabels[r.categories?.[0]]}</p>
                         <h3 className="font-display text-xl md:text-2xl group-hover:text-accent transition-colors">
                           {r.title}
                         </h3>
