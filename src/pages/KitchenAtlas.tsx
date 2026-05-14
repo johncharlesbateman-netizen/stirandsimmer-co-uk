@@ -129,40 +129,6 @@ const KitchenAtlas = () => {
         imageAlt="A flatlay of dishes and ingredients from cuisines around the world"
       />
 
-      {/* Divider between hero and dark section */}
-      <div
-        aria-hidden
-        className="w-full h-3 border-y border-border"
-        style={{ backgroundColor: "#f5e9d7" }}
-      />
-
-      {/* HERO */}
-      <section
-        className="relative w-full"
-        style={{ backgroundColor: "#1a0e00" }}
-      >
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28 text-center">
-          <p className="micro-caption mb-4" style={{ color: "#C97B1A" }}>
-            New
-          </p>
-          <h1 className="heading-display mb-6" style={{ color: "#f5e9d7" }}>
-            The Kitchen Atlas
-          </h1>
-          <p
-            className="text-lg md:text-xl max-w-2xl mx-auto"
-            style={{ color: "#d9c7a8" }}
-          >
-            Explore the world through food. Six cuisine regions, dozens of
-            recipes, one challenge at a time.
-          </p>
-          <div
-            className="mx-auto mt-8 h-px w-24"
-            style={{ backgroundColor: "#C97B1A" }}
-            aria-hidden
-          />
-        </div>
-      </section>
-
       {/* MAP */}
       <section style={{ backgroundColor: "#120a00" }} className="py-8 md:py-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
