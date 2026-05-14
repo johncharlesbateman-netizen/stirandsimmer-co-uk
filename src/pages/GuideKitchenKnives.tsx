@@ -55,10 +55,10 @@ const GuideKitchenKnives = () => {
               Kitchen knives — a cook's guide
             </h1>
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-              A good knife is the most important tool in the kitchen. It does more work than any pan, any gadget, any clever bit of equipment — and the right one, properly looked after, will make every meal you cook easier, faster and more enjoyable.
+              A good knife is the most important tool in your kitchen. Not a stand mixer, not a food processor, not a mandoline. A knife. Everything else is optional. A sharp, well-chosen knife is not.
             </p>
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-              You don't need a block full of blades. You need two or three good knives, kept sharp, that you reach for every day. This is a guide to choosing them, using them, and looking after them.
+              Most home cooks own too many knives and use too few. A block of eight knives that came as a set, half of which have never left the block. This guide will tell you what you actually need, how to choose it, and how to keep it sharp — because a blunt knife is more dangerous than a sharp one and far less useful.
             </p>
           </div>
         </header>
