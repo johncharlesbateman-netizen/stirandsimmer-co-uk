@@ -18,6 +18,13 @@ const GUIDES = [
       "Seven essential French techniques — mise en place, julienne, brunoise, chiffonade, beurre blanc, flambé and déglaze — explained simply.",
     eyebrow: "French technique",
   },
+  {
+    slug: "garam-masala",
+    title: "Garam masala — a cook's guide",
+    description:
+      "The spices that go in, why they matter, how to toast and grind them, and the mistakes most home cooks make.",
+    eyebrow: "Indian technique",
+  },
 ];
 
 const Guides = () => {
