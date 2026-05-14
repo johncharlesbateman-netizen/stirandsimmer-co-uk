@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Upload, X, Plus, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { allCategories, categoryLabels } from "@/lib/recipe-utils";
 import { CUISINE_REGIONS, type CuisineRegion } from "@/lib/cuisine-regions";
 import { MEAL_TYPES, type MealType } from "@/lib/meal-types";
 import CuisineRegionPicker from "@/components/CuisineRegionPicker";
+import CategoryPicker from "@/components/CategoryPicker";
 import MealTypePicker from "@/components/MealTypePicker";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -18,10 +18,10 @@ type RecipeCategory = Database["public"]["Enums"]["recipe_category"];
 
 const recipeSchema = z.object({
   title: z.string().trim().min(1, "Title is required").max(200, "Title too long"),
-  category: z.enum([
+  categories: z.array(z.enum([
     "chicken", "beef", "lamb", "pork", "spicy", "seafood",
     "lunch_suggestions", "sweets", "pasta",
-  ]),
+  ])).min(1, "Pick at least one category"),
   description: z.string().trim().min(1, "Description is required").max(1000, "Description too long"),
   prep_time_minutes: z.number().int().min(0).max(9999).nullable(),
   cook_time_minutes: z.number().int().min(0).max(9999).nullable(),
@@ -31,7 +31,7 @@ const recipeSchema = z.object({
   tips: z.string().trim().max(2000).nullable(),
   seo_title: z.string().trim().max(70).nullable(),
   seo_description: z.string().trim().max(170).nullable(),
-  cuisine_region: z.array(z.enum(CUISINE_REGIONS)).min(1, "Pick at least one cuisine region"),
+  cuisine_region: z.enum(CUISINE_REGIONS).nullable(),
   meal_types: z.array(z.enum(MEAL_TYPES)).min(1, "Pick at least one meal type"),
 });
 
@@ -47,7 +47,7 @@ const AdminNewRecipe = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState<RecipeCategory>("chicken");
+  const [categories, setCategories] = useState<RecipeCategory[]>(["chicken"]);
   const [description, setDescription] = useState("");
   const [prepTime, setPrepTime] = useState("");
   const [cookTime, setCookTime] = useState("");
@@ -57,7 +57,7 @@ const AdminNewRecipe = () => {
   const [tips, setTips] = useState("");
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
-  const [cuisineRegion, setCuisineRegion] = useState<CuisineRegion[]>([]);
+  const [cuisineRegion, setCuisineRegion] = useState<CuisineRegion | null>(null);
   const [mealTypes, setMealTypes] = useState<MealType[]>(["mains"]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -103,7 +103,7 @@ const AdminNewRecipe = () => {
     try {
       const cleaned = {
         title,
-        category,
+        categories,
         description,
         prep_time_minutes: prepTime ? parseInt(prepTime, 10) : null,
         cook_time_minutes: cookTime ? parseInt(cookTime, 10) : null,
@@ -128,7 +128,6 @@ const AdminNewRecipe = () => {
         return;
       }
 
-      // Upload image if provided
       let image_url: string | null = null;
       if (imageFile) {
         const ext = imageFile.name.split(".").pop() || "jpg";
@@ -143,7 +142,6 @@ const AdminNewRecipe = () => {
         image_url = urlData.publicUrl;
       }
 
-      // Generate unique slug
       let slug = slugify(title);
       const { data: existing } = await supabase
         .from("recipes")
@@ -154,7 +152,7 @@ const AdminNewRecipe = () => {
 
       const { error: insertError } = await supabase.from("recipes").insert([{
         title: parsed.data.title,
-        category: parsed.data.category,
+        categories: parsed.data.categories,
         description: parsed.data.description,
         prep_time_minutes: parsed.data.prep_time_minutes,
         cook_time_minutes: parsed.data.cook_time_minutes,
@@ -206,26 +204,20 @@ const AdminNewRecipe = () => {
             />
           </div>
 
-          {/* Category */}
+          {/* Categories */}
           <div>
-            <label className="block text-sm font-medium mb-2">Category *</label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value as RecipeCategory)}
-              className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
-              required
-            >
-              {allCategories.map((c) => (
-                <option key={c} value={c}>{categoryLabels[c]}</option>
-              ))}
-            </select>
+            <label className="block text-sm font-medium mb-2">Categories *</label>
+            <p className="text-xs text-muted-foreground mb-3">
+              Pick one or more food categories. A recipe can belong to several (e.g. a chicken pasta).
+            </p>
+            <CategoryPicker value={categories} onChange={setCategories} />
           </div>
 
-          {/* Cuisine regions */}
+          {/* Cuisine region */}
           <div>
-            <label className="block text-sm font-medium mb-2">Cuisine regions *</label>
+            <label className="block text-sm font-medium mb-2">Cuisine region</label>
             <p className="text-xs text-muted-foreground mb-3">
-              Tag this recipe with one or more regions. These map to challenge regions in The Daily Pass app.
+              Pick a single region. This maps to challenge regions in The Daily Pass app.
             </p>
             <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
           </div>
@@ -234,7 +226,7 @@ const AdminNewRecipe = () => {
           <div>
             <label className="block text-sm font-medium mb-2">Meal types *</label>
             <p className="text-xs text-muted-foreground mb-3">
-              Pick at least one meal type. Recipes can belong to more than one (e.g. a soup could be both lunch and mains).
+              Pick at least one meal type. Recipes can belong to more than one.
             </p>
             <MealTypePicker value={mealTypes} onChange={setMealTypes} />
           </div>
@@ -275,8 +267,6 @@ const AdminNewRecipe = () => {
               </label>
             )}
           </div>
-
-          {/* Times & servings — temporarily removed */}
 
           {/* Ingredients */}
           <div>
