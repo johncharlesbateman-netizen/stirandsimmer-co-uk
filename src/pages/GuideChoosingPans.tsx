@@ -230,6 +230,59 @@ const GuideChoosingPans = () => {
           </ul>
         </div>
 
+        {/* Cooking on induction */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            Cooking on induction — what you need to know
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Induction hobs work differently from gas and electric. Rather than generating heat and transferring it to the pan, induction uses electromagnetic energy to heat the pan directly. This makes induction faster, more responsive and more energy efficient than any other hob type — but it also means not every pan will work on it.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-8">
+            For a pan to work on induction it must contain ferromagnetic material — in simple terms, it needs to be magnetic. The easiest test: hold a fridge magnet to the base of the pan. If it sticks, the pan will work on induction.
+          </p>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            Works on induction
+          </h3>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed mb-8">
+            <li>
+              <strong className="text-foreground">Cast iron</strong> — excellent on induction, heats evenly and retains heat beautifully.
+            </li>
+            <li>
+              <strong className="text-foreground">Carbon steel</strong> — works well and responds quickly to heat changes.
+            </li>
+            <li>
+              <strong className="text-foreground">Stainless steel</strong> — works if it has a magnetic base, which most quality stainless steel does.
+            </li>
+            <li>
+              <strong className="text-foreground">Enamelled cast iron</strong> — works on induction regardless of colour or coating.
+            </li>
+          </ul>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            Does not work on induction
+          </h3>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed mb-8">
+            <li>
+              <strong className="text-foreground">Pure aluminium</strong> — not magnetic, will not work unless it has a magnetic base added.
+            </li>
+            <li>
+              <strong className="text-foreground">Copper</strong> — not magnetic, will not work unless specifically designed for induction.
+            </li>
+            <li>
+              <strong className="text-foreground">Some non-stick pans</strong> — check the base; many are aluminium with a non-stick coating and will not work.
+            </li>
+          </ul>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            What to look for when buying for induction
+          </h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Look for the induction symbol on the packaging — it looks like a coil of wire. Any pan labelled induction-compatible has been tested and confirmed to work. If you're replacing an existing pan collection for an induction hob, it's worth testing everything you already own with a magnet before assuming it needs replacing — you may find more of it works than you expect.
+          </p>
+        </div>
+
         {/* Common mistakes to avoid */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
