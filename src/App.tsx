@@ -33,6 +33,7 @@ import GuideGaramMasala from "./pages/GuideGaramMasala";
 import GuideHowToUseSpices from "./pages/GuideHowToUseSpices";
 import GuideProperStock from "./pages/GuideProperStock";
 import GuideProperSauce from "./pages/GuideProperSauce";
+import GuideChoosingPans from "./pages/GuideChoosingPans";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
@@ -138,6 +139,7 @@ const App = () => (
             <Route path="/guides/how-to-use-spices" element={<GuideHowToUseSpices />} />
             <Route path="/guides/proper-stock" element={<GuideProperStock />} />
             <Route path="/guides/proper-sauce" element={<GuideProperSauce />} />
+            <Route path="/guides/choosing-pans" element={<GuideChoosingPans />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />
