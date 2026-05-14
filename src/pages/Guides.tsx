@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import properStockImage from "@/assets/guide-proper-stock.jpg";
 import properSauceImage from "@/assets/guide-proper-sauce.jpg";
 import choosingPansImage from "@/assets/guide-choosing-pans.jpg";
+import kitchenKnivesImage from "@/assets/guide-kitchen-knives.jpg";
 
 const pexels = (id: string, w = 1200) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=${w}`;
@@ -88,6 +89,15 @@ const GUIDES: GuideEntry[] = [
     eyebrow: "Equipment Guide",
     image: choosingPansImage,
     imageAlt: "An overhead arrangement of cast iron, copper and stainless steel pans on a dark surface",
+  },
+  {
+    slug: "kitchen-knives",
+    title: "Kitchen knives — a cook's guide",
+    description:
+      "The blades worth owning, how to hold them, how to keep them sharp, and how to choose ones that will last a lifetime.",
+    eyebrow: "Equipment Guide",
+    image: kitchenKnivesImage,
+    imageAlt: "An overhead arrangement of kitchen knives on a dark cutting board",
   },
 ];
 
