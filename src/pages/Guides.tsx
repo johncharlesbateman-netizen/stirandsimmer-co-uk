@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { ArrowRight } from "lucide-react";
+import properStockImage from "@/assets/guide-proper-stock.jpg";
 
 const pexels = (id: string, w = 1200) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=${w}`;
@@ -12,7 +13,17 @@ const HERO_ID = "1340116"; // moody spices and herbs on dark wood
 const heroImage = pexels(HERO_ID, 1600);
 const heroSrcSet = pexelsSrcSet(HERO_ID, [768, 1200, 1600, 2000]);
 
-const GUIDES = [
+type GuideEntry = {
+  slug: string;
+  title: string;
+  description: string;
+  eyebrow: string;
+  imageId?: string;
+  image?: string;
+  imageAlt: string;
+};
+
+const GUIDES: GuideEntry[] = [
   {
     slug: "mother-sauces",
     title: "The five French mother sauces — and why every home cook should know them",
@@ -55,8 +66,8 @@ const GUIDES = [
     description:
       "The quiet foundation of good cooking — bones, mirepoix, water and time, and how to turn them into something your sauces and soups can lean on.",
     eyebrow: "Technique",
-    imageId: "33242", // simmering pot on the stove
-    imageAlt: "A pot of golden homemade stock simmering on the stove",
+    image: properStockImage,
+    imageAlt: "A pot of golden chicken stock simmering with bones, vegetables and herbs",
   },
 ];
 
@@ -111,8 +122,8 @@ const Guides = () => {
                 className="group relative block overflow-hidden border border-border/40 min-h-[340px] md:min-h-[380px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
               >
                 <img
-                  src={pexels(g.imageId, 800)}
-                  srcSet={pexelsSrcSet(g.imageId, [400, 600, 800, 1200])}
+                  src={g.image ?? pexels(g.imageId!, 800)}
+                  srcSet={g.image ? undefined : pexelsSrcSet(g.imageId!, [400, 600, 800, 1200])}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   alt={g.imageAlt}
                   loading="lazy"
