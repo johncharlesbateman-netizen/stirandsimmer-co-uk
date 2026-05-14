@@ -185,26 +185,26 @@ const GuideChoosingPans = () => {
         {/* The pans worth owning */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The pans worth owning
+            Essential pans for a home kitchen
           </h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
-            You can cook almost anything with these five pans. Start here and add as you need to.
+            You don't need every type. A well-chosen selection of three or four pans will cover almost everything:
           </p>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
-              <strong className="text-foreground">A heavy stainless steel frying pan (28cm)</strong> — for chicken, pork, vegetables, pan sauces, anything that needs proper browning. The pan you'll reach for most.
+              <strong className="text-foreground">A large stainless steel frying pan or sauté pan</strong> — your everyday workhorse. Buy the best you can afford with a thick, multi-ply base. A 28cm pan covers most tasks.
             </li>
             <li>
-              <strong className="text-foreground">A cast iron or carbon steel skillet (26–30cm)</strong> — for steak, lamb chops, smash burgers, anything that needs a serious crust. Hot, heavy, hardworking.
+              <strong className="text-foreground">A cast iron skillet</strong> — for searing, frying and hob-to-oven cooking. A 26cm skillet is the most versatile size.
             </li>
             <li>
-              <strong className="text-foreground">A small non-stick pan (20–24cm)</strong> — for eggs and fish. That's it. Keep it for those jobs only and it will last.
+              <strong className="text-foreground">A non-stick frying pan</strong> — for eggs, fish and delicate work. Keep it for these tasks only and don't overheat it.
             </li>
             <li>
-              <strong className="text-foreground">A medium saucepan (2–3 litres)</strong> — for sauces, rice, blanching vegetables, reducing stock. Stainless steel with a heavy base.
+              <strong className="text-foreground">A large stainless steel saucepan</strong> — for stocks, soups, sauces and pasta water. Choose one with a heavy base and a well-fitting lid.
             </li>
             <li>
-              <strong className="text-foreground">A heavy casserole or Dutch oven (4–6 litres)</strong> — for braises, stews, slow-cooked ragùs, soups, even bread. The pan that turns cheap cuts into something special.
+              <strong className="text-foreground">A casserole dish or Dutch oven</strong> — ideally cast iron with an enamel coating. The foundation of braises, stews and slow cooking. Enamelled cast iron doesn't require seasoning and is easy to clean.
             </li>
           </ul>
         </div>
