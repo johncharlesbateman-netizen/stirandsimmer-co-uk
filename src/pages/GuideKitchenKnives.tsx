@@ -213,6 +213,36 @@ const GuideKitchenKnives = () => {
           </p>
         </div>
 
+        {/* British knives */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="british-knives" className="font-display text-3xl md:text-4xl text-foreground mb-6 scroll-mt-24">
+            British knives — a proud heritage
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Before German and Japanese knives dominated the conversation, Britain — and Sheffield in particular — was the knife-making capital of the world. At its peak in the nineteenth century, Sheffield produced more cutlery than anywhere else on earth, supplying kitchens and tables across the British Empire. The city's combination of fast-flowing rivers for powering grinding wheels, local iron ore and skilled craftsmen made it uniquely suited to the trade.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            That heritage hasn't disappeared. Sheffield still makes knives, and several British brands are worth knowing about:
+          </p>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            <li>
+              <strong className="text-foreground">Robert Welch</strong> — based in Chipping Campden, Gloucestershire, Robert Welch combines strong design credentials with serious kitchen performance. Their knives are beautifully balanced, well finished and competitively priced against German equivalents. A genuinely excellent choice for home cooks who want quality without paying Japanese premium prices.
+            </li>
+            <li>
+              <strong className="text-foreground">Richardson Sheffield</strong> — one of the oldest Sheffield makers still in operation, Richardson Sheffield produces solid, reliable knives at accessible prices. Widely available in UK supermarkets and kitchen shops, they represent good everyday value and carry the weight of genuine Sheffield heritage.
+            </li>
+            <li>
+              <strong className="text-foreground">Stellar</strong> — a British brand producing well-regarded knives at mid-range prices. Popular with home cooks and a solid choice if you want quality without committing to a premium spend.
+            </li>
+            <li>
+              <strong className="text-foreground">Joseph Joseph</strong> — London-based and more design-led than the Sheffield makers, Joseph Joseph has built a serious reputation for well-made, thoughtfully designed kitchen tools including knives. Not traditional in the Sheffield sense but genuinely good and widely trusted.
+            </li>
+          </ul>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            <strong className="text-foreground">A note on Sheffield steel</strong> — at its finest, Sheffield steel was considered the best in the world. Joseph Rodgers &amp; Sons, founded in Sheffield in 1682 and holder of a Royal Warrant, was once the most celebrated knife maker on the planet. The brand still exists today. That history is worth something — and the craft, though diminished from its Victorian peak, has not been entirely lost. For a home cook who wants to support British manufacturing without compromising on quality, Robert Welch in particular stands comparison with the best German knives at a similar price point.
+          </p>
+        </div>
+
         {/* What to look for when buying */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 id="what-to-look-for-when-buying" className="font-display text-3xl md:text-4xl text-foreground mb-6 scroll-mt-24">
