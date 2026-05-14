@@ -11,6 +11,7 @@ const SECTIONS = [
   { id: "the-anatomy-of-a-knife", label: "The anatomy of a knife" },
   { id: "the-only-knives-you-actually-need", label: "The only knives you actually need" },
   { id: "blade-materials", label: "Blade materials" },
+  { id: "german-vs-japanese", label: "German vs Japanese" },
   { id: "what-to-look-for-when-buying", label: "What to look for when buying" },
   { id: "how-to-hold-a-knife", label: "How to hold a knife" },
   { id: "keeping-your-knives-sharp", label: "Keeping your knives sharp" },
