@@ -43,6 +43,7 @@ const isSectionKey = (v: unknown): v is SectionKey =>
   v === "quick" || isMealType(v);
 
 const MEAL_SECTION_MIN = 1;
+const SECTION_PREVIEW_LIMIT = 10;
 
 const totalTime = (r: Recipe) =>
   (r.prep_time_minutes ?? 0) + (r.cook_time_minutes ?? 0);
