@@ -25,6 +25,13 @@ const GUIDES = [
       "The spices that go in, why they matter, how to toast and grind them, and the mistakes most home cooks make.",
     eyebrow: "Indian technique",
   },
+  {
+    slug: "how-to-use-spices",
+    title: "How to use spices — a beginner's guide",
+    description:
+      "What spices do, how to store them, when to add them, and how to build proper flavour with confidence.",
+    eyebrow: "Technique",
+  },
 ];
 
 const Guides = () => {
