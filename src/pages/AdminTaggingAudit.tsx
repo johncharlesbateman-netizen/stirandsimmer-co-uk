@@ -35,8 +35,9 @@ type Status = "complete" | "partial" | "missing";
 
 const classify = (r: Recipe): { status: Status; reasons: string[] } => {
   const reasons: string[] = [];
-  const hasTileCategory = r.category && TILE_CATEGORY_SET.has(r.category);
-  const regionTags = ((r.cuisine_region as string[] | null) ?? []).filter(
+  const cats = (r.categories ?? []) as string[];
+  const hasTileCategory = cats.some((c) => TILE_CATEGORY_SET.has(c));
+  const regionTags = (r.cuisine_region ? [r.cuisine_region] : []).filter(
     (t) => VALID_REGION_SET.has(t),
   );
   const hasRegion = regionTags.length > 0;
@@ -58,8 +59,8 @@ const classify = (r: Recipe): { status: Status; reasons: string[] } => {
 // Cross-tag consistency rules. Returns a list of human-readable issues.
 const checkConsistency = (r: Recipe): string[] => {
   const issues: string[] = [];
-  const category = r.category as string | null;
-  const regions = ((r.cuisine_region as string[] | null) ?? []).filter((t) =>
+  const categories = (r.categories ?? []) as string[];
+  const regions = (r.cuisine_region ? [r.cuisine_region] : []).filter((t) =>
     VALID_REGION_SET.has(t),
   );
   const collections = ((r.collections as string[] | null) ?? []).map((c) =>
@@ -67,12 +68,12 @@ const checkConsistency = (r: Recipe): string[] => {
   );
 
   // Rule 1: spicy must have a cuisine region
-  if (category === "spicy" && regions.length === 0) {
+  if (categories.includes("spicy") && regions.length === 0) {
     issues.push('Tagged "spicy" but has no cuisine region');
   }
 
   // Rule 2: pasta must include italian or asian
-  if (category === "pasta") {
+  if (categories.includes("pasta")) {
     const ok = regions.includes("italian") || regions.includes("asian");
     if (!ok) {
       issues.push(
@@ -81,9 +82,9 @@ const checkConsistency = (r: Recipe): string[] => {
     }
   }
 
-  // Rule 3: "Sweets & Desserts" collection should have category "sweets"
+  // Rule 3: "Sweets & Desserts" collection should include category "sweets"
   const inDessertCollection = collections.includes("sweets & desserts");
-  if (inDessertCollection && category !== "sweets") {
+  if (inDessertCollection && !categories.includes("sweets")) {
     issues.push(
       'In "Sweets & Desserts" collection but category is not "sweets"',
     );
