@@ -267,6 +267,28 @@ const GuideGaramMasala = () => {
           </p>
         </div>
 
+        {/* A simple starting blend */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            A simple starting blend
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            If you want a place to begin, this is a clean, balanced version that works well across a wide range of dishes:
+          </p>
+          <ul className="space-y-2 text-base md:text-lg text-foreground/90 leading-relaxed mb-6 list-disc pl-6">
+            <li>3 tsp cumin seeds</li>
+            <li>3 tsp coriander seeds</li>
+            <li>2 tsp green cardamom pods</li>
+            <li>1 tsp black peppercorns</li>
+            <li>1 x 5cm cinnamon stick, broken</li>
+            <li>½ tsp cloves</li>
+            <li>¼ tsp nutmeg, freshly grated</li>
+          </ul>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Toast, cool and grind as above. This makes enough for several dishes and keeps well.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
