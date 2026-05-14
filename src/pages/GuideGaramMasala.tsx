@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import GuideTOC from "@/components/GuideTOC";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -131,11 +132,22 @@ const GuideGaramMasala = () => {
           </div>
         </header>
 
+        <GuideTOC
+          items={[
+              { id: "what-garam-masala-actually-is", label: "What garam masala actually is" },
+              { id: "why-every-version-is-different", label: "Why every version is different" },
+              { id: "the-core-spices", label: "The core spices" },
+              { id: "how-to-make-your-own", label: "How to make your own" },
+              { id: "a-simple-starting-blend", label: "A simple starting blend" },
+              { id: "more-complex-variations", label: "More complex variations" },
+              { id: "how-to-use-it", label: "How to use it" },
+              { id: "worth-making-your-own", label: "Worth making your own?" },
+          ]}
+        />
+
         {/* What it actually is */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            What garam masala actually is
-          </h2>
+          <h2  id="what-garam-masala-actually-is" className="font-display text-3xl md:text-4xl text-foreground mb-6">What garam masala actually is</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             The name translates from Hindi as "warm spice mixture" — and that word warm is important. It doesn't necessarily mean hot. It refers to spices that are considered warming in Ayurvedic tradition — spices that raise body temperature and aid digestion. Think cinnamon, cardamom, cloves, black pepper. Aromatic, fragrant, complex.
           </p>
@@ -149,9 +161,7 @@ const GuideGaramMasala = () => {
 
         {/* Why every version is different */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Why every version is different
-          </h2>
+          <h2  id="why-every-version-is-different" className="font-display text-3xl md:text-4xl text-foreground mb-6">Why every version is different</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             This is what makes garam masala genuinely fascinating. Travel across the Indian subcontinent and you'll find wildly different blends all carrying the same name.
           </p>
@@ -174,9 +184,7 @@ const GuideGaramMasala = () => {
 
         {/* The core spices */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The core spices
-          </h2>
+          <h2  id="the-core-spices" className="font-display text-3xl md:text-4xl text-foreground mb-6">The core spices</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
             While no recipe is definitive, certain spices appear consistently across most versions:
           </p>
@@ -253,9 +261,7 @@ const GuideGaramMasala = () => {
 
         {/* How to make your own */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            How to make your own
-          </h2>
+          <h2  id="how-to-make-your-own" className="font-display text-3xl md:text-4xl text-foreground mb-6">How to make your own</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             Making garam masala at home is straightforward and the difference in flavour compared to a shop-bought jar is remarkable.
           </p>
@@ -275,9 +281,7 @@ const GuideGaramMasala = () => {
 
         {/* A simple starting blend */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            A simple starting blend
-          </h2>
+          <h2  id="a-simple-starting-blend" className="font-display text-3xl md:text-4xl text-foreground mb-6">A simple starting blend</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
             If you want a place to begin, this is a clean, balanced version that works well across a wide range of dishes:
           </p>
@@ -297,9 +301,7 @@ const GuideGaramMasala = () => {
 
         {/* More complex variations */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            More complex variations
-          </h2>
+          <h2  id="more-complex-variations" className="font-display text-3xl md:text-4xl text-foreground mb-6">More complex variations</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             As you grow more confident you might want to explore richer, more layered blends. Some cooks add dried rose petals for fragrance. Others incorporate bay leaves, star anise or dried ginger. A Kashmiri version might lean heavily into cardamom and use very little cumin.
           </p>
@@ -310,9 +312,7 @@ const GuideGaramMasala = () => {
 
         {/* How to use it */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            How to use it
-          </h2>
+          <h2  id="how-to-use-it" className="font-display text-3xl md:text-4xl text-foreground mb-6">How to use it</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             This is perhaps the most important thing to know: garam masala is a finishing spice.
           </p>
@@ -326,9 +326,7 @@ const GuideGaramMasala = () => {
 
         {/* Worth making your own? */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Worth making your own?
-          </h2>
+          <h2  id="worth-making-your-own" className="font-display text-3xl md:text-4xl text-foreground mb-6">Worth making your own?</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             Yes. Even once. Not because shop-bought garam masala is bad — some blends are perfectly good — but because making it yourself teaches you something that no recipe can fully convey. You'll understand why cardamom smells the way it does when it hits a hot pan. You'll understand the difference between a blend that's been sitting in a warehouse for eight months and one made twenty minutes ago.
           </p>

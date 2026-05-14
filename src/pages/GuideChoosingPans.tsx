@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import GuideTOC from "@/components/GuideTOC";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -57,11 +58,24 @@ const GuideChoosingPans = () => {
           </div>
         </header>
 
+        <GuideTOC
+          items={[
+              { id: "why-the-pan-matters", label: "Why the pan matters" },
+              { id: "why-it-matters", label: "Why it matters" },
+              { id: "the-materials", label: "The materials" },
+              { id: "the-main-types-of-pan", label: "The main types of pan" },
+              { id: "essential-pans-for-a-home-kitchen", label: "Essential pans for a home kitchen" },
+              { id: "what-to-look-for-when-buying", label: "What to look for when buying" },
+              { id: "cooking-on-induction-what-you-need-to-know", label: "Cooking on induction — what you need to know" },
+              { id: "common-mistakes-to-avoid", label: "Common mistakes to avoid" },
+              { id: "caring-for-your-pans", label: "Caring for your pans" },
+              { id: "the-one-pan-rule", label: "The one pan rule" },
+          ]}
+        />
+
         {/* Why the pan matters */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Why the pan matters
-          </h2>
+          <h2  id="why-the-pan-matters" className="font-display text-3xl md:text-4xl text-foreground mb-6">Why the pan matters</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             A pan is a heat exchanger. Its job is to take energy from your hob and deliver it to the food, evenly and at the right rate. A thin, lightweight pan will hotspot, scorch and lose temperature the second food hits it. A heavy, well-made pan will hold its heat, sear properly and forgive small mistakes.
           </p>
@@ -72,9 +86,7 @@ const GuideChoosingPans = () => {
 
         {/* Why it matters */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Why it matters
-          </h2>
+          <h2  id="why-it-matters" className="font-display text-3xl md:text-4xl text-foreground mb-6">Why it matters</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             A pan is not just a container for heat. It is a tool with specific properties — weight, conductivity, reactivity, surface — that determine how food behaves inside it. Understanding those properties means you can choose the right pan instinctively, cook with more confidence, and get consistently better results.
           </p>
@@ -82,9 +94,7 @@ const GuideChoosingPans = () => {
 
         {/* The materials */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The materials
-          </h2>
+          <h2  id="the-materials" className="font-display text-3xl md:text-4xl text-foreground mb-6">The materials</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
               <strong className="text-foreground">Stainless steel</strong> — the workhorse. Durable, oven-safe, non-reactive and brilliant for building fond — the caramelised bits that make pan sauces sing. Look for a heavy tri-ply or five-ply pan with an aluminium core. Avoid thin, single-layer steel.
@@ -109,9 +119,7 @@ const GuideChoosingPans = () => {
 
         {/* The main types of pan */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The main types of pan
-          </h2>
+          <h2  id="the-main-types-of-pan" className="font-display text-3xl md:text-4xl text-foreground mb-6">The main types of pan</h2>
 
           <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
             Stainless steel
@@ -184,9 +192,7 @@ const GuideChoosingPans = () => {
 
         {/* The pans worth owning */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Essential pans for a home kitchen
-          </h2>
+          <h2  id="essential-pans-for-a-home-kitchen" className="font-display text-3xl md:text-4xl text-foreground mb-6">Essential pans for a home kitchen</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
             You don't need every type. A well-chosen selection of three or four pans will cover almost everything:
           </p>
@@ -211,9 +217,7 @@ const GuideChoosingPans = () => {
 
         {/* What to look for when buying */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            What to look for when buying
-          </h2>
+          <h2  id="what-to-look-for-when-buying" className="font-display text-3xl md:text-4xl text-foreground mb-6">What to look for when buying</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
               <strong className="text-foreground">Base thickness</strong> — a thick, heavy base distributes heat evenly and prevents hot spots. Cheap pans with thin bases warp and heat unevenly.
@@ -232,9 +236,7 @@ const GuideChoosingPans = () => {
 
         {/* Cooking on induction */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Cooking on induction — what you need to know
-          </h2>
+          <h2  id="cooking-on-induction-what-you-need-to-know" className="font-display text-3xl md:text-4xl text-foreground mb-6">Cooking on induction — what you need to know</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             Induction hobs work differently from gas and electric. Rather than generating heat and transferring it to the pan, induction uses electromagnetic energy to heat the pan directly. This makes induction faster, more responsive and more energy efficient than any other hob type — but it also means not every pan will work on it.
           </p>
@@ -285,9 +287,7 @@ const GuideChoosingPans = () => {
 
         {/* Common mistakes to avoid */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Common mistakes to avoid
-          </h2>
+          <h2  id="common-mistakes-to-avoid" className="font-display text-3xl md:text-4xl text-foreground mb-6">Common mistakes to avoid</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
               <strong className="text-foreground">Using non-stick for searing</strong> — non-stick coatings break down at high heat and never give you the crust or fond you need. Reach for stainless steel, cast iron or carbon steel instead.
@@ -309,9 +309,7 @@ const GuideChoosingPans = () => {
 
         {/* Caring for your pans */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Caring for your pans
-          </h2>
+          <h2  id="caring-for-your-pans" className="font-display text-3xl md:text-4xl text-foreground mb-6">Caring for your pans</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
               <strong className="text-foreground">Stainless steel</strong> — dishwasher safe but hand washing preserves the finish. For stubborn residue, deglaze with water while still hot or use a stainless steel cleaner.
@@ -333,9 +331,7 @@ const GuideChoosingPans = () => {
 
         {/* The one pan rule */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The one pan rule
-          </h2>
+          <h2  id="the-one-pan-rule" className="font-display text-3xl md:text-4xl text-foreground mb-6">The one pan rule</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             If you could only own one pan, make it a 28cm stainless steel frying pan with a thick base. It won't be perfect for everything — eggs will stick until you learn the technique, and it won't hold heat like cast iron — but it will handle more tasks more capably than any other single pan. Everything else builds from there.
           </p>

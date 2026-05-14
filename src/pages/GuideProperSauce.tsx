@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import GuideTOC from "@/components/GuideTOC";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -51,11 +52,21 @@ const GuideProperSauce = () => {
           </div>
         </header>
 
+        <GuideTOC
+          items={[
+              { id: "what-a-sauce-actually-does", label: "What a sauce actually does" },
+              { id: "the-building-blocks", label: "The building blocks" },
+              { id: "the-four-sauces-every-home-cook-should-know", label: "The four sauces every home cook should know" },
+              { id: "how-to-make-a-pan-sauce", label: "How to make a pan sauce" },
+              { id: "the-secrets-to-a-great-sauce", label: "The secrets to a great sauce" },
+              { id: "common-mistakes-to-avoid", label: "Common mistakes to avoid" },
+              { id: "a-note-on-stock", label: "A note on stock" },
+          ]}
+        />
+
         {/* What a sauce actually does */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            What a sauce actually does
-          </h2>
+          <h2  id="what-a-sauce-actually-does" className="font-display text-3xl md:text-4xl text-foreground mb-6">What a sauce actually does</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             A sauce has one job: to add flavour, moisture and cohesion to a dish. It should complement what it's served with, not compete with it. It should taste like it belongs on the plate — not like something that arrived separately and happens to be nearby.
           </p>
@@ -66,9 +77,7 @@ const GuideProperSauce = () => {
 
         {/* The building blocks */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The building blocks
-          </h2>
+          <h2  id="the-building-blocks" className="font-display text-3xl md:text-4xl text-foreground mb-6">The building blocks</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
             Every sauce, however complex it looks, is built from a small number of elements:
           </p>
@@ -93,9 +102,7 @@ const GuideProperSauce = () => {
 
         {/* The four sauces every home cook should know */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The four sauces every home cook should know
-          </h2>
+          <h2  id="the-four-sauces-every-home-cook-should-know" className="font-display text-3xl md:text-4xl text-foreground mb-6">The four sauces every home cook should know</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
               <strong className="text-foreground">Pan sauce</strong> — the simplest and most useful sauce you can make. After searing meat, deglaze the pan with wine or stock, scraping up all the caramelised bits from the bottom. Reduce, finish with butter. Done in five minutes. Works with almost anything.
@@ -114,9 +121,7 @@ const GuideProperSauce = () => {
 
         {/* How to make a pan sauce */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            How to make a pan sauce
-          </h2>
+          <h2  id="how-to-make-a-pan-sauce" className="font-display text-3xl md:text-4xl text-foreground mb-6">How to make a pan sauce</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-8">
             This is the one to learn first. It uses the pan you've already cooked in, takes five to ten minutes, and produces something that tastes like it came from a restaurant kitchen.
           </p>
@@ -155,9 +160,7 @@ const GuideProperSauce = () => {
 
         {/* The secrets to a great sauce */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The secrets to a great sauce
-          </h2>
+          <h2  id="the-secrets-to-a-great-sauce" className="font-display text-3xl md:text-4xl text-foreground mb-6">The secrets to a great sauce</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
               <strong className="text-foreground">Reduce properly</strong> — most home cooks don't reduce their sauces enough. Reduction concentrates flavour and builds body. If your sauce tastes thin and watery, keep cooking.
@@ -179,9 +182,7 @@ const GuideProperSauce = () => {
 
         {/* Common mistakes to avoid */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Common mistakes to avoid
-          </h2>
+          <h2  id="common-mistakes-to-avoid" className="font-display text-3xl md:text-4xl text-foreground mb-6">Common mistakes to avoid</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
               <strong className="text-foreground">Adding stock straight from cold</strong> — always use warm or hot stock. Cold stock added to a hot pan lowers the temperature and stalls the reduction.
@@ -200,9 +201,7 @@ const GuideProperSauce = () => {
 
         {/* A note on stock */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            A note on stock
-          </h2>
+          <h2  id="a-note-on-stock" className="font-display text-3xl md:text-4xl text-foreground mb-6">A note on stock</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             A sauce is only as good as its base. If you're using water and a cube, the ceiling is low. If you're using a good homemade stock, the ceiling disappears. This is why the{" "}
             <Link to="/guides/proper-stock" className="editorial-link text-foreground underline underline-offset-4 hover:no-underline">

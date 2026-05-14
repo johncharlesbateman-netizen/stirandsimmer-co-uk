@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import GuideTOC from "@/components/GuideTOC";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -51,11 +52,27 @@ const GuideProperStock = () => {
           </div>
         </header>
 
+        <GuideTOC
+          items={[
+              { id: "what-stock-actually-is", label: "What stock actually is" },
+              { id: "why-stock-matters", label: "Why stock matters" },
+              { id: "why-bother-making-your-own", label: "Why bother making your own" },
+              { id: "stock-vs-broth", label: "Stock vs broth" },
+              { id: "the-four-main-stocks", label: "The four main stocks" },
+              { id: "the-basic-method-chicken-stock", label: "The basic method — chicken stock" },
+              { id: "how-to-know-it-s-good", label: "How to know it's good" },
+              { id: "the-four-things-you-need", label: "The four things you need" },
+              { id: "white-vs-brown-stock", label: "White vs brown stock" },
+              { id: "step-by-step", label: "Step by step" },
+              { id: "common-mistakes-to-avoid", label: "Common mistakes to avoid" },
+              { id: "storing-and-using-your-stock", label: "Storing and using your stock" },
+              { id: "a-note-on-pressure-cookers", label: "A note on pressure cookers" },
+          ]}
+        />
+
         {/* What stock actually is */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            What stock actually is
-          </h2>
+          <h2  id="what-stock-actually-is" className="font-display text-3xl md:text-4xl text-foreground mb-6">What stock actually is</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             Stock is water that has been taught to taste of something. You simmer bones, vegetables and aromatics together long enough for everything they contain — collagen, minerals, natural sugars, flavour compounds — to dissolve into the liquid. What you're left with is a deeply flavoured base that makes everything you cook with it better.
           </p>
@@ -66,9 +83,7 @@ const GuideProperStock = () => {
 
         {/* Why stock matters */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Why stock matters
-          </h2>
+          <h2  id="why-stock-matters" className="font-display text-3xl md:text-4xl text-foreground mb-6">Why stock matters</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             Stock adds body, savouriness and depth that water simply can't. The collagen from the bones gives sauces their silky weight. The slow extraction of vegetables and aromatics gives a backdrop of flavour that you can taste in the finished dish even when you can't quite name it. Shop-bought stock is mostly salt and flavouring — useful in a pinch, but never the same.
           </p>
@@ -76,9 +91,7 @@ const GuideProperStock = () => {
 
         {/* Why bother making your own */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Why bother making your own
-          </h2>
+          <h2  id="why-bother-making-your-own" className="font-display text-3xl md:text-4xl text-foreground mb-6">Why bother making your own</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             Shop-bought stock has improved considerably. There are some decent fresh stocks available in supermarkets now. But homemade stock has qualities that no carton can replicate.
           </p>
@@ -92,9 +105,7 @@ const GuideProperStock = () => {
 
         {/* Stock vs broth */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Stock vs broth
-          </h2>
+          <h2  id="stock-vs-broth" className="font-display text-3xl md:text-4xl text-foreground mb-6">Stock vs broth</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             The two words get used interchangeably, but there's a useful distinction.
           </p>
@@ -108,9 +119,7 @@ const GuideProperStock = () => {
 
         {/* The four main stocks */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The four main stocks
-          </h2>
+          <h2  id="the-four-main-stocks" className="font-display text-3xl md:text-4xl text-foreground mb-6">The four main stocks</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
               <strong className="text-foreground">Chicken stock</strong> — the most versatile and the best place to start. Works in soups, risottos, sauces, braises, pasta dishes and more. Made from a chicken carcass, preferably roasted, with vegetables and aromatics.
@@ -129,9 +138,7 @@ const GuideProperStock = () => {
 
         {/* The basic method — chicken stock */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The basic method — chicken stock
-          </h2>
+          <h2  id="the-basic-method-chicken-stock" className="font-display text-3xl md:text-4xl text-foreground mb-6">The basic method — chicken stock</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-8">
             This is the one to learn first. Once you understand it, the others follow naturally.
           </p>
@@ -175,9 +182,7 @@ const GuideProperStock = () => {
 
         {/* How to know it's good */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            How to know it's good
-          </h2>
+          <h2  id="how-to-know-it-s-good" className="font-display text-3xl md:text-4xl text-foreground mb-6">How to know it's good</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             A good chicken stock should be golden and clear, with a clean, rounded flavour. When cold it should thicken noticeably — ideally setting to a loose jelly. If it stays completely liquid when cold, it either needed more collagen (add some chicken wings next time) or more time.
           </p>
@@ -188,9 +193,7 @@ const GuideProperStock = () => {
 
         {/* The basics */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            The four things you need
-          </h2>
+          <h2  id="the-four-things-you-need" className="font-display text-3xl md:text-4xl text-foreground mb-6">The four things you need</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
               <strong className="text-foreground">Bones</strong> — chicken carcasses, beef marrow and knuckle, or fish frames. Ask your butcher; they're often free or close to it. For vegetable stock, swap in a generous pile of trimmings and whole vegetables.
@@ -209,9 +212,7 @@ const GuideProperStock = () => {
 
         {/* White vs brown */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            White vs brown stock
-          </h2>
+          <h2  id="white-vs-brown-stock" className="font-display text-3xl md:text-4xl text-foreground mb-6">White vs brown stock</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             Same ingredients, different approach.
           </p>
@@ -225,9 +226,7 @@ const GuideProperStock = () => {
 
         {/* Step by step */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Step by step
-          </h2>
+          <h2  id="step-by-step" className="font-display text-3xl md:text-4xl text-foreground mb-6">Step by step</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
               <strong className="text-foreground">1. Prepare the bones.</strong> For brown stock, roast at 220°C for 40 to 50 minutes until deep mahogany. For white stock, blanch raw bones briefly in boiling water then drain — this removes scum and gives a cleaner result.
@@ -255,9 +254,7 @@ const GuideProperStock = () => {
 
         {/* Common mistakes */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Common mistakes to avoid
-          </h2>
+          <h2  id="common-mistakes-to-avoid" className="font-display text-3xl md:text-4xl text-foreground mb-6">Common mistakes to avoid</h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li><strong className="text-foreground">Boiling instead of simmering</strong> — the single most common error. Stock needs patience and a gentle heat.</li>
             <li><strong className="text-foreground">Not skimming</strong> — those grey impurities matter. Take five minutes at the start to skim properly and your stock will be cleaner and clearer.</li>
@@ -269,9 +266,7 @@ const GuideProperStock = () => {
 
         {/* How to use and store */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Storing and using your stock
-          </h2>
+          <h2  id="storing-and-using-your-stock" className="font-display text-3xl md:text-4xl text-foreground mb-6">Storing and using your stock</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             Stock keeps in the fridge for up to five days. It freezes beautifully for up to three months — freeze in usable portions, either in containers or in ice cube trays for small quantities.
           </p>
@@ -282,9 +277,7 @@ const GuideProperStock = () => {
 
         {/* A note on pressure cookers */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            A note on pressure cookers
-          </h2>
+          <h2  id="a-note-on-pressure-cookers" className="font-display text-3xl md:text-4xl text-foreground mb-6">A note on pressure cookers</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             If you have a pressure cooker or an Instant Pot, chicken stock can be made in around an hour rather than three to four. The results are slightly different — pressure cooking produces a more opaque stock as the agitation is greater — but the flavour is excellent and the time saving is significant.
           </p>
