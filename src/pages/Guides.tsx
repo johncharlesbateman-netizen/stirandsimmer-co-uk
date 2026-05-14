@@ -30,7 +30,7 @@ const GUIDES: GuideEntry[] = [
     title: "The five French mother sauces — and why every home cook should know them",
     description:
       "Master these five and you hold the keys to almost every classic sauce in western cuisine.",
-    eyebrow: "French technique",
+    eyebrow: "French Technique",
     imageId: "5908227", // saucepan with cream sauce
     imageAlt: "A glossy sauce being whisked in a saucepan",
   },
