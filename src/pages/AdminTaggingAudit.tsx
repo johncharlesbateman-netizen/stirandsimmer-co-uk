@@ -385,12 +385,9 @@ const RegionalMismatchAudit = ({ recipes }: { recipes: Recipe[] }) => {
   const removeRegion = async (row: RegionMismatchRow) => {
     setRemovingId(row.recipe.id);
     try {
-      const next = ((row.recipe.cuisine_region as string[] | null) ?? []).filter(
-        (t) => t !== row.taggedRegion,
-      );
       const { error } = await supabase
         .from("recipes")
-        .update({ cuisine_region: next })
+        .update({ cuisine_region: null })
         .eq("id", row.recipe.id);
       if (error) throw error;
       toast.success(
