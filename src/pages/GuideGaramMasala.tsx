@@ -141,6 +141,31 @@ const GuideGaramMasala = () => {
           </p>
         </div>
 
+        {/* Why every version is different */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            Why every version is different
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            This is what makes garam masala genuinely fascinating. Travel across the Indian subcontinent and you'll find wildly different blends all carrying the same name.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In Punjab the blend tends to be robust and warming — heavy on cumin, coriander and black pepper.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In Kashmir it becomes more delicate and floral — greater emphasis on cardamom, cinnamon and cloves, sometimes with dried ginger.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In Bengal you might find it simpler — just three or four spices, used sparingly.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In Maharashtra it can be more complex and pungent, sometimes including dried coconut or sesame.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            And within each region, every family has its own version. A grandmother's garam masala, made from memory and instinct, passed down through generations, is as personal as a signature.
+          </p>
+        </div>
+
         {/* Spice sections */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl">
           {SPICES.map((spice, i) => (
