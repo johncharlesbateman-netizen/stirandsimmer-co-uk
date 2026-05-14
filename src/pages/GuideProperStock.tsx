@@ -68,6 +68,22 @@ const GuideProperStock = () => {
           </p>
         </div>
 
+        {/* Why bother making your own */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            Why bother making your own
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Shop-bought stock has improved considerably. There are some decent fresh stocks available in supermarkets now. But homemade stock has qualities that no carton can replicate.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            When you make stock from bones, particularly roasted ones, you extract collagen that converts to gelatin as it cooks. A good stock, when chilled, should set to a loose jelly. That gelatin is what gives a sauce or a braise its body — that quality of coating your mouth rather than just washing over it.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Homemade stock is also almost free. You are using things that would otherwise be thrown away.
+          </p>
+        </div>
+
         {/* Stock vs broth */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
