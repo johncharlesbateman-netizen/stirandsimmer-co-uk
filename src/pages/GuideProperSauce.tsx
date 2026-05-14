@@ -177,6 +177,27 @@ const GuideProperSauce = () => {
           </ul>
         </div>
 
+        {/* Common mistakes to avoid */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            Common mistakes to avoid
+          </h2>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">Adding stock straight from cold</strong> — always use warm or hot stock. Cold stock added to a hot pan lowers the temperature and stalls the reduction.
+            </li>
+            <li>
+              <strong className="text-foreground">Boiling cream</strong> — cream added to a sauce should simmer gently, never boil hard. Boiling cream can split and produces a greasy, broken sauce.
+            </li>
+            <li>
+              <strong className="text-foreground">Forgetting acid</strong> — a sauce that tastes good but somehow flat almost always needs acid. A squeeze of lemon, a splash of wine vinegar, a spoonful of Dijon mustard. Add a little, taste, adjust.
+            </li>
+            <li>
+              <strong className="text-foreground">Over-thickening with cornflour</strong> — cornflour has its place but it can give a sauce a gluey, artificial texture if overused. Reduction and butter will almost always do a better job.
+            </li>
+          </ul>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
