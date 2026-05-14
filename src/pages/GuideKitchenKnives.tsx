@@ -11,6 +11,7 @@ const SECTIONS = [
   { id: "the-anatomy-of-a-knife", label: "The anatomy of a knife" },
   { id: "the-only-knives-you-actually-need", label: "The only knives you actually need" },
   { id: "blade-materials", label: "Blade materials" },
+  { id: "german-vs-japanese", label: "German vs Japanese" },
   { id: "what-to-look-for-when-buying", label: "What to look for when buying" },
   { id: "how-to-hold-a-knife", label: "How to hold a knife" },
   { id: "keeping-your-knives-sharp", label: "Keeping your knives sharp" },
@@ -189,6 +190,25 @@ const GuideKitchenKnives = () => {
               <strong className="text-foreground">Ceramic</strong> — light and very sharp out of the box, but brittle. They chip easily and can't be sharpened at home. Best avoided for serious cooking.
             </li>
           </ul>
+        </div>
+
+        {/* German vs Japanese */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="german-vs-japanese" className="font-display text-3xl md:text-4xl text-foreground mb-6 scroll-mt-24">
+            German vs Japanese — understanding the difference
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            This is the choice that divides cooks more than any other.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">German knives</strong> — typically heavier, with a curved blade designed for a rocking chopping motion. The steel is softer, which means the edge is slightly less sharp but more forgiving — easier to maintain and more resistant to chipping. Good for everyday heavy use. Brands like Wüsthof and Zwilling are the benchmark.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">Japanese knives</strong> — lighter, thinner, with harder steel that takes a sharper edge and holds it longer. The trade-off is brittleness — Japanese knives chip more easily if used carelessly or on hard bones. They reward careful technique and proper maintenance. Brands like Global, Shun and MAC are well regarded.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Neither is better. They suit different styles of cooking and different styles of cook. If you chop hard vegetables and bones regularly, a German knife is more practical. If you do precise, careful work with fish and vegetables, a Japanese knife is a joy.
+          </p>
         </div>
 
         {/* What to look for when buying */}
