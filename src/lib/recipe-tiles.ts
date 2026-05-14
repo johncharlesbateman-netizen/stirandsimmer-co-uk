@@ -14,11 +14,12 @@ export type RecipeTile = {
 };
 
 const hasRegion = (r: Recipe, regions: string[]) => {
-  const tags = ((r.cuisine_region as string[] | null) ?? []).map((t) =>
-    t.toLowerCase(),
-  );
-  return regions.some((reg) => tags.includes(reg));
+  const tag = (r.cuisine_region ?? "").toLowerCase();
+  return tag.length > 0 && regions.includes(tag);
 };
+
+const hasCategory = (r: Recipe, cat: string) =>
+  (r.categories ?? []).includes(cat as Recipe["categories"][number]);
 
 const titleMatches = (r: Recipe, words: string[]) => {
   const hay = `${r.title} ${r.description ?? ""}`.toLowerCase();
@@ -48,7 +49,7 @@ export const RECIPE_TILES: RecipeTile[] = [
     seoTitle: "Chicken recipes — easy and delicious | Stir & Simmer",
     seoDescription:
       "Discover our collection of tried and tested chicken recipes — from quick weeknight dinners to impressive weekend dishes. All free to browse.",
-    filter: (r) => r.category === "chicken",
+    filter: (r) => hasCategory(r, "chicken"),
   },
   {
     slug: "beef",
@@ -59,7 +60,7 @@ export const RECIPE_TILES: RecipeTile[] = [
     seoTitle: "Beef recipes | Stir & Simmer",
     seoDescription:
       "Hearty beef recipes for every occasion — slow braises, roasts, ragùs and more. Tried and tested in a real kitchen.",
-    filter: (r) => r.category === "beef",
+    filter: (r) => hasCategory(r, "beef"),
   },
   {
     slug: "lamb",
@@ -70,7 +71,7 @@ export const RECIPE_TILES: RecipeTile[] = [
     seoTitle: "Lamb recipes | Stir & Simmer",
     seoDescription:
       "Tender lamb recipes — slow roasts, fragrant curries and Mediterranean braises. Tried and tested in a real kitchen.",
-    filter: (r) => r.category === "lamb",
+    filter: (r) => hasCategory(r, "lamb"),
   },
   {
     slug: "fish-and-seafood",
@@ -81,7 +82,7 @@ export const RECIPE_TILES: RecipeTile[] = [
     seoTitle: "Fish and seafood recipes | Stir & Simmer",
     seoDescription:
       "Fresh and flavourful fish and seafood recipes from Stir & Simmer. From simple weeknight salmon to impressive dinner party dishes.",
-    filter: (r) => r.category === "seafood",
+    filter: (r) => hasCategory(r, "seafood"),
   },
   {
     slug: "pork",
@@ -92,7 +93,7 @@ export const RECIPE_TILES: RecipeTile[] = [
     seoTitle: "Pork recipes | Stir & Simmer",
     seoDescription:
       "Tried and tested pork recipes — from glazed fillets and crackling roasts to fragrant stir-fries and slow-braised casseroles.",
-    filter: (r) => r.category === "pork",
+    filter: (r) => hasCategory(r, "pork"),
   },
   {
     slug: "quick-meals",
@@ -116,7 +117,7 @@ export const RECIPE_TILES: RecipeTile[] = [
     seoDescription:
       "Bold, fiery and full of flavour — our spicy recipe collection for those who like a little heat in the kitchen.",
     filter: (r) =>
-      r.category === "spicy" || hasRegion(r, ["spicy", "indian"]),
+      hasCategory(r, "spicy") || hasRegion(r, ["spicy", "indian"]),
   },
   {
     slug: "pasta-and-rice",
@@ -128,7 +129,7 @@ export const RECIPE_TILES: RecipeTile[] = [
     seoDescription:
       "Comforting pasta and rice recipes — from rich ragùs and silky carbonara to fragrant pilafs and biryanis.",
     filter: (r) =>
-      r.category === "pasta" ||
+      hasCategory(r, "pasta") ||
       titleMatches(r, ["rice", "risotto", "pilaf", "biryani", "paella"]),
   },
   {
@@ -140,7 +141,7 @@ export const RECIPE_TILES: RecipeTile[] = [
     seoTitle: "Pudding and dessert recipes | Stir & Simmer",
     seoDescription:
       "Velvety crème brûlée, light soufflés, buttery scones and decadent chocolate cakes — sweet recipes for every occasion.",
-    filter: (r) => r.category === "sweets",
+    filter: (r) => hasCategory(r, "sweets"),
   },
 ];
 
