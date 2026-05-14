@@ -256,15 +256,26 @@ const GuideKitchenKnives = () => {
           <h2 id="keeping-your-knives-sharp" className="font-display text-3xl md:text-4xl text-foreground mb-6 scroll-mt-24">
             Keeping your knives sharp
           </h2>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            There are two separate jobs: honing and sharpening. Honing realigns a slightly bent edge and should be done often — every few uses, with a honing steel. Sharpening removes metal to create a new edge and should be done a few times a year, with a whetstone or by a professional.
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            A sharp knife is safer than a blunt one. A blunt knife requires more force, slips more easily and produces less precise cuts. Sharpness is not a luxury — it is a basic requirement.
           </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            A whetstone is the best home-sharpening tool. It takes a little practice but gives you complete control. Pull-through sharpeners are quick but aggressive, and shorten the life of a good knife. Avoid them for blades you care about.
-          </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            Test the edge by gently slicing a tomato. A sharp knife glides through the skin under its own weight. A blunt one squashes it.
-          </p>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">Honing steel</strong> — not a sharpener. A honing steel realigns the edge of the blade without removing metal. Use it regularly — before or after each session — to keep the edge true between sharpenings. Hold the steel vertically, tip on a chopping board, and draw the blade down at a consistent 15 to 20 degree angle.
+            </li>
+            <li>
+              <strong className="text-foreground">Whetstones</strong> — the best way to sharpen a knife. A whetstone removes metal to create a new edge. Start with a coarser grit to repair a damaged or very blunt edge, finish with a finer grit to refine it. Takes practice but produces the best results.
+            </li>
+            <li>
+              <strong className="text-foreground">Pull-through sharpeners</strong> — quick and easy but remove more metal than necessary and produce a less refined edge. Fine for a basic maintenance tool but not a replacement for a whetstone.
+            </li>
+            <li>
+              <strong className="text-foreground">Electric sharpeners</strong> — convenient but aggressive. Use sparingly.
+            </li>
+            <li>
+              <strong className="text-foreground">Professional sharpening</strong> — worth doing once or twice a year even if you maintain your knives well at home. A professional will restore an edge that home sharpening cannot.
+            </li>
+          </ul>
         </div>
 
         {/* Common mistakes to avoid */}
