@@ -70,7 +70,6 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
             {/* Main Content */}
             <div className="md:col-span-7">
-              <h1 className="heading-display mb-12">About</h1>
               
               <div className="space-y-8 body-editorial text-muted-foreground">
                 <p className="text-foreground text-xl md:text-2xl font-display leading-relaxed">
