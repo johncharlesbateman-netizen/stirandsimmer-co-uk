@@ -279,6 +279,27 @@ const GuideKitchenKnives = () => {
           </ul>
         </div>
 
+        {/* Storing your knives */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="storing-your-knives" className="font-display text-3xl md:text-4xl text-foreground mb-6 scroll-mt-24">
+            Storing your knives
+          </h2>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">Magnetic strip</strong> — the best option. Keeps knives accessible, visible and undamaged. Blades don't touch each other and the edge is preserved.
+            </li>
+            <li>
+              <strong className="text-foreground">Knife block</strong> — fine if the slots are wide enough. Narrow slots can damage the edge as you slide the knife in and out.
+            </li>
+            <li>
+              <strong className="text-foreground">Blade guards</strong> — useful for individual knives stored in a drawer. Never store unprotected knives loose in a drawer — it damages the edge and is a safety risk.
+            </li>
+            <li>
+              <strong className="text-foreground">Avoid the dishwasher</strong> — heat, harsh detergent and rattling against other items will damage both the blade and the handle. Always hand wash and dry immediately.
+            </li>
+          </ul>
+        </div>
+
         {/* Common mistakes to avoid */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 id="common-mistakes-to-avoid" className="font-display text-3xl md:text-4xl text-foreground mb-6 scroll-mt-24">
