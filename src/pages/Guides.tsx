@@ -39,7 +39,7 @@ const GUIDES: GuideEntry[] = [
     title: "French cooking techniques every home cook should know",
     description:
       "Seven essential French techniques — mise en place, julienne, brunoise, chiffonade, beurre blanc, flambé and déglaze — explained simply.",
-    eyebrow: "French technique",
+    eyebrow: "French Technique",
     imageId: "4252137", // chef knife and chopped vegetables
     imageAlt: "Chef's knife and finely chopped vegetables on a wooden board",
   },
