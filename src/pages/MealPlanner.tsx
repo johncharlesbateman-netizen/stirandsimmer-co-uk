@@ -606,7 +606,7 @@ const MealPlanner = () => {
                         <div className="text-sm font-medium truncate">{recipe.title}</div>
                         <div className="text-xs text-muted-foreground">
                           {recipe.servings ? `${recipe.servings} servings` : "—"}
-                          {recipe.category ? ` · ${recipe.category}` : ""}
+                          {recipe.categories?.[0] ? ` · ${recipe.categories[0]}` : ""}
                         </div>
                       </div>
                       <button
