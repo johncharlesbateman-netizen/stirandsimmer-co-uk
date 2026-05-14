@@ -51,6 +51,19 @@ const GuideProperSauce = () => {
           </div>
         </header>
 
+        {/* What a sauce actually does */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            What a sauce actually does
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            A sauce has one job: to add flavour, moisture and cohesion to a dish. It should complement what it's served with, not compete with it. It should taste like it belongs on the plate — not like something that arrived separately and happens to be nearby.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            A good sauce should also have body. Not necessarily thick, but present. Something that coats rather than runs. That quality comes from reduction, from fat, from starch, or from gelatin — and often from a combination of all four.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
