@@ -64,6 +64,33 @@ const GuideProperSauce = () => {
           </p>
         </div>
 
+        {/* The building blocks */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            The building blocks
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            Every sauce, however complex it looks, is built from a small number of elements:
+          </p>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">A base</strong> — stock, wine, cream, tomatoes, butter. This is the foundation and it determines the character of everything that follows.
+            </li>
+            <li>
+              <strong className="text-foreground">Aromatics</strong> — onion, shallot, garlic, celery, carrot. Cooked low and slow at the start to build sweetness and depth.
+            </li>
+            <li>
+              <strong className="text-foreground">Acid</strong> — wine, vinegar, lemon juice. Acid lifts a sauce and stops it tasting flat. Almost every great sauce has some acid in it somewhere.
+            </li>
+            <li>
+              <strong className="text-foreground">Fat</strong> — butter, cream, olive oil. Fat carries flavour and gives a sauce its richness and texture. Whisking cold butter into a finished sauce — a technique called <em>monter au beurre</em> — gives it a beautiful gloss and body without heaviness.
+            </li>
+            <li>
+              <strong className="text-foreground">Seasoning</strong> — salt, pepper, and time. A sauce that tastes flat usually needs more salt, more reduction, or more time. Often all three.
+            </li>
+          </ul>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
