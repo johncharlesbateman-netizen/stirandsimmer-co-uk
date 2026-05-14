@@ -107,7 +107,41 @@ const GuideChoosingPans = () => {
           </ul>
         </div>
 
-        {/* The pans worth owning */}
+        {/* The main types of pan */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            The main types of pan
+          </h2>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            Stainless steel
+          </h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The workhorse of the professional kitchen. Stainless steel is durable, non-reactive, oven-safe and dishwasher-safe. It conducts heat reasonably well, especially when paired with an aluminium or copper core, and it develops fond — those caramelised bits that stick to the pan and become the foundation of a great sauce.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The catch: stainless steel will stick if used incorrectly. The key is to preheat the pan properly and add your fat before the food. When the pan is hot enough, protein will release naturally rather than tearing.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-10">
+            <strong className="text-foreground">Best for:</strong> searing meat, making pan sauces, sautéing vegetables, general everyday cooking.
+          </p>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            Cast iron
+          </h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Heavy, slow to heat but extraordinary at retaining it. Cast iron heats unevenly at first but once up to temperature it holds that heat with remarkable consistency — making it ideal for searing, frying and anything that needs sustained, even heat.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            It also goes from hob to oven seamlessly, which makes it useful for dishes that start on the stove and finish in the oven. A cast iron pan, properly cared for, will outlast everything else in your kitchen.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The catch: it's heavy, it reacts with acidic foods if unseasoned, and it needs proper maintenance — drying thoroughly and oiling after every wash.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            <strong className="text-foreground">Best for:</strong> searing steaks, frying, cornbread, dishes that go from hob to oven, cooking over open fire.
+          </p>
+        </div>
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
             The pans worth owning
