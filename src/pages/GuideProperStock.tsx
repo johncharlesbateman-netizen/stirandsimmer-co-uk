@@ -39,11 +39,8 @@ const GuideProperStock = () => {
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
               The quiet foundation of good cooking — what goes in, how long it takes, and why a homemade stock will outperform anything in a carton.
             </p>
-            <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-              Stock is one of those things professional kitchens take for granted and home cooks tend to skip. It seems fussy and slow. In reality it's one of the most forgiving things you can make — a pot of bones, vegetables and water left to simmer quietly while you do something else.
-            </p>
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-              Get this right and your soups, risottos, sauces and braises move into another league.
+              Stock is one of those things that separates cooking that tastes good from cooking that tastes remarkable. It's not complicated. It doesn't require special skills or expensive ingredients. What it requires is time — and the understanding that the best things in a kitchen are often the simplest.
             </p>
           </div>
         </header>
