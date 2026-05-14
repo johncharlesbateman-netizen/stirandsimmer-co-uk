@@ -153,6 +153,30 @@ const GuideProperSauce = () => {
           </p>
         </div>
 
+        {/* The secrets to a great sauce */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            The secrets to a great sauce
+          </h2>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">Reduce properly</strong> — most home cooks don't reduce their sauces enough. Reduction concentrates flavour and builds body. If your sauce tastes thin and watery, keep cooking.
+            </li>
+            <li>
+              <strong className="text-foreground">Use cold butter at the end</strong> — this is one of the most useful techniques you can learn. Cold butter emulsifies into the sauce rather than splitting, giving it gloss and a velvety texture. Hot butter will split.
+            </li>
+            <li>
+              <strong className="text-foreground">Taste constantly</strong> — a sauce that's nearly there might need a splash of acid, a pinch more salt, another minute of reduction. Taste it. Adjust it. Trust your palate.
+            </li>
+            <li>
+              <strong className="text-foreground">Don't rush aromatics</strong> — onions and shallots cooked too fast taste sharp and raw. Given time and low heat they become sweet and mellow — a completely different ingredient.
+            </li>
+            <li>
+              <strong className="text-foreground">Season in layers</strong> — season your aromatics when they go in, season again when you add liquid, and season again at the end. Each stage builds flavour differently.
+            </li>
+          </ul>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
