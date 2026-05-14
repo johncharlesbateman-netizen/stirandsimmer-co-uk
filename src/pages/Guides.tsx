@@ -49,6 +49,15 @@ const GUIDES = [
     imageId: "2802527", // spices in jars and spoons
     imageAlt: "An array of ground spices in spoons on a dark wooden table",
   },
+  {
+    slug: "proper-stock",
+    title: "How to make a proper stock",
+    description:
+      "The quiet foundation of good cooking — bones, mirepoix, water and time, and how to turn them into something your sauces and soups can lean on.",
+    eyebrow: "Technique",
+    imageId: "5938/food-salad-healthy-vegetables", // fallback id below
+    imageAlt: "A pot of golden homemade stock simmering on the stove",
+  },
 ];
 
 const Guides = () => {
