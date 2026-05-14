@@ -205,7 +205,7 @@ const GuideFrenchTechniques = () => {
               >
                 Technique {i + 1} of 7
               </span>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-1">
+              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-1 scroll-mt-24">
                 {t.name}
               </h2>
               <p className="italic text-sm md:text-base text-muted-foreground mb-6">

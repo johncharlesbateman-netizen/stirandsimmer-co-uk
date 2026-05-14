@@ -108,6 +108,8 @@ const GuideMotherSauces = () => {
           </div>
         </header>
 
+        <GuideTOC items={SAUCES.map((s) => ({ id: s.id, label: s.name }))} />
+
         {/* Sauce sections */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl">
           {SAUCES.map((sauce, i) => (
