@@ -123,6 +123,19 @@ const GuideHowToUseSpices = () => {
           </ul>
         </div>
 
+        {/* Common mistakes to avoid */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            Common mistakes to avoid
+          </h2>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li><strong className="text-foreground">Adding spices too late</strong> — raw ground spice added at the end of cooking tastes harsh and unfinished. Give them time and heat.</li>
+            <li><strong className="text-foreground">Using old spices</strong> — ground spices lose their potency after 12 to 18 months. Smell the jar. If there's nothing there, bin it.</li>
+            <li><strong className="text-foreground">Over-spicing</strong> — more is not always better. Build flavour gradually and taste as you go.</li>
+            <li><strong className="text-foreground">Ignoring salt</strong> — spices and salt work together. Under-seasoned food will make even the best spice blend fall flat.</li>
+          </ul>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
