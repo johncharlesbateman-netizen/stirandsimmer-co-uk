@@ -56,8 +56,8 @@ const GUIDES = [
     description:
       "The quiet foundation of good cooking — bones, mirepoix, water and time, and how to turn them into something your sauces and soups can lean on.",
     eyebrow: "Technique",
-    imageId: "33242", // simmering pot on the stove
-    imageAlt: "A pot of golden homemade stock simmering on the stove",
+    image: properStockImage,
+    imageAlt: "A pot of golden chicken stock simmering with bones, vegetables and herbs",
   },
 ];
 
