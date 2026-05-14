@@ -45,6 +45,19 @@ const GuideProperStock = () => {
           </div>
         </header>
 
+        {/* What stock actually is */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            What stock actually is
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Stock is water that has been taught to taste of something. You simmer bones, vegetables and aromatics together long enough for everything they contain — collagen, minerals, natural sugars, flavour compounds — to dissolve into the liquid. What you're left with is a deeply flavoured base that makes everything you cook with it better.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            It is not the same as a cube. A stock cube is salt with flavouring. It has its place, but it is not stock.
+          </p>
+        </div>
+
         {/* Why stock matters */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
