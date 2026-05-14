@@ -198,6 +198,20 @@ const GuideProperSauce = () => {
           </ul>
         </div>
 
+        {/* A note on stock */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            A note on stock
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            A sauce is only as good as its base. If you're using water and a cube, the ceiling is low. If you're using a good homemade stock, the ceiling disappears. This is why the{" "}
+            <Link to="/guides/proper-stock" className="editorial-link text-foreground underline underline-offset-4 hover:no-underline">
+              stock guide
+            </Link>{" "}
+            comes first — because everything that follows depends on it.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
