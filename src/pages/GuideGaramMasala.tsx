@@ -243,15 +243,28 @@ const GuideGaramMasala = () => {
             </section>
           ))}
 
-          {/* Closing */}
-          <div
-            className="mt-16 rounded-lg p-6 md:p-8 border border-border"
-            style={{ backgroundColor: "#FDF3E7" }}
-          >
-            <p className="text-base md:text-lg text-foreground leading-relaxed">
-              Toast everything together in a dry pan, let it cool, then grind in a clean spice or coffee grinder until fine. Store in a small airtight jar away from the light and use within a month or two. After that the volatile oils fade and you are back where you started — with a tired jar of dust. Make small batches often. That is the whole secret.
-            </p>
-          </div>
+        </div>
+
+        {/* How to make your own */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            How to make your own
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Making garam masala at home is straightforward and the difference in flavour compared to a shop-bought jar is remarkable.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Start with whole spices wherever possible. Add them to a dry frying pan over a medium heat and toast, shaking the pan regularly, until they become fragrant — usually two to three minutes. Watch carefully; they can burn quickly and burnt spices are bitter and unusable.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Tip onto a plate and leave to cool completely. Never grind warm spices — the heat creates moisture and the powder will clump.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Once cool, grind to a fine powder using a spice grinder or a pestle and mortar. A dedicated coffee grinder works well for this.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Store in an airtight jar away from direct light and heat. Use within two to three months for best flavour — after that it won't be harmful but the potency will fade.
+          </p>
         </div>
 
         {/* Kitchen Atlas CTA */}
