@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
+import PageHero from "@/components/PageHero";
 import { Button } from "@/components/ui/button";
 import { WORLD_MAP_PATH } from "@/assets/world-map-path";
 import { supabase } from "@/integrations/supabase/client";
@@ -120,6 +121,13 @@ const KitchenAtlas = () => {
         <meta property="og:title" content="The Kitchen Atlas | Stir & Simmer" />
         <meta property="og:description" content="Explore six world cuisine regions and discover occasional cooking challenges." />
       </Helmet>
+
+      <PageHero
+        title="Kitchen Atlas"
+        subtitle="Every recipe, organised by cuisine, ingredient and occasion."
+        imageId="1640774"
+        imageAlt="A flatlay of dishes and ingredients from cuisines around the world"
+      />
 
       {/* HERO */}
       <section
