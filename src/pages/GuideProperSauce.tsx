@@ -112,6 +112,47 @@ const GuideProperSauce = () => {
           </ul>
         </div>
 
+        {/* How to make a pan sauce */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            How to make a pan sauce
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-8">
+            This is the one to learn first. It uses the pan you've already cooked in, takes five to ten minutes, and produces something that tastes like it came from a restaurant kitchen.
+          </p>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            What you need
+          </h3>
+          <ul className="space-y-2 text-base md:text-lg text-foreground/90 leading-relaxed mb-8 list-disc pl-6">
+            <li>The pan you just cooked meat in, with all its caramelised bits</li>
+            <li>1 shallot, finely chopped</li>
+            <li>150ml wine — red for beef and lamb, white for chicken and pork</li>
+            <li>200ml good chicken or beef stock</li>
+            <li>30g cold butter, cut into cubes</li>
+            <li>Salt and pepper</li>
+          </ul>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            Method
+          </h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Pour off most of the fat from the pan, leaving just a thin film. Set over a medium heat and add the shallot. Cook for two to three minutes until softened.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Pour in the wine. It will sizzle and steam — use a wooden spoon to scrape every caramelised bit from the bottom of the pan. This is where the flavour lives.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Let the wine reduce by half, then add the stock. Reduce again until the sauce has body — it should coat the back of a spoon.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Take the pan off the heat. Add the cold butter a cube at a time, swirling the pan constantly until each cube is incorporated. The sauce will become glossy and slightly thickened.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Season, taste, adjust. Serve immediately.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
