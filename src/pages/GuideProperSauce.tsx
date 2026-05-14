@@ -42,8 +42,11 @@ const GuideProperSauce = () => {
             <h1 className="font-display text-4xl md:text-5xl leading-tight text-foreground mb-5">
               How to make a proper sauce
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8">
-              The difference between a good plate and a great one is almost always the sauce — what to build it from, how to thicken it, and how to finish it so it shines.
+            <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+              A great sauce is not an afterthought. It is the difference between a plate of food and a meal worth remembering. It is what turns a piece of chicken into something people ask you to make again. It is, in many ways, the whole point.
+            </p>
+            <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+              The good news is that once you understand a handful of principles, making a proper sauce becomes less about following a recipe and more about instinct. You will start to see what every sauce has in common — and from there, you can make almost anything.
             </p>
           </div>
         </header>
