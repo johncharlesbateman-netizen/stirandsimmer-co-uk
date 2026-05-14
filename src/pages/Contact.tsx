@@ -3,6 +3,7 @@ import contactBehindScenes from "@/assets/contact-behind-scenes.jpg";
 import { Helmet } from "react-helmet-async";
 import { Instagram, MailCheck } from "lucide-react";
 import Layout from "@/components/Layout";
+import PageHero from "@/components/PageHero";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -106,6 +107,13 @@ const Contact = () => {
         <meta name="twitter:description" content="Get in touch with Stir & Simmer. We'd love to hear from you — questions, suggestions, or just to say hello." />
         <meta name="twitter:image" content={contactBehindScenes} />
       </Helmet>
+
+      <PageHero
+        title="Get in touch"
+        subtitle="A question, a recipe request, or just want to say hello — we'd love to hear from you."
+        imageId="1438672"
+        imageAlt="A rustic kitchen table with notebook, coffee and ingredients"
+      />
       {/* Header */}
       <section className="section-breathing pb-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">

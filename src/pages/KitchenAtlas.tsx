@@ -110,6 +110,7 @@ const KitchenAtlas = () => {
 
   return (
     <Layout>
+      <PageHeroLocal />
       <Helmet>
         <title>The Kitchen Atlas — explore world cuisines and cooking challenges | Stir and Simmer</title>
         <meta

@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
+import PageHero from "@/components/PageHero";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
 import { Link } from "react-router-dom";
 
@@ -56,6 +57,13 @@ const About = () => {
           }
         })}</script>
       </Helmet>
+
+      <PageHero
+        title="About Stir & Simmer"
+        subtitle="Real food, real kitchens, no shortcuts."
+        imageId="1640777"
+        imageAlt="A warm, lived-in kitchen with fresh ingredients on the counter"
+      />
       {/* Header */}
       <section className="pt-12 md:pt-16 pb-0">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
