@@ -142,6 +142,8 @@ const GuideChoosingPans = () => {
             <strong className="text-foreground">Best for:</strong> searing steaks, frying, cornbread, dishes that go from hob to oven, cooking over open fire.
           </p>
         </div>
+
+        {/* The pans worth owning */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
             The pans worth owning
