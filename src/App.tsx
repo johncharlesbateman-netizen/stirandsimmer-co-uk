@@ -31,6 +31,7 @@ import GuideMotherSauces from "./pages/GuideMotherSauces";
 import GuideFrenchTechniques from "./pages/GuideFrenchTechniques";
 import GuideGaramMasala from "./pages/GuideGaramMasala";
 import GuideHowToUseSpices from "./pages/GuideHowToUseSpices";
+import GuideProperStock from "./pages/GuideProperStock";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
