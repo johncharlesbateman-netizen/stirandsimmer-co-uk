@@ -39,8 +39,11 @@ const GuideHowToUseSpices = () => {
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
               Learn what spices do, how to handle them, and how to build proper flavour with confidence.
             </p>
+            <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+              Spices are one of the most transformative things in a kitchen. A pinch of the right one at the right moment can turn something ordinary into something memorable. But for many home cooks, the spice rack is a graveyard of half-used jars bought for one recipe and never touched again.
+            </p>
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-              Spices are the difference between food that's fine and food that makes someone stop and ask what's in it. There is nothing mystical about them — only a handful of principles to learn. Once you have those, the rest is curiosity and practice.
+              This guide is here to change that.
             </p>
           </div>
         </header>
