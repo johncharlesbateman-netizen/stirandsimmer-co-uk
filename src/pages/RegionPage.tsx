@@ -114,6 +114,12 @@ const RegionPage = () => {
     : null;
   const region = regionId ? REGIONS[regionId] : undefined;
 
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+
+  const toggleSection = (key: string) => {
+    setExpandedSections((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
   const { data: recipes, isLoading } = useQuery({
     queryKey: ["recipes", "region-page"],
     queryFn: async () => {
