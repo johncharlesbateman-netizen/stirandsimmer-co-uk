@@ -162,7 +162,7 @@ const Index = () => {
             Discover our Recipes
           </h2>
           <p className="text-base md:text-lg font-body max-w-2xl mx-auto mb-8 text-primary-foreground/90 leading-relaxed italic">
-            Browse our full collection of tried-and-tested recipes from around the world.
+            Proper recipes for proper home cooks.
           </p>
           <Link
             to="/recipes"
@@ -178,23 +178,6 @@ const Index = () => {
       {/* Weekly Meal Planner Promo */}
       <MealPlannerPromo />
 
-      <div className="h-px bg-border" aria-hidden />
-
-      {/* CTA Section */}
-      <section className="bg-secondary/50">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 text-center">
-          <h2 className="heading-editorial mb-4">Got a question? We'd love to help</h2>
-          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-            Whether you need advice on a recipe, a cooking tip, or just want to chat about food — drop us a line.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-block px-8 py-4 bg-foreground text-background text-sm tracking-wider uppercase hover:opacity-80 transition-opacity"
-          >
-            Get in Touch
-          </Link>
-        </div>
-      </section>
     </Layout>
   );
 };
