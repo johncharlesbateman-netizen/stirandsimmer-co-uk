@@ -138,8 +138,47 @@ const GuideChoosingPans = () => {
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             The catch: it's heavy, it reacts with acidic foods if unseasoned, and it needs proper maintenance — drying thoroughly and oiling after every wash.
           </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-10">
             <strong className="text-foreground">Best for:</strong> searing steaks, frying, cornbread, dishes that go from hob to oven, cooking over open fire.
+          </p>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            Non-stick
+          </h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The most forgiving pan in the kitchen. Non-stick surfaces — typically PTFE-based coatings or ceramic — prevent food from adhering, making them ideal for delicate ingredients that would otherwise tear or stick.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The catch: non-stick coatings degrade over time, especially if overheated or scratched with metal utensils. They should never be used on very high heat and should be replaced when the coating begins to show wear.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-10">
+            <strong className="text-foreground">Best for:</strong> eggs, fish fillets, pancakes, anything delicate that needs a gentle release.
+          </p>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            Carbon steel
+          </h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The professional kitchen's best kept secret. Lighter than cast iron but with many of the same properties — it heats quickly, retains heat well, develops a natural non-stick seasoning over time, and goes from hob to oven without complaint.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Carbon steel is the pan of choice in most restaurant kitchens for a reason. It requires seasoning like cast iron but responds faster to changes in heat, giving you more control.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-10">
+            <strong className="text-foreground">Best for:</strong> searing, sautéing, eggs once seasoned, anything you'd use cast iron or stainless steel for.
+          </p>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            Copper
+          </h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The most responsive of all pan materials. Copper heats and cools almost instantly, giving unparalleled control — which is why it's the choice of serious pastry chefs for temperature-sensitive work like sugar and chocolate.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The catch: copper is expensive, requires regular polishing, and reacts with acidic foods unless lined with tin or stainless steel.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            <strong className="text-foreground">Best for:</strong> sauces, sugar work, chocolate, anything requiring precise temperature control.
           </p>
         </div>
 
