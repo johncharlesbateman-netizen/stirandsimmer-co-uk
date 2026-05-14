@@ -137,6 +137,13 @@ const GuideFrenchTechniques = () => {
               <span className="mx-2">›</span>
               <span>French techniques</span>
             </nav>
+            <Link
+              to="/guides"
+              className="inline-flex items-center gap-2 text-sm mb-8 transition-colors hover:underline"
+              style={{ color: "#a08c6a" }}
+            >
+              <ArrowLeft className="w-4 h-4" /> Back to Guides
+            </Link>
             <p className="micro-caption mb-4" style={{ color: "#e0a558" }}>Guide</p>
             <h1
               className="font-display text-4xl md:text-5xl leading-tight mb-5"

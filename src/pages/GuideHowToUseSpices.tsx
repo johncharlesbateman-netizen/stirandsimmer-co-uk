@@ -32,6 +32,12 @@ const GuideHowToUseSpices = () => {
               <span className="mx-2">›</span>
               <span>How to use spices</span>
             </nav>
+            <Link
+              to="/guides"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back to Guides
+            </Link>
             <p className="micro-caption mb-4 text-primary">Guide</p>
             <h1 className="font-display text-4xl md:text-5xl leading-tight text-foreground mb-5">
               How to use spices — a beginner's guide
