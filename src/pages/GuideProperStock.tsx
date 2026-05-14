@@ -264,13 +264,13 @@ const GuideProperStock = () => {
         {/* How to use and store */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            How to use it — and how to store it
+            Storing and using your stock
           </h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            Once you have a good stock in the fridge, you'll find uses for it everywhere. Cook your rice in it instead of water. Use it as the base for soups, risottos and braises. Reduce it hard with a splash of wine for an instant pan sauce. A ladleful added to a tray of roasting vegetables transforms them.
+            Stock keeps in the fridge for up to five days. It freezes beautifully for up to three months — freeze in usable portions, either in containers or in ice cube trays for small quantities.
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            Stock keeps for 3 to 4 days in the fridge, or freeze it in portions — ice cube trays for small splashes, larger containers for full-batch cooking. A well-stocked freezer of homemade stock is one of the quietest upgrades you can give your cooking.
+            Use it anywhere water or a cube would otherwise go. Risotto. Soups. Braises. Gravies. Deglazing a pan after searing meat. Cooking lentils. The more you make it, the more you'll find yourself reaching for it.
           </p>
         </div>
 
