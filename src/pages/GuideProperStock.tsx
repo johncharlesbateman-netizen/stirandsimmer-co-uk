@@ -167,6 +167,19 @@ const GuideProperStock = () => {
           </p>
         </div>
 
+        {/* How to know it's good */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            How to know it's good
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            A good chicken stock should be golden and clear, with a clean, rounded flavour. When cold it should thicken noticeably — ideally setting to a loose jelly. If it stays completely liquid when cold, it either needed more collagen (add some chicken wings next time) or more time.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Taste it. It should taste clean and savoury, not flat, not greasy, not salty. It shouldn't taste finished — it's a base, not a soup.
+          </p>
+        </div>
+
         {/* The basics */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
