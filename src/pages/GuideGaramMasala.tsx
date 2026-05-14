@@ -289,6 +289,19 @@ const GuideGaramMasala = () => {
           </p>
         </div>
 
+        {/* More complex variations */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            More complex variations
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            As you grow more confident you might want to explore richer, more layered blends. Some cooks add dried rose petals for fragrance. Others incorporate bay leaves, star anise or dried ginger. A Kashmiri version might lean heavily into cardamom and use very little cumin.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Some blends — particularly those from certain regions — begin to resemble what we in the West might recognise as curry powder. When dried chillies, turmeric and dried mango powder enter the mix, the blend becomes warmer, more pungent and more complex. These are not wrong — they are simply a different tradition, a different set of influences. But they are a different thing to a classic aromatic garam masala, and worth understanding as such.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
