@@ -58,6 +58,22 @@ const GuideHowToUseSpices = () => {
           </p>
         </div>
 
+        {/* Whole vs ground */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            Whole vs ground
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Most spices come in two forms — whole and ground.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Whole spices such as cumin seeds, coriander seeds and cardamom pods last longer, carry more flavour and release it when heated. They're ideal for tempering — dropping them into hot oil at the start of cooking to bloom their flavour before anything else goes in.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Ground spices are more convenient and better for blending into sauces, marinades and rubs. They lose their potency faster though — if a ground spice smells of nothing when you open the jar, it's past its best.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
