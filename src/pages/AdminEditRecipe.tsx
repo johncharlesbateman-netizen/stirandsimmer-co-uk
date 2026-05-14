@@ -3,11 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 import { Upload, X, Plus, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { allCategories, categoryLabels } from "@/lib/recipe-utils";
+import { allCategories } from "@/lib/recipe-utils";
 import { collections, collectionNames } from "@/lib/collections";
-import { CUISINE_REGIONS, sanitiseCuisineRegions, type CuisineRegion } from "@/lib/cuisine-regions";
+import { CUISINE_REGIONS, sanitiseCuisineRegion, type CuisineRegion } from "@/lib/cuisine-regions";
 import { MEAL_TYPES, sanitiseMealTypes, type MealType } from "@/lib/meal-types";
 import CuisineRegionPicker from "@/components/CuisineRegionPicker";
+import CategoryPicker from "@/components/CategoryPicker";
 import MealTypePicker from "@/components/MealTypePicker";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -19,10 +20,10 @@ type RecipeCategory = Database["public"]["Enums"]["recipe_category"];
 
 const recipeSchema = z.object({
   title: z.string().trim().min(1, "Title is required").max(200, "Title too long"),
-  category: z.enum([
+  categories: z.array(z.enum([
     "chicken", "beef", "lamb", "pork", "spicy", "seafood",
     "lunch_suggestions", "sweets", "pasta",
-  ]),
+  ])).min(1, "Pick at least one category"),
   description: z.string().trim().min(1, "Description is required").max(1000, "Description too long"),
   prep_time_minutes: z.number().int().min(0).max(9999).nullable(),
   cook_time_minutes: z.number().int().min(0).max(9999).nullable(),
@@ -33,7 +34,7 @@ const recipeSchema = z.object({
   seo_title: z.string().trim().max(70).nullable(),
   seo_description: z.string().trim().max(170).nullable(),
   collections: z.array(z.string()).default([]),
-  cuisine_region: z.array(z.enum(CUISINE_REGIONS)).min(1, "Pick at least one cuisine region"),
+  cuisine_region: z.enum(CUISINE_REGIONS).nullable(),
   meal_types: z.array(z.enum(MEAL_TYPES)).min(1, "Pick at least one meal type"),
 });
 
@@ -51,7 +52,7 @@ const AdminEditRecipe = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState<RecipeCategory>("chicken");
+  const [categories, setCategories] = useState<RecipeCategory[]>([]);
   const [description, setDescription] = useState("");
   const [prepTime, setPrepTime] = useState("");
   const [cookTime, setCookTime] = useState("");
@@ -62,7 +63,7 @@ const AdminEditRecipe = () => {
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
   const [recipeCollections, setRecipeCollections] = useState<string[]>([]);
-  const [cuisineRegion, setCuisineRegion] = useState<CuisineRegion[]>([]);
+  const [cuisineRegion, setCuisineRegion] = useState<CuisineRegion | null>(null);
   const [mealTypes, setMealTypes] = useState<MealType[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -86,7 +87,7 @@ const AdminEditRecipe = () => {
       }
 
       setTitle(data.title);
-      setCategory(data.category);
+      setCategories(Array.isArray(data.categories) ? data.categories : []);
       setDescription(data.description);
       setPrepTime(data.prep_time_minutes?.toString() || "");
       setCookTime(data.cook_time_minutes?.toString() || "");
@@ -101,9 +102,7 @@ const AdminEditRecipe = () => {
           ? ((data as { collections?: string[] | null }).collections as string[])
           : [],
       );
-      setCuisineRegion(
-        sanitiseCuisineRegions((data as { cuisine_region?: unknown }).cuisine_region),
-      );
+      setCuisineRegion(sanitiseCuisineRegion(data.cuisine_region));
       const seededMeal = sanitiseMealTypes((data as { meal_types?: unknown }).meal_types);
       setMealTypes(seededMeal.length > 0 ? seededMeal : ["mains"]);
       setExistingImageUrl(data.image_url);
@@ -156,7 +155,7 @@ const AdminEditRecipe = () => {
     try {
       const cleaned = {
         title,
-        category,
+        categories,
         description,
         prep_time_minutes: prepTime ? parseInt(prepTime, 10) : null,
         cook_time_minutes: cookTime ? parseInt(cookTime, 10) : null,
@@ -200,7 +199,7 @@ const AdminEditRecipe = () => {
       // Update recipe
       const { error: updateError } = await supabase.from("recipes").update({
         title: parsed.data.title,
-        category: parsed.data.category,
+        categories: parsed.data.categories,
         description: parsed.data.description,
         prep_time_minutes: parsed.data.prep_time_minutes,
         cook_time_minutes: parsed.data.cook_time_minutes,
@@ -264,26 +263,20 @@ const AdminEditRecipe = () => {
             />
           </div>
 
-          {/* Category */}
+          {/* Categories */}
           <div>
-            <label className="block text-sm font-medium mb-2">Category *</label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value as RecipeCategory)}
-              className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
-              required
-            >
-              {allCategories.map((c) => (
-                <option key={c} value={c}>{categoryLabels[c]}</option>
-              ))}
-            </select>
+            <label className="block text-sm font-medium mb-2">Categories *</label>
+            <p className="text-xs text-muted-foreground mb-3">
+              Pick one or more food categories. A recipe can belong to several (e.g. a chicken pasta).
+            </p>
+            <CategoryPicker value={categories} onChange={setCategories} />
           </div>
 
-          {/* Cuisine regions */}
+          {/* Cuisine region */}
           <div>
-            <label className="block text-sm font-medium mb-2">Cuisine regions *</label>
+            <label className="block text-sm font-medium mb-2">Cuisine region</label>
             <p className="text-xs text-muted-foreground mb-3">
-              Tag this recipe with one or more regions. These map to challenge regions in The Daily Pass app.
+              Pick a single region. This maps to challenge regions in The Daily Pass app.
             </p>
             <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
           </div>
@@ -333,8 +326,6 @@ const AdminEditRecipe = () => {
               </label>
             )}
           </div>
-
-          {/* Times & servings — temporarily removed */}
 
           {/* Ingredients */}
           <div>
@@ -436,12 +427,10 @@ const AdminEditRecipe = () => {
                       }}
                       className="mt-0.5"
                     />
-                    <span>
-                      <span className="block text-sm font-medium">{c.title}</span>
-                      <span className="block text-xs text-muted-foreground mt-0.5">
-                        {c.tagline}
-                      </span>
-                    </span>
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium">{c.name}</p>
+                      <p className="text-xs text-muted-foreground">{c.description}</p>
+                    </div>
                   </label>
                 );
               })}
@@ -453,7 +442,7 @@ const AdminEditRecipe = () => {
             <div>
               <h2 className="font-display text-2xl mb-1">SEO settings</h2>
               <p className="text-xs text-muted-foreground">
-                Optional. Leave blank to auto-generate from the recipe title, prep time and key ingredients.
+                Optional. Leave blank to auto-generate from the recipe title and key ingredients.
               </p>
             </div>
 
@@ -494,7 +483,7 @@ const AdminEditRecipe = () => {
           <div className="flex gap-3 pt-4 border-t border-border">
             <Button type="submit" disabled={submitting}>
               {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
-              {submitting ? "Saving..." : "Save Changes"}
+              {submitting ? "Saving..." : "Save changes"}
             </Button>
             <Button type="button" variant="outline" onClick={() => navigate(`/recipes/${slug}`)}>
               Cancel

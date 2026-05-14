@@ -108,7 +108,7 @@ const RecipeGalleryItem = forwardRef<HTMLAnchorElement, RecipeGalleryItemProps>(
           <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
         </div>
         <figcaption className="mt-4 space-y-1">
-          <p className="micro-caption">{categoryLabels[recipe.category]}</p>
+          {recipe.categories?.[0] && <p className="micro-caption">{categoryLabels[recipe.categories[0]]}</p>}
           <h3 className="font-display text-xl md:text-2xl">{recipe.title}</h3>
           <p className="text-sm text-muted-foreground italic font-display">
             {recipe.description}

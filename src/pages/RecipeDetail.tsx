@@ -123,18 +123,20 @@ const RecipeDetail = () => {
     enabled: !!slug,
   });
 
-  // Related recipes: same category first, fall back to other recipes
+  // Related recipes: same primary category first, fall back to other recipes
+  const primaryCategory = recipe?.categories?.[0] ?? null;
   const { data: relatedRecipes = [] } = useQuery({
-    queryKey: ["related-recipes", recipe?.id, recipe?.category],
+    queryKey: ["related-recipes", recipe?.id, primaryCategory],
     queryFn: async () => {
       if (!recipe) return [];
-      // Try same category first
-      const { data: sameCat } = await supabase
-        .from("recipes")
-        .select("*")
-        .eq("category", recipe.category)
-        .neq("id", recipe.id)
-        .limit(6);
+      const { data: sameCat } = primaryCategory
+        ? await supabase
+            .from("recipes")
+            .select("*")
+            .contains("categories", [primaryCategory])
+            .neq("id", recipe.id)
+            .limit(6)
+        : { data: [] as Array<typeof recipe> };
 
       let pool = sameCat ?? [];
 
@@ -143,12 +145,11 @@ const RecipeDetail = () => {
           .from("recipes")
           .select("*")
           .neq("id", recipe.id)
-          .neq("category", recipe.category)
           .limit(6);
-        pool = [...pool, ...(others ?? [])];
+        const existingIds = new Set(pool.map((r) => r.id));
+        pool = [...pool, ...((others ?? []).filter((r) => !existingIds.has(r.id)))];
       }
 
-      // Score by shared ingredients to surface most-similar first
       const baseIngredients = new Set(
         ((recipe.ingredients as unknown[]) ?? []).map(normaliseIngredientForMatch).filter(Boolean),
       );
@@ -224,7 +225,7 @@ const RecipeDetail = () => {
     recipe.description,
     ingredients,
     totalTime,
-    recipe.category,
+    primaryCategory ?? "",
     recipe.servings,
   );
   // Richer description used for structured data (not constrained to 155 chars).
@@ -236,7 +237,7 @@ const RecipeDetail = () => {
 
   // Build keywords from category + first few key ingredients (de-duplicated, lowercase).
   const keywordParts = [
-    categoryLabels[recipe.category],
+    primaryCategory ? categoryLabels[primaryCategory] : "",
     ...ingredients
       .slice(0, 6)
       .map((i) =>
@@ -257,7 +258,7 @@ const RecipeDetail = () => {
     slug: recipe.slug,
     description: structuredDescription,
     imageUrl: recipe.image_url,
-    category: recipe.category,
+    category: primaryCategory ?? "",
     ingredients,
     instructions,
     prepMinutes: recipe.prep_time_minutes,
@@ -379,10 +380,12 @@ const RecipeDetail = () => {
               items={[
                 { label: "Home", href: "/" },
                 { label: "Recipes", href: "/recipes" },
-                {
-                  label: categoryLabels[recipe.category],
-                  href: `/recipes/category/${categoryToSlug[recipe.category]}`,
-                },
+                ...(primaryCategory
+                  ? [{
+                      label: categoryLabels[primaryCategory],
+                      href: `/recipes/category/${categoryToSlug[primaryCategory]}`,
+                    }]
+                  : []),
                 { label: recipe.title },
               ]}
             />

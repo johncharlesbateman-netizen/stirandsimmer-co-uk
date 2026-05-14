@@ -421,11 +421,11 @@ export type Database = {
       }
       recipes: {
         Row: {
-          category: Database["public"]["Enums"]["recipe_category"]
+          categories: Database["public"]["Enums"]["recipe_category"][]
           collections: string[]
           cook_time_minutes: number | null
           created_at: string
-          cuisine_region: string[]
+          cuisine_region: string | null
           description: string
           id: string
           image_url: string | null
@@ -444,11 +444,11 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          category: Database["public"]["Enums"]["recipe_category"]
+          categories?: Database["public"]["Enums"]["recipe_category"][]
           collections?: string[]
           cook_time_minutes?: number | null
           created_at?: string
-          cuisine_region?: string[]
+          cuisine_region?: string | null
           description: string
           id?: string
           image_url?: string | null
@@ -467,11 +467,11 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          category?: Database["public"]["Enums"]["recipe_category"]
+          categories?: Database["public"]["Enums"]["recipe_category"][]
           collections?: string[]
           cook_time_minutes?: number | null
           created_at?: string
-          cuisine_region?: string[]
+          cuisine_region?: string | null
           description?: string
           id?: string
           image_url?: string | null
