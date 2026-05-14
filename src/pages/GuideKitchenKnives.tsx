@@ -137,6 +137,36 @@ const GuideKitchenKnives = () => {
           </ul>
         </div>
 
+        {/* The only knives you actually need */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="the-only-knives-you-actually-need" className="font-display text-3xl md:text-4xl text-foreground mb-8 scroll-mt-24">
+            The only knives you actually need
+          </h2>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-3">Chef's knife — 20cm to 25cm</h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-4">
+            The single most important knife in the kitchen. A good chef's knife will handle 90 percent of everything you need to do — chopping, slicing, dicing, mincing, breaking down a chicken. If you buy one knife and one knife only, make it this.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-8">
+            Look for a blade between 20cm and 25cm depending on the size of your hands and your comfort level. Heavier German-style knives suit those who prefer a rocking motion. Lighter Japanese-style knives suit those who prefer a push cut.
+          </p>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-3">Paring knife — 8cm to 10cm</h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-8">
+            For the detailed work a chef's knife is too large for — peeling, trimming, deseeding, precise cuts. A small, nimble blade that gives you control over delicate tasks.
+          </p>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-3">Bread knife — serrated, 20cm to 25cm</h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-8">
+            The one knife where serration makes sense. A good bread knife will cut through a crusty loaf without crushing it, slice tomatoes without tearing them, and trim the layers of a cake. It rarely needs sharpening and lasts for years.
+          </p>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-3">Boning knife — 15cm (optional)</h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Flexible or stiff depending on preference. Used for breaking down meat, removing skin and working around joints. Not essential unless you regularly butcher your own meat — but invaluable when you do.
+          </p>
+        </div>
+
         {/* Blade materials */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 id="blade-materials" className="font-display text-3xl md:text-4xl text-foreground mb-6 scroll-mt-24">
