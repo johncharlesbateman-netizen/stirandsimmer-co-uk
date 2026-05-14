@@ -274,6 +274,16 @@ const GuideProperStock = () => {
           </p>
         </div>
 
+        {/* A note on pressure cookers */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            A note on pressure cookers
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            If you have a pressure cooker or an Instant Pot, chicken stock can be made in around an hour rather than three to four. The results are slightly different — pressure cooking produces a more opaque stock as the agitation is greater — but the flavour is excellent and the time saving is significant.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
