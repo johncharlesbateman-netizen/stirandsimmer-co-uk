@@ -100,6 +100,27 @@ const GuideProperStock = () => {
           </p>
         </div>
 
+        {/* The four main stocks */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            The four main stocks
+          </h2>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">Chicken stock</strong> — the most versatile and the best place to start. Works in soups, risottos, sauces, braises, pasta dishes and more. Made from a chicken carcass, preferably roasted, with vegetables and aromatics.
+            </li>
+            <li>
+              <strong className="text-foreground">Beef stock</strong> — richer and more robust. Made from roasted beef bones, ideally with some marrow. Takes longer than chicken but rewards the patience. Essential for proper gravies, French onion soup and red wine braises.
+            </li>
+            <li>
+              <strong className="text-foreground">Vegetable stock</strong> — quicker than either of the above and a useful all-rounder. Made from vegetable trimmings, aromatics and herbs. Best used fresh as it doesn't keep as well.
+            </li>
+            <li>
+              <strong className="text-foreground">Fish stock</strong> — the fastest of all, ready in under thirty minutes. Made from fish bones and heads. Delicate and quick to over-cook — don't be tempted to simmer it longer than the recipe says or it turns bitter.
+            </li>
+          </ul>
+        </div>
+
         {/* The basics */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
