@@ -13,7 +13,17 @@ const HERO_ID = "1340116"; // moody spices and herbs on dark wood
 const heroImage = pexels(HERO_ID, 1600);
 const heroSrcSet = pexelsSrcSet(HERO_ID, [768, 1200, 1600, 2000]);
 
-const GUIDES = [
+type GuideEntry = {
+  slug: string;
+  title: string;
+  description: string;
+  eyebrow: string;
+  imageId?: string;
+  image?: string;
+  imageAlt: string;
+};
+
+const GUIDES: GuideEntry[] = [
   {
     slug: "mother-sauces",
     title: "The five French mother sauces — and why every home cook should know them",
