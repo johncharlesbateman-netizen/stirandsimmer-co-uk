@@ -416,7 +416,7 @@ const RecipeDetail = () => {
             <button
               type="button"
               onClick={jumpToRecipe}
-              className="no-print mt-8 inline-flex items-center gap-2 px-8 py-3 bg-foreground text-background text-xs tracking-[0.2em] uppercase hover:opacity-80 transition-opacity"
+              className="no-print mt-8 inline-flex items-center gap-2 px-5 py-2 bg-foreground text-background text-xs tracking-[0.2em] uppercase hover:opacity-80 transition-opacity"
             >
               Jump to Recipe ↓
             </button>
