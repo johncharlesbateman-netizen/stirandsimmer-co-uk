@@ -106,6 +106,36 @@ const GuideKitchenKnives = () => {
           </ul>
         </div>
 
+        {/* The anatomy of a knife */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="the-anatomy-of-a-knife" className="font-display text-3xl md:text-4xl text-foreground mb-6 scroll-mt-24">
+            The anatomy of a knife
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            Before choosing a knife it helps to understand what you're looking at.
+          </p>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">Blade</strong> — the cutting edge. The shape, length and steel determine what the knife is best for.
+            </li>
+            <li>
+              <strong className="text-foreground">Edge</strong> — the sharpened part of the blade. A good edge should be maintained regularly.
+            </li>
+            <li>
+              <strong className="text-foreground">Spine</strong> — the thick, unsharpened top of the blade. Thicker spines add weight and stability.
+            </li>
+            <li>
+              <strong className="text-foreground">Bolster</strong> — the thick junction between blade and handle on forged knives. Adds balance and protects the fingers.
+            </li>
+            <li>
+              <strong className="text-foreground">Tang</strong> — the part of the blade that extends into the handle. A full tang — where the metal runs the full length of the handle — indicates a well-constructed knife.
+            </li>
+            <li>
+              <strong className="text-foreground">Handle</strong> — comfort and grip matter more than aesthetics. A handle should feel secure when wet.
+            </li>
+          </ul>
+        </div>
+
         {/* Blade materials */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 id="blade-materials" className="font-display text-3xl md:text-4xl text-foreground mb-6 scroll-mt-24">
