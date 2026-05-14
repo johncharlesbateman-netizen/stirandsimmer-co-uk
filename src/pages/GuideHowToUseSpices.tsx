@@ -136,6 +136,19 @@ const GuideHowToUseSpices = () => {
           </ul>
         </div>
 
+        {/* How to start experimenting */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            How to start experimenting
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The best way to learn spices is to pick one dish and make it repeatedly, adjusting the spicing each time. A simple dal, a roasted chicken thigh, a tomato sauce — something you make often enough to notice the difference.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Once you understand how a spice behaves on its own, you'll start to see how it fits with others. That's when cooking starts to feel less like following instructions and more like genuine instinct.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
