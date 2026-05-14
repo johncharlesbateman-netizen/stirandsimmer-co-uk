@@ -331,6 +331,16 @@ const GuideChoosingPans = () => {
           </ul>
         </div>
 
+        {/* The one pan rule */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            The one pan rule
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            If you could only own one pan, make it a 28cm stainless steel frying pan with a thick base. It won't be perfect for everything — eggs will stick until you learn the technique, and it won't hold heat like cast iron — but it will handle more tasks more capably than any other single pan. Everything else builds from there.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
