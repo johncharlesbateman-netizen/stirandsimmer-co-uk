@@ -15,6 +15,7 @@ const SECTIONS = [
   { id: "what-to-look-for-when-buying", label: "What to look for when buying" },
   { id: "how-to-hold-a-knife", label: "How to hold a knife" },
   { id: "keeping-your-knives-sharp", label: "Keeping your knives sharp" },
+  { id: "storing-your-knives", label: "Storing your knives" },
   { id: "common-mistakes-to-avoid", label: "Common mistakes to avoid" },
   { id: "the-one-knife-rule", label: "The one knife rule" },
 ];
