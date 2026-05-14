@@ -349,7 +349,7 @@ const RegionalMismatchAudit = ({ recipes }: { recipes: Recipe[] }) => {
   const rows: RegionMismatchRow[] = useMemo(() => {
     const out: RegionMismatchRow[] = [];
     for (const r of recipes) {
-      const regions = ((r.cuisine_region as string[] | null) ?? []).filter(
+      const regions = (r.cuisine_region ? [r.cuisine_region] : []).filter(
         (t) => REGION_KEYWORDS[t],
       );
       if (regions.length === 0) continue;
