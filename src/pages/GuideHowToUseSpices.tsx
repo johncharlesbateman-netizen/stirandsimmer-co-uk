@@ -48,6 +48,16 @@ const GuideHowToUseSpices = () => {
           </div>
         </header>
 
+        {/* Why spices matter */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            Why spices matter
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Spices don't just add heat. They add depth, warmth, earthiness, sweetness and complexity. They're the difference between a curry that tastes flat and one that tastes like it's been cooking all day. Understanding a few basics about how to use them will make everything you cook better.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
