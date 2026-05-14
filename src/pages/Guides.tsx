@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { ArrowRight } from "lucide-react";
 import properStockImage from "@/assets/guide-proper-stock.jpg";
+import properSauceImage from "@/assets/guide-proper-sauce.jpg";
 
 const pexels = (id: string, w = 1200) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=${w}`;
@@ -68,6 +69,15 @@ const GUIDES: GuideEntry[] = [
     eyebrow: "Technique",
     image: properStockImage,
     imageAlt: "A pot of golden chicken stock simmering with bones, vegetables and herbs",
+  },
+  {
+    slug: "proper-sauce",
+    title: "How to make a proper sauce",
+    description:
+      "The building blocks, the techniques, and the small details that turn a thin pan liquid into something glossy, balanced and worth mopping up.",
+    eyebrow: "Technique",
+    image: properSauceImage,
+    imageAlt: "A glossy dark pan sauce being whisked in a copper saucepan",
   },
 ];
 
