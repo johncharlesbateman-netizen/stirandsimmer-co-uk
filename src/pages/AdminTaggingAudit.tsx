@@ -632,16 +632,16 @@ const AdminTaggingAudit = () => {
     setApplying(recipe.id);
     try {
       const update: {
-        category?: TileCategory;
-        cuisine_region?: string[];
+        categories?: string[];
+        cuisine_region?: string;
         meal_types?: string[];
       } = {};
-      if (nextCategory) update.category = nextCategory;
-      if (nextRegions.length > 0) {
-        const existing = ((recipe.cuisine_region as string[] | null) ?? []).filter(
-          (t) => VALID_REGION_SET.has(t),
-        );
-        update.cuisine_region = Array.from(new Set([...existing, ...nextRegions]));
+      if (nextCategory) {
+        const existingCats = ((recipe.categories ?? []) as string[]);
+        update.categories = Array.from(new Set([...existingCats, nextCategory]));
+      }
+      if (nextRegions.length > 0 && !recipe.cuisine_region) {
+        update.cuisine_region = nextRegions[0];
       }
       if (nextMealTypes.length > 0) {
         const existing = (
