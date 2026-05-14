@@ -302,6 +302,22 @@ const GuideGaramMasala = () => {
           </p>
         </div>
 
+        {/* How to use it */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            How to use it
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            This is perhaps the most important thing to know: garam masala is a finishing spice.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Unlike cumin or coriander seeds, which are bloomed in oil at the start of cooking to build a flavour base, garam masala is typically added in the final minutes — stirred through a curry, a dal or a sauce just before serving. This preserves its fragrance and stops the more delicate aromatic notes from cooking off.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            A small amount goes a long way. Start with half a teaspoon and taste before adding more.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
