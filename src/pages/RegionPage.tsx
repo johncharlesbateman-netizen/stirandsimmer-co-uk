@@ -1,10 +1,12 @@
 import { useParams, Navigate, Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import Layout from "@/components/Layout";
 import RecipeCard from "@/components/RecipeCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { MealType, isMealType } from "@/lib/meal-types";
@@ -41,6 +43,7 @@ const isSectionKey = (v: unknown): v is SectionKey =>
   v === "quick" || isMealType(v);
 
 const MEAL_SECTION_MIN = 1;
+const SECTION_PREVIEW_LIMIT = 10;
 
 const totalTime = (r: Recipe) =>
   (r.prep_time_minutes ?? 0) + (r.cook_time_minutes ?? 0);
@@ -110,6 +113,12 @@ const RegionPage = () => {
     ? mealParamRaw
     : null;
   const region = regionId ? REGIONS[regionId] : undefined;
+
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+
+  const toggleSection = (key: string) => {
+    setExpandedSections((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   const { data: recipes, isLoading } = useQuery({
     queryKey: ["recipes", "region-page"],
@@ -267,42 +276,89 @@ const RegionPage = () => {
                   {filtered.length}{" "}
                   {filtered.length === 1 ? "recipe" : "recipes"}
                 </p>
-                {renderedSections.map((section) => (
-                  <div key={section.key} className="mb-14 md:mb-20">
-                    <h2 className="heading-section mb-6 md:mb-8">
-                      {region.adjective} {SECTION_PLURAL[section.key]}
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                      {section.recipes.map((recipe, index) => (
-                        <RecipeCard
-                          key={recipe.id}
-                          recipe={recipe}
-                          floatDelay={index}
-                          showMeta
-                        showCategory={false}
-                        />
-                      ))}
+                {renderedSections.map((section) => {
+                  const isExpanded = expandedSections[section.key] ?? false;
+                  const visible = isExpanded
+                    ? section.recipes
+                    : section.recipes.slice(0, SECTION_PREVIEW_LIMIT);
+                  const hasMore = section.recipes.length > SECTION_PREVIEW_LIMIT;
+                  return (
+                    <div key={section.key} className="mb-14 md:mb-20">
+                      <h2 className="heading-section mb-6 md:mb-8">
+                        {region.adjective} {SECTION_PLURAL[section.key]}
+                      </h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                        {visible.map((recipe, index) => (
+                          <RecipeCard
+                            key={recipe.id}
+                            recipe={recipe}
+                            floatDelay={index}
+                            showMeta
+                            showCategory={false}
+                          />
+                        ))}
+                      </div>
+                      {hasMore && (
+                        <div className="mt-6 flex justify-center">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => toggleSection(section.key)}
+                            className="gap-1.5"
+                          >
+                            {isExpanded ? (
+                              <>
+                                Show Less <ChevronUp className="w-4 h-4" />
+                              </>
+                            ) : (
+                              <>
+                                Show More <ChevronDown className="w-4 h-4" />
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
                 {generalRecipes.length > 0 && (
-                  <div>
+                  <div className="mb-14 md:mb-20">
                     {renderedSections.length > 0 && (
                       <h2 className="heading-section mb-6 md:mb-8">
                         More {region.adjective} recipes
                       </h2>
                     )}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                      {generalRecipes.map((recipe, index) => (
+                      {(expandedSections["general"] ? generalRecipes : generalRecipes.slice(0, SECTION_PREVIEW_LIMIT)).map((recipe, index) => (
                         <RecipeCard
                           key={recipe.id}
                           recipe={recipe}
                           floatDelay={index}
                           showMeta
-                        showCategory={false}
+                          showCategory={false}
                         />
                       ))}
                     </div>
+                    {generalRecipes.length > SECTION_PREVIEW_LIMIT && (
+                      <div className="mt-6 flex justify-center">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => toggleSection("general")}
+                          className="gap-1.5"
+                        >
+                          {expandedSections["general"] ? (
+                            <>
+                              Show Less <ChevronUp className="w-4 h-4" />
+                            </>
+                          ) : (
+                            <>
+                              Show More <ChevronDown className="w-4 h-4" />
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </>
