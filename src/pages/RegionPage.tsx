@@ -103,6 +103,18 @@ const REGIONS: Record<string, RegionDef> = {
     seoDescription:
       "South and Southeast Asian recipes from The Kitchen Atlas — curries, stir fries and bold, fragrant cooking from across the region.",
   },
+  mexico: {
+    id: "mexico",
+    name: "Mexico",
+    emoji: "🇲🇽",
+    description:
+      "Vibrant, smoky and deeply satisfying — tacos, salsas and the bold, layered flavours of Mexican cooking.",
+    regionTags: ["mexican"],
+    adjective: "Mexican",
+    seoTitle: "Mexican recipes — The Kitchen Atlas | Stir & Simmer",
+    seoDescription:
+      "Mexican recipes from The Kitchen Atlas — tacos, salsas and the bold, smoky flavours of Mexico. Tried and tested in a real kitchen.",
+  },
 };
 
 const RegionPage = () => {
