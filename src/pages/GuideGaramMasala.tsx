@@ -318,6 +318,19 @@ const GuideGaramMasala = () => {
           </p>
         </div>
 
+        {/* Worth making your own? */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            Worth making your own?
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Yes. Even once. Not because shop-bought garam masala is bad — some blends are perfectly good — but because making it yourself teaches you something that no recipe can fully convey. You'll understand why cardamom smells the way it does when it hits a hot pan. You'll understand the difference between a blend that's been sitting in a warehouse for eight months and one made twenty minutes ago.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            That understanding changes how you cook.
+          </p>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
