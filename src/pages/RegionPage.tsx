@@ -276,26 +276,53 @@ const RegionPage = () => {
                   {filtered.length}{" "}
                   {filtered.length === 1 ? "recipe" : "recipes"}
                 </p>
-                {renderedSections.map((section) => (
-                  <div key={section.key} className="mb-14 md:mb-20">
-                    <h2 className="heading-section mb-6 md:mb-8">
-                      {region.adjective} {SECTION_PLURAL[section.key]}
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                      {section.recipes.map((recipe, index) => (
-                        <RecipeCard
-                          key={recipe.id}
-                          recipe={recipe}
-                          floatDelay={index}
-                          showMeta
-                        showCategory={false}
-                        />
-                      ))}
+                {renderedSections.map((section) => {
+                  const isExpanded = expandedSections[section.key] ?? false;
+                  const visible = isExpanded
+                    ? section.recipes
+                    : section.recipes.slice(0, SECTION_PREVIEW_LIMIT);
+                  const hasMore = section.recipes.length > SECTION_PREVIEW_LIMIT;
+                  return (
+                    <div key={section.key} className="mb-14 md:mb-20">
+                      <h2 className="heading-section mb-6 md:mb-8">
+                        {region.adjective} {SECTION_PLURAL[section.key]}
+                      </h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                        {visible.map((recipe, index) => (
+                          <RecipeCard
+                            key={recipe.id}
+                            recipe={recipe}
+                            floatDelay={index}
+                            showMeta
+                            showCategory={false}
+                          />
+                        ))}
+                      </div>
+                      {hasMore && (
+                        <div className="mt-6 flex justify-center">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => toggleSection(section.key)}
+                            className="gap-1.5"
+                          >
+                            {isExpanded ? (
+                              <>
+                                Show Less <ChevronUp className="w-4 h-4" />
+                              </>
+                            ) : (
+                              <>
+                                Show More <ChevronDown className="w-4 h-4" />
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
                 {generalRecipes.length > 0 && (
-                  <div>
+                  <div className="mb-14 md:mb-20">
                     {renderedSections.length > 0 && (
                       <h2 className="heading-section mb-6 md:mb-8">
                         More {region.adjective} recipes
@@ -308,7 +335,7 @@ const RegionPage = () => {
                           recipe={recipe}
                           floatDelay={index}
                           showMeta
-                        showCategory={false}
+                          showCategory={false}
                         />
                       ))}
                     </div>
