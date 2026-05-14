@@ -133,12 +133,12 @@ const KitchenAtlas = () => {
       <div aria-hidden className="w-full h-px bg-white/90" />
 
       {/* MAP */}
-      <section style={{ backgroundColor: "#2a1a08" }} className="py-8 md:py-16">
+      <section style={{ backgroundColor: "#5a3a1f" }} className="py-8 md:py-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div
             className="relative mx-auto rounded-xl overflow-hidden block"
             style={{
-              backgroundColor: "#1a0e00",
+              backgroundColor: "#46301a",
               maxWidth: "1100px",
               aspectRatio: "2 / 1",
               backgroundImage:
