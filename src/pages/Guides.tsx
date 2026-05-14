@@ -30,7 +30,7 @@ const GUIDES: GuideEntry[] = [
     title: "The five French mother sauces — and why every home cook should know them",
     description:
       "Master these five and you hold the keys to almost every classic sauce in western cuisine.",
-    eyebrow: "French technique",
+    eyebrow: "French Technique",
     imageId: "5908227", // saucepan with cream sauce
     imageAlt: "A glossy sauce being whisked in a saucepan",
   },
@@ -39,7 +39,7 @@ const GUIDES: GuideEntry[] = [
     title: "French cooking techniques every home cook should know",
     description:
       "Seven essential French techniques — mise en place, julienne, brunoise, chiffonade, beurre blanc, flambé and déglaze — explained simply.",
-    eyebrow: "French technique",
+    eyebrow: "French Technique",
     imageId: "4252137", // chef knife and chopped vegetables
     imageAlt: "Chef's knife and finely chopped vegetables on a wooden board",
   },
@@ -48,7 +48,7 @@ const GUIDES: GuideEntry[] = [
     title: "Garam masala — a cook's guide",
     description:
       "The spices that go in, why they matter, how to toast and grind them, and the mistakes most home cooks make.",
-    eyebrow: "Indian technique",
+    eyebrow: "Indian Technique",
     imageId: "1340116", // bowls of warm spices
     imageAlt: "Small bowls of warm Indian spices arranged on a dark surface",
   },
@@ -57,7 +57,7 @@ const GUIDES: GuideEntry[] = [
     title: "How to use spices — a beginner's guide",
     description:
       "What spices do, how to store them, when to add them, and how to build proper flavour with confidence.",
-    eyebrow: "Technique",
+    eyebrow: "Spice Guide",
     imageId: "2802527", // spices in jars and spoons
     imageAlt: "An array of ground spices in spoons on a dark wooden table",
   },
