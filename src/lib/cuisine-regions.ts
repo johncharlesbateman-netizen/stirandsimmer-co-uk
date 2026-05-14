@@ -21,6 +21,7 @@ export const cuisineRegionLabels: Record<CuisineRegion, string> = {
   british: "British",
   indian: "Indian",
   asian: "Asian",
+  mexican: "Mexican",
   spicy: "Spicy",
   seasonal: "Seasonal",
   comfort: "Comfort",
