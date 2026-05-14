@@ -545,8 +545,9 @@ const AdminTaggingAudit = () => {
           collections: (r.collections as string[] | null) ?? [],
         });
 
-        const currentCategory = r.category as string | null;
-        const currentRegions = ((r.cuisine_region as string[] | null) ?? []).filter(
+        const currentCategories = (r.categories ?? []) as string[];
+        const currentCategory = currentCategories.find((c) => TILE_CATEGORY_SET.has(c)) ?? currentCategories[0] ?? null;
+        const currentRegions = (r.cuisine_region ? [r.cuisine_region] : []).filter(
           (t) => VALID_REGION_SET.has(t),
         );
         const currentMealTypes = (
