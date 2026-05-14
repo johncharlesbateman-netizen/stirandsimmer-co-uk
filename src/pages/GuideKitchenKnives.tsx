@@ -218,19 +218,19 @@ const GuideKitchenKnives = () => {
           </h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
-              <strong className="text-foreground">Pick it up</strong> — the knife should feel balanced in your hand, not blade-heavy or handle-heavy. The grip should feel natural and secure. If you can, try before you buy.
+              <strong className="text-foreground">Steel quality</strong> — high-carbon stainless steel is the sweet spot for most home cooks. It takes a good edge, resists rust and is relatively easy to maintain. Pure carbon steel takes an even better edge but requires more care — it will rust if not dried immediately.
             </li>
             <li>
-              <strong className="text-foreground">Full tang</strong> — the steel of the blade should run all the way through the handle. A full-tang knife is stronger, better balanced and longer lasting than a partial tang.
+              <strong className="text-foreground">Balance</strong> — hold the knife at the bolster with your thumb and index finger either side of the blade. A well-balanced knife should feel neither blade-heavy nor handle-heavy.
             </li>
             <li>
-              <strong className="text-foreground">Forged, not stamped</strong> — forged blades are heavier, denser and hold an edge longer. Stamped blades are cheaper and lighter but rarely last as well.
+              <strong className="text-foreground">Handle comfort</strong> — grip the handle as you would when cooking. It should feel secure and comfortable. Try both wet and dry if possible.
             </li>
             <li>
-              <strong className="text-foreground">A comfortable handle</strong> — wood, composite or moulded plastic; what matters is that it suits your hand. A handle that's too small or too large will tire you out.
+              <strong className="text-foreground">Full tang</strong> — look for a knife where the metal runs the full length of the handle, visible as a strip between the handle scales. This indicates better construction and durability.
             </li>
             <li>
-              <strong className="text-foreground">Buy fewer, better knives</strong> — one excellent chef's knife is worth ten cheap ones. Spend the money on the knives you'll use every day.
+              <strong className="text-foreground">Weight</strong> — heavier is not always better. The right weight is the one that feels natural after an hour of prep.
             </li>
           </ul>
         </div>
