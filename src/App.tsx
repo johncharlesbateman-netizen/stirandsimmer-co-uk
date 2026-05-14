@@ -135,6 +135,7 @@ const App = () => (
             <Route path="/guides/french-techniques" element={<GuideFrenchTechniques />} />
             <Route path="/guides/garam-masala" element={<GuideGaramMasala />} />
             <Route path="/guides/how-to-use-spices" element={<GuideHowToUseSpices />} />
+            <Route path="/guides/proper-stock" element={<GuideProperStock />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />
