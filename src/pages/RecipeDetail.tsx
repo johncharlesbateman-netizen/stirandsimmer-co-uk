@@ -563,10 +563,10 @@ const RecipeDetail = () => {
             <div className="mb-10 flex items-end justify-between gap-6 flex-wrap">
               <h2 className="heading-section">You Might Also Like</h2>
               <Link
-                to={`/recipes/category/${categoryToSlug[recipe.category]}`}
+                to={`/recipes/category/${categoryToSlug[recipe.categories?.[0]]}`}
                 className="inline-flex items-center gap-2 min-h-[44px] py-2 text-sm text-muted-foreground hover:text-foreground transition-colors editorial-link"
               >
-                More {categoryLabels[recipe.category]} recipes →
+                More {categoryLabels[recipe.categories?.[0]]} recipes →
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
