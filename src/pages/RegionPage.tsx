@@ -329,7 +329,7 @@ const RegionPage = () => {
                       </h2>
                     )}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                      {generalRecipes.map((recipe, index) => (
+                      {(expandedSections["general"] ? generalRecipes : generalRecipes.slice(0, SECTION_PREVIEW_LIMIT)).map((recipe, index) => (
                         <RecipeCard
                           key={recipe.id}
                           recipe={recipe}
@@ -339,6 +339,26 @@ const RegionPage = () => {
                         />
                       ))}
                     </div>
+                    {generalRecipes.length > SECTION_PREVIEW_LIMIT && (
+                      <div className="mt-6 flex justify-center">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => toggleSection("general")}
+                          className="gap-1.5"
+                        >
+                          {expandedSections["general"] ? (
+                            <>
+                              Show Less <ChevronUp className="w-4 h-4" />
+                            </>
+                          ) : (
+                            <>
+                              Show More <ChevronDown className="w-4 h-4" />
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </>
