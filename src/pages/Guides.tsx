@@ -55,7 +55,7 @@ const GUIDES = [
     description:
       "The quiet foundation of good cooking — bones, mirepoix, water and time, and how to turn them into something your sauces and soups can lean on.",
     eyebrow: "Technique",
-    imageId: "5938/food-salad-healthy-vegetables", // fallback id below
+    imageId: "33242", // simmering pot on the stove
     imageAlt: "A pot of golden homemade stock simmering on the stove",
   },
 ];
