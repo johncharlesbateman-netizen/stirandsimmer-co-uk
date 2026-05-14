@@ -91,6 +91,27 @@ const GuideProperSauce = () => {
           </ul>
         </div>
 
+        {/* The four sauces every home cook should know */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            The four sauces every home cook should know
+          </h2>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">Pan sauce</strong> — the simplest and most useful sauce you can make. After searing meat, deglaze the pan with wine or stock, scraping up all the caramelised bits from the bottom. Reduce, finish with butter. Done in five minutes. Works with almost anything.
+            </li>
+            <li>
+              <strong className="text-foreground">Béchamel</strong> — the great white sauce. Butter, flour, milk. The base of lasagne, cauliflower cheese, croque monsieur. Once you can make a béchamel without lumps, a whole category of dishes opens up.
+            </li>
+            <li>
+              <strong className="text-foreground">Tomato sauce</strong> — not from a jar. A proper tomato sauce is onion, garlic, good tinned tomatoes, olive oil, time and patience. It should be sweet, slightly sharp and deeply savoury. It freezes beautifully and makes everything better.
+            </li>
+            <li>
+              <strong className="text-foreground">Red wine reduction</strong> — the backbone of proper gravy and many braising sauces. Red wine, stock, aromatics, reduced until rich and glossy. Takes time but almost no skill.
+            </li>
+          </ul>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section
           className="w-full py-16 md:py-20 border-t border-border"
