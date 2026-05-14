@@ -209,26 +209,23 @@ const GuideChoosingPans = () => {
           </ul>
         </div>
 
-        {/* How to choose well */}
+        {/* What to look for when buying */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            How to choose well
+            What to look for when buying
           </h2>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
-              <strong className="text-foreground">Pick it up</strong> — a good pan feels heavy in the hand. Weight means thickness, and thickness means even heat. A pan that feels flimsy will cook flimsily.
+              <strong className="text-foreground">Base thickness</strong> — a thick, heavy base distributes heat evenly and prevents hot spots. Cheap pans with thin bases warp and heat unevenly.
             </li>
             <li>
-              <strong className="text-foreground">Check the base</strong> — a flat, thick base sits firm on the hob and spreads heat evenly. Thin or warped bases hotspot and waste energy.
+              <strong className="text-foreground">Handle comfort and security</strong> — the handle should feel solid and balanced. Riveted handles are more secure than welded ones. Check whether it stays cool on the hob.
             </li>
             <li>
-              <strong className="text-foreground">Look at the handle</strong> — it should be riveted, not glued or screwed. A loose handle on a hot pan is dangerous. Oven-safe handles open up a whole category of techniques.
+              <strong className="text-foreground">Oven-safe temperature</strong> — if you want to use a pan in the oven, check the maximum temperature. Many non-stick pans have low limits. Cast iron and stainless steel are usually unlimited.
             </li>
             <li>
-              <strong className="text-foreground">Match it to your hob</strong> — if you cook on induction, the pan must be magnetic. Cast iron and most stainless steel work; aluminium and copper usually don't unless they have a steel base.
-            </li>
-            <li>
-              <strong className="text-foreground">Buy fewer, better pans</strong> — one good pan you reach for every day is worth ten cheap ones gathering dust. Spend more, buy less, and look after what you have.
+              <strong className="text-foreground">Induction compatibility</strong> — if you cook on induction, check the pan has a magnetic base. Cast iron, carbon steel and most stainless steel work on induction. Copper and aluminium typically don't.
             </li>
           </ul>
         </div>
