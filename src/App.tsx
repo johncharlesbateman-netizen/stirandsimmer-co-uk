@@ -141,6 +141,7 @@ const App = () => (
             <Route path="/guides/proper-stock" element={<GuideProperStock />} />
             <Route path="/guides/proper-sauce" element={<GuideProperSauce />} />
             <Route path="/guides/choosing-pans" element={<GuideChoosingPans />} />
+            <Route path="/guides/kitchen-knives" element={<GuideKitchenKnives />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />
