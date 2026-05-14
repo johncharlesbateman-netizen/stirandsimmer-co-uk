@@ -320,7 +320,7 @@ const RecipeDetail = () => {
         type="button"
         onClick={jumpToRecipe}
         aria-label="Jump to recipe"
-        className={`no-print md:hidden fixed left-1/2 -translate-x-1/2 bottom-6 z-40 inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-5 py-3 rounded-full bg-foreground text-background text-sm font-medium shadow-lg transition-all duration-200 ${
+        className={`no-print md:hidden fixed left-1/2 -translate-x-1/2 bottom-6 z-40 inline-flex items-center justify-center min-h-[36px] min-w-[36px] px-3 py-1.5 rounded-full bg-foreground text-background text-xs font-medium shadow-lg transition-all duration-200 ${
           showJumpToRecipe ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"
         }`}
       >
