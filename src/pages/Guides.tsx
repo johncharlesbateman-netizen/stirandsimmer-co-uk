@@ -90,6 +90,15 @@ const GUIDES: GuideEntry[] = [
     image: choosingPansImage,
     imageAlt: "An overhead arrangement of cast iron, copper and stainless steel pans on a dark surface",
   },
+  {
+    slug: "kitchen-knives",
+    title: "Kitchen knives — a cook's guide",
+    description:
+      "The blades worth owning, how to hold them, how to keep them sharp, and how to choose ones that will last a lifetime.",
+    eyebrow: "Equipment Guide",
+    image: kitchenKnivesImage,
+    imageAlt: "An overhead arrangement of kitchen knives on a dark cutting board",
+  },
 ];
 
 const Guides = () => {
