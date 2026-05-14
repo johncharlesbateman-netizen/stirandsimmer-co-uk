@@ -359,12 +359,6 @@ const MealPlanner = () => {
           style={{ backgroundColor: "#1a0e00" }}
         >
           <div>
-            <h1
-              className="heading-display mb-2"
-              style={{ color: "#f5e9d7" }}
-            >
-              Plan your week's meals
-            </h1>
             <p
               className="text-sm md:text-base max-w-md font-light leading-relaxed"
               style={{ color: "#d9c7a8" }}
