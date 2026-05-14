@@ -129,8 +129,11 @@ const KitchenAtlas = () => {
         imageAlt="A flatlay of dishes and ingredients from cuisines around the world"
       />
 
+      {/* Divider between hero and map */}
+      <div aria-hidden className="w-full h-px bg-white/90" />
+
       {/* MAP */}
-      <section style={{ backgroundColor: "#120a00" }} className="py-8 md:py-16">
+      <section style={{ backgroundColor: "#2a1a08" }} className="py-8 md:py-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div
             className="relative mx-auto rounded-xl overflow-hidden block"
