@@ -246,6 +246,7 @@ const REGION_BUTTON_LABEL: Record<string, string> = {
   italy: "Explore all Italian recipes",
   france: "Explore all French recipes",
   asia: "Explore all South and Southeast Asian recipes",
+  mexico: "Explore all Mexican recipes",
 };
 
 // Render markdown-style [label](href) links inline. External URLs open in a
