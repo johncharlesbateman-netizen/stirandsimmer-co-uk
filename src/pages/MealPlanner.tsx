@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Search, Printer, Trash2, X, Plus, Check, BookOpen, Pencil, ShoppingBasket } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
+import PageHero from "@/components/PageHero";
 import { supabase } from "@/integrations/supabase/client";
 import { mergeIngredients } from "@/lib/ingredientMerger";
 import { isSectionHeader } from "@/lib/ingredient-utils";
@@ -343,6 +344,13 @@ const MealPlanner = () => {
         <meta name="twitter:description" content="Plan your week's meals, edit ingredients to match what's in your kitchen, and build a smart shopping list automatically. Free meal planner from Stir & Simmer." />
         <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
       </Helmet>
+
+      <PageHero
+        title="Plan your week"
+        subtitle="Drag, drop and cook. Your week sorted in minutes."
+        imageId="776538"
+        imageAlt="A weekly meal planner notebook with fresh ingredients on a kitchen counter"
+      />
 
       <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">
         {/* Hero */}
