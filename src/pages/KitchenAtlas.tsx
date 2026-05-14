@@ -129,6 +129,13 @@ const KitchenAtlas = () => {
         imageAlt="A flatlay of dishes and ingredients from cuisines around the world"
       />
 
+      {/* Divider between hero and dark section */}
+      <div
+        aria-hidden
+        className="w-full h-3 border-y border-border"
+        style={{ backgroundColor: "#f5e9d7" }}
+      />
+
       {/* HERO */}
       <section
         className="relative w-full"
