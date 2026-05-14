@@ -4,6 +4,7 @@ import Layout from "@/components/Layout";
 import { ArrowRight } from "lucide-react";
 import properStockImage from "@/assets/guide-proper-stock.jpg";
 import properSauceImage from "@/assets/guide-proper-sauce.jpg";
+import choosingPansImage from "@/assets/guide-choosing-pans.jpg";
 
 const pexels = (id: string, w = 1200) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=${w}`;
@@ -78,6 +79,15 @@ const GUIDES: GuideEntry[] = [
     eyebrow: "Technique",
     image: properSauceImage,
     imageAlt: "A glossy dark pan sauce being whisked in a copper saucepan",
+  },
+  {
+    slug: "choosing-pans",
+    title: "Choosing the right pan for the job",
+    description:
+      "The materials, the shapes, and which pans actually earn their place in a home kitchen — a practical guide to building a collection that lasts.",
+    eyebrow: "Equipment Guide",
+    image: choosingPansImage,
+    imageAlt: "An overhead arrangement of cast iron, copper and stainless steel pans on a dark surface",
   },
 ];
 
