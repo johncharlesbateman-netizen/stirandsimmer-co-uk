@@ -48,7 +48,7 @@ const GUIDES: GuideEntry[] = [
     title: "Garam masala — a cook's guide",
     description:
       "The spices that go in, why they matter, how to toast and grind them, and the mistakes most home cooks make.",
-    eyebrow: "Indian technique",
+    eyebrow: "Indian Technique",
     imageId: "1340116", // bowls of warm spices
     imageAlt: "Small bowls of warm Indian spices arranged on a dark surface",
   },
