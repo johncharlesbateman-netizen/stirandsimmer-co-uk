@@ -70,6 +70,15 @@ const GUIDES: GuideEntry[] = [
     image: properStockImage,
     imageAlt: "A pot of golden chicken stock simmering with bones, vegetables and herbs",
   },
+  {
+    slug: "proper-sauce",
+    title: "How to make a proper sauce",
+    description:
+      "The building blocks, the techniques, and the small details that turn a thin pan liquid into something glossy, balanced and worth mopping up.",
+    eyebrow: "Technique",
+    image: properSauceImage,
+    imageAlt: "A glossy dark pan sauce being whisked in a copper saucepan",
+  },
 ];
 
 const Guides = () => {
