@@ -594,7 +594,7 @@ const RecipeDetail = () => {
                         <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
                       </div>
                       <div className="space-y-2">
-                        <p className="micro-caption">{categoryLabels[r.category]}</p>
+                        <p className="micro-caption">{categoryLabels[r.categories?.[0]]}</p>
                         <h3 className="font-display text-xl md:text-2xl group-hover:text-accent transition-colors">
                           {r.title}
                         </h3>
