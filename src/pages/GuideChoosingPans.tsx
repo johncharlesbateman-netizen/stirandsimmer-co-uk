@@ -43,6 +43,12 @@ const GuideChoosingPans = () => {
               Choosing the right pan for the job
             </h1>
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+              The right pan makes cooking easier, more consistent and more enjoyable. The wrong one makes everything harder — food sticks, heat spreads unevenly, handles get too hot, nothing browns properly. Most home cooks accumulate pans over the years without ever really thinking about what each one is for.
+            </p>
+            <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+              This guide fixes that.
+            </p>
+            <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
               The pan you cook in matters more than most home cooks realise. The right pan does half the work for you — it conducts heat evenly, releases food cleanly and makes the difference between a steak with a deep, even crust and one that's grey and stewed.
             </p>
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
