@@ -166,6 +166,39 @@ const GuideGaramMasala = () => {
           </p>
         </div>
 
+        {/* The core spices */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            The core spices
+          </h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            While no recipe is definitive, certain spices appear consistently across most versions:
+          </p>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">Cardamom</strong> — green cardamom pods bring a floral, slightly citrusy warmth that is the backbone of many blends. Black cardamom adds a smokier, more intense note and appears in northern Indian versions.
+            </li>
+            <li>
+              <strong className="text-foreground">Cinnamon</strong> — sweet, warm and aromatic. Used as a stick or in pieces, never pre-ground if you can help it.
+            </li>
+            <li>
+              <strong className="text-foreground">Cloves</strong> — intensely aromatic and slightly numbing. Powerful — use with restraint.
+            </li>
+            <li>
+              <strong className="text-foreground">Cumin</strong> — earthy and warm, usually present in some quantity in most blends.
+            </li>
+            <li>
+              <strong className="text-foreground">Coriander</strong> — milder and slightly citrusy, it softens and rounds out the stronger spices.
+            </li>
+            <li>
+              <strong className="text-foreground">Black pepper</strong> — the original heat source in Indian cooking before chillies arrived from the Americas. Adds sharpness and depth.
+            </li>
+            <li>
+              <strong className="text-foreground">Nutmeg or mace</strong> — used in smaller quantities, adds a subtle sweetness and complexity.
+            </li>
+          </ul>
+        </div>
+
         {/* Spice sections */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl">
           {SPICES.map((spice, i) => (
