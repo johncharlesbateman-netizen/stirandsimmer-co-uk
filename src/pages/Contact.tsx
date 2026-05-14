@@ -120,7 +120,7 @@ const Contact = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
             {/* Form */}
             <div className="md:col-span-7">
-              <h1 className="heading-display mb-6">Contact</h1>
+              
               <p className="text-lg text-muted-foreground mb-12 max-w-lg">
                 Have a recipe request or a question?
                 Drop us a message and we'll get back to you within 48 hours.
