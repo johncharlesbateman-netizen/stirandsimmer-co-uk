@@ -57,7 +57,7 @@ const GUIDES: GuideEntry[] = [
     title: "How to use spices — a beginner's guide",
     description:
       "What spices do, how to store them, when to add them, and how to build proper flavour with confidence.",
-    eyebrow: "Technique",
+    eyebrow: "Spice Guide",
     imageId: "2802527", // spices in jars and spoons
     imageAlt: "An array of ground spices in spoons on a dark wooden table",
   },
