@@ -149,8 +149,8 @@ const RegionPage = () => {
   }
 
   const filtered = (recipes ?? []).filter((r) => {
-    const tags = (r.cuisine_region as string[] | null) ?? [];
-    return region.regionTags.some((t) => tags.includes(t));
+    const tag = r.cuisine_region;
+    return tag ? region.regionTags.includes(tag) : false;
   });
 
   const recipesBySection: Record<SectionKey, Recipe[]> = {
