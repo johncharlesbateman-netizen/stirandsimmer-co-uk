@@ -900,7 +900,9 @@ const AdminTaggingAudit = () => {
                   consistencyIssues,
                 }) => {
                   const allRegions =
-                    ((recipe.cuisine_region as string[] | null) ?? []);
+                    (recipe.cuisine_region ? [recipe.cuisine_region] : []);
+                  const recipeCats = ((recipe.categories ?? []) as string[]);
+                  const primaryCat = recipeCats.find((c) => TILE_CATEGORY_SET.has(c)) ?? recipeCats[0] ?? null;
                   const hasInconsistency = consistencyIssues.length > 0;
                   return (
                     <div
@@ -933,14 +935,14 @@ const AdminTaggingAudit = () => {
                           <div className="flex flex-wrap gap-2 text-xs">
                             <span className="inline-flex items-center gap-1.5">
                               <span className="text-muted-foreground">Category:</span>
-                              {recipe.category &&
-                              TILE_CATEGORY_SET.has(recipe.category) ? (
+                              {primaryCat &&
+                              TILE_CATEGORY_SET.has(primaryCat) ? (
                                 <span className="px-2 py-0.5 rounded bg-foreground/10 text-foreground font-mono">
-                                  {labelForCategory(recipe.category)}
+                                  {labelForCategory(primaryCat)}
                                 </span>
                               ) : (
                                 <span className="px-2 py-0.5 rounded bg-red-600/15 text-red-700 dark:text-red-300 font-mono">
-                                  {recipe.category ? labelForCategory(recipe.category) : "—"}
+                                  {primaryCat ? labelForCategory(primaryCat) : "—"}
                                 </span>
                               )}
                             </span>
