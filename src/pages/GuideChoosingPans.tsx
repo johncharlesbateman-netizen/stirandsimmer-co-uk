@@ -307,14 +307,28 @@ const GuideChoosingPans = () => {
           </ul>
         </div>
 
-        {/* A note on care */}
+        {/* Caring for your pans */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            A note on care
+            Caring for your pans
           </h2>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            A good pan, looked after, will outlive you. Dry it properly. Don't shock a hot pan under cold water. Season your cast iron and carbon steel with a thin film of oil after every wash. Treat your pans well and they will, slowly and quietly, make you a better cook.
-          </p>
+          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">Stainless steel</strong> — dishwasher safe but hand washing preserves the finish. For stubborn residue, deglaze with water while still hot or use a stainless steel cleaner.
+            </li>
+            <li>
+              <strong className="text-foreground">Cast iron</strong> — never soak in water. Wash with warm water and a stiff brush, dry immediately and thoroughly, then apply a thin layer of oil before storing. Re-season in the oven periodically.
+            </li>
+            <li>
+              <strong className="text-foreground">Non-stick</strong> — hand wash only with a soft cloth. Never use metal utensils. Replace when the coating shows wear.
+            </li>
+            <li>
+              <strong className="text-foreground">Carbon steel</strong> — treat like cast iron. Keep it dry, keep it oiled, and it will reward you for years.
+            </li>
+            <li>
+              <strong className="text-foreground">Copper</strong> — hand wash only. Polish regularly to maintain appearance and performance.
+            </li>
+          </ul>
         </div>
 
         {/* Kitchen Atlas CTA */}
