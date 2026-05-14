@@ -35,7 +35,7 @@ const RecipePickerDialog = ({ open, onClose, onSelect, dayLabel, mealLabel, defa
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
-        .select("id, title, slug, category, ingredients, servings, image_url")
+        .select("id, title, slug, categories, ingredients, servings, image_url")
         .order("title");
       if (error) throw error;
       return data;
@@ -46,15 +46,18 @@ const RecipePickerDialog = ({ open, onClose, onSelect, dayLabel, mealLabel, defa
     let list = recipes;
 
     if (categoryFilter) {
-      list = list.filter((r) => r.category === categoryFilter);
+      list = list.filter((r) => (r.categories ?? []).includes(categoryFilter));
     }
 
     if (search.trim()) {
       const q = search.toLowerCase();
       list = list.filter(
-        (r) =>
-          r.title.toLowerCase().includes(q) ||
-          categoryLabels[r.category]?.toLowerCase().includes(q)
+        (r) => {
+          if (r.title.toLowerCase().includes(q)) return true;
+          return (r.categories ?? []).some((c) =>
+            categoryLabels[c]?.toLowerCase().includes(q),
+          );
+        },
       );
     }
 
@@ -157,7 +160,7 @@ const RecipePickerDialog = ({ open, onClose, onSelect, dayLabel, mealLabel, defa
                   <div className="min-w-0">
                     <p className="text-sm font-medium text-foreground truncate">{recipe.title}</p>
                     <p className="text-xs text-muted-foreground">
-                      {categoryLabels[recipe.category]}
+                      {(recipe.categories ?? []).map((c) => categoryLabels[c]).filter(Boolean).join(" · ") || "—"}
                     </p>
                   </div>
                 </button>
