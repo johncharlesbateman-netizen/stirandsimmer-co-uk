@@ -89,30 +89,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Three Column Highlights */}
-      <section className="py-12 border-t border-border">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
-            <div>
-              <div className="text-4xl mb-4" aria-hidden="true">🍳</div>
-              <h3 className="heading-section mb-2">Real Recipes</h3>
-              <p className="text-sm text-muted-foreground">Tested in a home kitchen, not a TV studio</p>
-            </div>
-            <div>
-              <div className="text-4xl mb-4" aria-hidden="true">🛒</div>
-              <h3 className="heading-section mb-2">Normal Ingredients</h3>
-              <p className="text-sm text-muted-foreground">Everything from your local supermarket</p>
-            </div>
-            <div>
-              <div className="text-4xl mb-4" aria-hidden="true">📅</div>
-              <h3 className="heading-section mb-2">Always Growing</h3>
-              <p className="text-sm text-muted-foreground">Fresh recipes added when we have something worth sharing</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
       {/* CTA Section */}
       <section className="section-breathing border-t border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
