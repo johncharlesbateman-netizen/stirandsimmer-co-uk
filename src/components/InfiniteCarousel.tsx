@@ -36,23 +36,22 @@ const InfiniteCarousel = ({ images, speed = 30 }: InfiniteCarouselProps) => {
   const duplicatedImages = [...images, ...images];
 
   return (
-    <div className="w-screen overflow-hidden" style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
+    <div className="w-full overflow-hidden">
       <div
         ref={scrollRef}
-        className="flex overflow-x-hidden"
+        className="flex overflow-x-hidden h-[260px] sm:h-[400px] md:h-[500px]"
         style={{ scrollBehavior: 'auto' }}
       >
         {duplicatedImages.map((image, index) => (
           <div
             key={index}
-            className="flex-shrink-0 h-[400px] md:h-[500px]"
-            style={{ width: 'auto' }}
+            className="flex-shrink-0 h-full"
           >
             <img
               src={image.src}
               alt={image.alt}
               className="h-full w-auto object-cover"
-              loading="lazy"
+              loading="eager"
               decoding="async"
               width={500}
               height={500}
