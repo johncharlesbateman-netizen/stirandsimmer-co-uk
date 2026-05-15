@@ -89,25 +89,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-breathing border-t border-border">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-            <div>
-              <h2 className="heading-section mb-4">Have a recipe request?</h2>
-              <p className="text-muted-foreground">
-                Is there a dish you've always wanted to make but never quite cracked? A family favourite you'd love a better version of? Tell us — we build our recipe list around what real cooks actually want to eat.
-              </p>
-            </div>
-            <Link
-              to="/contact"
-              className="inline-block px-8 py-4 bg-foreground text-background text-sm tracking-wider uppercase hover:opacity-80 transition-opacity w-fit"
-            >
-              Get in Touch
-            </Link>
-          </div>
-        </div>
-      </section>
     </Layout>
   );
 };
