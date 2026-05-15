@@ -19,7 +19,7 @@ const carouselImages = [
 
 const About = () => {
   return (
-    <Layout>
+    <Layout hideNewsletter>
       <Helmet>
         <title>About Us | Stir & Simmer</title>
         <meta name="description" content="Learn about Stir & Simmer — who we are, our passion for fresh seasonal cooking, and who our recipes are made for." />
