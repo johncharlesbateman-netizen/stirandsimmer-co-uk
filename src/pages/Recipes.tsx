@@ -18,7 +18,7 @@ const Recipes = () => {
       const { data, error } = await supabase
         .from("recipes")
         .select(
-          "id, slug, category, cuisine_region, prep_time_minutes, cook_time_minutes, title, description"
+          "id, slug, categories, cuisine_region, prep_time_minutes, cook_time_minutes, title, description"
         )
         .order("created_at", { ascending: false });
       if (error) throw error;
