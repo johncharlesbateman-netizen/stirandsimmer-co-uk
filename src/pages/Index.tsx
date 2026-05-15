@@ -169,6 +169,27 @@ const Index = () => {
 
       <div className="h-px bg-border" aria-hidden />
 
+      {/* Featured Recipes */}
+      {featured.length > 0 && (
+        <section className="py-16 md:py-24" aria-labelledby="featured-recipes-heading">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20">
+            <div className="text-center mb-12 md:mb-16">
+              <p className="micro-caption mb-4">Featured</p>
+              <h2 id="featured-recipes-heading" className="heading-editorial">
+                Recipes worth making
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+              {featured.map((recipe, i) => (
+                <RecipeCard key={recipe.id} recipe={recipe} floatDelay={i} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <div className="h-px bg-border" aria-hidden />
+
       {/* Collections Teaser */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
