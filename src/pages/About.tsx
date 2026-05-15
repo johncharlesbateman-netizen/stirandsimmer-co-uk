@@ -120,16 +120,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Quote Section */}
-      <section className="py-16 border-t border-border">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <blockquote className="max-w-3xl">
-              <p className="heading-editorial text-muted-foreground italic leading-relaxed">
-                "The best cooking happens when you stop worrying about getting it perfect and just start enjoying the process."
-              </p>
-          </blockquote>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="section-breathing border-t border-border">
