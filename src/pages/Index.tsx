@@ -72,20 +72,20 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Stir & Simmer | Delicious Recipes for Every Occasion</title>
+        <title>Stir & Simmer | Real Recipes for UK Home Cooks</title>
         <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
         <link rel="preload" as="image" href={heroImage} imageSrcSet={heroImageSrcSet} imageSizes="100vw" fetchPriority="high" />
-        <meta name="description" content="Discover easy, flavour-packed recipes for every occasion. From quick weeknight dinners to impressive desserts — Stir & Simmer has something for everyone." />
+        <meta name="description" content="Over 118 tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients." />
         <meta name="keywords" content="recipes, easy recipes, dinner recipes, dessert recipes, quick meals" />
         <link rel="canonical" href="https://stirandsimmer.co.uk/" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/" />
-        <meta property="og:title" content="Stir & Simmer | Delicious Recipes for Every Occasion" />
-        <meta property="og:description" content="Discover easy, flavour-packed recipes for every occasion. From quick weeknight dinners to impressive desserts — Stir & Simmer has something for everyone." />
+        <meta property="og:title" content="Stir & Simmer | Real Recipes for UK Home Cooks" />
+        <meta property="og:description" content="Over 118 tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients." />
         <meta property="og:image" content={heroImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Stir & Simmer | Delicious Recipes for Every Occasion" />
-        <meta name="twitter:description" content="Discover easy, flavour-packed recipes for every occasion. From quick weeknight dinners to impressive desserts — Stir & Simmer has something for everyone." />
+        <meta name="twitter:title" content="Stir & Simmer | Real Recipes for UK Home Cooks" />
+        <meta name="twitter:description" content="Over 118 tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients." />
         <meta name="twitter:image" content={heroImage} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -109,7 +109,8 @@ const Index = () => {
           "@type": "Organization",
           "name": "Stir & Simmer",
           "url": "https://stirandsimmer.co.uk",
-          "description": "A UK recipe site with free curated recipes for every occasion."
+          "description": "A UK recipe site built for people who love good food but live real lives",
+          "sameAs": ["https://www.instagram.com/stirandsimmeruk"]
         })}</script>
       </Helmet>
       {/* Hero Section */}
