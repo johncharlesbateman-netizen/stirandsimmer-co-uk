@@ -177,6 +177,22 @@ const Index = () => {
         />
       </section>
 
+      {/* Editorial intro */}
+      <section
+        className="pt-16 md:pt-24 pb-4 md:pb-8"
+        style={{ backgroundColor: "#2C2416", color: "#F5EAD8" }}
+      >
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <p
+            className="max-w-2xl mx-auto text-center font-display text-lg md:text-xl leading-relaxed"
+            style={{ color: "rgba(245,234,216,0.9)" }}
+          >
+            Stir &amp; Simmer is a UK recipe site built for people who love good food but live real lives. Every recipe is tested in a real kitchen, written in grams and Celsius, and made with ingredients you'll find at your local supermarket. No cheffy techniques. No obscure ingredients. Just honest food that works.
+          </p>
+          <div className="mx-auto mt-8 h-px w-12" style={{ backgroundColor: "rgba(245,234,216,0.25)" }} aria-hidden />
+        </div>
+      </section>
+
       {/* Featured Recipes */}
       {featured.length > 0 && (
         <section
