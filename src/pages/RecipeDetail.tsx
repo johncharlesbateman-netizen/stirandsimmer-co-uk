@@ -390,7 +390,7 @@ const RecipeDetail = () => {
       </div>
 
       {/* Hero */}
-      <section className="py-6 md:py-16">
+      <section className="py-6 md:py-10">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-4xl">
             <Breadcrumbs
@@ -447,7 +447,7 @@ const RecipeDetail = () => {
 
       {/* Image */}
       {recipe.image_url && (
-        <section className="pb-8 md:pb-12">
+        <section className="pb-6 md:pb-8">
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
             <div className="max-w-4xl aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-muted">
               <img
@@ -468,7 +468,7 @@ const RecipeDetail = () => {
       )}
 
       {/* Content */}
-      <section className="pb-20 md:pb-32">
+      <section className="pb-12 md:pb-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           {/* Mobile tab bar */}
           <div className="mb-8 flex max-w-4xl border-b border-border md:hidden">
@@ -491,7 +491,7 @@ const RecipeDetail = () => {
             ))}
           </div>
 
-          <div ref={recipeCardRef} id="recipe-card" className="scroll-mt-20 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 max-w-4xl">
+          <div ref={recipeCardRef} id="recipe-card" className="scroll-mt-20 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 max-w-4xl">
             {/* Ingredients — order-2 on mobile (after image+info), order-1 on md */}
             <div className={`order-1 ${activeTab === "ingredients" ? "block" : "hidden"} md:col-span-4 md:order-1 md:block`}>
               <h2 className="heading-section mb-6 pb-4 border-b border-border hidden md:block">
@@ -564,7 +564,7 @@ const RecipeDetail = () => {
           </div>
 
           {/* Serving Suggestions — adds unique on-page text for SEO */}
-          <div className="max-w-4xl mt-16 pt-12 border-t border-border">
+          <div className="max-w-4xl mt-10 pt-8 border-t border-border">
             <h2 className="heading-section mb-4">Serving Suggestions</h2>
             <p className="text-base text-muted-foreground leading-relaxed max-w-2xl">
               {buildServingSuggestion(recipe.title, recipe.categories?.[0])}
@@ -578,8 +578,8 @@ const RecipeDetail = () => {
 
       {/* You Might Also Like */}
       {relatedRecipes.length > 0 && (
-        <section className="no-print pb-12 md:pb-20 border-t border-border">
-          <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-16 md:pt-20">
+        <section className="no-print pb-10 md:pb-14 border-t border-border">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-10 md:pt-14">
             <div className="mb-10 flex items-end justify-between gap-6 flex-wrap">
               <h2 className="heading-section">You Might Also Like</h2>
               <Link
@@ -639,13 +639,13 @@ const RecipeDetail = () => {
       )}
 
       {/* Supermarket Cards */}
-      <section className={`no-print pb-20 md:pb-32 ${activeTab === "shop" ? "block" : "hidden"} md:block`}>
+      <section className={`no-print py-8 md:py-10 ${activeTab === "shop" ? "block" : "hidden"} md:block`}>
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-4xl">
-            <h2 className="heading-section mb-6 pb-4 border-b border-border">
+            <h2 className="heading-section mb-4 pb-3 border-b border-border">
               Shop the Ingredients
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-9 gap-1.5 md:gap-2">
               {([
                 { name: "Tesco", id: "tesco" as const, url: "https://www.tesco.com/" },
                 { name: "Sainsbury's", id: "sainsburys" as const, url: "https://www.sainsburys.co.uk/" },
@@ -662,13 +662,11 @@ const RecipeDetail = () => {
                   href={market.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center gap-2 p-5 border border-border hover:border-muted-foreground/40 hover:bg-secondary hover:shadow-sm transition-all duration-200 text-center group last:col-span-2 last:max-w-[50%] last:mx-auto md:last:col-span-1 md:last:max-w-none"
+                  title={`Shop at ${market.name}`}
+                  aria-label={`Shop at ${market.name}`}
+                  className="flex items-center justify-center p-2 md:p-2.5 border border-border hover:border-muted-foreground/40 hover:bg-secondary hover:shadow-sm transition-all duration-200 group"
                 >
-                  <img src={supermarketLogos[market.id]} alt={market.name} className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200" loading="lazy" width={40} height={40} />
-                  <span className="text-sm font-semibold text-foreground">{market.name}</span>
-                  <span className="inline-flex items-center gap-1 text-xs text-muted-foreground group-hover:text-foreground transition-colors">
-                    Shop now <ExternalLink className="w-3 h-3" />
-                  </span>
+                  <img src={supermarketLogos[market.id]} alt={market.name} className="w-7 h-7 md:w-9 md:h-9 object-contain group-hover:scale-110 transition-transform duration-200" loading="lazy" width={36} height={36} />
                 </a>
               ))}
             </div>
