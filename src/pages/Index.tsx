@@ -289,7 +289,7 @@ const Index = () => {
                       <h3 className="font-display text-2xl mb-2 transition-transform duration-500 group-hover:translate-x-1" style={{ color: "#F5EAD8" }}>
                         {title}
                       </h3>
-                      <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(245,234,216,0.85)" }}>
+                      <p className="text-sm leading-relaxed mb-5 line-clamp-2 min-h-[2.75rem]" style={{ color: "rgba(245,234,216,0.85)" }}>
                         {desc}
                       </p>
                       <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase" style={{ color: "#C4A97A" }}>
