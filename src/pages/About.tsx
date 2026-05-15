@@ -1,9 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
-import InfiniteCarousel from "@/components/InfiniteCarousel";
 import aboutKitchen1 from "@/assets/about-kitchen-1.jpg";
-import aboutKitchen2 from "@/assets/about-kitchen-2.jpg";
 import aboutKitchen3 from "@/assets/about-kitchen-3.jpg";
 import aboutKitchen4 from "@/assets/about-kitchen-4.jpg";
 import kitchenLoop from "@/assets/about-kitchen-loop.mp4.asset.json";
@@ -11,15 +9,10 @@ import kitchenLoop from "@/assets/about-kitchen-loop.mp4.asset.json";
 
 const brandImage = "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=85";
 
-
-const carouselImages = [
-  { src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80", alt: "Delicious food spread" },
-  { src: "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&q=80", alt: "Gourmet pasta" },
+const gridImages = [
   { src: aboutKitchen3, alt: "Hands kneading bread dough on a flour-dusted wooden table" },
   { src: aboutKitchen1, alt: "Fresh seasonal vegetables on a wooden chopping board" },
   { src: aboutKitchen4, alt: "Caramelised onions sizzling in a cast iron skillet" },
-  { src: aboutKitchen2, alt: "Hearty home-cooked stew in a rustic ceramic bowl" },
-  { src: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80", alt: "Salmon dish" },
 ];
 
 const About = () => {
@@ -123,21 +116,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Carousel Section */}
-      <section className="pb-8">
-        <InfiniteCarousel images={carouselImages} />
-      </section>
-
-      {/* UK trust line */}
-      <section className="pb-10">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="max-w-3xl border-l-2 border-foreground pl-4">
-            <p className="text-sm text-foreground leading-relaxed">
-              Proudly UK-based. Every recipe uses grams, millilitres and degrees Celsius, with ingredients you'll actually find at Tesco, Sainsbury's, Aldi, Lidl, Morrisons or Waitrose.
-            </p>
-          </div>
-        </div>
-      </section>
 
     </Layout>
   );
