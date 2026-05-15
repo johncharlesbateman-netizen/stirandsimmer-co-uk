@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
-import MealPlannerPromo from "@/components/MealPlannerPromo";
 import { BookOpen, Map, CalendarDays, UtensilsCrossed, ArrowRight } from "lucide-react";
 import RecipeCard from "@/components/RecipeCard";
 import { collections } from "@/lib/collections";
@@ -201,11 +200,15 @@ const Index = () => {
       <div className="h-px bg-border" aria-hidden />
 
       {/* Explore the site */}
-      <section className="py-16 md:py-24 bg-background" aria-labelledby="explore-heading">
+      <section
+        className="py-16 md:py-24"
+        aria-labelledby="explore-heading"
+        style={{ backgroundColor: "#2C2416", color: "#F5EAD8" }}
+      >
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="text-center mb-12 md:mb-16">
-            <p className="micro-caption mb-4">Explore</p>
-            <h2 id="explore-heading" className="heading-editorial">
+            <p className="micro-caption mb-4" style={{ color: "#C4A97A" }}>Explore</p>
+            <h2 id="explore-heading" className="heading-editorial" style={{ color: "#F5EAD8" }}>
               Find your way around
             </h2>
           </div>
@@ -219,12 +222,17 @@ const Index = () => {
               <Link
                 key={to}
                 to={to}
-                className="group block p-8 border border-border bg-card hover:border-foreground/40 hover:shadow-md transition-all"
+                className="group block p-8 transition-all hover:shadow-lg"
+                style={{
+                  backgroundColor: "#3D3322",
+                  border: "1px solid rgba(245,234,216,0.15)",
+                  color: "#F5EAD8",
+                }}
               >
-                <Icon className="w-7 h-7 mb-5 text-foreground/70 group-hover:text-foreground transition-colors" strokeWidth={1.5} />
-                <h3 className="font-display text-2xl mb-2 text-foreground">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5">{desc}</p>
-                <span className="inline-flex items-center gap-1.5 text-xs tracking-[0.2em] uppercase text-foreground/70 group-hover:text-foreground transition-colors">
+                <Icon className="w-7 h-7 mb-5 transition-colors" strokeWidth={1.5} style={{ color: "#C4A97A" }} />
+                <h3 className="font-display text-2xl mb-2" style={{ color: "#F5EAD8" }}>{title}</h3>
+                <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(245,234,216,0.75)" }}>{desc}</p>
+                <span className="inline-flex items-center gap-1.5 text-xs tracking-[0.2em] uppercase" style={{ color: "#C4A97A" }}>
                   Explore
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                 </span>
@@ -233,11 +241,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      <div className="h-px bg-border" aria-hidden />
-
-      {/* Weekly Meal Planner Promo */}
-      <MealPlannerPromo />
 
     </Layout>
   );
