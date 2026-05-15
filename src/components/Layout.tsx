@@ -5,9 +5,10 @@ import NewsletterSignup from "./NewsletterSignup";
 
 interface LayoutProps {
   children: ReactNode;
+  hideNewsletter?: boolean;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, hideNewsletter = false }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       <a
@@ -18,7 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
       </a>
       <Header />
       <main id="main-content" className="flex-1 pt-20">{children}</main>
-      <NewsletterSignup />
+      {!hideNewsletter && <NewsletterSignup />}
       <Footer />
     </div>
   );
