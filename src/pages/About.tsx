@@ -70,6 +70,25 @@ const About = () => {
               That's not most people's reality. So we built something different.
             </p>
           </div>
+
+          <div className="max-w-3xl mt-16 pt-12 border-t border-border">
+            <h2 className="heading-section mb-6">How This Started</h2>
+            <div className="space-y-6 body-editorial text-muted-foreground">
+              <p>
+                Every recipe on here comes from actually making it — not once, but enough times to know what goes wrong and how to fix it. The portions are honest. The ingredients come from Tesco, Sainsbury's, Aldi or Waitrose. The methods are written for someone who's cooking after work, not performing for a camera.
+              </p>
+              <p>
+                If a dish isn't worth making, it doesn't go on the site.
+              </p>
+            </div>
+          </div>
+
+          <div className="max-w-3xl mt-16 pt-12 border-t border-border">
+            <h2 className="heading-section mb-6">What You'll Find Here</h2>
+            <p className="body-editorial text-muted-foreground">
+              Quick meals that don't taste like shortcuts. Proper weekend cooking when you have more time. Guides that explain the why, not just the what. And a recipe list that keeps growing — built around what real cooks actually want to eat.
+            </p>
+          </div>
         </div>
       </section>
 
