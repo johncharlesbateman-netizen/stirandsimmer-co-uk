@@ -176,7 +176,7 @@ const Recipes = () => {
           <Link
             to={`/recipes/${allTile.slug}`}
             className="group block rounded-xl p-6 md:p-8 mb-4 md:mb-6 transition-transform hover:-translate-y-0.5"
-            style={{ backgroundColor: "#1a0e00", color: "#f5e9d7" }}
+            style={{ backgroundColor: "#2C2416", color: "#F5EAD8" }}
           >
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-4 md:gap-5">
@@ -208,7 +208,7 @@ const Recipes = () => {
                   key={tile.slug}
                   to={`/recipes/${tile.slug}`}
                   className="group rounded-xl p-5 md:p-6 min-h-[140px] md:min-h-[170px] flex flex-col items-center justify-center text-center transition-transform hover:-translate-y-0.5"
-                  style={{ backgroundColor: "#1a0e00", color: "#f5e9d7" }}
+                  style={{ backgroundColor: "#2C2416", color: "#F5EAD8" }}
                 >
                   <span
                     className="text-3xl md:text-4xl mb-3"
@@ -221,7 +221,7 @@ const Recipes = () => {
                   </div>
                   <div
                     className="text-xs md:text-sm mt-2"
-                    style={{ color: "#a99270" }}
+                    style={{ color: "#C4A97A" }}
                   >
                     {count === 0
                       ? "Coming soon"
