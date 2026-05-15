@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
+import { BookOpen, Map, CalendarDays, UtensilsCrossed, ArrowRight } from "lucide-react";
 import RecipeCard from "@/components/RecipeCard";
 import { collections } from "@/lib/collections";
 import { Tables } from "@/integrations/supabase/types";
@@ -196,6 +197,42 @@ const Index = () => {
           </div>
         </section>
       )}
+
+      <div className="h-px bg-border" aria-hidden />
+
+      {/* Explore the site */}
+      <section className="py-16 md:py-24 bg-background" aria-labelledby="explore-heading">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <div className="text-center mb-12 md:mb-16">
+            <p className="micro-caption mb-4">Explore</p>
+            <h2 id="explore-heading" className="heading-editorial">
+              Find your way around
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {[
+              { to: "/recipes", icon: UtensilsCrossed, title: "Recipes", desc: "Browse every tried-and-tested recipe on the site." },
+              { to: "/meal-planner", icon: CalendarDays, title: "Meal Planner", desc: "Plan your week and build a shopping list in minutes." },
+              { to: "/guides", icon: BookOpen, title: "Guides", desc: "Master the techniques behind the recipes you love." },
+              { to: "/kitchen-atlas", icon: Map, title: "Kitchen Atlas", desc: "Travel the world's cuisines from your own kitchen." },
+            ].map(({ to, icon: Icon, title, desc }) => (
+              <Link
+                key={to}
+                to={to}
+                className="group block p-8 border border-border bg-card hover:border-foreground/40 hover:shadow-md transition-all"
+              >
+                <Icon className="w-7 h-7 mb-5 text-foreground/70 group-hover:text-foreground transition-colors" strokeWidth={1.5} />
+                <h3 className="font-display text-2xl mb-2 text-foreground">{title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-5">{desc}</p>
+                <span className="inline-flex items-center gap-1.5 text-xs tracking-[0.2em] uppercase text-foreground/70 group-hover:text-foreground transition-colors">
+                  Explore
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <div className="h-px bg-border" aria-hidden />
 
