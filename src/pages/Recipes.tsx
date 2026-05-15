@@ -53,13 +53,20 @@ const Recipes = () => {
         <title>All recipes — browse by category | Stir & Simmer</title>
         <meta
           name="description"
-          content="Browse over 100 free recipes by category — chicken, beef, lamb, fish and seafood, pork, pasta, quick meals and more."
+          content="Browse over 118 tried-and-tested recipes for UK home cooks. From quick weeknight dinners to impressive weekend cooking — all in grams, Celsius and supermarket ingredients."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/recipes" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/recipes" />
         <meta property="og:title" content="All recipes — browse by category | Stir & Simmer" />
-        <meta property="og:description" content="Browse over 100 free recipes by category — chicken, beef, lamb, fish and seafood, pork, pasta, quick meals and more." />
+        <meta property="og:description" content="Browse over 118 tried-and-tested recipes for UK home cooks. From quick weeknight dinners to impressive weekend cooking — all in grams, Celsius and supermarket ingredients." />
+        <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="All recipes — browse by category | Stir & Simmer" />
+        <meta name="twitter:description" content="Browse over 118 tried-and-tested recipes for UK home cooks. From quick weeknight dinners to impressive weekend cooking — all in grams, Celsius and supermarket ingredients." />
+        <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
       </Helmet>
 
       {/* Header */}
