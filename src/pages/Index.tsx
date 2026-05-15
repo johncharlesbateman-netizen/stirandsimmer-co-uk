@@ -163,12 +163,19 @@ const Index = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in z-10" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
           <div className="w-px h-16 bg-primary-foreground/50 animate-pulse" />
         </div>
-      </section>
 
-      <div className="h-px bg-border" aria-hidden />
+        {/* Bottom blend into warm dark section below */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, rgba(44,36,22,0) 0%, rgba(44,36,22,0.6) 55%, rgba(44,36,22,1) 100%)",
+          }}
+        />
+      </section>
 
       {/* Featured Recipes */}
       {featured.length > 0 && (
