@@ -150,10 +150,13 @@ const Index = () => {
           >
             <Link
               to="/recipes"
-              className="tracking-[0.2em] uppercase text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+              className="group inline-flex items-center gap-2 tracking-[0.2em] uppercase text-primary-foreground/80 hover:text-primary-foreground transition-colors"
               style={{ fontSize: "13px" }}
             >
-              Browse all {recipeCount} tried-and-tested recipes
+              <span className="underline-offset-4 group-hover:underline">
+                Browse all {recipeCount} tried-and-tested recipes
+              </span>
+              <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
           </div>
         </div>
