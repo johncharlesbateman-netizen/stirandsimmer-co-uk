@@ -6,9 +6,20 @@ import collectionsTeaser from "@/assets/collections-teaser.webp";
 import collectionsTeaser800 from "@/assets/collections-teaser-800.webp";
 import collectionsTeaser1200 from "@/assets/collections-teaser-1200.webp";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
+import RecipeCard from "@/components/RecipeCard";
 import { collections } from "@/lib/collections";
+import { Tables } from "@/integrations/supabase/types";
 
 import { supabase } from "@/integrations/supabase/client";
+
+const FEATURED_SLUGS = [
+  "butter-chicken",
+  "spaghetti-bolognese",
+  "best-coq-au-vin",
+  "pan-fried-salmon-with-pea-citrus-crush",
+  "panna-cotta-with-raspberry-compote",
+  "prawn-and-chorizo-rice",
+];
 
 const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp";
 const heroImage = `${heroPexelsBase}&w=1280`;
@@ -23,6 +34,7 @@ const FALLBACK_RECIPE_COUNT = 114;
 
 const Index = () => {
   const [recipeCount, setRecipeCount] = useState<number>(FALLBACK_RECIPE_COUNT);
+  const [featured, setFeatured] = useState<Tables<"recipes">[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -32,6 +44,25 @@ const Index = () => {
         .select("*", { count: "exact", head: true });
       if (!cancelled && !error && typeof count === "number" && count > 0) {
         setRecipeCount(count);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data, error } = await supabase
+        .from("recipes")
+        .select("*")
+        .in("slug", FEATURED_SLUGS);
+      if (!cancelled && !error && data) {
+        const ordered = FEATURED_SLUGS
+          .map((s) => data.find((r) => r.slug === s))
+          .filter((r): r is Tables<"recipes"> => Boolean(r));
+        setFeatured(ordered);
       }
     })();
     return () => {
