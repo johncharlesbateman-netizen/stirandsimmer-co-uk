@@ -12,6 +12,8 @@ import { categoryLabels, categoryToSlug } from "@/lib/recipe-utils";
 import { scaleIngredients, scaleIngredientsSmart } from "@/lib/ingredient-scaler";
 import { buildSeoTitle, buildSeoDescription, buildServingSuggestion } from "@/lib/seo";
 import { buildRecipeJsonLd } from "@/lib/recipe-schema";
+import { recipeFAQs } from "@/lib/recipe-faqs";
+import RecipeFAQ from "@/components/RecipeFAQ";
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
@@ -269,6 +271,19 @@ const RecipeDetail = () => {
     keywords,
   });
 
+  const faqs = recipeFAQs[recipe.slug] ?? [];
+  const faqJsonLd = faqs.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      }
+    : null;
+
 
 
 
@@ -314,6 +329,9 @@ const RecipeDetail = () => {
           />
         )}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        {faqJsonLd && (
+          <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
+        )}
       </Helmet>
 
       {/* Sticky "Jump to Recipe" — mobile only, appears after scrolling past hero */}
@@ -552,6 +570,8 @@ const RecipeDetail = () => {
               {buildServingSuggestion(recipe.title, recipe.categories?.[0])}
             </p>
           </div>
+
+          {faqs.length > 0 && <RecipeFAQ faqs={faqs} />}
 
         </div>
       </section>
