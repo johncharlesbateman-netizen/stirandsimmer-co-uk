@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
+import { BookOpen, Map, CalendarDays, UtensilsCrossed, ArrowRight } from "lucide-react";
 import RecipeCard from "@/components/RecipeCard";
 import { collections } from "@/lib/collections";
 import { Tables } from "@/integrations/supabase/types";
