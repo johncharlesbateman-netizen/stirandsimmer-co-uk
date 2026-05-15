@@ -163,12 +163,19 @@ const Index = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in z-10" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
           <div className="w-px h-16 bg-primary-foreground/50 animate-pulse" />
         </div>
-      </section>
 
-      <div className="h-px bg-border" aria-hidden />
+        {/* Bottom blend into warm dark section below */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, rgba(44,36,22,0) 0%, rgba(44,36,22,0.6) 55%, rgba(44,36,22,1) 100%)",
+          }}
+        />
+      </section>
 
       {/* Featured Recipes */}
       {featured.length > 0 && (
@@ -235,16 +242,16 @@ const Index = () => {
                 icon: BookOpen,
                 title: "Guides",
                 desc: "Master the techniques behind the recipes you love.",
-                imageId: 4252137,
-                alt: "Chef's hands working at a kitchen counter",
+                imageId: 1640773,
+                alt: "Overhead view of a fresh prepared dish",
               },
               {
                 to: "/kitchen-atlas",
                 icon: Map,
                 title: "Kitchen Atlas",
                 desc: "Travel the world's cuisines from your own kitchen.",
-                imageId: 1340116,
-                alt: "Colourful spices arranged in small bowls",
+                imageId: 1640774,
+                alt: "Overhead view of a colourful plated dish",
               },
             ].map(({ to, icon: Icon, title, desc, imageId, alt }) => {
               const base = `https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&fm=webp`;
@@ -266,19 +273,15 @@ const Index = () => {
                     width={800}
                     height={600}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+                    style={{ filter: "brightness(1.15) saturate(0.85) sepia(0.15)" }}
                   />
                   <div
                     aria-hidden
                     className="absolute inset-0 transition-opacity duration-500"
                     style={{
                       background:
-                        "linear-gradient(to top, rgba(44,36,22,0.97) 0%, rgba(44,36,22,0.85) 50%, rgba(44,36,22,0.65) 100%)",
+                        "linear-gradient(to top, rgba(44,36,22,0.92) 0%, rgba(44,36,22,0.6) 55%, rgba(44,36,22,0.3) 100%)",
                     }}
-                  />
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 mix-blend-multiply"
-                    style={{ backgroundColor: "#2C2416", opacity: 0.45 }}
                   />
                   <div className="relative p-6 md:p-7 flex flex-col h-full min-h-[340px] md:min-h-[380px]" style={{ color: "#F5EAD8" }}>
                     <Icon className="w-7 h-7 mb-auto" strokeWidth={1.5} style={{ color: "#C4A97A" }} />
