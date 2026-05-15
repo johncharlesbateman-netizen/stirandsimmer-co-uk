@@ -80,11 +80,11 @@ const Recipes = () => {
             </label>
             <div
               className="relative flex items-center rounded-xl overflow-hidden"
-              style={{ backgroundColor: "#1a0e00" }}
+              style={{ backgroundColor: "#2C2416" }}
             >
               <Search
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5"
-                style={{ color: "#a99270" }}
+                style={{ color: "#C4A97A" }}
                 aria-hidden
               />
               <input
@@ -93,10 +93,10 @@ const Recipes = () => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search recipes by name or ingredient…"
-                className="w-full h-14 pl-12 pr-28 text-base md:text-lg placeholder:text-[#a99270]/70 focus-visible:outline-none"
+                className="w-full h-14 pl-12 pr-28 text-base md:text-lg placeholder:text-[#C4A97A]/70 focus-visible:outline-none"
                 style={{
-                  backgroundColor: "#1a0e00",
-                  color: "#f5e9d7",
+                  backgroundColor: "#2C2416",
+                  color: "#F5EAD8",
                 }}
               />
               {query && (
@@ -104,8 +104,8 @@ const Recipes = () => {
                   type="button"
                   onClick={() => setQuery("")}
                   aria-label="Clear search"
-                  className="absolute right-20 top-1/2 -translate-y-1/2 p-2 rounded-full hover:bg-[#f5e9d7]/10 transition-colors"
-                  style={{ color: "#a99270" }}
+                  className="absolute right-20 top-1/2 -translate-y-1/2 p-2 rounded-full hover:bg-[#F5EAD8]/10 transition-colors"
+                  style={{ color: "#C4A97A" }}
                 >
                   <X className="w-4 h-4" aria-hidden />
                 </button>
@@ -114,8 +114,8 @@ const Recipes = () => {
                 type="button"
                 className="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-5 rounded-lg font-display text-sm font-medium transition-colors hover:opacity-90"
                 style={{
-                  backgroundColor: "#f5e9d7",
-                  color: "#1a0e00",
+                  backgroundColor: "#F5EAD8",
+                  color: "#2C2416",
                 }}
                 onClick={() => {
                   const el = document.getElementById("recipe-search");
