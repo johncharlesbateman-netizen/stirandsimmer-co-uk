@@ -196,43 +196,6 @@ const Index = () => {
 
       <div className="h-px bg-border" aria-hidden />
 
-      {/* Collections Teaser */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={collectionsTeaser1200}
-            srcSet={`${collectionsTeaser800} 800w, ${collectionsTeaser1200} 1200w, ${collectionsTeaser} 1600w`}
-            sizes="100vw"
-            alt="A warm, atmospheric table set with pasta, salad, bread and wine"
-            className="w-full h-full object-cover"
-            loading="lazy"
-            decoding="async"
-            width={1600}
-            height={821}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/75" />
-        </div>
-        <div className="relative container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20 text-center text-primary-foreground">
-          <p className="text-xs md:text-sm tracking-[0.3em] uppercase mb-4 opacity-90">
-            Recipes
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight max-w-3xl mx-auto">
-            Discover our Recipes
-          </h2>
-          <p className="text-base md:text-lg font-body max-w-2xl mx-auto mb-8 text-primary-foreground/90 leading-relaxed italic">
-            Proper recipes for proper home cooks.
-          </p>
-          <Link
-            to="/recipes"
-            className="inline-block px-10 py-4 bg-background text-foreground text-sm tracking-wider uppercase hover:opacity-90 transition-opacity"
-          >
-            Browse by Category
-          </Link>
-        </div>
-      </section>
-
-      <div className="h-px bg-border" aria-hidden />
-
       {/* Weekly Meal Planner Promo */}
       <MealPlannerPromo />
 
