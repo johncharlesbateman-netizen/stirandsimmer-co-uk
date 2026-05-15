@@ -242,16 +242,16 @@ const Index = () => {
                 icon: BookOpen,
                 title: "Guides",
                 desc: "Master the techniques behind the recipes you love.",
-                imageId: 4252137,
-                alt: "Chef's hands working at a kitchen counter",
+                imageId: 1640773,
+                alt: "Overhead view of a fresh prepared dish",
               },
               {
                 to: "/kitchen-atlas",
                 icon: Map,
                 title: "Kitchen Atlas",
                 desc: "Travel the world's cuisines from your own kitchen.",
-                imageId: 1340116,
-                alt: "Colourful spices arranged in small bowls",
+                imageId: 1640774,
+                alt: "Overhead view of a colourful plated dish",
               },
             ].map(({ to, icon: Icon, title, desc, imageId, alt }) => {
               const base = `https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&fm=webp`;
