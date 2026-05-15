@@ -116,21 +116,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Carousel Section */}
-      <section className="pb-8">
-        <InfiniteCarousel images={carouselImages} />
-      </section>
-
-      {/* UK trust line */}
-      <section className="pb-10">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="max-w-3xl border-l-2 border-foreground pl-4">
-            <p className="text-sm text-foreground leading-relaxed">
-              Proudly UK-based. Every recipe uses grams, millilitres and degrees Celsius, with ingredients you'll actually find at Tesco, Sainsbury's, Aldi, Lidl, Morrisons or Waitrose.
-            </p>
-          </div>
-        </div>
-      </section>
 
     </Layout>
   );
