@@ -2,6 +2,8 @@ import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
+import aboutKitchen1 from "@/assets/about-kitchen-1.jpg";
+import aboutKitchen2 from "@/assets/about-kitchen-2.jpg";
 
 
 const brandImage = "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=85";
@@ -11,8 +13,8 @@ const carouselImages = [
   { src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80", alt: "Delicious food spread" },
   { src: "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&q=80", alt: "Gourmet pasta" },
   { src: "https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=800&q=80", alt: "Fresh ingredients" },
-  { src: "https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?w=800&q=80", alt: "Pizza close-up" },
-  { src: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80", alt: "BBQ meat" },
+  { src: aboutKitchen1, alt: "Fresh seasonal vegetables on a wooden chopping board" },
+  { src: aboutKitchen2, alt: "Hearty home-cooked stew in a rustic ceramic bowl" },
   { src: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80", alt: "Pancakes" },
   { src: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80", alt: "Salmon dish" },
 ];
@@ -57,9 +59,9 @@ const About = () => {
         imageAlt="A warm, lived-in kitchen with fresh ingredients on the counter"
       />
       {/* Intro */}
-      <section className="pt-12 md:pt-16 pb-12">
+      <section className="pt-8 md:pt-10 pb-6 md:pb-8">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="max-w-3xl space-y-8 body-editorial text-muted-foreground">
+          <div className="max-w-3xl space-y-6 body-editorial text-muted-foreground">
             <p className="text-foreground text-xl md:text-2xl font-display leading-relaxed">
               Stir & Simmer is a UK recipe site for people who love good food but don't want cooking to become a project.
             </p>
@@ -71,9 +73,9 @@ const About = () => {
             </p>
           </div>
 
-          <div className="max-w-3xl mt-16 pt-12 border-t border-border">
-            <h2 className="heading-section mb-6">How This Started</h2>
-            <div className="space-y-6 body-editorial text-muted-foreground">
+          <div className="max-w-3xl mt-10 pt-8 border-t border-border">
+            <h2 className="heading-section mb-4">How This Started</h2>
+            <div className="space-y-4 body-editorial text-muted-foreground">
               <p>
                 Every recipe on here comes from actually making it — not once, but enough times to know what goes wrong and how to fix it. The portions are honest. The ingredients come from Tesco, Sainsbury's, Aldi or Waitrose. The methods are written for someone who's cooking after work, not performing for a camera.
               </p>
@@ -83,8 +85,8 @@ const About = () => {
             </div>
           </div>
 
-          <div className="max-w-3xl mt-16 pt-12 border-t border-border">
-            <h2 className="heading-section mb-6">What You'll Find Here</h2>
+          <div className="max-w-3xl mt-10 pt-8 border-t border-border">
+            <h2 className="heading-section mb-4">What You'll Find Here</h2>
             <p className="body-editorial text-muted-foreground">
               Quick meals that don't taste like shortcuts. Proper weekend cooking when you have more time. Guides that explain the why, not just the what. And a recipe list that keeps growing — built around what real cooks actually want to eat.
             </p>
@@ -93,12 +95,12 @@ const About = () => {
       </section>
 
       {/* Carousel Section */}
-      <section className="pb-12">
+      <section className="pb-8">
         <InfiniteCarousel images={carouselImages} />
       </section>
 
       {/* UK trust line */}
-      <section className="pb-4">
+      <section className="pb-10">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-3xl border-l-2 border-foreground pl-4">
             <p className="text-sm text-foreground leading-relaxed">
