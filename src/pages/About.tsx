@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
-import { Link } from "react-router-dom";
+
 
 const brandImage = "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=85";
 
