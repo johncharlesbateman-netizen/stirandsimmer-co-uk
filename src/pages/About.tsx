@@ -6,6 +6,7 @@ import aboutKitchen1 from "@/assets/about-kitchen-1.jpg";
 import aboutKitchen2 from "@/assets/about-kitchen-2.jpg";
 import aboutKitchen3 from "@/assets/about-kitchen-3.jpg";
 import aboutKitchen4 from "@/assets/about-kitchen-4.jpg";
+import kitchenLoop from "@/assets/about-kitchen-loop.mp4.asset.json";
 
 
 const brandImage = "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=85";
@@ -92,6 +93,32 @@ const About = () => {
             <p className="body-editorial text-muted-foreground">
               Quick meals that don't taste like shortcuts. Proper weekend cooking when you have more time. Guides that explain the why, not just the what. And a recipe list that keeps growing — built around what real cooks actually want to eat.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Looping kitchen video */}
+      <section className="pb-8">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <div className="relative overflow-hidden rounded-sm aspect-[21/9] bg-foreground">
+            <video
+              src={kitchenLoop.url}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              aria-label="A warm UK kitchen with steam rising from a simmering pot"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ filter: "saturate(1.05) contrast(1.05) sepia(0.18) brightness(0.92)" }}
+            />
+            <div
+              className="absolute inset-0 pointer-events-none mix-blend-multiply"
+              style={{ background: "linear-gradient(180deg, hsl(16 45% 25% / 0.25), hsl(0 0% 10% / 0.45))" }}
+            />
+            <div className="absolute inset-0 flex items-end p-6 md:p-10">
+              <p className="micro-caption text-background/90">A real kitchen, somewhere in the UK</p>
+            </div>
           </div>
         </div>
       </section>
