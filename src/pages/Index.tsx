@@ -174,15 +174,23 @@ const Index = () => {
 
       {/* Featured Recipes */}
       {featured.length > 0 && (
-        <section className="py-16 md:py-24" aria-labelledby="featured-recipes-heading">
+        <section
+          className="py-16 md:py-24"
+          aria-labelledby="featured-recipes-heading"
+          style={{ backgroundColor: "#2C2416", color: "#F5EAD8" }}
+        >
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
             <div className="text-center mb-12 md:mb-16">
-              <p className="micro-caption mb-4">Featured</p>
-              <h2 id="featured-recipes-heading" className="heading-editorial">
+              <p className="micro-caption mb-4" style={{ color: "#C4A97A" }}>Featured</p>
+              <h2
+                id="featured-recipes-heading"
+                className="heading-editorial"
+                style={{ color: "#F5EAD8" }}
+              >
                 Recipes worth making
               </h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 [&_h3]:text-[#F5EAD8] [&_.micro-caption]:text-[#C4A97A] [&_p]:text-[#F5EAD8]/75">
               {featured.map((recipe, i) => (
                 <RecipeCard key={recipe.id} recipe={recipe} floatDelay={i} />
               ))}
