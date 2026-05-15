@@ -214,30 +214,85 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {[
-              { to: "/recipes", icon: UtensilsCrossed, title: "Recipes", desc: "Browse every tried-and-tested recipe on the site." },
-              { to: "/meal-planner", icon: CalendarDays, title: "Meal Planner", desc: "Plan your week and build a shopping list in minutes." },
-              { to: "/guides", icon: BookOpen, title: "Guides", desc: "Master the techniques behind the recipes you love." },
-              { to: "/kitchen-atlas", icon: Map, title: "Kitchen Atlas", desc: "Travel the world's cuisines from your own kitchen." },
-            ].map(({ to, icon: Icon, title, desc }) => (
-              <Link
-                key={to}
-                to={to}
-                className="group block p-8 transition-all hover:shadow-lg"
-                style={{
-                  backgroundColor: "#3D3322",
-                  border: "1px solid rgba(245,234,216,0.15)",
-                  color: "#F5EAD8",
-                }}
-              >
-                <Icon className="w-7 h-7 mb-5 transition-colors" strokeWidth={1.5} style={{ color: "#C4A97A" }} />
-                <h3 className="font-display text-2xl mb-2" style={{ color: "#F5EAD8" }}>{title}</h3>
-                <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(245,234,216,0.75)" }}>{desc}</p>
-                <span className="inline-flex items-center gap-1.5 text-xs tracking-[0.2em] uppercase" style={{ color: "#C4A97A" }}>
-                  Explore
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                </span>
-              </Link>
-            ))}
+              {
+                to: "/recipes",
+                icon: UtensilsCrossed,
+                title: "Recipes",
+                desc: "Browse every tried-and-tested recipe on the site.",
+                imageId: 1640777,
+                alt: "Rustic table laid with cooked dishes",
+              },
+              {
+                to: "/meal-planner",
+                icon: CalendarDays,
+                title: "Meal Planner",
+                desc: "Plan your week and build a shopping list in minutes.",
+                imageId: 1640772,
+                alt: "Notebook and fresh ingredients on a wooden surface",
+              },
+              {
+                to: "/guides",
+                icon: BookOpen,
+                title: "Guides",
+                desc: "Master the techniques behind the recipes you love.",
+                imageId: 4252137,
+                alt: "Chef's hands working at a kitchen counter",
+              },
+              {
+                to: "/kitchen-atlas",
+                icon: Map,
+                title: "Kitchen Atlas",
+                desc: "Travel the world's cuisines from your own kitchen.",
+                imageId: 1340116,
+                alt: "Colourful spices arranged in small bowls",
+              },
+            ].map(({ to, icon: Icon, title, desc, imageId, alt }) => {
+              const base = `https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&fm=webp`;
+              const srcSet = [400, 600, 800, 1200].map((w) => `${base}&w=${w} ${w}w`).join(", ");
+              return (
+                <Link
+                  key={to}
+                  to={to}
+                  className="group relative block overflow-hidden min-h-[340px] md:min-h-[380px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
+                  style={{ border: "1px solid rgba(245,234,216,0.15)" }}
+                >
+                  <img
+                    src={`${base}&w=800`}
+                    srcSet={srcSet}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    alt={alt}
+                    loading="lazy"
+                    decoding="async"
+                    width={800}
+                    height={600}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+                  />
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 transition-opacity duration-500"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(44,36,22,0.95) 0%, rgba(44,36,22,0.7) 50%, rgba(44,36,22,0.35) 100%)",
+                    }}
+                  />
+                  <div className="relative p-6 md:p-7 flex flex-col h-full min-h-[340px] md:min-h-[380px]" style={{ color: "#F5EAD8" }}>
+                    <Icon className="w-7 h-7 mb-auto" strokeWidth={1.5} style={{ color: "#C4A97A" }} />
+                    <div className="mt-6">
+                      <h3 className="font-display text-2xl mb-2 transition-transform duration-500 group-hover:translate-x-1" style={{ color: "#F5EAD8" }}>
+                        {title}
+                      </h3>
+                      <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(245,234,216,0.85)" }}>
+                        {desc}
+                      </p>
+                      <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase" style={{ color: "#C4A97A" }}>
+                        Explore
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
