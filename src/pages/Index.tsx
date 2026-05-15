@@ -273,19 +273,15 @@ const Index = () => {
                     width={800}
                     height={600}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+                    style={{ filter: "brightness(1.15) saturate(0.85) sepia(0.15)" }}
                   />
                   <div
                     aria-hidden
                     className="absolute inset-0 transition-opacity duration-500"
                     style={{
                       background:
-                        "linear-gradient(to top, rgba(44,36,22,0.97) 0%, rgba(44,36,22,0.85) 50%, rgba(44,36,22,0.65) 100%)",
+                        "linear-gradient(to top, rgba(44,36,22,0.92) 0%, rgba(44,36,22,0.6) 55%, rgba(44,36,22,0.3) 100%)",
                     }}
-                  />
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 mix-blend-multiply"
-                    style={{ backgroundColor: "#2C2416", opacity: 0.45 }}
                   />
                   <div className="relative p-6 md:p-7 flex flex-col h-full min-h-[340px] md:min-h-[380px]" style={{ color: "#F5EAD8" }}>
                     <Icon className="w-7 h-7 mb-auto" strokeWidth={1.5} style={{ color: "#C4A97A" }} />
