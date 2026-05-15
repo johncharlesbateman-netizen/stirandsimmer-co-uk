@@ -6,9 +6,20 @@ import collectionsTeaser from "@/assets/collections-teaser.webp";
 import collectionsTeaser800 from "@/assets/collections-teaser-800.webp";
 import collectionsTeaser1200 from "@/assets/collections-teaser-1200.webp";
 import MealPlannerPromo from "@/components/MealPlannerPromo";
+import RecipeCard from "@/components/RecipeCard";
 import { collections } from "@/lib/collections";
+import { Tables } from "@/integrations/supabase/types";
 
 import { supabase } from "@/integrations/supabase/client";
+
+const FEATURED_SLUGS = [
+  "butter-chicken",
+  "spaghetti-bolognese",
+  "best-coq-au-vin",
+  "pan-fried-salmon-with-pea-citrus-crush",
+  "panna-cotta-with-raspberry-compote",
+  "prawn-and-chorizo-rice",
+];
 
 const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp";
 const heroImage = `${heroPexelsBase}&w=1280`;
@@ -23,6 +34,7 @@ const FALLBACK_RECIPE_COUNT = 114;
 
 const Index = () => {
   const [recipeCount, setRecipeCount] = useState<number>(FALLBACK_RECIPE_COUNT);
+  const [featured, setFeatured] = useState<Tables<"recipes">[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -32,6 +44,25 @@ const Index = () => {
         .select("*", { count: "exact", head: true });
       if (!cancelled && !error && typeof count === "number" && count > 0) {
         setRecipeCount(count);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data, error } = await supabase
+        .from("recipes")
+        .select("*")
+        .in("slug", FEATURED_SLUGS);
+      if (!cancelled && !error && data) {
+        const ordered = FEATURED_SLUGS
+          .map((s) => data.find((r) => r.slug === s))
+          .filter((r): r is Tables<"recipes"> => Boolean(r));
+        setFeatured(ordered);
       }
     })();
     return () => {
@@ -135,6 +166,27 @@ const Index = () => {
           <div className="w-px h-16 bg-primary-foreground/50 animate-pulse" />
         </div>
       </section>
+
+      <div className="h-px bg-border" aria-hidden />
+
+      {/* Featured Recipes */}
+      {featured.length > 0 && (
+        <section className="py-16 md:py-24" aria-labelledby="featured-recipes-heading">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20">
+            <div className="text-center mb-12 md:mb-16">
+              <p className="micro-caption mb-4">Featured</p>
+              <h2 id="featured-recipes-heading" className="heading-editorial">
+                Recipes worth making
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+              {featured.map((recipe, i) => (
+                <RecipeCard key={recipe.id} recipe={recipe} floatDelay={i} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <div className="h-px bg-border" aria-hidden />
 
