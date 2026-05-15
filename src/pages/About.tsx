@@ -2,6 +2,8 @@ import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
+import aboutKitchen1 from "@/assets/about-kitchen-1.jpg";
+import aboutKitchen2 from "@/assets/about-kitchen-2.jpg";
 
 
 const brandImage = "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=85";
@@ -11,8 +13,8 @@ const carouselImages = [
   { src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80", alt: "Delicious food spread" },
   { src: "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&q=80", alt: "Gourmet pasta" },
   { src: "https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=800&q=80", alt: "Fresh ingredients" },
-  { src: "https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?w=800&q=80", alt: "Pizza close-up" },
-  { src: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80", alt: "BBQ meat" },
+  { src: aboutKitchen1, alt: "Fresh seasonal vegetables on a wooden chopping board" },
+  { src: aboutKitchen2, alt: "Hearty home-cooked stew in a rustic ceramic bowl" },
   { src: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80", alt: "Pancakes" },
   { src: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80", alt: "Salmon dish" },
 ];
