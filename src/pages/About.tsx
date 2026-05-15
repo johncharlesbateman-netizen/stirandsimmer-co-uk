@@ -116,6 +116,40 @@ const About = () => {
         </div>
       </section>
 
+      {/* Why Stir & Simmer */}
+      <section className="pb-12 md:pb-16">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <div className="max-w-3xl">
+            <p className="micro-caption text-accent mb-3">Why Stir & Simmer</p>
+            <h2 className="heading-section mb-8">Built for real UK kitchens</h2>
+
+            <div className="grid md:grid-cols-2 gap-10 md:gap-12">
+              <div>
+                <h3 className="font-display text-xl text-foreground mb-4">We cook for</h3>
+                <ul className="space-y-3 body-editorial text-muted-foreground">
+                  <li>— People cooking after a long day at work</li>
+                  <li>— Families feeding fussy eaters without compromise</li>
+                  <li>— Anyone who wants weekend cooking to feel like a treat, not a chore</li>
+                  <li>— Home cooks who'd rather learn the why than memorise the what</li>
+                  <li>— Shoppers who actually use Tesco, Sainsbury's, Aldi and Waitrose</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-display text-xl text-foreground mb-4">Why UK-specific matters</h3>
+                <div className="space-y-4 body-editorial text-muted-foreground">
+                  <p>
+                    Every measurement is in grams and millilitres. Every oven temperature is in Celsius (with fan settings noted). Every ingredient is something you can actually buy at a British supermarket — no hunting for obscure imports or guessing at conversions.
+                  </p>
+                  <p>
+                    It sounds small. In practice, it's the difference between a recipe that works first time and one that quietly fails on a Tuesday night.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
     </Layout>
   );
