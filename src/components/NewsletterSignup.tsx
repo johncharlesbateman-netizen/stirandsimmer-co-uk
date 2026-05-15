@@ -119,8 +119,9 @@ const NewsletterSignup = ({
 
   return (
     <section
-      className={`no-print bg-background border-t border-border ${className}`}
+      className={`no-print ${className}`}
       aria-labelledby="newsletter-heading"
+      style={{ backgroundColor: "#2C2416", color: "#F5EAD8", borderTop: "1px solid rgba(245,234,216,0.15)" }}
     >
       <div
         className={`container mx-auto px-6 md:px-12 lg:px-20 ${
@@ -128,15 +129,16 @@ const NewsletterSignup = ({
         }`}
       >
         <div className="max-w-xl mx-auto text-center">
-          {eyebrow && <p className="micro-caption mb-5">{eyebrow}</p>}
+          {eyebrow && <p className="micro-caption mb-5" style={{ color: "#C4A97A" }}>{eyebrow}</p>}
           <h2
             id="newsletter-heading"
             className={isCompact ? "heading-section mb-4" : "heading-editorial mb-4"}
+            style={{ color: "#F5EAD8" }}
           >
             {headline || "Get recipes delivered free"}
           </h2>
-          <div className="mx-auto my-6 h-px w-12 bg-foreground/30" aria-hidden="true" />
-          <p className="text-muted-foreground leading-relaxed mb-10 max-w-md mx-auto">
+          <div className="mx-auto my-6 h-px w-12" style={{ backgroundColor: "rgba(245,234,216,0.3)" }} aria-hidden="true" />
+          <p className="leading-relaxed mb-10 max-w-md mx-auto" style={{ color: "rgba(245,234,216,0.75)" }}>
             {description ||
               "An occasional email with new recipes, seasonal ideas and the odd kitchen tip — sent only when we have something worth sharing. No spam, unsubscribe anytime."}
           </p>
@@ -145,7 +147,8 @@ const NewsletterSignup = ({
             <div
               role="status"
               aria-live="polite"
-              className="max-w-md mx-auto px-6 py-8 bg-secondary border border-border text-foreground"
+              className="max-w-md mx-auto px-6 py-8"
+              style={{ backgroundColor: "rgba(245,234,216,0.08)", border: "1px solid rgba(245,234,216,0.2)", color: "#F5EAD8" }}
             >
               <p className="text-base">{SUCCESS_MESSAGE}</p>
             </div>
@@ -169,7 +172,8 @@ const NewsletterSignup = ({
                     placeholder="First name"
                     value={fname}
                     onChange={(e) => setFname(e.target.value)}
-                    className="w-full min-h-[48px] px-0 py-3 bg-transparent border-0 border-b border-border text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-foreground transition-colors rounded-none"
+                    className="w-full min-h-[48px] px-0 py-3 bg-transparent border-0 border-b focus:outline-none transition-colors rounded-none"
+                    style={{ color: "#F5EAD8", borderColor: "rgba(245,234,216,0.25)" }}
                   />
                 </div>
                 <div className="flex-1">
@@ -186,7 +190,8 @@ const NewsletterSignup = ({
                     placeholder="you@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full min-h-[48px] px-0 py-3 bg-transparent border-0 border-b border-border text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-foreground transition-colors rounded-none"
+                    className="w-full min-h-[48px] px-0 py-3 bg-transparent border-0 border-b focus:outline-none transition-colors rounded-none"
+                    style={{ color: "#F5EAD8", borderColor: "rgba(245,234,216,0.25)" }}
                   />
                 </div>
               </div>
@@ -206,7 +211,7 @@ const NewsletterSignup = ({
                 </div>
               )}
 
-              <label className="flex items-start gap-3 text-xs text-muted-foreground leading-relaxed cursor-pointer pt-2">
+              <label className="flex items-start gap-3 text-xs leading-relaxed cursor-pointer pt-2" style={{ color: "rgba(245,234,216,0.7)" }}>
                 <input
                   type="checkbox"
                   name="gdpr[consent]"
@@ -214,12 +219,13 @@ const NewsletterSignup = ({
                   checked={consent}
                   onChange={(e) => setConsent(e.target.checked)}
                   required
-                  className="mt-0.5 w-4 h-4 flex-shrink-0 accent-foreground cursor-pointer"
+                  className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer"
+                  style={{ accentColor: "#C4A97A" }}
                 />
                 <span>
                   I agree to receive Stir &amp; Simmer's recipe newsletter and
                   accept the{" "}
-                  <Link to="/privacy" className="underline underline-offset-2 hover:text-foreground">
+                  <Link to="/privacy" className="underline underline-offset-2" style={{ color: "#F5EAD8" }}>
                     privacy policy
                   </Link>
                   . You can unsubscribe at any time.
@@ -227,7 +233,7 @@ const NewsletterSignup = ({
               </label>
 
               {error && (
-                <p className="text-xs text-destructive" role="alert">
+                <p className="text-xs" role="alert" style={{ color: "#f0a0a0" }}>
                   {error}
                 </p>
               )}
@@ -236,7 +242,8 @@ const NewsletterSignup = ({
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="inline-block px-10 py-4 bg-foreground text-background text-xs tracking-[0.2em] uppercase hover:opacity-80 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="inline-block px-10 py-4 text-xs tracking-[0.2em] uppercase hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{ backgroundColor: "#C4A97A", color: "#2C2416" }}
                 >
                   {status === "submitting" ? "Subscribing…" : "Subscribe"}
                 </button>
