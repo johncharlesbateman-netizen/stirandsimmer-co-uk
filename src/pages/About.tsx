@@ -4,6 +4,8 @@ import PageHero from "@/components/PageHero";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
 import aboutKitchen1 from "@/assets/about-kitchen-1.jpg";
 import aboutKitchen2 from "@/assets/about-kitchen-2.jpg";
+import aboutKitchen3 from "@/assets/about-kitchen-3.jpg";
+import aboutKitchen4 from "@/assets/about-kitchen-4.jpg";
 
 
 const brandImage = "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=85";
@@ -12,10 +14,10 @@ const brandImage = "https://images.unsplash.com/photo-1466637574441-749b8f19452f
 const carouselImages = [
   { src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80", alt: "Delicious food spread" },
   { src: "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&q=80", alt: "Gourmet pasta" },
-  { src: "https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=800&q=80", alt: "Fresh ingredients" },
+  { src: aboutKitchen3, alt: "Hands kneading bread dough on a flour-dusted wooden table" },
   { src: aboutKitchen1, alt: "Fresh seasonal vegetables on a wooden chopping board" },
+  { src: aboutKitchen4, alt: "Caramelised onions sizzling in a cast iron skillet" },
   { src: aboutKitchen2, alt: "Hearty home-cooked stew in a rustic ceramic bowl" },
-  { src: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80", alt: "Pancakes" },
   { src: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80", alt: "Salmon dish" },
 ];
 
