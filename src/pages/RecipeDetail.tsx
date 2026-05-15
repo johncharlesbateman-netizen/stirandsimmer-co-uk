@@ -189,7 +189,7 @@ const RecipeDetail = () => {
 
   if (isLoading) {
     return (
-      <Layout>
+      <Layout hideNewsletter>
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-20">
           <div className="animate-pulse space-y-8">
             <div className="h-4 w-32 bg-muted rounded" />
@@ -203,7 +203,7 @@ const RecipeDetail = () => {
 
   if (!recipe) {
     return (
-      <Layout>
+      <Layout hideNewsletter>
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-20 text-center">
           <h1 className="heading-editorial mb-4">Recipe not found</h1>
           <Link to="/recipes" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -302,7 +302,7 @@ const RecipeDetail = () => {
   };
 
   return (
-    <Layout>
+    <Layout hideNewsletter>
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
