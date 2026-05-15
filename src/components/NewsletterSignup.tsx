@@ -119,8 +119,9 @@ const NewsletterSignup = ({
 
   return (
     <section
-      className={`no-print bg-background border-t border-border ${className}`}
+      className={`no-print ${className}`}
       aria-labelledby="newsletter-heading"
+      style={{ backgroundColor: "#2C2416", color: "#F5EAD8", borderTop: "1px solid rgba(245,234,216,0.15)" }}
     >
       <div
         className={`container mx-auto px-6 md:px-12 lg:px-20 ${
@@ -128,15 +129,16 @@ const NewsletterSignup = ({
         }`}
       >
         <div className="max-w-xl mx-auto text-center">
-          {eyebrow && <p className="micro-caption mb-5">{eyebrow}</p>}
+          {eyebrow && <p className="micro-caption mb-5" style={{ color: "#C4A97A" }}>{eyebrow}</p>}
           <h2
             id="newsletter-heading"
             className={isCompact ? "heading-section mb-4" : "heading-editorial mb-4"}
+            style={{ color: "#F5EAD8" }}
           >
             {headline || "Get recipes delivered free"}
           </h2>
-          <div className="mx-auto my-6 h-px w-12 bg-foreground/30" aria-hidden="true" />
-          <p className="text-muted-foreground leading-relaxed mb-10 max-w-md mx-auto">
+          <div className="mx-auto my-6 h-px w-12" style={{ backgroundColor: "rgba(245,234,216,0.3)" }} aria-hidden="true" />
+          <p className="leading-relaxed mb-10 max-w-md mx-auto" style={{ color: "rgba(245,234,216,0.75)" }}>
             {description ||
               "An occasional email with new recipes, seasonal ideas and the odd kitchen tip — sent only when we have something worth sharing. No spam, unsubscribe anytime."}
           </p>
