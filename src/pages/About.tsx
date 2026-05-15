@@ -6,14 +6,6 @@ import { Link } from "react-router-dom";
 
 const brandImage = "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=85";
 
-const audienceTypes = [
-  "Home Cooks",
-  "Busy Families",
-  "Health-Conscious Foodies",
-  "Weekend Entertainers",
-  "Beginner Chefs",
-  "Meal Prep Enthusiasts",
-];
 
 const carouselImages = [
   { src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80", alt: "Delicious food spread" },
