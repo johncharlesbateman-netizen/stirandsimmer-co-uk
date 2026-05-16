@@ -105,13 +105,9 @@ const Recipes = () => {
             <label htmlFor="recipe-search" className="sr-only">
               Search recipes
             </label>
-            <div
-              className="relative flex items-center rounded-xl overflow-hidden"
-              style={{ backgroundColor: "#2C2416" }}
-            >
+            <div className="relative flex items-center rounded-xl overflow-hidden bg-warm-dark">
               <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5"
-                style={{ color: "#C4A97A" }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-warm-amber"
                 aria-hidden
               />
               <input
@@ -120,30 +116,22 @@ const Recipes = () => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search recipes by name or ingredient…"
-                className="w-full h-14 pl-12 pr-28 text-base md:text-lg placeholder:text-[#C4A97A]/70 focus-visible:outline-none"
-                style={{
-                  backgroundColor: "#2C2416",
-                  color: "#F5EAD8",
-                }}
+                className="w-full h-14 pl-12 pr-28 text-base md:text-lg bg-warm-dark text-warm-dark-foreground placeholder:text-warm-amber/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-amber"
               />
               {query && (
                 <button
                   type="button"
                   onClick={() => setQuery("")}
                   aria-label="Clear search"
-                  className="absolute right-20 top-1/2 -translate-y-1/2 p-2 rounded-full hover:bg-[#F5EAD8]/10 transition-colors"
-                  style={{ color: "#C4A97A" }}
+                  className="absolute right-20 top-1/2 -translate-y-1/2 p-2 rounded-full text-warm-amber hover:bg-warm-dark-foreground/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-amber"
                 >
                   <X className="w-4 h-4" aria-hidden />
                 </button>
               )}
               <button
                 type="button"
-                className="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-5 rounded-lg font-display text-sm font-medium transition-colors hover:opacity-90"
-                style={{
-                  backgroundColor: "#F5EAD8",
-                  color: "#2C2416",
-                }}
+                aria-label="Search recipes"
+                className="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-5 rounded-lg font-display text-sm font-medium bg-warm-dark-foreground text-warm-dark transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-amber"
                 onClick={() => {
                   const el = document.getElementById("recipe-search");
                   el?.focus();
