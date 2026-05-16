@@ -322,22 +322,14 @@ const renderChallenge = (text: string) => {
   return parts;
 };
 
-const RegionSection = ({ region }: { region: RegionDef }) => {
+const RegionSection = ({
+  region,
+  liveChallenge,
+}: {
+  region: RegionDef;
+  liveChallenge: string | null;
+}) => {
   const disabled = !region.available;
-
-  const { data: liveChallenge } = useQuery({
-    queryKey: ["region-challenge", region.id],
-    enabled: !disabled,
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("region_challenges")
-        .select("challenge")
-        .eq("region_id", region.id)
-        .maybeSingle();
-      if (error) throw error;
-      return data?.challenge ?? null;
-    },
-  });
 
   const challengeText = liveChallenge ?? region.challenge;
 
