@@ -33,12 +33,22 @@ const GuideSeo = ({ slug }: Props) => {
   // BreadcrumbList JSON-LD is emitted by the shared <Breadcrumbs> component
   // rendered in each guide's hero — keeping it there avoids duplicates.
 
+  const isPexels = meta.image.includes("images.pexels.com");
+
   return (
     <Helmet>
       <title>{meta.title}</title>
       <meta name="description" content={meta.description} />
       <meta name="author" content={meta.author} />
       <link rel="canonical" href={meta.url} />
+
+      {/* Warm the connection for Pexels-hosted hero images */}
+      {isPexels && (
+        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
+      )}
+      {/* Preload the guide's hero/key image so it's cached for the page,
+          social previews and any in-page rendering */}
+      <link rel="preload" as="image" href={meta.image} fetchPriority="high" />
 
       {/* Open Graph */}
       <meta property="og:type" content="article" />
