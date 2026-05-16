@@ -101,11 +101,27 @@ const Contact = () => {
         <meta property="og:url" content="https://stirandsimmer.co.uk/contact" />
         <meta property="og:title" content="Contact | Stir & Simmer" />
         <meta property="og:description" content="Get in touch with Stir & Simmer. We'd love to hear from you — questions, suggestions, or just to say hello." />
-        <meta property="og:image" content={contactBehindScenes} />
+        <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <meta property="og:locale" content="en_GB" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contact | Stir & Simmer" />
         <meta name="twitter:description" content="Get in touch with Stir & Simmer. We'd love to hear from you — questions, suggestions, or just to say hello." />
-        <meta name="twitter:image" content={contactBehindScenes} />
+        <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          name: "Contact | Stir & Simmer",
+          url: "https://stirandsimmer.co.uk/contact",
+          description: "Get in touch with Stir & Simmer. We'd love to hear from you — questions, suggestions, or just to say hello.",
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://stirandsimmer.co.uk/" },
+            { "@type": "ListItem", position: 2, name: "Contact", item: "https://stirandsimmer.co.uk/contact" },
+          ],
+        })}</script>
       </Helmet>
 
       <PageHero
