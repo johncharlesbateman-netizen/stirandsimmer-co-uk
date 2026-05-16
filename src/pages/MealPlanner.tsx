@@ -379,7 +379,7 @@ const MealPlanner = () => {
 
       <PageHero
         title="Plan your week"
-        subtitle="Drag, drop and cook. Your week sorted in minutes."
+        subtitle="Click to add, tweak and cook. Your week sorted in minutes."
         imageId="776538"
         imageAlt="A weekly meal planner notebook with fresh ingredients on a kitchen counter"
       />
