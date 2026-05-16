@@ -108,6 +108,14 @@
     --planner-soft: 145 25% 18%;
     --planner-accent: 145 50% 50%;
 
+    /* Warm dark brand palette — identical in both themes (brand identity) */
+    --warm-dark: 33 33% 13%;
+    --warm-dark-foreground: 36 58% 91%;
+    --warm-cream: 36 58% 91%;
+    --warm-cream-muted: 36 39% 76%;
+    --warm-amber: 32 68% 61%;
+    --warm-soft: 33 85% 95%;
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
