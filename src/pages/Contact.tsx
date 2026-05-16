@@ -170,7 +170,22 @@ const Contact = () => {
                   </Button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-8">
+                <form onSubmit={handleSubmit} className="space-y-8" noValidate aria-describedby={Object.keys(errors).length > 0 ? "contact-error-summary" : undefined}>
+                  {Object.keys(errors).length > 0 && (
+                    <div
+                      id="contact-error-summary"
+                      role="alert"
+                      aria-live="assertive"
+                      className="border border-destructive/40 bg-destructive/5 text-destructive rounded-md p-4 text-sm"
+                    >
+                      <p className="font-medium mb-1">Please fix the following before sending:</p>
+                      <ul className="list-disc pl-5 space-y-0.5">
+                        {errors.name && <li>{errors.name}</li>}
+                        {errors.email && <li>{errors.email}</li>}
+                        {errors.message && <li>{errors.message}</li>}
+                      </ul>
+                    </div>
+                  )}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="name" className="micro-caption">
@@ -182,10 +197,12 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Your name"
+                        aria-invalid={errors.name ? true : undefined}
+                        aria-describedby={errors.name ? "name-error" : undefined}
                         className="bg-transparent border-border focus:border-foreground transition-colors"
                       />
                       {errors.name && (
-                        <p className="text-sm text-destructive">{errors.name}</p>
+                        <p id="name-error" className="text-sm text-destructive">{errors.name}</p>
                       )}
                     </div>
                     <div className="space-y-2">
@@ -199,10 +216,12 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="your@email.com"
+                        aria-invalid={errors.email ? true : undefined}
+                        aria-describedby={errors.email ? "email-error" : undefined}
                         className="bg-transparent border-border focus:border-foreground transition-colors"
                       />
                       {errors.email && (
-                        <p className="text-sm text-destructive">{errors.email}</p>
+                        <p id="email-error" className="text-sm text-destructive">{errors.email}</p>
                       )}
                     </div>
                   </div>
@@ -218,10 +237,12 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="Ask us anything about a recipe, suggest a dish, or just say hello…"
                       rows={6}
+                      aria-invalid={errors.message ? true : undefined}
+                      aria-describedby={errors.message ? "message-error" : undefined}
                       className="bg-transparent border-border focus:border-foreground transition-colors resize-none"
                     />
                     {errors.message && (
-                      <p className="text-sm text-destructive">{errors.message}</p>
+                      <p id="message-error" className="text-sm text-destructive">{errors.message}</p>
                     )}
                   </div>
 
@@ -230,6 +251,7 @@ const Contact = () => {
                     variant="default"
                     size="lg"
                     disabled={isSubmitting}
+                    aria-busy={isSubmitting || undefined}
                     className="w-full md:w-auto px-12 text-sm tracking-wider uppercase"
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
