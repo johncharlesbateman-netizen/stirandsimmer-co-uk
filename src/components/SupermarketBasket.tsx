@@ -4,7 +4,7 @@ import {
   estimateAllPrices,
   type SupermarketId,
 } from "@/lib/supermarketPricing";
-import { supermarketLogos } from "@/lib/supermarket-logos";
+
 
 const STORAGE_KEY = "preferred-supermarket";
 
@@ -177,7 +177,7 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
       </div>
 
       {/* Supermarket cards — sorted cheapest first */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
+      <div className="grid grid-cols-5 sm:grid-cols-4 gap-2 mb-2">
         {sortedMarkets.map((market) => {
           const isActive = market.id === selected;
           const total = prices[market.id].total;
@@ -191,7 +191,7 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
                 openIngredientSearches(market);
               }}
               title={["lidl", "morrisons", "aldi"].includes(market.id) ? `Search for your ingredients on ${market.name}'s website` : undefined}
-              className={`relative flex flex-col items-center gap-1 p-3 border transition-all duration-200 text-center cursor-pointer group ${
+              className={`relative flex flex-col items-center gap-1 p-2 sm:p-3 border transition-all duration-200 text-center cursor-pointer group min-h-[44px] min-w-[44px] ${
                 isActive
                   ? "border-foreground bg-secondary shadow-sm"
                   : "border-border hover:border-muted-foreground/40 hover:bg-secondary hover:shadow-sm"
@@ -202,9 +202,15 @@ const SupermarketBasket = ({ checkedItems, scaleFactor = 1 }: SupermarketBasketP
                   Cheapest
                 </span>
               )}
-              <img src={supermarketLogos[market.id]} alt={market.name} className="w-8 h-8 object-contain group-hover:scale-110 transition-transform duration-200" loading="lazy" width={32} height={32} />
-              <span className="text-xs font-medium text-foreground">{market.name}</span>
-              <span className="text-xs text-muted-foreground">
+              <span
+                aria-hidden="true"
+                className="flex items-center justify-center w-8 h-8 rounded-full text-white text-sm font-semibold group-hover:scale-110 transition-transform duration-200"
+                style={{ backgroundColor: market.colour }}
+              >
+                {market.name.charAt(0)}
+              </span>
+              <span className="text-[11px] sm:text-xs font-medium text-foreground leading-tight">{market.name}</span>
+              <span className="text-[11px] sm:text-xs text-muted-foreground">
                 ~£{total.toFixed(2)}
               </span>
             </button>
