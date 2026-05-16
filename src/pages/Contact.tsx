@@ -148,7 +148,7 @@ const Contact = () => {
                   aria-live="polite"
                   className="border border-foreground/15 bg-muted/40 px-8 py-10 md:px-10 md:py-12 flex flex-col items-start gap-6 max-w-xl"
                 >
-                  <div className="flex items-center justify-center w-14 h-14 rounded-full bg-foreground text-background">
+                  <div className="flex items-center justify-center w-14 h-14 rounded-full bg-primary text-primary-foreground">
                     <MailCheck className="w-6 h-6" aria-hidden="true" />
                   </div>
                   <div className="space-y-3">
@@ -227,8 +227,10 @@ const Contact = () => {
 
                   <Button
                     type="submit"
+                    variant="default"
+                    size="lg"
                     disabled={isSubmitting}
-                    className="w-full md:w-auto px-12 py-6 h-auto bg-foreground text-background text-sm tracking-wider uppercase hover:opacity-80 transition-opacity disabled:opacity-50"
+                    className="w-full md:w-auto px-12 text-sm tracking-wider uppercase"
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
