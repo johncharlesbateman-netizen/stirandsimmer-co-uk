@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import GuideSeo from "@/components/GuideSeo";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -8,19 +8,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 const GuideChoosingPans = () => {
   return (
     <Layout>
-      <Helmet>
-        <title>Choosing the right pan for the job — a cook's guide | Stir and Simmer</title>
-        <meta
-          name="description"
-          content="A practical guide to choosing the right pan for the job — the materials, the shapes, and which pans actually earn their place in a home kitchen."
-        />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/guides/choosing-pans" />
-        <meta property="og:title" content="Choosing the right pan for the job — a cook's guide | Stir and Simmer" />
-        <meta
-          property="og:description"
-          content="A practical guide to choosing the right pan for the job — the materials, the shapes, and which pans actually earn their place in a home kitchen."
-        />
-      </Helmet>
+      <GuideSeo slug="choosing-pans" />
 
       <article className="bg-background">
         {/* Header */}

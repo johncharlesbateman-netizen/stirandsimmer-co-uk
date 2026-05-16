@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import GuideSeo from "@/components/GuideSeo";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -113,19 +113,7 @@ const TECHNIQUES: Technique[] = [
 const GuideFrenchTechniques = () => {
   return (
     <Layout>
-      <Helmet>
-        <title>French cooking techniques every home cook should know — Stir and Simmer</title>
-        <meta
-          name="description"
-          content="Seven essential French cooking techniques explained simply — mise en place, julienne, brunoise, chiffonade, beurre blanc, flambé and déglaze. Master these and transform your cooking."
-        />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/guides/french-techniques" />
-        <meta property="og:title" content="French cooking techniques every home cook should know — Stir and Simmer" />
-        <meta
-          property="og:description"
-          content="Seven essential French cooking techniques explained simply — mise en place, julienne, brunoise, chiffonade, beurre blanc, flambé and déglaze."
-        />
-      </Helmet>
+      <GuideSeo slug="french-techniques" />
 
       <article className="bg-background">
         {/* Dark hero */}
