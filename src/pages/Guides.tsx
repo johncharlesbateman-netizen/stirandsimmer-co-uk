@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { ArrowRight } from "lucide-react";
+import { GUIDES_IN_ORDER, SITE_ORIGIN } from "@/lib/guideMeta";
 import properStockImage from "@/assets/guide-proper-stock.jpg";
 import properSauceImage from "@/assets/guide-proper-sauce.jpg";
 import choosingPansImage from "@/assets/guide-choosing-pans.jpg";
@@ -102,6 +103,37 @@ const GUIDES: GuideEntry[] = [
 ];
 
 const Guides = () => {
+  const collectionUrl = `${SITE_ORIGIN}/guides`;
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": collectionUrl,
+    url: collectionUrl,
+    name: "Guides — kitchen techniques and reference",
+    description:
+      "Practical kitchen guides from Stir & Simmer — techniques, reference and the craft behind great home cooking.",
+    isPartOf: { "@type": "WebSite", name: "Stir & Simmer", url: SITE_ORIGIN },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListOrder: "https://schema.org/ItemListOrderAscending",
+      numberOfItems: GUIDES_IN_ORDER.length,
+      itemListElement: GUIDES_IN_ORDER.map((g, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: g.url,
+        name: g.name,
+      })),
+    },
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_ORIGIN}/` },
+      { "@type": "ListItem", position: 2, name: "Guides", item: collectionUrl },
+    ],
+  };
+
   return (
     <Layout>
       <Helmet>
@@ -110,9 +142,11 @@ const Guides = () => {
           name="description"
           content="Practical kitchen guides from Stir & Simmer — techniques, reference and the craft behind great home cooking."
         />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/guides" />
+        <link rel="canonical" href={collectionUrl} />
         <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
         <link rel="preload" as="image" href={heroImage} imageSrcSet={heroSrcSet} imageSizes="100vw" fetchPriority="high" />
+        <script type="application/ld+json">{JSON.stringify(collectionJsonLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
       </Helmet>
 
       {/* Hero */}
