@@ -232,6 +232,7 @@ const KitchenAtlas = () => {
               ) : (
                 <div
                   key={r.id}
+                  aria-disabled="true"
                   className="text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden cursor-not-allowed opacity-60"
                   style={{ borderTop: `4px solid ${r.bg}` }}
                 >
