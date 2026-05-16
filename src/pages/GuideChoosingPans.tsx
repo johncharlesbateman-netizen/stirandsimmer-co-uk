@@ -338,15 +338,12 @@ const GuideChoosingPans = () => {
         </div>
 
         {/* Kitchen Atlas CTA */}
-        <section
-          className="w-full py-16 md:py-20 border-t border-border"
-          style={{ backgroundColor: "#1a0e00" }}
-        >
+        <section className="w-full py-16 md:py-20 border-t border-border bg-warm-dark text-warm-dark-foreground">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl text-center">
-            <h2 className="font-display text-3xl md:text-4xl mb-4" style={{ color: "#f5e9d7" }}>
+            <h2 className="font-display text-3xl md:text-4xl mb-4">
               Ready to put it to work?
             </h2>
-            <p className="text-base md:text-lg mb-8" style={{ color: "#d9c7a8" }}>
+            <p className="text-base md:text-lg mb-8 text-warm-cream-muted">
               Head to The Kitchen Atlas and explore recipes from around the world to practise on.
             </p>
             <Button asChild size="lg" variant="secondary">
