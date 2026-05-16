@@ -10,6 +10,16 @@ import { isSectionHeader } from "@/lib/ingredient-utils";
 import { cn } from "@/lib/utils";
 import { RECIPE_TILES } from "@/lib/recipe-tiles";
 import type { Tables } from "@/integrations/supabase/types";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 /* ── Types ────────────────────────────────────────────────── */
 
