@@ -109,8 +109,22 @@ const scrollToRegion = (id: string) => {
 };
 
 const KitchenAtlas = () => {
+  const { data: liveChallenges } = useQuery({
+    queryKey: ["region-challenges-all"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("region_challenges")
+        .select("region_id, challenge");
+      if (error) throw error;
+      const map: Record<string, string> = {};
+      (data ?? []).forEach((row) => {
+        if (row.region_id && row.challenge) map[row.region_id] = row.challenge;
+      });
+      return map;
+    },
+  });
 
-  return (
+
     <Layout>
       <Helmet>
         <title>The Kitchen Atlas — explore world cuisines and cooking challenges | Stir & Simmer</title>
