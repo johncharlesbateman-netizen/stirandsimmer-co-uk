@@ -57,6 +57,21 @@
     --warm-amber: 32 68% 61%;           /* ≈ #E0A558 — accent on warm dark */
     --warm-soft: 33 85% 95%;            /* ≈ #FDF3E7 — callout/light surface */
 
+    /* Kitchen Atlas map chrome (warm earth palette, paired with warm-amber accent) */
+    --atlas-map-bg: 30 49% 24%;          /* ≈ #5a3a1f — outer map frame */
+    --atlas-map-surface: 28 47% 19%;     /* ≈ #46301a — inner map surface */
+    --atlas-map-land: 26 57% 15%;        /* ≈ #3a2410 — land silhouette fill */
+    --atlas-map-land-stroke: 31 58% 23%; /* ≈ #5a3a18 — land silhouette stroke */
+    --atlas-marker: 32 77% 45%;          /* ≈ #C97B1A — pulse marker (darker warm-amber) */
+
+    /* Kitchen Atlas region accents (used as card border-top / section border-left) */
+    --region-uk: 209 56% 23%;            /* ≈ #1a3a5c */
+    --region-italy: 11 53% 36%;          /* ≈ #8B3A2A */
+    --region-france: 222 65% 29%;        /* ≈ #1a3a7c */
+    --region-asia: 326 56% 23%;          /* ≈ #5c1a3a */
+    --region-japan: 0 65% 29%;           /* ≈ #7c1a1a */
+    --region-mexico: 132 56% 23%;        /* ≈ #1a5c2a */
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
@@ -115,6 +130,19 @@
     --warm-cream-muted: 36 39% 76%;
     --warm-amber: 32 68% 61%;
     --warm-soft: 33 85% 95%;
+
+    --atlas-map-bg: 30 49% 24%;
+    --atlas-map-surface: 28 47% 19%;
+    --atlas-map-land: 26 57% 15%;
+    --atlas-map-land-stroke: 31 58% 23%;
+    --atlas-marker: 32 77% 45%;
+
+    --region-uk: 209 56% 23%;
+    --region-italy: 11 53% 36%;
+    --region-france: 222 65% 29%;
+    --region-asia: 326 56% 23%;
+    --region-japan: 0 65% 29%;
+    --region-mexico: 132 56% 23%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
