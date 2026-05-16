@@ -119,13 +119,14 @@ const GuideFrenchTechniques = () => {
         {/* Dark hero */}
         <header className="w-full bg-warm-dark text-warm-dark-foreground">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24 max-w-3xl">
-            <nav className="text-xs uppercase tracking-widest mb-6 text-warm-cream-muted">
-              <Link to="/" className="hover:underline">Home</Link>
-              <span className="mx-2">›</span>
-              <Link to="/guides" className="hover:underline">Guides</Link>
-              <span className="mx-2">›</span>
-              <span>French techniques</span>
-            </nav>
+            <Breadcrumbs
+              className="mb-6 text-warm-cream-muted [&_a]:hover:text-warm-cream [&_[aria-current=page]]:text-warm-cream [&_a]:hover:no-underline"
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Guides", href: "/guides" },
+                { label: "French techniques" },
+              ]}
+            />
             <Link
               to="/guides"
               className="inline-flex items-center gap-2 text-sm mb-8 transition-colors hover:underline text-warm-cream-muted"
