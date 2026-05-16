@@ -12,6 +12,7 @@ const STATIC_URLS = [
   { path: "/recipes", changefreq: "daily", priority: "0.9" },
   { path: "/collections", changefreq: "weekly", priority: "0.8" },
   { path: "/meal-planner", changefreq: "monthly", priority: "0.6" },
+  { path: "/guides", changefreq: "monthly", priority: "0.8" },
   { path: "/about", changefreq: "monthly", priority: "0.5" },
   { path: "/contact", changefreq: "monthly", priority: "0.4" },
   
@@ -25,6 +26,11 @@ const CATEGORY_SLUGS = [
 const COLLECTION_SLUGS = [
   "weeknight-suppers", "italian-meals", "romantic-meals", "fish-and-seafood",
   "sweets-and-desserts", "quick-and-easy", "baking-and-bread", "healthy-eating",
+];
+
+const GUIDE_SLUGS = [
+  "mother-sauces", "french-techniques", "garam-masala", "how-to-use-spices",
+  "proper-stock", "proper-sauce", "choosing-pans", "kitchen-knives",
 ];
 
 export async function generateSitemap() {
@@ -55,6 +61,7 @@ export async function generateSitemap() {
   for (const u of STATIC_URLS) parts.push(entry(SITE + u.path, today, u.changefreq, u.priority));
   for (const slug of CATEGORY_SLUGS) parts.push(entry(`${SITE}/recipes/category/${slug}`, today, "weekly", "0.8"));
   for (const slug of COLLECTION_SLUGS) parts.push(entry(`${SITE}/collections/${slug}`, today, "weekly", "0.7"));
+  for (const slug of GUIDE_SLUGS) parts.push(entry(`${SITE}/guides/${slug}`, today, "monthly", "0.7"));
   for (const r of recipes ?? []) {
     const lastmod = r.updated_at ? new Date(r.updated_at).toISOString().split("T")[0] : today;
     parts.push(entry(`${SITE}/recipes/${r.slug}`, lastmod, "weekly", "0.7"));
