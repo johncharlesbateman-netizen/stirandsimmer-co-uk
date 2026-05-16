@@ -400,14 +400,17 @@ const MealPlanner = () => {
               <Printer className="w-4 h-4" /> Print my week
             </button>
             <button
-              onClick={clearAll}
+              onClick={() => setClearConfirmOpen(true)}
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors border border-warm-cream/40 text-warm-cream"
             >
               <Trash2 className="w-4 h-4" /> Clear all
             </button>
             {savedFlash && (
-              <span className="self-center text-sm inline-flex items-center gap-1 text-warm-cream-muted">
-                <Check className="w-4 h-4" /> Saved
+              <span
+                role="status"
+                className="self-center text-sm inline-flex items-center gap-1 text-warm-cream-muted"
+              >
+                <Check className="w-4 h-4" aria-hidden="true" /> Saved
               </span>
             )}
           </div>
