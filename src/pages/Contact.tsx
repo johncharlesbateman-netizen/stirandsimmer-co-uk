@@ -303,18 +303,20 @@ const Contact = () => {
       {/* Image Section */}
       <section className="pb-32">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="aspect-[21/9] overflow-hidden">
-            <img
-              src={contactBehindScenes}
-              alt="Behind the scenes at Stir & Simmer — chef plating a dish in the kitchen"
-              className="w-full h-full object-cover"
-              loading="lazy"
-              decoding="async"
-              width={1200}
-              height={900}
-            />
-          </div>
-          <p className="micro-caption mt-4">Behind the scenes — In the kitchen</p>
+          <figure>
+            <div className="aspect-[21/9] overflow-hidden">
+              <img
+                src={contactBehindScenes}
+                alt="Behind the scenes at Stir & Simmer — chef plating a dish in the kitchen"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+                width={1200}
+                height={514}
+              />
+            </div>
+            <figcaption className="micro-caption mt-4">Behind the scenes — In the kitchen</figcaption>
+          </figure>
         </div>
       </section>
     </Layout>
