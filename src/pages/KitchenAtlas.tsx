@@ -149,6 +149,9 @@ const KitchenAtlas = () => {
       <section className="py-8 md:py-16 bg-[hsl(var(--atlas-map-bg))]">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div
+            role="group"
+            aria-label="World map showing available cuisine regions"
+            aria-describedby="kitchen-atlas-map-description"
             className="relative mx-auto rounded-xl overflow-hidden block bg-[hsl(var(--atlas-map-surface))]"
             style={{
               maxWidth: "1100px",
@@ -157,12 +160,15 @@ const KitchenAtlas = () => {
                 "radial-gradient(circle at 20% 40%, hsl(var(--atlas-marker) / 0.08), transparent 40%), radial-gradient(circle at 60% 60%, hsl(var(--atlas-marker) / 0.06), transparent 45%), radial-gradient(circle at 80% 30%, hsl(var(--atlas-marker) / 0.05), transparent 40%)",
             }}
           >
+            <p id="kitchen-atlas-map-description" className="sr-only">
+              An interactive world map with markers for six cuisine regions: United Kingdom, France, Italy, South and Southeast Asia, Japan and Mexico. Active markers jump to the matching region section below; Japan is marked as coming soon. The same regions are listed as links in the grid further down the page.
+            </p>
             {/* World map silhouette (equirectangular, 1000x500 viewBox) */}
             <svg
               viewBox="0 0 1000 500"
               preserveAspectRatio="xMidYMid meet"
               className="absolute inset-0 w-full h-full"
-              aria-hidden
+              aria-hidden="true"
             >
               <path
                 d={WORLD_MAP_PATH}
