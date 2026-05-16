@@ -186,7 +186,7 @@ const MealPlanner = () => {
         .select("id, title, slug, description, image_url, prep_time_minutes, cook_time_minutes, servings, ingredients, categories, cuisine_region")
         .order("title");
       if (error) throw error;
-      return (data ?? []) as Recipe[];
+      return (data ?? []) as unknown as Recipe[];
     },
   });
 
