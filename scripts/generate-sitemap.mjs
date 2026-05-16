@@ -61,6 +61,7 @@ export async function generateSitemap() {
   for (const u of STATIC_URLS) parts.push(entry(SITE + u.path, today, u.changefreq, u.priority));
   for (const slug of CATEGORY_SLUGS) parts.push(entry(`${SITE}/recipes/category/${slug}`, today, "weekly", "0.8"));
   for (const slug of COLLECTION_SLUGS) parts.push(entry(`${SITE}/collections/${slug}`, today, "weekly", "0.7"));
+  for (const slug of GUIDE_SLUGS) parts.push(entry(`${SITE}/guides/${slug}`, today, "monthly", "0.7"));
   for (const r of recipes ?? []) {
     const lastmod = r.updated_at ? new Date(r.updated_at).toISOString().split("T")[0] : today;
     parts.push(entry(`${SITE}/recipes/${r.slug}`, lastmod, "weekly", "0.7"));
