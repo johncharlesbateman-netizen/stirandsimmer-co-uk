@@ -203,10 +203,39 @@ const RegionPage = () => {
         <title>{region.seoTitle}</title>
         <meta name="description" content={region.seoDescription} />
         <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:site_name" content="Stir & Simmer" />
+        <meta property="og:locale" content="en_GB" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:title" content={region.seoTitle} />
         <meta property="og:description" content={region.seoDescription} />
+        <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={`${region.adjective} recipes — Stir & Simmer`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={region.seoTitle} />
+        <meta name="twitter:description" content={region.seoDescription} />
+        <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: region.seoTitle,
+          description: region.seoDescription,
+          url: canonicalUrl,
+          inLanguage: "en-GB",
+          isPartOf: { "@type": "WebSite", name: "Stir & Simmer", url: "https://stirandsimmer.co.uk" },
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: filtered.length,
+            itemListElement: filtered.slice(0, 30).map((r, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `https://stirandsimmer.co.uk/recipe/${r.slug}`,
+              name: r.title,
+            })),
+          },
+        })}</script>
       </Helmet>
 
       <section className="py-10 md:py-14 border-b border-border">
