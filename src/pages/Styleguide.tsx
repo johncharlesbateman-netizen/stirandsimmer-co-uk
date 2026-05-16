@@ -198,7 +198,7 @@ const Styleguide = () => {
           
           <p className="text-muted-foreground mb-12 max-w-xl">
             The layout uses a 12-column grid with intentional asymmetry. 
-            Images are placed off-center to create visual tension and editorial flow.
+            Images are placed off-centre to create visual tension and editorial flow.
           </p>
           
           <div className="grid grid-cols-12 gap-4">
