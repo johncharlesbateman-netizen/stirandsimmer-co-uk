@@ -82,11 +82,11 @@ const Index = () => {
         <meta property="og:url" content="https://stirandsimmer.co.uk/" />
         <meta property="og:title" content="Stir & Simmer | Real Recipes for UK Home Cooks" />
         <meta property="og:description" content="Over 118 tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients." />
-        <meta property="og:image" content={heroImage} />
+        <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Stir & Simmer | Real Recipes for UK Home Cooks" />
         <meta name="twitter:description" content="Over 118 tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients." />
-        <meta name="twitter:image" content={heroImage} />
+        <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
@@ -163,55 +163,44 @@ const Index = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in z-10" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
+        <div aria-hidden className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in z-10" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
           <div className="w-px h-16 bg-primary-foreground/50 animate-pulse" />
         </div>
 
         {/* Bottom blend into warm dark section below */}
         <div
           aria-hidden
-          className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
-          style={{
-            background: "linear-gradient(to bottom, rgba(44,36,22,0) 0%, rgba(44,36,22,0.6) 55%, rgba(44,36,22,1) 100%)",
-          }}
+          className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none bg-gradient-to-b from-warm-dark/0 via-warm-dark/60 to-warm-dark"
         />
       </section>
 
       {/* Editorial intro */}
-      <section
-        className="pt-16 md:pt-24 pb-4 md:pb-8"
-        style={{ backgroundColor: "#2C2416", color: "#F5EAD8" }}
-      >
+      <section className="pt-16 md:pt-24 pb-4 md:pb-8 bg-warm-dark text-warm-dark-foreground">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <p
-            className="max-w-2xl mx-auto text-center font-display text-lg md:text-xl leading-relaxed"
-            style={{ color: "rgba(245,234,216,0.9)" }}
-          >
+          <p className="max-w-2xl mx-auto text-center font-display text-lg md:text-xl leading-relaxed text-warm-dark-foreground/90">
             Stir &amp; Simmer is a UK recipe site built for people who love good food but live real lives. Every recipe is tested in a real kitchen, written in grams and Celsius, and made with ingredients you'll find at your local supermarket. No cheffy techniques. No obscure ingredients. Just honest food that works.
           </p>
-          <div className="mx-auto mt-8 h-px w-12" style={{ backgroundColor: "rgba(245,234,216,0.25)" }} aria-hidden />
+          <div aria-hidden className="mx-auto mt-8 h-px w-12 bg-warm-dark-foreground/25" />
         </div>
       </section>
 
       {/* Featured Recipes */}
       {featured.length > 0 && (
         <section
-          className="py-16 md:py-24"
+          className="py-16 md:py-24 bg-warm-dark text-warm-dark-foreground"
           aria-labelledby="featured-recipes-heading"
-          style={{ backgroundColor: "#2C2416", color: "#F5EAD8" }}
         >
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
             <div className="text-center mb-12 md:mb-16">
-              <p className="micro-caption mb-4" style={{ color: "#C4A97A" }}>Featured</p>
+              <p className="micro-caption mb-4 text-warm-amber">Featured</p>
               <h2
                 id="featured-recipes-heading"
-                className="heading-editorial"
-                style={{ color: "#F5EAD8" }}
+                className="heading-editorial text-warm-dark-foreground"
               >
                 Recipes worth making
               </h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 [&_h3]:text-[#F5EAD8] [&_.micro-caption]:text-[#C4A97A] [&_p]:text-[#F5EAD8]/75">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 [&_h3]:text-warm-dark-foreground [&_.micro-caption]:text-warm-amber [&_p]:text-warm-dark-foreground/75">
               {featured.map((recipe, i) => (
                 <RecipeCard key={recipe.id} recipe={recipe} floatDelay={i} />
               ))}
@@ -224,14 +213,13 @@ const Index = () => {
 
       {/* Explore the site */}
       <section
-        className="py-16 md:py-24"
+        className="py-16 md:py-24 bg-warm-dark text-warm-dark-foreground"
         aria-labelledby="explore-heading"
-        style={{ backgroundColor: "#2C2416", color: "#F5EAD8" }}
       >
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="text-center mb-12 md:mb-16">
-            <p className="micro-caption mb-4" style={{ color: "#C4A97A" }}>Explore</p>
-            <h2 id="explore-heading" className="heading-editorial" style={{ color: "#F5EAD8" }}>
+            <p className="micro-caption mb-4 text-warm-amber">Explore</p>
+            <h2 id="explore-heading" className="heading-editorial text-warm-dark-foreground">
               Find your way around
             </h2>
           </div>
@@ -276,8 +264,7 @@ const Index = () => {
                 <Link
                   key={to}
                   to={to}
-                  className="group relative block overflow-hidden min-h-[340px] md:min-h-[380px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
-                  style={{ border: "1px solid rgba(245,234,216,0.15)" }}
+                  className="group relative block overflow-hidden min-h-[340px] md:min-h-[380px] border border-warm-dark-foreground/15 text-warm-dark-foreground transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
                 >
                   <img
                     src={`${base}&w=800`}
@@ -293,22 +280,18 @@ const Index = () => {
                   />
                   <div
                     aria-hidden
-                    className="absolute inset-0 transition-opacity duration-500"
-                    style={{
-                      background:
-                        "linear-gradient(to top, rgba(44,36,22,0.92) 0%, rgba(44,36,22,0.6) 55%, rgba(44,36,22,0.3) 100%)",
-                    }}
+                    className="absolute inset-0 transition-opacity duration-500 bg-gradient-to-t from-warm-dark/90 via-warm-dark/60 to-warm-dark/30"
                   />
-                  <div className="relative p-6 md:p-7 flex flex-col h-full min-h-[340px] md:min-h-[380px]" style={{ color: "#F5EAD8" }}>
-                    <Icon className="w-7 h-7 mb-auto" strokeWidth={1.5} style={{ color: "#C4A97A" }} />
+                  <div className="relative p-6 md:p-7 flex flex-col h-full min-h-[340px] md:min-h-[380px]">
+                    <Icon className="w-7 h-7 mb-auto text-warm-amber" strokeWidth={1.5} />
                     <div className="mt-6">
-                      <h3 className="font-display text-2xl mb-2 transition-transform duration-500 group-hover:translate-x-1" style={{ color: "#F5EAD8" }}>
+                      <h3 className="font-display text-2xl mb-2 transition-transform duration-500 group-hover:translate-x-1 text-warm-dark-foreground">
                         {title}
                       </h3>
-                      <p className="text-sm leading-relaxed mb-5 line-clamp-2 min-h-[2.75rem]" style={{ color: "rgba(245,234,216,0.85)" }}>
+                      <p className="text-sm leading-relaxed mb-5 line-clamp-2 min-h-[2.75rem] text-warm-dark-foreground/85">
                         {desc}
                       </p>
-                      <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase" style={{ color: "#C4A97A" }}>
+                      <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase text-warm-amber">
                         Explore
                         <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                       </span>
