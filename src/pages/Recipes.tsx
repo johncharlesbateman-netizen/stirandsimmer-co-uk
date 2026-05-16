@@ -190,8 +190,7 @@ const Recipes = () => {
           {/* Featured "All Recipes" banner tile */}
           <Link
             to={`/recipes/${allTile.slug}`}
-            className="group block rounded-xl p-6 md:p-8 mb-4 md:mb-6 transition-transform hover:-translate-y-0.5"
-            style={{ backgroundColor: "#2C2416", color: "#F5EAD8" }}
+            className="group block rounded-xl p-6 md:p-8 mb-4 md:mb-6 bg-warm-dark text-warm-dark-foreground transition-transform hover:-translate-y-0.5"
           >
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-4 md:gap-5">
