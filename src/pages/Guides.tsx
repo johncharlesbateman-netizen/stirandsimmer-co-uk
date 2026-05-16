@@ -209,22 +209,20 @@ const Guides = () => {
                   aria-hidden
                   className="absolute inset-0 bg-gradient-to-t from-warm-dark/95 via-warm-dark/60 to-warm-dark/25 transition-opacity duration-500 group-hover:from-warm-dark group-hover:via-warm-dark/70"
                 />
-                <div className="absolute inset-0 p-6 md:p-7 flex flex-col text-warm-dark-foreground">
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-warm-cream-muted mb-auto">
+                <div className="absolute inset-0 p-6 md:p-7 flex flex-col justify-end text-warm-dark-foreground">
+                  <p className="text-[10px] tracking-[0.2em] uppercase text-warm-cream-muted mb-3">
                     {g.eyebrow}
                   </p>
-                  <div className="mt-6">
-                    <h2 className="font-display text-xl md:text-2xl mb-3 leading-tight transition-transform duration-500 group-hover:translate-x-1">
-                      {g.title}
-                    </h2>
-                    <p className="text-sm leading-relaxed text-warm-cream-muted mb-5 line-clamp-3">
-                      {g.description}
-                    </p>
-                    <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase text-warm-cream-muted group-hover:text-warm-dark-foreground transition-colors">
-                      Read the guide
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                    </span>
-                  </div>
+                  <h2 className="font-display text-xl md:text-2xl mb-3 leading-tight transition-transform duration-500 group-hover:translate-x-1">
+                    {g.title}
+                  </h2>
+                  <p className="text-sm leading-relaxed text-warm-cream-muted mb-5 line-clamp-3">
+                    {g.description}
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase text-warm-cream-muted group-hover:text-warm-dark-foreground transition-colors">
+                    Read the guide
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
                 </div>
               </Link>
             </li>
