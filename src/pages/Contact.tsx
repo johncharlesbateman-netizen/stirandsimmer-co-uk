@@ -227,8 +227,10 @@ const Contact = () => {
 
                   <Button
                     type="submit"
+                    variant="default"
+                    size="lg"
                     disabled={isSubmitting}
-                    className="w-full md:w-auto px-12 py-6 h-auto bg-foreground text-background text-sm tracking-wider uppercase hover:opacity-80 transition-opacity disabled:opacity-50"
+                    className="w-full md:w-auto px-12 text-sm tracking-wider uppercase"
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
