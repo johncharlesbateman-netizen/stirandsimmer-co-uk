@@ -266,7 +266,11 @@ const KitchenAtlas = () => {
       {/* REGION SECTIONS — light */}
       <div className="bg-background">
         {REGIONS.map((region) => (
-          <RegionSection key={region.id} region={region} />
+          <RegionSection
+            key={region.id}
+            region={region}
+            liveChallenge={liveChallenges?.[region.id] ?? null}
+          />
         ))}
       </div>
     </Layout>
