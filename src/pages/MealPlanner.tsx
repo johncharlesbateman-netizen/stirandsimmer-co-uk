@@ -491,6 +491,7 @@ const MealPlanner = () => {
                     "text-[10px] font-medium uppercase tracking-wider",
                     isToday ? "text-planner" : "text-muted-foreground"
                   )}>
+                    {isToday && <span className="sr-only">Today, </span>}
                     {day.abbr}
                   </div>
                   <div className={cn("text-lg font-medium leading-tight", isToday && "text-planner")}>
