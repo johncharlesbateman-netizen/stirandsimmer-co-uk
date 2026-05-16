@@ -186,13 +186,14 @@ const KitchenAtlas = () => {
               return (
                 <button
                   key={r.id}
-                  onClick={() => scrollToRegion(r.id)}
+                  onClick={() => r.available && scrollToRegion(r.id)}
                   className="absolute -translate-x-1/2 -translate-y-1/2"
-                  style={{ top: pos.top, left: pos.left }}
-                  aria-label={`Jump to ${r.name}`}
+                  style={{ top: pos.top, left: pos.left, cursor: r.available ? "pointer" : "not-allowed" }}
+                  aria-label={r.available ? `Jump to ${r.name}` : `${r.name} — coming soon`}
+                  aria-disabled={r.available ? undefined : true}
                 >
                   <span
-                    className="block rounded-full animate-pulse bg-[hsl(var(--atlas-marker))]"
+                    className="block rounded-full bg-[hsl(var(--atlas-marker))] motion-safe:animate-pulse"
                     style={{
                       width: "16px",
                       height: "16px",
