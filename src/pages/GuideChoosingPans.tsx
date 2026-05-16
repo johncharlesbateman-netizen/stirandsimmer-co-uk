@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
