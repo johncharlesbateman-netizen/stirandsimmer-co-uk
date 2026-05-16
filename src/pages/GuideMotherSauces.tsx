@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import GuideSeo from "@/components/GuideSeo";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -65,19 +65,7 @@ const SAUCES = [
 const GuideMotherSauces = () => {
   return (
     <Layout>
-      <Helmet>
-        <title>The five French mother sauces every home cook should know | Stir and Simmer</title>
-        <meta
-          name="description"
-          content="Béchamel, Velouté, Espagnole, Hollandaise and Sauce Tomat — the five French mother sauces explained with step by step instructions and the mistakes to avoid."
-        />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/guides/mother-sauces" />
-        <meta property="og:title" content="The five French mother sauces every home cook should know | Stir and Simmer" />
-        <meta
-          property="og:description"
-          content="Béchamel, Velouté, Espagnole, Hollandaise and Sauce Tomat — the five French mother sauces explained with step by step instructions and the mistakes to avoid."
-        />
-      </Helmet>
+      <GuideSeo slug="mother-sauces" />
 
       <article className="bg-background">
         {/* Header */}

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import GuideSeo from "@/components/GuideSeo";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -88,19 +88,7 @@ const SPICES = [
 const GuideGaramMasala = () => {
   return (
     <Layout>
-      <Helmet>
-        <title>Garam masala — a cook's guide | Stir and Simmer</title>
-        <meta
-          name="description"
-          content="Garam masala demystified — the spices that go in, why they matter, how to toast and grind them, and the mistakes most home cooks make."
-        />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/guides/garam-masala" />
-        <meta property="og:title" content="Garam masala — a cook's guide | Stir and Simmer" />
-        <meta
-          property="og:description"
-          content="Garam masala demystified — the spices that go in, why they matter, how to toast and grind them, and the mistakes most home cooks make."
-        />
-      </Helmet>
+      <GuideSeo slug="garam-masala" />
 
       <article className="bg-background">
         {/* Header */}

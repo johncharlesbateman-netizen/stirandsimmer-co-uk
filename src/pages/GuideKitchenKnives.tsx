@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import GuideSeo from "@/components/GuideSeo";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -24,19 +24,7 @@ const SECTIONS = [
 const GuideKitchenKnives = () => {
   return (
     <Layout>
-      <Helmet>
-        <title>Kitchen knives — a cook's guide | Stir and Simmer</title>
-        <meta
-          name="description"
-          content="A practical guide to kitchen knives — the blades worth owning, how to hold them, how to keep them sharp, and how to choose ones that will last a lifetime."
-        />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/guides/kitchen-knives" />
-        <meta property="og:title" content="Kitchen knives — a cook's guide | Stir and Simmer" />
-        <meta
-          property="og:description"
-          content="A practical guide to kitchen knives — the blades worth owning, how to hold them, how to keep them sharp, and how to choose ones that will last a lifetime."
-        />
-      </Helmet>
+      <GuideSeo slug="kitchen-knives" />
 
       <article className="bg-background">
         {/* Header */}

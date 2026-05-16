@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import GuideSeo from "@/components/GuideSeo";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -8,19 +8,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 const GuideHowToUseSpices = () => {
   return (
     <Layout>
-      <Helmet>
-        <title>How to use spices — a beginner's guide | Stir and Simmer</title>
-        <meta
-          name="description"
-          content="A beginner's guide to cooking with spices — what they do, how to store them, when to add them, and how to build flavour with confidence."
-        />
-        <link rel="canonical" href="https://stirandsimmer.co.uk/guides/how-to-use-spices" />
-        <meta property="og:title" content="How to use spices — a beginner's guide | Stir and Simmer" />
-        <meta
-          property="og:description"
-          content="A beginner's guide to cooking with spices — what they do, how to store them, when to add them, and how to build flavour with confidence."
-        />
-      </Helmet>
+      <GuideSeo slug="how-to-use-spices" />
 
       <article className="bg-background">
         {/* Header */}
