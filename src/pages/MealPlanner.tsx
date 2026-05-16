@@ -106,6 +106,7 @@ const MealPlanner = () => {
     }
   });
   const [savedFlash, setSavedFlash] = useState(false);
+  const [clearConfirmOpen, setClearConfirmOpen] = useState(false);
 
   const [selections, setSelections] = useState<Record<string, number[]>>(() => {
     try {
