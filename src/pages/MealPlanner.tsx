@@ -319,8 +319,8 @@ const MealPlanner = () => {
     w.document.write(`<!DOCTYPE html><html><head><title>Shopping List</title>
       <style>body{font-family:system-ui;padding:2rem;max-width:600px;margin:auto}
       h1{font-size:1.4rem;margin-bottom:1rem}
-      li{padding:.4rem 0;border-bottom:1px solid #eee;list-style:none}
-      li::before{content:"☐ ";color:#999}</style></head><body>
+      li{padding:.4rem 0;border-bottom:1px solid hsl(36 15% 85%);list-style:none}
+      li::before{content:"☐ ";color:hsl(36 15% 60%)}</style></head><body>
       <h1>Shopping List — Stir & Simmer</h1><ul>${mergedShoppingList.map((i) => `<li>${i}</li>`).join("")}</ul></body></html>`);
     w.document.close();
     w.print();
