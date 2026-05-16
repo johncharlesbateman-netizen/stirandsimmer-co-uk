@@ -163,7 +163,7 @@ const Guides = () => {
             height={900}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-warm-dark/85 via-warm-dark/65 to-warm-dark/90" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-warm-dark/85 via-warm-dark/65 to-warm-dark/90" />
         </div>
         <div className="relative container mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-3xl text-warm-dark-foreground">
           <p className="text-xs md:text-sm tracking-[0.3em] uppercase mb-4 text-warm-cream-muted">Guides</p>

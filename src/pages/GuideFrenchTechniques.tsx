@@ -228,7 +228,7 @@ const GuideFrenchTechniques = () => {
                 </p>
               )}
 
-              <hr className="border-0 h-px my-8 bg-warm-amber" />
+              <hr aria-hidden="true" className="border-0 h-px my-8 bg-warm-amber" />
 
               <div className="rounded-r-lg p-5 md:p-6 border-l-4 bg-warm-soft border-warm-amber">
                 <p className="text-xs uppercase tracking-widest font-semibold mb-2 text-muted-foreground">
