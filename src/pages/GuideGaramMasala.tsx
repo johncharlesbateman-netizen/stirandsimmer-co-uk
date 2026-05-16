@@ -243,10 +243,7 @@ const GuideGaramMasala = () => {
                 {spice.uses}
               </p>
 
-              <div
-                className="rounded-lg p-5 md:p-6 border border-border"
-                style={{ backgroundColor: "#FDF3E7" }}
-              >
+              <div className="rounded-lg p-5 md:p-6 border border-border bg-warm-soft">
                 <p className="text-xs uppercase tracking-widest font-semibold mb-2 text-muted-foreground">
                   The mistake most home cooks make
                 </p>
