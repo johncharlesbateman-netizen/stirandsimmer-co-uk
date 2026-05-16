@@ -109,6 +109,20 @@ const scrollToRegion = (id: string) => {
 };
 
 const KitchenAtlas = () => {
+  const { data: liveChallenges } = useQuery({
+    queryKey: ["region-challenges-all"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("region_challenges")
+        .select("region_id, challenge");
+      if (error) throw error;
+      const map: Record<string, string> = {};
+      (data ?? []).forEach((row) => {
+        if (row.region_id && row.challenge) map[row.region_id] = row.challenge;
+      });
+      return map;
+    },
+  });
 
   return (
     <Layout>
@@ -252,7 +266,11 @@ const KitchenAtlas = () => {
       {/* REGION SECTIONS — light */}
       <div className="bg-background">
         {REGIONS.map((region) => (
-          <RegionSection key={region.id} region={region} />
+          <RegionSection
+            key={region.id}
+            region={region}
+            liveChallenge={liveChallenges?.[region.id] ?? null}
+          />
         ))}
       </div>
     </Layout>
@@ -304,22 +322,14 @@ const renderChallenge = (text: string) => {
   return parts;
 };
 
-const RegionSection = ({ region }: { region: RegionDef }) => {
+const RegionSection = ({
+  region,
+  liveChallenge,
+}: {
+  region: RegionDef;
+  liveChallenge: string | null;
+}) => {
   const disabled = !region.available;
-
-  const { data: liveChallenge } = useQuery({
-    queryKey: ["region-challenge", region.id],
-    enabled: !disabled,
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("region_challenges")
-        .select("challenge")
-        .eq("region_id", region.id)
-        .maybeSingle();
-      if (error) throw error;
-      return data?.challenge ?? null;
-    },
-  });
 
   const challengeText = liveChallenge ?? region.challenge;
 
