@@ -328,7 +328,6 @@ const RegionSection = ({ region }: { region: RegionDef }) => {
       id={`region-${region.id}`}
       className="scroll-mt-24 py-5 md:py-6 bg-background border-b border-border border-l-4"
       style={{ borderLeftColor: region.bg, opacity: disabled ? 0.55 : 1 }}
-      aria-disabled={disabled || undefined}
     >
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
         <div className="flex items-baseline gap-3 mb-2 flex-wrap">
