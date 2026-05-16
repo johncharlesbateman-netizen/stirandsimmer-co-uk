@@ -113,14 +113,26 @@ const KitchenAtlas = () => {
   return (
     <Layout>
       <Helmet>
-        <title>The Kitchen Atlas — explore world cuisines and cooking challenges | Stir and Simmer</title>
+        <title>The Kitchen Atlas — explore world cuisines and cooking challenges | Stir & Simmer</title>
         <meta
           name="description"
-          content="Explore six world cuisine regions and discover occasional cooking challenges — all linked to tried and tested recipes on Stir and Simmer."
+          content="Explore six world cuisine regions and discover occasional cooking challenges — all linked to tried and tested recipes on Stir & Simmer."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/kitchen-atlas" />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://stirandsimmer.co.uk/kitchen-atlas" />
         <meta property="og:title" content="The Kitchen Atlas | Stir & Simmer" />
-        <meta property="og:description" content="Explore six world cuisine regions and discover occasional cooking challenges." />
+        <meta property="og:description" content="Explore six world cuisine regions and discover occasional cooking challenges — all linked to tried and tested recipes on Stir & Simmer." />
+        <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <meta property="og:site_name" content="Stir & Simmer" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Kitchen Atlas | Stir & Simmer" />
+        <meta name="twitter:description" content="Explore six world cuisine regions and discover occasional cooking challenges — all linked to tried and tested recipes on Stir & Simmer." />
+        <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
       </Helmet>
 
       <PageHero
