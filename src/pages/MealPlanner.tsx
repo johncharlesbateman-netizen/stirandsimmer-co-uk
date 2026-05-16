@@ -124,30 +124,69 @@ const MealPlanner = () => {
   });
 
   const weekDates = useMemo(getWeekDates, []);
-  const todayIdx = useMemo(() => {
+  const computeTodayIdx = useCallback(() => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return weekDates.findIndex((d) => d.getTime() === today.getTime());
   }, [weekDates]);
+  const [todayIdx, setTodayIdx] = useState<number>(() => computeTodayIdx());
 
-  /* Persist */
-  useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(plan)); }, [plan]);
-  useEffect(() => { localStorage.setItem(SELECTIONS_KEY, JSON.stringify(selections)); }, [selections]);
+  // Recompute todayIdx at the next local midnight, and again whenever the tab
+  // becomes visible (covers cases where the timeout was throttled while hidden).
   useEffect(() => {
-    localStorage.setItem(SHOPPING_CHECKED_KEY, JSON.stringify(Array.from(shoppingChecked)));
-  }, [shoppingChecked]);
-  useEffect(() => { localStorage.setItem(NOTES_KEY, JSON.stringify(notes)); }, [notes]);
+    let timeoutId: number | undefined;
+    const scheduleMidnight = () => {
+      const now = new Date();
+      const next = new Date(now);
+      next.setHours(24, 0, 5, 0); // 5s past midnight to avoid races
+      const ms = next.getTime() - now.getTime();
+      timeoutId = window.setTimeout(() => {
+        setTodayIdx(computeTodayIdx());
+        scheduleMidnight();
+      }, ms);
+    };
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") setTodayIdx(computeTodayIdx());
+    };
+    scheduleMidnight();
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      if (timeoutId) window.clearTimeout(timeoutId);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [computeTodayIdx]);
 
-  /* Recipes */
+  /* Persist — debounced to avoid writing on every keystroke */
+  const useDebouncedLocalStorage = (key: string, value: unknown, delay = 500) => {
+    useEffect(() => {
+      const id = window.setTimeout(() => {
+        try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* quota */ }
+      }, delay);
+      return () => window.clearTimeout(id);
+    }, [key, value, delay]);
+  };
+  useDebouncedLocalStorage(STORAGE_KEY, plan);
+  useDebouncedLocalStorage(SELECTIONS_KEY, selections);
+  useDebouncedLocalStorage(NOTES_KEY, notes);
+  useEffect(() => {
+    const id = window.setTimeout(() => {
+      try {
+        localStorage.setItem(SHOPPING_CHECKED_KEY, JSON.stringify(Array.from(shoppingChecked)));
+      } catch { /* quota */ }
+    }, 500);
+    return () => window.clearTimeout(id);
+  }, [shoppingChecked]);
+
+  /* Recipes — only the columns needed for the picker */
   const { data: allRecipes = [] } = useQuery({
-    queryKey: ["all-recipes"],
+    queryKey: ["all-recipes", "planner"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
-        .select("*")
+        .select("id, title, slug, description, image_url, prep_time_minutes, cook_time_minutes, servings, ingredients, categories, cuisine_region")
         .order("title");
       if (error) throw error;
-      return (data ?? []) as Recipe[];
+      return (data ?? []) as unknown as Recipe[];
     },
   });
 
