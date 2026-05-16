@@ -142,8 +142,7 @@ const GuideMotherSauces = () => {
               </p>
 
               <div
-                className="rounded-lg p-5 md:p-6 border border-border"
-                style={{ backgroundColor: "#FDF3E7" }}
+                className="rounded-lg p-5 md:p-6 border border-border bg-warm-soft"
               >
                 <p className="text-xs uppercase tracking-widest font-semibold mb-2 text-muted-foreground">
                   The mistake most home cooks make
@@ -157,8 +156,7 @@ const GuideMotherSauces = () => {
 
           {/* Closing */}
           <div
-            className="mt-16 rounded-lg p-6 md:p-8 border border-border"
-            style={{ backgroundColor: "#FDF3E7" }}
+            className="mt-16 rounded-lg p-6 md:p-8 border border-border bg-warm-soft"
           >
             <p className="text-base md:text-lg text-foreground leading-relaxed">
               You do not need to make all five in one week. Pick one. Make it properly. Understand what you are doing and why. Then move to the next. Cook all five over a month and your kitchen confidence will be transformed.
@@ -167,15 +165,12 @@ const GuideMotherSauces = () => {
         </div>
 
         {/* Kitchen Atlas CTA */}
-        <section
-          className="w-full py-16 md:py-20 border-t border-border"
-          style={{ backgroundColor: "#1a0e00" }}
-        >
+        <section className="w-full py-16 md:py-20 border-t border-border bg-warm-dark text-warm-dark-foreground">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl text-center">
-            <h2 className="font-display text-3xl md:text-4xl mb-4" style={{ color: "#f5e9d7" }}>
+            <h2 className="font-display text-3xl md:text-4xl mb-4">
               Ready for the French challenge?
             </h2>
-            <p className="text-base md:text-lg mb-8" style={{ color: "#d9c7a8" }}>
+            <p className="text-base md:text-lg mb-8 text-warm-cream-muted">
               Head to The Kitchen Atlas and take on the current French cooking challenge.
             </p>
             <Button asChild size="lg" variant="secondary">

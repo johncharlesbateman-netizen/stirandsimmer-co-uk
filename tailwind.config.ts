@@ -52,6 +52,16 @@ export default {
           soft: "hsl(var(--planner-soft))",
           accent: "hsl(var(--planner-accent))",
         },
+        "warm-dark": {
+          DEFAULT: "hsl(var(--warm-dark))",
+          foreground: "hsl(var(--warm-dark-foreground))",
+        },
+        "warm-cream": {
+          DEFAULT: "hsl(var(--warm-cream))",
+          muted: "hsl(var(--warm-cream-muted))",
+        },
+        "warm-amber": "hsl(var(--warm-amber))",
+        "warm-soft": "hsl(var(--warm-soft))",
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",

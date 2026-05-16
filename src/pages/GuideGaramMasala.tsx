@@ -243,10 +243,7 @@ const GuideGaramMasala = () => {
                 {spice.uses}
               </p>
 
-              <div
-                className="rounded-lg p-5 md:p-6 border border-border"
-                style={{ backgroundColor: "#FDF3E7" }}
-              >
+              <div className="rounded-lg p-5 md:p-6 border border-border bg-warm-soft">
                 <p className="text-xs uppercase tracking-widest font-semibold mb-2 text-muted-foreground">
                   The mistake most home cooks make
                 </p>
@@ -336,15 +333,12 @@ const GuideGaramMasala = () => {
         </div>
 
         {/* Kitchen Atlas CTA */}
-        <section
-          className="w-full py-16 md:py-20 border-t border-border"
-          style={{ backgroundColor: "#1a0e00" }}
-        >
+        <section className="w-full py-16 md:py-20 border-t border-border bg-warm-dark text-warm-dark-foreground">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl text-center">
-            <h2 className="font-display text-3xl md:text-4xl mb-4" style={{ color: "#f5e9d7" }}>
+            <h2 className="font-display text-3xl md:text-4xl mb-4">
               Ready to put it to work?
             </h2>
-            <p className="text-base md:text-lg mb-8" style={{ color: "#d9c7a8" }}>
+            <p className="text-base md:text-lg mb-8 text-warm-cream-muted">
               Head to The Kitchen Atlas and explore the Indian recipes waiting for your fresh garam masala.
             </p>
             <Button asChild size="lg" variant="secondary">

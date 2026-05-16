@@ -129,9 +129,9 @@ const GuideFrenchTechniques = () => {
 
       <article className="bg-background">
         {/* Dark hero */}
-        <header className="w-full" style={{ backgroundColor: "#1a0e00" }}>
+        <header className="w-full bg-warm-dark text-warm-dark-foreground">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24 max-w-3xl">
-            <nav className="text-xs uppercase tracking-widest mb-6" style={{ color: "#a08c6a" }}>
+            <nav className="text-xs uppercase tracking-widest mb-6 text-warm-cream-muted">
               <Link to="/" className="hover:underline">Home</Link>
               <span className="mx-2">›</span>
               <Link to="/guides" className="hover:underline">Guides</Link>
@@ -140,19 +140,15 @@ const GuideFrenchTechniques = () => {
             </nav>
             <Link
               to="/guides"
-              className="inline-flex items-center gap-2 text-sm mb-8 transition-colors hover:underline"
-              style={{ color: "#a08c6a" }}
+              className="inline-flex items-center gap-2 text-sm mb-8 transition-colors hover:underline text-warm-cream-muted"
             >
               <ArrowLeft className="w-4 h-4" /> Back to Guides
             </Link>
-            <p className="micro-caption mb-4" style={{ color: "#e0a558" }}>Guide</p>
-            <h1
-              className="font-display text-4xl md:text-5xl leading-tight mb-5"
-              style={{ color: "#f5e9d7" }}
-            >
+            <p className="micro-caption mb-4 text-warm-amber">Guide</p>
+            <h1 className="font-display text-4xl md:text-5xl leading-tight mb-5">
               French cooking techniques every home cook should know
             </h1>
-            <p className="text-lg md:text-xl" style={{ color: "#d9c7a8" }}>
+            <p className="text-lg md:text-xl text-warm-cream-muted">
               You do not need to train in a professional kitchen. But learning a handful of French techniques will transform the way you cook — and the way your food looks and tastes.
             </p>
           </div>
@@ -162,10 +158,7 @@ const GuideFrenchTechniques = () => {
 
         {/* At a glance summary */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-16 max-w-3xl">
-          <div
-            className="rounded-lg p-6 md:p-8 border border-border"
-            style={{ backgroundColor: "#FDF3E7" }}
-          >
+          <div className="rounded-lg p-6 md:p-8 border border-border bg-warm-soft">
             <p className="text-xs uppercase tracking-widest font-semibold mb-5 text-muted-foreground">
               At a glance — the seven techniques
             </p>
@@ -202,10 +195,7 @@ const GuideFrenchTechniques = () => {
               id={t.id}
               className={`scroll-mt-24 ${i > 0 ? "mt-16 pt-16 border-t border-border" : ""}`}
             >
-              <span
-                className="inline-block text-xs uppercase tracking-widest font-semibold rounded-full px-3 py-1 mb-4"
-                style={{ backgroundColor: "#FDF3E7", color: "#a55a00" }}
-              >
+              <span className="inline-block text-xs uppercase tracking-widest font-semibold rounded-full px-3 py-1 mb-4 bg-warm-soft text-warm-amber">
                 Technique {i + 1} of 7
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-foreground mb-1 scroll-mt-24">
@@ -248,12 +238,9 @@ const GuideFrenchTechniques = () => {
                 </p>
               )}
 
-              <hr className="border-0 h-px my-8" style={{ backgroundColor: "#e0a558" }} />
+              <hr className="border-0 h-px my-8 bg-warm-amber" />
 
-              <div
-                className="rounded-r-lg p-5 md:p-6 border-l-4"
-                style={{ backgroundColor: "#FDF3E7", borderLeftColor: "#e0a558" }}
-              >
+              <div className="rounded-r-lg p-5 md:p-6 border-l-4 bg-warm-soft border-warm-amber">
                 <p className="text-xs uppercase tracking-widest font-semibold mb-2 text-muted-foreground">
                   The mistake most home cooks make
                 </p>
@@ -265,10 +252,7 @@ const GuideFrenchTechniques = () => {
           ))}
 
           {/* Closing */}
-          <div
-            className="mt-16 rounded-lg p-6 md:p-8 border border-border"
-            style={{ backgroundColor: "#F4D9A8" }}
-          >
+          <div className="mt-16 rounded-lg p-6 md:p-8 border border-border bg-warm-soft">
             <p className="text-base md:text-lg text-foreground leading-relaxed">
               You do not need to learn all seven techniques this week. Pick the one that feels most relevant to how you cook right now. Mise en place will change your daily cooking immediately. Julienne will improve how your food looks. Beurre blanc will make you feel like a professional. Déglaze will transform every pan sauce you ever make. Come back to the others when you are ready. Each one is a small investment that pays back every time you cook.
             </p>
@@ -276,15 +260,12 @@ const GuideFrenchTechniques = () => {
         </div>
 
         {/* Kitchen Atlas CTA */}
-        <section
-          className="w-full py-16 md:py-20 border-t border-border"
-          style={{ backgroundColor: "#1a0e00" }}
-        >
+        <section className="w-full py-16 md:py-20 border-t border-border bg-warm-dark text-warm-dark-foreground">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl text-center">
-            <h2 className="font-display text-3xl md:text-4xl mb-4" style={{ color: "#f5e9d7" }}>
+            <h2 className="font-display text-3xl md:text-4xl mb-4">
               Ready to put these techniques into practice?
             </h2>
-            <p className="text-base md:text-lg mb-8" style={{ color: "#d9c7a8" }}>
+            <p className="text-base md:text-lg mb-8 text-warm-cream-muted">
               Head to The Kitchen Atlas and take on the current French cooking challenge — designed to use exactly these techniques in real dishes.
             </p>
             <Button asChild size="lg" variant="secondary">
