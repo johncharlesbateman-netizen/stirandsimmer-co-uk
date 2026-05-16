@@ -26,7 +26,7 @@ const REGIONS: RegionDef[] = [
     id: "uk",
     name: "United Kingdom",
     emoji: "🇬🇧",
-    bg: "#1a3a5c",
+    bg: "hsl(var(--region-uk))",
     available: true,
     description: "Honest, seasonal and deeply comforting. The foundation of everything.",
     challenge:
@@ -37,7 +37,7 @@ const REGIONS: RegionDef[] = [
     id: "italy",
     name: "Italy",
     emoji: "🇮🇹",
-    bg: "#8B3A2A",
+    bg: "hsl(var(--region-italy))",
     available: true,
     description: "Pasta, sauces and the art of simplicity. Italy feeds the soul.",
     challenge:
@@ -48,7 +48,7 @@ const REGIONS: RegionDef[] = [
     id: "france",
     name: "France",
     emoji: "🇫🇷",
-    bg: "#1a3a7c",
+    bg: "hsl(var(--region-france))",
     available: true,
     description: "Classical techniques that underpin all of western cooking.",
     challenge:
@@ -59,7 +59,7 @@ const REGIONS: RegionDef[] = [
     id: "asia",
     name: "South and Southeast Asia",
     emoji: "🌶️",
-    bg: "#5c1a3a",
+    bg: "hsl(var(--region-asia))",
     available: true,
     description: "Bold spices, fragrant herbs and layers of warmth and depth.",
     challenge:
@@ -70,7 +70,7 @@ const REGIONS: RegionDef[] = [
     id: "japan",
     name: "Japan",
     emoji: "🇯🇵",
-    bg: "#7c1a1a",
+    bg: "hsl(var(--region-japan))",
     available: false,
     description:
       "Precision, balance and the art of umami. Japanese cooking at its finest.",
@@ -81,7 +81,7 @@ const REGIONS: RegionDef[] = [
     id: "mexico",
     name: "Mexico",
     emoji: "🇲🇽",
-    bg: "#1a5c2a",
+    bg: "hsl(var(--region-mexico))",
     available: true,
     description:
       "Vibrant, smoky and deeply satisfying. The bold flavours of Mexican cooking.",
@@ -146,16 +146,15 @@ const KitchenAtlas = () => {
       <div aria-hidden className="w-full h-px bg-white/90" />
 
       {/* MAP */}
-      <section style={{ backgroundColor: "#5a3a1f" }} className="py-8 md:py-16">
+      <section className="py-8 md:py-16 bg-[hsl(var(--atlas-map-bg))]">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div
-            className="relative mx-auto rounded-xl overflow-hidden block"
+            className="relative mx-auto rounded-xl overflow-hidden block bg-[hsl(var(--atlas-map-surface))]"
             style={{
-              backgroundColor: "#46301a",
               maxWidth: "1100px",
               aspectRatio: "2 / 1",
               backgroundImage:
-                "radial-gradient(circle at 20% 40%, rgba(201,123,26,0.08), transparent 40%), radial-gradient(circle at 60% 60%, rgba(201,123,26,0.06), transparent 45%), radial-gradient(circle at 80% 30%, rgba(201,123,26,0.05), transparent 40%)",
+                "radial-gradient(circle at 20% 40%, hsl(var(--atlas-marker) / 0.08), transparent 40%), radial-gradient(circle at 60% 60%, hsl(var(--atlas-marker) / 0.06), transparent 45%), radial-gradient(circle at 80% 30%, hsl(var(--atlas-marker) / 0.05), transparent 40%)",
             }}
           >
             {/* World map silhouette (equirectangular, 1000x500 viewBox) */}
@@ -167,8 +166,8 @@ const KitchenAtlas = () => {
             >
               <path
                 d={WORLD_MAP_PATH}
-                fill="#3a2410"
-                stroke="#5a3a18"
+                fill="hsl(var(--atlas-map-land))"
+                stroke="hsl(var(--atlas-map-land-stroke))"
                 strokeWidth="0.6"
                 strokeLinejoin="round"
               />
@@ -187,12 +186,11 @@ const KitchenAtlas = () => {
                   aria-label={`Jump to ${r.name}`}
                 >
                   <span
-                    className="block rounded-full animate-pulse"
+                    className="block rounded-full animate-pulse bg-[hsl(var(--atlas-marker))]"
                     style={{
                       width: "16px",
                       height: "16px",
-                      backgroundColor: "#C97B1A",
-                      boxShadow: "0 0 18px 4px rgba(201,123,26,0.55)",
+                      boxShadow: "0 0 18px 4px hsl(var(--atlas-marker) / 0.55)",
                       opacity: r.available ? 1 : 0.55,
                     }}
                   />
@@ -360,10 +358,11 @@ const RegionSection = ({ region }: { region: RegionDef }) => {
           </Button>
         )}
 
-        {/* Challenge callout — light warm amber */}
+        {/* Challenge callout — warm-soft surface */}
         <div
-          className="mt-8 rounded-lg p-5 md:p-6 border border-border"
-          style={{ backgroundColor: disabled ? "#F7F4EE" : "#FDF3E7" }}
+          className={`mt-8 rounded-lg p-5 md:p-6 border border-border ${
+            disabled ? "bg-warm-soft/60" : "bg-warm-soft"
+          }`}
         >
           <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
             Challenge
