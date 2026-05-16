@@ -105,10 +105,10 @@ const Guides = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Guides — kitchen techniques and reference | Stir and Simmer</title>
+        <title>Guides — kitchen techniques and reference | Stir & Simmer</title>
         <meta
           name="description"
-          content="Practical kitchen guides from Stir and Simmer — techniques, reference and the craft behind great home cooking."
+          content="Practical kitchen guides from Stir & Simmer — techniques, reference and the craft behind great home cooking."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/guides" />
         <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
