@@ -124,7 +124,7 @@ const KitchenAtlas = () => {
     },
   });
 
-
+  return (
     <Layout>
       <Helmet>
         <title>The Kitchen Atlas — explore world cuisines and cooking challenges | Stir & Simmer</title>
