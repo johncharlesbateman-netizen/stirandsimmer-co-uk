@@ -221,8 +221,7 @@ const Recipes = () => {
                 <Link
                   key={tile.slug}
                   to={`/recipes/${tile.slug}`}
-                  className="group rounded-xl p-5 md:p-6 min-h-[140px] md:min-h-[170px] flex flex-col items-center justify-center text-center transition-transform hover:-translate-y-0.5"
-                  style={{ backgroundColor: "#2C2416", color: "#F5EAD8" }}
+                  className="group rounded-xl p-5 md:p-6 min-h-[140px] md:min-h-[170px] flex flex-col items-center justify-center text-center bg-warm-dark text-warm-dark-foreground transition-transform hover:-translate-y-0.5"
                 >
                   <span
                     className="text-3xl md:text-4xl mb-3"
@@ -233,10 +232,7 @@ const Recipes = () => {
                   <div className="font-display text-base md:text-lg leading-tight">
                     {tile.label}
                   </div>
-                  <div
-                    className="text-xs md:text-sm mt-2"
-                    style={{ color: "#C4A97A" }}
-                  >
+                  <div className="text-xs md:text-sm mt-2 text-warm-amber">
                     {count === 0
                       ? "Coming soon"
                       : `${count} ${count === 1 ? "recipe" : "recipes"}`}
