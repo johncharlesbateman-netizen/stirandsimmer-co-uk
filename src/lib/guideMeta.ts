@@ -3,7 +3,7 @@ import properSauceImage from "@/assets/guide-proper-sauce.jpg";
 import choosingPansImage from "@/assets/guide-choosing-pans.jpg";
 import kitchenKnivesImage from "@/assets/guide-kitchen-knives.jpg";
 
-const SITE_ORIGIN = "https://stirandsimmer.co.uk";
+export const SITE_ORIGIN = "https://stirandsimmer.co.uk";
 const AUTHOR = "Stir & Simmer";
 
 const pexels = (id: string, w = 1600) =>
@@ -12,9 +12,15 @@ const pexels = (id: string, w = 1600) =>
 const toAbsolute = (path: string) =>
   path.startsWith("http") ? path : `${SITE_ORIGIN}${path}`;
 
+const stripSiteSuffix = (title: string) =>
+  title.replace(/\s*[|—–-]\s*Stir\s*&\s*Simmer\s*$/i, "").trim();
+
 export type GuideMeta = {
   slug: string;
+  /** Page <title>, includes the "Stir & Simmer" site suffix. */
   title: string;
+  /** Clean headline without the site suffix, used in schema/breadcrumbs. */
+  name: string;
   description: string;
   image: string;
   url: string;
@@ -102,23 +108,23 @@ const RAW: RawMeta[] = [
 
 const DEFAULT_MODIFIED = "2025-05-16T09:00:00Z";
 
+export const GUIDES_IN_ORDER: GuideMeta[] = RAW.map((r) => {
+  const image = r.image ?? (r.imageId ? pexels(r.imageId, 1600) : "");
+  return {
+    slug: r.slug,
+    title: r.title,
+    name: stripSiteSuffix(r.title),
+    description: r.description,
+    image: toAbsolute(image),
+    url: `${SITE_ORIGIN}/guides/${r.slug}`,
+    publishedTime: r.publishedTime,
+    modifiedTime: r.modifiedTime ?? DEFAULT_MODIFIED,
+    author: AUTHOR,
+  };
+});
+
 export const GUIDE_META: Record<string, GuideMeta> = Object.fromEntries(
-  RAW.map((r) => {
-    const image = r.image ?? (r.imageId ? pexels(r.imageId, 1600) : "");
-    return [
-      r.slug,
-      {
-        slug: r.slug,
-        title: r.title,
-        description: r.description,
-        image: toAbsolute(image),
-        url: `${SITE_ORIGIN}/guides/${r.slug}`,
-        publishedTime: r.publishedTime,
-        modifiedTime: r.modifiedTime ?? DEFAULT_MODIFIED,
-        author: AUTHOR,
-      },
-    ];
-  }),
+  GUIDES_IN_ORDER.map((m) => [m.slug, m]),
 );
 
 export const getGuideMeta = (slug: string): GuideMeta => {
