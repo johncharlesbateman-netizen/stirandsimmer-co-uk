@@ -376,38 +376,27 @@ const MealPlanner = () => {
 
       <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">
         {/* Hero */}
-        <section
-          className="rounded-2xl p-6 md:p-10 mb-8 flex flex-wrap items-center justify-between gap-4"
-          style={{ backgroundColor: "#1a0e00" }}
-        >
+        <section className="rounded-2xl p-6 md:p-10 mb-8 flex flex-wrap items-center justify-between gap-4 bg-warm-dark">
           <div>
-            <p
-              className="text-sm md:text-base max-w-md font-light leading-relaxed"
-              style={{ color: "#d9c7a8" }}
-            >
+            <p className="text-sm md:text-base max-w-md font-light leading-relaxed text-warm-cream-muted">
               Search our recipes, tweak the ingredients to suit what you have, then build your shopping list automatically.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             <button
               onClick={printWeek}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors"
-              style={{ backgroundColor: "#C97B1A", color: "#1a0e00" }}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors bg-warm-amber text-warm-dark"
             >
               <Printer className="w-4 h-4" /> Print my week
             </button>
             <button
               onClick={clearAll}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors border"
-              style={{ borderColor: "rgba(245,233,215,0.4)", color: "#f5e9d7" }}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors border border-warm-cream/40 text-warm-cream"
             >
               <Trash2 className="w-4 h-4" /> Clear all
             </button>
             {savedFlash && (
-              <span
-                className="self-center text-sm inline-flex items-center gap-1"
-                style={{ color: "#d9c7a8" }}
-              >
+              <span className="self-center text-sm inline-flex items-center gap-1 text-warm-cream-muted">
                 <Check className="w-4 h-4" /> Saved
               </span>
             )}
