@@ -343,6 +343,28 @@ const MealPlanner = () => {
         <meta name="twitter:title" content="Weekly Meal Planner | Stir & Simmer" />
         <meta name="twitter:description" content="Plan your week's meals, edit ingredients to match what's in your kitchen, and build a smart shopping list automatically. Free meal planner from Stir & Simmer." />
         <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <meta name="robots" content="noindex, nofollow" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: "Weekly Meal Planner",
+          url: "https://stirandsimmer.co.uk/meal-planner",
+          description: "Plan your week's meals, edit ingredients to match what's in your kitchen, and build a smart shopping list automatically.",
+          applicationCategory: "LifestyleApplication",
+          operatingSystem: "Any",
+          browserRequirements: "Requires a modern web browser with JavaScript enabled.",
+          isAccessibleForFree: true,
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "GBP",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "Stir & Simmer",
+            url: "https://stirandsimmer.co.uk",
+          },
+        })}</script>
       </Helmet>
 
       <PageHero
