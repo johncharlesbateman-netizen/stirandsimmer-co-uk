@@ -56,6 +56,8 @@ const Recipes = () => {
           content="Browse over 118 tried-and-tested recipes for UK home cooks. From quick weeknight dinners to impressive weekend cooking — all in grams, Celsius and supermarket ingredients."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/recipes" />
+        <meta property="og:site_name" content="Stir & Simmer" />
+        <meta property="og:locale" content="en_GB" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/recipes" />
         <meta property="og:title" content="All recipes — browse by category | Stir & Simmer" />
@@ -63,10 +65,28 @@ const Recipes = () => {
         <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Stir & Simmer — recipes for UK home cooks" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="All recipes — browse by category | Stir & Simmer" />
         <meta name="twitter:description" content="Browse over 118 tried-and-tested recipes for UK home cooks. From quick weeknight dinners to impressive weekend cooking — all in grams, Celsius and supermarket ingredients." />
         <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "All recipes — browse by category",
+          url: "https://stirandsimmer.co.uk/recipes",
+          inLanguage: "en-GB",
+          isPartOf: { "@type": "WebSite", name: "Stir & Simmer", url: "https://stirandsimmer.co.uk" },
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: RECIPE_TILES.slice(1).map((tile, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: `${tile.label} recipes`,
+              url: `https://stirandsimmer.co.uk/recipes/${tile.slug}`,
+            })),
+          },
+        })}</script>
       </Helmet>
 
       {/* Header */}
