@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -14,13 +15,14 @@ const GuideChoosingPans = () => {
         {/* Header */}
         <header className="border-b border-border">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-20 max-w-3xl">
-            <nav className="text-xs uppercase tracking-widest text-muted-foreground mb-6">
-              <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
-              <span className="mx-2">›</span>
-              <Link to="/guides" className="hover:text-foreground transition-colors">Guides</Link>
-              <span className="mx-2">›</span>
-              <span>Choosing the right pan for the job</span>
-            </nav>
+            <Breadcrumbs
+              className="mb-6"
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Guides", href: "/guides" },
+                { label: "Choosing the right pan for the job" },
+              ]}
+            />
             <Link
               to="/guides"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"

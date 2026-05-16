@@ -163,14 +163,14 @@ const Guides = () => {
             height={900}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-warm-dark/85 via-warm-dark/65 to-warm-dark/90" />
         </div>
-        <div className="relative container mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-3xl text-primary-foreground">
-          <p className="text-xs md:text-sm tracking-[0.3em] uppercase mb-4 opacity-90">Guides</p>
+        <div className="relative container mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-3xl text-warm-dark-foreground">
+          <p className="text-xs md:text-sm tracking-[0.3em] uppercase mb-4 text-warm-cream-muted">Guides</p>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight mb-5">
             Kitchen guides
           </h1>
-          <p className="text-lg md:text-xl opacity-90 max-w-2xl">
+          <p className="text-lg md:text-xl text-warm-cream-muted max-w-2xl">
             Techniques, reference and the craft behind great home cooking — explained simply.
           </p>
         </div>
@@ -183,7 +183,7 @@ const Guides = () => {
             <li key={g.slug}>
               <Link
                 to={`/guides/${g.slug}`}
-                className="group relative block overflow-hidden border border-border/40 min-h-[340px] md:min-h-[380px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
+                className="group relative block overflow-hidden border border-warm-dark/20 min-h-[340px] md:min-h-[380px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
               >
                 <img
                   src={g.image ?? pexels(g.imageId!, 800)}
@@ -198,20 +198,20 @@ const Guides = () => {
                 />
                 <div
                   aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/25 transition-opacity duration-500 group-hover:from-black/95 group-hover:via-black/65"
+                  className="absolute inset-0 bg-gradient-to-t from-warm-dark/95 via-warm-dark/60 to-warm-dark/25 transition-opacity duration-500 group-hover:from-warm-dark group-hover:via-warm-dark/70"
                 />
-                <div className="relative p-6 md:p-7 flex flex-col h-full min-h-[340px] md:min-h-[380px] text-white">
-                  <p className="text-[10px] tracking-[0.2em] uppercase opacity-90 mb-auto">
+                <div className="relative p-6 md:p-7 flex flex-col h-full min-h-[340px] md:min-h-[380px] text-warm-dark-foreground">
+                  <p className="text-[10px] tracking-[0.2em] uppercase text-warm-cream-muted mb-auto">
                     {g.eyebrow}
                   </p>
                   <div className="mt-6">
                     <h2 className="font-display text-xl md:text-2xl mb-3 leading-tight transition-transform duration-500 group-hover:translate-x-1">
                       {g.title}
                     </h2>
-                    <p className="text-sm leading-relaxed opacity-85 mb-5 line-clamp-3">
+                    <p className="text-sm leading-relaxed text-warm-cream-muted mb-5 line-clamp-3">
                       {g.description}
                     </p>
-                    <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase opacity-90 group-hover:opacity-100 transition-opacity">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase text-warm-cream-muted group-hover:text-warm-dark-foreground transition-colors">
                       Read the guide
                       <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>

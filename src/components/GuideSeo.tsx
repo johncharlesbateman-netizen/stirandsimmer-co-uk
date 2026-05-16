@@ -30,15 +30,8 @@ const GuideSeo = ({ slug }: Props) => {
     },
   };
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_ORIGIN}/` },
-      { "@type": "ListItem", position: 2, name: "Guides", item: `${SITE_ORIGIN}/guides` },
-      { "@type": "ListItem", position: 3, name: meta.name, item: meta.url },
-    ],
-  };
+  // BreadcrumbList JSON-LD is emitted by the shared <Breadcrumbs> component
+  // rendered in each guide's hero — keeping it there avoids duplicates.
 
   return (
     <Helmet>
@@ -67,7 +60,6 @@ const GuideSeo = ({ slug }: Props) => {
 
       {/* Structured data */}
       <script type="application/ld+json">{JSON.stringify(articleJsonLd)}</script>
-      <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
     </Helmet>
   );
 };
