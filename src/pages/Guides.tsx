@@ -8,6 +8,9 @@ import properSauceImage from "@/assets/guide-proper-sauce.jpg";
 import choosingPansImage from "@/assets/guide-choosing-pans.jpg";
 import kitchenKnivesImage from "@/assets/guide-kitchen-knives.jpg";
 
+// Local fallback used if a remote (Pexels) card image fails to load.
+const CARD_FALLBACK = properStockImage;
+
 const pexels = (id: string, w = 1200) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=${w}`;
 const pexelsSrcSet = (id: string, widths: number[]) =>
@@ -183,7 +186,7 @@ const Guides = () => {
             <li key={g.slug}>
               <Link
                 to={`/guides/${g.slug}`}
-                className="group relative block overflow-hidden border border-warm-dark/20 min-h-[340px] md:min-h-[380px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
+                className="group relative block overflow-hidden border border-warm-dark/20 aspect-[3/2] md:aspect-[4/3] transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
               >
                 <img
                   src={g.image ?? pexels(g.imageId!, 800)}
@@ -192,15 +195,21 @@ const Guides = () => {
                   alt={g.imageAlt}
                   loading="lazy"
                   decoding="async"
-                  width={800}
-                  height={600}
+                  width={600}
+                  height={400}
+                  onError={(e) => {
+                    const img = e.currentTarget;
+                    if (img.src === CARD_FALLBACK) return;
+                    img.srcset = "";
+                    img.src = CARD_FALLBACK;
+                  }}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
                 />
                 <div
                   aria-hidden
                   className="absolute inset-0 bg-gradient-to-t from-warm-dark/95 via-warm-dark/60 to-warm-dark/25 transition-opacity duration-500 group-hover:from-warm-dark group-hover:via-warm-dark/70"
                 />
-                <div className="relative p-6 md:p-7 flex flex-col h-full min-h-[340px] md:min-h-[380px] text-warm-dark-foreground">
+                <div className="absolute inset-0 p-6 md:p-7 flex flex-col text-warm-dark-foreground">
                   <p className="text-[10px] tracking-[0.2em] uppercase text-warm-cream-muted mb-auto">
                     {g.eyebrow}
                   </p>
