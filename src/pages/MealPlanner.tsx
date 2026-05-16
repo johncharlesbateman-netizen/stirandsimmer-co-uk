@@ -10,6 +10,16 @@ import { isSectionHeader } from "@/lib/ingredient-utils";
 import { cn } from "@/lib/utils";
 import { RECIPE_TILES } from "@/lib/recipe-tiles";
 import type { Tables } from "@/integrations/supabase/types";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 /* ── Types ────────────────────────────────────────────────── */
 
@@ -96,6 +106,7 @@ const MealPlanner = () => {
     }
   });
   const [savedFlash, setSavedFlash] = useState(false);
+  const [clearConfirmOpen, setClearConfirmOpen] = useState(false);
 
   const [selections, setSelections] = useState<Record<string, number[]>>(() => {
     try {
@@ -298,7 +309,6 @@ const MealPlanner = () => {
   };
 
   const clearAll = () => {
-    if (!confirm("Clear the entire week's plan?")) return;
     setPlan(emptyWeek());
     setSelections({});
     setNotes({});
@@ -369,7 +379,7 @@ const MealPlanner = () => {
 
       <PageHero
         title="Plan your week"
-        subtitle="Drag, drop and cook. Your week sorted in minutes."
+        subtitle="Click to add, tweak and cook. Your week sorted in minutes."
         imageId="776538"
         imageAlt="A weekly meal planner notebook with fresh ingredients on a kitchen counter"
       />
@@ -390,14 +400,17 @@ const MealPlanner = () => {
               <Printer className="w-4 h-4" /> Print my week
             </button>
             <button
-              onClick={clearAll}
+              onClick={() => setClearConfirmOpen(true)}
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors border border-warm-cream/40 text-warm-cream"
             >
               <Trash2 className="w-4 h-4" /> Clear all
             </button>
             {savedFlash && (
-              <span className="self-center text-sm inline-flex items-center gap-1 text-warm-cream-muted">
-                <Check className="w-4 h-4" /> Saved
+              <span
+                role="status"
+                className="self-center text-sm inline-flex items-center gap-1 text-warm-cream-muted"
+              >
+                <Check className="w-4 h-4" aria-hidden="true" /> Saved
               </span>
             )}
           </div>
@@ -478,6 +491,7 @@ const MealPlanner = () => {
                     "text-[10px] font-medium uppercase tracking-wider",
                     isToday ? "text-planner" : "text-muted-foreground"
                   )}>
+                    {isToday && <span className="sr-only">Today, </span>}
                     {day.abbr}
                   </div>
                   <div className={cn("text-lg font-medium leading-tight", isToday && "text-planner")}>
@@ -809,6 +823,21 @@ const MealPlanner = () => {
           </div>
         </div>
       </div>
+
+      <AlertDialog open={clearConfirmOpen} onOpenChange={setClearConfirmOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Clear the entire week's plan?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will remove all recipes, notes and shopping list selections for the week. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={clearAll}>Clear week</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Layout>
   );
 };
