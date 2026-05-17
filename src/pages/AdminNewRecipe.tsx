@@ -496,14 +496,37 @@ const AdminNewRecipe = () => {
               </div>
             </label>
 
-            <div className="flex gap-3">
-              <Button type="submit" disabled={submitting}>
+            <div className="flex flex-wrap gap-3">
+              <Button type="submit" disabled={submitting || savingDraft}>
                 {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
                 {submitting
                   ? (published ? "Publishing..." : "Saving draft...")
                   : (published ? "Create & Publish" : "Save as Draft")}
               </Button>
-              <Button type="button" variant="outline" onClick={() => navigate("/recipes")}>
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={handleSaveDraft}
+                disabled={submitting || savingDraft}
+                title="Save what you have so far as an unpublished draft. You can finish it later from the edit page."
+              >
+                {savingDraft && <Loader2 className="w-4 h-4 animate-spin" />}
+                {savingDraft ? "Saving draft..." : "Save Draft & Continue Later"}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  if (
+                    isDirty &&
+                    !savedOrSubmitted &&
+                    !window.confirm("You have unsaved changes — are you sure you want to leave?")
+                  ) {
+                    return;
+                  }
+                  navigate("/recipes");
+                }}
+              >
                 Cancel
               </Button>
             </div>
