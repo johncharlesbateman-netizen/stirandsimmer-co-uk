@@ -56,6 +56,18 @@ const REGIONS: RegionDef[] = [
     regionTags: ["french"],
   },
   {
+    id: "spain",
+    name: "Spain",
+    emoji: "🇪🇸",
+    bg: "hsl(var(--region-spain))",
+    available: true,
+    description:
+      "Bold flavours, beautiful simplicity and the art of sharing. The soul of Spanish cooking.",
+    challenge:
+      "This week — cook a Spanish classic from scratch. Try our [Our Paella](/recipes/our-paella) or [Prawn and Chorizo Rice](/recipes/prawn-and-chorizo-rice).",
+    regionTags: ["spanish"],
+  },
+  {
     id: "asia",
     name: "South and Southeast Asia",
     emoji: "🌶️",
