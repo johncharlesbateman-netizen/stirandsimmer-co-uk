@@ -45,6 +45,7 @@ export async function generateSitemap() {
   const { data: recipes, error } = await supabase
     .from("recipes")
     .select("slug, updated_at")
+    .eq("published", true)
     .order("updated_at", { ascending: false });
 
   if (error) {
