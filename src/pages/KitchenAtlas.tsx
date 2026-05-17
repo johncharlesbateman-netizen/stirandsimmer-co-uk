@@ -56,6 +56,18 @@ const REGIONS: RegionDef[] = [
     regionTags: ["french"],
   },
   {
+    id: "spain",
+    name: "Spain",
+    emoji: "🇪🇸",
+    bg: "hsl(var(--region-spain))",
+    available: true,
+    description:
+      "Bold flavours, beautiful simplicity and the art of sharing. The soul of Spanish cooking.",
+    challenge:
+      "This week — cook a Spanish classic from scratch. Try our [Our Paella](/recipes/our-paella) or [Prawn and Chorizo Rice](/recipes/prawn-and-chorizo-rice).",
+    regionTags: ["spanish"],
+  },
+  {
     id: "asia",
     name: "South and Southeast Asia",
     emoji: "🌶️",
@@ -97,6 +109,7 @@ const REGIONS: RegionDef[] = [
 const MAP_POSITIONS: Record<string, { top: string; left: string }> = {
   uk: { top: "21.4%", left: "49.97%" },
   france: { top: "22.8%", left: "50.67%" },
+  spain: { top: "27.6%", left: "48.2%" },
   italy: { top: "26.7%", left: "53.47%" },
   asia: { top: "41.6%", left: "75%" },
   japan: { top: "30.2%", left: "88.8%" },
@@ -278,6 +291,7 @@ const KitchenAtlas = () => {
 };
 
 const REGION_BUTTON_LABEL: Record<string, string> = {
+  spain: "Explore all Spanish recipes",
   uk: "Explore all United Kingdom recipes",
   italy: "Explore all Italian recipes",
   france: "Explore all French recipes",

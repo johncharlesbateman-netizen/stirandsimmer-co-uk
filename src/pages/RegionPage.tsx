@@ -90,6 +90,18 @@ const REGIONS: Record<string, RegionDef> = {
     seoDescription:
       "French recipes from The Kitchen Atlas — classical techniques, mother sauces, braises, patisserie and bistro classics.",
   },
+  spain: {
+    id: "spain",
+    name: "Spain",
+    emoji: "🇪🇸",
+    description:
+      "Bold flavours, beautiful simplicity and the art of sharing — paella, tapas, chorizo and the soul of Spanish cooking.",
+    regionTags: ["spanish"],
+    adjective: "Spanish",
+    seoTitle: "Spanish recipes — The Kitchen Atlas | Stir & Simmer",
+    seoDescription:
+      "Spanish recipes from The Kitchen Atlas — paella, tapas, chorizo and the bold, generous flavours of Spain. Tried and tested in a real kitchen.",
+  },
   asia: {
     id: "asia",
     name: "South and Southeast Asia",
