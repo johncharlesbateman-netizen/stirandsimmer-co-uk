@@ -291,6 +291,7 @@ const KitchenAtlas = () => {
 };
 
 const REGION_BUTTON_LABEL: Record<string, string> = {
+  spain: "Explore all Spanish recipes",
   uk: "Explore all United Kingdom recipes",
   italy: "Explore all Italian recipes",
   france: "Explore all French recipes",
