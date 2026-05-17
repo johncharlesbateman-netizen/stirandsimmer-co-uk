@@ -167,6 +167,7 @@ const AdminNewRecipe = () => {
         meal_types: parsed.data.meal_types,
         slug,
         image_url,
+        published,
       }]);
 
       if (insertError) throw insertError;
