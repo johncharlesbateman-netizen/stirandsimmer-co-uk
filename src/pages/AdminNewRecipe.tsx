@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Upload, X, Plus, Loader2 } from "lucide-react";
@@ -45,6 +45,7 @@ const slugify = (s: string) =>
 const AdminNewRecipe = () => {
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
+  const [savingDraft, setSavingDraft] = useState(false);
 
   const [title, setTitle] = useState("");
   const [categories, setCategories] = useState<RecipeCategory[]>(["chicken"]);
@@ -62,6 +63,31 @@ const AdminNewRecipe = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [published, setPublished] = useState(true);
+  const [savedOrSubmitted, setSavedOrSubmitted] = useState(false);
+
+  const isDirty =
+    title.trim() !== "" ||
+    description.trim() !== "" ||
+    prepTime !== "" ||
+    cookTime !== "" ||
+    servings !== "" ||
+    ingredients.some((s) => s.trim() !== "") ||
+    instructions.some((s) => s.trim() !== "") ||
+    tips.trim() !== "" ||
+    seoTitle.trim() !== "" ||
+    seoDescription.trim() !== "" ||
+    cuisineRegion !== null ||
+    imageFile !== null;
+
+  useEffect(() => {
+    if (!isDirty || savedOrSubmitted) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [isDirty, savedOrSubmitted]);
 
   const updateListItem = (
     list: string[],
@@ -95,6 +121,74 @@ const AdminNewRecipe = () => {
     }
     setImageFile(file);
     setImagePreview(URL.createObjectURL(file));
+  };
+
+  const handleSaveDraft = async () => {
+    if (!title.trim()) {
+      toast({
+        title: "Title required",
+        description: "Add at least a title before saving a draft.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setSavingDraft(true);
+    try {
+      let image_url: string | null = null;
+      if (imageFile) {
+        const ext = imageFile.name.split(".").pop() || "jpg";
+        const filename = `${Date.now()}-${slugify(title)}.${ext}`;
+        const { error: uploadError } = await supabase.storage
+          .from("recipe-images")
+          .upload(filename, imageFile, { cacheControl: "3600", upsert: false });
+        if (uploadError) throw uploadError;
+        const { data: urlData } = supabase.storage
+          .from("recipe-images")
+          .getPublicUrl(filename);
+        image_url = urlData.publicUrl;
+      }
+
+      let slug = slugify(title) || `draft-${Date.now().toString(36)}`;
+      const { data: existing } = await supabase
+        .from("recipes")
+        .select("slug")
+        .eq("slug", slug)
+        .maybeSingle();
+      if (existing) slug = `${slug}-${Date.now().toString(36)}`;
+
+      const cleanedIngredients = ingredients.map((s) => s.trim()).filter(Boolean);
+      const cleanedInstructions = instructions.map((s) => s.trim()).filter(Boolean);
+
+      const { error: insertError } = await supabase.from("recipes").insert([{
+        title: title.trim(),
+        categories: categories.length ? categories : ["chicken"],
+        description: description.trim() || "Draft — description pending.",
+        prep_time_minutes: prepTime ? parseInt(prepTime, 10) : null,
+        cook_time_minutes: cookTime ? parseInt(cookTime, 10) : null,
+        servings: servings ? parseInt(servings, 10) : null,
+        ingredients: cleanedIngredients,
+        instructions: cleanedInstructions,
+        tips: tips.trim() || null,
+        seo_title: seoTitle.trim() || null,
+        seo_description: seoDescription.trim() || null,
+        cuisine_region: cuisineRegion,
+        meal_types: mealTypes.length ? mealTypes : ["mains"],
+        slug,
+        image_url,
+        published: false,
+      }]);
+
+      if (insertError) throw insertError;
+
+      setSavedOrSubmitted(true);
+      toast({ title: "Draft saved", description: title });
+      navigate(`/admin/recipes/${slug}/edit`);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Something went wrong";
+      toast({ title: "Failed to save draft", description: msg, variant: "destructive" });
+    } finally {
+      setSavingDraft(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -172,8 +266,9 @@ const AdminNewRecipe = () => {
 
       if (insertError) throw insertError;
 
+      setSavedOrSubmitted(true);
       toast({ title: "Recipe created", description: title });
-      navigate(`/recipes/${slug}`);
+      navigate(published ? `/recipes/${slug}` : `/admin/recipes/${slug}/edit`);
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Something went wrong";
       toast({ title: "Failed to create recipe", description: msg, variant: "destructive" });
@@ -401,14 +496,37 @@ const AdminNewRecipe = () => {
               </div>
             </label>
 
-            <div className="flex gap-3">
-              <Button type="submit" disabled={submitting}>
+            <div className="flex flex-wrap gap-3">
+              <Button type="submit" disabled={submitting || savingDraft}>
                 {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
                 {submitting
                   ? (published ? "Publishing..." : "Saving draft...")
                   : (published ? "Create & Publish" : "Save as Draft")}
               </Button>
-              <Button type="button" variant="outline" onClick={() => navigate("/recipes")}>
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={handleSaveDraft}
+                disabled={submitting || savingDraft}
+                title="Save what you have so far as an unpublished draft. You can finish it later from the edit page."
+              >
+                {savingDraft && <Loader2 className="w-4 h-4 animate-spin" />}
+                {savingDraft ? "Saving draft..." : "Save Draft & Continue Later"}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  if (
+                    isDirty &&
+                    !savedOrSubmitted &&
+                    !window.confirm("You have unsaved changes — are you sure you want to leave?")
+                  ) {
+                    return;
+                  }
+                  navigate("/recipes");
+                }}
+              >
                 Cancel
               </Button>
             </div>
