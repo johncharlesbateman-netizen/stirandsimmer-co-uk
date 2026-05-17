@@ -482,15 +482,34 @@ const AdminEditRecipe = () => {
             </div>
           </div>
 
-          {/* Submit */}
-          <div className="flex gap-3 pt-4 border-t border-border">
-            <Button type="submit" disabled={submitting}>
-              {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
-              {submitting ? "Saving..." : "Save changes"}
-            </Button>
-            <Button type="button" variant="outline" onClick={() => navigate(`/recipes/${slug}`)}>
-              Cancel
-            </Button>
+          {/* Publish toggle + Submit */}
+          <div className="pt-4 border-t border-border space-y-4">
+            <label className="flex items-start gap-3 p-3 border border-border rounded-md cursor-pointer hover:bg-secondary/50 transition-colors">
+              <input
+                type="checkbox"
+                checked={published}
+                onChange={(e) => setPublished(e.target.checked)}
+                className="mt-1"
+              />
+              <div className="min-w-0">
+                <p className="text-sm font-medium">
+                  {published ? "Published" : "Draft (hidden from site)"}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Published recipes appear in listings, counts and search. Untick to hide this recipe as a draft.
+                </p>
+              </div>
+            </label>
+
+            <div className="flex gap-3">
+              <Button type="submit" disabled={submitting}>
+                {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
+                {submitting ? "Saving..." : (published ? "Save changes" : "Save as draft")}
+              </Button>
+              <Button type="button" variant="outline" onClick={() => navigate(`/recipes/${slug}`)}>
+                Cancel
+              </Button>
+            </div>
           </div>
         </form>
       </div>
