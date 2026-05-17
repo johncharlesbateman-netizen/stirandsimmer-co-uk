@@ -333,7 +333,8 @@ export async function prerenderRoutes() {
       const supabase = createClient(url, key);
       const { data: recipes, error } = await supabase
         .from("recipes")
-        .select("slug, title, description, image_url, category, seo_title, seo_description");
+        .select("slug, title, description, image_url, category, seo_title, seo_description")
+        .eq("published", true);
       if (error) throw error;
       for (const r of recipes ?? []) {
         const title = r.seo_title || `${r.title} | Stir & Simmer`;
