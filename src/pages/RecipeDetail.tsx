@@ -148,6 +148,7 @@ const RecipeDetail = () => {
         const { data: others } = await supabase
           .from("recipes")
           .select("*")
+          .eq("published", true)
           .neq("id", recipe.id)
           .limit(6);
         const existingIds = new Set(pool.map((r) => r.id));
