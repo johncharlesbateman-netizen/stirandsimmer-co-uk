@@ -36,6 +36,7 @@ const Index = () => {
       const { data, error } = await supabase
         .from("recipes")
         .select("*")
+        .eq("published", true)
         .in("slug", FEATURED_SLUGS);
       if (!cancelled && !error && data) {
         const ordered = FEATURED_SLUGS
