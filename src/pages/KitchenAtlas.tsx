@@ -109,6 +109,7 @@ const REGIONS: RegionDef[] = [
 const MAP_POSITIONS: Record<string, { top: string; left: string }> = {
   uk: { top: "21.4%", left: "49.97%" },
   france: { top: "22.8%", left: "50.67%" },
+  spain: { top: "27.6%", left: "48.2%" },
   italy: { top: "26.7%", left: "53.47%" },
   asia: { top: "41.6%", left: "75%" },
   japan: { top: "30.2%", left: "88.8%" },
