@@ -42,6 +42,7 @@ const CategoryPage = () => {
       const { data, error } = await supabase
         .from("recipes")
         .select("*")
+        .eq("published", true)
         .order("created_at", { ascending: false });
       if (error) throw error;
       return (data ?? []) as Recipe[];
