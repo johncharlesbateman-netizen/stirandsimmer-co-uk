@@ -215,6 +215,7 @@ const AdminEditRecipe = () => {
         cuisine_region: parsed.data.cuisine_region,
         meal_types: parsed.data.meal_types,
         image_url,
+        published,
       }).eq("slug", slug);
 
       if (updateError) throw updateError;
