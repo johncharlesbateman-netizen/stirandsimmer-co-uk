@@ -6,6 +6,7 @@ export const CUISINE_REGIONS = [
   "italian",
   "french",
   "british",
+  "spanish",
   "indian",
   "asian",
   "mexican",
