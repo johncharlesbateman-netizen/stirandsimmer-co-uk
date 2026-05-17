@@ -68,6 +68,7 @@ const AdminEditRecipe = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
+  const [published, setPublished] = useState(true);
 
   useEffect(() => {
     if (!slug) return;
