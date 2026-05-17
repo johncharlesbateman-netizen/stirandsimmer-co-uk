@@ -53,7 +53,7 @@ const Recipes = () => {
         <title>All recipes — browse by category | Stir & Simmer</title>
         <meta
           name="description"
-          content="Browse over 118 tried-and-tested recipes for UK home cooks. From quick weeknight dinners to impressive weekend cooking — all in grams, Celsius and supermarket ingredients."
+          content={`Browse ${total ? `over ${total} ` : ""}tried-and-tested recipes for UK home cooks. From quick weeknight dinners to impressive weekend cooking — all in grams, Celsius and supermarket ingredients.`}
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/recipes" />
         <meta property="og:site_name" content="Stir & Simmer" />
@@ -61,14 +61,14 @@ const Recipes = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/recipes" />
         <meta property="og:title" content="All recipes — browse by category | Stir & Simmer" />
-        <meta property="og:description" content="Browse over 118 tried-and-tested recipes for UK home cooks. From quick weeknight dinners to impressive weekend cooking — all in grams, Celsius and supermarket ingredients." />
+        <meta property="og:description" content={`Browse ${total ? `over ${total} ` : ""}tried-and-tested recipes for UK home cooks. From quick weeknight dinners to impressive weekend cooking — all in grams, Celsius and supermarket ingredients.`} />
         <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Stir & Simmer — recipes for UK home cooks" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="All recipes — browse by category | Stir & Simmer" />
-        <meta name="twitter:description" content="Browse over 118 tried-and-tested recipes for UK home cooks. From quick weeknight dinners to impressive weekend cooking — all in grams, Celsius and supermarket ingredients." />
+        <meta name="twitter:description" content={`Browse ${total ? `over ${total} ` : ""}tried-and-tested recipes for UK home cooks. From quick weeknight dinners to impressive weekend cooking — all in grams, Celsius and supermarket ingredients.`} />
         <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -95,7 +95,7 @@ const Recipes = () => {
           <p className="micro-caption mb-4">Free Recipes</p>
           <h1 className="heading-display mb-6">Recipes</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mb-8">
-            Pick a category to dive in. Over {total} free recipes
+            Pick a category to dive in.{total ? ` Over ${total} free recipes` : " Free recipes"}{" "}
             using local and seasonal produce — from quick lunches to indulgent
             sweets.
           </p>
@@ -199,7 +199,7 @@ const Recipes = () => {
                 </span>
                 <div>
                   <div className="font-display text-xl md:text-2xl leading-tight">
-                    Browse all {total} recipes
+                    Browse {total ? `all ${total} ` : ""}recipes
                   </div>
                   <div className="text-sm md:text-base opacity-80 mt-1">
                     Every recipe in one place — newest first.

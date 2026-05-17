@@ -6,6 +6,7 @@ import { BookOpen, Map, CalendarDays, UtensilsCrossed, ArrowRight } from "lucide
 import RecipeCard from "@/components/RecipeCard";
 import { collections } from "@/lib/collections";
 import { Tables } from "@/integrations/supabase/types";
+import { useRecipeCount } from "@/hooks/useRecipeCount";
 
 import { supabase } from "@/integrations/supabase/client";
 
@@ -25,28 +26,9 @@ const heroImageSrcSet = [480, 768, 1024, 1280, 1600]
   .join(", ");
 const heroImageSizes = "(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1600px";
 
-// Fallback values used until the live count loads (and if the query ever fails).
-const FALLBACK_RECIPE_COUNT = 118;
-
-
 const Index = () => {
-  const [recipeCount, setRecipeCount] = useState<number>(FALLBACK_RECIPE_COUNT);
+  const recipeCount = useRecipeCount();
   const [featured, setFeatured] = useState<Tables<"recipes">[]>([]);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const { count, error } = await supabase
-        .from("recipes")
-        .select("*", { count: "exact", head: true });
-      if (!cancelled && !error && typeof count === "number" && count > 0) {
-        setRecipeCount(count);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -75,17 +57,17 @@ const Index = () => {
         <title>Stir & Simmer | Real Recipes for UK Home Cooks</title>
         <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
         <link rel="preload" as="image" href={heroImage} imageSrcSet={heroImageSrcSet} imageSizes="100vw" fetchPriority="high" />
-        <meta name="description" content="Over 118 tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients." />
+        <meta name="description" content={`${recipeCount ? `Over ${recipeCount} ` : ""}tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients.`} />
         <meta name="keywords" content="recipes, easy recipes, dinner recipes, dessert recipes, quick meals" />
         <link rel="canonical" href="https://stirandsimmer.co.uk/" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/" />
         <meta property="og:title" content="Stir & Simmer | Real Recipes for UK Home Cooks" />
-        <meta property="og:description" content="Over 118 tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients." />
+        <meta property="og:description" content={`${recipeCount ? `Over ${recipeCount} ` : ""}tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients.`} />
         <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Stir & Simmer | Real Recipes for UK Home Cooks" />
-        <meta name="twitter:description" content="Over 118 tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients." />
+        <meta name="twitter:description" content={`${recipeCount ? `Over ${recipeCount} ` : ""}tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients.`} />
         <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -155,7 +137,7 @@ const Index = () => {
               style={{ fontSize: "13px" }}
             >
               <span className="underline-offset-4 group-hover:underline">
-                Browse all {recipeCount} tried-and-tested recipes
+                Browse {recipeCount ? `all ${recipeCount} ` : ""}tried-and-tested recipes
               </span>
               <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
