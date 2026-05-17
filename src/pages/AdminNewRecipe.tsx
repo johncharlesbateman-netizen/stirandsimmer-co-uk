@@ -45,6 +45,7 @@ const slugify = (s: string) =>
 const AdminNewRecipe = () => {
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
+  const [savingDraft, setSavingDraft] = useState(false);
 
   const [title, setTitle] = useState("");
   const [categories, setCategories] = useState<RecipeCategory[]>(["chicken"]);
