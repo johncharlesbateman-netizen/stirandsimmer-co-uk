@@ -63,6 +63,31 @@ const AdminNewRecipe = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [published, setPublished] = useState(true);
+  const [savedOrSubmitted, setSavedOrSubmitted] = useState(false);
+
+  const isDirty =
+    title.trim() !== "" ||
+    description.trim() !== "" ||
+    prepTime !== "" ||
+    cookTime !== "" ||
+    servings !== "" ||
+    ingredients.some((s) => s.trim() !== "") ||
+    instructions.some((s) => s.trim() !== "") ||
+    tips.trim() !== "" ||
+    seoTitle.trim() !== "" ||
+    seoDescription.trim() !== "" ||
+    cuisineRegion !== null ||
+    imageFile !== null;
+
+  useEffect(() => {
+    if (!isDirty || savedOrSubmitted) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [isDirty, savedOrSubmitted]);
 
   const updateListItem = (
     list: string[],
