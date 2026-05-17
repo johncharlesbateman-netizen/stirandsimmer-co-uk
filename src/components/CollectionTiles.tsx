@@ -29,7 +29,7 @@ const CollectionTiles = ({
   const { data: counts } = useQuery({
     queryKey: ["collection-counts"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("recipes").select("collections");
+      const { data, error } = await supabase.from("recipes").select("collections").eq("published", true);
       if (error) throw error;
       const tally: Record<string, number> = {};
       for (const row of data ?? []) {
