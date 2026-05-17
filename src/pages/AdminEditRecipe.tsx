@@ -108,6 +108,7 @@ const AdminEditRecipe = () => {
       setMealTypes(seededMeal.length > 0 ? seededMeal : ["mains"]);
       setExistingImageUrl(data.image_url);
       setImagePreview(data.image_url);
+      setPublished((data as { published?: boolean | null }).published ?? true);
       setLoading(false);
     };
 
