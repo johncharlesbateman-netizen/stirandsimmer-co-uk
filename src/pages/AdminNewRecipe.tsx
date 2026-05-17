@@ -61,6 +61,7 @@ const AdminNewRecipe = () => {
   const [mealTypes, setMealTypes] = useState<MealType[]>(["mains"]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [published, setPublished] = useState(true);
 
   const updateListItem = (
     list: string[],
