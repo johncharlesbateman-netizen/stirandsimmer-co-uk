@@ -136,6 +136,7 @@ const RecipeDetail = () => {
         ? await supabase
             .from("recipes")
             .select("*")
+            .eq("published", true)
             .contains("categories", [primaryCategory])
             .neq("id", recipe.id)
             .limit(6)
