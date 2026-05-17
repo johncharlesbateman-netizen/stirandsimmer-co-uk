@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useBlocker } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Upload, X, Plus, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
