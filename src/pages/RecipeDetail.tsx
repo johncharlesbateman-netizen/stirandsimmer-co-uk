@@ -117,6 +117,7 @@ const RecipeDetail = () => {
       const { data, error } = await supabase
         .from("recipes")
         .select("*")
+        .eq("published", true)
         .eq("slug", slug!)
         .single();
       if (error) throw error;
