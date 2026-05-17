@@ -117,6 +117,7 @@ const RecipeDetail = () => {
       const { data, error } = await supabase
         .from("recipes")
         .select("*")
+        .eq("published", true)
         .eq("slug", slug!)
         .single();
       if (error) throw error;
@@ -135,6 +136,7 @@ const RecipeDetail = () => {
         ? await supabase
             .from("recipes")
             .select("*")
+            .eq("published", true)
             .contains("categories", [primaryCategory])
             .neq("id", recipe.id)
             .limit(6)
@@ -146,6 +148,7 @@ const RecipeDetail = () => {
         const { data: others } = await supabase
           .from("recipes")
           .select("*")
+          .eq("published", true)
           .neq("id", recipe.id)
           .limit(6);
         const existingIds = new Set(pool.map((r) => r.id));

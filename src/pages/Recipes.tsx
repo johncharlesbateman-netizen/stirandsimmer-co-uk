@@ -20,6 +20,7 @@ const Recipes = () => {
         .select(
           "id, slug, categories, cuisine_region, prep_time_minutes, cook_time_minutes, title, description"
         )
+        .eq("published", true)
         .order("created_at", { ascending: false });
       if (error) throw error;
       return (data ?? []) as unknown as Recipe[];

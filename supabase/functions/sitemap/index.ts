@@ -67,6 +67,7 @@ Deno.serve(async (_req) => {
       supabase
         .from("recipes")
         .select("slug, updated_at")
+        .eq("published", true)
         .order("updated_at", { ascending: false }),
       supabase
         .from("guides")

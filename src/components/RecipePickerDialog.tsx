@@ -36,6 +36,7 @@ const RecipePickerDialog = ({ open, onClose, onSelect, dayLabel, mealLabel, defa
       const { data, error } = await supabase
         .from("recipes")
         .select("id, title, slug, categories, ingredients, servings, image_url")
+        .eq("published", true)
         .order("title");
       if (error) throw error;
       return data;

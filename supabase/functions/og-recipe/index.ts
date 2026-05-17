@@ -16,6 +16,7 @@ Deno.serve(async (req) => {
   const { data: recipe, error } = await supabase
     .from("recipes")
     .select("title, description, image_url, slug")
+    .eq("published", true)
     .eq("slug", slug)
     .single();
 

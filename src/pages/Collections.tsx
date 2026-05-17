@@ -49,7 +49,8 @@ const CollectionsIndex = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
-        .select("collections");
+        .select("collections")
+        .eq("published", true);
       if (error) throw error;
       const tally: Record<string, number> = {};
       for (const row of data ?? []) {
@@ -157,6 +158,7 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
       const { data, error } = await supabase
         .from("recipes")
         .select("*")
+        .eq("published", true)
         .contains("collections", [def.name])
         .order("created_at", { ascending: false });
       if (error) throw error;

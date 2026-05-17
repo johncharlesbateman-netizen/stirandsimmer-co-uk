@@ -31,6 +31,7 @@ const FeaturedRecipes = () => {
       const { data } = await supabase
         .from("recipes")
         .select("*")
+        .eq("published", true)
         .order("created_at", { ascending: false })
         .limit(5);
       if (data) setRecipes(data);
