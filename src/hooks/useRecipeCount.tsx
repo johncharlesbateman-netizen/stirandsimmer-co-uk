@@ -12,7 +12,8 @@ export function useRecipeCount(): number | null {
     queryFn: async () => {
       const { count, error } = await supabase
         .from("recipes")
-        .select("*", { count: "exact", head: true });
+        .select("*", { count: "exact", head: true })
+        .eq("published", true);
       if (error) throw error;
       return typeof count === "number" ? count : null;
     },
