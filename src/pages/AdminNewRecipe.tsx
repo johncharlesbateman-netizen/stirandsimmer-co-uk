@@ -61,6 +61,7 @@ const AdminNewRecipe = () => {
   const [mealTypes, setMealTypes] = useState<MealType[]>(["mains"]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [published, setPublished] = useState(true);
 
   const updateListItem = (
     list: string[],
@@ -166,6 +167,7 @@ const AdminNewRecipe = () => {
         meal_types: parsed.data.meal_types,
         slug,
         image_url,
+        published,
       }]);
 
       if (insertError) throw insertError;
@@ -380,15 +382,36 @@ const AdminNewRecipe = () => {
             </div>
           </div>
 
-          {/* Submit */}
-          <div className="flex gap-3 pt-4 border-t border-border">
-            <Button type="submit" disabled={submitting}>
-              {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
-              {submitting ? "Creating..." : "Create Recipe"}
-            </Button>
-            <Button type="button" variant="outline" onClick={() => navigate("/recipes")}>
-              Cancel
-            </Button>
+          {/* Publish toggle + Submit */}
+          <div className="pt-4 border-t border-border space-y-4">
+            <label className="flex items-start gap-3 p-3 border border-border rounded-md cursor-pointer hover:bg-secondary/50 transition-colors">
+              <input
+                type="checkbox"
+                checked={published}
+                onChange={(e) => setPublished(e.target.checked)}
+                className="mt-1"
+              />
+              <div className="min-w-0">
+                <p className="text-sm font-medium">
+                  {published ? "Publish now" : "Save as draft"}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Published recipes appear in listings, counts and search. Drafts stay hidden until you tick this box.
+                </p>
+              </div>
+            </label>
+
+            <div className="flex gap-3">
+              <Button type="submit" disabled={submitting}>
+                {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
+                {submitting
+                  ? (published ? "Publishing..." : "Saving draft...")
+                  : (published ? "Create & Publish" : "Save as Draft")}
+              </Button>
+              <Button type="button" variant="outline" onClick={() => navigate("/recipes")}>
+                Cancel
+              </Button>
+            </div>
           </div>
         </form>
       </div>
