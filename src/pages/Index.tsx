@@ -137,7 +137,7 @@ const Index = () => {
               style={{ fontSize: "13px" }}
             >
               <span className="underline-offset-4 group-hover:underline">
-                Browse all {recipeCount} tried-and-tested recipes
+                Browse {recipeCount ? `all ${recipeCount} ` : ""}tried-and-tested recipes
               </span>
               <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
