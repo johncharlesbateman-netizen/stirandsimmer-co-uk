@@ -95,7 +95,7 @@ const Recipes = () => {
           <p className="micro-caption mb-4">Free Recipes</p>
           <h1 className="heading-display mb-6">Recipes</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mb-8">
-            Pick a category to dive in. Over {total} free recipes
+            Pick a category to dive in.{total ? ` Over ${total} free recipes` : " Free recipes"}{" "}
             using local and seasonal produce — from quick lunches to indulgent
             sweets.
           </p>
