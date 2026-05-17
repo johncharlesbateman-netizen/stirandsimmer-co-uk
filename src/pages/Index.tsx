@@ -26,28 +26,9 @@ const heroImageSrcSet = [480, 768, 1024, 1280, 1600]
   .join(", ");
 const heroImageSizes = "(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1600px";
 
-// Fallback values used until the live count loads (and if the query ever fails).
-const FALLBACK_RECIPE_COUNT = 118;
-
-
 const Index = () => {
-  const [recipeCount, setRecipeCount] = useState<number>(FALLBACK_RECIPE_COUNT);
+  const recipeCount = useRecipeCount();
   const [featured, setFeatured] = useState<Tables<"recipes">[]>([]);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const { count, error } = await supabase
-        .from("recipes")
-        .select("*", { count: "exact", head: true });
-      if (!cancelled && !error && typeof count === "number" && count > 0) {
-        setRecipeCount(count);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
