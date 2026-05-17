@@ -6,6 +6,7 @@ import { BookOpen, Map, CalendarDays, UtensilsCrossed, ArrowRight } from "lucide
 import RecipeCard from "@/components/RecipeCard";
 import { collections } from "@/lib/collections";
 import { Tables } from "@/integrations/supabase/types";
+import { useRecipeCount } from "@/hooks/useRecipeCount";
 
 import { supabase } from "@/integrations/supabase/client";
 
