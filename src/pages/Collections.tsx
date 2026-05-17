@@ -158,6 +158,7 @@ const CollectionDetail = ({ slug }: { slug: keyof typeof collectionBySlug }) => 
       const { data, error } = await supabase
         .from("recipes")
         .select("*")
+        .eq("published", true)
         .contains("collections", [def.name])
         .order("created_at", { ascending: false });
       if (error) throw error;
