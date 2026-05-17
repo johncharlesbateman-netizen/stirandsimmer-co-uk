@@ -184,6 +184,7 @@ const MealPlanner = () => {
       const { data, error } = await supabase
         .from("recipes")
         .select("id, title, slug, description, image_url, prep_time_minutes, cook_time_minutes, servings, ingredients, categories, cuisine_region")
+        .eq("published", true)
         .order("title");
       if (error) throw error;
       return (data ?? []) as unknown as Recipe[];
