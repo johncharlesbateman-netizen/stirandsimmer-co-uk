@@ -158,7 +158,7 @@ const GuideUnderstandingOliveOil = () => {
             <strong className="text-foreground">A cooking oil</strong> — a decent supermarket extra virgin, somewhere in the £6 to £10 a litre range. Use this for sautéing onions, roasting vegetables, frying eggs, the base of a tomato sauce. Anything where heat will mute the flavour anyway. Don't waste your good bottle on it.
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            <strong className="text-foreground">A finishing oil</strong> — a smaller, better bottle of single-estate or single-variety extra virgin, somewhere in the £15 to £30 a half-litre range. Use this raw, off the heat. A glug over a bowl of soup just before serving. Drizzled on grilled bread, burrata, tomatoes, white beans, roasted fish. Stirred into a dressing. This is where olive oil earns its money.
+            <strong className="text-foreground">A finishing oil</strong> — a smaller, better bottle of single-estate or single-variety extra virgin, somewhere in the £15 to £30 a half-litre range. Use this raw, off the heat. A glug over a bowl of soup just before serving. Drizzled on grilled bread, burrata, tomatoes, white beans, roasted fish. Stirred into a dressing. A finishing oil belongs on dishes like our <Link to="/recipes/crab-spaghetti-with-tomato-caper-sauce" className="font-semibold text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary">crab spaghetti with tomato and caper sauce</Link>, <Link to="/recipes/tuna-linguine-with-tomatoes-olives" className="font-semibold text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary">tuna linguine with tomatoes and olives</Link>, or a <Link to="/recipes/warm-beef-salad" className="font-semibold text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary">warm beef salad</Link> — anywhere a final raw glug will lift the whole plate. This is where olive oil earns its money.
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             Heat destroys the most volatile aromatic compounds — the grassy, peppery notes that you're paying for. If you're going to cook with the good stuff, add it at the end.
@@ -282,6 +282,27 @@ const GuideUnderstandingOliveOil = () => {
               </Link>
             </Button>
           </div>
+        </section>
+
+        {/* Related guides */}
+        <section className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
+          <h2 className="font-display text-2xl md:text-3xl text-foreground mb-6">Related guides</h2>
+          <ul className="space-y-4">
+            <li>
+              <Link to="/guides/how-to-cook-pasta" className="group block">
+                <p className="micro-caption text-primary mb-1">Kitchen Essentials</p>
+                <p className="font-display text-xl text-foreground group-hover:underline">How to cook pasta properly — a cook's guide</p>
+                <p className="text-base text-muted-foreground mt-1">A finishing glug of good olive oil is the last step in most Italian pasta dishes. Here's how to get the rest of it right.</p>
+              </Link>
+            </li>
+            <li>
+              <Link to="/guides/choosing-pans" className="group block">
+                <p className="micro-caption text-primary mb-1">Kitchen Essentials</p>
+                <p className="font-display text-xl text-foreground group-hover:underline">Choosing the right pan — a cook's guide</p>
+                <p className="text-base text-muted-foreground mt-1">The right pan turns olive oil into a proper cooking medium. What to buy and what to skip.</p>
+              </Link>
+            </li>
+          </ul>
         </section>
 
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">

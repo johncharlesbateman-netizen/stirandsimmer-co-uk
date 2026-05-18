@@ -262,7 +262,7 @@ const GuideHowToCookPasta = () => {
               <strong className="text-foreground">Aglio e olio</strong> — garlic, olive oil, chilli, parsley. Gently warm sliced garlic and a pinch of chilli flakes in plenty of good extra virgin until just golden. Toss with spaghetti and a splash of pasta water. The ultimate ten-minute dinner.
             </li>
             <li>
-              <strong className="text-foreground">Cacio e pepe</strong> — just pecorino, black pepper and pasta water. Crack a generous amount of pepper into a dry pan to toast, add pasta water, then toss with the noodles off the heat and a mountain of finely grated pecorino. The starch and cheese emulsify into a creamy coating. Tricky the first time, magic when it works.
+              <Link to="/recipes/cacio-e-pepe" className="font-semibold text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary">Cacio e pepe</Link> — just pecorino, black pepper and pasta water. Crack a generous amount of pepper into a dry pan to toast, add pasta water, then toss with the noodles off the heat and a mountain of finely grated pecorino. The starch and cheese emulsify into a creamy coating. Tricky the first time, magic when it works.
             </li>
             <li>
               <strong className="text-foreground">Pomodoro</strong> — a proper tomato sauce. Soften a halved onion and a few garlic cloves in olive oil, add a tin of good plum tomatoes, crush them in the pan, simmer for 20 minutes with a torn basil leaf and a pinch of salt. Finish with butter off the heat for gloss. The benchmark.
@@ -271,7 +271,7 @@ const GuideHowToCookPasta = () => {
               <strong className="text-foreground">Carbonara</strong> — guanciale (or pancetta), egg yolks, pecorino, black pepper. Render the cured pork until crisp. Whisk yolks with grated pecorino and pepper. Toss hot pasta in the pork fat, then off the heat with the egg mixture and a little pasta water until silky. Never use cream.
             </li>
             <li>
-              <strong className="text-foreground">A simple ragù</strong> — onion, carrot, celery softened in olive oil; minced beef or pork browned hard; a splash of wine, a tin of tomatoes, a pinch of salt, a long slow simmer. An hour minimum, two is better. Pappardelle or tagliatelle, never spaghetti.
+              <strong className="text-foreground">A simple ragù</strong> — onion, carrot, celery softened in olive oil; minced beef or pork browned hard; a splash of wine, a tin of tomatoes, a pinch of salt, a long slow simmer. An hour minimum, two is better. Pappardelle or tagliatelle, never spaghetti. Try our <Link to="/recipes/lamb-ragu" className="font-semibold text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary">lamb ragù</Link> for a slow-cooked version, or <Link to="/recipes/spaghetti-bolognese" className="font-semibold text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary">spaghetti bolognese</Link> for the classic everyday plate.
             </li>
           </ul>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mt-6">
@@ -294,6 +294,27 @@ const GuideHowToCookPasta = () => {
               </Link>
             </Button>
           </div>
+        </section>
+
+        {/* Related guides */}
+        <section className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
+          <h2 className="font-display text-2xl md:text-3xl text-foreground mb-6">Related guides</h2>
+          <ul className="space-y-4">
+            <li>
+              <Link to="/guides/understanding-olive-oil" className="group block">
+                <p className="micro-caption text-primary mb-1">Kitchen Essentials</p>
+                <p className="font-display text-xl text-foreground group-hover:underline">Understanding olive oil — a cook's guide</p>
+                <p className="text-base text-muted-foreground mt-1">The bottle you reach for matters as much as the pasta itself — when to use which oil, and why.</p>
+              </Link>
+            </li>
+            <li>
+              <Link to="/guides/choosing-pans" className="group block">
+                <p className="micro-caption text-primary mb-1">Kitchen Essentials</p>
+                <p className="font-display text-xl text-foreground group-hover:underline">Choosing the right pan — a cook's guide</p>
+                <p className="text-base text-muted-foreground mt-1">A wide, shallow pan is what makes finishing pasta in the sauce work. Here's how to pick one.</p>
+              </Link>
+            </li>
+          </ul>
         </section>
 
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
