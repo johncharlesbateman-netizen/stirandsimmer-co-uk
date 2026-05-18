@@ -265,7 +265,7 @@ export type Suggestion = {
 type RecipeInput = {
   title?: string | null;
   description?: string | null;
-  intro?: string | null;
+  
   collections?: string[] | null;
 };
 
