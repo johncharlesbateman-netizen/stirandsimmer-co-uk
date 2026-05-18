@@ -51,7 +51,7 @@ const GuideChoosingPans = () => {
         <GuideTOC
           items={[
               { id: "why-the-pan-matters", label: "Why the pan matters" },
-              { id: "why-it-matters", label: "Why it matters" },
+              
               { id: "the-materials", label: "The materials" },
               { id: "the-main-types-of-pan", label: "The main types of pan" },
               { id: "essential-pans-for-a-home-kitchen", label: "Essential pans for a home kitchen" },
@@ -71,14 +71,6 @@ const GuideChoosingPans = () => {
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             The shape matters too. Sloped sides for tossing and reducing. Straight sides for braising and shallow frying. Wide and flat for searing. The right shape makes a technique easier; the wrong shape makes it nearly impossible.
-          </p>
-        </div>
-
-        {/* Why it matters */}
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2  id="why-it-matters" className="font-display text-3xl md:text-4xl text-foreground mb-6">Why it matters</h2>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            A pan is not just a container for heat. It is a tool with specific properties — weight, conductivity, reactivity, surface — that determine how food behaves inside it. Understanding those properties means you can choose the right pan instinctively, cook with more confidence, and get consistently better results.
           </p>
         </div>
 
