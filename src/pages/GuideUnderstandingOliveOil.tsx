@@ -5,6 +5,7 @@ import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import heroImage from "@/assets/guide-understanding-olive-oil-hero.jpg";
 
 const GuideUnderstandingOliveOil = () => {
   return (
@@ -12,6 +13,18 @@ const GuideUnderstandingOliveOil = () => {
       <GuideSeo slug="understanding-olive-oil" />
 
       <article className="bg-background">
+        {/* Hero image */}
+        <div className="w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-muted">
+          <img
+            src={heroImage}
+            alt="Extra virgin olive oil being poured into a small white dish on a rustic wooden board, with green olives, rosemary and bread"
+            width={1600}
+            height={900}
+            className="w-full h-full object-cover"
+            fetchPriority="high"
+          />
+        </div>
+
         {/* Header */}
         <header className="border-b border-border">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-20 max-w-3xl">
