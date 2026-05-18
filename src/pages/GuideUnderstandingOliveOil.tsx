@@ -284,6 +284,27 @@ const GuideUnderstandingOliveOil = () => {
           </div>
         </section>
 
+        {/* Related guides */}
+        <section className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
+          <h2 className="font-display text-2xl md:text-3xl text-foreground mb-6">Related guides</h2>
+          <ul className="space-y-4">
+            <li>
+              <Link to="/guides/how-to-cook-pasta" className="group block">
+                <p className="micro-caption text-primary mb-1">Kitchen Essentials</p>
+                <p className="font-display text-xl text-foreground group-hover:underline">How to cook pasta properly — a cook's guide</p>
+                <p className="text-base text-muted-foreground mt-1">A finishing glug of good olive oil is the last step in most Italian pasta dishes. Here's how to get the rest of it right.</p>
+              </Link>
+            </li>
+            <li>
+              <Link to="/guides/choosing-pans" className="group block">
+                <p className="micro-caption text-primary mb-1">Kitchen Essentials</p>
+                <p className="font-display text-xl text-foreground group-hover:underline">Choosing the right pan — a cook's guide</p>
+                <p className="text-base text-muted-foreground mt-1">The right pan turns olive oil into a proper cooking medium. What to buy and what to skip.</p>
+              </Link>
+            </li>
+          </ul>
+        </section>
+
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
           <Link
             to="/guides"
