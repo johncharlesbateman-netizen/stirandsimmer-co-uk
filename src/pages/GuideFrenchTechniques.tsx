@@ -117,11 +117,11 @@ const GuideFrenchTechniques = () => {
       <GuideSeo slug="french-techniques" />
 
       <article className="bg-background">
-        {/* Dark hero */}
-        <header className="w-full bg-warm-dark text-warm-dark-foreground">
-          <div className="container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24 max-w-3xl">
+        {/* Header */}
+        <header className="border-b border-border">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-20 max-w-3xl">
             <Breadcrumbs
-              className="mb-6 text-warm-cream-muted [&_a]:hover:text-warm-cream [&_[aria-current=page]]:text-warm-cream [&_a]:hover:no-underline"
+              className="mb-6"
               items={[
                 { label: "Home", href: "/" },
                 { label: "Guides", href: "/guides" },
@@ -130,15 +130,15 @@ const GuideFrenchTechniques = () => {
             />
             <Link
               to="/guides"
-              className="inline-flex items-center gap-2 text-sm mb-8 transition-colors hover:underline text-warm-cream-muted"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" /> Back to Guides
             </Link>
-            <p className="micro-caption mb-4 text-warm-amber">Guide</p>
-            <h1 className="font-display text-4xl md:text-5xl leading-tight mb-5">
+            <p className="micro-caption mb-4 text-primary">Guide</p>
+            <h1 className="font-display text-4xl md:text-5xl leading-tight text-foreground mb-5">
               French cooking techniques every home cook should know
             </h1>
-            <p className="text-lg md:text-xl text-warm-cream-muted">
+            <p className="text-lg md:text-xl text-muted-foreground">
               You do not need to train in a professional kitchen. But learning a handful of French techniques will transform the way you cook — and the way your food looks and tastes.
             </p>
           </div>
