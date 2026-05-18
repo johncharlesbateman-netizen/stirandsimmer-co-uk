@@ -28,10 +28,6 @@ const COLLECTION_SLUGS = [
   "sweets-and-desserts", "quick-and-easy", "baking-and-bread", "healthy-eating",
 ];
 
-const GUIDE_SLUGS = [
-  "mother-sauces", "french-techniques", "garam-masala", "how-to-use-spices",
-  "proper-stock", "proper-sauce", "choosing-pans", "kitchen-knives",
-];
 
 export async function generateSitemap() {
   const url = process.env.VITE_SUPABASE_URL;
@@ -42,14 +38,24 @@ export async function generateSitemap() {
   }
 
   const supabase = createClient(url, key);
-  const { data: recipes, error } = await supabase
-    .from("recipes")
-    .select("slug, updated_at")
-    .eq("published", true)
-    .order("updated_at", { ascending: false });
+  const [{ data: recipes, error }, { data: guides, error: guidesError }] = await Promise.all([
+    supabase
+      .from("recipes")
+      .select("slug, updated_at")
+      .eq("published", true)
+      .order("updated_at", { ascending: false }),
+    supabase
+      .from("guides")
+      .select("slug, updated_at, last_updated_at")
+      .eq("published", true),
+  ]);
 
   if (error) {
     console.error("[sitemap] DB query failed:", error.message);
+    return;
+  }
+  if (guidesError) {
+    console.error("[sitemap] Guides query failed:", guidesError.message);
     return;
   }
 
@@ -62,7 +68,11 @@ export async function generateSitemap() {
   for (const u of STATIC_URLS) parts.push(entry(SITE + u.path, today, u.changefreq, u.priority));
   for (const slug of CATEGORY_SLUGS) parts.push(entry(`${SITE}/recipes/category/${slug}`, today, "weekly", "0.8"));
   for (const slug of COLLECTION_SLUGS) parts.push(entry(`${SITE}/collections/${slug}`, today, "weekly", "0.7"));
-  for (const slug of GUIDE_SLUGS) parts.push(entry(`${SITE}/guides/${slug}`, today, "monthly", "0.7"));
+  for (const g of guides ?? []) {
+    const stamp = g.last_updated_at ?? g.updated_at;
+    const lastmod = stamp ? new Date(stamp).toISOString().split("T")[0] : today;
+    parts.push(entry(`${SITE}/guides/${g.slug}`, lastmod, "monthly", "0.7"));
+  }
   for (const r of recipes ?? []) {
     const lastmod = r.updated_at ? new Date(r.updated_at).toISOString().split("T")[0] : today;
     parts.push(entry(`${SITE}/recipes/${r.slug}`, lastmod, "weekly", "0.7"));
@@ -74,7 +84,7 @@ export async function generateSitemap() {
   const outPath = resolve(__dirname, "../public/sitemap.xml");
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, xml, "utf-8");
-  console.log(`[sitemap] Wrote ${recipes?.length ?? 0} recipes + ${STATIC_URLS.length} static + ${CATEGORY_SLUGS.length} categories + ${COLLECTION_SLUGS.length} collections → public/sitemap.xml`);
+  console.log(`[sitemap] Wrote ${recipes?.length ?? 0} recipes + ${guides?.length ?? 0} guides + ${STATIC_URLS.length} static + ${CATEGORY_SLUGS.length} categories + ${COLLECTION_SLUGS.length} collections → public/sitemap.xml`);
 }
 
 // Allow running standalone: `node scripts/generate-sitemap.mjs`
