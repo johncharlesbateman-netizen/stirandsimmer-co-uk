@@ -284,7 +284,6 @@ export const suggestTags = (recipe: RecipeInput): Suggestion => {
   const text = [
     recipe.title ?? "",
     recipe.description ?? "",
-    recipe.intro ?? "",
   ]
     .join(" \n ")
     .toLowerCase();
