@@ -127,6 +127,54 @@ const REGIONS: Record<string, RegionDef> = {
     seoDescription:
       "Mexican recipes from The Kitchen Atlas — tacos, salsas and the bold, smoky flavours of Mexico. Tried and tested in a real kitchen.",
   },
+  thailand: {
+    id: "thailand",
+    name: "Thailand",
+    emoji: "🇹🇭",
+    description:
+      "Fragrant, fiery and beautifully balanced — the sweet, sour, salty, spicy heart of Thai cooking.",
+    regionTags: ["thai"],
+    adjective: "Thai",
+    seoTitle: "Thai recipes — The Kitchen Atlas | Stir & Simmer",
+    seoDescription:
+      "Thai recipes from The Kitchen Atlas — curries, stir fries and the fragrant, balanced cooking of Thailand.",
+  },
+  japan: {
+    id: "japan",
+    name: "Japan",
+    emoji: "🇯🇵",
+    description:
+      "Precision, balance and the art of umami — Japanese cooking at its finest.",
+    regionTags: ["japanese"],
+    adjective: "Japanese",
+    seoTitle: "Japanese recipes — The Kitchen Atlas | Stir & Simmer",
+    seoDescription:
+      "Japanese recipes from The Kitchen Atlas — ramen, katsu, sushi and the precision of Japanese cooking.",
+  },
+  mediterranean: {
+    id: "mediterranean",
+    name: "Mediterranean",
+    emoji: "🌊",
+    description:
+      "The shared table around one sea — olive oil, vegetables, fish and herbs from southern Europe and North Africa.",
+    regionTags: ["mediterranean"],
+    adjective: "Mediterranean",
+    seoTitle: "Mediterranean recipes — The Kitchen Atlas | Stir & Simmer",
+    seoDescription:
+      "Mediterranean recipes from The Kitchen Atlas — olive oil, vegetables, fish and herbs from across the Mediterranean.",
+  },
+  middleeast: {
+    id: "middleeast",
+    name: "Middle East",
+    emoji: "🥙",
+    description:
+      "Warm spices, slow-cooked meats, fresh herbs and the deep hospitality of Middle Eastern cooking.",
+    regionTags: ["middle-eastern"],
+    adjective: "Middle Eastern",
+    seoTitle: "Middle Eastern recipes — The Kitchen Atlas | Stir & Simmer",
+    seoDescription:
+      "Middle Eastern recipes from The Kitchen Atlas — kofta, mezze, flatbreads and the warm hospitality of Middle Eastern cooking.",
+  },
 };
 
 const RegionPage = () => {
