@@ -28,10 +28,6 @@ const COLLECTION_SLUGS = [
   "sweets-and-desserts", "quick-and-easy", "baking-and-bread", "healthy-eating",
 ];
 
-const GUIDE_SLUGS = [
-  "mother-sauces", "french-techniques", "garam-masala", "how-to-use-spices",
-  "proper-stock", "proper-sauce", "choosing-pans", "kitchen-knives",
-];
 
 export async function generateSitemap() {
   const url = process.env.VITE_SUPABASE_URL;
