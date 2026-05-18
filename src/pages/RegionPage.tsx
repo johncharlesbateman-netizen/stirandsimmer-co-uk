@@ -102,18 +102,18 @@ const REGIONS: Record<string, RegionDef> = {
     seoDescription:
       "Spanish recipes from The Kitchen Atlas — paella, tapas, chorizo and the bold, generous flavours of Spain. Tried and tested in a real kitchen.",
   },
-  asia: {
-    id: "asia",
-    name: "South and Southeast Asia",
-    emoji: "🌶️",
+  india: {
+    id: "india",
+    name: "India",
+    emoji: "🇮🇳",
     description:
-      "Bold spices, fragrant herbs and layers of warmth and depth — curries, stir fries and slow-simmered classics from across the region.",
-    regionTags: ["indian", "asian"],
-    adjective: "South and Southeast Asian",
+      "Bold spices, fragrant herbs and layers of warmth and depth — curries, dals and slow-simmered classics from across India.",
+    regionTags: ["indian"],
+    adjective: "Indian",
     seoTitle:
-      "South and Southeast Asian recipes — The Kitchen Atlas | Stir & Simmer",
+      "Indian recipes — The Kitchen Atlas | Stir & Simmer",
     seoDescription:
-      "South and Southeast Asian recipes from The Kitchen Atlas — curries, stir fries and bold, fragrant cooking from across the region.",
+      "Indian recipes from The Kitchen Atlas — curries, dals, tandoori and bold, fragrant cooking from across India.",
   },
   mexico: {
     id: "mexico",

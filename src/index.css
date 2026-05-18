@@ -69,7 +69,11 @@
     --region-italy: 11 53% 36%;          /* ≈ #8B3A2A */
     --region-france: 222 65% 29%;        /* ≈ #1a3a7c */
     --region-spain: 28 78% 42%;          /* ≈ #c0691a — paprika/saffron */
-    --region-asia: 326 56% 23%;          /* ≈ #5c1a3a */
+    --region-india: 326 56% 23%;         /* ≈ #5c1a3a */
+    --region-thailand: 160 50% 28%;      /* teal-green */
+    --region-greece: 205 70% 38%;        /* aegean blue */
+    --region-mediterranean: 190 55% 35%; /* sea blue-green */
+    --region-middleeast: 35 55% 35%;     /* spice amber */
     --region-japan: 0 65% 29%;           /* ≈ #7c1a1a */
     --region-mexico: 132 56% 23%;        /* ≈ #1a5c2a */
 
@@ -142,7 +146,11 @@
     --region-italy: 11 53% 36%;
     --region-france: 222 65% 29%;
     --region-spain: 28 78% 42%;
-    --region-asia: 326 56% 23%;
+    --region-india: 326 56% 23%;
+    --region-thailand: 160 50% 28%;
+    --region-greece: 205 70% 38%;
+    --region-mediterranean: 190 55% 35%;
+    --region-middleeast: 35 55% 35%;
     --region-japan: 0 65% 29%;
     --region-mexico: 132 56% 23%;
 
