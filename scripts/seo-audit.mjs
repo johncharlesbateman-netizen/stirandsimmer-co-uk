@@ -87,7 +87,9 @@ const stripQuantity = (i) =>
     "",
   ).split(",")[0].trim();
 const getKeyIngredients = (ings, max = 3) =>
-  ings.filter((i) => !/^(for the |for |the )/i.test(i.trim()))
+  ings
+    .filter((i) => typeof i === "string" && i.trim())
+    .filter((i) => !/^(for the |for |the )/i.test(i.trim()))
     .slice(0, max).map(stripQuantity).filter(Boolean);
 
 const buildSeoTitle = (custom, title, totalMin) => {
