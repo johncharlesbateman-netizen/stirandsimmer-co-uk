@@ -10,6 +10,10 @@ export const CUISINE_REGIONS = [
   "indian",
   "asian",
   "mexican",
+  "thai",
+  "japanese",
+  "mediterranean",
+  "middle-eastern",
 ] as const;
 
 export type CuisineRegion = (typeof CUISINE_REGIONS)[number];
@@ -22,6 +26,10 @@ export const cuisineRegionLabels: Record<CuisineRegion, string> = {
   indian: "Indian",
   asian: "Asian",
   mexican: "Mexican",
+  thai: "Thai",
+  japanese: "Japanese",
+  mediterranean: "Mediterranean",
+  "middle-eastern": "Middle Eastern",
 };
 
 export const isCuisineRegion = (v: unknown): v is CuisineRegion =>
