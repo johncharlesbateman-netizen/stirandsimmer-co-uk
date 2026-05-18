@@ -311,9 +311,9 @@ const RegionPage = () => {
           />
           <Link
             to="/kitchen-atlas"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to The Kitchen Atlas
+            <ArrowLeft className="w-4 h-4" /> Back to Kitchen Atlas
           </Link>
           <div className="flex items-baseline gap-3 mb-4">
             <span className="text-3xl md:text-4xl">{region.emoji}</span>
