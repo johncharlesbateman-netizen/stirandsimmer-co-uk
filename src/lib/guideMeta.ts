@@ -5,6 +5,7 @@ import kitchenKnivesImage from "@/assets/guide-kitchen-knives.jpg";
 import oliveOilImage from "@/assets/guide-understanding-olive-oil-hero.jpg";
 import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.jpg";
 import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.jpg";
+import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.jpg";
 
 export const SITE_ORIGIN = "https://stirandsimmer.co.uk";
 const AUTHOR = "Stir & Simmer";
@@ -130,6 +131,14 @@ const RAW: RawMeta[] = [
       "A beginner's guide to baking bread at home — the four ingredients, the flours, the yeasts, the method, the mistakes, and five loaves every home baker should try.",
     image: howToMakeBreadImage,
     publishedTime: "2025-05-18T11:00:00Z",
+  },
+  {
+    slug: "what-to-cook-in-summer",
+    title: "What to cook in summer — a seasonal guide | Stir & Simmer",
+    description:
+      "A seasonal guide to summer cooking in the UK — what's in season, how to build a proper salad, grilling done well, summer herbs, soft fruit, and five dishes every cook should know.",
+    image: whatToCookInSummerImage,
+    publishedTime: "2025-05-18T12:00:00Z",
   },
 ];
 
