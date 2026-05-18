@@ -51,7 +51,7 @@ const GuideChoosingPans = () => {
         <GuideTOC
           items={[
               { id: "why-the-pan-matters", label: "Why the pan matters" },
-              { id: "why-it-matters", label: "Why it matters" },
+              
               { id: "the-materials", label: "The materials" },
               { id: "the-main-types-of-pan", label: "The main types of pan" },
               { id: "essential-pans-for-a-home-kitchen", label: "Essential pans for a home kitchen" },
