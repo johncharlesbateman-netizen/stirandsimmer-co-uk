@@ -135,6 +135,23 @@ const GuideUnderstandingOliveOil = () => {
           </p>
         </div>
 
+        {/* Cooking vs finishing */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="cooking-vs-finishing" className="font-display text-3xl md:text-4xl text-foreground mb-6">When to use olive oil for cooking vs finishing</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Most home cooks own one bottle and use it for everything. That's fine — but if you can stretch to two, you'll get more from your money.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">A cooking oil</strong> — a decent supermarket extra virgin, somewhere in the £6 to £10 a litre range. Use this for sautéing onions, roasting vegetables, frying eggs, the base of a tomato sauce. Anything where heat will mute the flavour anyway. Don't waste your good bottle on it.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">A finishing oil</strong> — a smaller, better bottle of single-estate or single-variety extra virgin, somewhere in the £15 to £30 a half-litre range. Use this raw, off the heat. A glug over a bowl of soup just before serving. Drizzled on grilled bread, burrata, tomatoes, white beans, roasted fish. Stirred into a dressing. This is where olive oil earns its money.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Heat destroys the most volatile aromatic compounds — the grassy, peppery notes that you're paying for. If you're going to cook with the good stuff, add it at the end.
+          </p>
+        </div>
+
         {/* Compared to other oils */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2 id="compared-to-other-oils" className="font-display text-3xl md:text-4xl text-foreground mb-6">How olive oil compares to other cooking oils</h2>
@@ -157,23 +174,6 @@ const GuideUnderstandingOliveOil = () => {
           </ul>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mt-6">
             A sensible everyday set-up: a litre of refined rapeseed for high-heat frying, a decent supermarket extra virgin for everyday cooking, and a smaller bottle of good single-estate extra virgin for finishing. That covers ninety-nine per cent of what a home cook actually needs.
-          </p>
-        </div>
-
-        {/* Cooking vs finishing */}
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 id="cooking-vs-finishing" className="font-display text-3xl md:text-4xl text-foreground mb-6">When to use olive oil for cooking vs finishing</h2>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            Most home cooks own one bottle and use it for everything. That's fine — but if you can stretch to two, you'll get more from your money.
-          </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            <strong className="text-foreground">A cooking oil</strong> — a decent supermarket extra virgin, somewhere in the £6 to £10 a litre range. Use this for sautéing onions, roasting vegetables, frying eggs, the base of a tomato sauce. Anything where heat will mute the flavour anyway. Don't waste your good bottle on it.
-          </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            <strong className="text-foreground">A finishing oil</strong> — a smaller, better bottle of single-estate or single-variety extra virgin, somewhere in the £15 to £30 a half-litre range. Use this raw, off the heat. A glug over a bowl of soup just before serving. Drizzled on grilled bread, burrata, tomatoes, white beans, roasted fish. Stirred into a dressing. This is where olive oil earns its money.
-          </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            Heat destroys the most volatile aromatic compounds — the grassy, peppery notes that you're paying for. If you're going to cook with the good stuff, add it at the end.
           </p>
         </div>
 
