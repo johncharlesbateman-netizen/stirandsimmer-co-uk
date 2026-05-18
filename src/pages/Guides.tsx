@@ -8,6 +8,7 @@ import properSauceImage from "@/assets/guide-proper-sauce.jpg";
 import choosingPansImage from "@/assets/guide-choosing-pans.jpg";
 import kitchenKnivesImage from "@/assets/guide-kitchen-knives.jpg";
 import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.jpg";
+import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.jpg";
 
 // Local fallback used if a remote (Pexels) card image fails to load.
 const CARD_FALLBACK = properStockImage;
@@ -121,6 +122,15 @@ const GUIDES: GuideEntry[] = [
     eyebrow: "Kitchen Essentials",
     image: howToCookPastaImage,
     imageAlt: "Spaghetti being twirled in a pan of glossy tomato sauce with basil and parmesan",
+  },
+  {
+    slug: "how-to-make-bread",
+    title: "How to make bread at home — a beginner's guide",
+    description:
+      "The four ingredients, the flours, the yeasts, the method and the mistakes — everything you need to bake a proper loaf at home.",
+    eyebrow: "Kitchen Essentials",
+    image: howToMakeBreadImage,
+    imageAlt: "A freshly baked rustic sourdough loaf with an open crumb, sliced on a dark wooden board",
   },
 ];
 
