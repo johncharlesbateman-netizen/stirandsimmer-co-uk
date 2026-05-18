@@ -83,10 +83,12 @@ const REGIONS: RegionDef[] = [
     name: "Thailand",
     emoji: "🇹🇭",
     bg: "hsl(var(--region-thailand))",
-    available: false,
+    available: true,
     description:
       "Fragrant, fiery and beautifully balanced — the sweet, sour, salty, spicy heart of Thai cooking.",
-    challenge: "Coming soon — master green curry, pad thai and som tam.",
+    challenge:
+      "This week — cook a Thai dish from scratch. Browse our [Thai collection](/recipes/region/thailand) for inspiration.",
+    regionTags: ["thai"],
   },
   {
     id: "greece",
@@ -103,31 +105,36 @@ const REGIONS: RegionDef[] = [
     name: "Mediterranean",
     emoji: "🌊",
     bg: "hsl(var(--region-mediterranean))",
-    available: false,
+    available: true,
     description:
       "The shared table around one sea — olive oil, vegetables, fish and herbs from southern Europe and North Africa.",
-    challenge: "Coming soon — the dishes that tie the Mediterranean together.",
+    challenge:
+      "This week — cook a Mediterranean classic. Browse our [Mediterranean collection](/recipes/region/mediterranean) for inspiration.",
+    regionTags: ["mediterranean"],
   },
   {
     id: "middleeast",
     name: "Middle East",
     emoji: "🥙",
     bg: "hsl(var(--region-middleeast))",
-    available: false,
+    available: true,
     description:
       "Warm spices, slow-cooked meats, fresh herbs and the deep hospitality of Middle Eastern cooking.",
-    challenge: "Coming soon — hummus, kofta, tagines and flatbreads.",
+    challenge:
+      "This week — cook a Middle Eastern dish. Browse our [Middle Eastern collection](/recipes/region/middleeast) for inspiration.",
+    regionTags: ["middle-eastern"],
   },
   {
     id: "japan",
     name: "Japan",
     emoji: "🇯🇵",
     bg: "hsl(var(--region-japan))",
-    available: false,
+    available: true,
     description:
       "Precision, balance and the art of umami. Japanese cooking at its finest.",
     challenge:
-      "Coming soon — master the art of ramen, sushi and teriyaki.",
+      "This week — cook a Japanese dish. Browse our [Japanese collection](/recipes/region/japan) for inspiration.",
+    regionTags: ["japanese"],
   },
   {
     id: "mexico",
