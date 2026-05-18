@@ -309,7 +309,7 @@ const GuideHowToMakeBread = () => {
 
         {/* Related guides */}
         <section className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
-          <h2 className="font-display text-2xl md:the-3xl text-foreground mb-6">Related guides</h2>
+          <h2 className="font-display text-2xl md:text-3xl text-foreground mb-6">Related guides</h2>
           <ul className="space-y-4">
             <li>
               <Link to="/guides/how-to-cook-pasta" className="group block">

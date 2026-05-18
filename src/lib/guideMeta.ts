@@ -4,6 +4,7 @@ import choosingPansImage from "@/assets/guide-choosing-pans.jpg";
 import kitchenKnivesImage from "@/assets/guide-kitchen-knives.jpg";
 import oliveOilImage from "@/assets/guide-understanding-olive-oil-hero.jpg";
 import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.jpg";
+import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.jpg";
 
 export const SITE_ORIGIN = "https://stirandsimmer.co.uk";
 const AUTHOR = "Stir & Simmer";
@@ -121,6 +122,14 @@ const RAW: RawMeta[] = [
       "How to cook pasta properly — choosing the shape, salting the water, timing it right, saving the cooking water and finishing it in the sauce.",
     image: howToCookPastaImage,
     publishedTime: "2025-05-18T10:00:00Z",
+  },
+  {
+    slug: "how-to-make-bread",
+    title: "How to make bread at home — a beginner's guide | Stir & Simmer",
+    description:
+      "A beginner's guide to baking bread at home — the four ingredients, the flours, the yeasts, the method, the mistakes, and five loaves every home baker should try.",
+    image: howToMakeBreadImage,
+    publishedTime: "2025-05-18T11:00:00Z",
   },
 ];
 
