@@ -49,6 +49,7 @@ const GuideUnderstandingOliveOil = () => {
             { id: "how-olive-oil-is-made", label: "How olive oil is made" },
             { id: "flavour-profiles", label: "Flavour profiles — mild, medium, robust" },
             { id: "cooking-vs-finishing", label: "When to use olive oil for cooking vs finishing" },
+            { id: "compared-to-other-oils", label: "How olive oil compares to other cooking oils" },
             { id: "smoke-point", label: "Smoke point — the truth" },
             { id: "how-to-store-olive-oil", label: "How to store olive oil properly" },
             { id: "how-to-taste-olive-oil", label: "How to taste olive oil like a professional" },
