@@ -277,7 +277,7 @@ const QuickMealsTimeAudit = () => {
 
 // --- Regional mismatch audit ---------------------------------------------
 // Surfaces recipes whose tagged cuisine region has no obvious keyword match in
-// the title/description/intro — a signal that the tag may be wrong.
+// the title or description — a signal that the tag may be wrong.
 
 const REGION_KEYWORDS: Record<string, string[]> = {
   italian: [
