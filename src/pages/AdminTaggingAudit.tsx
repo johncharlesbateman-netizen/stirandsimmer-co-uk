@@ -353,7 +353,7 @@ const RegionalMismatchAudit = ({ recipes }: { recipes: Recipe[] }) => {
         (t) => REGION_KEYWORDS[t],
       );
       if (regions.length === 0) continue;
-      const text = [r.title, r.description, r.intro ?? ""].join(" ");
+      const text = [r.title, r.description].join(" ");
       for (const region of regions) {
         const ownMatches = countKeywordMatches(text, REGION_KEYWORDS[region]);
         if (ownMatches.length > 0) continue;
