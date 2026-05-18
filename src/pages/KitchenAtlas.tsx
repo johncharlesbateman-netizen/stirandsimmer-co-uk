@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import { Button } from "@/components/ui/button";
-import kitchenAtlasHero from "@/assets/kitchen-atlas-hero.jpg";
+
 import { supabase } from "@/integrations/supabase/client";
 
 
