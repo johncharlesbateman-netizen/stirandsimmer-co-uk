@@ -103,6 +103,15 @@ const GUIDES: GuideEntry[] = [
     image: kitchenKnivesImage,
     imageAlt: "An overhead arrangement of kitchen knives on a dark cutting board",
   },
+  {
+    slug: "understanding-olive-oil",
+    title: "Understanding olive oil — a cook's guide",
+    description:
+      "What the labels actually mean, how it's made, when to cook with it, when to finish with it, and which bottles to buy in the UK.",
+    eyebrow: "Kitchen Essentials",
+    imageId: "33783",
+    imageAlt: "A bottle of extra virgin olive oil and fresh olives on a dark wooden surface",
+  },
 ];
 
 const Guides = () => {
