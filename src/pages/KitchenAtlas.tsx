@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import { Button } from "@/components/ui/button";
-import kitchenAtlasHero from "@/assets/kitchen-atlas-hero.jpg";
+
 import { supabase } from "@/integrations/supabase/client";
 
 
@@ -212,18 +212,6 @@ const KitchenAtlas = () => {
         imageId="1640774"
         imageAlt="A flatlay of dishes and ingredients from cuisines around the world"
       />
-
-      {/* Full-width food photography hero */}
-      <div className="w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-muted">
-        <img
-          src={kitchenAtlasHero}
-          alt="A warm flatlay of dishes from cuisines around the world — pasta, curry, paella, tacos, bread and mezze on a dark wooden table"
-          width={1920}
-          height={1080}
-          className="w-full h-full object-cover"
-          fetchPriority="high"
-        />
-      </div>
 
       {/* REGION CARD GRID — light section */}
       <section className="bg-background py-10 md:py-14 border-b border-border">
