@@ -7,6 +7,7 @@ import properStockImage from "@/assets/guide-proper-stock.jpg";
 import properSauceImage from "@/assets/guide-proper-sauce.jpg";
 import choosingPansImage from "@/assets/guide-choosing-pans.jpg";
 import kitchenKnivesImage from "@/assets/guide-kitchen-knives.jpg";
+import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.jpg";
 
 // Local fallback used if a remote (Pexels) card image fails to load.
 const CARD_FALLBACK = properStockImage;
@@ -111,6 +112,15 @@ const GUIDES: GuideEntry[] = [
     eyebrow: "Kitchen Essentials",
     imageId: "33783",
     imageAlt: "A bottle of extra virgin olive oil and fresh olives on a dark wooden surface",
+  },
+  {
+    slug: "how-to-cook-pasta",
+    title: "How to cook pasta properly — a cook's guide",
+    description:
+      "How to choose the shape, salt the water, time it right, save the cooking water and finish it in the sauce — the small habits that change everything.",
+    eyebrow: "Kitchen Essentials",
+    image: howToCookPastaImage,
+    imageAlt: "Spaghetti being twirled in a pan of glossy tomato sauce with basil and parmesan",
   },
 ];
 

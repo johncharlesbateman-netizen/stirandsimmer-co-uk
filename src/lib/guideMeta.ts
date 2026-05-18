@@ -2,6 +2,8 @@ import properStockImage from "@/assets/guide-proper-stock.jpg";
 import properSauceImage from "@/assets/guide-proper-sauce.jpg";
 import choosingPansImage from "@/assets/guide-choosing-pans.jpg";
 import kitchenKnivesImage from "@/assets/guide-kitchen-knives.jpg";
+import oliveOilImage from "@/assets/guide-understanding-olive-oil-hero.jpg";
+import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.jpg";
 
 export const SITE_ORIGIN = "https://stirandsimmer.co.uk";
 const AUTHOR = "Stir & Simmer";
@@ -109,8 +111,16 @@ const RAW: RawMeta[] = [
     title: "Understanding olive oil — a cook's guide | Stir & Simmer",
     description:
       "A practical guide to olive oil — what the labels mean, how it's made, when to cook with it, when to finish with it, and which bottles to buy in the UK.",
-    imageId: "33783",
+    image: oliveOilImage,
     publishedTime: "2025-05-18T09:00:00Z",
+  },
+  {
+    slug: "how-to-cook-pasta",
+    title: "How to cook pasta properly — a cook's guide | Stir & Simmer",
+    description:
+      "How to cook pasta properly — choosing the shape, salting the water, timing it right, saving the cooking water and finishing it in the sauce.",
+    image: howToCookPastaImage,
+    publishedTime: "2025-05-18T10:00:00Z",
   },
 ];
 
