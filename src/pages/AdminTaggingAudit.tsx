@@ -277,7 +277,7 @@ const QuickMealsTimeAudit = () => {
 
 // --- Regional mismatch audit ---------------------------------------------
 // Surfaces recipes whose tagged cuisine region has no obvious keyword match in
-// the title/description/intro — a signal that the tag may be wrong.
+// the title or description — a signal that the tag may be wrong.
 
 const REGION_KEYWORDS: Record<string, string[]> = {
   italian: [
@@ -353,7 +353,7 @@ const RegionalMismatchAudit = ({ recipes }: { recipes: Recipe[] }) => {
         (t) => REGION_KEYWORDS[t],
       );
       if (regions.length === 0) continue;
-      const text = [r.title, r.description, r.intro ?? ""].join(" ");
+      const text = [r.title, r.description].join(" ");
       for (const region of regions) {
         const ownMatches = countKeywordMatches(text, REGION_KEYWORDS[region]);
         if (ownMatches.length > 0) continue;
@@ -409,8 +409,8 @@ const RegionalMismatchAudit = ({ recipes }: { recipes: Recipe[] }) => {
             Regional mismatch review
           </h2>
           <p className="text-sm text-muted-foreground max-w-2xl">
-            Recipes tagged with a cuisine region whose title, description and
-            intro contain no obvious keywords for that region. Where another
+            Recipes tagged with a cuisine region whose title and description
+            contain no obvious keywords for that region. Where another
             region's signature words appear instead, that region is shown as a
             possible better fit. Review and remove or reassign as needed.
           </p>
@@ -527,7 +527,7 @@ const AdminTaggingAudit = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("recipes")
-        .select("id, slug, title, description, intro, categories, cuisine_region, meal_types, collections")
+        .select("id, slug, title, description, categories, cuisine_region, meal_types, collections")
         .order("title");
       if (error) throw error;
       return (data ?? []) as Recipe[];
@@ -541,7 +541,6 @@ const AdminTaggingAudit = () => {
         const suggestion = suggestTags({
           title: r.title,
           description: r.description,
-          intro: r.intro,
           collections: (r.collections as string[] | null) ?? [],
         });
 

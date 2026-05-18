@@ -1,6 +1,6 @@
 // Heuristic tag suggestion engine for recipes.
 // Deterministic, transparent — based on keyword matching against
-// title, description, intro and collections. Used by the admin
+// title, description and collections. Used by the admin
 // tagging audit page to surface suggestions for manual review.
 
 export type TileCategory =
@@ -265,7 +265,7 @@ export type Suggestion = {
 type RecipeInput = {
   title?: string | null;
   description?: string | null;
-  intro?: string | null;
+  
   collections?: string[] | null;
 };
 
@@ -284,7 +284,6 @@ export const suggestTags = (recipe: RecipeInput): Suggestion => {
   const text = [
     recipe.title ?? "",
     recipe.description ?? "",
-    recipe.intro ?? "",
   ]
     .join(" \n ")
     .toLowerCase();

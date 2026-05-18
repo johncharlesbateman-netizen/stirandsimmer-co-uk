@@ -119,7 +119,7 @@ const buildSeoDescription = (custom, _title, desc, ings, totalMin) => {
 // to support schemas where columns are named differently.
 const DEFAULT_FIELD_MAP = {
   name: ["title", "name", "recipe_name"],
-  description: ["description", "summary", "intro"],
+  description: ["description", "summary"],
   image: ["image_url", "image", "hero_image", "photo_url", "cover_image"],
   prepTime: ["prep_time_minutes", "prep_minutes", "prep_time", "prepTime", "prep"],
   cookTime: ["cook_time_minutes", "cook_minutes", "cook_time", "cookTime", "cook"],

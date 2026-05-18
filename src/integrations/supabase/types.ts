@@ -431,7 +431,6 @@ export type Database = {
           image_url: string | null
           ingredients: Json
           instructions: Json
-          intro: string | null
           is_seasonal: boolean | null
           meal_types: string[]
           prep_time_minutes: number | null
@@ -455,7 +454,6 @@ export type Database = {
           image_url?: string | null
           ingredients?: Json
           instructions?: Json
-          intro?: string | null
           is_seasonal?: boolean | null
           meal_types?: string[]
           prep_time_minutes?: number | null
@@ -479,7 +477,6 @@ export type Database = {
           image_url?: string | null
           ingredients?: Json
           instructions?: Json
-          intro?: string | null
           is_seasonal?: boolean | null
           meal_types?: string[]
           prep_time_minutes?: number | null
