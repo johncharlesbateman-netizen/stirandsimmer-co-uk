@@ -38,6 +38,7 @@ import GuideKitchenKnives from "./pages/GuideKitchenKnives";
 import GuideUnderstandingOliveOil from "./pages/GuideUnderstandingOliveOil";
 import GuideHowToCookPasta from "./pages/GuideHowToCookPasta";
 import GuideHowToMakeBread from "./pages/GuideHowToMakeBread";
+import GuideWhatToCookInSummer from "./pages/GuideWhatToCookInSummer";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
@@ -148,6 +149,7 @@ const App = () => (
             <Route path="/guides/understanding-olive-oil" element={<GuideUnderstandingOliveOil />} />
             <Route path="/guides/how-to-cook-pasta" element={<GuideHowToCookPasta />} />
             <Route path="/guides/how-to-make-bread" element={<GuideHowToMakeBread />} />
+            <Route path="/guides/what-to-cook-in-summer" element={<GuideWhatToCookInSummer />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />

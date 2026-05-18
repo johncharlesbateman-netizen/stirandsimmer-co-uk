@@ -9,6 +9,7 @@ import choosingPansImage from "@/assets/guide-choosing-pans.jpg";
 import kitchenKnivesImage from "@/assets/guide-kitchen-knives.jpg";
 import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.jpg";
 import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.jpg";
+import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.jpg";
 
 // Local fallback used if a remote (Pexels) card image fails to load.
 const CARD_FALLBACK = properStockImage;
@@ -131,6 +132,15 @@ const GUIDES: GuideEntry[] = [
     eyebrow: "Kitchen Essentials",
     image: howToMakeBreadImage,
     imageAlt: "A freshly baked rustic sourdough loaf with an open crumb, sliced on a dark wooden board",
+  },
+  {
+    slug: "what-to-cook-in-summer",
+    title: "What to cook in summer — a seasonal guide",
+    description:
+      "What's in season in the UK, how to build a proper salad, grilling done well, summer herbs, soft fruit and five dishes every cook should know.",
+    eyebrow: "Seasonal",
+    image: whatToCookInSummerImage,
+    imageAlt: "A sunlit summer table with grilled vegetables, ripe tomatoes, peaches, fresh herbs and a jug of iced drink",
   },
 ];
 
