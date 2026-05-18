@@ -267,23 +267,6 @@ const GuideUnderstandingOliveOil = () => {
           </p>
         </div>
 
-        {/* Kitchen Atlas CTA */}
-        <section className="w-full py-16 md:py-20 border-t border-border bg-warm-dark text-warm-dark-foreground">
-          <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl text-center">
-            <h2 className="font-display text-3xl md:text-4xl mb-4">
-              Ready to put it to work?
-            </h2>
-            <p className="text-base md:text-lg mb-8 text-warm-cream-muted">
-              Head to The Kitchen Atlas and explore Italian, Spanish and Mediterranean recipes that show off a good bottle of oil.
-            </p>
-            <Button asChild size="lg" variant="secondary">
-              <Link to="/kitchen-atlas">
-                Visit The Kitchen Atlas <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
-          </div>
-        </section>
-
         {/* Related guides */}
         <section className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
           <h2 className="font-display text-2xl md:text-3xl text-foreground mb-6">Related guides</h2>
@@ -303,6 +286,23 @@ const GuideUnderstandingOliveOil = () => {
               </Link>
             </li>
           </ul>
+        </section>
+
+        {/* Kitchen Atlas CTA */}
+        <section className="w-full py-16 md:py-20 border-t border-border bg-warm-dark text-warm-dark-foreground">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl text-center">
+            <h2 className="font-display text-3xl md:text-4xl mb-4">
+              Ready to put it to work?
+            </h2>
+            <p className="text-base md:text-lg mb-8 text-warm-cream-muted">
+              Head to The Kitchen Atlas and explore Italian, Spanish and Mediterranean recipes that show off a good bottle of oil.
+            </p>
+            <Button asChild size="lg" variant="secondary">
+              <Link to="/kitchen-atlas">
+                Visit The Kitchen Atlas <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
         </section>
 
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
