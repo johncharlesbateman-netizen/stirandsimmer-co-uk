@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import { Button } from "@/components/ui/button";
-import { WORLD_MAP_PATH } from "@/assets/world-map-path";
+import kitchenAtlasHero from "@/assets/kitchen-atlas-hero.jpg";
 import { supabase } from "@/integrations/supabase/client";
 
 
@@ -213,72 +213,17 @@ const KitchenAtlas = () => {
         imageAlt="A flatlay of dishes and ingredients from cuisines around the world"
       />
 
-      {/* Divider between hero and map */}
-      <div aria-hidden className="w-full h-px bg-white/90" />
-
-      {/* MAP */}
-      <section className="py-8 md:py-16 bg-[hsl(var(--atlas-map-bg))]">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div
-            role="group"
-            aria-label="World map showing available cuisine regions"
-            aria-describedby="kitchen-atlas-map-description"
-            className="relative mx-auto rounded-xl overflow-hidden block bg-[hsl(var(--atlas-map-surface))]"
-            style={{
-              maxWidth: "1100px",
-              aspectRatio: "2 / 1",
-              backgroundImage:
-                "radial-gradient(circle at 20% 40%, hsl(var(--atlas-marker) / 0.08), transparent 40%), radial-gradient(circle at 60% 60%, hsl(var(--atlas-marker) / 0.06), transparent 45%), radial-gradient(circle at 80% 30%, hsl(var(--atlas-marker) / 0.05), transparent 40%)",
-            }}
-          >
-            <p id="kitchen-atlas-map-description" className="sr-only">
-              An interactive world map with markers for six cuisine regions: United Kingdom, France, Italy, South and Southeast Asia, Japan and Mexico. Active markers jump to the matching region section below; Japan is marked as coming soon. The same regions are listed as links in the grid further down the page.
-            </p>
-            {/* World map silhouette (equirectangular, 1000x500 viewBox) */}
-            <svg
-              viewBox="0 0 1000 500"
-              preserveAspectRatio="xMidYMid meet"
-              className="absolute inset-0 w-full h-full"
-              aria-hidden="true"
-            >
-              <path
-                d={WORLD_MAP_PATH}
-                fill="hsl(var(--atlas-map-land))"
-                stroke="hsl(var(--atlas-map-land-stroke))"
-                strokeWidth="0.6"
-                strokeLinejoin="round"
-              />
-            </svg>
-
-            {/* Markers */}
-            {REGIONS.map((r) => {
-              const pos = MAP_POSITIONS[r.id];
-              if (!pos) return null;
-              return (
-                <button
-                  key={r.id}
-                  onClick={() => r.available && scrollToRegion(r.id)}
-                  className="absolute -translate-x-1/2 -translate-y-1/2"
-                  style={{ top: pos.top, left: pos.left, cursor: r.available ? "pointer" : "not-allowed" }}
-                  aria-label={r.available ? `Jump to ${r.name}` : `${r.name} — coming soon`}
-                  aria-disabled={r.available ? undefined : true}
-                >
-                  <span
-                    className="block rounded-full bg-[hsl(var(--atlas-marker))] motion-safe:animate-pulse"
-                    style={{
-                      width: "16px",
-                      height: "16px",
-                      boxShadow: "0 0 18px 4px hsl(var(--atlas-marker) / 0.55)",
-                      opacity: r.available ? 1 : 0.55,
-                    }}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
+      {/* Full-width food photography hero */}
+      <div className="w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-muted">
+        <img
+          src={kitchenAtlasHero}
+          alt="A warm flatlay of dishes from cuisines around the world — pasta, curry, paella, tacos, bread and mezze on a dark wooden table"
+          width={1920}
+          height={1080}
+          className="w-full h-full object-cover"
+          fetchPriority="high"
+        />
+      </div>
 
       {/* REGION CARD GRID — light section */}
       <section className="bg-background py-10 md:py-14 border-b border-border">
