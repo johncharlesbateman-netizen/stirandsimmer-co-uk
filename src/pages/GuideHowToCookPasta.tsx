@@ -296,6 +296,27 @@ const GuideHowToCookPasta = () => {
           </div>
         </section>
 
+        {/* Related guides */}
+        <section className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-t border-border">
+          <h2 className="font-display text-2xl md:text-3xl text-foreground mb-6">Related guides</h2>
+          <ul className="space-y-4">
+            <li>
+              <Link to="/guides/understanding-olive-oil" className="group block">
+                <p className="micro-caption text-primary mb-1">Kitchen Essentials</p>
+                <p className="font-display text-xl text-foreground group-hover:underline">Understanding olive oil — a cook's guide</p>
+                <p className="text-base text-muted-foreground mt-1">The bottle you reach for matters as much as the pasta itself — when to use which oil, and why.</p>
+              </Link>
+            </li>
+            <li>
+              <Link to="/guides/choosing-pans" className="group block">
+                <p className="micro-caption text-primary mb-1">Kitchen Essentials</p>
+                <p className="font-display text-xl text-foreground group-hover:underline">Choosing the right pan — a cook's guide</p>
+                <p className="text-base text-muted-foreground mt-1">A wide, shallow pan is what makes finishing pasta in the sauce work. Here's how to pick one.</p>
+              </Link>
+            </li>
+          </ul>
+        </section>
+
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
           <Link
             to="/guides"
