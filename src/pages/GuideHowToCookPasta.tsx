@@ -300,6 +300,15 @@ const GuideHowToCookPasta = () => {
           </ul>
         </section>
 
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
+          <Link
+            to="/guides"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" /> Back to all guides
+          </Link>
+        </div>
+
         {/* Kitchen Atlas CTA */}
         <section className="w-full py-16 md:py-20 border-t border-border bg-warm-dark text-warm-dark-foreground">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl text-center">
@@ -316,15 +325,6 @@ const GuideHowToCookPasta = () => {
             </Button>
           </div>
         </section>
-
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
-          <Link
-            to="/guides"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" /> Back to all guides
-          </Link>
-        </div>
       </article>
     </Layout>
   );
