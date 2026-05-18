@@ -104,6 +104,14 @@ const RAW: RawMeta[] = [
     image: kitchenKnivesImage,
     publishedTime: "2025-05-01T09:00:00Z",
   },
+  {
+    slug: "understanding-olive-oil",
+    title: "Understanding olive oil — a cook's guide | Stir & Simmer",
+    description:
+      "A practical guide to olive oil — what the labels mean, how it's made, when to cook with it, when to finish with it, and which bottles to buy in the UK.",
+    imageId: "33783",
+    publishedTime: "2025-05-18T09:00:00Z",
+  },
 ];
 
 const DEFAULT_MODIFIED = "2025-05-16T09:00:00Z";
