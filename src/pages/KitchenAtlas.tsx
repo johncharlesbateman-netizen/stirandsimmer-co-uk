@@ -68,15 +68,55 @@ const REGIONS: RegionDef[] = [
     regionTags: ["spanish"],
   },
   {
-    id: "asia",
-    name: "South and Southeast Asia",
-    emoji: "🌶️",
-    bg: "hsl(var(--region-asia))",
+    id: "india",
+    name: "India",
+    emoji: "🇮🇳",
+    bg: "hsl(var(--region-india))",
     available: true,
     description: "Bold spices, fragrant herbs and layers of warmth and depth.",
     challenge:
-      "This week — cook a curry entirely from scratch using whole spices, no jars. Find your recipe in our [Asian collection](/recipes/asian).",
-    regionTags: ["indian", "asian"],
+      "This week — cook a curry entirely from scratch using whole spices, no jars. Find your recipe in our [Indian collection](/recipes/region/indian).",
+    regionTags: ["indian"],
+  },
+  {
+    id: "thailand",
+    name: "Thailand",
+    emoji: "🇹🇭",
+    bg: "hsl(var(--region-thailand))",
+    available: false,
+    description:
+      "Fragrant, fiery and beautifully balanced — the sweet, sour, salty, spicy heart of Thai cooking.",
+    challenge: "Coming soon — master green curry, pad thai and som tam.",
+  },
+  {
+    id: "greece",
+    name: "Greece",
+    emoji: "🇬🇷",
+    bg: "hsl(var(--region-greece))",
+    available: false,
+    description:
+      "Olive oil, lemon, oregano and the generous, sun-drenched cooking of the Aegean.",
+    challenge: "Coming soon — moussaka, souvlaki, spanakopita and more.",
+  },
+  {
+    id: "mediterranean",
+    name: "Mediterranean",
+    emoji: "🌊",
+    bg: "hsl(var(--region-mediterranean))",
+    available: false,
+    description:
+      "The shared table around one sea — olive oil, vegetables, fish and herbs from southern Europe and North Africa.",
+    challenge: "Coming soon — the dishes that tie the Mediterranean together.",
+  },
+  {
+    id: "middleeast",
+    name: "Middle East",
+    emoji: "🥙",
+    bg: "hsl(var(--region-middleeast))",
+    available: false,
+    description:
+      "Warm spices, slow-cooked meats, fresh herbs and the deep hospitality of Middle Eastern cooking.",
+    challenge: "Coming soon — hummus, kofta, tagines and flatbreads.",
   },
   {
     id: "japan",
