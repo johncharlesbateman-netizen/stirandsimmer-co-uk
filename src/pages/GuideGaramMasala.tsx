@@ -127,6 +127,7 @@ const GuideGaramMasala = () => {
               { id: "what-garam-masala-actually-is", label: "What garam masala actually is" },
               { id: "why-every-version-is-different", label: "Why every version is different" },
               { id: "the-core-spices", label: "The core spices" },
+              ...SPICES.map((s) => ({ id: s.id, label: s.name })),
               { id: "how-to-make-your-own", label: "How to make your own" },
               { id: "a-simple-starting-blend", label: "A simple starting blend" },
               { id: "more-complex-variations", label: "More complex variations" },
