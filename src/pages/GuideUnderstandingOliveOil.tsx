@@ -49,6 +49,7 @@ const GuideUnderstandingOliveOil = () => {
             { id: "how-olive-oil-is-made", label: "How olive oil is made" },
             { id: "flavour-profiles", label: "Flavour profiles — mild, medium, robust" },
             { id: "cooking-vs-finishing", label: "When to use olive oil for cooking vs finishing" },
+            { id: "compared-to-other-oils", label: "How olive oil compares to other cooking oils" },
             { id: "smoke-point", label: "Smoke point — the truth" },
             { id: "how-to-store-olive-oil", label: "How to store olive oil properly" },
             { id: "how-to-taste-olive-oil", label: "How to taste olive oil like a professional" },
@@ -148,6 +149,31 @@ const GuideUnderstandingOliveOil = () => {
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             Heat destroys the most volatile aromatic compounds — the grassy, peppery notes that you're paying for. If you're going to cook with the good stuff, add it at the end.
+          </p>
+        </div>
+
+        {/* Compared to other oils */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="compared-to-other-oils" className="font-display text-3xl md:text-4xl text-foreground mb-6">How olive oil compares to other cooking oils</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            Olive oil isn't the only bottle worth keeping in the cupboard. Every kitchen benefits from one or two neutral oils for the jobs extra virgin isn't suited to. Here's how the most common ones stack up.
+          </p>
+          <ul className="space-y-5 text-base md:text-lg text-foreground/90 leading-relaxed">
+            <li>
+              <strong className="text-foreground">Rapeseed oil</strong> — Britain's quiet workhorse. Cold-pressed rapeseed (often labelled "extra virgin" or sold under names like Yorkshire or Hillfarm) has a warm, golden, nutty flavour and a smoke point around 230°C. Use it for roasting, frying, mayonnaise and baking. Refined rapeseed — sold simply as "vegetable oil" or "rapeseed oil" in supermarkets — is neutral, cheap and has an even higher smoke point, which makes it the most reliable choice for deep-frying and high-heat searing. Better for the environment than imported oils too.
+            </li>
+            <li>
+              <strong className="text-foreground">Sunflower oil</strong> — clean, neutral and high-smoking (around 225°C refined), which makes it a perfectly serviceable frying oil. Its strengths are blandness and price. The limitation is that it's almost entirely polyunsaturated, so it oxidises faster than olive or rapeseed when reused, and it brings nothing to the dish in terms of flavour. Fine for tempura, pastry where you want no taste at all, or filling a deep-fat fryer. There's rarely a reason to choose it over rapeseed.
+            </li>
+            <li>
+              <strong className="text-foreground">Vegetable oil</strong> — a non-specific label that, in the UK, usually means refined rapeseed, sometimes blended with sunflower or soybean. It's neutral, cheap and stable up to around 220°C. Perfectly fine for frying chips, lining a roasting tin or greasing a cake tin. Just don't expect it to taste of anything, and check the back of the bottle if you care what's actually in it.
+            </li>
+            <li>
+              <strong className="text-foreground">Avocado oil</strong> — the trendy one, and not without reason. Refined avocado oil has one of the highest smoke points of any culinary oil — around 270°C — which makes it genuinely useful for searing steak, blistering peppers or wok cooking at full heat. Unrefined (cold-pressed) avocado oil is greener, grassier and faintly buttery, and works well drizzled over salads or eggs. The catch is the price — three or four times that of rapeseed — and the carbon footprint of shipping it from Mexico or New Zealand. Worth a small bottle for high-heat work if you cook a lot of steak, but for most jobs a good extra virgin or a bottle of rapeseed will do the same work for less.
+            </li>
+          </ul>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mt-6">
+            A sensible everyday set-up: a litre of refined rapeseed for high-heat frying, a decent supermarket extra virgin for everyday cooking, and a smaller bottle of good single-estate extra virgin for finishing. That covers ninety-nine per cent of what a home cook actually needs.
           </p>
         </div>
 
