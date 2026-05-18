@@ -409,8 +409,8 @@ const RegionalMismatchAudit = ({ recipes }: { recipes: Recipe[] }) => {
             Regional mismatch review
           </h2>
           <p className="text-sm text-muted-foreground max-w-2xl">
-            Recipes tagged with a cuisine region whose title, description and
-            intro contain no obvious keywords for that region. Where another
+            Recipes tagged with a cuisine region whose title and description
+            contain no obvious keywords for that region. Where another
             region's signature words appear instead, that region is shown as a
             possible better fit. Review and remove or reassign as needed.
           </p>
