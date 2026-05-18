@@ -1,6 +1,6 @@
 // Heuristic tag suggestion engine for recipes.
 // Deterministic, transparent — based on keyword matching against
-// title, description, intro and collections. Used by the admin
+// title, description and collections. Used by the admin
 // tagging audit page to surface suggestions for manual review.
 
 export type TileCategory =
