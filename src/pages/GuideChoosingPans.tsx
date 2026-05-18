@@ -74,14 +74,6 @@ const GuideChoosingPans = () => {
           </p>
         </div>
 
-        {/* Why it matters */}
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2  id="why-it-matters" className="font-display text-3xl md:text-4xl text-foreground mb-6">Why it matters</h2>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            A pan is not just a container for heat. It is a tool with specific properties — weight, conductivity, reactivity, surface — that determine how food behaves inside it. Understanding those properties means you can choose the right pan instinctively, cook with more confidence, and get consistently better results.
-          </p>
-        </div>
-
         {/* The materials */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2  id="the-materials" className="font-display text-3xl md:text-4xl text-foreground mb-6">The materials</h2>
