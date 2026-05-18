@@ -35,6 +35,7 @@ import GuideProperStock from "./pages/GuideProperStock";
 import GuideProperSauce from "./pages/GuideProperSauce";
 import GuideChoosingPans from "./pages/GuideChoosingPans";
 import GuideKitchenKnives from "./pages/GuideKitchenKnives";
+import GuideUnderstandingOliveOil from "./pages/GuideUnderstandingOliveOil";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
