@@ -339,7 +339,7 @@ const REGION_BUTTON_LABEL: Record<string, string> = {
   uk: "Explore all United Kingdom recipes",
   italy: "Explore all Italian recipes",
   france: "Explore all French recipes",
-  asia: "Explore all South and Southeast Asian recipes",
+  india: "Explore all Indian recipes",
   mexico: "Explore all Mexican recipes",
 };
 
