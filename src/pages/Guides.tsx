@@ -185,7 +185,6 @@ const Guides = () => {
           content="Practical kitchen guides from Stir & Simmer — techniques, reference and the craft behind great home cooking."
         />
         <link rel="canonical" href={collectionUrl} />
-        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
         <link rel="preload" as="image" href={heroImage} imageSrcSet={heroSrcSet} imageSizes="100vw" fetchPriority="high" />
         <script type="application/ld+json">{JSON.stringify(collectionJsonLd)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>

@@ -44,7 +44,6 @@ const GuideSeo = ({ slug }: Props) => {
 
       {/* Warm the connection for Pexels-hosted hero images */}
       {isPexels && (
-        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
       )}
       {/* Preload the guide's hero/key image so it's cached for the page,
           social previews and any in-page rendering */}
