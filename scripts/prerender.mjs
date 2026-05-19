@@ -8,7 +8,7 @@
 // without needing to execute JavaScript.
 
 import { createClient } from "@supabase/supabase-js";
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
