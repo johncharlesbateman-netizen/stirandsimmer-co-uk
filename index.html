@@ -21,6 +21,17 @@
       imagesizes="100vw"
       fetchpriority="high"
     />
+    <!-- Preload the body-text font file directly so it isn't blocked behind
+         fetching the Google Fonts CSS first. URL is the woff2 served by Google
+         for DM Sans 400 — stable for years; if Google ever rotates it the CSS
+         fallback below still loads the font, just one round-trip slower. -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K6z9mXg.woff2"
+      crossorigin
+    />
     <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700,400i,500i,700i&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript>
