@@ -155,6 +155,10 @@ const App = () => (
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />
             <Route
+              path="/admin/recipes"
+              element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminRecipes /></Suspense></RequireAdmin>}
+            />
+            <Route
               path="/admin/recipes/new"
               element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminNewRecipe /></Suspense></RequireAdmin>}
             />
