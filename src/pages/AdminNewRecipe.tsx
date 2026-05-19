@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { Upload, X, Plus, Loader2 } from "lucide-react";
+import { Upload, X, Plus, Loader2, ArrowUp, ArrowDown, CornerDownRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { CUISINE_REGIONS, type CuisineRegion } from "@/lib/cuisine-regions";
 import { MEAL_TYPES, type MealType } from "@/lib/meal-types";
@@ -395,6 +395,9 @@ const AdminNewRecipe = () => {
           {/* Instructions */}
           <div>
             <label className="block text-sm font-medium mb-2">Instructions *</label>
+            <p className="text-xs text-muted-foreground mb-3">
+              Use the arrows to reorder steps, or the inline + to insert a new step above the current one.
+            </p>
             <div className="space-y-2">
               {instructions.map((step, i) => (
                 <div key={i} className="flex gap-2">
@@ -406,21 +409,67 @@ const AdminNewRecipe = () => {
                     rows={2}
                     className="flex-1 px-3 py-2 rounded-md border border-input bg-background text-sm resize-y"
                   />
-                  <button
-                    type="button"
-                    onClick={() => removeListItem(instructions, setInstructions, i)}
-                    disabled={instructions.length === 1}
-                    className="px-3 border border-border rounded-md hover:bg-secondary disabled:opacity-30 self-start"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
+                  <div className="flex flex-col gap-1 self-start">
+                    <button
+                      type="button"
+                      title="Insert step above"
+                      onClick={() => {
+                        const next = [...instructions];
+                        next.splice(i, 0, "");
+                        setInstructions(next);
+                      }}
+                      className="px-2 py-1 border border-border rounded-md hover:bg-secondary"
+                    >
+                      <CornerDownRight className="w-3.5 h-3.5 rotate-180" />
+                    </button>
+                    <div className="flex gap-1">
+                      <button
+                        type="button"
+                        title="Move up"
+                        onClick={() => {
+                          if (i === 0) return;
+                          const next = [...instructions];
+                          [next[i - 1], next[i]] = [next[i], next[i - 1]];
+                          setInstructions(next);
+                        }}
+                        disabled={i === 0}
+                        className="px-2 py-1 border border-border rounded-md hover:bg-secondary disabled:opacity-30"
+                      >
+                        <ArrowUp className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        title="Move down"
+                        onClick={() => {
+                          if (i === instructions.length - 1) return;
+                          const next = [...instructions];
+                          [next[i + 1], next[i]] = [next[i], next[i + 1]];
+                          setInstructions(next);
+                        }}
+                        disabled={i === instructions.length - 1}
+                        className="px-2 py-1 border border-border rounded-md hover:bg-secondary disabled:opacity-30"
+                      >
+                        <ArrowDown className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      title="Remove step"
+                      onClick={() => removeListItem(instructions, setInstructions, i)}
+                      disabled={instructions.length === 1}
+                      className="px-2 py-1 border border-border rounded-md hover:bg-secondary disabled:opacity-30"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               ))}
               <Button type="button" variant="outline" size="sm" onClick={() => addListItem(instructions, setInstructions)}>
-                <Plus className="w-4 h-4" /> Add step
+                <Plus className="w-4 h-4" /> Add step at end
               </Button>
             </div>
           </div>
+
 
           {/* Tips */}
           <div>
