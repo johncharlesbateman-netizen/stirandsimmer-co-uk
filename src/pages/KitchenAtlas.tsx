@@ -91,16 +91,6 @@ const REGIONS: RegionDef[] = [
     regionTags: ["thai"],
   },
   {
-    id: "greece",
-    name: "Greece",
-    emoji: "🇬🇷",
-    bg: "hsl(var(--region-greece))",
-    available: false,
-    description:
-      "Olive oil, lemon, oregano and the generous, sun-drenched cooking of the Aegean.",
-    challenge: "Coming soon — moussaka, souvlaki, spanakopita and more.",
-  },
-  {
     id: "mediterranean",
     name: "Mediterranean",
     emoji: "🌊",
