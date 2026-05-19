@@ -686,7 +686,7 @@ const RecipeDetail = () => {
           <h2 className="print-title">{recipe.title}</h2>
           {recipe.description && <p className="print-description">{recipe.description}</p>}
           {recipe.image_url && (
-            <img src={recipe.image_url} alt={imageAlt} className="print-image" />
+            <img src={recipe.image_url} alt={imageAlt} className="print-image" loading="lazy" decoding="async" />
           )}
           <div className="print-meta">
             {recipe.prep_time_minutes ? (
@@ -731,7 +731,7 @@ const RecipeDetail = () => {
 
         {qrDataUrl && (
           <div className="print-qr">
-            <img src={qrDataUrl} alt="Scan to view recipe online" />
+            <img src={qrDataUrl} alt="Scan to view recipe online" loading="lazy" decoding="async" width={120} height={120} />
             <p>
               Scan to view this recipe online
               <span>{pageUrl}</span>

@@ -51,11 +51,12 @@ const InfiniteCarousel = ({ images, speed = 30 }: InfiniteCarouselProps) => {
               src={image.src}
               alt={image.alt}
               className="h-full w-auto object-cover"
-              loading="eager"
+              loading={index < 4 ? "eager" : "lazy"}
               decoding="async"
               width={500}
               height={500}
             />
+
           </div>
         ))}
       </div>
