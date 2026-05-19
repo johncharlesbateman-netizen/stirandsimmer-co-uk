@@ -209,32 +209,46 @@ function buildPrerenderedHtml(template, meta) {
   }
 
   // -------------------------------------------------------------------
-  // Static cookie consent skeleton.
+  // Cookie consent banner — fully static + vanilla JS.
   //
-  // Lighthouse attributed the page's remaining CLS (~0.09) to the cookie
-  // banner because React mounts it ~600 ms after first paint. By emitting
-  // a pixel-identical skeleton into the prerendered HTML, the banner is
-  // present in the initial paint and contributes 0 to CLS. An inline
-  // script removes the skeleton synchronously if the user has already
-  // chosen — so returning visitors never see a flash. React's
-  // CookieConsent component then strips whatever skeleton remains on
-  // mount and renders its interactive version.
+  // CLS-wise, the cheapest banner is one that is present in the first
+  // paint and never re-inserted. So we render the banner here (matching
+  // the React component's visuals) and wire its buttons with a tiny
+  // inline script: Accept / Reject write localStorage and remove the
+  // node; Manage preferences toggles the secondary view. The matching
+  // React component (src/components/CookieConsent.tsx) becomes a no-op
+  // in production via the window.__hasStaticCookieBanner flag below.
   // -------------------------------------------------------------------
   const cookieSkeleton = `
-    <div id="cc-static" role="dialog" aria-live="polite" aria-label="Cookie consent" class="fixed bottom-0 left-0 right-0 z-[55] px-4 pb-4 pt-3 md:px-6 md:pb-6" style="position:fixed;bottom:0;left:0;right:0;z-index:55;padding:0.75rem 1rem 1rem;">
-      <div style="margin:0 auto;max-width:48rem;border-radius:0.5rem;border:1px solid rgba(245,234,214,0.12);box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);padding:1rem 1.25rem;background-color:#1a0e00;color:#f5ead6;display:flex;flex-direction:column;gap:1rem;">
-        <div style="flex:1;font-size:0.875rem;line-height:1.6;color:#f5ead6;">
-          We use cookies to improve your experience, analyse traffic and show relevant content. See our <a href="/privacy" style="color:#f5ead6;text-decoration:underline;text-underline-offset:2px;">privacy policy</a>.
+    <div id="cc-static" role="dialog" aria-live="polite" aria-label="Cookie consent" style="position:fixed;bottom:0;left:0;right:0;z-index:55;padding:0.75rem 1rem 1rem;">
+      <div style="margin:0 auto;max-width:48rem;border-radius:0.5rem;border:1px solid rgba(245,234,214,0.12);box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);padding:1rem 1.25rem;background-color:#1a0e00;color:#f5ead6;">
+        <div id="cc-main" style="display:flex;flex-direction:column;gap:1rem;">
+          <div style="flex:1;font-size:0.875rem;line-height:1.6;color:#f5ead6;">
+            We use cookies to improve your experience, analyse traffic and show relevant content. See our <a href="/privacy" style="color:#f5ead6;text-decoration:underline;text-underline-offset:2px;">privacy policy</a>.
+          </div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem 1.25rem;">
+            <button type="button" data-cc-action="prefs" style="background:none;border:0;padding:0;font-size:0.875rem;text-decoration:underline;text-underline-offset:2px;color:rgba(245,234,214,0.7);cursor:pointer;font-family:inherit;">Manage preferences</button>
+            <button type="button" data-cc-action="reject" style="background:none;border:0;padding:0;font-size:0.875rem;text-decoration:underline;text-underline-offset:2px;color:rgba(245,234,214,0.7);cursor:pointer;font-family:inherit;">Reject all</button>
+            <button type="button" data-cc-action="accept" style="display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:0.375rem;padding:0.625rem 1.25rem;font-size:0.875rem;font-weight:600;letter-spacing:0.025em;background-color:#C97B1A;color:#1a0e00;cursor:pointer;font-family:inherit;">Accept all</button>
+          </div>
         </div>
-        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem 1.25rem;">
-          <span style="font-size:0.875rem;text-decoration:underline;text-underline-offset:2px;color:rgba(245,234,214,0.7);">Manage preferences</span>
-          <span style="font-size:0.875rem;text-decoration:underline;text-underline-offset:2px;color:rgba(245,234,214,0.7);">Reject all</span>
-          <span style="display:inline-flex;align-items:center;justify-content:center;border-radius:0.375rem;padding:0.625rem 1.25rem;font-size:0.875rem;font-weight:600;letter-spacing:0.025em;background-color:#C97B1A;color:#1a0e00;">Accept all</span>
+        <div id="cc-prefs" style="display:none;font-size:0.875rem;color:#f5ead6;">
+          <h2 style="font-family:'Boska','Boska Fallback',Georgia,serif;font-size:1.125rem;margin:0 0 0.5rem;color:#f5ead6;">Cookie preferences</h2>
+          <ul style="margin:0 0 0.75rem;padding-left:1rem;">
+            <li style="margin-bottom:0.25rem;"><strong>Essential</strong> <span style="color:rgba(245,234,214,0.75);">&mdash; always on. Required for the site to work.</span></li>
+            <li><strong>Analytics &amp; marketing</strong> <span style="color:rgba(245,234,214,0.75);">&mdash; help us improve the site and show relevant content.</span></li>
+          </ul>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem 1.25rem;">
+            <button type="button" data-cc-action="back" style="background:none;border:0;padding:0;font-size:0.875rem;text-decoration:underline;text-underline-offset:2px;color:rgba(245,234,214,0.7);cursor:pointer;font-family:inherit;">Back</button>
+            <button type="button" data-cc-action="reject" style="background:none;border:0;padding:0;font-size:0.875rem;text-decoration:underline;text-underline-offset:2px;color:rgba(245,234,214,0.7);cursor:pointer;font-family:inherit;">Essential only</button>
+            <button type="button" data-cc-action="accept" style="display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:0.375rem;padding:0.625rem 1.25rem;font-size:0.875rem;font-weight:600;letter-spacing:0.025em;background-color:#C97B1A;color:#1a0e00;cursor:pointer;font-family:inherit;">Accept all</button>
+          </div>
         </div>
       </div>
     </div>
-    <script>(function(){try{var v=localStorage.getItem('ss_cookie_consent_v1');if(v==='all'||v==='essential'){var e=document.getElementById('cc-static');if(e)e.parentNode.removeChild(e);}}catch(e){}})();</script>`;
+    <script>(function(){window.__hasStaticCookieBanner=true;var K='ss_cookie_consent_v1';try{var v=localStorage.getItem(K);if(v==='all'||v==='essential'){var e=document.getElementById('cc-static');if(e)e.parentNode.removeChild(e);return;}}catch(e){}var root=document.getElementById('cc-static');if(!root)return;root.addEventListener('click',function(ev){var t=ev.target;while(t&&t!==root&&!t.getAttribute('data-cc-action'))t=t.parentNode;if(!t||t===root)return;var a=t.getAttribute('data-cc-action');if(a==='prefs'){document.getElementById('cc-main').style.display='none';document.getElementById('cc-prefs').style.display='block';}else if(a==='back'){document.getElementById('cc-prefs').style.display='none';document.getElementById('cc-main').style.display='flex';}else if(a==='accept'||a==='reject'){try{localStorage.setItem(K,a==='accept'?'all':'essential');}catch(e){}root.parentNode&&root.parentNode.removeChild(root);}});})();</script>`;
   html = html.replace(/<\/body>/i, `${cookieSkeleton}\n  </body>`);
+
 
   return html;
 }

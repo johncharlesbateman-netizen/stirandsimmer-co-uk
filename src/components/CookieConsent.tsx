@@ -33,12 +33,13 @@ const CookieConsent = () => {
   const [showPrefs, setShowPrefs] = useState(false);
 
   useEffect(() => {
-    // The prerendered HTML ships a static skeleton (#cc-static) so the
-    // banner is part of the first paint and contributes 0 to CLS. Remove
-    // it as soon as React is ready to render the real, interactive one —
-    // or leave the inline-script removal alone for already-consented users.
-    const skeleton = document.getElementById("cc-static");
-    if (skeleton) skeleton.remove();
+    // In production, the prerender emits a fully interactive static
+    // banner (#cc-static) and sets window.__hasStaticCookieBanner. That
+    // banner owns the UX end-to-end, so React should not duplicate it.
+    if (typeof window !== "undefined" && (window as unknown as { __hasStaticCookieBanner?: boolean }).__hasStaticCookieBanner) {
+      return;
+    }
+    // Dev / non-prerendered fallback: render the React banner as before.
     if (readChoice() === null) setVisible(true);
   }, []);
 
