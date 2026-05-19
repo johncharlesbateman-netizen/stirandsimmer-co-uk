@@ -43,15 +43,21 @@ interface TransformOpts {
 }
 
 /**
- * Build an optimised image URL. For Supabase Storage URLs, this rewrites the
- * path to the image renderer and serves WebP. For other URLs (local imports,
- * external CDNs), the original URL is returned unchanged.
+ * Build an optimised image URL. For Supabase Storage and Wix media URLs,
+ * rewrites the URL to serve a properly sized WebP/AVIF variant. For any
+ * other URL (local imports, unknown external CDNs), the original is returned
+ * unchanged.
  */
 export const optimisedImage = (
   src: string | null | undefined,
   opts: TransformOpts = {},
 ): string => {
   if (!src) return "";
+
+  if (isWixUrl(src)) {
+    return transformWixUrl(src, opts);
+  }
+
   if (!isSupabaseStorageUrl(src)) return src;
 
   const base = toRenderUrl(src);
@@ -74,7 +80,8 @@ export const responsiveSrcSet = (
   widths: number[],
   opts: Omit<TransformOpts, "width"> = {},
 ): string => {
-  if (!src || !isSupabaseStorageUrl(src)) return "";
+  if (!src) return "";
+  if (!isSupabaseStorageUrl(src) && !isWixUrl(src)) return "";
   return widths
     .map((w) => `${optimisedImage(src, { ...opts, width: w })} ${w}w`)
     .join(", ");
