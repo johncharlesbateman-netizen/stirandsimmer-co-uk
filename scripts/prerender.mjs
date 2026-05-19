@@ -278,6 +278,57 @@ export async function prerenderRoutes() {
     return;
   }
 
+  // ---------- Inline the CSS bundle ----------
+  // Vite emits a single render-blocking stylesheet at /assets/index-*.css
+  // (~17 KiB transferred, ~80 KiB unminified). Lighthouse measured 400 ms
+  // of LCP delay waiting for it. Inlining it into <head> removes the
+  // critical-path request entirely so the prerendered hero <img> can paint
+  // as soon as the HTML lands — no extra round-trip.
+  //
+  // Trade-off: we ship the same CSS in every prerendered HTML file (~5 KiB
+  // gzipped each). For 350 prerendered routes that's ~1.7 MB of total
+  // duplicated bytes across the whole site, but each individual cold-load
+  // only pays for one copy — a clear win for LCP.
+  try {
+    const assetsDir = resolve(distDir, "assets");
+    const cssFile = readdirSync(assetsDir).find(
+      (f) => f.startsWith("index-") && f.endsWith(".css"),
+    );
+    if (cssFile) {
+      const cssPath = resolve(assetsDir, cssFile);
+      const css = readFileSync(cssPath, "utf-8");
+      const cssHref = `/assets/${cssFile}`;
+      // Strip the original render-blocking <link rel="stylesheet"> for this
+      // bundle (Vite inserts it in <head>) and replace with an inline
+      // <style> block. We keep a deferred <link> in <noscript> so users
+      // without JS still get the styles via the standard mechanism, and a
+      // preload-as-style swap so the browser caches the external file for
+      // subsequent navigations (where CSS hashing means it'll match).
+      const linkRe = new RegExp(
+        `<link\\s+rel=["']stylesheet["']\\s+[^>]*href=["']${cssHref.replace(
+          /[.*+?^${}()|[\]\\]/g,
+          "\\$&",
+        )}["'][^>]*>`,
+        "i",
+      );
+      const inlined =
+        `<style data-inlined-bundle>${css}</style>\n    ` +
+        `<link rel="preload" as="style" href="${cssHref}" onload="this.onload=null;this.rel='stylesheet'" />\n    ` +
+        `<noscript><link rel="stylesheet" href="${cssHref}" /></noscript>`;
+      if (linkRe.test(template)) {
+        template = template.replace(linkRe, inlined);
+        console.log(`[prerender] Inlined ${(css.length / 1024).toFixed(1)} KiB of CSS from ${cssFile}.`);
+      } else {
+        console.warn(`[prerender] CSS <link> for ${cssHref} not found in template — skipping inline.`);
+      }
+    } else {
+      console.warn("[prerender] No index-*.css found in dist/assets — skipping inline.");
+    }
+  } catch (e) {
+    console.warn("[prerender] CSS inline failed:", e.message);
+  }
+
+
   const routes = [];
 
   for (const r of STATIC_ROUTES) {
