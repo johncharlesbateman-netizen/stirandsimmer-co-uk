@@ -44,6 +44,10 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
+    // Build-time image variants for bundled assets. Use `?as=srcset` to import
+    // a ready-made srcset string, or `?w=600;1200&format=webp&as=picture` for
+    // a <picture>-friendly object.
+    imagetools({ defaultDirectives: () => new URLSearchParams() }),
     mode === "development" && componentTagger(),
     sitemapPlugin(),
     prerenderPlugin(),
