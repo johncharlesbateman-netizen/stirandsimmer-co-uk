@@ -190,9 +190,13 @@ function buildPrerenderedHtml(template, meta) {
   html = html.replace(/<\/head>/i, `${tags.join("\n    ")}\n  </head>`);
 
   if (injectHero) {
-    const base = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp";
-    const srcset = [480, 768, 1024, 1280, 1600].map((w) => `${base}&amp;w=${w} ${w}w`).join(", ");
-    const heroImg = `<img id="lcp-hero" src="${base}&amp;w=1280" srcset="${srcset}" sizes="100vw" alt="Rustic table laid with freshly cooked dishes, herbs and warm natural light" fetchpriority="high" decoding="async" width="1600" height="1067" />`;
+    // Self-hosted hero (same origin as the HTML). Files live under
+    // /public/hero/ and are emitted at build time by the original Pexels
+    // download → sharp WebP pipeline. Keeping this same-origin lets the
+    // browser reuse the HTML connection and skips the ~1 s third-party
+    // DNS+TLS+CDN-render hop that was dominating LCP.
+    const srcset = [480, 768, 1024, 1280, 1600].map((w) => `/hero/hero-${w}.webp ${w}w`).join(", ");
+    const heroImg = `<img id="lcp-hero" src="/hero/hero-1280.webp" srcset="${srcset}" sizes="100vw" alt="Rustic table laid with freshly cooked dishes, herbs and warm natural light" fetchpriority="high" decoding="async" width="1600" height="1067" />`;
     // Bundled dark overlay so the bootstrap image reads correctly against
     // light text — replicates the React hero's `bg-black/60` so the page
     // looks identical with or without the React img above it.

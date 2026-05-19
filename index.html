@@ -9,22 +9,20 @@
     <meta name="google-site-verification" content="pnnjNOShptmR1bVZIthOLf6n4TJp7qvu-j-3xFo7iPk" />
     <link rel="canonical" href="https://stirandsimmer.co.uk/" />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    <!-- Pexels and Supabase image fetches are non-CORS, so the preconnect
-         must NOT carry the crossorigin flag — otherwise the browser opens
-         a connection in the "anonymous CORS" bucket and the image request
-         (which is in the "no CORS" bucket) can't reuse it. Lighthouse
-         flagged this as 300 ms of wasted LCP. -->
-    <link rel="preconnect" href="https://images.pexels.com" />
-    <link rel="preconnect" href="https://xlekynbjvcfbfqycjnpj.supabase.co" />
-    <!-- Separate crossorigin preconnect for Supabase REST API (CORS). -->
+    <!-- Supabase REST API preconnect (CORS for the recipes query). -->
     <link rel="preconnect" href="https://xlekynbjvcfbfqycjnpj.supabase.co" crossorigin />
+    <!-- LCP hero is self-hosted (same origin as the HTML). Same-origin
+         WebP at ~63 KiB reuses the open HTML connection and avoids the
+         third-party DNS+TLS+image-render hop that was costing ~1.5 s of
+         LCP "element render delay" on Slow 4G. -->
     <link
       rel="preload"
       as="image"
-      href="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=768"
-      imagesrcset="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=480 480w, https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=768 768w, https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=1024 1024w, https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=1280 1280w, https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=1600 1600w"
+      href="/hero/hero-768.webp"
+      imagesrcset="/hero/hero-480.webp 480w, /hero/hero-768.webp 768w, /hero/hero-1024.webp 1024w, /hero/hero-1280.webp 1280w, /hero/hero-1600.webp 1600w"
       imagesizes="100vw"
       fetchpriority="high"
+      type="image/webp"
     />
     <!-- Self-hosted DM Sans. Preload the latin upright weight (used by 95% of
          body copy) so it starts downloading immediately, with no extra DNS /
