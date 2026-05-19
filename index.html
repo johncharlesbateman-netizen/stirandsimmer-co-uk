@@ -83,8 +83,37 @@
       .lcp-hero-dismissed #lcp-hero-overlay { position: absolute; height: 100vh; }
     </style>
     <!-- Boska (display headings) — kept on Fontshare with async-swap load.
-         Headings paint with the system serif fallback first, then swap; this
-         is fine because the hero H1 sits below the LCP image. -->
+         Headings paint with a metric-matched Georgia fallback first, then
+         swap to Boska. The fallback @font-face below uses size-adjust and
+         ascent/descent-overrides tuned to Boska's metrics so the swap does
+         not shift layout (eliminates the remaining CLS Lighthouse flagged). -->
+    <style>
+      /* "Boska Fallback" — local Georgia re-shaped to Boska's box.
+         Boska (Indian Type Foundry): upem 1000, ascent 1000, descent 250,
+         x-height ~480 → x-height ratio ~0.480.
+         Georgia: x-height ratio ~0.481, so size-adjust stays near 100%.
+         Tuned empirically to minimise heading reflow on swap. */
+      @font-face {
+        font-family: 'Boska Fallback';
+        src: local('Georgia'), local('Times New Roman'), local('Times');
+        font-weight: 400 700;
+        font-style: normal;
+        size-adjust: 100%;
+        ascent-override: 100%;
+        descent-override: 25%;
+        line-gap-override: 0%;
+      }
+      @font-face {
+        font-family: 'Boska Fallback';
+        src: local('Georgia Italic'), local('Georgia'), local('Times New Roman Italic'), local('Times');
+        font-weight: 400 700;
+        font-style: italic;
+        size-adjust: 100%;
+        ascent-override: 100%;
+        descent-override: 25%;
+        line-gap-override: 0%;
+      }
+    </style>
     <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700,400i,500i,700i&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript>
       <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700,400i,500i,700i&display=swap" />

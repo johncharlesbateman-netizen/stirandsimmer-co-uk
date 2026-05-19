@@ -196,7 +196,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Boska', serif;
+    font-family: 'Boska', 'Boska Fallback', Georgia, serif;
   }
 
   /* Smooth transitions for all interactive elements */
@@ -347,19 +347,19 @@
 
   /* Large editorial headings — capped per design spec */
   .heading-display {
-    font-family: 'Boska', serif;
+    font-family: 'Boska', 'Boska Fallback', Georgia, serif;
     font-size: clamp(2rem, 5vw, 3rem); /* 32px → 48px */
     @apply font-medium tracking-tight leading-tight;
   }
 
   .heading-editorial {
-    font-family: 'Boska', serif;
+    font-family: 'Boska', 'Boska Fallback', Georgia, serif;
     font-size: clamp(1.5rem, 3.5vw, 2rem); /* 24px → 32px */
     @apply font-medium tracking-tight leading-tight;
   }
 
   .heading-section {
-    font-family: 'Boska', serif;
+    font-family: 'Boska', 'Boska Fallback', Georgia, serif;
     font-size: clamp(1.25rem, 3vw, 1.75rem); /* 20px → 28px */
     @apply font-medium leading-snug;
   }
@@ -421,7 +421,7 @@
   }
 
   .print-recipe-card .print-title {
-    font-family: 'Boska', serif;
+    font-family: 'Boska', 'Boska Fallback', Georgia, serif;
     font-size: 24pt;
     margin: 0 0 8pt 0;
     padding-bottom: 0;
@@ -473,7 +473,7 @@
   }
 
   .print-recipe-card h2 {
-    font-family: 'Boska', serif;
+    font-family: 'Boska', 'Boska Fallback', Georgia, serif;
     font-size: 14pt;
     margin: 14pt 0 8pt 0;
     padding-bottom: 4pt;
