@@ -311,9 +311,13 @@ export async function prerenderRoutes() {
         )}["'][^>]*>`,
         "i",
       );
+      // Inline the bundle and DROP the external <link> entirely from the
+      // critical path — the styles are already in the HTML, so any extra
+      // request just delays render (Lighthouse flagged the preload-swap
+      // variant as 340 ms of render-blocking). <noscript> keeps a
+      // standards-compliant fallback for the no-JS path.
       const inlined =
         `<style data-inlined-bundle>${css}</style>\n    ` +
-        `<link rel="preload" as="style" href="${cssHref}" onload="this.onload=null;this.rel='stylesheet'" />\n    ` +
         `<noscript><link rel="stylesheet" href="${cssHref}" /></noscript>`;
       if (linkRe.test(template)) {
         template = template.replace(linkRe, inlined);
