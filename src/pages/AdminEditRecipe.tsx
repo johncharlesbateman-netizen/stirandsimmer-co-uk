@@ -312,7 +312,7 @@ const AdminEditRecipe = () => {
             <label className="block text-sm font-medium mb-2">Photo</label>
             {imagePreview ? (
               <div className="relative inline-block">
-                <img src={imagePreview} alt="Preview" className="w-64 h-48 object-cover rounded-md border border-border" />
+                <img src={imagePreview} alt="Preview" loading="lazy" decoding="async" width={256} height={192} className="w-64 h-48 object-cover rounded-md border border-border" />
                 <button
                   type="button"
                   onClick={() => { setImageFile(null); setImagePreview(existingImageUrl); }}
