@@ -33,7 +33,7 @@ const GuideSeo = ({ slug }: Props) => {
   // BreadcrumbList JSON-LD is emitted by the shared <Breadcrumbs> component
   // rendered in each guide's hero — keeping it there avoids duplicates.
 
-  const isPexels = meta.image.includes("images.pexels.com");
+  // (preconnect hints live in index.html)
 
   return (
     <Helmet>
