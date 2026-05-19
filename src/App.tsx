@@ -22,6 +22,7 @@ import KitchenAtlas from "./pages/KitchenAtlas";
 import MealPlanner from "./pages/MealPlanner";
 // Admin routes are lazy-loaded so their bundle isn't shipped to public visitors.
 const AdminNewRecipe = lazy(() => import("./pages/AdminNewRecipe"));
+const AdminRecipes = lazy(() => import("./pages/AdminRecipes"));
 const AdminEditRecipe = lazy(() => import("./pages/AdminEditRecipe"));
 const AdminSeoStatus = lazy(() => import("./pages/AdminSeoStatus"));
 const AdminTaggingAudit = lazy(() => import("./pages/AdminTaggingAudit"));
@@ -153,6 +154,10 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/auth" element={<Auth />} />
+            <Route
+              path="/admin/recipes"
+              element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminRecipes /></Suspense></RequireAdmin>}
+            />
             <Route
               path="/admin/recipes/new"
               element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminNewRecipe /></Suspense></RequireAdmin>}
