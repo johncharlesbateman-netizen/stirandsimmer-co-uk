@@ -19,12 +19,13 @@ const FEATURED_SLUGS = [
   "prawn-and-chorizo-rice",
 ];
 
-const heroPexelsBase = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp";
-const heroImage = `${heroPexelsBase}&w=1280`;
+// Self-hosted hero — emitted to /public/hero/ as same-origin WebP. Avoids
+// the third-party DNS+TLS+CDN render hop that was costing ~1 s of LCP.
+const heroImage = "/hero/hero-1280.webp";
 const heroImageSrcSet = [480, 768, 1024, 1280, 1600]
-  .map((w) => `${heroPexelsBase}&w=${w} ${w}w`)
+  .map((w) => `/hero/hero-${w}.webp ${w}w`)
   .join(", ");
-const heroImageSizes = "(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1600px";
+const heroImageSizes = "100vw";
 
 const Index = () => {
   const recipeCount = useRecipeCount();
