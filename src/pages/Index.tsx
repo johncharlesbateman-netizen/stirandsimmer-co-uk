@@ -112,21 +112,27 @@ const Index = () => {
       </Helmet>
       {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden" style={{ marginTop: '-5rem' }}>
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            srcSet={heroImageSrcSet}
-            sizes="100vw"
-            alt="Rustic table laid with freshly cooked dishes, herbs and warm natural light"
-            fetchPriority="high"
-            decoding="async"
-            width={1600}
-            height={1067}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
+        {/* Background image — only rendered when the prerendered bootstrap
+            hero isn't present (i.e. dev / local). In production the static
+            <img id="lcp-hero"> + overlay injected by scripts/prerender.mjs
+            already cover the viewport, and re-rendering them here would
+            cause Chrome to re-pick the LCP candidate. */}
+        {!hasBootstrapHero && (
+          <div className="absolute inset-0">
+            <img
+              src={heroImage}
+              srcSet={heroImageSrcSet}
+              sizes="100vw"
+              alt="Rustic table laid with freshly cooked dishes, herbs and warm natural light"
+              fetchPriority="high"
+              decoding="async"
+              width={1600}
+              height={1067}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
+        )}
 
         {/* Hero Content */}
         <div className="relative z-10 text-center text-primary-foreground px-6 max-w-4xl">
