@@ -33,11 +33,13 @@ const CookieConsent = () => {
   const [showPrefs, setShowPrefs] = useState(false);
 
   useEffect(() => {
-    if (readChoice() === null) {
-      // Defer slightly so it doesn't compete with first paint.
-      const t = window.setTimeout(() => setVisible(true), 600);
-      return () => window.clearTimeout(t);
-    }
+    // The prerendered HTML ships a static skeleton (#cc-static) so the
+    // banner is part of the first paint and contributes 0 to CLS. Remove
+    // it as soon as React is ready to render the real, interactive one —
+    // or leave the inline-script removal alone for already-consented users.
+    const skeleton = document.getElementById("cc-static");
+    if (skeleton) skeleton.remove();
+    if (readChoice() === null) setVisible(true);
   }, []);
 
   const acceptAll = () => {
