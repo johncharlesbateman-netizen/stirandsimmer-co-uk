@@ -4,12 +4,19 @@ import Layout from "@/components/Layout";
 import { ArrowRight } from "lucide-react";
 import { GUIDES_IN_ORDER, SITE_ORIGIN } from "@/lib/guideMeta";
 import properStockImage from "@/assets/guide-proper-stock.webp";
+import properStockSrcSet from "@/assets/guide-proper-stock.webp?w=400;600;800;1200&format=webp&as=srcset";
 import properSauceImage from "@/assets/guide-proper-sauce.webp";
+import properSauceSrcSet from "@/assets/guide-proper-sauce.webp?w=400;600;800;1200&format=webp&as=srcset";
 import choosingPansImage from "@/assets/guide-choosing-pans.webp";
+import choosingPansSrcSet from "@/assets/guide-choosing-pans.webp?w=400;600;800;1200&format=webp&as=srcset";
 import kitchenKnivesImage from "@/assets/guide-kitchen-knives.webp";
+import kitchenKnivesSrcSet from "@/assets/guide-kitchen-knives.webp?w=400;600;800;1200&format=webp&as=srcset";
 import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.webp";
+import howToCookPastaSrcSet from "@/assets/guide-how-to-cook-pasta-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
 import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.webp";
+import howToMakeBreadSrcSet from "@/assets/guide-how-to-make-bread-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
 import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.webp";
+import whatToCookInSummerSrcSet from "@/assets/guide-what-to-cook-in-summer-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
 
 // Local fallback used if a remote (Pexels) card image fails to load.
 const CARD_FALLBACK = properStockImage;
@@ -30,6 +37,7 @@ type GuideEntry = {
   eyebrow: string;
   imageId?: string;
   image?: string;
+  imageSrcSet?: string;
   imageAlt: string;
 };
 
@@ -77,6 +85,7 @@ const GUIDES: GuideEntry[] = [
       "The quiet foundation of good cooking — bones, mirepoix, water and time, and how to turn them into something your sauces and soups can lean on.",
     eyebrow: "Technique",
     image: properStockImage,
+    imageSrcSet: properStockSrcSet,
     imageAlt: "A pot of golden chicken stock simmering with bones, vegetables and herbs",
   },
   {
@@ -86,6 +95,7 @@ const GUIDES: GuideEntry[] = [
       "The building blocks, the techniques, and the small details that turn a thin pan liquid into something glossy, balanced and worth mopping up.",
     eyebrow: "Technique",
     image: properSauceImage,
+    imageSrcSet: properSauceSrcSet,
     imageAlt: "A glossy dark pan sauce being whisked in a copper saucepan",
   },
   {
@@ -95,6 +105,7 @@ const GUIDES: GuideEntry[] = [
       "The materials, the shapes, and which pans actually earn their place in a home kitchen — a practical guide to building a collection that lasts.",
     eyebrow: "Equipment Guide",
     image: choosingPansImage,
+    imageSrcSet: choosingPansSrcSet,
     imageAlt: "An overhead arrangement of cast iron, copper and stainless steel pans on a dark surface",
   },
   {
@@ -104,6 +115,7 @@ const GUIDES: GuideEntry[] = [
       "The blades worth owning, how to hold them, how to keep them sharp, and how to choose ones that will last a lifetime.",
     eyebrow: "Equipment Guide",
     image: kitchenKnivesImage,
+    imageSrcSet: kitchenKnivesSrcSet,
     imageAlt: "An overhead arrangement of kitchen knives on a dark cutting board",
   },
   {
@@ -122,6 +134,7 @@ const GUIDES: GuideEntry[] = [
       "How to choose the shape, salt the water, time it right, save the cooking water and finish it in the sauce — the small habits that change everything.",
     eyebrow: "Kitchen Essentials",
     image: howToCookPastaImage,
+    imageSrcSet: howToCookPastaSrcSet,
     imageAlt: "Spaghetti being twirled in a pan of glossy tomato sauce with basil and parmesan",
   },
   {
@@ -131,6 +144,7 @@ const GUIDES: GuideEntry[] = [
       "The four ingredients, the flours, the yeasts, the method and the mistakes — everything you need to bake a proper loaf at home.",
     eyebrow: "Kitchen Essentials",
     image: howToMakeBreadImage,
+    imageSrcSet: howToMakeBreadSrcSet,
     imageAlt: "A freshly baked rustic sourdough loaf with an open crumb, sliced on a dark wooden board",
   },
   {
@@ -140,6 +154,7 @@ const GUIDES: GuideEntry[] = [
       "What's in season in the UK, how to build a proper salad, grilling done well, summer herbs, soft fruit and five dishes every cook should know.",
     eyebrow: "Seasonal",
     image: whatToCookInSummerImage,
+    imageSrcSet: whatToCookInSummerSrcSet,
     imageAlt: "A sunlit summer table with grilled vegetables, ripe tomatoes, peaches, fresh herbs and a jug of iced drink",
   },
 ];
@@ -228,7 +243,7 @@ const Guides = () => {
               >
                 <img
                   src={g.image ?? pexels(g.imageId!, 800)}
-                  srcSet={g.image ? undefined : pexelsSrcSet(g.imageId!, [400, 600, 800, 1200])}
+                  srcSet={g.imageSrcSet ?? (g.image ? undefined : pexelsSrcSet(g.imageId!, [400, 600, 800, 1200]))}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   alt={g.imageAlt}
                   loading="lazy"
