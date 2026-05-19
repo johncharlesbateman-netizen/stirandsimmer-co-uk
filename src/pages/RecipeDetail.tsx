@@ -731,7 +731,7 @@ const RecipeDetail = () => {
 
         {qrDataUrl && (
           <div className="print-qr">
-            <img src={qrDataUrl} alt="Scan to view recipe online" />
+            <img src={qrDataUrl} alt="Scan to view recipe online" loading="lazy" decoding="async" width={120} height={120} />
             <p>
               Scan to view this recipe online
               <span>{pageUrl}</span>
