@@ -115,18 +115,6 @@ const REGIONS: RegionDef[] = [
     regionTags: ["middle-eastern"],
   },
   {
-    id: "japan",
-    name: "Japan",
-    emoji: "🇯🇵",
-    bg: "hsl(var(--region-japan))",
-    available: true,
-    description:
-      "Precision, balance and the art of umami. Japanese cooking at its finest.",
-    challenge:
-      "This week — cook a Japanese dish. Browse our [Japanese collection](/recipes/region/japan) for inspiration.",
-    regionTags: ["japanese"],
-  },
-  {
     id: "mexico",
     name: "Mexico",
     emoji: "🇲🇽",
