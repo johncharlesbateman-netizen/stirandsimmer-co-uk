@@ -1,17 +1,39 @@
-// Image transformation helpers for Supabase Storage.
-// Uses the built-in image renderer to deliver WebP + responsive sizes,
-// improving LCP and reducing bandwidth on mobile.
+// Image transformation helpers for remote image hosts we serve from.
+// Currently handles Supabase Storage and Wix media — both expose URL-based
+// transformations to deliver WebP + correctly sized variants, which cuts
+// LCP and bandwidth dramatically on mobile.
 //
-// Docs: https://supabase.com/docs/guides/storage/serving/image-transformations
+// Docs:
+//   Supabase: https://supabase.com/docs/guides/storage/serving/image-transformations
+//   Wix: https://dev.wix.com/docs/sdk/articles/media/images
 
 const SUPABASE_RENDER_PATH = "/storage/v1/render/image/public/";
 const SUPABASE_OBJECT_PATH = "/storage/v1/object/public/";
+const WIX_HOST = "static.wixstatic.com";
 
 const isSupabaseStorageUrl = (url: string): boolean =>
   url.includes(SUPABASE_OBJECT_PATH) || url.includes(SUPABASE_RENDER_PATH);
 
+const isWixUrl = (url: string): boolean => url.includes(WIX_HOST);
+
 const toRenderUrl = (url: string): string =>
   url.replace(SUPABASE_OBJECT_PATH, SUPABASE_RENDER_PATH);
+
+// Rewrites a Wix media URL's transform segment to request a smaller WebP/AVIF
+// variant (via enc_auto, which content-negotiates on the Accept header).
+// Wix URLs look like:
+//   .../media/<id>~mv2.jpeg/v1/fill/w_3024,h_4032,al_c,q_90/<name>.jpeg
+const transformWixUrl = (url: string, opts: TransformOpts): string => {
+  const width = opts.width ?? 800;
+  const height = opts.height ?? Math.round(width * 0.75);
+  const quality = Math.min(Math.max(opts.quality ?? 75, 20), 90);
+  // Match /v1/<mode>/<segment>/ — segment is the comma-list of options.
+  return url.replace(
+    /\/v1\/(fill|fit|crop|scale_to_fill|scale_to_fit)\/[^/]+/i,
+    (_m, mode) =>
+      `/v1/${mode}/w_${width},h_${height},al_c,q_${quality},enc_auto`,
+  );
+};
 
 interface TransformOpts {
   width?: number;
@@ -21,15 +43,21 @@ interface TransformOpts {
 }
 
 /**
- * Build an optimised image URL. For Supabase Storage URLs, this rewrites the
- * path to the image renderer and serves WebP. For other URLs (local imports,
- * external CDNs), the original URL is returned unchanged.
+ * Build an optimised image URL. For Supabase Storage and Wix media URLs,
+ * rewrites the URL to serve a properly sized WebP/AVIF variant. For any
+ * other URL (local imports, unknown external CDNs), the original is returned
+ * unchanged.
  */
 export const optimisedImage = (
   src: string | null | undefined,
   opts: TransformOpts = {},
 ): string => {
   if (!src) return "";
+
+  if (isWixUrl(src)) {
+    return transformWixUrl(src, opts);
+  }
+
   if (!isSupabaseStorageUrl(src)) return src;
 
   const base = toRenderUrl(src);
@@ -52,7 +80,8 @@ export const responsiveSrcSet = (
   widths: number[],
   opts: Omit<TransformOpts, "width"> = {},
 ): string => {
-  if (!src || !isSupabaseStorageUrl(src)) return "";
+  if (!src) return "";
+  if (!isSupabaseStorageUrl(src) && !isWixUrl(src)) return "";
   return widths
     .map((w) => `${optimisedImage(src, { ...opts, width: w })} ${w}w`)
     .join(", ");

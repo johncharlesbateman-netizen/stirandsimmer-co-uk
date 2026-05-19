@@ -9,6 +9,7 @@ import { mergeIngredients } from "@/lib/ingredientMerger";
 import { isSectionHeader } from "@/lib/ingredient-utils";
 import { cn } from "@/lib/utils";
 import { RECIPE_TILES } from "@/lib/recipe-tiles";
+import { optimisedImage } from "@/lib/image-utils";
 import type { Tables } from "@/integrations/supabase/types";
 import {
   AlertDialog,
@@ -662,7 +663,7 @@ const MealPlanner = () => {
                     >
                       <div className="w-10 h-10 rounded-md bg-secondary overflow-hidden flex-shrink-0">
                         {recipe.image_url ? (
-<img src={recipe.image_url} alt={recipe.title} loading="lazy" decoding="async" width={40} height={40} className="w-full h-full object-cover" />
+<img src={optimisedImage(recipe.image_url, { width: 80, height: 80 })} alt={recipe.title} loading="lazy" decoding="async" width={40} height={40} className="w-full h-full object-cover" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-lg">🍽️</div>
                         )}
@@ -782,7 +783,7 @@ const MealPlanner = () => {
                         >
                           <div className="w-10 h-10 rounded-md bg-secondary overflow-hidden flex-shrink-0">
                             {recipe.image_url ? (
-                              <img src={recipe.image_url} alt={recipe.title} loading="lazy" decoding="async" width={40} height={40} className="w-full h-full object-cover" />
+                              <img src={optimisedImage(recipe.image_url, { width: 80, height: 80 })} alt={recipe.title} loading="lazy" decoding="async" width={40} height={40} className="w-full h-full object-cover" />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center text-lg">🍰</div>
                             )}

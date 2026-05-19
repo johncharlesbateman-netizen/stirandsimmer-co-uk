@@ -56,7 +56,6 @@ const Index = () => {
     <Layout>
       <Helmet>
         <title>Stir & Simmer | Real Recipes for UK Home Cooks</title>
-        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
         <link rel="preload" as="image" href={heroImage} imageSrcSet={heroImageSrcSet} imageSizes="100vw" fetchPriority="high" />
         <meta name="description" content={`${recipeCount ? `Over ${recipeCount} ` : ""}tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients.`} />
         <meta name="keywords" content="recipes, easy recipes, dinner recipes, dessert recipes, quick meals" />
