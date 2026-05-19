@@ -138,6 +138,7 @@ const MAP_POSITIONS: Record<string, { top: string; left: string }> = {
   italy: { top: "26.7%", left: "53.47%" },
   india: { top: "41.6%", left: "70%" },
   thailand: { top: "46%", left: "77.5%" },
+  mediterranean: { top: "31.5%", left: "51.5%" },
   middleeast: { top: "35%", left: "60%" },
   mexico: { top: "39.2%", left: "22.5%" },
 };
