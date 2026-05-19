@@ -9,7 +9,14 @@
     <meta name="google-site-verification" content="pnnjNOShptmR1bVZIthOLf6n4TJp7qvu-j-3xFo7iPk" />
     <link rel="canonical" href="https://stirandsimmer.co.uk/" />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    <link rel="preconnect" href="https://images.pexels.com" crossorigin />
+    <!-- Pexels and Supabase image fetches are non-CORS, so the preconnect
+         must NOT carry the crossorigin flag — otherwise the browser opens
+         a connection in the "anonymous CORS" bucket and the image request
+         (which is in the "no CORS" bucket) can't reuse it. Lighthouse
+         flagged this as 300 ms of wasted LCP. -->
+    <link rel="preconnect" href="https://images.pexels.com" />
+    <link rel="preconnect" href="https://xlekynbjvcfbfqycjnpj.supabase.co" />
+    <!-- Separate crossorigin preconnect for Supabase REST API (CORS). -->
     <link rel="preconnect" href="https://xlekynbjvcfbfqycjnpj.supabase.co" crossorigin />
     <link
       rel="preload"
