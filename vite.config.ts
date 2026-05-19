@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import { imagetools } from "vite-imagetools";
 // @ts-ignore — plain JS module, no types needed
 import { generateSitemap } from "./scripts/generate-sitemap.mjs";
 // @ts-ignore — plain JS module, no types needed
