@@ -243,7 +243,7 @@ const Guides = () => {
               >
                 <img
                   src={g.image ?? pexels(g.imageId!, 800)}
-                  srcSet={g.image ? undefined : pexelsSrcSet(g.imageId!, [400, 600, 800, 1200])}
+                  srcSet={g.imageSrcSet ?? (g.image ? undefined : pexelsSrcSet(g.imageId!, [400, 600, 800, 1200]))}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   alt={g.imageAlt}
                   loading="lazy"
