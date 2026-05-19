@@ -91,16 +91,6 @@ const REGIONS: RegionDef[] = [
     regionTags: ["thai"],
   },
   {
-    id: "greece",
-    name: "Greece",
-    emoji: "🇬🇷",
-    bg: "hsl(var(--region-greece))",
-    available: false,
-    description:
-      "Olive oil, lemon, oregano and the generous, sun-drenched cooking of the Aegean.",
-    challenge: "Coming soon — moussaka, souvlaki, spanakopita and more.",
-  },
-  {
     id: "mediterranean",
     name: "Mediterranean",
     emoji: "🌊",
@@ -123,18 +113,6 @@ const REGIONS: RegionDef[] = [
     challenge:
       "This week — cook a Middle Eastern dish. Browse our [Middle Eastern collection](/recipes/region/middleeast) for inspiration.",
     regionTags: ["middle-eastern"],
-  },
-  {
-    id: "japan",
-    name: "Japan",
-    emoji: "🇯🇵",
-    bg: "hsl(var(--region-japan))",
-    available: true,
-    description:
-      "Precision, balance and the art of umami. Japanese cooking at its finest.",
-    challenge:
-      "This week — cook a Japanese dish. Browse our [Japanese collection](/recipes/region/japan) for inspiration.",
-    regionTags: ["japanese"],
   },
   {
     id: "mexico",
@@ -160,10 +138,8 @@ const MAP_POSITIONS: Record<string, { top: string; left: string }> = {
   italy: { top: "26.7%", left: "53.47%" },
   india: { top: "41.6%", left: "70%" },
   thailand: { top: "46%", left: "77.5%" },
-  greece: { top: "30%", left: "55%" },
   mediterranean: { top: "31.5%", left: "51.5%" },
   middleeast: { top: "35%", left: "60%" },
-  japan: { top: "30.2%", left: "88.8%" },
   mexico: { top: "39.2%", left: "22.5%" },
 };
 
