@@ -8,8 +8,6 @@
     <meta name="author" content="Stir & Simmer" />
     <meta name="google-site-verification" content="pnnjNOShptmR1bVZIthOLf6n4TJp7qvu-j-3xFo7iPk" />
     <link rel="canonical" href="https://stirandsimmer.co.uk/" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link rel="preconnect" href="https://images.pexels.com" crossorigin />
     <link rel="preconnect" href="https://xlekynbjvcfbfqycjnpj.supabase.co" crossorigin />
@@ -21,22 +19,57 @@
       imagesizes="100vw"
       fetchpriority="high"
     />
-    <!-- Preload the body-text font file directly so it isn't blocked behind
-         fetching the Google Fonts CSS first. URL is the woff2 served by Google
-         for DM Sans 400 — stable for years; if Google ever rotates it the CSS
-         fallback below still loads the font, just one round-trip slower. -->
-    <link
-      rel="preload"
-      as="font"
-      type="font/woff2"
-      href="https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K6z9mXg.woff2"
-      crossorigin
-    />
+    <!-- Self-hosted DM Sans. Preload the latin upright weight (used by 95% of
+         body copy) so it starts downloading immediately, with no extra DNS /
+         CSS round-trip via Google Fonts. The full @font-face declarations
+         live in the inline <style> below so they can't be blocked or deferred. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/dmsans-latin.woff2" crossorigin />
+    <style>
+      /* DM Sans — self-hosted variable cuts (Google v17). Splitting on
+         unicode-range so non-Latin pages only download what they need. */
+      @font-face {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 400 600;
+        font-display: swap;
+        src: url('/fonts/dmsans-latin.woff2') format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 400 600;
+        font-display: swap;
+        src: url('/fonts/dmsans-latin-ext.woff2') format('woff2');
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'DM Sans';
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/dmsans-latin-italic.woff2') format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'DM Sans';
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/dmsans-latin-ext-italic.woff2') format('woff2');
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* LCP hero bootstrap — inserted by prerender for the homepage. Sits
+         behind #root at z-index:-1 so it paints with the HTML parse, then is
+         hidden once React mounts its own hero overlay. */
+      #lcp-hero { position: fixed; inset: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1; background: #1a1614; }
+    </style>
+    <!-- Boska (display headings) — kept on Fontshare with async-swap load.
+         Headings paint with the system serif fallback first, then swap; this
+         is fine because the hero H1 sits below the LCP image. -->
     <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700,400i,500i,700i&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript>
       <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700,400i,500i,700i&display=swap" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
     </noscript>
     <meta property="og:url" content="https://stirandsimmer.co.uk/" />
 
