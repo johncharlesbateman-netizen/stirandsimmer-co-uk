@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Boska"', 'serif'],
+        display: ['"Boska"', '"Boska Fallback"', 'Georgia', 'serif'],
         body: ['"DM Sans"', 'sans-serif'],
       },
       colors: {
