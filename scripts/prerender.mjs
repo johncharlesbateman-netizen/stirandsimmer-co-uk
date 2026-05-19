@@ -144,9 +144,14 @@ const escapeHtml = (s) =>
  * Rewrites the SEO-critical tags inside a copy of dist/index.html.
  * Removes any existing <title>, description / canonical / og:* / twitter:*
  * tags, then inserts a fresh block tailored to this route.
+ *
+ * For the homepage, also injects a static <img id="lcp-hero"> sibling of
+ * #root so the LCP candidate paints with the HTML parser (~1.2 s on mobile)
+ * instead of waiting for React to mount (~2.5 s+). The element is hidden by
+ * the React Index page once its own hero <img> is mounted.
  */
 function buildPrerenderedHtml(template, meta) {
-  const { url, title, description, image = DEFAULT_OG, type = "website", jsonLd } = meta;
+  const { url, title, description, image = DEFAULT_OG, type = "website", jsonLd, injectHero } = meta;
 
   // Strip existing SEO tags from the source template.
   let html = template
@@ -182,7 +187,17 @@ function buildPrerenderedHtml(template, meta) {
     }
   }
 
-  return html.replace(/<\/head>/i, `${tags.join("\n    ")}\n  </head>`);
+  html = html.replace(/<\/head>/i, `${tags.join("\n    ")}\n  </head>`);
+
+  if (injectHero) {
+    const base = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&fm=webp";
+    const srcset = [480, 768, 1024, 1280, 1600].map((w) => `${base}&amp;w=${w} ${w}w`).join(", ");
+    const heroImg = `<img id="lcp-hero" src="${base}&amp;w=1280" srcset="${srcset}" sizes="100vw" alt="Rustic table laid with freshly cooked dishes, herbs and warm natural light" fetchpriority="high" decoding="async" width="1600" height="1067" />`;
+    // Inserted before #root so the LCP image is in the initial paint tree.
+    html = html.replace(/<div id="root"><\/div>/, `${heroImg}\n    <div id="root"></div>`);
+  }
+
+  return html;
 }
 
 function buildBreadcrumb(items) {
@@ -270,6 +285,7 @@ export async function prerenderRoutes() {
     const route = { path: r.path, url, title: r.title, description: r.description };
     if (r.path === "/") {
       route.jsonLd = HOME_JSONLD;
+      route.injectHero = true;
     } else {
       route.jsonLd = buildBreadcrumb([
         { name: "Home", url: `${SITE}/` },

@@ -30,6 +30,13 @@ const Index = () => {
   const recipeCount = useRecipeCount();
   const [featured, setFeatured] = useState<Tables<"recipes">[]>([]);
 
+  // Hide the prerendered LCP-hero <img> (injected by scripts/prerender.mjs)
+  // as soon as the React-rendered hero is mounted, so we don't double-paint.
+  useEffect(() => {
+    const bootstrap = document.getElementById("lcp-hero");
+    if (bootstrap) bootstrap.style.display = "none";
+  }, []);
+
   useEffect(() => {
     let cancelled = false;
     (async () => {
