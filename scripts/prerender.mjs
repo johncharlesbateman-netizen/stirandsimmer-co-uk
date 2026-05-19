@@ -285,6 +285,7 @@ export async function prerenderRoutes() {
     const route = { path: r.path, url, title: r.title, description: r.description };
     if (r.path === "/") {
       route.jsonLd = HOME_JSONLD;
+      route.injectHero = true;
     } else {
       route.jsonLd = buildBreadcrumb([
         { name: "Home", url: `${SITE}/` },
