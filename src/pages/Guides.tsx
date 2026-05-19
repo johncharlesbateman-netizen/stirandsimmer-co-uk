@@ -37,6 +37,7 @@ type GuideEntry = {
   eyebrow: string;
   imageId?: string;
   image?: string;
+  imageSrcSet?: string;
   imageAlt: string;
 };
 
