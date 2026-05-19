@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { SITE_ORIGIN } from "@/lib/guideMeta";
-import heroImage from "@/assets/guide-how-to-make-bread-hero.jpg";
+import heroImage from "@/assets/guide-how-to-make-bread-hero.webp";
 
 const GuideHowToMakeBread = () => {
   const breadcrumbJsonLd = {

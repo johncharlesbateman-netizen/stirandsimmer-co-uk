@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import heroImage from "@/assets/guide-understanding-olive-oil-hero.jpg";
+import heroImage from "@/assets/guide-understanding-olive-oil-hero.webp";
 
 const GuideUnderstandingOliveOil = () => {
   return (

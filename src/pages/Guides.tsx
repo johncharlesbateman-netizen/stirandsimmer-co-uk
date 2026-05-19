@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { ArrowRight } from "lucide-react";
 import { GUIDES_IN_ORDER, SITE_ORIGIN } from "@/lib/guideMeta";
-import properStockImage from "@/assets/guide-proper-stock.jpg";
-import properSauceImage from "@/assets/guide-proper-sauce.jpg";
-import choosingPansImage from "@/assets/guide-choosing-pans.jpg";
-import kitchenKnivesImage from "@/assets/guide-kitchen-knives.jpg";
-import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.jpg";
-import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.jpg";
-import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.jpg";
+import properStockImage from "@/assets/guide-proper-stock.webp";
+import properSauceImage from "@/assets/guide-proper-sauce.webp";
+import choosingPansImage from "@/assets/guide-choosing-pans.webp";
+import kitchenKnivesImage from "@/assets/guide-kitchen-knives.webp";
+import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.webp";
+import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.webp";
+import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.webp";
 
 // Local fallback used if a remote (Pexels) card image fails to load.
 const CARD_FALLBACK = properStockImage;

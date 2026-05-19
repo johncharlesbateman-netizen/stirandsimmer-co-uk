@@ -1,5 +1,5 @@
 import { useState } from "react";
-import contactBehindScenes from "@/assets/contact-behind-scenes.jpg";
+import contactBehindScenes from "@/assets/contact-behind-scenes.webp";
 import { Helmet } from "react-helmet-async";
 import { Instagram, MailCheck } from "lucide-react";
 import Layout from "@/components/Layout";

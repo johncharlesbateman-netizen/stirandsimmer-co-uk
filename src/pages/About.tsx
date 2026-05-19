@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
-import aboutKitchen1 from "@/assets/about-kitchen-1.jpg";
-import aboutKitchen3 from "@/assets/about-kitchen-3.jpg";
-import aboutKitchen4 from "@/assets/about-kitchen-4.jpg";
+import aboutKitchen1 from "@/assets/about-kitchen-1.webp";
+import aboutKitchen3 from "@/assets/about-kitchen-3.webp";
+import aboutKitchen4 from "@/assets/about-kitchen-4.webp";
 import kitchenLoop from "@/assets/about-kitchen-loop.mp4.asset.json";
 
 
