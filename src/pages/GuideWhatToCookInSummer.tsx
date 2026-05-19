@@ -8,6 +8,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { SITE_ORIGIN } from "@/lib/guideMeta";
 import heroImage from "@/assets/guide-what-to-cook-in-summer-hero.webp";
+import heroImageSrcSet from "@/assets/guide-what-to-cook-in-summer-hero.webp?w=640;960;1280;1600&format=webp&as=srcset";
 
 const GuideWhatToCookInSummer = () => {
   const breadcrumbJsonLd = {
@@ -37,6 +38,8 @@ const GuideWhatToCookInSummer = () => {
         <div className="w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-muted">
           <img
             src={heroImage}
+            srcSet={heroImageSrcSet}
+            sizes="100vw"
             alt="A sunlit summer table with grilled vegetables, ripe tomatoes, peaches, fresh herbs and a jug of iced drink"
             width={1600}
             height={900}

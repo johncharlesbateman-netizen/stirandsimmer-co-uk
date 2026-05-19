@@ -8,6 +8,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { SITE_ORIGIN } from "@/lib/guideMeta";
 import heroImage from "@/assets/guide-how-to-make-bread-hero.webp";
+import heroImageSrcSet from "@/assets/guide-how-to-make-bread-hero.webp?w=640;960;1280;1600&format=webp&as=srcset";
 
 const GuideHowToMakeBread = () => {
   const breadcrumbJsonLd = {
@@ -37,6 +38,8 @@ const GuideHowToMakeBread = () => {
         <div className="w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-muted">
           <img
             src={heroImage}
+            srcSet={heroImageSrcSet}
+            sizes="100vw"
             alt="A freshly baked rustic sourdough loaf with an open crumb, sliced on a dark wooden board"
             width={1600}
             height={900}
