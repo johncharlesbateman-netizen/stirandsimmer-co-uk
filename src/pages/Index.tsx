@@ -29,13 +29,21 @@ const heroImageSizes = "(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 160
 const Index = () => {
   const recipeCount = useRecipeCount();
   const [featured, setFeatured] = useState<Tables<"recipes">[]>([]);
+  // True when the prerender has injected an <img id="lcp-hero"> + overlay
+  // into the static HTML. In that case React must NOT render its own hero
+  // <img>, otherwise the browser swaps LCP candidates once we mount and we
+  // lose the early paint. In dev (no prerender) this stays false and the
+  // React img renders as a fallback.
+  const [hasBootstrapHero] = useState(
+    () => typeof document !== "undefined" && !!document.getElementById("lcp-hero"),
+  );
 
-  // Hide the prerendered LCP-hero <img> (injected by scripts/prerender.mjs)
-  // as soon as the React-rendered hero is mounted, so we don't double-paint.
   useEffect(() => {
-    const bootstrap = document.getElementById("lcp-hero");
-    if (bootstrap) bootstrap.style.display = "none";
-  }, []);
+    if (!hasBootstrapHero) return;
+    // After hydration, drop the bootstrap from `fixed` to `absolute` height:100vh
+    // so it scrolls away with the hero section rather than covering content below.
+    document.documentElement.classList.add("lcp-hero-dismissed");
+  }, [hasBootstrapHero]);
 
   useEffect(() => {
     let cancelled = false;
@@ -104,21 +112,27 @@ const Index = () => {
       </Helmet>
       {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden" style={{ marginTop: '-5rem' }}>
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            srcSet={heroImageSrcSet}
-            sizes="100vw"
-            alt="Rustic table laid with freshly cooked dishes, herbs and warm natural light"
-            fetchPriority="high"
-            decoding="async"
-            width={1600}
-            height={1067}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
+        {/* Background image — only rendered when the prerendered bootstrap
+            hero isn't present (i.e. dev / local). In production the static
+            <img id="lcp-hero"> + overlay injected by scripts/prerender.mjs
+            already cover the viewport, and re-rendering them here would
+            cause Chrome to re-pick the LCP candidate. */}
+        {!hasBootstrapHero && (
+          <div className="absolute inset-0">
+            <img
+              src={heroImage}
+              srcSet={heroImageSrcSet}
+              sizes="100vw"
+              alt="Rustic table laid with freshly cooked dishes, herbs and warm natural light"
+              fetchPriority="high"
+              decoding="async"
+              width={1600}
+              height={1067}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
+        )}
 
         {/* Hero Content */}
         <div className="relative z-10 text-center text-primary-foreground px-6 max-w-4xl">
