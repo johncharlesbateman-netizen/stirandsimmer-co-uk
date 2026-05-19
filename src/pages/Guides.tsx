@@ -4,12 +4,19 @@ import Layout from "@/components/Layout";
 import { ArrowRight } from "lucide-react";
 import { GUIDES_IN_ORDER, SITE_ORIGIN } from "@/lib/guideMeta";
 import properStockImage from "@/assets/guide-proper-stock.webp";
+import properStockSrcSet from "@/assets/guide-proper-stock.webp?w=400;600;800;1200&format=webp&as=srcset";
 import properSauceImage from "@/assets/guide-proper-sauce.webp";
+import properSauceSrcSet from "@/assets/guide-proper-sauce.webp?w=400;600;800;1200&format=webp&as=srcset";
 import choosingPansImage from "@/assets/guide-choosing-pans.webp";
+import choosingPansSrcSet from "@/assets/guide-choosing-pans.webp?w=400;600;800;1200&format=webp&as=srcset";
 import kitchenKnivesImage from "@/assets/guide-kitchen-knives.webp";
+import kitchenKnivesSrcSet from "@/assets/guide-kitchen-knives.webp?w=400;600;800;1200&format=webp&as=srcset";
 import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.webp";
+import howToCookPastaSrcSet from "@/assets/guide-how-to-cook-pasta-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
 import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.webp";
+import howToMakeBreadSrcSet from "@/assets/guide-how-to-make-bread-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
 import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.webp";
+import whatToCookInSummerSrcSet from "@/assets/guide-what-to-cook-in-summer-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
 
 // Local fallback used if a remote (Pexels) card image fails to load.
 const CARD_FALLBACK = properStockImage;
