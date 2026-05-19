@@ -208,6 +208,34 @@ function buildPrerenderedHtml(template, meta) {
     );
   }
 
+  // -------------------------------------------------------------------
+  // Static cookie consent skeleton.
+  //
+  // Lighthouse attributed the page's remaining CLS (~0.09) to the cookie
+  // banner because React mounts it ~600 ms after first paint. By emitting
+  // a pixel-identical skeleton into the prerendered HTML, the banner is
+  // present in the initial paint and contributes 0 to CLS. An inline
+  // script removes the skeleton synchronously if the user has already
+  // chosen — so returning visitors never see a flash. React's
+  // CookieConsent component then strips whatever skeleton remains on
+  // mount and renders its interactive version.
+  // -------------------------------------------------------------------
+  const cookieSkeleton = `
+    <div id="cc-static" role="dialog" aria-live="polite" aria-label="Cookie consent" class="fixed bottom-0 left-0 right-0 z-[55] px-4 pb-4 pt-3 md:px-6 md:pb-6" style="position:fixed;bottom:0;left:0;right:0;z-index:55;padding:0.75rem 1rem 1rem;">
+      <div style="margin:0 auto;max-width:48rem;border-radius:0.5rem;border:1px solid rgba(245,234,214,0.12);box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);padding:1rem 1.25rem;background-color:#1a0e00;color:#f5ead6;display:flex;flex-direction:column;gap:1rem;">
+        <div style="flex:1;font-size:0.875rem;line-height:1.6;color:#f5ead6;">
+          We use cookies to improve your experience, analyse traffic and show relevant content. See our <a href="/privacy" style="color:#f5ead6;text-decoration:underline;text-underline-offset:2px;">privacy policy</a>.
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem 1.25rem;">
+          <span style="font-size:0.875rem;text-decoration:underline;text-underline-offset:2px;color:rgba(245,234,214,0.7);">Manage preferences</span>
+          <span style="font-size:0.875rem;text-decoration:underline;text-underline-offset:2px;color:rgba(245,234,214,0.7);">Reject all</span>
+          <span style="display:inline-flex;align-items:center;justify-content:center;border-radius:0.375rem;padding:0.625rem 1.25rem;font-size:0.875rem;font-weight:600;letter-spacing:0.025em;background-color:#C97B1A;color:#1a0e00;">Accept all</span>
+        </div>
+      </div>
+    </div>
+    <script>(function(){try{var v=localStorage.getItem('ss_cookie_consent_v1');if(v==='all'||v==='essential'){var e=document.getElementById('cc-static');if(e)e.parentNode.removeChild(e);}}catch(e){}})();</script>`;
+  html = html.replace(/<\/body>/i, `${cookieSkeleton}\n  </body>`);
+
   return html;
 }
 
