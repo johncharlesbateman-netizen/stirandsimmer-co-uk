@@ -66,10 +66,21 @@
         src: url('/fonts/dmsans-latin-ext-italic.woff2') format('woff2');
         unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
       }
-      /* LCP hero bootstrap — inserted by prerender for the homepage. Sits
-         behind #root at z-index:-1 so it paints with the HTML parse, then is
-         hidden once React mounts its own hero overlay. */
-      #lcp-hero { position: fixed; inset: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1; background: #1a1614; }
+      /* LCP hero bootstrap — inserted by prerender for the homepage.
+         z-index:0 is important: Chrome's LCP heuristic ignores candidates
+         with negative z-index ("not visible to user"). Sitting at z:0 with
+         the overlay at z:1 and the React text at z:10 keeps the visual
+         identical to the React-rendered hero. The bootstrap stays mounted
+         for the lifetime of the page — Index.tsx detects it and skips
+         rendering its own <img>, so the LCP element never changes. */
+      #lcp-hero { position: fixed; inset: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: 0; background: #1a1614; }
+      #lcp-hero-overlay { position: fixed; inset: 0; z-index: 1; background: rgba(0,0,0,0.6); pointer-events: none; }
+      /* Once the user scrolls past the hero (h-screen + the -5rem margin),
+         the bootstrap should not block the dark sections below. We dismiss
+         it via a `.lcp-hero-dismissed` class added by Index.tsx after
+         hydration so React's own layout takes over for scroll regions. */
+      .lcp-hero-dismissed #lcp-hero,
+      .lcp-hero-dismissed #lcp-hero-overlay { position: absolute; height: 100vh; }
     </style>
     <!-- Boska (display headings) — kept on Fontshare with async-swap load.
          Headings paint with the system serif fallback first, then swap; this
