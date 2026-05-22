@@ -529,7 +529,7 @@ const RecipeDetail = () => {
                 {(() => {
                   let stepNum = 0;
                   return instructions.map((step, i) => {
-                    const isHeader = /^(for the |for |the |to serve|to make)/i.test(step.trim()) && step.trim().split(" ").length <= 6;
+                    const isHeader = isSectionHeader(step);
                     if (isHeader) {
                       return (
                         <li key={i} className="pt-4 first:pt-0">
