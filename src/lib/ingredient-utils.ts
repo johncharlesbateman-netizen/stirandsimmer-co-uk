@@ -9,8 +9,8 @@ export const isSectionHeader = (text: string): boolean => {
   if (startsWithQuantity) return false;
 
   // Common header patterns
-  const headerPatterns = /^(for the |for |the |sauce|salad|marinade|dressing|garnish|topping|filling|glaze|batter|pastry|crust|base|assembly)/i;
-  if (headerPatterns.test(trimmed)) return true;
+  const headerPatterns = /^(for the |for |the |to serve|to make |to assemble|to finish|sauce|salad|marinade|dressing|garnish|topping|filling|glaze|batter|pastry|crust|base|assembly)/i;
+  if (headerPatterns.test(trimmed) && trimmed.split(" ").length <= 8) return true;
 
   // If the line ends with a colon, treat as header
   if (trimmed.endsWith(":")) return true;
