@@ -142,13 +142,14 @@ const CategoryPage = () => {
               const recipesBySection: Record<SectionKey, Recipe[]> = {
                 mains: [], quick: [], lunch: [], dessert: [], snack: [],
               };
+              // Each recipe appears in only the FIRST matching section (per SECTION_ORDER),
+              // so multi-meal-type recipes aren't duplicated across sections.
               for (const r of filtered) {
                 const mts = ((r.meal_types as string[] | null) ?? []).filter(isMealType);
-                if (mts.length > 0) {
-                  for (const mt of mts) recipesBySection[mt].push(r);
-                } else if (isQuickMeal(r)) {
-                  recipesBySection.quick.push(r);
-                }
+                const candidates = new Set<SectionKey>(mts);
+                if (isQuickMeal(r)) candidates.add("quick");
+                const firstMatch = SECTION_ORDER.find((k) => candidates.has(k));
+                if (firstMatch) recipesBySection[firstMatch].push(r);
               }
               const renderedSections = SECTION_ORDER
                 .map((k) => ({ key: k, recipes: recipesBySection[k] }))
