@@ -130,6 +130,10 @@ const REGIONS = [
   { slug: "comfort", label: "Comfort" },
 ];
 
+const RECIPE_PRERENDER_ALIASES = {
+  "chorizo-and-chicken-tapas": ["chorizo-and-chicken-tapa"],
+};
+
 // ---------- HTML rewriting ----------
 
 const escapeHtml = (s) =>
@@ -545,6 +549,25 @@ export async function prerenderRoutes() {
             ]),
           ],
         });
+        for (const alias of RECIPE_PRERENDER_ALIASES[r.slug] ?? []) {
+          routes.push({
+            path: `/recipes/${alias}`,
+            url: recipeUrl,
+            outputMode: "exact-path",
+            title,
+            description,
+            image: r.image_url || DEFAULT_OG,
+            type: "article",
+            jsonLd: [
+              buildRecipeJsonLd({ ...r, slug: r.slug }),
+              buildBreadcrumb([
+                { name: "Home", url: `${SITE}/` },
+                { name: "Recipes", url: `${SITE}/recipes` },
+                { name: r.title, url: recipeUrl },
+              ]),
+            ],
+          });
+        }
         recipeCount++;
       }
     } catch (e) {
