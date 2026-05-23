@@ -330,6 +330,7 @@ const GuideHowToCookPasta = () => {
           </div>
         </section>
       </article>
+      <GuideRelatedRecipes guideSlug="how-to-cook-pasta" />
     </Layout>
   );
 };
