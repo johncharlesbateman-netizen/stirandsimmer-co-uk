@@ -506,6 +506,26 @@ const RecipeDetail = () => {
         </section>
       )}
 
+      {/* Hidden Pinterest-optimised portrait (2:3, 1000x1500). Picked up by
+          the Pinterest browser button via data-pin-media so pinned cards
+          use the tall variant rather than the landscape hero. */}
+      {recipe.image_url && (
+        <img
+          src={pinterestImage(recipe.image_url)}
+          alt={imageAlt}
+          width={1000}
+          height={1500}
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+          data-pin-media={pinterestImage(recipe.image_url)}
+          data-pin-description={seoDescription}
+          data-pin-url={pageUrl}
+          style={{ position: "absolute", width: 1, height: 1, opacity: 0, pointerEvents: "none", left: -9999, top: "auto" }}
+        />
+      )}
+
+
       {/* Content */}
       <section className="pb-12 md:pb-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
