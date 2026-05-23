@@ -300,6 +300,7 @@ const GuideProperStock = () => {
           </Link>
         </div>
       </article>
+      <GuideRelatedRecipes guideSlug="proper-stock" />
     </Layout>
   );
 };
