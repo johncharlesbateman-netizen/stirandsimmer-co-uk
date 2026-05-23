@@ -346,6 +346,7 @@ const GuideChoosingPans = () => {
           </Link>
         </div>
       </article>
+      <GuideRelatedRecipes guideSlug="choosing-pans" />
     </Layout>
   );
 };
