@@ -293,11 +293,16 @@ const HOME_JSONLD = [
 
 function writeRoute(distDir, template, meta) {
   const html = buildPrerenderedHtml(template, meta);
-  // Root route stays as dist/index.html; everything else nests under its path.
+  // Root route stays as dist/index.html. Most routes nest under their path,
+  // but recipe detail pages use an exact clean-path file (dist/recipes/slug)
+  // so Lovable hosting serves that raw HTML at /recipes/slug instead of the
+  // SPA fallback shell.
   const outPath =
     meta.path === "/"
       ? resolve(distDir, "index.html")
-      : resolve(distDir, `.${meta.path}/index.html`);
+      : meta.outputMode === "exact-path"
+        ? resolve(distDir, `.${meta.path}`)
+        : resolve(distDir, `.${meta.path}/index.html`);
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, html, "utf-8");
 }
@@ -513,7 +518,7 @@ export async function prerenderRoutes() {
       const { data: recipes, error } = await supabase
         .from("recipes")
         .select(
-          "slug, title, description, image_url, category, categories, cuisine, seo_title, seo_description, ingredients, instructions, prep_time_minutes, cook_time_minutes, servings, created_at, updated_at",
+          "slug, title, description, image_url, categories, cuisine:cuisine_region, seo_title, seo_description, ingredients, instructions, prep_time_minutes, cook_time_minutes, servings, created_at, updated_at",
         )
         .eq("published", true);
       if (error) throw error;
@@ -526,6 +531,7 @@ export async function prerenderRoutes() {
         routes.push({
           path: `/recipes/${r.slug}`,
           url: recipeUrl,
+          outputMode: "exact-path",
           title,
           description,
           image: r.image_url || DEFAULT_OG,
