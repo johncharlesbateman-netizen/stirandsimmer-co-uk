@@ -512,7 +512,9 @@ export async function prerenderRoutes() {
       const supabase = createClient(url, key);
       const { data: recipes, error } = await supabase
         .from("recipes")
-        .select("slug, title, description, image_url, category, seo_title, seo_description")
+        .select(
+          "slug, title, description, image_url, category, categories, cuisine, seo_title, seo_description, ingredients, instructions, prep_time_minutes, cook_time_minutes, servings, created_at, updated_at",
+        )
         .eq("published", true);
       if (error) throw error;
       for (const r of recipes ?? []) {
@@ -529,13 +531,7 @@ export async function prerenderRoutes() {
           image: r.image_url || DEFAULT_OG,
           type: "article",
           jsonLd: [
-            buildRecipeJsonLd({
-              title: r.title,
-              slug: r.slug,
-              description: r.description ?? title,
-              imageUrl: r.image_url,
-              category: r.category,
-            }),
+            buildRecipeJsonLd(r),
             buildBreadcrumb([
               { name: "Home", url: `${SITE}/` },
               { name: "Recipes", url: `${SITE}/recipes` },
