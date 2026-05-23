@@ -318,6 +318,7 @@ const GuideUnderstandingOliveOil = () => {
           </div>
         </section>
       </article>
+      <GuideRelatedRecipes guideSlug="understanding-olive-oil" />
     </Layout>
   );
 };
