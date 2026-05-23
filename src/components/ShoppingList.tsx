@@ -78,9 +78,18 @@ const ShoppingList = ({ ingredients, scaleFactor = 1, recipeName = "Recipe" }: S
     const printWindow = window.open("", "_blank");
     if (!printWindow) return;
 
+    const esc = (s: unknown) =>
+      String(s ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+
+    printWindow.document.open();
     printWindow.document.write(`
       <!DOCTYPE html>
-      <html><head><title>Shopping List — ${recipeName}</title>
+      <html><head><title>Shopping List — ${esc(recipeName)}</title>
       <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -185,10 +194,10 @@ const ShoppingList = ({ ingredients, scaleFactor = 1, recipeName = "Recipe" }: S
         }
       </style></head><body>
       <div class="logo">Stir & Simmer</div>
-      <div class="recipe-name">${recipeName}</div>
+      <div class="recipe-name">${esc(recipeName)}</div>
 
       <div class="section-title">Shopping List · ${items.length} item${items.length !== 1 ? "s" : ""}</div>
-      <ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>
+      <ul>${items.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>
 
       <div class="section-title">Estimated Prices</div>
       <div class="prices-grid">
@@ -198,7 +207,7 @@ const ShoppingList = ({ ingredients, scaleFactor = 1, recipeName = "Recipe" }: S
             const total = scaledPrices[id].total;
             return `<div class="price-card${i === 0 ? " cheapest" : ""}">
               ${i === 0 ? '<div class="badge">Cheapest</div>' : ""}
-              <div class="name">${label}</div>
+              <div class="name">${esc(label)}</div>
               <div class="total">~£${total.toFixed(2)}</div>
             </div>`;
           })
@@ -209,7 +218,7 @@ const ShoppingList = ({ ingredients, scaleFactor = 1, recipeName = "Recipe" }: S
         ${scaledPrices[sortedMarkets[0]].items
           .map(
             (item) =>
-              `<div class="breakdown-row"><span class="label">${item.productName}</span><span class="value">~£${item.price.toFixed(2)}</span></div>`
+              `<div class="breakdown-row"><span class="label">${esc(item.productName)}</span><span class="value">~£${item.price.toFixed(2)}</span></div>`
           )
           .join("")}
       </div>
