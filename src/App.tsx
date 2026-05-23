@@ -181,7 +181,7 @@ const App = () => (
                 path="/admin/tagging-audit"
                 element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminTaggingAudit /></Suspense></RequireAdmin>}
               />
-              <Route path="/admin/challenges" element={<Suspense fallback={<AdminFallback />}><AdminChallenges /></Suspense>} />
+              <Route path="/admin/challenges" element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminChallenges /></Suspense></RequireAdmin>} />
               <Route path="/privacy" element={<Privacy />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
