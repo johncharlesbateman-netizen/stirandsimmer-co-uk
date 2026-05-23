@@ -347,6 +347,9 @@ const RecipeDetail = () => {
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
         {recipe.image_url && <meta name="twitter:image" content={recipe.image_url} />}
+        {recipe.image_url && <meta name="pinterest:image" content={pinterestImage(recipe.image_url)} />}
+        {recipe.image_url && <meta name="pinterest:description" content={seoDescription} />}
+
         <link rel="canonical" href={pageUrl} />
         {recipe.image_url && (
           <link
