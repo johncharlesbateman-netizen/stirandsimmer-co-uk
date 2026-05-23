@@ -172,6 +172,7 @@ const GuideHowToUseSpices = () => {
           </Link>
         </div>
       </article>
+      <GuideRelatedRecipes guideSlug="how-to-use-spices" />
     </Layout>
   );
 };
