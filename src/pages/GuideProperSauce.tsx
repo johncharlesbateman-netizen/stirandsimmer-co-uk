@@ -228,6 +228,7 @@ const GuideProperSauce = () => {
           </Link>
         </div>
       </article>
+      <GuideRelatedRecipes guideSlug="proper-sauce" />
     </Layout>
   );
 };
