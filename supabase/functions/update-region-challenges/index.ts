@@ -36,27 +36,18 @@ Deno.serve(async (req) => {
       return json({ error: "Unauthorized" }, 401);
     }
 
-    // Service-role client — used for the is_admin check and DB writes.
+    // Service-role client — bypasses RLS for is_admin check and writes.
     const admin = createClient(supabaseUrl, serviceKey);
 
-    const { data: isAdmin, error: isAdminError } = await admin.rpc("is_admin_user", {
-      _user_id: userData.user.id,
-    }).maybeSingle();
-
-    // Fall back to direct check on admin_emails if RPC isn't present.
+    const email = userData.user.email?.toLowerCase() ?? "";
     let allowed = false;
-    if (!isAdminError && isAdmin !== null && isAdmin !== undefined) {
-      allowed = !!(isAdmin as unknown as boolean);
-    } else {
-      const email = userData.user.email?.toLowerCase() ?? "";
-      if (email) {
-        const { data: match } = await admin
-          .from("admin_emails")
-          .select("email")
-          .ilike("email", email)
-          .maybeSingle();
-        allowed = !!match;
-      }
+    if (email) {
+      const { data: match } = await admin
+        .from("admin_emails")
+        .select("email")
+        .ilike("email", email)
+        .maybeSingle();
+      allowed = !!match;
     }
 
     if (!allowed) {
