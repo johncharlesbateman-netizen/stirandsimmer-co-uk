@@ -337,7 +337,7 @@ function normaliseInstruction(s) {
   return String(s ?? "");
 }
 
-function buildRecipeJsonLd(r) {
+function buildRecipeJsonLd(r, aggregate) {
   const pageUrl = `${SITE}/recipes/${r.slug}`;
   const ingredients = (r.ingredients ?? []).map(normaliseIngredient).filter(Boolean);
   const instructions = (r.instructions ?? []).map(normaliseInstruction).filter((s) => s.trim());
@@ -377,8 +377,18 @@ function buildRecipeJsonLd(r) {
       calories: `${calories} kcal`,
       servingSize: r.servings ? `1 of ${r.servings} servings` : "1 serving",
     },
+    ...(aggregate && aggregate.count > 0 && {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: Number(aggregate.average.toFixed(2)),
+        ratingCount: aggregate.count,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    }),
   };
 }
+
 
 // ---------- Main entry ----------
 
