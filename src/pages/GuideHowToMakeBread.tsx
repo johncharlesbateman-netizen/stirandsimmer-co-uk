@@ -332,6 +332,8 @@ const GuideHowToMakeBread = () => {
           </ul>
         </section>
 
+        <GuideRelatedRecipes guideSlug="how-to-make-bread" heading="Recipes that use this skill" />
+
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
           <Link
             to="/guides"
@@ -358,7 +360,6 @@ const GuideHowToMakeBread = () => {
           </div>
         </section>
       </article>
-      <GuideRelatedRecipes guideSlug="how-to-make-bread" heading="Recipes that use this skill" />
     </Layout>
   );
 };

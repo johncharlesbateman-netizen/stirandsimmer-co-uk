@@ -327,6 +327,8 @@ const GuideWhatToCookInSummer = () => {
           </ul>
         </section>
 
+        <GuideRelatedRecipes guideSlug="what-to-cook-in-summer" heading="Recipes to cook this summer" />
+
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
           <Link
             to="/guides"
@@ -353,7 +355,6 @@ const GuideWhatToCookInSummer = () => {
           </div>
         </section>
       </article>
-      <GuideRelatedRecipes guideSlug="what-to-cook-in-summer" heading="Recipes to cook this summer" />
     </Layout>
   );
 };

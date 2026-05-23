@@ -304,6 +304,8 @@ const GuideHowToCookPasta = () => {
           </ul>
         </section>
 
+        <GuideRelatedRecipes guideSlug="how-to-cook-pasta" />
+
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
           <Link
             to="/guides"
@@ -330,7 +332,6 @@ const GuideHowToCookPasta = () => {
           </div>
         </section>
       </article>
-      <GuideRelatedRecipes guideSlug="how-to-cook-pasta" />
     </Layout>
   );
 };

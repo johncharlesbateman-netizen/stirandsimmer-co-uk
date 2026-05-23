@@ -292,6 +292,8 @@ const GuideUnderstandingOliveOil = () => {
           </ul>
         </section>
 
+        <GuideRelatedRecipes guideSlug="understanding-olive-oil" />
+
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
           <Link
             to="/guides"
@@ -318,7 +320,6 @@ const GuideUnderstandingOliveOil = () => {
           </div>
         </section>
       </article>
-      <GuideRelatedRecipes guideSlug="understanding-olive-oil" />
     </Layout>
   );
 };
