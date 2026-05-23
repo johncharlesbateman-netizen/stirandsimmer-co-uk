@@ -173,6 +173,27 @@ const RecipeDetail = () => {
     enabled: !!recipe,
   });
 
+  // Aggregate rating for JSON-LD. Component below fetches the full list,
+  // but this lightweight head-of-page query keeps the schema in sync without
+  // depending on render order.
+  const { data: ratingAggregate } = useQuery({
+    queryKey: ["recipe-rating-aggregate", recipe?.id],
+    queryFn: async () => {
+      if (!recipe?.id) return { average: 0, count: 0 };
+      const { data, error } = await supabase
+        .from("recipe_ratings")
+        .select("rating")
+        .eq("recipe_id", recipe.id);
+      if (error) throw error;
+      const rows = data ?? [];
+      const count = rows.length;
+      const average = count ? rows.reduce((s, r) => s + r.rating, 0) / count : 0;
+      return { average, count };
+    },
+    enabled: !!recipe?.id,
+  });
+
+
   const baseServings = recipe?.servings || 2;
   const currentServings = servings ?? baseServings;
   const scaleFactor = currentServings / baseServings;
