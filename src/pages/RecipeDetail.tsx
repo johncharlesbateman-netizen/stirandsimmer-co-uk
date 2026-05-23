@@ -295,6 +295,10 @@ const RecipeDetail = () => {
     createdAt: recipe.created_at,
     updatedAt: recipe.updated_at,
     keywords,
+    aggregateRating:
+      ratingAggregate && ratingAggregate.count > 0
+        ? { ratingValue: ratingAggregate.average, ratingCount: ratingAggregate.count }
+        : null,
   });
 
   const faqs = recipeFAQs[recipe.slug] ?? [];
