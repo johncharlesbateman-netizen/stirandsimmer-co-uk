@@ -181,6 +181,7 @@ const GuideMotherSauces = () => {
           </Link>
         </div>
       </article>
+      <GuideRelatedRecipes guideSlug="mother-sauces" />
     </Layout>
   );
 };
