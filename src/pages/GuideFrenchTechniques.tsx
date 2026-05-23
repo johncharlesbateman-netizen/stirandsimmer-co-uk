@@ -276,6 +276,7 @@ const GuideFrenchTechniques = () => {
           </Link>
         </div>
       </article>
+      <GuideRelatedRecipes guideSlug="french-techniques" />
     </Layout>
   );
 };
