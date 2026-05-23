@@ -532,16 +532,38 @@ export async function prerenderRoutes() {
       const { data: recipes, error } = await supabase
         .from("recipes")
         .select(
-          "slug, title, description, image_url, categories, cuisine:cuisine_region, seo_title, seo_description, ingredients, instructions, prep_time_minutes, cook_time_minutes, servings, created_at, updated_at",
+          "id, slug, title, description, image_url, categories, cuisine:cuisine_region, seo_title, seo_description, ingredients, instructions, prep_time_minutes, cook_time_minutes, servings, created_at, updated_at",
         )
         .eq("published", true);
       if (error) throw error;
+
+      // Aggregate ratings per recipe so the prerendered JSON-LD carries
+      // aggregateRating for Google's Rich Results Test without needing JS.
+      const aggregates = new Map();
+      try {
+        const { data: ratings } = await supabase
+          .from("recipe_ratings")
+          .select("recipe_id, rating");
+        for (const row of ratings ?? []) {
+          const cur = aggregates.get(row.recipe_id) || { sum: 0, count: 0 };
+          cur.sum += row.rating;
+          cur.count += 1;
+          aggregates.set(row.recipe_id, cur);
+        }
+      } catch (e) {
+        console.warn("[prerender] Ratings fetch failed:", e.message);
+      }
+
       for (const r of recipes ?? []) {
         const title = r.seo_title || `${r.title} | Stir & Simmer`;
         const description =
           r.seo_description ||
           (r.description ? r.description.slice(0, 155) : `${r.title} — a tried-and-tested recipe from Stir & Simmer.`);
         const recipeUrl = `${SITE}/recipes/${r.slug}`;
+        const agg = aggregates.get(r.id);
+        const aggregate = agg && agg.count > 0
+          ? { average: agg.sum / agg.count, count: agg.count }
+          : null;
         routes.push({
           path: `/recipes/${r.slug}`,
           url: recipeUrl,
@@ -551,7 +573,7 @@ export async function prerenderRoutes() {
           image: r.image_url || DEFAULT_OG,
           type: "article",
           jsonLd: [
-            buildRecipeJsonLd(r),
+            buildRecipeJsonLd(r, aggregate),
             buildBreadcrumb([
               { name: "Home", url: `${SITE}/` },
               { name: "Recipes", url: `${SITE}/recipes` },
@@ -569,7 +591,7 @@ export async function prerenderRoutes() {
             image: r.image_url || DEFAULT_OG,
             type: "article",
             jsonLd: [
-              buildRecipeJsonLd({ ...r, slug: r.slug }),
+              buildRecipeJsonLd({ ...r, slug: r.slug }, aggregate),
               buildBreadcrumb([
                 { name: "Home", url: `${SITE}/` },
                 { name: "Recipes", url: `${SITE}/recipes` },
