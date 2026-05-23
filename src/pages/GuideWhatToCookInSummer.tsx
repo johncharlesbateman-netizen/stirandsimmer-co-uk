@@ -1,5 +1,6 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
+import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -352,6 +353,7 @@ const GuideWhatToCookInSummer = () => {
           </div>
         </section>
       </article>
+      <GuideRelatedRecipes guideSlug="what-to-cook-in-summer" heading="Recipes to cook this summer" />
     </Layout>
   );
 };

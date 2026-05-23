@@ -1,5 +1,6 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
+import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -357,6 +358,7 @@ const GuideHowToMakeBread = () => {
           </div>
         </section>
       </article>
+      <GuideRelatedRecipes guideSlug="how-to-make-bread" heading="Recipes that use this skill" />
     </Layout>
   );
 };

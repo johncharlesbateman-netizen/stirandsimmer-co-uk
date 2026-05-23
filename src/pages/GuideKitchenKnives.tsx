@@ -1,5 +1,6 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
+import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -381,6 +382,7 @@ const GuideKitchenKnives = () => {
           </Link>
         </div>
       </article>
+      <GuideRelatedRecipes guideSlug="kitchen-knives" />
     </Layout>
   );
 };
