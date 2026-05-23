@@ -78,9 +78,18 @@ const ShoppingList = ({ ingredients, scaleFactor = 1, recipeName = "Recipe" }: S
     const printWindow = window.open("", "_blank");
     if (!printWindow) return;
 
+    const esc = (s: unknown) =>
+      String(s ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+
+    printWindow.document.open();
     printWindow.document.write(`
       <!DOCTYPE html>
-      <html><head><title>Shopping List — ${recipeName}</title>
+      <html><head><title>Shopping List — ${esc(recipeName)}</title>
       <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
