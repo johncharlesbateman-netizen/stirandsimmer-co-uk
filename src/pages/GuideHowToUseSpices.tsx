@@ -146,6 +146,8 @@ const GuideHowToUseSpices = () => {
           </p>
         </div>
 
+        <GuideRelatedRecipes guideSlug="how-to-use-spices" />
+
         {/* Kitchen Atlas CTA */}
         <section className="w-full py-16 md:py-20 border-t border-border bg-warm-dark text-warm-dark-foreground">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl text-center">
@@ -172,7 +174,6 @@ const GuideHowToUseSpices = () => {
           </Link>
         </div>
       </article>
-      <GuideRelatedRecipes guideSlug="how-to-use-spices" />
     </Layout>
   );
 };
