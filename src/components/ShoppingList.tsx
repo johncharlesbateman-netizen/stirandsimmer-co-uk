@@ -194,10 +194,10 @@ const ShoppingList = ({ ingredients, scaleFactor = 1, recipeName = "Recipe" }: S
         }
       </style></head><body>
       <div class="logo">Stir & Simmer</div>
-      <div class="recipe-name">${recipeName}</div>
+      <div class="recipe-name">${esc(recipeName)}</div>
 
       <div class="section-title">Shopping List · ${items.length} item${items.length !== 1 ? "s" : ""}</div>
-      <ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>
+      <ul>${items.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>
 
       <div class="section-title">Estimated Prices</div>
       <div class="prices-grid">
@@ -207,7 +207,7 @@ const ShoppingList = ({ ingredients, scaleFactor = 1, recipeName = "Recipe" }: S
             const total = scaledPrices[id].total;
             return `<div class="price-card${i === 0 ? " cheapest" : ""}">
               ${i === 0 ? '<div class="badge">Cheapest</div>' : ""}
-              <div class="name">${label}</div>
+              <div class="name">${esc(label)}</div>
               <div class="total">~£${total.toFixed(2)}</div>
             </div>`;
           })
@@ -218,7 +218,7 @@ const ShoppingList = ({ ingredients, scaleFactor = 1, recipeName = "Recipe" }: S
         ${scaledPrices[sortedMarkets[0]].items
           .map(
             (item) =>
-              `<div class="breakdown-row"><span class="label">${item.productName}</span><span class="value">~£${item.price.toFixed(2)}</span></div>`
+              `<div class="breakdown-row"><span class="label">${esc(item.productName)}</span><span class="value">~£${item.price.toFixed(2)}</span></div>`
           )
           .join("")}
       </div>
