@@ -382,6 +382,7 @@ const GuideKitchenKnives = () => {
           </Link>
         </div>
       </article>
+      <GuideRelatedRecipes guideSlug="kitchen-knives" />
     </Layout>
   );
 };
