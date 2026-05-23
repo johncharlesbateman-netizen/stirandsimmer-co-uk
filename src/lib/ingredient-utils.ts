@@ -8,8 +8,10 @@ export const isSectionHeader = (text: string): boolean => {
   const startsWithQuantity = /^(\d|½|¼|¾|⅓|⅔|⅛|⅜|⅝|⅞|\.)/i.test(trimmed);
   if (startsWithQuantity) return false;
 
-  // Common header patterns
-  const headerPatterns = /^(for the |for |the |to serve|to make |to assemble|to finish|sauce|salad|marinade|dressing|garnish|topping|filling|glaze|batter|pastry|crust|base|assembly)/i;
+  // Common header patterns. The `to <word>` clause catches "To Serve", "To Decorate",
+  // "To Pane", "To Top", "To Garnish", "To Finish", etc. — restricted to short phrases
+  // so it doesn't grab ingredient lines like "Lemon juice, to taste".
+  const headerPatterns = /^(for the |for |the |to [a-z]+\b|sauce|salad|marinade|dressing|garnish|topping|filling|glaze|batter|pastry|crust|base|assembly)/i;
   if (headerPatterns.test(trimmed) && trimmed.split(" ").length <= 8) return true;
 
   // If the line ends with a colon, treat as header
