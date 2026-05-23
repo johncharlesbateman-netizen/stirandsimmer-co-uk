@@ -6,10 +6,6 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// Simple shared password for the standalone /admin/challenges tool.
-// Change this string to rotate the password.
-const ADMIN_PASSWORD = "StirSimmer2026!";
-
 const ALLOWED_REGIONS = new Set(["uk", "italy", "france", "asia"]);
 
 type Update = { region_id: string; challenge: string };
@@ -20,19 +16,59 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // Verify the caller is an authenticated admin.
+    const authHeader = req.headers.get("Authorization") ?? "";
+    if (!authHeader.startsWith("Bearer ")) {
+      return json({ error: "Unauthorized" }, 401);
+    }
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+
+    // Client scoped to the caller's JWT — used to resolve the user.
+    const userClient = createClient(supabaseUrl, anonKey, {
+      global: { headers: { Authorization: authHeader } },
+    });
+
+    const { data: userData, error: userError } = await userClient.auth.getUser();
+    if (userError || !userData?.user) {
+      return json({ error: "Unauthorized" }, 401);
+    }
+
+    // Service-role client — used for the is_admin check and DB writes.
+    const admin = createClient(supabaseUrl, serviceKey);
+
+    const { data: isAdmin, error: isAdminError } = await admin.rpc("is_admin_user", {
+      _user_id: userData.user.id,
+    }).maybeSingle();
+
+    // Fall back to direct check on admin_emails if RPC isn't present.
+    let allowed = false;
+    if (!isAdminError && isAdmin !== null && isAdmin !== undefined) {
+      allowed = !!(isAdmin as unknown as boolean);
+    } else {
+      const email = userData.user.email?.toLowerCase() ?? "";
+      if (email) {
+        const { data: match } = await admin
+          .from("admin_emails")
+          .select("email")
+          .ilike("email", email)
+          .maybeSingle();
+        allowed = !!match;
+      }
+    }
+
+    if (!allowed) {
+      return json({ error: "Forbidden" }, 403);
+    }
+
     const body = await req.json().catch(() => null);
     if (!body || typeof body !== "object") {
       return json({ error: "Invalid body" }, 400);
     }
 
-    const { password, updates } = body as {
-      password?: string;
-      updates?: unknown;
-    };
-
-    if (password !== ADMIN_PASSWORD) {
-      return json({ error: "Incorrect password" }, 401);
-    }
+    const { updates } = body as { updates?: unknown };
 
     if (!Array.isArray(updates) || updates.length === 0) {
       return json({ error: "No updates provided" }, 400);
@@ -53,14 +89,7 @@ Deno.serve(async (req) => {
       cleaned.push({ region_id: u.region_id, challenge: u.challenge.trim() });
     }
 
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-    );
-
-    // Fetch existing rows so we can record any that are about to change
-    // into the history log.
-    const { data: existing, error: existingError } = await supabase
+    const { data: existing, error: existingError } = await admin
       .from("region_challenges")
       .select("region_id, challenge")
       .in("region_id", cleaned.map((u) => u.region_id));
@@ -88,7 +117,7 @@ Deno.serve(async (req) => {
       }));
 
     if (historyRows.length > 0) {
-      const { error: historyError } = await supabase
+      const { error: historyError } = await admin
         .from("region_challenge_history")
         .insert(historyRows);
       if (historyError) {
@@ -103,7 +132,7 @@ Deno.serve(async (req) => {
       updated_at: now,
     }));
 
-    const { error } = await supabase
+    const { error } = await admin
       .from("region_challenges")
       .upsert(rows, { onConflict: "region_id" });
 
