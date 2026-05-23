@@ -350,6 +350,7 @@ const GuideGaramMasala = () => {
           </Link>
         </div>
       </article>
+      <GuideRelatedRecipes guideSlug="garam-masala" />
     </Layout>
   );
 };
