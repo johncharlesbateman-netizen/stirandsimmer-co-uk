@@ -358,6 +358,7 @@ const GuideHowToMakeBread = () => {
           </div>
         </section>
       </article>
+      <GuideRelatedRecipes guideSlug="how-to-make-bread" heading="Recipes that use this skill" />
     </Layout>
   );
 };
