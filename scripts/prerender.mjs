@@ -302,17 +302,72 @@ function writeRoute(distDir, template, meta) {
   writeFileSync(outPath, html, "utf-8");
 }
 
-function buildRecipeJsonLd({ title, slug, description, imageUrl, category }) {
-  const url = `${SITE}/recipes/${slug}`;
+// Mirrors src/lib/recipe-schema.ts so the prerendered HTML carries the
+// same rich Recipe JSON-LD that the client renders post-hydration —
+// crucial for Google's Rich Results Test, which does not execute JS.
+const CATEGORY_CALORIES = {
+  chicken: 480, beef: 620, lamb: 640, pork: 580, spicy: 520,
+  seafood: 420, pasta: 560, lunch_suggestions: 380, sweets: 340,
+  desserts: 380, starters: 260, sides: 220, salads: 280, soups: 260,
+  cakes: 360, breakfast: 420, drinks: 140, sandwiches: 460, mains: 540,
+};
+const isoDuration = (m) => (m && m > 0 ? `PT${m}M` : undefined);
+
+function normaliseIngredient(i) {
+  if (typeof i === "string") return i.trim();
+  if (i && typeof i === "object") {
+    const amount = i.amount == null ? "" : String(i.amount).trim();
+    const item = typeof i.item === "string" ? i.item.trim() : "";
+    return `${amount} ${item}`.trim();
+  }
+  return "";
+}
+function normaliseInstruction(s) {
+  if (typeof s === "string") return s;
+  if (s && typeof s === "object") return String(s.text ?? s.step ?? s.instruction ?? "");
+  return String(s ?? "");
+}
+
+function buildRecipeJsonLd(r) {
+  const pageUrl = `${SITE}/recipes/${r.slug}`;
+  const ingredients = (r.ingredients ?? []).map(normaliseIngredient).filter(Boolean);
+  const instructions = (r.instructions ?? []).map(normaliseInstruction).filter((s) => s.trim());
+  const prep = r.prep_time_minutes;
+  const cook = r.cook_time_minutes;
+  const total = (prep || 0) + (cook || 0);
+  const category = r.categories?.[0] ?? r.category ?? "";
+  const calories = CATEGORY_CALORIES[(category || "").toLowerCase()] || 450;
+
   return {
     "@context": "https://schema.org",
     "@type": "Recipe",
-    name: title,
-    description,
-    ...(imageUrl && { image: [imageUrl] }),
-    url,
+    name: r.title,
+    description: r.description ?? "",
+    ...(r.image_url && { image: [r.image_url] }),
+    url: pageUrl,
     author: { "@type": "Organization", name: "Stir & Simmer", url: SITE },
+    ...(r.created_at && { datePublished: r.created_at }),
+    ...(r.updated_at && { dateModified: r.updated_at }),
+    ...(isoDuration(prep) && { prepTime: isoDuration(prep) }),
+    ...(isoDuration(cook) && { cookTime: isoDuration(cook) }),
+    ...(total > 0 && { totalTime: `PT${total}M` }),
+    ...(r.servings && { recipeYield: `${r.servings} servings` }),
     recipeCategory: category,
+    recipeCuisine: r.cuisine || "British",
+    recipeIngredient: ingredients,
+    recipeInstructions: instructions.map((step, i) => ({
+      "@type": "HowToStep",
+      name: `Step ${i + 1}`,
+      position: i + 1,
+      text: step,
+      url: `${pageUrl}#step-${i + 1}`,
+      ...(r.image_url && { image: r.image_url }),
+    })),
+    nutrition: {
+      "@type": "NutritionInformation",
+      calories: `${calories} kcal`,
+      servingSize: r.servings ? `1 of ${r.servings} servings` : "1 serving",
+    },
   };
 }
 
