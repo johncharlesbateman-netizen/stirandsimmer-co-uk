@@ -14,7 +14,7 @@ import { buildSeoTitle, buildSeoDescription, buildServingSuggestion } from "@/li
 import { buildRecipeJsonLd } from "@/lib/recipe-schema";
 import { recipeFAQs } from "@/lib/recipe-faqs";
 import RecipeFAQ from "@/components/RecipeFAQ";
-import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
+import { optimisedImage, responsiveSrcSet, pinterestImage } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
 import IngredientList from "@/components/IngredientList";
 import { isSectionHeader } from "@/lib/ingredient-utils";
