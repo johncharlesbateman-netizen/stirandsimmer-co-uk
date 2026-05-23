@@ -154,8 +154,27 @@ const escapeHtml = (s) =>
  * instead of waiting for React to mount (~2.5 s+). The element is hidden by
  * the React Index page once its own hero <img> is mounted.
  */
+function pinterestPortrait(src) {
+  if (!src) return src;
+  // Supabase Storage public object → render endpoint with 1000x1500 cover
+  if (src.includes("/storage/v1/object/public/") || src.includes("/storage/v1/render/image/public/")) {
+    const base = src.replace("/storage/v1/object/public/", "/storage/v1/render/image/public/");
+    const sep = base.includes("?") ? "&" : "?";
+    return `${base}${sep}format=webp&width=1000&height=1500&quality=80&resize=cover`;
+  }
+  // Wix media URL with transform segment
+  if (src.includes("static.wixstatic.com")) {
+    return src.replace(
+      /\/v1\/(fill|fit|crop|scale_to_fill|scale_to_fit)\/[^/]+/i,
+      (_m, mode) => `/v1/${mode}/w_1000,h_1500,al_c,q_80,enc_auto`,
+    );
+  }
+  return src;
+}
+
 function buildPrerenderedHtml(template, meta) {
   const { url, title, description, image = DEFAULT_OG, type = "website", jsonLd, injectHero } = meta;
+  const pinImage = pinterestPortrait(image);
 
   // Strip existing SEO tags from the source template.
   let html = template
@@ -163,7 +182,8 @@ function buildPrerenderedHtml(template, meta) {
     .replace(/<meta\s+name=["']description["'][^>]*>/gi, "")
     .replace(/<link\s+rel=["']canonical["'][^>]*>/gi, "")
     .replace(/<meta\s+property=["']og:[^"']+["'][^>]*>/gi, "")
-    .replace(/<meta\s+name=["']twitter:[^"']+["'][^>]*>/gi, "");
+    .replace(/<meta\s+name=["']twitter:[^"']+["'][^>]*>/gi, "")
+    .replace(/<meta\s+name=["']pinterest:[^"']+["'][^>]*>/gi, "");
 
   const tags = [
     `<title>${escapeHtml(title)}</title>`,
@@ -180,7 +200,10 @@ function buildPrerenderedHtml(template, meta) {
     `<meta name="twitter:title" content="${escapeHtml(title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(description)}" />`,
     `<meta name="twitter:image" content="${escapeHtml(image)}" />`,
+    `<meta name="pinterest:image" content="${escapeHtml(pinImage)}" />`,
+    `<meta name="pinterest:description" content="${escapeHtml(description)}" />`,
   ];
+
 
   if (jsonLd) {
     const blocks = Array.isArray(jsonLd) ? jsonLd : [jsonLd];

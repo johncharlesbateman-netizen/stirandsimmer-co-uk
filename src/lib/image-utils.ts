@@ -86,3 +86,13 @@ export const responsiveSrcSet = (
     .map((w) => `${optimisedImage(src, { ...opts, width: w })} ${w}w`)
     .join(", ");
 };
+
+/**
+ * Pinterest-optimised portrait crop (2:3, 1000x1500). Pinterest favours
+ * tall pins; this returns a centre-cropped portrait variant of the source
+ * image when the host supports URL-based transforms, otherwise the
+ * original URL is returned unchanged.
+ */
+export const pinterestImage = (src: string | null | undefined): string =>
+  optimisedImage(src, { width: 1000, height: 1500, resize: "cover", quality: 80 });
+
