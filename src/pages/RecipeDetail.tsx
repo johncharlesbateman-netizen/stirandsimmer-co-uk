@@ -464,6 +464,12 @@ const RecipeDetail = () => {
               )}
             </div>
 
+            <div className="mt-6">
+              <RecipeRating recipeId={recipe.id} />
+            </div>
+
+
+
             <button
               type="button"
               onClick={jumpToRecipe}
