@@ -22,7 +22,7 @@ const SECTION_PLURAL: Record<SectionKey, string> = {
   snack: "Snacks",
 };
 
-const SECTION_ORDER: SectionKey[] = ["quick", "mains", "dessert", "lunch", "snack"];
+const SECTION_ORDER: SectionKey[] = ["dessert", "quick", "mains", "lunch", "snack"];
 
 const totalTime = (r: Recipe) =>
   (r.prep_time_minutes ?? 0) + (r.cook_time_minutes ?? 0);
