@@ -61,6 +61,67 @@ const STATIC_ROUTES = [
       "Master the essential French cooking techniques that underpin classic cuisine — from sautéing and braising to stocks, sauces and emulsions.",
   },
   {
+    path: "/guides/garam-masala",
+    title: "Garam masala — a cook's guide | Stir & Simmer",
+    description:
+      "Garam masala demystified — the spices that go in, why they matter, how to toast and grind them, and the mistakes most home cooks make.",
+  },
+  {
+    path: "/guides/how-to-use-spices",
+    title: "How to use spices — a beginner's guide | Stir & Simmer",
+    description:
+      "A beginner's guide to cooking with spices — what they do, how to store them, when to add them, and how to build flavour with confidence.",
+  },
+  {
+    path: "/guides/proper-stock",
+    title: "How to make a proper stock — a cook's guide | Stir & Simmer",
+    description:
+      "A practical guide to making proper stock at home — what goes in, how long to simmer, the difference between white and brown stock, and how to use and store it.",
+  },
+  {
+    path: "/guides/proper-sauce",
+    title: "How to make a proper sauce — a cook's guide | Stir & Simmer",
+    description:
+      "A practical guide to making proper sauces at home — the building blocks, the techniques, and the small details that turn a thin pan liquid into something glossy and memorable.",
+  },
+  {
+    path: "/guides/choosing-pans",
+    title: "Choosing the right pan for the job — a cook's guide | Stir & Simmer",
+    description:
+      "A practical guide to choosing the right pan for the job — the materials, the shapes, and which pans actually earn their place in a home kitchen.",
+  },
+  {
+    path: "/guides/kitchen-knives",
+    title: "Kitchen knives — a cook's guide | Stir & Simmer",
+    description:
+      "A practical guide to kitchen knives — the blades worth owning, how to hold them, how to keep them sharp, and how to choose ones that will last a lifetime.",
+  },
+  {
+    path: "/guides/understanding-olive-oil",
+    title: "Understanding olive oil — a cook's guide | Stir & Simmer",
+    description:
+      "A practical guide to olive oil — what the labels mean, how it's made, when to cook with it, when to finish with it, and which bottles to buy in the UK.",
+  },
+  {
+    path: "/guides/how-to-cook-pasta",
+    title: "How to cook pasta properly — a cook's guide | Stir & Simmer",
+    description:
+      "How to cook pasta properly — choosing the shape, salting the water, timing it right, saving the cooking water and finishing it in the sauce.",
+  },
+  {
+    path: "/guides/how-to-make-bread",
+    title: "How to make bread at home — a beginner's guide | Stir & Simmer",
+    description:
+      "A beginner's guide to baking bread at home — the four ingredients, the flours, the yeasts, the method, the mistakes, and five loaves every home baker should try.",
+  },
+  {
+    path: "/guides/what-to-cook-in-summer",
+    title: "What to cook in summer — a seasonal guide | Stir & Simmer",
+    description:
+      "A seasonal guide to summer cooking in the UK — what's in season, how to build a proper salad, grilling done well, summer herbs, soft fruit, and five dishes every cook should know.",
+  },
+
+  {
     path: "/meal-planner",
     title: "7-Day Meal Planner | Stir & Simmer",
     description:
