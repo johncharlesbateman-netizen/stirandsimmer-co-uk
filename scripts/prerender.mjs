@@ -1,4 +1,4 @@
-// Build cache bust marker: 2026-05-26 guide-prerender-redeploy-3
+// Build cache bust marker: 2026-05-26 guide-prerender-redeploy-4
 // Static meta-only prerender. Runs after Vite emits dist/ at production
 // build time and writes one HTML file per public route to dist/{path}/index.html.
 //
@@ -386,16 +386,24 @@ const HOME_JSONLD = [
 
 function writeRoute(distDir, template, meta) {
   const html = buildPrerenderedHtml(template, meta);
-  // Root route stays as dist/index.html. Every other route nests under its
-  // path as `{path}/index.html` so Lovable's static host serves it directly
-  // for clean URLs (e.g. /recipes/beef-stroganoff → dist/recipes/beef-stroganoff/index.html)
-  // instead of falling through to the SPA shell.
-  const outPath =
-    meta.path === "/"
-      ? resolve(distDir, "index.html")
-      : resolve(distDir, `.${meta.path}/index.html`);
-  mkdirSync(dirname(outPath), { recursive: true });
-  writeFileSync(outPath, html, "utf-8");
+  // Root route stays as dist/index.html.
+  // For every other route, emit BOTH `{path}/index.html` and `{path}.html`.
+  // The live host is currently serving the SPA shell for some clean URLs even
+  // though the nested prerendered file exists, so we provide the flat `.html`
+  // twin as a compatibility fallback for hosts that resolve `/foo/bar` to
+  // `/foo/bar.html` before SPA fallback.
+  if (meta.path === "/") {
+    writeFileSync(resolve(distDir, "index.html"), html, "utf-8");
+    return;
+  }
+
+  const nestedOutPath = resolve(distDir, `.${meta.path}/index.html`);
+  const flatOutPath = resolve(distDir, `.${meta.path}.html`);
+
+  mkdirSync(dirname(nestedOutPath), { recursive: true });
+  mkdirSync(dirname(flatOutPath), { recursive: true });
+  writeFileSync(nestedOutPath, html, "utf-8");
+  writeFileSync(flatOutPath, html, "utf-8");
 }
 
 // Mirrors src/lib/recipe-schema.ts so the prerendered HTML carries the
