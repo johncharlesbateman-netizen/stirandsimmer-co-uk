@@ -37,6 +37,13 @@ function* walkHtml(dir) {
       yield* walkHtml(full);
     } else if (entry.endsWith(".html")) {
       yield full;
+    } else if (!entry.includes(".")) {
+      // Extensionless files emitted by older prerender modes — sniff for HTML
+      // so they're verified too instead of silently skipped.
+      try {
+        const head = readFileSync(full, "utf-8").slice(0, 256).toLowerCase();
+        if (head.includes("<!doctype html") || head.includes("<html")) yield full;
+      } catch {}
     }
   }
 }
@@ -57,8 +64,11 @@ for (const file of walkHtml(DIST)) {
   }
 
   // Canonical must match the route (allow trailing slash differences).
+  // Known recipe aliases intentionally canonicalise to their real slug —
+  // mirrors RECIPE_PRERENDER_ALIASES in scripts/prerender.mjs.
+  const RECIPE_ALIAS_ROUTES = new Set(["/recipes/chorizo-and-chicken-tapa"]);
   const canon = html.match(REQUIRED[2].re)?.[1];
-  if (canon) {
+  if (canon && !RECIPE_ALIAS_ROUTES.has(route)) {
     const expectedPath = route === "/" ? "/" : route;
     const canonPath = canon.replace(SITE, "") || "/";
     if (canonPath !== expectedPath) {

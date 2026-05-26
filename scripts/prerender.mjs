@@ -320,16 +320,14 @@ const HOME_JSONLD = [
 
 function writeRoute(distDir, template, meta) {
   const html = buildPrerenderedHtml(template, meta);
-  // Root route stays as dist/index.html. Most routes nest under their path,
-  // but recipe detail pages use an exact clean-path file (dist/recipes/slug)
-  // so Lovable hosting serves that raw HTML at /recipes/slug instead of the
-  // SPA fallback shell.
+  // Root route stays as dist/index.html. Every other route nests under its
+  // path as `{path}/index.html` so Lovable's static host serves it directly
+  // for clean URLs (e.g. /recipes/beef-stroganoff → dist/recipes/beef-stroganoff/index.html)
+  // instead of falling through to the SPA shell.
   const outPath =
     meta.path === "/"
       ? resolve(distDir, "index.html")
-      : meta.outputMode === "exact-path"
-        ? resolve(distDir, `.${meta.path}`)
-        : resolve(distDir, `.${meta.path}/index.html`);
+      : resolve(distDir, `.${meta.path}/index.html`);
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, html, "utf-8");
 }
