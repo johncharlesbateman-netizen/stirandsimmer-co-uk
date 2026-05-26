@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://stirandsimmer.co.uk/recipes/greek-lemon-chicken-kotopoulo-lemonato</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/our-paella</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/beef-enchiladas</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://stirandsimmer.co.uk/recipes/chorizo-and-chicken-tapas</loc>
     <lastmod>2026-05-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -49,19 +67,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/greek-lemon-chicken-kotopoulo-lemonato</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://stirandsimmer.co.uk/recipes/chicken-katsu-curry</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/beef-enchiladas</loc>
     <lastmod>2026-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -79,13 +85,31 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/spiced-fillet-of-lamb-with-cannellini-beans</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/spiced-lamb-skewers</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://stirandsimmer.co.uk/recipes/thai-ginger-beef</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/salmon-scallops-with-ginger-lemongrass-risotto</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/spiced-fillet-of-lamb-with-cannellini-beans</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/chicken-satay</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -103,24 +127,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/salmon-scallops-with-ginger-lemongrass-risotto</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/chicken-satay</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/spiced-lamb-skewers</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://stirandsimmer.co.uk/recipes/fresh-tomato-curry-and-prawns</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -133,13 +139,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/smoked-salmon-and-cream-cheese-roll</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/prawn-avocado-and-mango-salad</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/scallops-with-apple-fennel-and-celeriac-salad</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -151,13 +151,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/warm-beef-salad</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/prawn-avocado-and-mango-salad</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/scallops-with-apple-fennel-and-celeriac-salad</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/warm-beef-salad</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -169,13 +169,19 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/chorizo-crusted-chicken-with-apple-sage-cassoulet</loc>
-    <lastmod>2026-05-17</lastmod>
+    <loc>https://stirandsimmer.co.uk/recipes/smoked-salmon-and-cream-cheese-roll</loc>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://stirandsimmer.co.uk/recipes/seared-scallops-with-cannellini-beans-and-chorizo</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/chorizo-crusted-chicken-with-apple-sage-cassoulet</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -199,19 +205,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/our-paella</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/prawn-and-chorizo-rice</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://stirandsimmer.co.uk/recipes/spanish-chicken-tray-bake</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/prawn-and-chorizo-rice</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
