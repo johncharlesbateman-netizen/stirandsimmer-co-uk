@@ -1,0 +1,36 @@
+name: Verify Live Site
+
+# Runs the post-deploy verification script against the production domain.
+# Triggers:
+#   - On push to main (after Lovable redeploys the live site)
+#   - Hourly via schedule (catches CDN-cache or prerender regressions early)
+#   - Manually via workflow_dispatch
+#
+# Fails loudly if any sampled URL returns the generic homepage title or
+# is missing expected schema/JSON-LD content.
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    name: Verify production URLs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Wait for CDN to settle after deploy
+        if: github.event_name == 'push'
+        run: sleep 90
+      - name: Verify live site
+        env:
+          SITE_URL: ${{ vars.SITE_URL || 'https://stirandsimmer.co.uk' }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+        run: node scripts/verify-live-site.mjs
