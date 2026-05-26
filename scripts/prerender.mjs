@@ -704,3 +704,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     process.exit(1);
   });
 }
+// rebuild trigger: 2026-05-26T09:21:00Z
