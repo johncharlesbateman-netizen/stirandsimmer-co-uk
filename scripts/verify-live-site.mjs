@@ -53,9 +53,12 @@ const STATIC_TARGETS = [
 
 const TARGETS = [...(await fetchRecipeSamples(3)), ...STATIC_TARGETS];
 
+const decodeEntities = (s) =>
+  s.replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+
 const extractTitle = (html) => {
   const m = html.match(/<title>([^<]*)<\/title>/i);
-  return m ? m[1].trim() : "";
+  return m ? decodeEntities(m[1].trim()) : "";
 };
 
 const hasSchemaType = (html, type) =>
