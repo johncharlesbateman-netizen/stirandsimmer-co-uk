@@ -19,12 +19,29 @@ const SITE = (process.env.SITE_URL || "https://stirandsimmer.co.uk").replace(/\/
 const HOMEPAGE_TITLE = "Stir & Simmer | Delicious Recipes for Every Occasion";
 const UA = "StirAndSimmerDeployVerifier/1.0";
 
-/** @type {{path: string, kind: "recipe"|"guide"|"page", titleIncludes: string, schemaType?: string}[]} */
-const TARGETS = [
-  // Recipes
-  { path: "/recipes/proper-chicken-stock", kind: "recipe", titleIncludes: "Chicken Stock", schemaType: "Recipe" },
-  { path: "/recipes/classic-beef-stew", kind: "recipe", titleIncludes: "Beef Stew", schemaType: "Recipe" },
-  { path: "/recipes/spaghetti-bolognese", kind: "recipe", titleIncludes: "Spaghetti Bolognese", schemaType: "Recipe" },
+const SUPABASE_URL =
+  process.env.VITE_SUPABASE_URL || "https://xlekynbjvcfbfqycjnpj.supabase.co";
+const SUPABASE_KEY =
+  process.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsZWt5bmJqdmNmYmZxeWNqbnBqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5NDg3ODksImV4cCI6MjA5MDUyNDc4OX0.JTFvGgNDC0e-L8v5aLri4L-Fd2BFmWyWiqeXC0xp3FA";
+
+async function fetchRecipeSamples(n = 3) {
+  const url = `${SUPABASE_URL}/rest/v1/recipes?select=slug,title&order=updated_at.desc&limit=${n}`;
+  const res = await fetch(url, {
+    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` },
+  });
+  if (!res.ok) throw new Error(`Supabase ${res.status}`);
+  const rows = await res.json();
+  return rows.map((r) => ({
+    path: `/recipes/${r.slug}`,
+    kind: "recipe",
+    // First significant word from the title — robust against title formatting tweaks.
+    titleIncludes: String(r.title).split(/\s+/).find((w) => w.length > 3) || r.title,
+    schemaType: "Recipe",
+  }));
+}
+
+const STATIC_TARGETS = [
   // Guides
   { path: "/guides/proper-stock", kind: "guide", titleIncludes: "Stock", schemaType: "Article" },
   { path: "/guides/proper-sauce", kind: "guide", titleIncludes: "Sauce", schemaType: "Article" },
@@ -33,6 +50,8 @@ const TARGETS = [
   { path: "/kitchen-atlas", kind: "page", titleIncludes: "Kitchen Atlas" },
   { path: "/meal-planner", kind: "page", titleIncludes: "Meal Planner" },
 ];
+
+const TARGETS = [...(await fetchRecipeSamples(3)), ...STATIC_TARGETS];
 
 const extractTitle = (html) => {
   const m = html.match(/<title>([^<]*)<\/title>/i);
