@@ -1,4 +1,4 @@
-// Build cache bust marker: 2026-05-26 guide-prerender-redeploy-2
+// Build cache bust marker: 2026-05-26 guide-prerender-redeploy-3
 // Static meta-only prerender. Runs after Vite emits dist/ at production
 // build time and writes one HTML file per public route to dist/{path}/index.html.
 //
