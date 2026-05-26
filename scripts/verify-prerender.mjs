@@ -37,6 +37,13 @@ function* walkHtml(dir) {
       yield* walkHtml(full);
     } else if (entry.endsWith(".html")) {
       yield full;
+    } else if (!entry.includes(".")) {
+      // Extensionless files emitted by older prerender modes — sniff for HTML
+      // so they're verified too instead of silently skipped.
+      try {
+        const head = readFileSync(full, "utf-8").slice(0, 256).toLowerCase();
+        if (head.includes("<!doctype html") || head.includes("<html")) yield full;
+      } catch {}
     }
   }
 }
