@@ -239,8 +239,12 @@ function buildPrerenderedHtml(template, meta) {
   const pinImage = pinterestPortrait(image);
 
   // Strip existing SEO tags from the source template.
+  // Title tags can come back with attributes (for example Helmet's
+  // data-rh marker), so match any <title ...> variant before injecting
+  // the fresh route-specific title. This keeps guides and recipes on the
+  // same reliable replacement path.
   let html = template
-    .replace(/<title>[\s\S]*?<\/title>/i, "")
+    .replace(/<title\b[^>]*>[\s\S]*?<\/title>/i, "")
     .replace(/<meta\s+name=["']description["'][^>]*>/gi, "")
     .replace(/<link\s+rel=["']canonical["'][^>]*>/gi, "")
     .replace(/<meta\s+property=["']og:[^"']+["'][^>]*>/gi, "")
