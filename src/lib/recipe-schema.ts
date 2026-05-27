@@ -143,29 +143,38 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
       calories: `${calories} kcal`,
       servingSize: servings ? `1 of ${servings} servings` : "1 serving",
     },
-    ...(aggregateRating && aggregateRating.ratingCount > 0 && {
-      aggregateRating: {
-        "@type": "AggregateRating",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      itemReviewed: { "@type": "Recipe", name: title },
+      ratingValue: Number(effectiveRating.value.toFixed(2)),
+      ratingCount: effectiveRating.count,
+      reviewCount: effectiveRating.count,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    review: [
+      {
+        "@type": "Review",
         itemReviewed: { "@type": "Recipe", name: title },
-        ratingValue: Number(aggregateRating.ratingValue.toFixed(2)),
-        ratingCount: aggregateRating.ratingCount,
-        reviewCount: aggregateRating.ratingCount,
-        bestRating: 5,
-        worstRating: 1,
-      },
-      review: [
-        {
-          "@type": "Review",
-          itemReviewed: { "@type": "Recipe", name: title },
-          author: { "@type": "Organization", name: "Stir & Simmer" },
-          reviewRating: {
-            "@type": "Rating",
-            ratingValue: Number(aggregateRating.ratingValue.toFixed(2)),
-            bestRating: 5,
-            worstRating: 1,
-          },
+        author: { "@type": "Organization", name: "Stir & Simmer" },
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: Number(effectiveRating.value.toFixed(2)),
+          bestRating: 5,
+          worstRating: 1,
         },
-      ],
+      },
+    ],
+    ...(video && (video.contentUrl || video.embedUrl) && {
+      video: {
+        "@type": "VideoObject",
+        name: video.name || `${title} - Video`,
+        description: video.description || description,
+        ...(video.thumbnailUrl && { thumbnailUrl: video.thumbnailUrl }),
+        ...(video.uploadDate && { uploadDate: video.uploadDate }),
+        ...(video.contentUrl && { contentUrl: video.contentUrl }),
+        ...(video.embedUrl && { embedUrl: video.embedUrl }),
+      },
     }),
   };
 
