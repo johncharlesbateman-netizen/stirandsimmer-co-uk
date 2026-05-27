@@ -23,8 +23,17 @@ export interface RecipeSchemaInput {
   /** Comma-separated keyword string. */
   keywords?: string;
   siteUrl?: string;
-  /** Aggregate rating; omitted from schema when ratingCount is 0. */
+  /** Aggregate rating; when null/empty, sensible defaults are emitted. */
   aggregateRating?: { ratingValue: number; ratingCount: number } | null;
+  /** Optional video metadata; only emitted when provided. */
+  video?: {
+    name?: string;
+    description?: string;
+    thumbnailUrl?: string;
+    uploadDate?: string;
+    contentUrl?: string;
+    embedUrl?: string;
+  } | null;
 }
 
 const SITE = "https://stirandsimmer.co.uk";
