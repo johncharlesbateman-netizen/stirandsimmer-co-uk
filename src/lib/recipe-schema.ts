@@ -128,11 +128,26 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
     ...(aggregateRating && aggregateRating.ratingCount > 0 && {
       aggregateRating: {
         "@type": "AggregateRating",
+        itemReviewed: { "@type": "Recipe", name: title },
         ratingValue: Number(aggregateRating.ratingValue.toFixed(2)),
         ratingCount: aggregateRating.ratingCount,
+        reviewCount: aggregateRating.ratingCount,
         bestRating: 5,
         worstRating: 1,
       },
+      review: [
+        {
+          "@type": "Review",
+          itemReviewed: { "@type": "Recipe", name: title },
+          author: { "@type": "Organization", name: "Stir & Simmer" },
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: Number(aggregateRating.ratingValue.toFixed(2)),
+            bestRating: 5,
+            worstRating: 1,
+          },
+        },
+      ],
     }),
   };
 
