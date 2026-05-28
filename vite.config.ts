@@ -31,7 +31,10 @@ const prerenderPlugin = () => ({
     try {
       await prerenderRoutes();
     } catch (e) {
-      console.warn("[prerender] Generation failed:", (e as Error).message);
+      // Fail the build loudly — a silently-skipped prerender ships a broken
+      // SEO deploy. Set PRERENDER_ALLOW_SKIP_RECIPES=1 for local dev builds.
+      console.error("[prerender] FAILED:", (e as Error).message);
+      throw e;
     }
   },
 });
