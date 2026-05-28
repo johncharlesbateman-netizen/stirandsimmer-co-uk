@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://stirandsimmer.co.uk/recipes/date-and-walnut-cake</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://stirandsimmer.co.uk/recipes/greek-lemon-chicken-kotopoulo-lemonato</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -85,7 +91,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/spiced-lamb-skewers</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/salmon-scallops-with-ginger-lemongrass-risotto</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -97,7 +103,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/salmon-scallops-with-ginger-lemongrass-risotto</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/lamb-shapta</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/spiced-lamb-skewers</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -109,19 +121,19 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/chicken-satay</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://stirandsimmer.co.uk/recipes/steak-kebabs</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/lamb-shapta</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/chicken-satay</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/chicken-kiev-with-ratatouille</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -133,7 +145,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/chicken-kiev-with-ratatouille</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/prawn-avocado-and-mango-salad</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/smoked-salmon-and-cream-cheese-roll</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -151,12 +169,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/prawn-avocado-and-mango-salad</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://stirandsimmer.co.uk/recipes/warm-beef-salad</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -169,8 +181,8 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/smoked-salmon-and-cream-cheese-roll</loc>
-    <lastmod>2026-05-18</lastmod>
+    <loc>https://stirandsimmer.co.uk/recipes/sausage-and-prawn-jambalaya</loc>
+    <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -182,12 +194,6 @@
   </url>
   <url>
     <loc>https://stirandsimmer.co.uk/recipes/chorizo-crusted-chicken-with-apple-sage-cassoulet</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/sausage-and-prawn-jambalaya</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -205,6 +211,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://stirandsimmer.co.uk/recipes/avocado-and-chorizo-toast</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://stirandsimmer.co.uk/recipes/prawn-and-chorizo-rice</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -212,12 +224,6 @@
   </url>
   <url>
     <loc>https://stirandsimmer.co.uk/recipes/spanish-chicken-tray-bake</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/avocado-and-chorizo-toast</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -236,12 +242,6 @@
   </url>
   <url>
     <loc>https://stirandsimmer.co.uk/recipes/battered-prawn-tacos</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/vegetable-lasagne</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -734,6 +734,12 @@
   </url>
   <url>
     <loc>https://stirandsimmer.co.uk/recipes/spicy-fried-chicken-with-apple-salad</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/vegetable-lasagne</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
