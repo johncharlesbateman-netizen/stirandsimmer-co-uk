@@ -37,6 +37,24 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://stirandsimmer.co.uk/work</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/kitchen-atlas</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/privacy</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://stirandsimmer.co.uk/contact</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
