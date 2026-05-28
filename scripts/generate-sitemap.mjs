@@ -58,25 +58,6 @@ const wrapIndex = (entries) =>
     .join("\n")}\n</sitemapindex>\n`;
 
 export async function generateSitemap() {
-  const url = process.env.VITE_SUPABASE_URL;
-  const key = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-  if (!url || !key) {
-    console.warn("[sitemap] Missing Supabase env vars — skipping regeneration.");
-    return;
-  }
-
-  const supabase = createClient(url, key);
-  const { data: recipes, error } = await supabase
-    .from("recipes")
-    .select("slug, updated_at")
-    .eq("published", true)
-    .order("updated_at", { ascending: false });
-
-  if (error) {
-    console.error("[sitemap] DB query failed:", error.message);
-    return;
-  }
-
   const today = new Date().toISOString().split("T")[0];
 
   // sitemap-pages.xml — static pages, category and collection landing pages
@@ -85,31 +66,54 @@ export async function generateSitemap() {
   for (const slug of CATEGORY_SLUGS) pageParts.push(urlEntry(`${SITE}/recipes/category/${slug}`, today, "weekly", "0.8"));
   for (const slug of COLLECTION_SLUGS) pageParts.push(urlEntry(`${SITE}/collections/${slug}`, today, "weekly", "0.7"));
 
-  // sitemap-recipes.xml
-  const recipeParts = (recipes ?? []).map((r) =>
-    urlEntry(`${SITE}/recipes/${r.slug}`, toDate(r.updated_at) ?? today, "weekly", "0.7"),
-  );
-  const recipesLastmod =
-    (recipes ?? [])
-      .map((r) => toDate(r.updated_at))
-      .filter(Boolean)
-      .sort()
-      .pop() ?? today;
-
   // sitemap-guides.xml — driven by hardcoded GUIDE_SLUGS (see App.tsx routes).
+  // Independent of Supabase so it always regenerates even if env vars are missing.
   const guideParts = GUIDE_SLUGS.map((slug) =>
     urlEntry(`${SITE}/guides/${slug}`, today, "monthly", "0.7"),
   );
   const guidesLastmod = today;
 
+  // sitemap-recipes.xml — requires Supabase. Skip gracefully if env vars missing.
+  let recipes = [];
+  const url = process.env.VITE_SUPABASE_URL;
+  const key = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+  if (url && key) {
+    const supabase = createClient(url, key);
+    const { data, error } = await supabase
+      .from("recipes")
+      .select("slug, updated_at")
+      .eq("published", true)
+      .order("updated_at", { ascending: false });
+    if (error) {
+      console.error("[sitemap] DB query failed:", error.message);
+    } else {
+      recipes = data ?? [];
+    }
+  } else {
+    console.warn("[sitemap] Missing Supabase env vars — skipping recipes sitemap regeneration.");
+  }
+
+  const recipeParts = recipes.map((r) =>
+    urlEntry(`${SITE}/recipes/${r.slug}`, toDate(r.updated_at) ?? today, "weekly", "0.7"),
+  );
+  const recipesLastmod =
+    recipes
+      .map((r) => toDate(r.updated_at))
+      .filter(Boolean)
+      .sort()
+      .pop() ?? today;
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const publicDir = resolve(__dirname, "../public");
   mkdirSync(publicDir, { recursive: true });
 
   writeFileSync(resolve(publicDir, "sitemap-pages.xml"), wrapUrlset(pageParts), "utf-8");
-  writeFileSync(resolve(publicDir, "sitemap-recipes.xml"), wrapUrlset(recipeParts), "utf-8");
   writeFileSync(resolve(publicDir, "sitemap-guides.xml"), wrapUrlset(guideParts), "utf-8");
+  // Only overwrite recipes sitemap when we actually fetched data, so a missing-env
+  // build doesn't blow away the previously generated file.
+  if (recipes.length > 0) {
+    writeFileSync(resolve(publicDir, "sitemap-recipes.xml"), wrapUrlset(recipeParts), "utf-8");
+  }
 
   const indexXml = wrapIndex([
     { loc: `${SITE}/sitemap-pages.xml`, lastmod: today },
@@ -119,9 +123,10 @@ export async function generateSitemap() {
   writeFileSync(resolve(publicDir, "sitemap.xml"), indexXml, "utf-8");
 
   console.log(
-    `[sitemap] Wrote index + ${recipes?.length ?? 0} recipes, ${guides?.length ?? 0} guides, ${pageParts.length} pages`,
+    `[sitemap] Wrote index + ${recipes.length} recipes, ${GUIDE_SLUGS.length} guides, ${pageParts.length} pages`,
   );
 }
+
 
 // Allow running standalone: `node scripts/generate-sitemap.mjs`
 if (import.meta.url === `file://${process.argv[1]}`) {
