@@ -13,8 +13,11 @@ const STATIC_URLS = [
   { path: "/collections", changefreq: "weekly", priority: "0.8" },
   { path: "/meal-planner", changefreq: "monthly", priority: "0.6" },
   { path: "/guides", changefreq: "monthly", priority: "0.8" },
+  { path: "/kitchen-atlas", changefreq: "monthly", priority: "0.6" },
   { path: "/about", changefreq: "monthly", priority: "0.5" },
+  { path: "/work", changefreq: "monthly", priority: "0.5" },
   { path: "/contact", changefreq: "monthly", priority: "0.4" },
+  { path: "/privacy", changefreq: "yearly", priority: "0.3" },
 ];
 
 const CATEGORY_SLUGS = [
@@ -26,6 +29,17 @@ const COLLECTION_SLUGS = [
   "weeknight-suppers", "italian-meals", "romantic-meals", "fish-and-seafood",
   "sweets-and-desserts", "quick-and-easy", "baking-and-bread", "healthy-eating",
 ];
+
+// Source of truth: hardcoded <Route path="/guides/..."> entries in src/App.tsx.
+// The `guides` DB table contains legacy rows that no longer map to real routes,
+// so we don't query it for the sitemap.
+const GUIDE_SLUGS = [
+  "mother-sauces", "french-techniques", "garam-masala", "how-to-use-spices",
+  "proper-stock", "proper-sauce", "choosing-pans", "kitchen-knives",
+  "understanding-olive-oil", "how-to-cook-pasta", "how-to-make-bread",
+  "what-to-cook-in-summer",
+];
+
 
 const toDate = (s) => (s ? new Date(s).toISOString().split("T")[0] : null);
 
@@ -52,24 +66,14 @@ export async function generateSitemap() {
   }
 
   const supabase = createClient(url, key);
-  const [{ data: recipes, error }, { data: guides, error: guidesError }] = await Promise.all([
-    supabase
-      .from("recipes")
-      .select("slug, updated_at")
-      .eq("published", true)
-      .order("updated_at", { ascending: false }),
-    supabase
-      .from("guides")
-      .select("slug, updated_at, last_updated_at")
-      .eq("published", true),
-  ]);
+  const { data: recipes, error } = await supabase
+    .from("recipes")
+    .select("slug, updated_at")
+    .eq("published", true)
+    .order("updated_at", { ascending: false });
 
   if (error) {
     console.error("[sitemap] DB query failed:", error.message);
-    return;
-  }
-  if (guidesError) {
-    console.error("[sitemap] Guides query failed:", guidesError.message);
     return;
   }
 
@@ -92,21 +96,12 @@ export async function generateSitemap() {
       .sort()
       .pop() ?? today;
 
-  // sitemap-guides.xml
-  const guideParts = (guides ?? []).map((g) =>
-    urlEntry(
-      `${SITE}/guides/${g.slug}`,
-      toDate(g.last_updated_at ?? g.updated_at) ?? today,
-      "monthly",
-      "0.7",
-    ),
+  // sitemap-guides.xml — driven by hardcoded GUIDE_SLUGS (see App.tsx routes).
+  const guideParts = GUIDE_SLUGS.map((slug) =>
+    urlEntry(`${SITE}/guides/${slug}`, today, "monthly", "0.7"),
   );
-  const guidesLastmod =
-    (guides ?? [])
-      .map((g) => toDate(g.last_updated_at ?? g.updated_at))
-      .filter(Boolean)
-      .sort()
-      .pop() ?? today;
+  const guidesLastmod = today;
+
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const publicDir = resolve(__dirname, "../public");
