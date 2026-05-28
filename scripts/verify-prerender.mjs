@@ -53,7 +53,12 @@ let checked = 0;
 const failures = [];
 
 for (const file of walkHtml(DIST)) {
-  const rel = "/" + relative(DIST, file).replace(/\/?index\.html$/, "");
+  // Treat both `/foo/index.html` and `/foo.html` as the canonical route `/foo`,
+  // since the prerender emits both for the same URL and both canonicalise to
+  // the clean path.
+  const rel = "/" + relative(DIST, file)
+    .replace(/\/?index\.html$/, "")
+    .replace(/\.html$/, "");
   const route = rel === "/" ? "/" : rel;
   const html = readFileSync(file, "utf-8");
   checked++;
