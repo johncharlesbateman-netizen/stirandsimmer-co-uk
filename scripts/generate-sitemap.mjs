@@ -66,24 +66,14 @@ export async function generateSitemap() {
   }
 
   const supabase = createClient(url, key);
-  const [{ data: recipes, error }, { data: guides, error: guidesError }] = await Promise.all([
-    supabase
-      .from("recipes")
-      .select("slug, updated_at")
-      .eq("published", true)
-      .order("updated_at", { ascending: false }),
-    supabase
-      .from("guides")
-      .select("slug, updated_at, last_updated_at")
-      .eq("published", true),
-  ]);
+  const { data: recipes, error } = await supabase
+    .from("recipes")
+    .select("slug, updated_at")
+    .eq("published", true)
+    .order("updated_at", { ascending: false });
 
   if (error) {
     console.error("[sitemap] DB query failed:", error.message);
-    return;
-  }
-  if (guidesError) {
-    console.error("[sitemap] Guides query failed:", guidesError.message);
     return;
   }
 
@@ -106,21 +96,12 @@ export async function generateSitemap() {
       .sort()
       .pop() ?? today;
 
-  // sitemap-guides.xml
-  const guideParts = (guides ?? []).map((g) =>
-    urlEntry(
-      `${SITE}/guides/${g.slug}`,
-      toDate(g.last_updated_at ?? g.updated_at) ?? today,
-      "monthly",
-      "0.7",
-    ),
+  // sitemap-guides.xml — driven by hardcoded GUIDE_SLUGS (see App.tsx routes).
+  const guideParts = GUIDE_SLUGS.map((slug) =>
+    urlEntry(`${SITE}/guides/${slug}`, today, "monthly", "0.7"),
   );
-  const guidesLastmod =
-    (guides ?? [])
-      .map((g) => toDate(g.last_updated_at ?? g.updated_at))
-      .filter(Boolean)
-      .sort()
-      .pop() ?? today;
+  const guidesLastmod = today;
+
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const publicDir = resolve(__dirname, "../public");
