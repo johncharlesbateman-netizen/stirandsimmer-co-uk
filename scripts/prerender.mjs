@@ -618,20 +618,41 @@ export async function prerenderRoutes() {
   }
 
   // Recipe pages — fetched from the database.
-  const url = process.env.VITE_SUPABASE_URL;
-  const key = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-  let recipeCount = 0;
-  if (url && key) {
-    try {
-      const supabase = createClient(url, key);
-      const { data: recipes, error } = await supabase
-        .from("recipes")
-        .select(
-          "id, slug, title, description, image_url, categories, cuisine:cuisine_region, seo_title, seo_description, ingredients, instructions, prep_time_minutes, cook_time_minutes, servings, created_at, updated_at",
-        )
-        .eq("published", true);
-      if (error) throw error;
+  // Strip stray quotes/whitespace that sneak in when env vars are pasted into
+  // Cloudflare Pages with surrounding quote marks (a real regression we hit).
+  const cleanEnv = (v) =>
+    typeof v === "string" ? v.trim().replace(/^['"]|['"]$/g, "").trim() : v;
+  const url = cleanEnv(process.env.VITE_SUPABASE_URL);
+  const key = cleanEnv(process.env.VITE_SUPABASE_PUBLISHABLE_KEY);
+  // Opt-out for local/dev builds where hitting the DB is not desired.
+  const allowSkip = process.env.PRERENDER_ALLOW_SKIP_RECIPES === "1";
 
+  const failOrWarn = (msg) => {
+    if (allowSkip) {
+      console.warn(`[prerender] ${msg} — skipping recipe routes (PRERENDER_ALLOW_SKIP_RECIPES=1).`);
+      return;
+    }
+    throw new Error(`[prerender] ${msg}. Set PRERENDER_ALLOW_SKIP_RECIPES=1 to bypass for local builds.`);
+  };
+
+  let recipeCount = 0;
+  if (!url || !key) {
+    failOrWarn("Missing VITE_SUPABASE_URL or VITE_SUPABASE_PUBLISHABLE_KEY");
+  } else if (!/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/.test(url)) {
+    failOrWarn(`VITE_SUPABASE_URL is malformed: ${JSON.stringify(url)}`);
+  } else {
+    const supabase = createClient(url, key);
+    const { data: recipes, error } = await supabase
+      .from("recipes")
+      .select(
+        "id, slug, title, description, image_url, categories, cuisine:cuisine_region, seo_title, seo_description, ingredients, instructions, prep_time_minutes, cook_time_minutes, servings, created_at, updated_at",
+      )
+      .eq("published", true);
+    if (error) {
+      failOrWarn(`Recipe fetch failed: ${error.message}`);
+    } else if (!recipes || recipes.length === 0) {
+      failOrWarn("Recipe query returned 0 rows");
+    } else {
       // Aggregate ratings per recipe so the prerendered JSON-LD carries
       // aggregateRating for Google's Rich Results Test without needing JS.
       const aggregates = new Map();
@@ -649,7 +670,7 @@ export async function prerenderRoutes() {
         console.warn("[prerender] Ratings fetch failed:", e.message);
       }
 
-      for (const r of recipes ?? []) {
+      for (const r of recipes) {
         const title = r.seo_title || `${r.title} | Stir & Simmer`;
         const description =
           r.seo_description ||
@@ -697,11 +718,7 @@ export async function prerenderRoutes() {
         }
         recipeCount++;
       }
-    } catch (e) {
-      console.warn("[prerender] Recipe fetch failed:", e.message);
     }
-  } else {
-    console.warn("[prerender] Missing Supabase env vars — skipping recipe routes.");
   }
 
   for (const route of routes) writeRoute(distDir, template, route);
