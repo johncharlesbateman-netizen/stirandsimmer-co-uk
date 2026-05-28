@@ -180,16 +180,78 @@ const COLLECTIONS = [
   { slug: "healthy-eating", title: "Healthy Eating", description: "Bright, balanced recipes that prioritise vegetables, lean proteins and whole grains." },
 ];
 
-// Region pages (mirrors src/lib/cuisine-regions.ts).
+// Region pages (mirrors src/pages/KitchenAtlas.tsx + src/pages/RegionPage.tsx).
 const REGIONS = [
-  { slug: "italian", label: "Italian" },
-  { slug: "french", label: "French" },
-  { slug: "british", label: "British" },
-  { slug: "indian", label: "Indian" },
-  { slug: "asian", label: "Asian" },
-  { slug: "spicy", label: "Spicy" },
-  { slug: "seasonal", label: "Seasonal" },
-  { slug: "comfort", label: "Comfort" },
+  {
+    slug: "uk",
+    label: "United Kingdom",
+    adjective: "British",
+    description:
+      "Honest, seasonal and deeply comforting British cooking — pies, roasts, puddings and the foundation of everything.",
+  },
+  {
+    slug: "italy",
+    label: "Italy",
+    adjective: "Italian",
+    description:
+      "Pasta, sauces and the art of simplicity. Italian cooking that feeds the soul.",
+  },
+  {
+    slug: "france",
+    label: "France",
+    adjective: "French",
+    description:
+      "Classical techniques that underpin all of western cooking — sauces, braises, patisserie and bistro classics.",
+  },
+  {
+    slug: "spain",
+    label: "Spain",
+    adjective: "Spanish",
+    description:
+      "Bold flavours, beautiful simplicity and the art of sharing — paella, tapas, chorizo and the soul of Spanish cooking.",
+  },
+  {
+    slug: "india",
+    label: "India",
+    adjective: "Indian",
+    description:
+      "Bold spices, fragrant herbs and layers of warmth and depth — curries, dals and slow-simmered classics from across India.",
+  },
+  {
+    slug: "mexico",
+    label: "Mexico",
+    adjective: "Mexican",
+    description:
+      "Vibrant, smoky and deeply satisfying — tacos, salsas and the bold, layered flavours of Mexican cooking.",
+  },
+  {
+    slug: "thailand",
+    label: "Thailand",
+    adjective: "Thai",
+    description:
+      "Fragrant, fiery and beautifully balanced — the sweet, sour, salty, spicy heart of Thai cooking.",
+  },
+  {
+    slug: "japan",
+    label: "Japan",
+    adjective: "Japanese",
+    description:
+      "Precision, balance and the art of umami — Japanese cooking at its finest.",
+  },
+  {
+    slug: "mediterranean",
+    label: "Mediterranean",
+    adjective: "Mediterranean",
+    description:
+      "The shared table around one sea — olive oil, vegetables, fish and herbs from southern Europe and North Africa.",
+  },
+  {
+    slug: "middleeast",
+    label: "Middle East",
+    adjective: "Middle Eastern",
+    description:
+      "Warm spices, slow-cooked meats, fresh herbs and the deep hospitality of Middle Eastern cooking.",
+  },
 ];
 
 const RECIPE_PRERENDER_ALIASES = {
