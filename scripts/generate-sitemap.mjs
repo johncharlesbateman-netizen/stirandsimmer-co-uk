@@ -13,8 +13,11 @@ const STATIC_URLS = [
   { path: "/collections", changefreq: "weekly", priority: "0.8" },
   { path: "/meal-planner", changefreq: "monthly", priority: "0.6" },
   { path: "/guides", changefreq: "monthly", priority: "0.8" },
+  { path: "/kitchen-atlas", changefreq: "monthly", priority: "0.6" },
   { path: "/about", changefreq: "monthly", priority: "0.5" },
+  { path: "/work", changefreq: "monthly", priority: "0.5" },
   { path: "/contact", changefreq: "monthly", priority: "0.4" },
+  { path: "/privacy", changefreq: "yearly", priority: "0.3" },
 ];
 
 const CATEGORY_SLUGS = [
@@ -26,6 +29,17 @@ const COLLECTION_SLUGS = [
   "weeknight-suppers", "italian-meals", "romantic-meals", "fish-and-seafood",
   "sweets-and-desserts", "quick-and-easy", "baking-and-bread", "healthy-eating",
 ];
+
+// Source of truth: hardcoded <Route path="/guides/..."> entries in src/App.tsx.
+// The `guides` DB table contains legacy rows that no longer map to real routes,
+// so we don't query it for the sitemap.
+const GUIDE_SLUGS = [
+  "mother-sauces", "french-techniques", "garam-masala", "how-to-use-spices",
+  "proper-stock", "proper-sauce", "choosing-pans", "kitchen-knives",
+  "understanding-olive-oil", "how-to-cook-pasta", "how-to-make-bread",
+  "what-to-cook-in-summer",
+];
+
 
 const toDate = (s) => (s ? new Date(s).toISOString().split("T")[0] : null);
 
