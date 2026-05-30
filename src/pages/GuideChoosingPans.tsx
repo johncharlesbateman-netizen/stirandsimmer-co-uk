@@ -98,7 +98,13 @@ const GuideChoosingPans = () => {
               <strong className="text-foreground">Copper</strong> — beautiful, responsive, expensive. Reacts to heat changes faster than anything else, which makes it the gold standard for sauces and sugar work. Niche, but lovely if you have the budget.
             </li>
             <li>
-              <strong className="text-foreground">Titanium, ceramic-coated and hybrid pans</strong> — heavily marketed, but worth approaching with caution. Titanium and ceramic coatings are usually applied over an aluminium base and perform well when new, but tend to degrade faster than stainless steel or a well-seasoned carbon steel. Hybrid pans — typically a stainless steel or hard-anodised body with a non-stick cooking surface — are a more recent development and a genuine attempt to get the best of both worlds. They're more durable than traditional non-stick and more forgiving than bare stainless, but they're still a compromise, and most are too new to have a long track record. All three are more sensitive to high heat than bare metal, which limits how you can cook with them. Not bad pans, but rarely the best long-term investment. If you want a non-stick surface, a carbon steel pan you've seasoned yourself will outlast most coated alternatives by years.
+              <strong className="text-foreground">Titanium, ceramic-coated and hybrid pans</strong> — worth understanding before you buy, because "titanium" covers very different things. Pure solid titanium pans have no coating at all — nothing to scratch, chip, or wear out — and genuinely do last a lifetime. They're expensive, require some technique to cook with (they're not naturally non-stick without proper preheating and fat), but are a legitimate long-term investment if you're prepared to learn them.
+
+              Most pans sold as "titanium", however, are aluminium or steel with a titanium-reinforced non-stick coating. These are more durable than standard non-stick and the lifetime claims you'll see on social media often refer to the pure version — not these. The coating still degrades over time, particularly with high heat or metal utensils. Better than traditional non-stick, but not the same thing as solid titanium.
+
+              Ceramic-coated and hybrid pans — typically a stainless steel or hard-anodised body with a non-stick cooking surface — follow a similar pattern: good when new, more durable than old-style Teflon, but still a surface that wears. Most are too new to have a long track record.
+
+              If you see a pan marketed as "titanium", check whether it's pure titanium or titanium-reinforced. The difference matters.
             </li>
           </ul>
         </div>
