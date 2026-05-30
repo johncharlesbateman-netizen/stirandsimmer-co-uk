@@ -105,71 +105,31 @@ const GuideChoosingPans = () => {
           <h2  id="the-main-types-of-pan" className="font-display text-3xl md:text-4xl text-foreground mb-6">The main types of pan</h2>
 
           <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
-            Stainless steel
+            Frying pan (or skillet)
           </h3>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            The workhorse of the professional kitchen. Stainless steel is durable, non-reactive, oven-safe and dishwasher-safe. It conducts heat reasonably well, especially when paired with an aluminium or copper core, and it develops fond — those caramelised bits that stick to the pan and become the foundation of a great sauce.
-          </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            The catch: stainless steel will stick if used incorrectly. The key is to preheat the pan properly and add your fat before the food. When the pan is hot enough, protein will release naturally rather than tearing.
-          </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-10">
-            <strong className="text-foreground">Best for:</strong> searing meat, making pan sauces, sautéing vegetables, general everyday cooking.
+            The one you'll reach for every day. Eggs, seared chicken, vegetables, a quick sauce — it handles almost everything. A 24–26cm pan suits one to two people; go 28cm if you're regularly cooking for four. This is the pan to invest in first, and the one where material matters most.
           </p>
 
           <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
-            Cast iron
+            Sauté pan
           </h3>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            Heavy, slow to heat but extraordinary at retaining it. Cast iron heats unevenly at first but once up to temperature it holds that heat with remarkable consistency — making it ideal for searing, frying and anything that needs sustained, even heat.
-          </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            It also goes from hob to oven seamlessly, which makes it useful for dishes that start on the stove and finish in the oven. A cast iron pan, properly cared for, will outlast everything else in your kitchen.
-          </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            The catch: it's heavy, it reacts with acidic foods if unseasoned, and it needs proper maintenance — drying thoroughly and oiling after every wash.
-          </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-10">
-            <strong className="text-foreground">Best for:</strong> searing steaks, frying, cornbread, dishes that go from hob to oven, cooking over open fire.
+            Like a frying pan but with straight, deeper sides and a lid. The extra depth lets you brown meat and add liquid without splashing — perfect for one-pan suppers, braised dishes, or anything that starts on the hob and finishes in the oven. If you're adding a second pan, make it this.
           </p>
 
           <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
-            Non-stick
+            Saucepan
           </h3>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            The most forgiving pan in the kitchen. Non-stick surfaces — typically PTFE-based coatings or ceramic — prevent food from adhering, making them ideal for delicate ingredients that would otherwise tear or stick.
-          </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            The catch: non-stick coatings degrade over time, especially if overheated or scratched with metal utensils. They should never be used on very high heat and should be replaced when the coating begins to show wear.
-          </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-10">
-            <strong className="text-foreground">Best for:</strong> eggs, fish fillets, pancakes, anything delicate that needs a gentle release.
+            The quiet workhorse. Pasta, rice, soups, sauces, blanching greens. A medium (18cm) and a large (24cm) will cover almost everything. You probably already own one — just make sure it has a heavy base.
           </p>
 
           <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
-            Carbon steel
+            Wok
           </h3>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            The professional kitchen's best kept secret. Lighter than cast iron but with many of the same properties — it heats quickly, retains heat well, develops a natural non-stick seasoning over time, and goes from hob to oven without complaint.
-          </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            Carbon steel is the pan of choice in most restaurant kitchens for a reason. It requires seasoning like cast iron but responds faster to changes in heat, giving you more control.
-          </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-10">
-            <strong className="text-foreground">Best for:</strong> searing, sautéing, eggs once seasoned, anything you'd use cast iron or stainless steel for.
-          </p>
-
-          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
-            Copper
-          </h3>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            The most responsive of all pan materials. Copper heats and cools almost instantly, giving unparalleled control — which is why it's the choice of serious pastry chefs for temperature-sensitive work like sugar and chocolate.
-          </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            The catch: copper is expensive, requires regular polishing, and reacts with acidic foods unless lined with tin or stainless steel.
-          </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            <strong className="text-foreground">Best for:</strong> sauces, sugar work, chocolate, anything requiring precise temperature control.
+            Optional, but irreplaceable once you have one. High sloping sides and fierce heat make it the only real tool for stir fries and noodles. Carbon steel is the traditional choice — lighter than cast iron, and it builds a natural non-stick surface the more you cook with it.
           </p>
         </div>
 
