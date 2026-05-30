@@ -256,6 +256,33 @@ const GuideChoosingPans = () => {
         {/* Caring for your pans */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <h2  id="caring-for-your-pans" className="font-display text-3xl md:text-4xl text-foreground mb-6">Caring for your pans</h2>
+
+          <h3 className="font-display text-xl md:text-2xl text-foreground mb-4">
+            Seasoning your pan
+          </h3>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            Seasoning is the process of baking a thin layer of oil into the surface of a pan to create a natural, non-stick coating. It's what makes cast iron and carbon steel pans so good over time — and it's much simpler than it sounds.
+          </p>
+
+          <h4 className="font-display text-lg md:text-xl text-foreground mb-2">Why it matters</h4>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            A new cast iron or carbon steel pan has a bare metal surface that food will stick to. Seasoning fills the microscopic pores in the metal with polymerised oil, creating a smooth, slick layer that improves every time you cook with it. A well-seasoned pan is genuinely non-stick, adds a subtle depth of flavour, and protects against rust.
+          </p>
+
+          <h4 className="font-display text-lg md:text-xl text-foreground mb-2">How to season a new pan</h4>
+          <ol className="list-decimal pl-6 space-y-2 text-base md:text-lg text-foreground/90 leading-relaxed mb-6">
+            <li>Wash the pan with warm soapy water and dry it thoroughly — this is the one time soap is fine, as you're removing the factory coating.</li>
+            <li>Place it on a hob over a low heat for a few minutes to drive off any remaining moisture.</li>
+            <li>Apply a very thin layer of a high smoke-point oil — flaxseed, grapeseed, or vegetable oil all work well. Wipe it over the entire surface, inside and out, then buff off the excess with a clean cloth until the pan looks almost dry. Less oil is more — a thick layer will go sticky.</li>
+            <li>Place the pan upside down in an oven at around 230°C (450°F) for an hour. Put a sheet of foil on the rack below to catch any drips.</li>
+            <li>Leave it to cool in the oven, then repeat the process two or three more times for a solid base layer.</li>
+          </ol>
+
+          <h4 className="font-display text-lg md:text-xl text-foreground mb-2">Keeping it in good condition</h4>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-10">
+            After that, cooking with fat — frying bacon, searing meat, stir frying with oil — builds the seasoning naturally over time. Rinse the pan with hot water after use, dry it immediately, and rub a tiny amount of oil into the surface before storing. Avoid soaking, the dishwasher, or leaving it wet.
+          </p>
+
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
             <li>
               <strong className="text-foreground">Stainless steel</strong> — dishwasher safe but hand washing preserves the finish. For stubborn residue, deglaze with water while still hot or use a stainless steel cleaner.
