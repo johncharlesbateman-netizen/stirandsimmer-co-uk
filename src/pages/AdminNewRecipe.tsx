@@ -9,6 +9,7 @@ import CuisineRegionPicker from "@/components/CuisineRegionPicker";
 import CategoryPicker from "@/components/CategoryPicker";
 import MealTypePicker from "@/components/MealTypePicker";
 import Layout from "@/components/Layout";
+import CookTimeWarning from "@/components/CookTimeWarning";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
@@ -528,6 +529,10 @@ const AdminNewRecipe = () => {
 
           {/* Publish toggle + Submit */}
           <div className="pt-4 border-t border-border space-y-4">
+            <CookTimeWarning
+              cookTimeMinutes={cookTime ? parseInt(cookTime, 10) : null}
+              instructions={instructions}
+            />
             <label className="flex items-start gap-3 p-3 border border-border rounded-md cursor-pointer hover:bg-secondary/50 transition-colors">
               <input
                 type="checkbox"
