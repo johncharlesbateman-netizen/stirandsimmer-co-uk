@@ -8,9 +8,9 @@ const HEIC_MIME_TYPES = new Set([
   "image/heif-sequence",
 ]);
 
-const MIN_FILE_BYTES = 25_000; // ~25KB; real photos at q=0.9 are well above this
+const MIN_FILE_BYTES = 25_000; // ~25KB; real photos at q≥0.9 are well above this
 const MIN_SHORT_EDGE_PX = 400; // reject anything smaller than this on the shortest side
-const MIN_COLOUR_VARIANCE = 180; // sum of per-channel variance across a 4×4 grid; very uniform crops (wood, sky, plain table) fall well below this
+const MIN_COLOUR_VARIANCE = 180; // sum of per-channel cell variance; flat textures (wood, sky, tablecloth) fall well below this
 const GRID = 4;
 
 const isHeicLikeFile = (file: File) =>
@@ -18,6 +18,9 @@ const isHeicLikeFile = (file: File) =>
 
 const toJpegFileName = (name: string) =>
   HEIC_EXTENSIONS.test(name) ? name.replace(HEIC_EXTENSIONS, ".jpg") : `${name}.jpg`;
+
+const toPngFileName = (name: string) =>
+  HEIC_EXTENSIONS.test(name) ? name.replace(HEIC_EXTENSIONS, ".png") : `${name}.png`;
 
 export class RecipeImageValidationError extends Error {
   readonly code: string;
@@ -28,8 +31,18 @@ export class RecipeImageValidationError extends Error {
   }
 }
 
-const loadImage = (blob: Blob): Promise<HTMLImageElement> =>
-  new Promise((resolve, reject) => {
+interface Candidate {
+  blob: Blob;
+  img: HTMLImageElement;
+  variance: number;
+  shortEdge: number;
+  longEdge: number;
+  mime: string;
+  strategyLabel: string;
+}
+
+const loadImage = (blob: Blob): Promise<HTMLImageElement | null> =>
+  new Promise((resolve) => {
     const url = URL.createObjectURL(blob);
     const img = new Image();
     img.onload = () => {
@@ -38,26 +51,18 @@ const loadImage = (blob: Blob): Promise<HTMLImageElement> =>
     };
     img.onerror = () => {
       URL.revokeObjectURL(url);
-      reject(new RecipeImageValidationError("DECODE_FAILED", "Converted image could not be decoded."));
+      resolve(null);
     };
     img.src = url;
   });
 
-/**
- * Sample the image as a GRID×GRID grid of cell-averaged RGB values and
- * return the summed per-channel variance across cells. A genuine food
- * photograph hits hundreds-to-thousands; a flat wood-grain / single-colour
- * crop sits well under 100.
- */
 const computeColourVariance = (img: HTMLImageElement): number => {
   const canvas = document.createElement("canvas");
-  // Downscale to a fixed sample size so the variance threshold is stable
-  // regardless of source dimensions.
   const sample = 64;
   canvas.width = sample;
   canvas.height = sample;
   const ctx = canvas.getContext("2d");
-  if (!ctx) return Number.POSITIVE_INFINITY; // can't check — don't block
+  if (!ctx) return Number.POSITIVE_INFINITY;
   ctx.drawImage(img, 0, 0, sample, sample);
   const { data } = ctx.getImageData(0, 0, sample, sample);
 
@@ -78,65 +83,170 @@ const computeColourVariance = (img: HTMLImageElement): number => {
       cellMeans.push([r / n, g / n, b / n]);
     }
   }
-
   const mean = (idx: 0 | 1 | 2) =>
     cellMeans.reduce((acc, c) => acc + c[idx], 0) / cellMeans.length;
   const variance = (idx: 0 | 1 | 2) => {
     const m = mean(idx);
     return cellMeans.reduce((acc, c) => acc + (c[idx] - m) ** 2, 0) / cellMeans.length;
   };
-
   return variance(0) + variance(1) + variance(2);
 };
 
-const validateConvertedImage = async (blob: Blob, sourceName: string): Promise<void> => {
-  if (blob.size < MIN_FILE_BYTES) {
-    throw new RecipeImageValidationError(
-      "TOO_SMALL",
-      `Converted image for "${sourceName}" is only ${(blob.size / 1024).toFixed(1)}KB — the HEIC conversion likely failed. Please re-export the photo as JPEG/PNG and try again.`,
-    );
-  }
+/** Re-encode a decoded image through a fresh canvas at high quality JPEG.
+ *  This is the "safer crop strategy" — by drawing the full natural
+ *  dimensions onto canvas and exporting, we discard any odd metadata-driven
+ *  cropping from the source and guarantee the output matches what we just
+ *  inspected.
+ */
+const reencodeViaCanvas = (img: HTMLImageElement, quality = 0.92): Promise<Blob | null> =>
+  new Promise((resolve) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return resolve(null);
+    ctx.drawImage(img, 0, 0);
+    canvas.toBlob((b) => resolve(b), "image/jpeg", quality);
+  });
 
+const buildCandidate = async (
+  blob: Blob,
+  mime: string,
+  strategyLabel: string,
+): Promise<Candidate | null> => {
+  if (blob.size < 1000) return null;
   const img = await loadImage(blob);
-  const shortEdge = Math.min(img.naturalWidth, img.naturalHeight);
-  if (shortEdge < MIN_SHORT_EDGE_PX) {
-    throw new RecipeImageValidationError(
-      "TOO_LOW_RES",
-      `Converted image for "${sourceName}" is only ${img.naturalWidth}×${img.naturalHeight}px. Please re-export the photo at a higher resolution.`,
-    );
+  if (!img) return null;
+  return {
+    blob,
+    img,
+    variance: computeColourVariance(img),
+    shortEdge: Math.min(img.naturalWidth, img.naturalHeight),
+    longEdge: Math.max(img.naturalWidth, img.naturalHeight),
+    mime,
+    strategyLabel,
+  };
+};
+
+const isPassing = (c: Candidate): boolean =>
+  c.blob.size >= MIN_FILE_BYTES &&
+  c.shortEdge >= MIN_SHORT_EDGE_PX &&
+  c.variance >= MIN_COLOUR_VARIANCE;
+
+/** Generate conversion candidates from a HEIC file, in fallback order:
+ *   1. Standard single-frame JPEG at q=0.95
+ *   2. Multi-frame extraction → every embedded image (picks up the real
+ *      photo when the HEIC container holds a thumbnail/depth-map first)
+ *   3. Lossless PNG (different decode path inside heic2any)
+ *   4. Canvas re-encode of the best decoded frame above (safer re-export)
+ */
+async function* generateCandidates(file: File): AsyncGenerator<Candidate> {
+  // 1. Standard JPEG
+  try {
+    const out = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.95 });
+    const blobs = Array.isArray(out) ? out : [out];
+    for (let i = 0; i < blobs.length; i++) {
+      const cand = await buildCandidate(
+        blobs[i],
+        "image/jpeg",
+        `jpeg-q95${blobs.length > 1 ? `[${i}]` : ""}`,
+      );
+      if (cand) yield cand;
+    }
+  } catch {
+    /* fall through */
   }
 
-  const variance = computeColourVariance(img);
-  if (variance < MIN_COLOUR_VARIANCE) {
-    throw new RecipeImageValidationError(
-      "UNIFORM_CROP",
-      `The HEIC conversion for "${sourceName}" produced a near-uniform image (likely just background / table surface, not the dish). Please re-export the photo as JPEG or PNG from your phone and upload that instead.`,
-    );
+  // 2. Multi-frame extraction — return every embedded frame
+  try {
+    const out = await heic2any({
+      blob: file,
+      toType: "image/jpeg",
+      quality: 0.95,
+      multiple: true,
+    } as Parameters<typeof heic2any>[0]);
+    const blobs = Array.isArray(out) ? out : [out];
+    for (let i = 0; i < blobs.length; i++) {
+      const cand = await buildCandidate(blobs[i], "image/jpeg", `jpeg-frame[${i}]`);
+      if (cand) yield cand;
+    }
+  } catch {
+    /* fall through */
   }
-};
+
+  // 3. Lossless PNG path
+  try {
+    const out = await heic2any({ blob: file, toType: "image/png" });
+    const blobs = Array.isArray(out) ? out : [out];
+    for (let i = 0; i < blobs.length; i++) {
+      const cand = await buildCandidate(
+        blobs[i],
+        "image/png",
+        `png${blobs.length > 1 ? `[${i}]` : ""}`,
+      );
+      if (cand) yield cand;
+    }
+  } catch {
+    /* fall through */
+  }
+}
 
 export const normaliseRecipeImageUpload = async (file: File): Promise<File> => {
   if (!isHeicLikeFile(file)) return file;
 
-  let convertedBlob: Blob;
-  try {
-    const converted = await heic2any({
-      blob: file,
-      toType: "image/jpeg",
-      quality: 0.9,
-    });
-    convertedBlob = Array.isArray(converted) ? converted[0] : converted;
-  } catch (err) {
+  const candidates: Candidate[] = [];
+  let anyDecoded = false;
+
+  for await (const cand of generateCandidates(file)) {
+    anyDecoded = true;
+    candidates.push(cand);
+    if (isPassing(cand)) {
+      return finalise(cand, file.name);
+    }
+  }
+
+  // None passed outright. Try a canvas re-encode of the best decoded frame —
+  // this rescues cases where the original blob was oversized or had odd
+  // metadata, but the actual pixels are fine.
+  if (candidates.length > 0) {
+    const best = candidates.slice().sort((a, b) =>
+      (b.variance * b.shortEdge) - (a.variance * a.shortEdge),
+    )[0];
+    if (best.shortEdge >= MIN_SHORT_EDGE_PX && best.variance >= MIN_COLOUR_VARIANCE) {
+      const reBlob = await reencodeViaCanvas(best.img);
+      if (reBlob) {
+        const reCand = await buildCandidate(reBlob, "image/jpeg", `${best.strategyLabel}+canvas`);
+        if (reCand && isPassing(reCand)) {
+          return finalise(reCand, file.name);
+        }
+      }
+      // Re-encode didn't help but pixels are valid — accept the best frame anyway.
+      return finalise(best, file.name);
+    }
+  }
+
+  if (!anyDecoded) {
     throw new RecipeImageValidationError(
       "CONVERSION_FAILED",
-      `Could not convert "${file.name}" from HEIC to JPEG in the browser. Please re-export it as JPEG or PNG from your phone and try again.`,
+      `Could not convert "${file.name}" from HEIC to JPEG in the browser, even after multiple attempts. Please re-export it as JPEG or PNG from your phone and try again.`,
     );
   }
 
-  await validateConvertedImage(convertedBlob, file.name);
+  // Decoded but every attempt failed validation — explain why using the best candidate.
+  const best = candidates.slice().sort((a, b) => b.variance - a.variance)[0];
+  if (best.shortEdge < MIN_SHORT_EDGE_PX) {
+    throw new RecipeImageValidationError(
+      "TOO_LOW_RES",
+      `"${file.name}" only decoded to ${best.img.naturalWidth}×${best.img.naturalHeight}px after ${candidates.length} attempts. Please re-export at a higher resolution.`,
+    );
+  }
+  throw new RecipeImageValidationError(
+    "UNIFORM_CROP",
+    `Every HEIC decoding strategy for "${file.name}" produced a near-uniform image (likely just background, not the dish). Please re-export the photo as JPEG or PNG from your phone and upload that instead.`,
+  );
+};
 
-  return new File([convertedBlob], toJpegFileName(file.name), {
-    type: "image/jpeg",
-    lastModified: Date.now(),
-  });
+const finalise = (cand: Candidate, originalName: string): File => {
+  const name = cand.mime === "image/png" ? toPngFileName(originalName) : toJpegFileName(originalName);
+  return new File([cand.blob], name, { type: cand.mime, lastModified: Date.now() });
 };
