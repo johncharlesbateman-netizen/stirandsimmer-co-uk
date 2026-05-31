@@ -592,6 +592,15 @@ const AdminEditRecipe = () => {
           </div>
         </form>
       </div>
+      <AiFillConfirmDialog
+        open={aiFill.open}
+        previews={aiFill.previews}
+        selected={aiFill.selected}
+        loading={aiFill.loading}
+        onToggle={aiFill.toggle}
+        onCancel={aiFill.cancel}
+        onConfirm={aiFill.confirm}
+      />
     </Layout>
   );
 };
