@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import type { Database } from "@/integrations/supabase/types";
-import { AuthorSectionHeader, AISectionHeader, AIBadge } from "@/components/FieldOwnership";
+import { AuthorSectionHeader, AISectionHeader, AIBadge, AuthorBadge } from "@/components/FieldOwnership";
 import AiFillConfirmDialog from "@/components/AiFillConfirmDialog";
 import { useAiFillRecipeMetadata } from "@/lib/useAiFillRecipeMetadata";
 
@@ -275,7 +275,7 @@ const AdminEditRecipe = () => {
 
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium mb-2">Title *</label>
+            <label className="block text-sm font-medium mb-2">Title * <AuthorBadge /></label>
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -287,7 +287,7 @@ const AdminEditRecipe = () => {
 
           {/* Categories */}
           <div>
-            <label className="block text-sm font-medium mb-2">Categories *</label>
+            <label className="block text-sm font-medium mb-2">Categories * <AuthorBadge /></label>
             <p className="text-xs text-muted-foreground mb-3">
               Pick one or more food categories. A recipe can belong to several (e.g. a chicken pasta).
             </p>
@@ -297,7 +297,7 @@ const AdminEditRecipe = () => {
 
           {/* Meal types */}
           <div>
-            <label className="block text-sm font-medium mb-2">Meal types *</label>
+            <label className="block text-sm font-medium mb-2">Meal types * <AuthorBadge /></label>
             <p className="text-xs text-muted-foreground mb-3">
               Pick at least one meal type. Recipes can belong to more than one.
             </p>
@@ -306,7 +306,7 @@ const AdminEditRecipe = () => {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium mb-2">Description *</label>
+            <label className="block text-sm font-medium mb-2">Description * <AuthorBadge /></label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -320,7 +320,7 @@ const AdminEditRecipe = () => {
 
           {/* Image */}
           <div>
-            <label className="block text-sm font-medium mb-2">Photo</label>
+            <label className="block text-sm font-medium mb-2">Photo <AuthorBadge /></label>
             {imagePreview ? (
               <div className="relative inline-block">
                 <img src={imagePreview} alt="Preview" loading="lazy" decoding="async" width={256} height={192} className="w-64 h-48 object-cover rounded-md border border-border" />
@@ -343,7 +343,7 @@ const AdminEditRecipe = () => {
 
           {/* Ingredients */}
           <div>
-            <label className="block text-sm font-medium mb-2">Ingredients *</label>
+            <label className="block text-sm font-medium mb-2">Ingredients * <AuthorBadge /></label>
             <div className="space-y-2">
               {ingredients.map((ing, i) => (
                 <div key={i} className="flex gap-2">
@@ -370,7 +370,7 @@ const AdminEditRecipe = () => {
 
           {/* Instructions */}
           <div>
-            <label className="block text-sm font-medium mb-2">Instructions *</label>
+            <label className="block text-sm font-medium mb-2">Instructions * <AuthorBadge /></label>
             <p className="text-xs text-muted-foreground mb-3">
               Use the arrows to reorder steps, or the inline + to insert a new step above the current one.
             </p>
