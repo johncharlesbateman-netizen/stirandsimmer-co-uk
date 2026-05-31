@@ -320,10 +320,10 @@ const RecipeDetail = () => {
   const structuredDescription = recipe.description;
   const imageAlt = buildRecipeAltText(recipe.title, ingredients);
   const heroImageUrl = recipe.image_url
-    ? optimisedImage(recipe.image_url, { width: 1600, resize: "contain" })
+    ? optimisedImage(recipe.image_url, { width: 1600, height: 900, resize: "cover" })
     : "";
   const heroImageSrcSet = recipe.image_url
-    ? responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000], { resize: "contain" })
+    ? responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000], { resize: "cover" })
     : "";
 
   const pageUrl = `https://stirandsimmer.co.uk/recipes/${recipe.slug}`;
