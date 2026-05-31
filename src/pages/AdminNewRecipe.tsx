@@ -353,7 +353,7 @@ const AdminNewRecipe = () => {
             <label className="block text-sm font-medium mb-2">Photo <AuthorBadge /></label>
             {imagePreview ? (
               <div className="relative">
-                <img src={imagePreview} alt="Recipe photo" className="w-full max-h-80 object-cover rounded-lg border border-border" />
+                <img src={imagePreview} alt="Recipe photo" className="w-full max-h-96 object-contain rounded-lg border border-border bg-muted" />
                 <button
                   type="button"
                   onClick={() => { setImageFile(null); setImagePreview(null); }}
