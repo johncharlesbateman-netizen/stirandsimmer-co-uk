@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
-import { Upload, X, Plus, Loader2, ArrowUp, ArrowDown, CornerDownRight } from "lucide-react";
+import { Upload, X, Plus, Loader2, ArrowUp, ArrowDown, CornerDownRight, ClipboardList } from "lucide-react";
+import QuickPasteDialog from "@/components/QuickPasteDialog";
 import { supabase } from "@/integrations/supabase/client";
 import { allCategories } from "@/lib/recipe-utils";
 import { collections, collectionNames } from "@/lib/collections";
@@ -75,6 +76,8 @@ const AdminEditRecipe = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
   const [published, setPublished] = useState(true);
+  const [pasteIngredientsOpen, setPasteIngredientsOpen] = useState(false);
+  const [pasteStepsOpen, setPasteStepsOpen] = useState(false);
   const aiFill = useAiFillRecipeMetadata();
   const handleAiFill = () =>
     aiFill.request(
@@ -360,6 +363,15 @@ const AdminEditRecipe = () => {
           {/* Ingredients */}
           <div>
             <label className="block text-sm font-medium mb-2">Ingredients * <AuthorBadge /></label>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="mb-3"
+              onClick={() => setPasteIngredientsOpen(true)}
+            >
+              <ClipboardList className="w-4 h-4 mr-2" /> Paste all ingredients
+            </Button>
             <div className="space-y-3">
               {ingredients.map((ing, i) => (
                 <div key={i} className="flex gap-2 items-start">
@@ -388,6 +400,15 @@ const AdminEditRecipe = () => {
           {/* Instructions */}
           <div>
             <label className="block text-sm font-medium mb-2">Instructions * <AuthorBadge /></label>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="mb-3"
+              onClick={() => setPasteStepsOpen(true)}
+            >
+              <ClipboardList className="w-4 h-4 mr-2" /> Paste all steps
+            </Button>
             <p className="text-xs text-muted-foreground mb-3">
               Use the arrows to reorder steps, or the inline + to insert a new step above the current one.
             </p>
@@ -618,6 +639,25 @@ const AdminEditRecipe = () => {
         onToggle={aiFill.toggle}
         onCancel={aiFill.cancel}
         onConfirm={aiFill.confirm}
+      />
+      <QuickPasteDialog
+        open={pasteIngredientsOpen}
+        onOpenChange={setPasteIngredientsOpen}
+        title="Paste all ingredients"
+        description="Paste your ingredient list below — one ingredient per line. They will replace the current list."
+        placeholder="2 tbsp olive oil&#10;1 red onion, finely sliced&#10;400g canned chickpeas, drained"
+        buttonLabel="Add ingredients"
+        onSubmit={(items) => setIngredients(items)}
+      />
+      <QuickPasteDialog
+        open={pasteStepsOpen}
+        onOpenChange={setPasteStepsOpen}
+        title="Paste all steps"
+        description="Paste your method steps below — one step per line. Leading numbers or bullets will be stripped automatically. They will replace the current list."
+        placeholder="Preheat the oven to 180°C.&#10;Season the lamb generously with salt and pepper.&#10;Roast for 4 hours until falling apart."
+        buttonLabel="Add steps"
+        onSubmit={(items) => setInstructions(items)}
+        stripNumbers
       />
     </Layout>
   );
