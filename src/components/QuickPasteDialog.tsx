@@ -67,15 +67,6 @@ export function parsePastedItems(text: string, stripNumbers: boolean): string[] 
 }
 
 
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  title: string;
-  description: string;
-  placeholder: string;
-  buttonLabel: string;
-  onSubmit: (items: string[]) => void;
-  stripNumbers?: boolean;
-}
 
 export default function QuickPasteDialog({
   open,
