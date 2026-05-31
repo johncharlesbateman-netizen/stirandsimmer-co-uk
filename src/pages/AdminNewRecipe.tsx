@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import type { Database } from "@/integrations/supabase/types";
-import { AuthorSectionHeader, AISectionHeader, AIBadge } from "@/components/FieldOwnership";
+import { AuthorSectionHeader, AISectionHeader, AIBadge, AuthorBadge } from "@/components/FieldOwnership";
 import AiFillConfirmDialog from "@/components/AiFillConfirmDialog";
 import { useAiFillRecipeMetadata } from "@/lib/useAiFillRecipeMetadata";
 
