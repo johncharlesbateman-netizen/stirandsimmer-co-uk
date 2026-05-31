@@ -798,7 +798,7 @@ export async function prerenderRoutes() {
     const { data: recipes, error } = await supabase
       .from("recipes")
       .select(
-        "id, slug, title, description, image_url, categories, cuisine:cuisine_region, seo_title, seo_description, ingredients, instructions, prep_time_minutes, cook_time_minutes, servings, created_at, updated_at",
+        "id, slug, title, description, image_url, categories, meal_types, collections, cuisine_region, seo_title, seo_description, ingredients, instructions, prep_time_minutes, cook_time_minutes, servings, created_at, updated_at",
       )
       .eq("published", true);
     if (error) {
