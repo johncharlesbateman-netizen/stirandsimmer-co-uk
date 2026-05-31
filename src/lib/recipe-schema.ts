@@ -193,13 +193,7 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
     video,
   } = input;
 
-  // Always emit an aggregateRating: use real ratings when available,
-  // otherwise fall back to a sensible default so Recipe rich-results
-  // eligibility is preserved for new recipes that haven't been rated yet.
-  const effectiveRating =
-    aggregateRating && aggregateRating.ratingCount > 0
-      ? { value: aggregateRating.ratingValue, count: aggregateRating.ratingCount }
-      : { value: 4.8, count: 5 };
+  const hasRealRatings = aggregateRating && aggregateRating.ratingCount > 0;
 
   const totalMinutes = (prepMinutes || 0) + (cookMinutes || 0);
   const pageUrl = `${siteUrl}/recipes/${slug}`;
@@ -240,28 +234,32 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
       calories: `${calories} kcal`,
       servingSize: servings ? `1 of ${servings} servings` : "1 serving",
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      itemReviewed: { "@type": "Recipe", name: title },
-      ratingValue: Number(effectiveRating.value.toFixed(2)),
-      ratingCount: effectiveRating.count,
-      reviewCount: effectiveRating.count,
-      bestRating: 5,
-      worstRating: 1,
-    },
-    review: [
-      {
-        "@type": "Review",
+    ...(hasRealRatings && {
+      aggregateRating: {
+        "@type": "AggregateRating",
         itemReviewed: { "@type": "Recipe", name: title },
-        author: { "@type": "Organization", name: "Stir & Simmer" },
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: Number(effectiveRating.value.toFixed(2)),
-          bestRating: 5,
-          worstRating: 1,
-        },
+        ratingValue: Number(aggregateRating.ratingValue.toFixed(2)),
+        ratingCount: aggregateRating.ratingCount,
+        reviewCount: aggregateRating.ratingCount,
+        bestRating: 5,
+        worstRating: 1,
       },
-    ],
+    }),
+    ...(hasRealRatings && {
+      review: [
+        {
+          "@type": "Review",
+          itemReviewed: { "@type": "Recipe", name: title },
+          author: { "@type": "Organization", name: "Stir & Simmer" },
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: Number(aggregateRating.ratingValue.toFixed(2)),
+            bestRating: 5,
+            worstRating: 1,
+          },
+        },
+      ],
+    }),
     ...(video && (video.contentUrl || video.embedUrl) && {
       video: {
         "@type": "VideoObject",
