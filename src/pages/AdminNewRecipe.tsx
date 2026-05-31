@@ -69,7 +69,7 @@ const AdminNewRecipe = () => {
   const [savedOrSubmitted, setSavedOrSubmitted] = useState(false);
   const aiFill = useAiFillRecipeMetadata();
   const handleAiFill = () =>
-    aiFill.run(
+    aiFill.request(
       { title, description, ingredients, instructions, prepTime, cookTime, servings },
       { cuisineRegion, seoTitle, seoDescription, tips },
       { setCuisineRegion, setSeoTitle, setSeoDescription, setTips },
