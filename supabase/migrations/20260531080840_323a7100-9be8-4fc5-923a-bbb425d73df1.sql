@@ -1,0 +1,1 @@
+UPDATE recipes SET cook_time_minutes = 15 WHERE slug = 'pork-chow-mein';
