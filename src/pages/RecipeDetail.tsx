@@ -263,23 +263,19 @@ const RecipeDetail = () => {
   const pageUrl = `https://stirandsimmer.co.uk/recipes/${recipe.slug}`;
   const shareUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-recipe?slug=${recipe.slug}`;
 
-  // Build keywords from category + first few key ingredients (de-duplicated, lowercase).
-  const keywordParts = [
-    primaryCategory ? categoryLabels[primaryCategory] : "",
-    ...ingredients
-      .slice(0, 6)
-      .map((i) =>
-        i
-          .replace(
-            /^[\d\s/.,⅓½¼¾⅔⅛⅜⅝⅞-]+\s*(g|kg|ml|l|tsp|tbsp|cup|cups|oz|lb|pinch|clove|cloves|slice|slices)?\s*/i,
-            "",
-          )
-          .split(",")[0]
-          .trim()
-          .toLowerCase(),
-      ),
-  ].filter(Boolean);
-  const keywords = Array.from(new Set(keywordParts)).slice(0, 8).join(", ");
+  // Build keywords from cuisine, meal types, categories, collections and
+  // top ingredients — falls back to title words when metadata is missing.
+  const cuisineLabel = recipe.cuisine_region
+    ? cuisineRegionLabels[recipe.cuisine_region as keyof typeof cuisineRegionLabels] ?? recipe.cuisine_region
+    : undefined;
+  const keywords = buildRecipeKeywords({
+    title: recipe.title,
+    cuisine: cuisineLabel,
+    categories: recipe.categories ?? [],
+    mealTypes: (recipe as { meal_types?: string[] | null }).meal_types ?? [],
+    collections: (recipe as { collections?: string[] | null }).collections ?? [],
+    ingredients,
+  });
 
   const jsonLd = buildRecipeJsonLd({
     title: recipe.title,
@@ -287,6 +283,7 @@ const RecipeDetail = () => {
     description: structuredDescription,
     imageUrl: recipe.image_url,
     category: primaryCategory ?? "",
+    cuisine: cuisineLabel,
     ingredients,
     instructions,
     prepMinutes: recipe.prep_time_minutes,
@@ -300,6 +297,7 @@ const RecipeDetail = () => {
         ? { ratingValue: ratingAggregate.average, ratingCount: ratingAggregate.count }
         : null,
   });
+
 
   const faqs = recipeFAQs[recipe.slug] ?? [];
   const faqJsonLd = faqs.length
