@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import type { Database } from "@/integrations/supabase/types";
 import { AuthorSectionHeader, AISectionHeader, AIBadge } from "@/components/FieldOwnership";
+import AiFillConfirmDialog from "@/components/AiFillConfirmDialog";
 import { useAiFillRecipeMetadata } from "@/lib/useAiFillRecipeMetadata";
 
 type RecipeCategory = Database["public"]["Enums"]["recipe_category"];
@@ -74,7 +75,7 @@ const AdminEditRecipe = () => {
   const [published, setPublished] = useState(true);
   const aiFill = useAiFillRecipeMetadata();
   const handleAiFill = () =>
-    aiFill.run(
+    aiFill.request(
       { title, description, ingredients, instructions, prepTime, cookTime, servings },
       { cuisineRegion, seoTitle, seoDescription, tips, collections: recipeCollections },
       {
@@ -592,6 +593,15 @@ const AdminEditRecipe = () => {
           </div>
         </form>
       </div>
+      <AiFillConfirmDialog
+        open={aiFill.open}
+        previews={aiFill.previews}
+        selected={aiFill.selected}
+        loading={aiFill.loading}
+        onToggle={aiFill.toggle}
+        onCancel={aiFill.cancel}
+        onConfirm={aiFill.confirm}
+      />
     </Layout>
   );
 };
