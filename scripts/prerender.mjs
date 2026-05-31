@@ -519,6 +519,66 @@ function normaliseInstruction(s) {
   return String(s ?? "");
 }
 
+const CUISINE_REGION_LABELS = {
+  italian: "Italian", french: "French", british: "British", spanish: "Spanish",
+  indian: "Indian", asian: "Asian", mexican: "Mexican", thai: "Thai",
+  japanese: "Japanese", mediterranean: "Mediterranean",
+  "middle-eastern": "Middle Eastern",
+};
+
+const CATEGORY_LABELS_KW = {
+  chicken: "Chicken", beef: "Beef", lamb: "Lamb", pork: "Pork", spicy: "Spicy",
+  seafood: "Seafood", lunch_suggestions: "Lunch", sweets: "Sweets",
+  pasta: "Pasta",
+};
+
+const KW_UNIT_STRIP =
+  /^[\d\s/.,⅓½¼¾⅔⅛⅜⅝⅞-]+\s*(g|kg|ml|l|tsp|tbsp|cup|cups|oz|lb|pinch|clove|cloves|slice|slices)?\s*/i;
+
+const KW_STOPWORDS = new Set([
+  "the","and","with","for","from","into","your","our","a","an",
+  "of","in","on","at","to","by","is","it","or","as",
+]);
+
+function buildRecipeKeywordsPR(r, ingredients) {
+  const parts = [];
+  const cuisine = r.cuisine_region
+    ? CUISINE_REGION_LABELS[r.cuisine_region] || r.cuisine_region
+    : null;
+  if (cuisine) parts.push(cuisine);
+  for (const m of r.meal_types || []) if (m) parts.push(String(m).replace(/_/g, " "));
+  for (const c of r.categories || []) {
+    if (!c) continue;
+    parts.push(CATEGORY_LABELS_KW[c] || String(c).replace(/_/g, " "));
+  }
+  for (const col of r.collections || []) if (col) parts.push(col);
+  for (const ing of (ingredients || []).slice(0, 4)) {
+    const cleaned = String(ing).replace(KW_UNIT_STRIP, "").split(",")[0].trim().toLowerCase();
+    if (cleaned) parts.push(cleaned);
+  }
+
+  const seen = new Set();
+  const unique = [];
+  for (const p of parts) {
+    const k = String(p).trim().toLowerCase();
+    if (!k || seen.has(k)) continue;
+    seen.add(k);
+    unique.push(String(p).trim());
+  }
+
+  if (unique.length === 0) {
+    const fb = [];
+    if (cuisine) fb.push(cuisine);
+    for (const w of String(r.title || "").toLowerCase().replace(/[^a-z0-9\s-]/g, "").split(/\s+/)) {
+      if (w.length > 2 && !KW_STOPWORDS.has(w) && !fb.some((f) => f.toLowerCase() === w)) fb.push(w);
+      if (fb.length >= 6) break;
+    }
+    return fb.slice(0, 8).join(", ");
+  }
+
+  return unique.slice(0, 10).join(", ");
+}
+
 function buildRecipeJsonLd(r, aggregate) {
   const pageUrl = `${SITE}/recipes/${r.slug}`;
   const ingredients = (r.ingredients ?? []).map(normaliseIngredient).filter(Boolean);
@@ -528,6 +588,10 @@ function buildRecipeJsonLd(r, aggregate) {
   const total = (prep || 0) + (cook || 0);
   const category = r.categories?.[0] ?? r.category ?? "";
   const calories = CATEGORY_CALORIES[(category || "").toLowerCase()] || 450;
+  const cuisine = r.cuisine_region
+    ? CUISINE_REGION_LABELS[r.cuisine_region] || r.cuisine_region
+    : (r.cuisine || "British");
+  const keywords = buildRecipeKeywordsPR(r, ingredients);
 
   return {
     "@context": "https://schema.org",
@@ -544,7 +608,8 @@ function buildRecipeJsonLd(r, aggregate) {
     ...(total > 0 && { totalTime: `PT${total}M` }),
     ...(r.servings && { recipeYield: `${r.servings} servings` }),
     recipeCategory: category,
-    recipeCuisine: r.cuisine || "British",
+    recipeCuisine: cuisine,
+    ...(keywords && { keywords }),
     recipeIngredient: ingredients,
     recipeInstructions: instructions.map((step, i) => ({
       "@type": "HowToStep",
@@ -570,6 +635,7 @@ function buildRecipeJsonLd(r, aggregate) {
     }),
   };
 }
+
 
 
 // ---------- Main entry ----------
@@ -732,7 +798,7 @@ export async function prerenderRoutes() {
     const { data: recipes, error } = await supabase
       .from("recipes")
       .select(
-        "id, slug, title, description, image_url, categories, cuisine:cuisine_region, seo_title, seo_description, ingredients, instructions, prep_time_minutes, cook_time_minutes, servings, created_at, updated_at",
+        "id, slug, title, description, image_url, categories, meal_types, collections, cuisine_region, seo_title, seo_description, ingredients, instructions, prep_time_minutes, cook_time_minutes, servings, created_at, updated_at",
       )
       .eq("published", true);
     if (error) {
