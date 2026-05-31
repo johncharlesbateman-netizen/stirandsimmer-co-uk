@@ -8,6 +8,7 @@ import { MEAL_TYPES, type MealType } from "@/lib/meal-types";
 import CuisineRegionPicker from "@/components/CuisineRegionPicker";
 import CategoryPicker from "@/components/CategoryPicker";
 import MealTypePicker from "@/components/MealTypePicker";
+import FractionPicker from "@/components/FractionPicker";
 import Layout from "@/components/Layout";
 import CookTimeWarning from "@/components/CookTimeWarning";
 import { Button } from "@/components/ui/button";
