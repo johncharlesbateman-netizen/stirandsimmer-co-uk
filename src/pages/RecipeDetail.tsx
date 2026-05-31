@@ -552,7 +552,7 @@ const RecipeDetail = () => {
       {recipe.image_url && (
         <section className="pb-6 md:pb-8">
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
-            <div className="max-w-4xl flex items-center justify-center bg-muted overflow-hidden rounded-sm">
+            <div className="max-w-4xl mx-auto aspect-[16/9] bg-muted overflow-hidden rounded-sm">
               <img
                 src={heroImageUrl}
                 srcSet={heroImageSrcSet}
@@ -563,7 +563,7 @@ const RecipeDetail = () => {
                 decoding="async"
                 width={1600}
                 height={900}
-                className="w-full h-auto max-h-[70vh] object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
