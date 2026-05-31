@@ -546,7 +546,7 @@ const RecipeDetail = () => {
       {recipe.image_url && (
         <section className="pb-6 md:pb-8">
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
-            <div className="max-w-4xl aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-muted">
+            <div className="max-w-4xl flex items-center justify-center bg-muted overflow-hidden rounded-sm">
               <img
                 src={optimisedImage(recipe.image_url, { width: 1600 })}
                 srcSet={responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000])}
@@ -557,7 +557,7 @@ const RecipeDetail = () => {
                 decoding="async"
                 width={1600}
                 height={900}
-                className="w-full h-full object-cover"
+                className="w-full h-auto max-h-[70vh] object-contain"
               />
             </div>
           </div>
