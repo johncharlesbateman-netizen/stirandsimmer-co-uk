@@ -319,6 +319,12 @@ const RecipeDetail = () => {
   // Richer description used for structured data (not constrained to 155 chars).
   const structuredDescription = recipe.description;
   const imageAlt = buildRecipeAltText(recipe.title, ingredients);
+  const heroImageUrl = recipe.image_url
+    ? optimisedImage(recipe.image_url, { width: 1600, resize: "contain" })
+    : "";
+  const heroImageSrcSet = recipe.image_url
+    ? responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000], { resize: "contain" })
+    : "";
 
   const pageUrl = `https://stirandsimmer.co.uk/recipes/${recipe.slug}`;
   const shareUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-recipe?slug=${recipe.slug}`;
@@ -413,8 +419,8 @@ const RecipeDetail = () => {
           <link
             rel="preload"
             as="image"
-            href={optimisedImage(recipe.image_url, { width: 1600 })}
-            imageSrcSet={responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000])}
+            href={heroImageUrl}
+            imageSrcSet={heroImageSrcSet}
             imageSizes="(max-width: 1024px) 100vw, 1024px"
             fetchPriority="high"
           />
@@ -548,8 +554,8 @@ const RecipeDetail = () => {
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
             <div className="max-w-4xl flex items-center justify-center bg-muted overflow-hidden rounded-sm">
               <img
-                src={optimisedImage(recipe.image_url, { width: 1600 })}
-                srcSet={responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000])}
+                src={heroImageUrl}
+                srcSet={heroImageSrcSet}
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 alt={imageAlt}
                 loading="eager"
