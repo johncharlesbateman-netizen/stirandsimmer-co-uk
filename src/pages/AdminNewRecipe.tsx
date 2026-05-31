@@ -71,6 +71,8 @@ const AdminNewRecipe = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [published, setPublished] = useState(true);
   const [savedOrSubmitted, setSavedOrSubmitted] = useState(false);
+  const [pasteIngredientsOpen, setPasteIngredientsOpen] = useState(false);
+  const [pasteStepsOpen, setPasteStepsOpen] = useState(false);
   const aiFill = useAiFillRecipeMetadata();
   const handleAiFill = () =>
     aiFill.request(
