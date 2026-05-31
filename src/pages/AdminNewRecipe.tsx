@@ -653,6 +653,25 @@ const AdminNewRecipe = () => {
         onCancel={aiFill.cancel}
         onConfirm={aiFill.confirm}
       />
+      <QuickPasteDialog
+        open={pasteIngredientsOpen}
+        onOpenChange={setPasteIngredientsOpen}
+        title="Paste all ingredients"
+        description="Paste your ingredient list below — one ingredient per line. They will replace the current list."
+        placeholder="2 tbsp olive oil&#10;1 red onion, finely sliced&#10;400g canned chickpeas, drained"
+        buttonLabel="Add ingredients"
+        onSubmit={(items) => setIngredients(items)}
+      />
+      <QuickPasteDialog
+        open={pasteStepsOpen}
+        onOpenChange={setPasteStepsOpen}
+        title="Paste all steps"
+        description="Paste your method steps below — one step per line. Leading numbers or bullets will be stripped automatically. They will replace the current list."
+        placeholder="Preheat the oven to 180°C.&#10;Season the lamb generously with salt and pepper.&#10;Roast for 4 hours until falling apart."
+        buttonLabel="Add steps"
+        onSubmit={(items) => setInstructions(items)}
+        stripNumbers
+      />
     </Layout>
   );
 };
