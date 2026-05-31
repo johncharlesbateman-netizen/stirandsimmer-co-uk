@@ -139,7 +139,7 @@ const RecipeDetail = () => {
 
       const recipeCollections = (recipe.collections ?? []) as string[];
       const recipeCategories = (recipe.categories ?? []) as string[];
-      const recipeMealTypes = (recipe.meta_types ?? recipe.meal_types ?? []) as string[];
+      const recipeMealTypes = (recipe.meal_types ?? []) as string[];
 
       // Build a candidate pool from collections, categories, meal types,
       // falling back to any other published recipes if still thin.
