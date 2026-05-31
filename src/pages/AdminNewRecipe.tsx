@@ -67,6 +67,13 @@ const AdminNewRecipe = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [published, setPublished] = useState(true);
   const [savedOrSubmitted, setSavedOrSubmitted] = useState(false);
+  const aiFill = useAiFillRecipeMetadata();
+  const handleAiFill = () =>
+    aiFill.run(
+      { title, description, ingredients, instructions, prepTime, cookTime, servings },
+      { cuisineRegion, seoTitle, seoDescription, tips },
+      { setCuisineRegion, setSeoTitle, setSeoDescription, setTips },
+    );
 
   const isDirty =
     title.trim() !== "" ||
