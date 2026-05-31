@@ -320,10 +320,10 @@ const RecipeDetail = () => {
   const structuredDescription = recipe.description;
   const imageAlt = buildRecipeAltText(recipe.title, ingredients);
   const heroImageUrl = recipe.image_url
-    ? optimisedImage(recipe.image_url, { width: 1600, resize: "contain" })
+    ? optimisedImage(recipe.image_url, { width: 1600, height: 900, resize: "cover" })
     : "";
   const heroImageSrcSet = recipe.image_url
-    ? responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000], { resize: "contain" })
+    ? responsiveSrcSet(recipe.image_url, [800, 1200, 1600, 2000], { resize: "cover" })
     : "";
 
   const pageUrl = `https://stirandsimmer.co.uk/recipes/${recipe.slug}`;
@@ -552,7 +552,7 @@ const RecipeDetail = () => {
       {recipe.image_url && (
         <section className="pb-6 md:pb-8">
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
-            <div className="max-w-4xl flex items-center justify-center bg-muted overflow-hidden rounded-sm">
+            <div className="max-w-4xl mx-auto aspect-[16/9] bg-muted overflow-hidden rounded-sm">
               <img
                 src={heroImageUrl}
                 srcSet={heroImageSrcSet}
@@ -563,7 +563,7 @@ const RecipeDetail = () => {
                 decoding="async"
                 width={1600}
                 height={900}
-                className="w-full h-auto max-h-[70vh] object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
