@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { CUISINE_REGIONS, type CuisineRegion } from "@/lib/cuisine-regions";
+import { CUISINE_REGIONS, cuisineRegionLabels, type CuisineRegion } from "@/lib/cuisine-regions";
 import { collectionNames } from "@/lib/collections";
 
 /**
- * AI-fill for AI-assisted recipe fields. Only fields currently empty are sent
- * to the AI as "needs filling", and only those keys are applied to setters.
- * Author fields are read-only inputs to the AI prompt.
+ * AI-fill for AI-assisted recipe fields. Two phase:
+ *  1) request() — fetches suggestions from the edge function (loading state)
+ *  2) confirm() — applies only the previewed fields the user keeps ticked
+ * Author fields are read-only inputs to the prompt and are never modified.
  */
 export interface AIFillAuthorInput {
   title: string;
@@ -24,7 +25,7 @@ export interface AIFillAssistedState {
   seoTitle: string;
   seoDescription: string;
   tips: string;
-  collections?: string[]; // only present on the Edit page
+  collections?: string[];
 }
 
 export interface AIFillSetters {
@@ -35,16 +36,60 @@ export interface AIFillSetters {
   setCollections?: (v: string[]) => void;
 }
 
+export type AIFieldKey =
+  | "cuisine_region"
+  | "seo_title"
+  | "seo_description"
+  | "tips"
+  | "collections";
+
+export interface AIFieldPreview {
+  key: AIFieldKey;
+  label: string;
+  preview: string;
+  rawValue: unknown;
+}
+
+export const AI_FIELD_LABELS: Record<AIFieldKey, string> = {
+  cuisine_region: "Cuisine region",
+  seo_title: "Meta title",
+  seo_description: "Meta description",
+  tips: "Tips",
+  collections: "Collections",
+};
+
+function renderPreview(key: AIFieldKey, value: unknown): string {
+  if (value == null) return "";
+  if (key === "cuisine_region" && typeof value === "string") {
+    return cuisineRegionLabels[value as CuisineRegion] ?? value;
+  }
+  if (key === "collections" && Array.isArray(value)) {
+    return value.filter((c): c is string => typeof c === "string").join(", ");
+  }
+  if (typeof value === "string") return value;
+  return String(value);
+}
+
 export function useAiFillRecipeMetadata() {
   const [loading, setLoading] = useState(false);
+  const [previews, setPreviews] = useState<AIFieldPreview[]>([]);
+  const [selected, setSelected] = useState<Record<AIFieldKey, boolean>>({
+    cuisine_region: true,
+    seo_title: true,
+    seo_description: true,
+    tips: true,
+    collections: true,
+  });
+  const [pendingSetters, setPendingSetters] = useState<AIFillSetters | null>(null);
 
-  const run = async (
+  const open = previews.length > 0;
+
+  const request = async (
     author: AIFillAuthorInput,
     current: AIFillAssistedState,
     setters: AIFillSetters,
   ) => {
-    // Determine which AI-assisted fields are currently empty.
-    const emptyFields: string[] = [];
+    const emptyFields: AIFieldKey[] = [];
     if (!current.cuisineRegion) emptyFields.push("cuisine_region");
     if (!current.seoTitle.trim()) emptyFields.push("seo_title");
     if (!current.seoDescription.trim()) emptyFields.push("seo_description");
@@ -64,7 +109,8 @@ export function useAiFillRecipeMetadata() {
     if (!author.title.trim() || !author.description.trim()) {
       toast({
         title: "Add a title and description first",
-        description: "The AI needs your author content as a reference before it can suggest metadata.",
+        description:
+          "The AI needs your author content as a reference before it can suggest metadata.",
         variant: "destructive",
       });
       return;
@@ -89,61 +135,52 @@ export function useAiFillRecipeMetadata() {
       if (error) throw error;
       const suggestions = (data?.suggestions ?? {}) as Record<string, unknown>;
 
-      let applied = 0;
+      const valid: AIFieldPreview[] = [];
+      const initialSelected: Record<AIFieldKey, boolean> = {
+        cuisine_region: false,
+        seo_title: false,
+        seo_description: false,
+        tips: false,
+        collections: false,
+      };
 
-      // Strict: only apply if the field was empty AND the AI returned a value.
-      if (
-        emptyFields.includes("cuisine_region") &&
-        typeof suggestions.cuisine_region === "string" &&
-        (CUISINE_REGIONS as readonly string[]).includes(suggestions.cuisine_region)
-      ) {
-        setters.setCuisineRegion(suggestions.cuisine_region as CuisineRegion);
-        applied += 1;
-      }
-      if (
-        emptyFields.includes("seo_title") &&
-        typeof suggestions.seo_title === "string" &&
-        suggestions.seo_title.trim()
-      ) {
-        setters.setSeoTitle(suggestions.seo_title.trim().slice(0, 70));
-        applied += 1;
-      }
-      if (
-        emptyFields.includes("seo_description") &&
-        typeof suggestions.seo_description === "string" &&
-        suggestions.seo_description.trim()
-      ) {
-        setters.setSeoDescription(suggestions.seo_description.trim().slice(0, 170));
-        applied += 1;
-      }
-      if (
-        emptyFields.includes("tips") &&
-        typeof suggestions.tips === "string" &&
-        suggestions.tips.trim()
-      ) {
-        setters.setTips(suggestions.tips.trim().slice(0, 2000));
-        applied += 1;
-      }
-      if (
-        emptyFields.includes("collections") &&
-        setters.setCollections &&
-        Array.isArray(suggestions.collections)
-      ) {
-        const cleaned = (suggestions.collections as unknown[])
-          .filter((c): c is string => typeof c === "string" && collectionNames.includes(c));
-        if (cleaned.length > 0) {
-          setters.setCollections(cleaned);
-          applied += 1;
+      for (const key of emptyFields) {
+        const raw = suggestions[key];
+        let ok = false;
+        if (key === "cuisine_region") {
+          ok =
+            typeof raw === "string" &&
+            (CUISINE_REGIONS as readonly string[]).includes(raw);
+        } else if (key === "collections") {
+          ok =
+            Array.isArray(raw) &&
+            (raw as unknown[]).some(
+              (c) => typeof c === "string" && collectionNames.includes(c),
+            );
+        } else {
+          ok = typeof raw === "string" && raw.trim().length > 0;
         }
+        if (!ok) continue;
+        valid.push({
+          key,
+          label: AI_FIELD_LABELS[key],
+          preview: renderPreview(key, raw),
+          rawValue: raw,
+        });
+        initialSelected[key] = true;
       }
 
-      toast({
-        title: applied > 0 ? "AI fields filled" : "No suggestions applied",
-        description:
-          applied > 0
-            ? `Populated ${applied} empty field${applied === 1 ? "" : "s"}. Author content untouched.`
-            : "The AI didn't return usable suggestions. Try again or fill them manually.",
-      });
+      if (valid.length === 0) {
+        toast({
+          title: "No usable suggestions",
+          description: "The AI didn't return anything we could safely apply.",
+        });
+        return;
+      }
+
+      setPreviews(valid);
+      setSelected(initialSelected);
+      setPendingSetters(setters);
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Something went wrong";
       toast({ title: "AI fill failed", description: msg, variant: "destructive" });
@@ -152,5 +189,58 @@ export function useAiFillRecipeMetadata() {
     }
   };
 
-  return { run, loading };
+  const toggle = (key: AIFieldKey) =>
+    setSelected((prev) => ({ ...prev, [key]: !prev[key] }));
+
+  const cancel = () => {
+    setPreviews([]);
+    setPendingSetters(null);
+  };
+
+  const confirm = () => {
+    if (!pendingSetters) return;
+    let applied = 0;
+    for (const p of previews) {
+      if (!selected[p.key]) continue;
+      switch (p.key) {
+        case "cuisine_region":
+          pendingSetters.setCuisineRegion(p.rawValue as CuisineRegion);
+          applied += 1;
+          break;
+        case "seo_title":
+          pendingSetters.setSeoTitle(String(p.rawValue).trim().slice(0, 70));
+          applied += 1;
+          break;
+        case "seo_description":
+          pendingSetters.setSeoDescription(String(p.rawValue).trim().slice(0, 170));
+          applied += 1;
+          break;
+        case "tips":
+          pendingSetters.setTips(String(p.rawValue).trim().slice(0, 2000));
+          applied += 1;
+          break;
+        case "collections": {
+          if (!pendingSetters.setCollections) break;
+          const cleaned = (p.rawValue as unknown[]).filter(
+            (c): c is string => typeof c === "string" && collectionNames.includes(c),
+          );
+          if (cleaned.length > 0) {
+            pendingSetters.setCollections(cleaned);
+            applied += 1;
+          }
+          break;
+        }
+      }
+    }
+    toast({
+      title: applied > 0 ? "AI fields filled" : "Nothing applied",
+      description:
+        applied > 0
+          ? `Populated ${applied} field${applied === 1 ? "" : "s"}. Author content untouched.`
+          : "No fields were selected.",
+    });
+    cancel();
+  };
+
+  return { request, confirm, cancel, toggle, loading, open, previews, selected };
 }
