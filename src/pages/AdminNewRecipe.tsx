@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { Upload, X, Plus, Loader2, ArrowUp, ArrowDown, CornerDownRight } from "lucide-react";
+import { Upload, X, Plus, Loader2, ArrowUp, ArrowDown, CornerDownRight, ClipboardList } from "lucide-react";
+import QuickPasteDialog from "@/components/QuickPasteDialog";
 import { supabase } from "@/integrations/supabase/client";
 import { CUISINE_REGIONS, type CuisineRegion } from "@/lib/cuisine-regions";
 import { MEAL_TYPES, type MealType } from "@/lib/meal-types";
