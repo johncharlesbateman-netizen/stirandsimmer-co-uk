@@ -129,50 +129,109 @@ const RecipeDetail = () => {
     enabled: !!slug,
   });
 
-  // Related recipes: same primary category first, fall back to other recipes
+  // Related recipes: prioritise shared collections (e.g. "spicy"), then
+  // shared categories / meal types, then ingredient overlap as a tiebreaker.
   const primaryCategory = recipe?.categories?.[0] ?? null;
   const { data: relatedRecipes = [] } = useQuery({
     queryKey: ["related-recipes", recipe?.id, primaryCategory],
     queryFn: async () => {
       if (!recipe) return [];
-      const { data: sameCat } = primaryCategory
-        ? await supabase
-            .from("recipes")
-            .select("*")
-            .eq("published", true)
-            .contains("categories", [primaryCategory])
-            .neq("id", recipe.id)
-            .limit(6)
-        : { data: [] as Array<typeof recipe> };
 
-      let pool = sameCat ?? [];
+      const recipeCollections = (recipe.collections ?? []) as string[];
+      const recipeCategories = (recipe.categories ?? []) as string[];
+      const recipeMealTypes = (recipe.meta_types ?? recipe.meal_types ?? []) as string[];
+
+      // Build a candidate pool from collections, categories, meal types,
+      // falling back to any other published recipes if still thin.
+      const seen = new Set<string>([recipe.id]);
+      const pool: Array<typeof recipe> = [];
+      const pushUnique = (rows: Array<typeof recipe> | null | undefined) => {
+        for (const r of rows ?? []) {
+          if (!seen.has(r.id)) {
+            seen.add(r.id);
+            pool.push(r);
+          }
+        }
+      };
+
+      if (recipeCollections.length) {
+        const { data } = await supabase
+          .from("recipes")
+          .select("*")
+          .eq("published", true)
+          .neq("id", recipe.id)
+          .overlaps("collections", recipeCollections)
+          .limit(12);
+        pushUnique(data as typeof pool);
+      }
+
+      if (pool.length < 6 && primaryCategory) {
+        const { data } = await supabase
+          .from("recipes")
+          .select("*")
+          .eq("published", true)
+          .neq("id", recipe.id)
+          .contains("categories", [primaryCategory])
+          .limit(12);
+        pushUnique(data as typeof pool);
+      }
 
       if (pool.length < 3) {
-        const { data: others } = await supabase
+        const { data } = await supabase
           .from("recipes")
           .select("*")
           .eq("published", true)
           .neq("id", recipe.id)
           .limit(6);
-        const existingIds = new Set(pool.map((r) => r.id));
-        pool = [...pool, ...((others ?? []).filter((r) => !existingIds.has(r.id)))];
+        pushUnique(data as typeof pool);
       }
 
       const baseIngredients = new Set(
         ((recipe.ingredients as unknown[]) ?? []).map(normaliseIngredientForMatch).filter(Boolean),
       );
+
       const scored = pool.map((r) => {
+        const collections = (r.collections ?? []) as string[];
+        const categories = (r.categories ?? []) as string[];
+        const mealTypes = (r.meal_types ?? []) as string[];
+
+        const collectionOverlap = collections.filter((c) => recipeCollections.includes(c)).length;
+        const categoryOverlap = categories.filter((c) => recipeCategories.includes(c)).length;
+        const mealOverlap = mealTypes.filter((m) => recipeMealTypes.includes(m)).length;
+
         const ings = ((r.ingredients as unknown[]) ?? []).map(normaliseIngredientForMatch).filter(Boolean);
-        const overlap = ings.filter((i) =>
+        const ingredientOverlap = ings.filter((i) =>
           [...baseIngredients].some((b) => b && i && (b.includes(i) || i.includes(b))),
         ).length;
-        return { recipe: r, score: overlap };
+
+        // Collections (curated lists like "spicy") dominate, then category,
+        // then meal type, with ingredient overlap as a fine-grained tiebreaker.
+        const score =
+          collectionOverlap * 100 +
+          categoryOverlap * 20 +
+          mealOverlap * 10 +
+          ingredientOverlap;
+
+        return { recipe: r, score };
       });
-      scored.sort((a, b) => b.score - a.score);
-      return scored.slice(0, 3).map((s) => s.recipe);
+
+      // If the current recipe belongs to any collection, only surface
+      // suggestions that share at least one collection. This is what the
+      // user expects for themed lists like "spicy" — never bleed across.
+      const filtered = recipeCollections.length
+        ? scored.filter((s) => {
+            const cols = (s.recipe.collections ?? []) as string[];
+            return cols.some((c) => recipeCollections.includes(c));
+          })
+        : scored;
+
+      const finalPool = filtered.length >= 3 ? filtered : scored;
+      finalPool.sort((a, b) => b.score - a.score);
+      return finalPool.slice(0, 3).map((s) => s.recipe);
     },
     enabled: !!recipe,
   });
+
 
   // Aggregate rating for JSON-LD. Component below fetches the full list,
   // but this lightweight head-of-page query keeps the schema in sync without
