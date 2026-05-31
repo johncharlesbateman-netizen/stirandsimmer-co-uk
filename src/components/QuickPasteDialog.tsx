@@ -33,18 +33,9 @@ export default function QuickPasteDialog({
   const [text, setText] = useState("");
 
   const handleSubmit = () => {
-    let lines = text
-      .split("\n")
-      .map((l) => l.trim())
-      .filter(Boolean);
-
-    if (stripNumbers) {
-      lines = lines.map((l) => l.replace(/^\s*(\d+[\.\)\-]|\-|\*|\+)\s*/, "").trim()).filter(Boolean);
-    }
-
-    if (lines.length === 0) return;
-
-    onSubmit(lines);
+    const items = parsePastedItems(text, stripNumbers);
+    if (items.length === 0) return;
+    onSubmit(items);
     setText("");
     onOpenChange(false);
   };
