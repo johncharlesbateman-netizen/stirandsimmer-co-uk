@@ -323,20 +323,21 @@ const AdminEditRecipe = () => {
           <div>
             <label className="block text-sm font-medium mb-2">Photo <AuthorBadge /></label>
             {imagePreview ? (
-              <div className="relative inline-block">
-                <img src={imagePreview} alt="Preview" loading="lazy" decoding="async" width={256} height={192} className="w-64 h-48 object-cover rounded-md border border-border" />
+              <div className="relative">
+                <img src={imagePreview} alt="Recipe photo" className="w-full max-h-80 object-cover rounded-lg border border-border" />
                 <button
                   type="button"
                   onClick={() => { setImageFile(null); setImagePreview(existingImageUrl); }}
-                  className="absolute top-2 right-2 p-1 bg-background border border-border rounded-md hover:bg-secondary"
+                  className="absolute top-3 right-3 p-2 bg-background/90 backdrop-blur border border-border rounded-full hover:bg-secondary shadow-sm"
+                  title="Remove image"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
             ) : (
-              <label className="flex flex-col items-center justify-center w-64 h-48 border-2 border-dashed border-border rounded-md cursor-pointer hover:bg-secondary transition-colors">
-                <Upload className="w-6 h-6 text-muted-foreground mb-2" />
-                <span className="text-xs text-muted-foreground">Click to upload (max 5MB)</span>
+              <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-border rounded-lg cursor-pointer hover:bg-secondary transition-colors">
+                <Upload className="w-8 h-8 text-muted-foreground mb-3" />
+                <span className="text-sm text-muted-foreground">Click to upload a photo (max 5MB)</span>
                 <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
               </label>
             )}
