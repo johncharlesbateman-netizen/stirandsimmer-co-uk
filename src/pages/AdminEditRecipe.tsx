@@ -16,6 +16,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import type { Database } from "@/integrations/supabase/types";
+import { AuthorSectionHeader, AISectionHeader, AIBadge } from "@/components/FieldOwnership";
+import { useAiFillRecipeMetadata } from "@/lib/useAiFillRecipeMetadata";
 
 type RecipeCategory = Database["public"]["Enums"]["recipe_category"];
 
@@ -70,6 +72,19 @@ const AdminEditRecipe = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
   const [published, setPublished] = useState(true);
+  const aiFill = useAiFillRecipeMetadata();
+  const handleAiFill = () =>
+    aiFill.run(
+      { title, description, ingredients, instructions, prepTime, cookTime, servings },
+      { cuisineRegion, seoTitle, seoDescription, tips, collections: recipeCollections },
+      {
+        setCuisineRegion,
+        setSeoTitle,
+        setSeoDescription,
+        setTips,
+        setCollections: setRecipeCollections,
+      },
+    );
 
   useEffect(() => {
     if (!slug) return;
@@ -255,6 +270,8 @@ const AdminEditRecipe = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
+          <AuthorSectionHeader title="Author fields" />
+
           {/* Title */}
           <div>
             <label className="block text-sm font-medium mb-2">Title *</label>
@@ -276,14 +293,6 @@ const AdminEditRecipe = () => {
             <CategoryPicker value={categories} onChange={setCategories} />
           </div>
 
-          {/* Cuisine region */}
-          <div>
-            <label className="block text-sm font-medium mb-2">Cuisine region</label>
-            <p className="text-xs text-muted-foreground mb-3">
-              Pick a single region. This maps to challenge regions in The Daily Pass app.
-            </p>
-            <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
-          </div>
 
           {/* Meal types */}
           <div>
@@ -437,9 +446,29 @@ const AdminEditRecipe = () => {
           </div>
 
 
+          {/* AI-assisted fields */}
+          <AISectionHeader
+            title="AI-assisted fields"
+            onFill={handleAiFill}
+            loading={aiFill.loading}
+          />
+
+          {/* Cuisine region */}
+          <div>
+            <label className="block text-sm font-medium mb-2">
+              Cuisine region <AIBadge />
+            </label>
+            <p className="text-xs text-muted-foreground mb-3">
+              Pick a single region. This maps to challenge regions in The Daily Pass app.
+            </p>
+            <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
+          </div>
+
           {/* Tips */}
           <div>
-            <label className="block text-sm font-medium mb-2">Tips (optional)</label>
+            <label className="block text-sm font-medium mb-2">
+              Tips (optional) <AIBadge />
+            </label>
             <textarea
               value={tips}
               onChange={(e) => setTips(e.target.value)}
@@ -451,9 +480,11 @@ const AdminEditRecipe = () => {
           </div>
 
           {/* Collections */}
-          <div className="space-y-3 pt-6 border-t border-border">
+          <div className="space-y-3">
             <div>
-              <h2 className="font-display text-2xl mb-1">Collections</h2>
+              <h3 className="text-sm font-medium">
+                Collections <AIBadge />
+              </h3>
               <p className="text-xs text-muted-foreground">
                 Recipes were auto-assigned based on their attributes — tick or untick to override.
               </p>
@@ -491,17 +522,10 @@ const AdminEditRecipe = () => {
           </div>
 
           {/* SEO Settings */}
-          <div className="space-y-4 pt-6 border-t border-border">
-            <div>
-              <h2 className="font-display text-2xl mb-1">SEO settings</h2>
-              <p className="text-xs text-muted-foreground">
-                Optional. Leave blank to auto-generate from the recipe title and key ingredients.
-              </p>
-            </div>
-
+          <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-2">
-                Meta title{" "}
+                Meta title <AIBadge />{" "}
                 <span className={`text-xs ${seoTitle.length > 60 ? "text-destructive" : "text-muted-foreground"}`}>
                   ({seoTitle.length}/60)
                 </span>
@@ -516,7 +540,7 @@ const AdminEditRecipe = () => {
 
             <div>
               <label className="block text-sm font-medium mb-2">
-                Meta description{" "}
+                Meta description <AIBadge />{" "}
                 <span className={`text-xs ${seoDescription.length > 155 ? "text-destructive" : "text-muted-foreground"}`}>
                   ({seoDescription.length}/155)
                 </span>
@@ -531,6 +555,7 @@ const AdminEditRecipe = () => {
               />
             </div>
           </div>
+
 
           {/* Publish toggle + Submit */}
           <div className="pt-4 border-t border-border space-y-4">
