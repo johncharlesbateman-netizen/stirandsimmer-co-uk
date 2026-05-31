@@ -20,6 +20,7 @@ import type { Database } from "@/integrations/supabase/types";
 import { AuthorSectionHeader, AISectionHeader, AIBadge, AuthorBadge } from "@/components/FieldOwnership";
 import AiFillConfirmDialog from "@/components/AiFillConfirmDialog";
 import { useAiFillRecipeMetadata } from "@/lib/useAiFillRecipeMetadata";
+import { normaliseRecipeImageUpload } from "@/lib/recipe-image-upload";
 
 type RecipeCategory = Database["public"]["Enums"]["recipe_category"];
 
@@ -156,15 +157,24 @@ const AdminEditRecipe = () => {
     setter(list.filter((_, i) => i !== idx));
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (file.size > 5 * 1024 * 1024) {
       toast({ title: "Image too large", description: "Max 5MB", variant: "destructive" });
       return;
     }
-    setImageFile(file);
-    setImagePreview(URL.createObjectURL(file));
+    try {
+      const processedFile = await normaliseRecipeImageUpload(file);
+      setImageFile(processedFile);
+      setImagePreview(URL.createObjectURL(processedFile));
+    } catch {
+      toast({
+        title: "Image couldn't be prepared",
+        description: "Please try a JPG or PNG version of the photo.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
