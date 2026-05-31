@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
-import { Upload, X, Plus, Loader2, ArrowUp, ArrowDown, CornerDownRight } from "lucide-react";
+import { Upload, X, Plus, Loader2, ArrowUp, ArrowDown, CornerDownRight, ClipboardList } from "lucide-react";
+import QuickPasteDialog from "@/components/QuickPasteDialog";
 import { supabase } from "@/integrations/supabase/client";
 import { allCategories } from "@/lib/recipe-utils";
 import { collections, collectionNames } from "@/lib/collections";
