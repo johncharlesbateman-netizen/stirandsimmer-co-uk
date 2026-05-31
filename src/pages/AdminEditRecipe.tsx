@@ -363,6 +363,15 @@ const AdminEditRecipe = () => {
           {/* Ingredients */}
           <div>
             <label className="block text-sm font-medium mb-2">Ingredients * <AuthorBadge /></label>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="mb-3"
+              onClick={() => setPasteIngredientsOpen(true)}
+            >
+              <ClipboardList className="w-4 h-4 mr-2" /> Paste all ingredients
+            </Button>
             <div className="space-y-3">
               {ingredients.map((ing, i) => (
                 <div key={i} className="flex gap-2 items-start">
@@ -391,6 +400,15 @@ const AdminEditRecipe = () => {
           {/* Instructions */}
           <div>
             <label className="block text-sm font-medium mb-2">Instructions * <AuthorBadge /></label>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="mb-3"
+              onClick={() => setPasteStepsOpen(true)}
+            >
+              <ClipboardList className="w-4 h-4 mr-2" /> Paste all steps
+            </Button>
             <p className="text-xs text-muted-foreground mb-3">
               Use the arrows to reorder steps, or the inline + to insert a new step above the current one.
             </p>
