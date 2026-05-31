@@ -168,12 +168,16 @@ const AdminEditRecipe = () => {
       const processedFile = await normaliseRecipeImageUpload(file);
       setImageFile(processedFile);
       setImagePreview(URL.createObjectURL(processedFile));
-    } catch {
+    } catch (err) {
+      const description = err instanceof Error
+        ? err.message
+        : "Please try a JPG or PNG version of the photo.";
       toast({
         title: "Image couldn't be prepared",
-        description: "Please try a JPG or PNG version of the photo.",
+        description,
         variant: "destructive",
       });
+      e.target.value = "";
     }
   };
 
