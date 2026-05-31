@@ -475,9 +475,29 @@ const AdminNewRecipe = () => {
           </div>
 
 
+          {/* AI-assisted fields */}
+          <AISectionHeader
+            title="AI-assisted fields"
+            onFill={handleAiFill}
+            loading={aiFill.loading}
+          />
+
+          {/* Cuisine region */}
+          <div>
+            <label className="block text-sm font-medium mb-2">
+              Cuisine region <AIBadge />
+            </label>
+            <p className="text-xs text-muted-foreground mb-3">
+              Pick a single region. This maps to challenge regions in The Daily Pass app.
+            </p>
+            <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
+          </div>
+
           {/* Tips */}
           <div>
-            <label className="block text-sm font-medium mb-2">Tips (optional)</label>
+            <label className="block text-sm font-medium mb-2">
+              Tips (optional) <AIBadge />
+            </label>
             <textarea
               value={tips}
               onChange={(e) => setTips(e.target.value)}
@@ -489,17 +509,10 @@ const AdminNewRecipe = () => {
           </div>
 
           {/* SEO Settings */}
-          <div className="space-y-4 pt-6 border-t border-border">
-            <div>
-              <h2 className="font-display text-2xl mb-1">SEO settings</h2>
-              <p className="text-xs text-muted-foreground">
-                Optional. Leave blank to auto-generate from the recipe title, prep time and key ingredients.
-              </p>
-            </div>
-
+          <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-2">
-                Meta title{" "}
+                Meta title <AIBadge />{" "}
                 <span className={`text-xs ${seoTitle.length > 60 ? "text-destructive" : "text-muted-foreground"}`}>
                   ({seoTitle.length}/60)
                 </span>
@@ -514,7 +527,7 @@ const AdminNewRecipe = () => {
 
             <div>
               <label className="block text-sm font-medium mb-2">
-                Meta description{" "}
+                Meta description <AIBadge />{" "}
                 <span className={`text-xs ${seoDescription.length > 155 ? "text-destructive" : "text-muted-foreground"}`}>
                   ({seoDescription.length}/155)
                 </span>
@@ -529,6 +542,7 @@ const AdminNewRecipe = () => {
               />
             </div>
           </div>
+
 
           {/* Publish toggle + Submit */}
           <div className="pt-4 border-t border-border space-y-4">
