@@ -16,6 +16,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import type { Database } from "@/integrations/supabase/types";
+import { AuthorSectionHeader, AISectionHeader, AIBadge } from "@/components/FieldOwnership";
+import { useAiFillRecipeMetadata } from "@/lib/useAiFillRecipeMetadata";
 
 type RecipeCategory = Database["public"]["Enums"]["recipe_category"];
 
