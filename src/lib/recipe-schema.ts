@@ -74,6 +74,103 @@ export const estimateCalories = (
   return CATEGORY_CALORIES[(category || "").toLowerCase()] || 450;
 };
 
+const UNIT_STRIP_RE =
+  /^[\d\s/.,⅓½¼¾⅔⅛⅜⅝⅞-]+\s*(g|kg|ml|l|tsp|tbsp|cup|cups|oz|lb|pinch|clove|cloves|slice|slices)?\s*/i;
+
+const cleanIngredientName = (raw: string): string =>
+  raw
+    .replace(UNIT_STRIP_RE, "")
+    .split(",")[0]
+    .trim()
+    .toLowerCase();
+
+const STOPWORDS = new Set([
+  "the", "and", "with", "for", "from", "into", "your", "our", "a", "an",
+  "of", "in", "on", "at", "to", "by", "is", "it", "or", "as",
+]);
+
+const titleWordsFallback = (title: string): string[] =>
+  title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .split(/\s+/)
+    .filter((w) => w.length > 2 && !STOPWORDS.has(w))
+    .slice(0, 5);
+
+export interface RecipeKeywordsInput {
+  title: string;
+  cuisine?: string | null;
+  categories?: string[] | null;
+  mealTypes?: string[] | null;
+  collections?: string[] | null;
+  ingredients?: string[] | null;
+}
+
+/**
+ * Build a comma-separated keywords string for the Recipe schema, pulling
+ * from cuisine, meal types, food categories, collections (which carry
+ * dietary/style tags like "Quick & Easy"), and the first few main
+ * ingredients. Falls back to title words + cuisine when no metadata exists.
+ */
+export const buildRecipeKeywords = (input: RecipeKeywordsInput): string => {
+  const {
+    title,
+    cuisine,
+    categories = [],
+    mealTypes = [],
+    collections = [],
+    ingredients = [],
+  } = input;
+
+  const parts: string[] = [];
+
+  if (cuisine) parts.push(cuisine);
+
+  for (const m of mealTypes ?? []) {
+    if (m) parts.push(m.toString().replace(/_/g, " "));
+  }
+
+  for (const c of categories ?? []) {
+    if (!c) continue;
+    const label =
+      categoryLabels[c as keyof typeof categoryLabels] ??
+      c.toString().replace(/_/g, " ");
+    parts.push(label);
+  }
+
+  for (const col of collections ?? []) {
+    if (col) parts.push(col);
+  }
+
+  for (const ing of (ingredients ?? []).slice(0, 4)) {
+    const cleaned = cleanIngredientName(ing);
+    if (cleaned) parts.push(cleaned);
+  }
+
+  // Dedupe case-insensitively while preserving display casing of first hit.
+  const seen = new Set<string>();
+  const unique: string[] = [];
+  for (const p of parts) {
+    const key = p.trim().toLowerCase();
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    unique.push(p.trim());
+  }
+
+  if (unique.length === 0) {
+    // Fallback: title words + cuisine.
+    const fallback: string[] = [];
+    if (cuisine) fallback.push(cuisine);
+    for (const w of titleWordsFallback(title)) {
+      if (!fallback.some((f) => f.toLowerCase() === w)) fallback.push(w);
+    }
+    return fallback.slice(0, 8).join(", ");
+  }
+
+  return unique.slice(0, 10).join(", ");
+};
+
+
 export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
   const {
     title,
