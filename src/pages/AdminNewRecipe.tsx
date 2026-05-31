@@ -299,6 +299,8 @@ const AdminNewRecipe = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
+          <AuthorSectionHeader title="Author fields" />
+
           {/* Title */}
           <div>
             <label className="block text-sm font-medium mb-2">Title *</label>
@@ -320,14 +322,6 @@ const AdminNewRecipe = () => {
             <CategoryPicker value={categories} onChange={setCategories} />
           </div>
 
-          {/* Cuisine region */}
-          <div>
-            <label className="block text-sm font-medium mb-2">Cuisine region</label>
-            <p className="text-xs text-muted-foreground mb-3">
-              Pick a single region. This maps to challenge regions in The Daily Pass app.
-            </p>
-            <CuisineRegionPicker value={cuisineRegion} onChange={setCuisineRegion} />
-          </div>
 
           {/* Meal types */}
           <div>
