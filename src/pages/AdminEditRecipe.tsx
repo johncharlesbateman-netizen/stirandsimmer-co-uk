@@ -74,7 +74,7 @@ const AdminEditRecipe = () => {
   const [published, setPublished] = useState(true);
   const aiFill = useAiFillRecipeMetadata();
   const handleAiFill = () =>
-    aiFill.run(
+    aiFill.request(
       { title, description, ingredients, instructions, prepTime, cookTime, servings },
       { cuisineRegion, seoTitle, seoDescription, tips, collections: recipeCollections },
       {
