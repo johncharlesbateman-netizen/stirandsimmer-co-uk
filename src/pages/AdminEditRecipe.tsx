@@ -10,6 +10,7 @@ import { MEAL_TYPES, sanitiseMealTypes, type MealType } from "@/lib/meal-types";
 import CuisineRegionPicker from "@/components/CuisineRegionPicker";
 import CategoryPicker from "@/components/CategoryPicker";
 import MealTypePicker from "@/components/MealTypePicker";
+import FractionPicker from "@/components/FractionPicker";
 import Layout from "@/components/Layout";
 import CookTimeWarning from "@/components/CookTimeWarning";
 import { Button } from "@/components/ui/button";
@@ -344,19 +345,20 @@ const AdminEditRecipe = () => {
           {/* Ingredients */}
           <div>
             <label className="block text-sm font-medium mb-2">Ingredients * <AuthorBadge /></label>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {ingredients.map((ing, i) => (
-                <div key={i} className="flex gap-2">
-                  <Input
+                <div key={i} className="flex gap-2 items-start">
+                  <FractionPicker
                     value={ing}
-                    onChange={(e) => updateListItem(ingredients, setIngredients, i, e.target.value)}
+                    onChange={(v) => updateListItem(ingredients, setIngredients, i, v)}
                     placeholder="2 tbsp olive oil"
+                    className="flex-1"
                   />
                   <button
                     type="button"
                     onClick={() => removeListItem(ingredients, setIngredients, i)}
                     disabled={ingredients.length === 1}
-                    className="px-3 border border-border rounded-md hover:bg-secondary disabled:opacity-30"
+                    className="px-3 border border-border rounded-md hover:bg-secondary disabled:opacity-30 h-10 mt-8 self-start"
                   >
                     <X className="w-4 h-4" />
                   </button>
