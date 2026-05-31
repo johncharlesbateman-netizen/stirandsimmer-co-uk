@@ -534,6 +534,10 @@ const AdminEditRecipe = () => {
 
           {/* Publish toggle + Submit */}
           <div className="pt-4 border-t border-border space-y-4">
+            <CookTimeWarning
+              cookTimeMinutes={cookTime ? parseInt(cookTime, 10) : null}
+              instructions={instructions}
+            />
             <label className="flex items-start gap-3 p-3 border border-border rounded-md cursor-pointer hover:bg-secondary/50 transition-colors">
               <input
                 type="checkbox"
