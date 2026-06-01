@@ -22,6 +22,7 @@ import { isSectionHeader } from "@/lib/ingredient-utils";
 import ServingScaler from "@/components/ServingScaler";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import RecipeRating from "@/components/RecipeRating";
+import RecipeRatingPrompt from "@/components/RecipeRatingPrompt";
 import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
