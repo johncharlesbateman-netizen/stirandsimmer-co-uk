@@ -54,9 +54,9 @@ const DEFAULT_OG_ALT =
 const STATIC_ROUTES = [
   {
     path: "/",
-    title: "Stir & Simmer | Delicious Recipes for Every Occasion",
+    title: "Stir & Simmer — Tried-and-tested recipes from a real family kitchen",
     description:
-      "Discover easy, flavour-packed recipes for every occasion. From quick weeknight dinners to impressive desserts — Stir & Simmer has something for everyone.",
+      "125 tried-and-tested recipes cooked, eaten and approved in our kitchen. Explore world cuisines, build your meal plan, and find food that actually works.",
   },
   {
     path: "/recipes",
