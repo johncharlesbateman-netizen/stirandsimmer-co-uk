@@ -343,6 +343,11 @@ function buildPrerenderedHtml(template, meta) {
     .replace(/<meta\s+name=["']twitter:[^"']+["'][^>]*>/gi, "")
     .replace(/<meta\s+name=["']pinterest:[^"']+["'][^>]*>/gi, "");
 
+  // Only the default OG image has known intrinsic dimensions / alt text.
+  // Recipe and guide images use whatever the editor uploaded, so we skip
+  // image:width/height/alt for them rather than lying to crawlers.
+  const isDefaultOg = image === DEFAULT_OG;
+
   const tags = [
     `<title>${escapeHtml(title)}</title>`,
     `<meta name="description" content="${escapeHtml(description)}" />`,
