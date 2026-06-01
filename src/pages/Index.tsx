@@ -10,15 +10,6 @@ import { useRecipeCount } from "@/hooks/useRecipeCount";
 
 import { supabase } from "@/integrations/supabase/client";
 
-const FEATURED_SLUGS = [
-  "butter-chicken",
-  "spaghetti-bolognese",
-  "best-coq-au-vin",
-  "pan-fried-salmon-with-pea-citrus-crush",
-  "panna-cotta-with-raspberry-compote",
-  "prawn-and-chorizo-rice",
-];
-
 // Self-hosted hero — emitted to /public/hero/ as same-origin WebP. Avoids
 // the third-party DNS+TLS+CDN render hop that was costing ~1 s of LCP.
 const heroImage = "/hero/hero-1280.webp";
@@ -29,7 +20,7 @@ const heroImageSizes = "100vw";
 
 const Index = () => {
   const recipeCount = useRecipeCount();
-  const [featured, setFeatured] = useState<Tables<"recipes">[]>([]);
+  const [latestRecipes, setLatestRecipes] = useState<Tables<"recipes">[]>([]);
   // True when the prerender has injected an <img id="lcp-hero"> + overlay
   // into the static HTML. In that case React must NOT render its own hero
   // <img>, otherwise the browser swaps LCP candidates once we mount and we
@@ -53,12 +44,10 @@ const Index = () => {
         .from("recipes")
         .select("*")
         .eq("published", true)
-        .in("slug", FEATURED_SLUGS);
+        .order("created_at", { ascending: false })
+        .limit(6);
       if (!cancelled && !error && data) {
-        const ordered = FEATURED_SLUGS
-          .map((s) => data.find((r) => r.slug === s))
-          .filter((r): r is Tables<"recipes"> => Boolean(r));
-        setFeatured(ordered);
+        setLatestRecipes(data);
       }
     })();
     return () => {
@@ -188,24 +177,24 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Recipes */}
-      {featured.length > 0 && (
+      {/* Latest Recipes */}
+      {latestRecipes.length > 0 && (
         <section
           className="py-16 md:py-24 bg-warm-dark text-warm-dark-foreground"
-          aria-labelledby="featured-recipes-heading"
+          aria-labelledby="latest-recipes-heading"
         >
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
             <div className="text-center mb-12 md:mb-16">
-              <p className="micro-caption mb-4 text-warm-amber">Featured</p>
+              <p className="micro-caption mb-4 text-warm-amber">Fresh from the kitchen</p>
               <h2
-                id="featured-recipes-heading"
+                id="latest-recipes-heading"
                 className="heading-editorial text-warm-dark-foreground"
               >
-                Recipes worth making
+                Latest Recipes
               </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 [&_h3]:text-warm-dark-foreground [&_.micro-caption]:text-warm-amber [&_p]:text-warm-dark-foreground/75">
-              {featured.map((recipe, i) => (
+              {latestRecipes.map((recipe, i) => (
                 <RecipeCard key={recipe.id} recipe={recipe} floatDelay={i} />
               ))}
             </div>
