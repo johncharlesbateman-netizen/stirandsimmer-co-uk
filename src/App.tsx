@@ -15,9 +15,7 @@ import ExitIntentPopup from "./components/ExitIntentPopup";
 import CookieConsent from "./components/CookieConsent";
 import CanonicalRedirect from "./components/CanonicalRedirect";
 
-const Work = lazy(() => import("./pages/Work"));
 const About = lazy(() => import("./pages/About"));
-const Styleguide = lazy(() => import("./pages/Styleguide"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Recipes = lazy(() => import("./pages/Recipes"));
 const RecipeDetail = lazy(() => import("./pages/RecipeDetail"));
