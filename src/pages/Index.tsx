@@ -278,8 +278,8 @@ const Index = () => {
                 icon: Map,
                 title: "Kitchen Atlas",
                 desc: "Travel the world's cuisines from your kitchen.",
-                imageId: 6260921,
-                alt: "Spiced rice dish served on a patterned ceramic plate, evoking world cuisines",
+                imageId: 1640774,
+                alt: "A flatlay of dishes and ingredients from cuisines around the world",
               },
             ].map(({ to, icon: Icon, title, desc, imageId, alt }) => {
               const base = `https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&fm=webp`;
