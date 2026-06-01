@@ -39,7 +39,15 @@ import { fileURLToPath } from "node:url";
 
 
 const SITE = "https://stirandsimmer.co.uk";
-const DEFAULT_OG = `${SITE}/og-image.jpg`;
+// Facebook/LinkedIn/Twitter require a 1.91:1 image (1200×630 is the canonical
+// size). The legacy /og-image.jpg is 1536×1024 (3:2) and gets cropped/rejected
+// by some validators, so the default OG image is the dedicated 1200×630 JPEG.
+const DEFAULT_OG = `${SITE}/og-image-1200x630.jpg`;
+const DEFAULT_OG_WIDTH = 1200;
+const DEFAULT_OG_HEIGHT = 630;
+const DEFAULT_OG_TYPE = "image/jpeg";
+const DEFAULT_OG_ALT =
+  "A rustic wooden table with freshly cooked pasta, roasted vegetables, fresh herbs and a copper saucepan.";
 
 // ---------- Static route definitions ----------
 
