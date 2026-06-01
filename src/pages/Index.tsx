@@ -287,7 +287,7 @@ const Index = () => {
                   />
                   <div
                     aria-hidden
-                    className="absolute inset-0 transition-opacity duration-500 bg-gradient-to-t from-warm-dark/90 via-warm-dark/60 to-warm-dark/30"
+                    className="absolute inset-0 transition-opacity duration-500 bg-gradient-to-t from-warm-dark via-warm-dark/85 to-warm-dark/20"
                   />
                   <div className="relative p-6 md:p-7 flex flex-col h-full min-h-[340px] md:min-h-[380px]">
                     <Icon className="w-7 h-7 mb-auto text-warm-amber" strokeWidth={1.5} />
@@ -295,7 +295,7 @@ const Index = () => {
                       <h3 className="font-display text-2xl mb-2 transition-transform duration-500 group-hover:translate-x-1 text-warm-dark-foreground">
                         {title}
                       </h3>
-                      <p className="text-sm leading-relaxed mb-5 line-clamp-2 min-h-[2.75rem] text-warm-dark-foreground/85">
+                      <p className="text-sm leading-relaxed mb-5 text-warm-dark-foreground/90">
                         {desc}
                       </p>
                       <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase text-warm-amber">
