@@ -10,15 +10,6 @@ import { useRecipeCount } from "@/hooks/useRecipeCount";
 
 import { supabase } from "@/integrations/supabase/client";
 
-const FEATURED_SLUGS = [
-  "butter-chicken",
-  "spaghetti-bolognese",
-  "best-coq-au-vin",
-  "pan-fried-salmon-with-pea-citrus-crush",
-  "panna-cotta-with-raspberry-compote",
-  "prawn-and-chorizo-rice",
-];
-
 // Self-hosted hero — emitted to /public/hero/ as same-origin WebP. Avoids
 // the third-party DNS+TLS+CDN render hop that was costing ~1 s of LCP.
 const heroImage = "/hero/hero-1280.webp";
@@ -29,7 +20,7 @@ const heroImageSizes = "100vw";
 
 const Index = () => {
   const recipeCount = useRecipeCount();
-  const [featured, setFeatured] = useState<Tables<"recipes">[]>([]);
+  const [latestRecipes, setLatestRecipes] = useState<Tables<"recipes">[]>([]);
   // True when the prerender has injected an <img id="lcp-hero"> + overlay
   // into the static HTML. In that case React must NOT render its own hero
   // <img>, otherwise the browser swaps LCP candidates once we mount and we
@@ -53,12 +44,10 @@ const Index = () => {
         .from("recipes")
         .select("*")
         .eq("published", true)
-        .in("slug", FEATURED_SLUGS);
+        .order("created_at", { ascending: false })
+        .limit(6);
       if (!cancelled && !error && data) {
-        const ordered = FEATURED_SLUGS
-          .map((s) => data.find((r) => r.slug === s))
-          .filter((r): r is Tables<"recipes"> => Boolean(r));
-        setFeatured(ordered);
+        setLatestRecipes(data);
       }
     })();
     return () => {
