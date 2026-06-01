@@ -1,0 +1,1 @@
+UPDATE public.recipes SET categories = array_remove(categories, 'chicken') WHERE id = '880178c7-6386-4887-ae93-e0706d371a72';
