@@ -25,9 +25,10 @@ const CATEGORY_SLUGS = [
   "seafood", "pasta", "lunch-suggestions", "sweets",
 ];
 
+// Must stay in sync with src/lib/collections.ts (the live curated set).
 const COLLECTION_SLUGS = [
-  "weeknight-suppers", "italian-meals", "romantic-meals", "fish-and-seafood",
-  "sweets-and-desserts", "quick-and-easy", "baking-and-bread", "healthy-eating",
+  "italian-meals", "romantic-meals", "fish-and-seafood",
+  "sweets-and-desserts", "quick-and-easy", "baking-and-bread",
 ];
 
 // Source of truth: hardcoded <Route path="/guides/..."> entries in src/App.tsx.
