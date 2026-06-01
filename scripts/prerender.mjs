@@ -358,11 +358,22 @@ function buildPrerenderedHtml(template, meta) {
     `<meta property="og:description" content="${escapeHtml(description)}" />`,
     `<meta property="og:url" content="${escapeHtml(url)}" />`,
     `<meta property="og:image" content="${escapeHtml(image)}" />`,
+    ...(isDefaultOg
+      ? [
+          `<meta property="og:image:type" content="${DEFAULT_OG_TYPE}" />`,
+          `<meta property="og:image:width" content="${DEFAULT_OG_WIDTH}" />`,
+          `<meta property="og:image:height" content="${DEFAULT_OG_HEIGHT}" />`,
+          `<meta property="og:image:alt" content="${escapeHtml(DEFAULT_OG_ALT)}" />`,
+        ]
+      : []),
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:site" content="@StirAndSimmer" />`,
     `<meta name="twitter:title" content="${escapeHtml(title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(description)}" />`,
     `<meta name="twitter:image" content="${escapeHtml(image)}" />`,
+    ...(isDefaultOg
+      ? [`<meta name="twitter:image:alt" content="${escapeHtml(DEFAULT_OG_ALT)}" />`]
+      : []),
     `<meta name="pinterest:image" content="${escapeHtml(pinImage)}" />`,
     `<meta name="pinterest:description" content="${escapeHtml(description)}" />`,
   ];
