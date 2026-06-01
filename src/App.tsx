@@ -15,9 +15,7 @@ import ExitIntentPopup from "./components/ExitIntentPopup";
 import CookieConsent from "./components/CookieConsent";
 import CanonicalRedirect from "./components/CanonicalRedirect";
 
-const Work = lazy(() => import("./pages/Work"));
 const About = lazy(() => import("./pages/About"));
-const Styleguide = lazy(() => import("./pages/Styleguide"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Recipes = lazy(() => import("./pages/Recipes"));
 const RecipeDetail = lazy(() => import("./pages/RecipeDetail"));
@@ -96,10 +94,8 @@ const RecipeDetailRoute = () => {
   return <RecipeDetail key={slug ?? "recipe-detail"} />;
 };
 
-const LegacyRecipeRedirect = () => {
-  const { slug } = useParams<{ slug: string }>();
-  return <Navigate to={`/recipes/${getCanonicalRecipeSlug(slug)}`} replace />;
-};
+
+
 
 const CanonicalRecipeSlugRedirect = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -130,14 +126,10 @@ const App = () => (
           <Suspense fallback={<RouteFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/work" element={<Work />} />
               <Route path="/about" element={<About />} />
-              <Route path="/styleguide" element={<Styleguide />} />
               <Route path="/recipes" element={<Recipes />} />
               <Route path="/recipes/category/:slug" element={<CategoryPage />} />
               <Route path="/recipes/region/:regionId" element={<RegionPage />} />
-              <Route path="/recipes-1/:slug" element={<LegacyRecipeRedirect />} />
-              <Route path="/recipes-1-1/:slug" element={<LegacyRecipeRedirect />} />
               <Route path="/recipes/:slug" element={<CanonicalRecipeSlugRedirect />} />
               {/* Legacy top-level recipe URLs with no current equivalent → send to recipes listing */}
               <Route path="/pork-curry-with-" element={<Navigate to="/recipes" replace />} />
