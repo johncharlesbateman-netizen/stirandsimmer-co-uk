@@ -7,12 +7,18 @@ import { imagetools } from "vite-imagetools";
 import { generateSitemap } from "./scripts/generate-sitemap.mjs";
 // @ts-ignore — plain JS module, no types needed
 import { prerenderRoutes } from "./scripts/prerender.mjs";
+// @ts-ignore — plain JS module, no types needed
+import { validateSitemapCollections } from "./scripts/validate-sitemap-collections.mjs";
 
 // Regenerates public/sitemap.xml from the database before each production build.
 const sitemapPlugin = () => ({
   name: "generate-sitemap",
   apply: "build" as const,
   async buildStart() {
+    // Hard-fail the build if the hard-coded collection slug lists drift away
+    // from src/lib/collections.ts. Runs before generation so a bad list never
+    // makes it into dist/.
+    validateSitemapCollections();
     try {
       await generateSitemap();
     } catch (e) {
