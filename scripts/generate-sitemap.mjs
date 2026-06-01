@@ -15,7 +15,7 @@ const STATIC_URLS = [
   { path: "/guides", changefreq: "monthly", priority: "0.8" },
   { path: "/kitchen-atlas", changefreq: "monthly", priority: "0.6" },
   { path: "/about", changefreq: "monthly", priority: "0.5" },
-  { path: "/work", changefreq: "monthly", priority: "0.5" },
+  
   { path: "/contact", changefreq: "monthly", priority: "0.4" },
   { path: "/privacy", changefreq: "yearly", priority: "0.3" },
 ];
