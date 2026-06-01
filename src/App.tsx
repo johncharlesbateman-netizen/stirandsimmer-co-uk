@@ -94,10 +94,8 @@ const RecipeDetailRoute = () => {
   return <RecipeDetail key={slug ?? "recipe-detail"} />;
 };
 
-const LegacyRecipeRedirect = () => {
-  const { slug } = useParams<{ slug: string }>();
-  return <Navigate to={`/recipes/${getCanonicalRecipeSlug(slug)}`} replace />;
-};
+
+
 
 const CanonicalRecipeSlugRedirect = () => {
   const { slug } = useParams<{ slug: string }>();
