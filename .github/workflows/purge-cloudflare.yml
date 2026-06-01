@@ -1,0 +1,102 @@
+name: Purge Cloudflare Cache
+
+# Purges the content routes from Cloudflare's edge cache after each deploy so
+# the freshly prerendered HTML (new <title>, OG tags, JSON-LD) is served
+# immediately instead of waiting for the CDN to revalidate.
+#
+# The `_headers` file already sets CDN-Cache-Control: no-store on these
+# routes, so in theory the CDN shouldn't hold them — but social crawlers
+# (Facebook, LinkedIn) and any intermediate caches can still serve stale
+# copies. An explicit purge guarantees a clean slate.
+#
+# Required GitHub repo secrets:
+#   CLOUDFLARE_API_TOKEN  — token with Zone → Cache Purge permission
+#   CLOUDFLARE_ZONE_ID    — zone ID for stirandsimmer.co.uk
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      purge_everything:
+        description: "Purge the entire zone instead of specific URLs"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  purge:
+    name: Purge Cloudflare edge cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Lovable deploy to settle
+        if: github.event_name == 'push'
+        run: sleep 90
+
+      - name: Purge homepage and content routes
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          PURGE_ALL: ${{ inputs.purge_everything }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${CF_API_TOKEN:-}" ] || [ -z "${CF_ZONE_ID:-}" ]; then
+            echo "::error::CLOUDFLARE_API_TOKEN and CLOUDFLARE_ZONE_ID secrets must be set."
+            exit 1
+          fi
+
+          if [ "${PURGE_ALL:-false}" = "true" ]; then
+            echo "Purging entire zone..."
+            BODY='{"purge_everything":true}'
+          else
+            echo "Purging homepage + sitemaps + robots..."
+            # Cloudflare's "purge by URL" accepts up to 30 URLs per call.
+            # Recipe/guide pages are individually content-hashed via their
+            # JSON-LD, so we only need to bust the entry points that load
+            # them. The full prerendered recipe HTML is no-store anyway.
+            BODY=$(cat <<'JSON'
+          {
+            "files": [
+              "https://stirandsimmer.co.uk/",
+              "https://stirandsimmer.co.uk/index.html",
+              "https://stirandsimmer.co.uk/recipes",
+              "https://stirandsimmer.co.uk/recipes/",
+              "https://stirandsimmer.co.uk/guides",
+              "https://stirandsimmer.co.uk/guides/",
+              "https://stirandsimmer.co.uk/collections",
+              "https://stirandsimmer.co.uk/collections/",
+              "https://stirandsimmer.co.uk/kitchen-atlas",
+              "https://stirandsimmer.co.uk/kitchen-atlas/",
+              "https://stirandsimmer.co.uk/meal-planner",
+              "https://stirandsimmer.co.uk/meal-planner/",
+              "https://stirandsimmer.co.uk/about",
+              "https://stirandsimmer.co.uk/about/",
+              "https://stirandsimmer.co.uk/robots.txt",
+              "https://stirandsimmer.co.uk/sitemap.xml",
+              "https://stirandsimmer.co.uk/sitemap-pages.xml",
+              "https://stirandsimmer.co.uk/sitemap-recipes.xml",
+              "https://stirandsimmer.co.uk/sitemap-guides.xml",
+              "https://stirandsimmer.co.uk/llms.txt"
+            ]
+          }
+          JSON
+          )
+          fi
+
+          RESPONSE=$(curl -sS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data "${BODY}")
+
+          echo "Cloudflare response:"
+          echo "${RESPONSE}"
+
+          # Fail the job if Cloudflare didn't report success:true
+          if ! echo "${RESPONSE}" | grep -q '"success":true'; then
+            echo "::error::Cloudflare purge failed."
+            exit 1
+          fi
+
+          echo "Cache purge succeeded."
