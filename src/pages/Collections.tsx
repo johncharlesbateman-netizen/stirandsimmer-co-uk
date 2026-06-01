@@ -68,16 +68,16 @@ const CollectionsIndex = () => {
         <title>Meal Ideas | Stir & Simmer</title>
         <meta
           name="description"
-          content="Browse our handpicked meal ideas — Weeknight Suppers, Italian Meals, Romantic Meals, Sunday Roasts and more. Recipe collections for every occasion."
+          content="Browse our handpicked meal ideas — Italian Meals, Romantic Meals, Quick & Easy, Fish & Seafood and more. Curated recipe collections for every kind of meal."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/collections" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/collections" />
         <meta property="og:title" content="Meal Ideas | Stir & Simmer" />
-        <meta property="og:description" content="Browse our handpicked meal ideas — Weeknight Suppers, Italian Meals, Romantic Meals, Sunday Roasts and more. Recipe collections for every occasion." />
+        <meta property="og:description" content="Browse our handpicked meal ideas — Italian Meals, Romantic Meals, Quick & Easy, Fish & Seafood and more. Curated recipe collections for every kind of meal." />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Meal Ideas | Stir & Simmer" />
-        <meta name="twitter:description" content="Browse our handpicked meal ideas — Weeknight Suppers, Italian Meals, Romantic Meals, Sunday Roasts and more. Recipe collections for every occasion." />
+        <meta name="twitter:description" content="Browse our handpicked meal ideas — Italian Meals, Romantic Meals, Quick & Easy, Fish & Seafood and more. Curated recipe collections for every kind of meal." />
       </Helmet>
 
       <section className="py-12 md:py-16 border-b border-border">
