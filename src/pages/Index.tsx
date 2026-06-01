@@ -184,6 +184,8 @@ const Index = () => {
         />
       </section>
 
+      <div className="h-px bg-border" aria-hidden />
+
       {/* Editorial intro */}
       <section className="pt-16 md:pt-24 pb-4 md:pb-8 bg-warm-dark text-warm-dark-foreground">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
