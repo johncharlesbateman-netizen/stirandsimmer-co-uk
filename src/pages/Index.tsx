@@ -277,7 +277,7 @@ const Index = () => {
                 to: "/kitchen-atlas",
                 icon: Map,
                 title: "Kitchen Atlas",
-                desc: "Explore the ingredients, techniques and traditions behind the world's great cuisines — from Japanese basics to North African spice.",
+                desc: "Travel the world's cuisines from your kitchen.",
                 imageId: 6260921,
                 alt: "Spiced rice dish served on a patterned ceramic plate, evoking world cuisines",
               },
