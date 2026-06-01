@@ -69,11 +69,16 @@ const Index = () => {
         <meta property="og:url" content="https://stirandsimmer.co.uk/" />
         <meta property="og:title" content="Stir & Simmer — Tried-and-tested recipes from a real family kitchen" />
         <meta property="og:description" content="125 tried-and-tested recipes cooked, eaten and approved in our kitchen. Explore world cuisines, build your meal plan, and find food that actually works." />
-        <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <meta property="og:image" content="https://stirandsimmer.co.uk/og-image-1200x630.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="A rustic wooden table with freshly cooked pasta, roasted vegetables, fresh herbs and a copper saucepan." />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Stir & Simmer — Tried-and-tested recipes from a real family kitchen" />
         <meta name="twitter:description" content="125 tried-and-tested recipes cooked, eaten and approved in our kitchen. Explore world cuisines, build your meal plan, and find food that actually works." />
-        <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
+        <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image-1200x630.jpg" />
+        <meta name="twitter:image:alt" content="A rustic wooden table with freshly cooked pasta, roasted vegetables, fresh herbs and a copper saucepan." />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
@@ -83,7 +88,13 @@ const Index = () => {
           "publisher": {
             "@type": "Organization",
             "name": "Stir & Simmer",
-            "url": "https://stirandsimmer.co.uk"
+            "url": "https://stirandsimmer.co.uk",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://stirandsimmer.co.uk/logo-square.png",
+              "width": 1024,
+              "height": 1024
+            }
           },
           "potentialAction": {
             "@type": "SearchAction",
@@ -96,6 +107,12 @@ const Index = () => {
           "@type": "Organization",
           "name": "Stir & Simmer",
           "url": "https://stirandsimmer.co.uk",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://stirandsimmer.co.uk/logo-square.png",
+            "width": 1024,
+            "height": 1024
+          },
           "description": "125 tried-and-tested recipes cooked, eaten and approved in our kitchen. Explore world cuisines, build your meal plan, and find food that actually works.",
           "sameAs": ["https://www.instagram.com/stirandsimmeruk"]
         })}</script>
