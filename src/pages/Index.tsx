@@ -60,26 +60,26 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Stir & Simmer | Real Recipes for UK Home Cooks</title>
+        <title>Stir & Simmer — Tried-and-tested recipes from a real family kitchen</title>
         <link rel="preload" as="image" href={heroImage} imageSrcSet={heroImageSrcSet} imageSizes="100vw" fetchPriority="high" />
-        <meta name="description" content={`${recipeCount ? `Over ${recipeCount} ` : ""}tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients.`} />
+        <meta name="description" content="125 tried-and-tested recipes cooked, eaten and approved in our kitchen. Explore world cuisines, build your meal plan, and find food that actually works." />
         <meta name="keywords" content="recipes, easy recipes, dinner recipes, dessert recipes, quick meals" />
         <link rel="canonical" href="https://stirandsimmer.co.uk/" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/" />
-        <meta property="og:title" content="Stir & Simmer | Real Recipes for UK Home Cooks" />
-        <meta property="og:description" content={`${recipeCount ? `Over ${recipeCount} ` : ""}tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients.`} />
+        <meta property="og:title" content="Stir & Simmer — Tried-and-tested recipes from a real family kitchen" />
+        <meta property="og:description" content="125 tried-and-tested recipes cooked, eaten and approved in our kitchen. Explore world cuisines, build your meal plan, and find food that actually works." />
         <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Stir & Simmer | Real Recipes for UK Home Cooks" />
-        <meta name="twitter:description" content={`${recipeCount ? `Over ${recipeCount} ` : ""}tried-and-tested recipes for UK home cooks. No cheffy techniques, no obscure ingredients — just honest food that works. Grams, Celsius, supermarket ingredients.`} />
+        <meta name="twitter:title" content="Stir & Simmer — Tried-and-tested recipes from a real family kitchen" />
+        <meta name="twitter:description" content="125 tried-and-tested recipes cooked, eaten and approved in our kitchen. Explore world cuisines, build your meal plan, and find food that actually works." />
         <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Stir & Simmer",
           "url": "https://stirandsimmer.co.uk",
-          "description": "Curated recipes crafted with fresh ingredients, bold flavours, and a whole lot of love.",
+          "description": "125 tried-and-tested recipes cooked, eaten and approved in our kitchen. Explore world cuisines, build your meal plan, and find food that actually works.",
           "publisher": {
             "@type": "Organization",
             "name": "Stir & Simmer",
@@ -96,7 +96,7 @@ const Index = () => {
           "@type": "Organization",
           "name": "Stir & Simmer",
           "url": "https://stirandsimmer.co.uk",
-          "description": "A UK recipe site built for people who love good food but live real lives",
+          "description": "125 tried-and-tested recipes cooked, eaten and approved in our kitchen. Explore world cuisines, build your meal plan, and find food that actually works.",
           "sameAs": ["https://www.instagram.com/stirandsimmeruk"]
         })}</script>
       </Helmet>
