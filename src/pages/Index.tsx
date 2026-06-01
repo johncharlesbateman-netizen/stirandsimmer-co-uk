@@ -177,24 +177,24 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Recipes */}
-      {featured.length > 0 && (
+      {/* Latest Recipes */}
+      {latestRecipes.length > 0 && (
         <section
           className="py-16 md:py-24 bg-warm-dark text-warm-dark-foreground"
-          aria-labelledby="featured-recipes-heading"
+          aria-labelledby="latest-recipes-heading"
         >
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
             <div className="text-center mb-12 md:mb-16">
-              <p className="micro-caption mb-4 text-warm-amber">Featured</p>
+              <p className="micro-caption mb-4 text-warm-amber">Fresh from the kitchen</p>
               <h2
-                id="featured-recipes-heading"
+                id="latest-recipes-heading"
                 className="heading-editorial text-warm-dark-foreground"
               >
-                Recipes worth making
+                Latest Recipes
               </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 [&_h3]:text-warm-dark-foreground [&_.micro-caption]:text-warm-amber [&_p]:text-warm-dark-foreground/75">
-              {featured.map((recipe, i) => (
+              {latestRecipes.map((recipe, i) => (
                 <RecipeCard key={recipe.id} recipe={recipe} floatDelay={i} />
               ))}
             </div>
