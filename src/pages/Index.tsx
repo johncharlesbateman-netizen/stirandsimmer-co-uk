@@ -196,6 +196,8 @@ const Index = () => {
         </div>
       </section>
 
+      <div className="h-px bg-border" aria-hidden />
+
       {/* Latest Recipes */}
       {latestRecipes.length > 0 && (
         <section
