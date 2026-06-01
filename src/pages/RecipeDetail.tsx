@@ -780,6 +780,20 @@ const RecipeDetail = () => {
         </section>
       )}
 
+      {/* Explore the cuisine — internal link to Kitchen Atlas */}
+      {atlasRegionId && cuisineLabel && (
+        <section className="no-print border-t border-border">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20 py-8 md:py-10 text-center">
+            <Link
+              to={`/kitchen-atlas#region-${atlasRegionId}`}
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors editorial-link"
+            >
+              Explore the cuisine — {cuisineLabel} in the Kitchen Atlas →
+            </Link>
+          </div>
+        </section>
+      )}
+
       {/* Supermarket Cards */}
       <section className={`no-print py-8 md:py-10 ${activeTab === "shop" ? "block" : "hidden"} md:block`}>
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
