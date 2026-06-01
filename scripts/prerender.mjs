@@ -487,7 +487,12 @@ const HOME_JSONLD = [
     "@type": "Organization",
     name: "Stir & Simmer",
     url: SITE,
-    logo: `${SITE}/og-image.jpg`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE}/logo-square.png`,
+      width: 1024,
+      height: 1024,
+    },
     description: "A UK recipe site with free curated recipes for every occasion.",
   },
 ];
