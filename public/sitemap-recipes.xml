@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/fillet-of-beef-with-fondant-potatoes-shitake-mushrooms-and-brandy-sauce</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/pork-chow-mein</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/chorizo-baked-potatoes-with-avocado-cream</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/spiced-salmon-and-chilli-bazaar-salad</loc>
     <lastmod>2026-05-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -13,7 +25,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/lamb-ragu</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/fillet-of-beef-with-fondant-potatoes-shitake-mushrooms-and-brandy-sauce</loc>
     <lastmod>2026-05-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -31,7 +43,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/pork-chow-mein</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/lamb-ragu</loc>
     <lastmod>2026-05-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -127,7 +139,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/chicken-satay</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/spiced-fillet-of-lamb-with-cannellini-beans</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/steak-kebabs</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -151,19 +169,13 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://stirandsimmer.co.uk/recipes/chicken-satay</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://stirandsimmer.co.uk/recipes/thai-ginger-beef</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/spiced-fillet-of-lamb-with-cannellini-beans</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/steak-kebabs</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -187,24 +199,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/prawn-avocado-and-mango-salad</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/smoked-salmon-and-cream-cheese-roll</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/scallops-with-apple-fennel-and-celeriac-salad</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://stirandsimmer.co.uk/recipes/salmon-and-asparagus-terrine</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -217,19 +211,37 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://stirandsimmer.co.uk/recipes/scallops-with-apple-fennel-and-celeriac-salad</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/smoked-salmon-and-cream-cheese-roll</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/prawn-avocado-and-mango-salad</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://stirandsimmer.co.uk/recipes/seared-scallops-with-cannellini-beans-and-chorizo</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/sausage-and-prawn-jambalaya</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/chorizo-crusted-chicken-with-apple-sage-cassoulet</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/chorizo-crusted-chicken-with-apple-sage-cassoulet</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/sausage-and-prawn-jambalaya</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -247,7 +259,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/chorizo-baked-potatoes-with-avocado-cream</loc>
+    <loc>https://stirandsimmer.co.uk/recipes/prawn-and-chorizo-rice</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -265,12 +277,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stirandsimmer.co.uk/recipes/prawn-and-chorizo-rice</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://stirandsimmer.co.uk/recipes/avocado-and-chorizo-toast</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -278,12 +284,6 @@
   </url>
   <url>
     <loc>https://stirandsimmer.co.uk/recipes/battered-prawn-tacos</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stirandsimmer.co.uk/recipes/pork-burger-with-spicy-apple-chutney-coleslaw</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -740,6 +740,12 @@
   </url>
   <url>
     <loc>https://stirandsimmer.co.uk/recipes/crab-spaghetti-with-tomato-caper-sauce</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://stirandsimmer.co.uk/recipes/pork-burger-with-spicy-apple-chutney-coleslaw</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
