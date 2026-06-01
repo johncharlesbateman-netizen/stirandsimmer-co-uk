@@ -198,6 +198,17 @@ const Index = () => {
                 <RecipeCard key={recipe.id} recipe={recipe} floatDelay={i} />
               ))}
             </div>
+            <div className="mt-12 md:mt-16 text-center">
+              <Link
+                to="/recipes"
+                className="group inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase text-warm-amber hover:text-warm-amber/80 transition-colors"
+              >
+                <span className="underline-offset-4 group-hover:underline">
+                  Browse all recipes
+                </span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </div>
           </div>
         </section>
       )}
