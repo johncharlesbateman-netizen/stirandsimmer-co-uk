@@ -5,7 +5,13 @@
 # and `dist/recipes/<slug>.html` so clean URLs resolve to the prerendered file
 # without any rewrite needed — Googlebot sees the per-route <title>, meta and
 # Recipe JSON-LD in the initial HTML response.
-#
+
+# --- Permanent (301) redirects for retired collection URLs ---------------
+# These collections were removed from src/lib/collections.ts. Any traffic or
+# backlinks still hitting the old URLs are sent to the closest live page.
+/collections/weeknight-suppers   /collections/quick-and-easy     301
+/collections/healthy-eating      /collections/fish-and-seafood   301
+
 # Only routes that DON'T have a prerendered file (dynamic admin pages, auth,
 # 404s, etc.) fall through to this rule and load the React SPA shell. The 200
 # status code is required so the SPA route handler can take over client-side.
