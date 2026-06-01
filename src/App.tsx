@@ -126,14 +126,10 @@ const App = () => (
           <Suspense fallback={<RouteFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/work" element={<Work />} />
               <Route path="/about" element={<About />} />
-              <Route path="/styleguide" element={<Styleguide />} />
               <Route path="/recipes" element={<Recipes />} />
               <Route path="/recipes/category/:slug" element={<CategoryPage />} />
               <Route path="/recipes/region/:regionId" element={<RegionPage />} />
-              <Route path="/recipes-1/:slug" element={<LegacyRecipeRedirect />} />
-              <Route path="/recipes-1-1/:slug" element={<LegacyRecipeRedirect />} />
               <Route path="/recipes/:slug" element={<CanonicalRecipeSlugRedirect />} />
               {/* Legacy top-level recipe URLs with no current equivalent → send to recipes listing */}
               <Route path="/pork-curry-with-" element={<Navigate to="/recipes" replace />} />
