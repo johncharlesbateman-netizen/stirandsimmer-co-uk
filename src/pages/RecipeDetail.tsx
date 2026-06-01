@@ -334,6 +334,25 @@ const RecipeDetail = () => {
   const cuisineLabel = recipe.cuisine_region
     ? cuisineRegionLabels[recipe.cuisine_region as keyof typeof cuisineRegionLabels] ?? recipe.cuisine_region
     : undefined;
+
+  // Map a recipe's cuisine_region tag to the Kitchen Atlas region id used
+  // for anchor links on /kitchen-atlas.
+  const cuisineToAtlasId: Record<string, string> = {
+    british: "uk",
+    italian: "italy",
+    french: "france",
+    spanish: "spain",
+    indian: "india",
+    thai: "thailand",
+    japanese: "asia",
+    asian: "asia",
+    mexican: "mexico",
+    mediterranean: "mediterranean",
+    "middle-eastern": "middleeast",
+  };
+  const atlasRegionId = recipe.cuisine_region
+    ? cuisineToAtlasId[recipe.cuisine_region as string]
+    : undefined;
   const keywords = buildRecipeKeywords({
     title: recipe.title,
     cuisine: cuisineLabel,
