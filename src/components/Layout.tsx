@@ -20,6 +20,7 @@ const Layout = ({ children, hideNewsletter = false }: LayoutProps) => {
       <Header />
       <main id="main-content" className="flex-1 pt-20">{children}</main>
       {!hideNewsletter && <NewsletterSignup />}
+      <div className="h-px bg-border" aria-hidden />
       <Footer />
     </div>
   );
