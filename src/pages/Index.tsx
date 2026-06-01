@@ -328,6 +328,8 @@ const Index = () => {
         </div>
       </section>
 
+      <div className="h-px bg-border" aria-hidden />
+
     </Layout>
   );
 };
