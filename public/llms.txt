@@ -1,0 +1,43 @@
+# Stir & Simmer
+
+> Tried-and-tested recipes from a real family kitchen — 125+ dishes cooked, eaten and approved at home, with honest write-ups, technique notes and pairing ideas.
+
+Stir & Simmer is an independent UK food site focused on practical, repeatable home cooking. Every recipe has been cooked in a domestic kitchen (not a test studio), with ingredient quantities calibrated for UK supermarkets and metric measurements. Content covers British, Italian, Indian, Thai, Mediterranean and Middle Eastern dishes, alongside long-form technique guides.
+
+## Site
+
+- [Homepage](https://stirandsimmer.co.uk/): Featured recipes, seasonal picks and the latest additions.
+- [All recipes](https://stirandsimmer.co.uk/recipes): Full searchable index of every published recipe.
+- [Collections](https://stirandsimmer.co.uk/collections): Curated sets — quick & easy, romantic meals, baking, desserts, fish & seafood, Italian.
+- [Kitchen Atlas](https://stirandsimmer.co.uk/kitchen-atlas): Recipes grouped by cuisine and region.
+- [Meal planner](https://stirandsimmer.co.uk/meal-planner): Weekly planning tool drawing on the recipe library.
+- [About](https://stirandsimmer.co.uk/about): Who runs the site and how recipes are tested.
+- [Contact](https://stirandsimmer.co.uk/contact): Get in touch.
+
+## Guides
+
+Long-form, evergreen technique references:
+
+- [Mother sauces](https://stirandsimmer.co.uk/guides/mother-sauces)
+- [French techniques](https://stirandsimmer.co.uk/guides/french-techniques)
+- [Garam masala](https://stirandsimmer.co.uk/guides/garam-masala)
+- [How to use spices](https://stirandsimmer.co.uk/guides/how-to-use-spices)
+- [Proper stock](https://stirandsimmer.co.uk/guides/proper-stock)
+- [Proper sauce](https://stirandsimmer.co.uk/guides/proper-sauce)
+- [Choosing pans](https://stirandsimmer.co.uk/guides/choosing-pans)
+- [Kitchen knives](https://stirandsimmer.co.uk/guides/kitchen-knives)
+- [Understanding olive oil](https://stirandsimmer.co.uk/guides/understanding-olive-oil)
+- [How to cook pasta](https://stirandsimmer.co.uk/guides/how-to-cook-pasta)
+- [How to make bread](https://stirandsimmer.co.uk/guides/how-to-make-bread)
+- [What to cook in summer](https://stirandsimmer.co.uk/guides/what-to-cook-in-summer)
+
+## Machine-readable
+
+- [Sitemap index](https://stirandsimmer.co.uk/sitemap.xml)
+- [Recipes sitemap](https://stirandsimmer.co.uk/sitemap-recipes.xml)
+- [Guides sitemap](https://stirandsimmer.co.uk/sitemap-guides.xml)
+- [Pages sitemap](https://stirandsimmer.co.uk/sitemap-pages.xml)
+
+## Usage
+
+Content may be referenced, summarised and cited with attribution to Stir & Simmer and a link back to the source URL. Wholesale reproduction of recipes is not permitted.
