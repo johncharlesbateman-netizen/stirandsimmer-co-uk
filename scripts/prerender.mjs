@@ -39,7 +39,15 @@ import { fileURLToPath } from "node:url";
 
 
 const SITE = "https://stirandsimmer.co.uk";
-const DEFAULT_OG = `${SITE}/og-image.jpg`;
+// Facebook/LinkedIn/Twitter require a 1.91:1 image (1200×630 is the canonical
+// size). The legacy /og-image.jpg is 1536×1024 (3:2) and gets cropped/rejected
+// by some validators, so the default OG image is the dedicated 1200×630 JPEG.
+const DEFAULT_OG = `${SITE}/og-image-1200x630.jpg`;
+const DEFAULT_OG_WIDTH = 1200;
+const DEFAULT_OG_HEIGHT = 630;
+const DEFAULT_OG_TYPE = "image/jpeg";
+const DEFAULT_OG_ALT =
+  "A rustic wooden table with freshly cooked pasta, roasted vegetables, fresh herbs and a copper saucepan.";
 
 // ---------- Static route definitions ----------
 
@@ -335,6 +343,11 @@ function buildPrerenderedHtml(template, meta) {
     .replace(/<meta\s+name=["']twitter:[^"']+["'][^>]*>/gi, "")
     .replace(/<meta\s+name=["']pinterest:[^"']+["'][^>]*>/gi, "");
 
+  // Only the default OG image has known intrinsic dimensions / alt text.
+  // Recipe and guide images use whatever the editor uploaded, so we skip
+  // image:width/height/alt for them rather than lying to crawlers.
+  const isDefaultOg = image === DEFAULT_OG;
+
   const tags = [
     `<title>${escapeHtml(title)}</title>`,
     `<meta name="description" content="${escapeHtml(description)}" />`,
@@ -345,11 +358,22 @@ function buildPrerenderedHtml(template, meta) {
     `<meta property="og:description" content="${escapeHtml(description)}" />`,
     `<meta property="og:url" content="${escapeHtml(url)}" />`,
     `<meta property="og:image" content="${escapeHtml(image)}" />`,
+    ...(isDefaultOg
+      ? [
+          `<meta property="og:image:type" content="${DEFAULT_OG_TYPE}" />`,
+          `<meta property="og:image:width" content="${DEFAULT_OG_WIDTH}" />`,
+          `<meta property="og:image:height" content="${DEFAULT_OG_HEIGHT}" />`,
+          `<meta property="og:image:alt" content="${escapeHtml(DEFAULT_OG_ALT)}" />`,
+        ]
+      : []),
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:site" content="@StirAndSimmer" />`,
     `<meta name="twitter:title" content="${escapeHtml(title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(description)}" />`,
     `<meta name="twitter:image" content="${escapeHtml(image)}" />`,
+    ...(isDefaultOg
+      ? [`<meta name="twitter:image:alt" content="${escapeHtml(DEFAULT_OG_ALT)}" />`]
+      : []),
     `<meta name="pinterest:image" content="${escapeHtml(pinImage)}" />`,
     `<meta name="pinterest:description" content="${escapeHtml(description)}" />`,
   ];
@@ -463,7 +487,12 @@ const HOME_JSONLD = [
     "@type": "Organization",
     name: "Stir & Simmer",
     url: SITE,
-    logo: `${SITE}/og-image.jpg`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE}/logo-square.png`,
+      width: 1024,
+      height: 1024,
+    },
     description: "A UK recipe site with free curated recipes for every occasion.",
   },
 ];
