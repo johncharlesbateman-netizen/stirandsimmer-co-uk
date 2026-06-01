@@ -200,9 +200,6 @@ const COLLECTIONS = [
   { slug: "sweets-and-desserts", title: "Sweets & Desserts", description: "Crème brûlée, sticky toffee pudding, soufflés and decadent cakes — sweet endings for every occasion." },
   { slug: "quick-and-easy", title: "Quick & Easy", description: "Minimal prep, short ingredient lists and simple techniques — for when you need dinner fast." },
   { slug: "baking-and-bread", title: "Baking & Bread", description: "Warm crusty bread, buttery scones, light sponges and crisp biscuits — straight from the oven." },
-  // Listed in sitemap but not currently in collections.ts — generic copy.
-  { slug: "weeknight-suppers", title: "Weeknight Suppers", description: "Easy weeknight dinners that come together fast without compromising on flavour." },
-  { slug: "healthy-eating", title: "Healthy Eating", description: "Bright, balanced recipes that prioritise vegetables, lean proteins and whole grains." },
 ];
 
 // Region pages (mirrors src/pages/KitchenAtlas.tsx + src/pages/RegionPage.tsx).
