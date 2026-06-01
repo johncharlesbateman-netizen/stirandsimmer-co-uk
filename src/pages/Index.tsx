@@ -192,6 +192,9 @@ const Index = () => {
               >
                 Latest Recipes
               </h2>
+              <p className="mt-6 text-sm text-warm-dark-foreground/60 max-w-2xl mx-auto">
+                Every recipe on Stir & Simmer has been cooked in our kitchen, eaten at our table, and only published if the family asked for it again.
+              </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 [&_h3]:text-warm-dark-foreground [&_.micro-caption]:text-warm-amber [&_p]:text-warm-dark-foreground/75">
               {latestRecipes.map((recipe, i) => (
