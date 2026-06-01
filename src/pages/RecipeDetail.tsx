@@ -22,6 +22,7 @@ import { isSectionHeader } from "@/lib/ingredient-utils";
 import ServingScaler from "@/components/ServingScaler";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import RecipeRating from "@/components/RecipeRating";
+import RecipeRatingPrompt from "@/components/RecipeRatingPrompt";
 import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
@@ -703,6 +704,12 @@ const RecipeDetail = () => {
               )}
             </div>
 
+          </div>
+
+          {/* Rating prompt — sits below the method, before serving suggestions
+              (which is the closest thing this site has to a comments block). */}
+          <div className="max-w-4xl">
+            <RecipeRatingPrompt recipeId={recipe.id} />
           </div>
 
           {/* Serving Suggestions — adds unique on-page text for SEO */}
