@@ -77,6 +77,12 @@ const STATIC_ROUTES = [
       "Explore our recipes by cuisine region — Italian, French, British, Indian, Asian and more. A world of flavour from a single kitchen.",
   },
   {
+    path: "/kitchen-atlas/italy",
+    title: "Italian Cuisine Guide — Stir & Simmer",
+    description:
+      "A warm, honest guide to Italian cuisine — its regions, defining ingredients and why it works so well at home. Plus tried-and-tested Italian recipes from our kitchen.",
+  },
+  {
     path: "/guides",
     title: "Cooking Guides | Stir & Simmer",
     description:
