@@ -1,0 +1,200 @@
+import properStockImage from "@/assets/guide-proper-stock.webp";
+import properStockSrcSet from "@/assets/guide-proper-stock.webp?w=400;600;800;1200&format=webp&as=srcset";
+import properSauceImage from "@/assets/guide-proper-sauce.webp";
+import properSauceSrcSet from "@/assets/guide-proper-sauce.webp?w=400;600;800;1200&format=webp&as=srcset";
+import choosingPansImage from "@/assets/guide-choosing-pans.webp";
+import choosingPansSrcSet from "@/assets/guide-choosing-pans.webp?w=400;600;800;1200&format=webp&as=srcset";
+import kitchenKnivesImage from "@/assets/guide-kitchen-knives.webp";
+import kitchenKnivesSrcSet from "@/assets/guide-kitchen-knives.webp?w=400;600;800;1200&format=webp&as=srcset";
+import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.webp";
+import howToCookPastaSrcSet from "@/assets/guide-how-to-cook-pasta-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
+import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.webp";
+import howToMakeBreadSrcSet from "@/assets/guide-how-to-make-bread-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
+import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.webp";
+import whatToCookInSummerSrcSet from "@/assets/guide-what-to-cook-in-summer-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
+
+export const GUIDE_CATEGORIES = [
+  "All",
+  "French Technique",
+  "Spices",
+  "Equipment",
+  "Kitchen Essentials",
+  "Seasonal",
+] as const;
+export type GuideCategory = (typeof GUIDE_CATEGORIES)[number];
+
+export type GuideEntry = {
+  slug: string;
+  title: string;
+  description: string;
+  /** Display label on the card. */
+  eyebrow: string;
+  /** Filter category — must be one of GUIDE_CATEGORIES (minus "All"). */
+  category: Exclude<GuideCategory, "All">;
+  imageId?: string;
+  image?: string;
+  imageSrcSet?: string;
+  imageAlt: string;
+};
+
+const pexels = (id: string, w = 1200) =>
+  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=${w}`;
+const pexelsSrcSet = (id: string, widths: number[]) =>
+  widths.map((w) => `${pexels(id, w)} ${w}w`).join(", ");
+
+export const GUIDES: GuideEntry[] = [
+  {
+    slug: "mother-sauces",
+    title: "The five French mother sauces — and why every home cook should know them",
+    description:
+      "Master these five and you hold the keys to almost every classic sauce in western cuisine.",
+    eyebrow: "French Technique",
+    category: "French Technique",
+    imageId: "5908227",
+    imageAlt: "A glossy sauce being whisked in a saucepan",
+  },
+  {
+    slug: "french-techniques",
+    title: "French cooking techniques every home cook should know",
+    description:
+      "Seven essential French techniques — mise en place, julienne, brunoise, chiffonade, beurre blanc, flambé and déglaze — explained simply.",
+    eyebrow: "French Technique",
+    category: "French Technique",
+    imageId: "4252137",
+    imageAlt: "Chef's knife and finely chopped vegetables on a wooden board",
+  },
+  {
+    slug: "garam-masala",
+    title: "Garam masala — a cook's guide",
+    description:
+      "The spices that go in, why they matter, how to toast and grind them, and the mistakes most home cooks make.",
+    eyebrow: "Spices",
+    category: "Spices",
+    imageId: "1340116",
+    imageAlt: "Small bowls of warm Indian spices arranged on a dark surface",
+  },
+  {
+    slug: "how-to-use-spices",
+    title: "How to use spices — a beginner's guide",
+    description:
+      "What spices do, how to store them, when to add them, and how to build proper flavour with confidence.",
+    eyebrow: "Spices",
+    category: "Spices",
+    imageId: "2802527",
+    imageAlt: "An array of ground spices in spoons on a dark wooden table",
+  },
+  {
+    slug: "proper-stock",
+    title: "How to make a proper stock",
+    description:
+      "The quiet foundation of good cooking — bones, mirepoix, water and time, and how to turn them into something your sauces and soups can lean on.",
+    eyebrow: "French Technique",
+    category: "French Technique",
+    image: properStockImage,
+    imageSrcSet: properStockSrcSet,
+    imageAlt: "A pot of golden chicken stock simmering with bones, vegetables and herbs",
+  },
+  {
+    slug: "proper-sauce",
+    title: "How to make a proper sauce",
+    description:
+      "The building blocks, the techniques, and the small details that turn a thin pan liquid into something glossy, balanced and worth mopping up.",
+    eyebrow: "French Technique",
+    category: "French Technique",
+    image: properSauceImage,
+    imageSrcSet: properSauceSrcSet,
+    imageAlt: "A glossy dark pan sauce being whisked in a copper saucepan",
+  },
+  {
+    slug: "choosing-pans",
+    title: "Choosing the right pan for the job",
+    description:
+      "The materials, the shapes, and which pans actually earn their place in a home kitchen — a practical guide to building a collection that lasts.",
+    eyebrow: "Equipment",
+    category: "Equipment",
+    image: choosingPansImage,
+    imageSrcSet: choosingPansSrcSet,
+    imageAlt: "An overhead arrangement of cast iron, copper and stainless steel pans on a dark surface",
+  },
+  {
+    slug: "kitchen-knives",
+    title: "Kitchen knives — a cook's guide",
+    description:
+      "The blades worth owning, how to hold them, how to keep them sharp, and how to choose ones that will last a lifetime.",
+    eyebrow: "Equipment",
+    category: "Equipment",
+    image: kitchenKnivesImage,
+    imageSrcSet: kitchenKnivesSrcSet,
+    imageAlt: "An overhead arrangement of kitchen knives on a dark cutting board",
+  },
+  {
+    slug: "understanding-olive-oil",
+    title: "Understanding olive oil — a cook's guide",
+    description:
+      "What the labels actually mean, how it's made, when to cook with it, when to finish with it, and which bottles to buy in the UK.",
+    eyebrow: "Kitchen Essentials",
+    category: "Kitchen Essentials",
+    imageId: "33783",
+    imageAlt: "A bottle of extra virgin olive oil and fresh olives on a dark wooden surface",
+  },
+  {
+    slug: "how-to-cook-pasta",
+    title: "How to cook pasta properly — a cook's guide",
+    description:
+      "How to choose the shape, salt the water, time it right, save the cooking water and finish it in the sauce — the small habits that change everything.",
+    eyebrow: "Kitchen Essentials",
+    category: "Kitchen Essentials",
+    image: howToCookPastaImage,
+    imageSrcSet: howToCookPastaSrcSet,
+    imageAlt: "Spaghetti being twirled in a pan of glossy tomato sauce with basil and parmesan",
+  },
+  {
+    slug: "how-to-make-bread",
+    title: "How to make bread at home — a beginner's guide",
+    description:
+      "The four ingredients, the flours, the yeasts, the method and the mistakes — everything you need to bake a proper loaf at home.",
+    eyebrow: "Kitchen Essentials",
+    category: "Kitchen Essentials",
+    image: howToMakeBreadImage,
+    imageSrcSet: howToMakeBreadSrcSet,
+    imageAlt: "A freshly baked rustic sourdough loaf with an open crumb, sliced on a dark wooden board",
+  },
+  {
+    slug: "what-to-cook-in-summer",
+    title: "What to cook in summer — a seasonal guide",
+    description:
+      "What's in season in the UK, how to build a proper salad, grilling done well, summer herbs, soft fruit and five dishes every cook should know.",
+    eyebrow: "Seasonal",
+    category: "Seasonal",
+    image: whatToCookInSummerImage,
+    imageSrcSet: whatToCookInSummerSrcSet,
+    imageAlt: "A sunlit summer table with grilled vegetables, ripe tomatoes, peaches, fresh herbs and a jug of iced drink",
+  },
+];
+
+export const GUIDE_FALLBACK_IMAGE = properStockImage;
+
+export const guideCardImage = (g: GuideEntry, w = 800) =>
+  g.image ?? pexels(g.imageId!, w);
+export const guideCardSrcSet = (g: GuideEntry) =>
+  g.imageSrcSet ?? (g.image ? undefined : pexelsSrcSet(g.imageId!, [400, 600, 800, 1200]));
+
+export const GUIDE_BY_SLUG: Record<string, GuideEntry> = Object.fromEntries(
+  GUIDES.map((g) => [g.slug, g]),
+);
+
+/** Manual related-guide mapping. Order matters — first listed shows first. */
+export const RELATED_GUIDES: Record<string, [string, string]> = {
+  "mother-sauces": ["proper-sauce", "french-techniques"],
+  "french-techniques": ["mother-sauces", "kitchen-knives"],
+  "garam-masala": ["how-to-use-spices", "proper-stock"],
+  "how-to-use-spices": ["garam-masala", "proper-sauce"],
+  "proper-stock": ["proper-sauce", "mother-sauces"],
+  "proper-sauce": ["mother-sauces", "proper-stock"],
+  "choosing-pans": ["kitchen-knives", "how-to-cook-pasta"],
+  "kitchen-knives": ["choosing-pans", "french-techniques"],
+  "understanding-olive-oil": ["proper-sauce", "what-to-cook-in-summer"],
+  "how-to-cook-pasta": ["proper-sauce", "understanding-olive-oil"],
+  "how-to-make-bread": ["how-to-cook-pasta", "kitchen-knives"],
+  "what-to-cook-in-summer": ["understanding-olive-oil", "how-to-make-bread"],
+};
