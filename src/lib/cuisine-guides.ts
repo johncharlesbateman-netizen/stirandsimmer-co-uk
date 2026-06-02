@@ -119,6 +119,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🥄", name: "Dijon mustard", note: "Stirred into vinaigrettes, sauces and crusted onto roasts." },
       { emoji: "🍞", name: "Good bread", note: "A proper baguette or sourdough — eaten with everything." },
     ],
+    relatedCuisines: ["italy", "spain"],
   },
   {
     slug: "spain",
@@ -146,6 +147,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🫒", name: "Spanish olive oil", note: "Fruity, peppery — the cooking medium and a finishing oil in one." },
       { emoji: "🍅", name: "Tomatoes", note: "Grated raw onto pan con tomate, slow-cooked into sofrito." },
     ],
+    relatedCuisines: ["mediterranean", "france"],
   },
   {
     slug: "india",
@@ -173,6 +175,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🌿", name: "Fresh coriander", note: "Stalks chopped into the curry, leaves scattered at the end." },
       { emoji: "🥛", name: "Yoghurt", note: "Stirred in for richness, used to marinate meat and tenderise it." },
     ],
+    relatedCuisines: ["middle-east", "thailand"],
   },
   {
     slug: "thailand",
@@ -200,6 +203,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🥥", name: "Coconut milk", note: "Full-fat tins — the thick cream cracks first to fry the curry paste." },
       { emoji: "🌾", name: "Jasmine rice", note: "Fragrant, slightly sticky — the cornerstone of nearly every meal." },
     ],
+    relatedCuisines: ["india", "mediterranean"],
   },
   {
     slug: "mediterranean",
@@ -227,6 +231,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🐟", name: "Fresh fish", note: "Whole, grilled simply or baked in the oven with lemon and herbs." },
       { emoji: "🫘", name: "Beans & pulses", note: "Chickpeas, white beans and lentils — protein, body and warmth." },
     ],
+    relatedCuisines: ["italy", "spain"],
   },
   {
     slug: "middle-east",
@@ -254,6 +259,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🍅", name: "Pomegranate molasses", note: "Sweet, sour and dark — a few drops transform a dressing or stew." },
       { emoji: "🥩", name: "Lamb", note: "Slow-cooked until tender, grilled in pieces, or minced into kofte." },
     ],
+    relatedCuisines: ["india", "mediterranean"],
   },
   {
     slug: "mexico",
@@ -281,6 +287,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🌿", name: "Fresh coriander", note: "Stalks and leaves chopped raw into salsas and scattered at the end." },
       { emoji: "🥑", name: "Avocado", note: "Mashed into guacamole, sliced over tacos, blended into green sauces." },
     ],
+    relatedCuisines: ["spain", "mediterranean"],
   },
 ];
 
