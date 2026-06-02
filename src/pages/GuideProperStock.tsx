@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
 import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
+import GuideFAQ from "@/components/GuideFAQ";
 import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -274,6 +275,9 @@ const GuideProperStock = () => {
             If you have a pressure cooker or an Instant Pot, chicken stock can be made in around an hour rather than three to four. The results are slightly different — pressure cooking produces a more opaque stock as the agitation is greater — but the flavour is excellent and the time saving is significant.
           </p>
         </div>
+
+        <GuideFAQ slug="proper-stock" />
+
 
         <GuideRelatedRecipes guideSlug="proper-stock" />
 

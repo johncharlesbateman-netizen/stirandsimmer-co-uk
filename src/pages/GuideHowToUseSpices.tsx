@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
 import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
+import GuideFAQ from "@/components/GuideFAQ";
 import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -146,6 +147,9 @@ const GuideHowToUseSpices = () => {
             Once you understand how a spice behaves on its own, you'll start to see how it fits with others. That's when cooking starts to feel less like following instructions and more like genuine instinct.
           </p>
         </div>
+
+        <GuideFAQ slug="how-to-use-spices" />
+
 
         <GuideRelatedRecipes guideSlug="how-to-use-spices" />
 

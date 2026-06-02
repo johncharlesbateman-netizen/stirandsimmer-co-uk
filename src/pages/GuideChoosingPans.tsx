@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
 import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
+import GuideFAQ from "@/components/GuideFAQ";
 import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -316,6 +317,9 @@ const GuideChoosingPans = () => {
             If you could only own one pan, make it a 28cm stainless steel frying pan with a thick base. It won't be perfect for everything — eggs will stick until you learn the technique, and it won't hold heat like cast iron — but it will handle more tasks more capably than any other single pan. Everything else builds from there.
           </p>
         </div>
+
+        <GuideFAQ slug="choosing-pans" />
+
 
         <GuideRelatedRecipes guideSlug="choosing-pans" />
 
