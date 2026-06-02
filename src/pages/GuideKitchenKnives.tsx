@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
 import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
+import GuideFAQ from "@/components/GuideFAQ";
 import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -356,6 +357,9 @@ const GuideKitchenKnives = () => {
             If you could only own one knife, make it a 20cm chef's knife in high-carbon stainless steel, kept sharp. It will do almost everything. A paring knife and a bread knife can follow when budget allows. Everything else is a speciality tool for specific tasks — useful when you need them, unnecessary when you don't.
           </p>
         </div>
+
+        <GuideFAQ slug="kitchen-knives" />
+
 
         <GuideRelatedRecipes guideSlug="kitchen-knives" />
 

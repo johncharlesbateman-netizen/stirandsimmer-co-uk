@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
 import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
+import GuideFAQ from "@/components/GuideFAQ";
 import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -202,6 +203,9 @@ const GuideProperSauce = () => {
             comes first — because everything that follows depends on it.
           </p>
         </div>
+
+        <GuideFAQ slug="proper-sauce" />
+
 
         <GuideRelatedRecipes guideSlug="proper-sauce" />
 
