@@ -83,6 +83,54 @@ const STATIC_ROUTES = [
       "A warm, honest guide to Italian cuisine — its regions, defining ingredients and why it works so well at home. Plus tried-and-tested Italian recipes from our kitchen.",
   },
   {
+    path: "/kitchen-atlas/united-kingdom",
+    title: "British Cuisine Guide — Stir & Simmer",
+    description:
+      "An honest guide to British cuisine — pies, roasts, puddings and the seasonal ingredients that make it work. Plus tried-and-tested British recipes from our kitchen.",
+  },
+  {
+    path: "/kitchen-atlas/france",
+    title: "French Cuisine Guide — Stir & Simmer",
+    description:
+      "A practical guide to French cuisine — the mother sauces, key ingredients and techniques that underpin western cooking. Plus French recipes tested in a real home kitchen.",
+  },
+  {
+    path: "/kitchen-atlas/spain",
+    title: "Spanish Cuisine Guide — Stir & Simmer",
+    description:
+      "A warm guide to Spanish cuisine — paella, tapas, chorizo and the ingredients that define it. Plus tried-and-tested Spanish recipes from our kitchen.",
+  },
+  {
+    path: "/kitchen-atlas/india",
+    title: "Indian Cuisine Guide — Stir & Simmer",
+    description:
+      "A warm guide to Indian cuisine — its regions, defining spices and how to cook proper curries at home. Plus tried-and-tested Indian recipes from our kitchen.",
+  },
+  {
+    path: "/kitchen-atlas/thailand",
+    title: "Thai Cuisine Guide — Stir & Simmer",
+    description:
+      "A warm guide to Thai cuisine — its four-flavour balance, defining ingredients and how to cook proper Thai food at home. Plus tried-and-tested Thai recipes from our kitchen.",
+  },
+  {
+    path: "/kitchen-atlas/mediterranean",
+    title: "Mediterranean Cuisine Guide — Stir & Simmer",
+    description:
+      "A warm guide to Mediterranean cuisine — the shared ingredients of southern Europe and North Africa, and how they work in a home kitchen. Plus tried-and-tested recipes.",
+  },
+  {
+    path: "/kitchen-atlas/middle-east",
+    title: "Middle Eastern Cuisine Guide — Stir & Simmer",
+    description:
+      "A warm guide to Middle Eastern cuisine — its spices, herbs, slow-cooked meats and the hospitality at its heart. Plus tried-and-tested recipes from our kitchen.",
+  },
+  {
+    path: "/kitchen-atlas/mexico",
+    title: "Mexican Cuisine Guide — Stir & Simmer",
+    description:
+      "A warm guide to Mexican cuisine — its dried chillies, herbs and ancient corn-based cooking. Plus tried-and-tested Mexican recipes from our kitchen.",
+  },
+  {
     path: "/guides",
     title: "Cooking Guides | Stir & Simmer",
     description:
