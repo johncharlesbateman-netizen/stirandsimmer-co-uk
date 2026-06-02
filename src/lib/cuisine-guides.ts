@@ -45,7 +45,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     adjective: "Italian",
     cuisineRegionTag: "italian",
     characterLine: "Pasta, sauces and the art of simplicity. Italian cooking that feeds the soul.",
-    imageId: "1640774",
+    imageId: "36753771",
     imageAlt: "A rustic Italian table with pasta, tomatoes, basil and olive oil",
     seoTitle: "Italian Cuisine Guide — Stir & Simmer",
     seoDescription:
@@ -73,7 +73,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     adjective: "British",
     cuisineRegionTag: "british",
     characterLine: "Honest, seasonal and deeply comforting. The foundation of everything.",
-    imageId: "1640774",
+    imageId: "19119797",
     imageAlt: "A traditional British table with pie, roast vegetables and gravy",
     seoTitle: "British Cuisine Guide — Stir & Simmer",
     seoDescription:
@@ -101,7 +101,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     adjective: "French",
     cuisineRegionTag: "french",
     characterLine: "Classical techniques that underpin all of western cooking.",
-    imageId: "1640774",
+    imageId: "821365",
     imageAlt: "A French kitchen scene with butter, herbs, copper pans and a baguette",
     seoTitle: "French Cuisine Guide — Stir & Simmer",
     seoDescription:
@@ -129,7 +129,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     adjective: "Spanish",
     cuisineRegionTag: "spanish",
     characterLine: "Bold flavours, beautiful simplicity and the art of sharing.",
-    imageId: "1640774",
+    imageId: "16743486",
     imageAlt: "A Spanish table with paella, chorizo, prawns and olive oil",
     seoTitle: "Spanish Cuisine Guide — Stir & Simmer",
     seoDescription:
@@ -157,7 +157,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     adjective: "Indian",
     cuisineRegionTag: "indian",
     characterLine: "Bold spices, fragrant herbs and layers of warmth and depth.",
-    imageId: "1640774",
+    imageId: "28674690",
     imageAlt: "An Indian spice grinder with whole spices, fresh ginger and coriander",
     seoTitle: "Indian Cuisine Guide — Stir & Simmer",
     seoDescription:
@@ -185,7 +185,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     adjective: "Thai",
     cuisineRegionTag: "thai",
     characterLine: "Fragrant, fiery and beautifully balanced — sweet, sour, salty, spicy.",
-    imageId: "1640774",
+    imageId: "18765531",
     imageAlt: "A Thai market table with lemongrass, chillies, lime and fish sauce",
     seoTitle: "Thai Cuisine Guide — Stir & Simmer",
     seoDescription:
@@ -213,7 +213,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     adjective: "Mediterranean",
     cuisineRegionTag: "mediterranean",
     characterLine: "The shared table around one sea — olive oil, vegetables, fish and herbs.",
-    imageId: "1640774",
+    imageId: "1213710",
     imageAlt: "A Mediterranean table with olive oil, lemons, fish, herbs and vegetables",
     seoTitle: "Mediterranean Cuisine Guide — Stir & Simmer",
     seoDescription:
@@ -241,7 +241,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     adjective: "Middle Eastern",
     cuisineRegionTag: "middle-eastern",
     characterLine: "Warm spices, slow-cooked meats, fresh herbs and deep hospitality.",
-    imageId: "1640774",
+    imageId: "6275158",
     imageAlt: "A Middle Eastern mezze table with flatbreads, herbs, lamb and spices",
     seoTitle: "Middle Eastern Cuisine Guide — Stir & Simmer",
     seoDescription:
@@ -269,7 +269,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     adjective: "Mexican",
     cuisineRegionTag: "mexican",
     characterLine: "Vibrant, smoky and deeply satisfying. The bold flavours of Mexican cooking.",
-    imageId: "1640774",
+    imageId: "8448339",
     imageAlt: "A Mexican table with tortillas, dried chillies, lime, coriander and avocado",
     seoTitle: "Mexican Cuisine Guide — Stir & Simmer",
     seoDescription:
