@@ -58,6 +58,18 @@ const CuisineGuidePage = () => {
         imageAlt={guide.imageAlt}
       />
 
+      {/* Back link */}
+      <section className="bg-background pt-4 pb-2">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <Link
+            to="/kitchen-atlas"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" /> Back to Kitchen Atlas
+          </Link>
+        </div>
+      </section>
+
       <section className="bg-background py-6 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <Breadcrumbs
