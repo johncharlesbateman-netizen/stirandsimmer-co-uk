@@ -372,6 +372,9 @@ const AdminEditRecipe = () => {
             >
               <ClipboardList className="w-4 h-4 mr-2" /> Paste all ingredients
             </Button>
+            <p className="text-xs text-muted-foreground mb-3">
+              Use the arrows to reorder ingredients.
+            </p>
             <div className="space-y-3">
               {ingredients.map((ing, i) => (
                 <div key={i} className="flex gap-2 items-start">
@@ -381,14 +384,47 @@ const AdminEditRecipe = () => {
                     placeholder="2 tbsp olive oil"
                     className="flex-1"
                   />
-                  <button
-                    type="button"
-                    onClick={() => removeListItem(ingredients, setIngredients, i)}
-                    disabled={ingredients.length === 1}
-                    className="px-3 border border-border rounded-md hover:bg-secondary disabled:opacity-30 h-10 mt-8 self-start"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
+                  <div className="flex flex-col gap-1 self-start mt-8">
+                    <div className="flex gap-1">
+                      <button
+                        type="button"
+                        title="Move up"
+                        onClick={() => {
+                          if (i === 0) return;
+                          const next = [...ingredients];
+                          [next[i - 1], next[i]] = [next[i], next[i - 1]];
+                          setIngredients(next);
+                        }}
+                        disabled={i === 0}
+                        className="px-2 py-1 border border-border rounded-md hover:bg-secondary disabled:opacity-30"
+                      >
+                        <ArrowUp className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        title="Move down"
+                        onClick={() => {
+                          if (i === ingredients.length - 1) return;
+                          const next = [...ingredients];
+                          [next[i + 1], next[i]] = [next[i], next[i + 1]];
+                          setIngredients(next);
+                        }}
+                        disabled={i === ingredients.length - 1}
+                        className="px-2 py-1 border border-border rounded-md hover:bg-secondary disabled:opacity-30"
+                      >
+                        <ArrowDown className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      title="Remove ingredient"
+                      onClick={() => removeListItem(ingredients, setIngredients, i)}
+                      disabled={ingredients.length === 1}
+                      className="px-2 py-1 border border-border rounded-md hover:bg-secondary disabled:opacity-30"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               ))}
               <Button type="button" variant="outline" size="sm" onClick={() => addListItem(ingredients, setIngredients)}>
