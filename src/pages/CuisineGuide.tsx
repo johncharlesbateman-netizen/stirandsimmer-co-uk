@@ -1,0 +1,161 @@
+import { Helmet } from "react-helmet-async";
+import { Link, useParams, Navigate } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import Layout from "@/components/Layout";
+import PageHero from "@/components/PageHero";
+import RecipeCard from "@/components/RecipeCard";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
+import { CUISINE_GUIDES_BY_SLUG } from "@/lib/cuisine-guides";
+
+const CuisineGuidePage = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const guide = slug ? CUISINE_GUIDES_BY_SLUG[slug] : undefined;
+
+  const { data: recipes } = useQuery({
+    queryKey: ["kitchen-atlas-cuisine-recipes", guide?.cuisineRegionTag],
+    enabled: !!guide,
+    queryFn: async () => {
+      if (!guide) return [];
+      const { data, error } = await supabase
+        .from("recipes")
+        .select("*")
+        .eq("cuisine_region", guide.cuisineRegionTag)
+        .eq("published", true)
+        .order("created_at", { ascending: false })
+        .limit(6);
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+
+  if (!guide) return <Navigate to="/kitchen-atlas" replace />;
+
+  const canonical = `https://stirandsimmer.co.uk/kitchen-atlas/${guide.slug}`;
+
+  return (
+    <Layout>
+      <Helmet>
+        <title>{guide.seoTitle}</title>
+        <meta name="description" content={guide.seoDescription} />
+        <link rel="canonical" href={canonical} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:title" content={guide.seoTitle} />
+        <meta property="og:description" content={guide.seoDescription} />
+        <meta property="og:site_name" content="Stir & Simmer" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={guide.seoTitle} />
+        <meta name="twitter:description" content={guide.seoDescription} />
+      </Helmet>
+
+      <PageHero
+        title={`${guide.emoji} ${guide.name}`}
+        subtitle={guide.characterLine}
+        imageId={guide.imageId}
+        imageAlt={guide.imageAlt}
+      />
+
+      <section className="bg-background py-6 border-b border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <Breadcrumbs
+            items={[
+              { label: "Kitchen Atlas", href: "/kitchen-atlas" },
+              { label: guide.name },
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* About */}
+      <section className="bg-background py-10 md:py-14 border-b border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+            About {guide.adjective} cuisine
+          </h2>
+          <div className="space-y-5 text-base md:text-lg text-foreground/90 leading-relaxed">
+            {guide.about.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Key ingredients */}
+      <section className="bg-warm-soft py-10 md:py-14 border-b border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-2">
+            Key ingredients
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-2xl">
+            Stock these and you can cook {guide.adjective} almost any night of the week.
+          </p>
+          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {guide.keyIngredients.map((i) => (
+              <li
+                key={i.name}
+                className="rounded-lg border border-border bg-card p-5 flex gap-4"
+              >
+                <span className="text-3xl leading-none" aria-hidden="true">
+                  {i.emoji}
+                </span>
+                <div>
+                  <div className="font-display text-lg text-foreground mb-1">{i.name}</div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{i.note}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Recipes */}
+      <section className="bg-background py-10 md:py-14 border-b border-border">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-2">
+            Recipes from our kitchen to try
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-2xl">
+            A handful of {guide.adjective} recipes we cook on rotation. All tested in a real, busy kitchen.
+          </p>
+
+          {recipes && recipes.length > 0 ? (
+            <>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {recipes.map((r) => (
+                  <RecipeCard key={r.id} recipe={r} />
+                ))}
+              </div>
+              <div className="mt-10">
+                <Button asChild size="lg">
+                  <Link to={`/recipes/region/${guide.regionPageId}`}>
+                    Explore all {guide.adjective} recipes <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+              </div>
+            </>
+          ) : (
+            <p className="text-muted-foreground">
+              No {guide.adjective} recipes published yet — check back soon.
+            </p>
+          )}
+        </div>
+      </section>
+
+      <section className="bg-background py-8">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <Link
+            to="/kitchen-atlas"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="w-4 h-4" /> Back to the Kitchen Atlas
+          </Link>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default CuisineGuidePage;
