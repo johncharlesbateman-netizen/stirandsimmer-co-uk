@@ -153,8 +153,8 @@ const KitchenAtlas = () => {
       <PageHero
         title="Kitchen Atlas"
         subtitle="Every recipe, explored by cuisine and ingredient — discover the traditions behind the food you love."
-        imageId="1640774"
-        imageAlt="A flatlay of dishes and ingredients from cuisines around the world"
+        imageId="678414"
+        imageAlt="An overhead flat lay of spices from around the world — cinnamon sticks, star anise, turmeric, fennel and poppy seeds"
       />
 
       {/* REGION CARD GRID — light section */}
