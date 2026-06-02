@@ -36,7 +36,7 @@ const CuisineGuidePage = () => {
   const canonical = `https://stirandsimmer.co.uk/kitchen-atlas/${guide.slug}`;
 
   return (
-    <Layout>
+    <Layout hideNewsletter>
       <Helmet>
         <title>{guide.seoTitle}</title>
         <meta name="description" content={guide.seoDescription} />
@@ -156,14 +156,35 @@ const CuisineGuidePage = () => {
         </div>
       </section>
 
-      <section className="bg-background py-8">
+      {/* You might also enjoy */}
+      <section className="bg-warm-soft py-10 md:py-14 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <Link
-            to="/kitchen-atlas"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="w-4 h-4" /> Back to the Kitchen Atlas
-          </Link>
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">
+            You might also enjoy
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
+            {guide.relatedCuisines
+              .map((s) => CUISINE_GUIDES_BY_SLUG[s])
+              .filter(Boolean)
+              .map((related) => (
+                <Link
+                  key={related.slug}
+                  to={`/kitchen-atlas/${related.slug}`}
+                  className="group flex flex-col text-left rounded-xl p-5 md:p-6 bg-card border border-border overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:border-primary/30"
+                >
+                  <div className="text-2xl md:text-3xl mb-2">{related.emoji}</div>
+                  <div className="font-display text-lg md:text-xl leading-tight text-foreground">
+                    {related.name}
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed flex-1">
+                    {related.characterLine}
+                  </p>
+                  <div className="mt-3 text-sm font-medium text-primary flex items-center gap-1 group-hover:gap-2 transition-all duration-300">
+                    Read the guide <span aria-hidden="true">→</span>
+                  </div>
+                </Link>
+              ))}
+          </div>
         </div>
       </section>
     </Layout>
