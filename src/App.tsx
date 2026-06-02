@@ -23,6 +23,7 @@ const CategoryPage = lazy(() => import("./pages/CategoryPage"));
 const RegionPage = lazy(() => import("./pages/RegionPage"));
 const Collections = lazy(() => import("./pages/Collections"));
 const KitchenAtlas = lazy(() => import("./pages/KitchenAtlas"));
+const RegionItaly = lazy(() => import("./pages/RegionItaly"));
 const MealPlanner = lazy(() => import("./pages/MealPlanner"));
 const Guides = lazy(() => import("./pages/Guides"));
 const GuideMotherSauces = lazy(() => import("./pages/GuideMotherSauces"));
