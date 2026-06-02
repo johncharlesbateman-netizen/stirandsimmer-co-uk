@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
 import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
+import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -204,22 +205,7 @@ const GuideProperSauce = () => {
 
         <GuideRelatedRecipes guideSlug="proper-sauce" />
 
-        {/* Kitchen Atlas CTA */}
-        <section className="w-full py-16 md:py-20 border-t border-border bg-warm-dark text-warm-dark-foreground">
-          <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl text-center">
-            <h2 className="font-display text-3xl md:text-4xl mb-4">
-              Ready to put it to work?
-            </h2>
-            <p className="text-base md:text-lg mb-8 text-warm-cream-muted">
-              Head to The Kitchen Atlas and explore recipes from around the world to practise on.
-            </p>
-            <Button asChild size="lg" variant="secondary">
-              <Link to="/kitchen-atlas">
-                Visit The Kitchen Atlas <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
-          </div>
-        </section>
+        <GuideRelatedGuides guideSlug="proper-sauce" />
 
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
           <Link
