@@ -59,13 +59,13 @@ const About = () => {
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-3xl space-y-6 body-editorial text-muted-foreground">
             <p className="text-foreground text-xl md:text-2xl font-display leading-relaxed">
-              Stir & Simmer is a UK recipe site for people who love good food but don't want cooking to become a project.
+              Stir & Simmer started at our kitchen table. Every recipe on this site has been cooked in our family kitchen, eaten at our table, and only written down because someone around that table asked for it again.
             </p>
             <p>
-              We started this in a real kitchen, after one too many recipes that called for ingredients you've never heard of, techniques that assumed professional training, or timings that only work if you have the whole afternoon free.
+              We built this for people who love good food but don't want cooking to become a project — after one too many recipes that called for ingredients you've never heard of, techniques that assumed professional training, or timings that only work if you have the whole afternoon free.
             </p>
             <p>
-              That's not most people's reality. So we built something different.
+              That's not most people's reality. So we made something different.
             </p>
           </div>
 
@@ -73,10 +73,13 @@ const About = () => {
             <h2 className="heading-section mb-4">How This Started</h2>
             <div className="space-y-4 body-editorial text-muted-foreground">
               <p>
-                Every recipe on here comes from actually making it — not once, but enough times to know what goes wrong and how to fix it. The portions are honest. The ingredients come from Tesco, Sainsbury's, Aldi or Waitrose. The methods are written for someone who's cooking after work, not performing for a camera.
+                Stir & Simmer grew out of a handwritten recipe book started around twenty years ago, after retiring from a career in international financial services. The recipes that worked — the ones that got asked for again — got written down. What began as a personal collection became a digital one, and eventually found its way here as a proper site.
               </p>
               <p>
-                If a dish isn't worth making, it doesn't go on the site.
+                The principle never changed: if the family didn't ask for it again, it didn't make the cut.
+              </p>
+              <p>
+                Every recipe on here comes from actually making it — not once, but enough times to know what goes wrong and how to fix it. The portions are honest. The ingredients come from Tesco, Sainsbury's, Aldi or Waitrose. The methods are written for someone who's cooking after work, not performing for a camera.
               </p>
             </div>
           </div>
@@ -110,7 +113,7 @@ const About = () => {
               style={{ background: "linear-gradient(180deg, hsl(16 45% 25% / 0.25), hsl(0 0% 10% / 0.45))" }}
             />
             <div className="absolute inset-0 flex items-end p-6 md:p-10">
-              <p className="micro-caption text-background/90">A real kitchen, somewhere in the UK</p>
+              <p className="micro-caption text-background/90">Our kitchen. Where everything on this site gets made and eaten first.</p>
             </div>
           </div>
         </div>
@@ -139,7 +142,7 @@ const About = () => {
                 <h3 className="font-display text-xl text-foreground mb-4">Why UK-specific matters</h3>
                 <div className="space-y-4 body-editorial text-muted-foreground">
                   <p>
-                    Every measurement is in grams and millilitres. Every oven temperature is in Celsius (with fan settings noted). Every ingredient is something you can actually buy at a British supermarket — no hunting for obscure imports or guessing at conversions.
+                    We're based in the Fens, on the borders of Cambridgeshire, Norfolk and Lincolnshire. Good farming country, honest food, not much pretension about eating. Every measurement is in grams and millilitres. Every oven temperature is in Celsius (with fan settings noted). Every ingredient is something you can actually buy at a British supermarket — no hunting for obscure imports or guessing at conversions.
                   </p>
                   <p>
                     It sounds small. In practice, it's the difference between a recipe that works first time and one that quietly fails on a Tuesday night.
