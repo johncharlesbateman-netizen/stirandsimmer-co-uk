@@ -73,7 +73,7 @@ const About = () => {
             <h2 className="heading-section mb-4">How This Started</h2>
             <div className="space-y-4 body-editorial text-muted-foreground">
               <p>
-                Stir & Simmer grew out of a handwritten recipe book started around twenty years ago, after retiring from a career in international financial services. The recipes that worked — the ones that got asked for again — got written down. What began as a personal collection became a digital one, and eventually found its way here as a proper site.
+                Stir & Simmer grew out of a handwritten recipe book the founder of Stir and Simmer started around twenty years ago, when he retired from a career in international financial services. The recipes that worked — the ones that got asked for again — got written down. What began as a personal collection became a digital one, and eventually found its way here as a proper site.
               </p>
               <p>
                 The principle never changed: if the family didn't ask for it again, it didn't make the cut.
