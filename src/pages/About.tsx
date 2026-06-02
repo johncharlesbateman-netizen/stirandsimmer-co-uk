@@ -93,32 +93,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Looping kitchen video */}
-      <section className="pb-8">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="relative overflow-hidden rounded-sm aspect-[21/9] bg-foreground">
-            <video
-              src={kitchenLoop.url}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-              aria-label="A warm UK kitchen with steam rising from a simmering pot"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: "saturate(1.05) contrast(1.05) sepia(0.18) brightness(0.92)" }}
-            />
-            <div
-              className="absolute inset-0 pointer-events-none mix-blend-multiply"
-              style={{ background: "linear-gradient(180deg, hsl(16 45% 25% / 0.25), hsl(0 0% 10% / 0.45))" }}
-            />
-            <div className="absolute inset-0 flex items-end p-6 md:p-10">
-              <p className="micro-caption text-background/90">Our kitchen. Where everything on this site gets made and eaten first.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Why Stir & Simmer */}
       <section className="pb-12 md:pb-16">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
