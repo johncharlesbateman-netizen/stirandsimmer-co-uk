@@ -24,6 +24,7 @@ const REGIONS: RegionDef[] = [
     bg: "hsl(var(--region-uk))",
     available: true,
     description: "Honest, seasonal and deeply comforting. The foundation of everything.",
+    href: "/kitchen-atlas/united-kingdom",
   },
   {
     id: "italy",
@@ -41,6 +42,7 @@ const REGIONS: RegionDef[] = [
     bg: "hsl(var(--region-france))",
     available: true,
     description: "Classical techniques that underpin all of western cooking.",
+    href: "/kitchen-atlas/france",
   },
   {
     id: "spain",
@@ -50,6 +52,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description:
       "Bold flavours, beautiful simplicity and the art of sharing. The soul of Spanish cooking.",
+    href: "/kitchen-atlas/spain",
   },
   {
     id: "india",
@@ -58,6 +61,7 @@ const REGIONS: RegionDef[] = [
     bg: "hsl(var(--region-india))",
     available: true,
     description: "Bold spices, fragrant herbs and layers of warmth and depth.",
+    href: "/kitchen-atlas/india",
   },
   {
     id: "thailand",
@@ -67,6 +71,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description:
       "Fragrant, fiery and beautifully balanced — the sweet, sour, salty, spicy heart of Thai cooking.",
+    href: "/kitchen-atlas/thailand",
   },
   {
     id: "mediterranean",
@@ -76,6 +81,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description:
       "The shared table around one sea — olive oil, vegetables, fish and herbs from southern Europe and North Africa.",
+    href: "/kitchen-atlas/mediterranean",
   },
   {
     id: "middleeast",
@@ -85,6 +91,7 @@ const REGIONS: RegionDef[] = [
     available: true,
     description:
       "Warm spices, slow-cooked meats, fresh herbs and the deep hospitality of Middle Eastern cooking.",
+    href: "/kitchen-atlas/middle-east",
   },
   {
     id: "mexico",
@@ -94,19 +101,25 @@ const REGIONS: RegionDef[] = [
     available: true,
     description:
       "Vibrant, smoky and deeply satisfying. The bold flavours of Mexican cooking.",
+    href: "/kitchen-atlas/mexico",
   },
 ];
 
 const REGION_BUTTON_LABEL: Record<string, string> = {
-  spain: "Explore all Spanish recipes",
-  uk: "Explore all United Kingdom recipes",
+  uk: "Read the British cuisine guide",
   italy: "Read the Italian cuisine guide",
-  france: "Explore all French recipes",
-  india: "Explore all Indian recipes",
-  mexico: "Explore all Mexican recipes",
+  france: "Read the French cuisine guide",
+  spain: "Read the Spanish cuisine guide",
+  india: "Read the Indian cuisine guide",
+  thailand: "Read the Thai cuisine guide",
+  mediterranean: "Read the Mediterranean cuisine guide",
+  middleeast: "Read the Middle Eastern cuisine guide",
+  mexico: "Read the Mexican cuisine guide",
 };
 
 const regionHref = (r: RegionDef) => r.href ?? `/recipes/region/${r.id}`;
+
+
 
 const KitchenAtlas = () => {
   return (
