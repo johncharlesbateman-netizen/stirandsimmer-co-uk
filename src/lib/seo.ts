@@ -2,7 +2,7 @@
 // Generates concise, unique meta titles (<60 chars) and descriptions (<155 chars)
 // when an admin hasn't supplied custom values.
 
-const SITE_SUFFIX = " | Stir & Simmer";
+const SITE_SUFFIX = " — Stir & Simmer";
 const TITLE_LIMIT = 60;
 const DESC_MIN = 140;
 const DESC_MAX = 155;

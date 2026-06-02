@@ -46,97 +46,97 @@ type RawMeta = {
 const RAW: RawMeta[] = [
   {
     slug: "mother-sauces",
-    title: "The five French mother sauces every home cook should know | Stir & Simmer",
+    title: "The Five French Mother Sauces Explained — Stir & Simmer",
     description:
-      "Béchamel, Velouté, Espagnole, Hollandaise and Sauce Tomat — the five French mother sauces explained with step by step instructions and the mistakes to avoid.",
+      "Learn the five French mother sauces — Béchamel, Velouté, Espagnole, Hollandaise and Tomat — with clear steps, ratios and the mistakes to avoid.",
     imageId: "5908227",
     publishedTime: "2025-01-15T09:00:00Z",
   },
   {
     slug: "french-techniques",
-    title: "French cooking techniques every home cook should know — Stir & Simmer",
+    title: "Essential French Cooking Techniques for Home Cooks — Stir & Simmer",
     description:
-      "Seven essential French cooking techniques explained simply — mise en place, julienne, brunoise, chiffonade, beurre blanc, flambé and déglaze. Master these and transform your cooking.",
+      "Master seven essential French techniques — mise en place, julienne, brunoise, chiffonade, beurre blanc, flambé and déglaze — to lift everyday cooking.",
     imageId: "4252137",
     publishedTime: "2025-02-01T09:00:00Z",
   },
   {
     slug: "garam-masala",
-    title: "Garam masala — a cook's guide | Stir & Simmer",
+    title: "Garam Masala Explained: Spices, Toasting and How to Use It — Stir & Simmer",
     description:
-      "Garam masala demystified — the spices that go in, why they matter, how to toast and grind them, and the mistakes most home cooks make.",
+      "What garam masala really is, the spices that belong in it, how to toast and grind your own blend, and when to add it for the deepest, warmest flavour.",
     imageId: "1340116",
     publishedTime: "2025-02-15T09:00:00Z",
   },
   {
     slug: "how-to-use-spices",
-    title: "How to use spices — a beginner's guide | Stir & Simmer",
+    title: "How to Cook With Spices: A Beginner's Guide — Stir & Simmer",
     description:
-      "A beginner's guide to cooking with spices — what they do, how to store them, when to add them, and how to build flavour with confidence.",
+      "A beginner's guide to cooking with spices — how to store, toast and bloom them, when to add them, and how to build layered flavour with real confidence.",
     imageId: "2802527",
     publishedTime: "2025-03-01T09:00:00Z",
   },
   {
     slug: "proper-stock",
-    title: "How to make a proper stock — a cook's guide | Stir & Simmer",
+    title: "How to Make Proper Stock at Home: A Cook's Guide — Stir & Simmer",
     description:
-      "A practical guide to making proper stock at home — what goes in, how long to simmer, the difference between white and brown stock, and how to use and store it.",
+      "How to make a proper stock at home — bones, vegetables and timings for white and brown stocks, plus how to strain, store and actually use them well.",
     image: properStockImage,
     publishedTime: "2025-03-15T09:00:00Z",
   },
   {
     slug: "proper-sauce",
-    title: "How to make a proper sauce — a cook's guide | Stir & Simmer",
+    title: "How to Make a Proper Sauce From Scratch — Stir & Simmer",
     description:
-      "A practical guide to making proper sauces at home — the building blocks, the techniques, and the small details that turn a thin pan liquid into something glossy and memorable.",
+      "How to build a proper sauce at home — the bases, the thickeners, the deglaze, and the small details that turn pan juices into something glossy and rich.",
     image: properSauceImage,
     publishedTime: "2025-04-01T09:00:00Z",
   },
   {
     slug: "choosing-pans",
-    title: "Choosing the right pan for the job — a cook's guide | Stir & Simmer",
+    title: "How to Choose the Right Pan for Every Job — Stir & Simmer",
     description:
-      "A practical guide to choosing the right pan for the job — the materials, the shapes, and which pans actually earn their place in a home kitchen.",
+      "A practical guide to choosing pans — cast iron, stainless steel, non-stick and copper — and which shapes and sizes actually earn space in your kitchen.",
     image: choosingPansImage,
     publishedTime: "2025-04-15T09:00:00Z",
   },
   {
     slug: "kitchen-knives",
-    title: "Kitchen knives — a cook's guide | Stir & Simmer",
+    title: "Kitchen Knives: Which to Buy, How to Hold, How to Sharpen — Stir & Simmer",
     description:
-      "A practical guide to kitchen knives — the blades worth owning, how to hold them, how to keep them sharp, and how to choose ones that will last a lifetime.",
+      "Which kitchen knives are worth owning, how to grip them safely, how to keep an edge with a steel and stone, and how to buy blades that last a lifetime.",
     image: kitchenKnivesImage,
     publishedTime: "2025-05-01T09:00:00Z",
   },
   {
     slug: "understanding-olive-oil",
-    title: "Understanding olive oil — a cook's guide | Stir & Simmer",
+    title: "Understanding Olive Oil: Labels, Grades and When to Use It — Stir & Simmer",
     description:
-      "A practical guide to olive oil — what the labels mean, how it's made, when to cook with it, when to finish with it, and which bottles to buy in the UK.",
+      "Olive oil decoded — what extra virgin really means, when to cook with it, when to finish a dish with it, and which UK bottles are worth buying.",
     image: oliveOilImage,
     publishedTime: "2025-05-18T09:00:00Z",
   },
   {
     slug: "how-to-cook-pasta",
-    title: "How to cook pasta properly — a cook's guide | Stir & Simmer",
+    title: "How to Cook Pasta Properly: An Italian Cook's Guide — Stir & Simmer",
     description:
-      "How to cook pasta properly — choosing the shape, salting the water, timing it right, saving the cooking water and finishing it in the sauce.",
+      "Cook pasta the Italian way — pick the right shape, salt the water heavily, time it al dente, save the cooking water, and finish it in the sauce.",
     image: howToCookPastaImage,
     publishedTime: "2025-05-18T10:00:00Z",
   },
   {
     slug: "how-to-make-bread",
-    title: "How to make bread at home — a beginner's guide | Stir & Simmer",
+    title: "How to Make Bread at Home: A Beginner's Baking Guide — Stir & Simmer",
     description:
-      "A beginner's guide to baking bread at home — the four ingredients, the flours, the yeasts, the method, the mistakes, and five loaves every home baker should try.",
+      "Start baking bread at home — the four ingredients, choosing flours and yeast, kneading and proving, the common mistakes, and five loaves to try first.",
     image: howToMakeBreadImage,
     publishedTime: "2025-05-18T11:00:00Z",
   },
   {
     slug: "what-to-cook-in-summer",
-    title: "What to cook in summer — a seasonal guide | Stir & Simmer",
+    title: "What to Cook in Summer: A Seasonal UK Cooking Guide — Stir & Simmer",
     description:
-      "A seasonal guide to summer cooking in the UK — what's in season, how to build a proper salad, grilling done well, summer herbs, soft fruit, and five dishes every cook should know.",
+      "Cook with the British summer — what's in season, how to build a proper salad, grilling done well, the herbs to use, and five summer dishes to master.",
     image: whatToCookInSummerImage,
     publishedTime: "2025-05-18T12:00:00Z",
   },
