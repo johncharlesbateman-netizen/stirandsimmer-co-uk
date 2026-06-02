@@ -1,13 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import { Button } from "@/components/ui/button";
-
-import { supabase } from "@/integrations/supabase/client";
-
 
 type RegionDef = {
   id: string;
@@ -16,9 +12,8 @@ type RegionDef = {
   bg: string; // hex
   available: boolean;
   description?: string;
-  challenge?: string;
-  regionTags?: string[]; // cuisine_region tags to match
-  collectionLink?: string;
+  /** Path to open when the user clicks Explore. Defaults to /recipes/region/:id. */
+  href?: string;
 };
 
 const REGIONS: RegionDef[] = [
@@ -29,9 +24,6 @@ const REGIONS: RegionDef[] = [
     bg: "hsl(var(--region-uk))",
     available: true,
     description: "Honest, seasonal and deeply comforting. The foundation of everything.",
-    challenge:
-      "This week — cook a classic British fish dish. Try our [Fish Finger Butty](/recipes/fish-finger-butty-with-lemon-mayonnaise) or [Cider Battered Prawns](/recipes/cider-battered-prawns-with-aubergine-salad).",
-    regionTags: ["british"],
   },
   {
     id: "italy",
@@ -40,9 +32,7 @@ const REGIONS: RegionDef[] = [
     bg: "hsl(var(--region-italy))",
     available: true,
     description: "Pasta, sauces and the art of simplicity. Italy feeds the soul.",
-    challenge:
-      "This week — cook a pasta dish entirely from scratch. Find our [Italian recipes](/recipes/italian) and challenge yourself.",
-    regionTags: ["italian"],
+    href: "/kitchen-atlas/italy",
   },
   {
     id: "france",
@@ -51,9 +41,6 @@ const REGIONS: RegionDef[] = [
     bg: "hsl(var(--region-france))",
     available: true,
     description: "Classical techniques that underpin all of western cooking.",
-    challenge:
-      "This week — make a classic French sauce from scratch. Browse our [French recipe collection](/recipes/french) to find your starting point.",
-    regionTags: ["french"],
   },
   {
     id: "spain",
@@ -63,9 +50,6 @@ const REGIONS: RegionDef[] = [
     available: true,
     description:
       "Bold flavours, beautiful simplicity and the art of sharing. The soul of Spanish cooking.",
-    challenge:
-      "This week — cook a Spanish classic from scratch. Try our [Our Paella](/recipes/our-paella) or [Prawn and Chorizo Rice](/recipes/prawn-and-chorizo-rice).",
-    regionTags: ["spanish"],
   },
   {
     id: "india",
@@ -74,9 +58,6 @@ const REGIONS: RegionDef[] = [
     bg: "hsl(var(--region-india))",
     available: true,
     description: "Bold spices, fragrant herbs and layers of warmth and depth.",
-    challenge:
-      "This week — cook a curry entirely from scratch using whole spices, no jars. Find your recipe in our [Indian collection](/recipes/region/indian).",
-    regionTags: ["indian"],
   },
   {
     id: "thailand",
@@ -86,9 +67,6 @@ const REGIONS: RegionDef[] = [
     available: true,
     description:
       "Fragrant, fiery and beautifully balanced — the sweet, sour, salty, spicy heart of Thai cooking.",
-    challenge:
-      "This week — cook a Thai dish from scratch. Browse our [Thai collection](/recipes/region/thailand) for inspiration.",
-    regionTags: ["thai"],
   },
   {
     id: "mediterranean",
@@ -98,9 +76,6 @@ const REGIONS: RegionDef[] = [
     available: true,
     description:
       "The shared table around one sea — olive oil, vegetables, fish and herbs from southern Europe and North Africa.",
-    challenge:
-      "This week — cook a Mediterranean classic. Browse our [Mediterranean collection](/recipes/region/mediterranean) for inspiration.",
-    regionTags: ["mediterranean"],
   },
   {
     id: "middleeast",
@@ -110,9 +85,6 @@ const REGIONS: RegionDef[] = [
     available: true,
     description:
       "Warm spices, slow-cooked meats, fresh herbs and the deep hospitality of Middle Eastern cooking.",
-    challenge:
-      "This week — cook a Middle Eastern dish. Browse our [Middle Eastern collection](/recipes/region/middleeast) for inspiration.",
-    regionTags: ["middle-eastern"],
   },
   {
     id: "mexico",
@@ -122,55 +94,28 @@ const REGIONS: RegionDef[] = [
     available: true,
     description:
       "Vibrant, smoky and deeply satisfying. The bold flavours of Mexican cooking.",
-    challenge:
-      "This week — make tacos from scratch. Try our [Battered Prawn Tacos](/recipes/battered-prawn-tacos) for a crisp, fresh take.",
-    regionTags: ["mexican"],
   },
 ];
 
-// Approximate map positions (% of map area) for the markers.
-// Positions in % of map area, derived from equirectangular projection
-// fitted to a 1000x500 viewBox (matches WORLD_MAP_PATH).
-const MAP_POSITIONS: Record<string, { top: string; left: string }> = {
-  uk: { top: "21.4%", left: "49.97%" },
-  france: { top: "22.8%", left: "50.67%" },
-  spain: { top: "27.6%", left: "48.2%" },
-  italy: { top: "26.7%", left: "53.47%" },
-  india: { top: "41.6%", left: "70%" },
-  thailand: { top: "46%", left: "77.5%" },
-  mediterranean: { top: "31.5%", left: "51.5%" },
-  middleeast: { top: "35%", left: "60%" },
-  mexico: { top: "39.2%", left: "22.5%" },
+const REGION_BUTTON_LABEL: Record<string, string> = {
+  spain: "Explore all Spanish recipes",
+  uk: "Explore all United Kingdom recipes",
+  italy: "Read the Italian cuisine guide",
+  france: "Explore all French recipes",
+  india: "Explore all Indian recipes",
+  mexico: "Explore all Mexican recipes",
 };
 
-const scrollToRegion = (id: string) => {
-  const el = document.getElementById(`region-${id}`);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-};
+const regionHref = (r: RegionDef) => r.href ?? `/recipes/region/${r.id}`;
 
 const KitchenAtlas = () => {
-  const { data: liveChallenges } = useQuery({
-    queryKey: ["region-challenges-all"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("region_challenges")
-        .select("region_id, challenge");
-      if (error) throw error;
-      const map: Record<string, string> = {};
-      (data ?? []).forEach((row) => {
-        if (row.region_id && row.challenge) map[row.region_id] = row.challenge;
-      });
-      return map;
-    },
-  });
-
   return (
     <Layout>
       <Helmet>
-        <title>The Kitchen Atlas — explore world cuisines and cooking challenges | Stir & Simmer</title>
+        <title>The Kitchen Atlas — explore world cuisines | Stir & Simmer</title>
         <meta
           name="description"
-          content="Explore six world cuisine regions and discover occasional cooking challenges — all linked to tried and tested recipes on Stir & Simmer."
+          content="Explore world cuisine regions and the recipes behind them — Italian, French, British, Spanish, Indian, Thai and more, all tried and tested at Stir & Simmer."
         />
         <link rel="canonical" href="https://stirandsimmer.co.uk/kitchen-atlas" />
 
@@ -178,14 +123,14 @@ const KitchenAtlas = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://stirandsimmer.co.uk/kitchen-atlas" />
         <meta property="og:title" content="The Kitchen Atlas | Stir & Simmer" />
-        <meta property="og:description" content="Explore six world cuisine regions and discover occasional cooking challenges — all linked to tried and tested recipes on Stir & Simmer." />
+        <meta property="og:description" content="Explore world cuisine regions and the recipes behind them — all tried and tested on Stir & Simmer." />
         <meta property="og:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
         <meta property="og:site_name" content="Stir & Simmer" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="The Kitchen Atlas | Stir & Simmer" />
-        <meta name="twitter:description" content="Explore six world cuisine regions and discover occasional cooking challenges — all linked to tried and tested recipes on Stir & Simmer." />
+        <meta name="twitter:description" content="Explore world cuisine regions and the recipes behind them — all tried and tested on Stir & Simmer." />
         <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
       </Helmet>
 
@@ -204,7 +149,7 @@ const KitchenAtlas = () => {
               r.available ? (
                 <Link
                   key={r.id}
-                  to={`/recipes/region/${r.id}`}
+                  to={regionHref(r)}
                   className="text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden transition-all hover:-translate-y-1 hover:shadow-md cursor-pointer block"
                   style={{ borderTop: `4px solid ${r.bg}` }}
                 >
@@ -236,76 +181,20 @@ const KitchenAtlas = () => {
           </div>
         </div>
       </section>
+
       {/* REGION SECTIONS — light */}
       <div className="bg-background">
         {REGIONS.map((region) => (
-          <RegionSection
-            key={region.id}
-            region={region}
-            liveChallenge={liveChallenges?.[region.id] ?? null}
-          />
+          <RegionSection key={region.id} region={region} />
         ))}
       </div>
     </Layout>
   );
 };
 
-const REGION_BUTTON_LABEL: Record<string, string> = {
-  spain: "Explore all Spanish recipes",
-  uk: "Explore all United Kingdom recipes",
-  italy: "Explore all Italian recipes",
-  france: "Explore all French recipes",
-  india: "Explore all Indian recipes",
-  mexico: "Explore all Mexican recipes",
-};
-
-// Render markdown-style [label](href) links inline. External URLs open in a
-// new tab; internal paths use react-router for client-side navigation.
-const renderChallenge = (text: string) => {
-  const parts: (string | JSX.Element)[] = [];
-  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
-  let lastIndex = 0;
-  let match: RegExpExecArray | null;
-  let key = 0;
-  while ((match = regex.exec(text)) !== null) {
-    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
-    const [, label, href] = match;
-    const isInternal = href.startsWith("/");
-    if (isInternal) {
-      parts.push(
-        <Link key={key++} to={href} className="underline underline-offset-2 hover:opacity-80">
-          {label}
-        </Link>,
-      );
-    } else {
-      parts.push(
-        <a
-          key={key++}
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline underline-offset-2 hover:opacity-80"
-        >
-          {label}
-        </a>,
-      );
-    }
-    lastIndex = match.index + match[0].length;
-  }
-  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
-  return parts;
-};
-
-const RegionSection = ({
-  region,
-  liveChallenge,
-}: {
-  region: RegionDef;
-  liveChallenge: string | null;
-}) => {
+const RegionSection = ({ region }: { region: RegionDef }) => {
   const disabled = !region.available;
-
-  const challengeText = liveChallenge ?? region.challenge;
+  const href = regionHref(region);
 
   return (
     <section
@@ -342,26 +231,12 @@ const RegionSection = ({
             size="lg"
             className="w-full md:w-auto whitespace-normal md:whitespace-nowrap text-base"
           >
-            <Link to={`/recipes/region/${region.id}`}>
+            <Link to={href}>
               {REGION_BUTTON_LABEL[region.id] ?? `Explore all ${region.name} recipes`}{" "}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
         )}
-
-        {/* Challenge callout — warm-soft surface */}
-        <div
-          className={`mt-8 rounded-lg p-5 md:p-6 border border-border ${
-            disabled ? "bg-warm-soft/60" : "bg-warm-soft"
-          }`}
-        >
-          <p className="text-xs uppercase tracking-widest font-semibold mb-1 text-muted-foreground">
-            Challenge
-          </p>
-          <p className="text-base md:text-lg text-foreground">
-            {renderChallenge(challengeText)}
-          </p>
-        </div>
       </div>
     </section>
   );

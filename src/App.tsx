@@ -23,6 +23,7 @@ const CategoryPage = lazy(() => import("./pages/CategoryPage"));
 const RegionPage = lazy(() => import("./pages/RegionPage"));
 const Collections = lazy(() => import("./pages/Collections"));
 const KitchenAtlas = lazy(() => import("./pages/KitchenAtlas"));
+const RegionItaly = lazy(() => import("./pages/RegionItaly"));
 const MealPlanner = lazy(() => import("./pages/MealPlanner"));
 const Guides = lazy(() => import("./pages/Guides"));
 const GuideMotherSauces = lazy(() => import("./pages/GuideMotherSauces"));
@@ -137,6 +138,7 @@ const App = () => (
               <Route path="/collections" element={<Collections />} />
               <Route path="/collections/:slug" element={<Collections />} />
               <Route path="/kitchen-atlas" element={<KitchenAtlas />} />
+              <Route path="/kitchen-atlas/italy" element={<RegionItaly />} />
               <Route path="/guides" element={<Guides />} />
               <Route path="/guides/mother-sauces" element={<GuideMotherSauces />} />
               <Route path="/guides/french-techniques" element={<GuideFrenchTechniques />} />
