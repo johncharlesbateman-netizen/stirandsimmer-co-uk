@@ -63,6 +63,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🧀", name: "Parmigiano Reggiano", note: "Grated over pasta, stirred into risotto, the savoury backbone." },
       { emoji: "🍝", name: "Good dried pasta", note: "Bronze-die cut holds sauce better than supermarket smooth pasta." },
     ],
+    relatedCuisines: ["france", "mediterranean"],
   },
   {
     slug: "united-kingdom",
