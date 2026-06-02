@@ -1,19 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
-import aboutKitchen1 from "@/assets/about-kitchen-1.webp";
-import aboutKitchen3 from "@/assets/about-kitchen-3.webp";
-import aboutKitchen4 from "@/assets/about-kitchen-4.webp";
-import kitchenLoop from "@/assets/about-kitchen-loop.mp4.asset.json";
-
 
 const brandImage = "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=85";
-
-const gridImages = [
-  { src: aboutKitchen3, alt: "Hands kneading bread dough on a flour-dusted wooden table" },
-  { src: aboutKitchen1, alt: "Fresh seasonal vegetables on a wooden chopping board" },
-  { src: aboutKitchen4, alt: "Caramelised onions sizzling in a cast iron skillet" },
-];
 
 const About = () => {
   return (
