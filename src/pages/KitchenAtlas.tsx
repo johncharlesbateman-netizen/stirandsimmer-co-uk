@@ -2,9 +2,12 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
+import { CUISINE_GUIDES_BY_SLUG } from "@/lib/cuisine-guides";
 
 type RegionDef = {
   id: string;
+  /** Slug into CUISINE_GUIDES_BY_SLUG — used to pull the hero image. */
+  slug: string;
   name: string;
   emoji: string;
   bg: string; // hex
@@ -17,6 +20,7 @@ type RegionDef = {
 const REGIONS: RegionDef[] = [
   {
     id: "uk",
+    slug: "united-kingdom",
     name: "United Kingdom",
     emoji: "🇬🇧",
     bg: "hsl(var(--region-uk))",
@@ -26,6 +30,7 @@ const REGIONS: RegionDef[] = [
   },
   {
     id: "italy",
+    slug: "italy",
     name: "Italy",
     emoji: "🇮🇹",
     bg: "hsl(var(--region-italy))",
@@ -35,6 +40,7 @@ const REGIONS: RegionDef[] = [
   },
   {
     id: "france",
+    slug: "france",
     name: "France",
     emoji: "🇫🇷",
     bg: "hsl(var(--region-france))",
@@ -44,6 +50,7 @@ const REGIONS: RegionDef[] = [
   },
   {
     id: "spain",
+    slug: "spain",
     name: "Spain",
     emoji: "🇪🇸",
     bg: "hsl(var(--region-spain))",
@@ -54,6 +61,7 @@ const REGIONS: RegionDef[] = [
   },
   {
     id: "india",
+    slug: "india",
     name: "India",
     emoji: "🇮🇳",
     bg: "hsl(var(--region-india))",
@@ -63,6 +71,7 @@ const REGIONS: RegionDef[] = [
   },
   {
     id: "thailand",
+    slug: "thailand",
     name: "Thailand",
     emoji: "🇹🇭",
     bg: "hsl(var(--region-thailand))",
@@ -73,6 +82,7 @@ const REGIONS: RegionDef[] = [
   },
   {
     id: "mediterranean",
+    slug: "mediterranean",
     name: "Mediterranean",
     emoji: "🌊",
     bg: "hsl(var(--region-mediterranean))",
@@ -83,6 +93,7 @@ const REGIONS: RegionDef[] = [
   },
   {
     id: "middleeast",
+    slug: "middle-east",
     name: "Middle East",
     emoji: "🥙",
     bg: "hsl(var(--region-middleeast))",
@@ -93,6 +104,7 @@ const REGIONS: RegionDef[] = [
   },
   {
     id: "mexico",
+    slug: "mexico",
     name: "Mexico",
     emoji: "🇲🇽",
     bg: "hsl(var(--region-mexico))",
@@ -104,6 +116,13 @@ const REGIONS: RegionDef[] = [
 ];
 
 const regionHref = (r: RegionDef) => r.href ?? `/recipes/region/${r.id}`;
+const pexelsImage = (id: string, w = 800) =>
+  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fm=webp&w=${w}`;
+const regionImage = (r: RegionDef) => {
+  const guide = CUISINE_GUIDES_BY_SLUG[r.slug];
+  return guide ? pexelsImage(guide.imageId, 800) : null;
+};
+
 
 const KitchenAtlas = () => {
   return (
@@ -142,46 +161,75 @@ const KitchenAtlas = () => {
       <section className="bg-background py-10 md:py-14 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {REGIONS.map((r) =>
-              r.available ? (
-                <Link
-                  key={r.id}
-                  to={regionHref(r)}
-                  className="group flex flex-col text-left rounded-xl p-5 md:p-6 bg-card border border-border overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:border-primary/30 cursor-pointer"
-                  style={{ borderTop: `4px solid ${r.bg}` }}
-                >
-                  <div className="text-3xl md:text-4xl mb-3">{r.emoji}</div>
-                  <div className="font-display text-lg md:text-xl leading-tight text-foreground">
-                    {r.name}
+            {REGIONS.map((r) => {
+              const img = regionImage(r);
+              const cardBase =
+                "group relative flex flex-col text-left rounded-xl overflow-hidden border border-border min-h-[280px] md:min-h-[320px]";
+              const interactive =
+                "transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-primary/40 cursor-pointer";
+
+              const inner = (
+                <>
+                  {/* Background image */}
+                  {img ? (
+                    <img
+                      src={img}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0"
+                      style={{ background: r.bg }}
+                    />
+                  )}
+                  {/* Dark gradient overlay */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/30"
+                  />
+                  {/* Content */}
+                  <div className="relative flex flex-col h-full p-5 md:p-6 text-white">
+                    <div className="text-3xl md:text-4xl mb-3 drop-shadow">{r.emoji}</div>
+                    <div className="font-display text-lg md:text-xl leading-tight">
+                      {r.name}
+                    </div>
+                    <p className="text-sm text-white/85 mt-2 leading-relaxed flex-1">
+                      {r.description}
+                    </p>
+                    {r.available ? (
+                      <div className="mt-4 text-sm font-medium text-white flex items-center gap-1 group-hover:gap-2 transition-all duration-300">
+                        Read the guide <span aria-hidden="true">→</span>
+                      </div>
+                    ) : (
+                      <div className="mt-4 text-sm font-medium text-white/70">
+                        Coming soon
+                      </div>
+                    )}
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed flex-1">
-                    {r.description}
-                  </p>
-                  <div className="mt-4 text-sm font-medium text-primary flex items-center gap-1 group-hover:gap-2 transition-all duration-300">
-                    Read the guide <span aria-hidden="true">→</span>
-                  </div>
+                </>
+              );
+
+              return r.available ? (
+                <Link key={r.id} to={regionHref(r)} className={`${cardBase} ${interactive}`}>
+                  {inner}
                 </Link>
               ) : (
                 <div
                   key={r.id}
                   aria-disabled="true"
-                  className="flex flex-col text-left rounded-xl p-5 md:p-6 bg-card border border-border overflow-hidden cursor-not-allowed opacity-60"
-                  style={{ borderTop: `4px solid ${r.bg}` }}
+                  className={`${cardBase} cursor-not-allowed opacity-70`}
                 >
-                  <div className="text-3xl md:text-4xl mb-3">{r.emoji}</div>
-                  <div className="font-display text-lg md:text-xl leading-tight text-foreground">
-                    {r.name}
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed flex-1">
-                    {r.description}
-                  </p>
-                  <div className="mt-4 text-sm font-medium text-muted-foreground">
-                    Coming soon
-                  </div>
+                  {inner}
                 </div>
-              ),
-            )}
+              );
+            })}
           </div>
+
         </div>
       </section>
     </Layout>
