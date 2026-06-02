@@ -32,6 +32,8 @@ export type CuisineGuide = {
   about: [string, string, string];
   /** 6 defining ingredients. */
   keyIngredients: CuisineIngredient[];
+  /** 2 related cuisine slugs for "You might also enjoy" cross-links. */
+  relatedCuisines: string[];
 };
 
 export const CUISINE_GUIDES: CuisineGuide[] = [
