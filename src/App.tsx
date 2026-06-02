@@ -138,6 +138,7 @@ const App = () => (
               <Route path="/collections" element={<Collections />} />
               <Route path="/collections/:slug" element={<Collections />} />
               <Route path="/kitchen-atlas" element={<KitchenAtlas />} />
+              <Route path="/kitchen-atlas/italy" element={<RegionItaly />} />
               <Route path="/guides" element={<Guides />} />
               <Route path="/guides/mother-sauces" element={<GuideMotherSauces />} />
               <Route path="/guides/french-techniques" element={<GuideFrenchTechniques />} />
