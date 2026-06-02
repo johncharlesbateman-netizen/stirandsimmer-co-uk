@@ -91,6 +91,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🧀", name: "Mature Cheddar", note: "Cooked into pies and sauces, melted on toast, grated over greens." },
       { emoji: "🌿", name: "Fresh herbs", note: "Thyme, sage, parsley and rosemary — the backbone of British seasoning." },
     ],
+    relatedCuisines: ["france", "mediterranean"],
   },
   {
     slug: "france",
