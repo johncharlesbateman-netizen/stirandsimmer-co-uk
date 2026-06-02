@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
 import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
+import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -333,6 +334,8 @@ const GuideHowToMakeBread = () => {
         </section>
 
         <GuideRelatedRecipes guideSlug="how-to-make-bread" heading="Recipes that use this skill" />
+
+        <GuideRelatedGuides guideSlug="how-to-make-bread" />
 
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
           <Link
