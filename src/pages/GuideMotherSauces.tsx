@@ -96,7 +96,7 @@ const GuideMotherSauces = () => {
               Master these five and you hold the keys to almost every classic sauce in western cuisine.
             </p>
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-              Every sauce in French cooking descends from five originals. They sound intimidating. They are not. Each one is built on simple ingredients and a small number of techniques. Learn them once and you will use them forever.
+              The five French mother sauces are Béchamel, Velouté, Espagnole, Hollandaise and Sauce Tomat — the original five from which almost every classical French sauce descends. Every sauce in French cooking descends from these five originals. They sound intimidating. They are not. Each one is built on simple ingredients and a small number of techniques. Learn them once and you will use them forever.
             </p>
           </div>
         </header>
