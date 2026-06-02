@@ -1,14 +1,13 @@
 import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import NewsletterSignup from "./NewsletterSignup";
 
 interface LayoutProps {
   children: ReactNode;
   hideNewsletter?: boolean;
 }
 
-const Layout = ({ children, hideNewsletter = false }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       <a
@@ -19,7 +18,6 @@ const Layout = ({ children, hideNewsletter = false }: LayoutProps) => {
       </a>
       <Header />
       <main id="main-content" className="flex-1 pt-20">{children}</main>
-      {!hideNewsletter && <NewsletterSignup />}
       <div className="h-px bg-border" aria-hidden />
       <Footer />
     </div>
