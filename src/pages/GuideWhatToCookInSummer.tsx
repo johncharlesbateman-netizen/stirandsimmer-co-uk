@@ -329,6 +329,8 @@ const GuideWhatToCookInSummer = () => {
           </ul>
         </section>
 
+        <GuideFAQ slug="what-to-cook-in-summer" />
+
         <GuideRelatedRecipes guideSlug="what-to-cook-in-summer" heading="Recipes to cook this summer" />
 
         <GuideRelatedGuides guideSlug="what-to-cook-in-summer" />

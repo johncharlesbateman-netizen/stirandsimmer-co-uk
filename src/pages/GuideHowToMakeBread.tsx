@@ -334,6 +334,8 @@ const GuideHowToMakeBread = () => {
           </ul>
         </section>
 
+        <GuideFAQ slug="how-to-make-bread" />
+
         <GuideRelatedRecipes guideSlug="how-to-make-bread" heading="Recipes that use this skill" />
 
         <GuideRelatedGuides guideSlug="how-to-make-bread" />
