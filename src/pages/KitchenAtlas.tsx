@@ -1,9 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
-import { Button } from "@/components/ui/button";
 
 type RegionDef = {
   id: string;
@@ -105,21 +103,7 @@ const REGIONS: RegionDef[] = [
   },
 ];
 
-const REGION_BUTTON_LABEL: Record<string, string> = {
-  uk: "Read the British cuisine guide",
-  italy: "Read the Italian cuisine guide",
-  france: "Read the French cuisine guide",
-  spain: "Read the Spanish cuisine guide",
-  india: "Read the Indian cuisine guide",
-  thailand: "Read the Thai cuisine guide",
-  mediterranean: "Read the Mediterranean cuisine guide",
-  middleeast: "Read the Middle Eastern cuisine guide",
-  mexico: "Read the Mexican cuisine guide",
-};
-
 const regionHref = (r: RegionDef) => r.href ?? `/recipes/region/${r.id}`;
-
-
 
 const KitchenAtlas = () => {
   return (
@@ -157,35 +141,41 @@ const KitchenAtlas = () => {
       {/* REGION CARD GRID — light section */}
       <section className="bg-background py-10 md:py-14 border-b border-border">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {REGIONS.map((r) =>
               r.available ? (
                 <Link
                   key={r.id}
                   to={regionHref(r)}
-                  className="text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden transition-all hover:-translate-y-1 hover:shadow-md cursor-pointer block"
+                  className="group flex flex-col text-left rounded-xl p-5 md:p-6 bg-card border border-border overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:border-primary/30 cursor-pointer"
                   style={{ borderTop: `4px solid ${r.bg}` }}
                 >
-                  <div className="text-xl md:text-3xl mb-1.5 md:mb-2">{r.emoji}</div>
-                  <div className="font-display text-xs md:text-lg leading-tight text-foreground">
+                  <div className="text-3xl md:text-4xl mb-3">{r.emoji}</div>
+                  <div className="font-display text-lg md:text-xl leading-tight text-foreground">
                     {r.name}
                   </div>
-                  <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 text-muted-foreground">
-                    Explore →
+                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed flex-1">
+                    {r.description}
+                  </p>
+                  <div className="mt-4 text-sm font-medium text-primary flex items-center gap-1 group-hover:gap-2 transition-all duration-300">
+                    Read the guide <span aria-hidden="true">→</span>
                   </div>
                 </Link>
               ) : (
                 <div
                   key={r.id}
                   aria-disabled="true"
-                  className="text-left rounded-lg p-3 md:p-5 bg-card border border-border overflow-hidden cursor-not-allowed opacity-60"
+                  className="flex flex-col text-left rounded-xl p-5 md:p-6 bg-card border border-border overflow-hidden cursor-not-allowed opacity-60"
                   style={{ borderTop: `4px solid ${r.bg}` }}
                 >
-                  <div className="text-xl md:text-3xl mb-1.5 md:mb-2">{r.emoji}</div>
-                  <div className="font-display text-xs md:text-lg leading-tight text-foreground">
+                  <div className="text-3xl md:text-4xl mb-3">{r.emoji}</div>
+                  <div className="font-display text-lg md:text-xl leading-tight text-foreground">
                     {r.name}
                   </div>
-                  <div className="text-[10px] md:text-xs mt-1.5 md:mt-2 text-muted-foreground">
+                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed flex-1">
+                    {r.description}
+                  </p>
+                  <div className="mt-4 text-sm font-medium text-muted-foreground">
                     Coming soon
                   </div>
                 </div>
@@ -194,64 +184,7 @@ const KitchenAtlas = () => {
           </div>
         </div>
       </section>
-
-      {/* REGION SECTIONS — light */}
-      <div className="bg-background">
-        {REGIONS.map((region) => (
-          <RegionSection key={region.id} region={region} />
-        ))}
-      </div>
     </Layout>
-  );
-};
-
-const RegionSection = ({ region }: { region: RegionDef }) => {
-  const disabled = !region.available;
-  const href = regionHref(region);
-
-  return (
-    <section
-      id={`region-${region.id}`}
-      className="scroll-mt-24 py-5 md:py-6 bg-background border-b border-border border-l-4"
-      style={{ borderLeftColor: region.bg, opacity: disabled ? 0.55 : 1 }}
-    >
-      <div className="container mx-auto px-6 md:px-12 lg:px-20">
-        <div className="flex items-baseline gap-3 mb-2 flex-wrap">
-          <span className="text-2xl">{region.emoji}</span>
-          <h2 className="font-display text-3xl md:text-4xl text-foreground">
-            {region.name}
-          </h2>
-          {disabled && (
-            <span className="text-xs uppercase tracking-widest font-semibold text-muted-foreground border border-border rounded-full px-2.5 py-1">
-              Coming soon
-            </span>
-          )}
-        </div>
-        <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-3xl">
-          {region.description}
-        </p>
-
-        {disabled ? (
-          <span
-            className="inline-flex items-center justify-center w-full md:w-auto whitespace-normal md:whitespace-nowrap text-base rounded-md px-8 py-3 font-medium border border-border bg-muted text-muted-foreground cursor-not-allowed select-none"
-            aria-disabled="true"
-          >
-            Coming soon
-          </span>
-        ) : (
-          <Button
-            asChild
-            size="lg"
-            className="w-full md:w-auto whitespace-normal md:whitespace-nowrap text-base"
-          >
-            <Link to={href}>
-              {REGION_BUTTON_LABEL[region.id] ?? `Explore all ${region.name} recipes`}{" "}
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Button>
-        )}
-      </div>
-    </section>
   );
 };
 
