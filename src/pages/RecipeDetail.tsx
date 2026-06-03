@@ -242,7 +242,6 @@ const RecipeDetail = () => {
     queryFn: async () => {
       if (!recipe?.id) return { average: 0, count: 0 };
       const { data, error } = await supabase
-        // @ts-expect-error - recipe_ratings_public view not in generated types yet
         .from("recipe_ratings_public")
         .select("rating")
         .eq("recipe_id", recipe.id);
