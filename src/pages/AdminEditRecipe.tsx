@@ -554,47 +554,6 @@ const AdminEditRecipe = () => {
             />
           </div>
 
-          {/* Collections */}
-          <div className="space-y-3">
-            <div>
-              <h3 className="text-sm font-medium">
-                Collections <AIBadge />
-              </h3>
-              <p className="text-xs text-muted-foreground">
-                Recipes were auto-assigned based on their attributes — tick or untick to override.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {collections.map((c) => {
-                const checked = recipeCollections.includes(c.name);
-                return (
-                  <label
-                    key={c.slug}
-                    className={`flex items-start gap-3 p-3 border rounded-md cursor-pointer transition-colors ${
-                      checked ? "border-foreground bg-secondary" : "border-border hover:bg-secondary/50"
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={(e) => {
-                        setRecipeCollections((prev) =>
-                          e.target.checked
-                            ? [...prev, c.name]
-                            : prev.filter((n) => n !== c.name),
-                        );
-                      }}
-                      className="mt-0.5"
-                    />
-                    <div className="min-w-0">
-                      <p className="text-sm font-medium">{c.name}</p>
-                      <p className="text-xs text-muted-foreground">{c.description}</p>
-                    </div>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
 
           {/* SEO Settings */}
           <div className="space-y-4">
