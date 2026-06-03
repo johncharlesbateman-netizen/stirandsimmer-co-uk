@@ -554,23 +554,25 @@ const HOME_JSONLD = [
 function writeRoute(distDir, template, meta) {
   const html = buildPrerenderedHtml(template, meta);
   // Root route stays as dist/index.html.
-  // For every other route, emit BOTH `{path}/index.html` and `{path}.html`.
-  // The live host is currently serving the SPA shell for some clean URLs even
-  // though the nested prerendered file exists, so we provide the flat `.html`
-  // twin as a compatibility fallback for hosts that resolve `/foo/bar` to
-  // `/foo/bar.html` before SPA fallback.
+  // For every other route, emit ONLY `{path}/index.html`.
+  //
+  // We used to additionally emit a flat `{path}.html` twin as a
+  // compatibility fallback for hosts that resolve `/foo/bar` to
+  // `/foo/bar.html` before SPA fallback. Lovable hosting does SPA
+  // fallback natively, so the twin was never needed for serving — but
+  // Googlebot still discovered it (e.g. `/recipes/foo.html`) and
+  // flagged it as "Alternate page with proper canonical tag", because
+  // both files shipped the same `<link rel="canonical">` pointing at
+  // the clean URL. Emitting only the nested index.html eliminates the
+  // duplicate canonical entirely.
   if (meta.path === "/") {
     writeFileSync(resolve(distDir, "index.html"), html, "utf-8");
     return;
   }
 
   const nestedOutPath = resolve(distDir, `.${meta.path}/index.html`);
-  const flatOutPath = resolve(distDir, `.${meta.path}.html`);
-
   mkdirSync(dirname(nestedOutPath), { recursive: true });
-  mkdirSync(dirname(flatOutPath), { recursive: true });
   writeFileSync(nestedOutPath, html, "utf-8");
-  writeFileSync(flatOutPath, html, "utf-8");
 }
 
 // Mirrors src/lib/recipe-schema.ts so the prerendered HTML carries the
