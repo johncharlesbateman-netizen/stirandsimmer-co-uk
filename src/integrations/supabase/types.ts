@@ -679,6 +679,29 @@ export type Database = {
           },
         ]
       }
+      recipe_ratings_public: {
+        Row: {
+          rating: number | null
+          recipe_id: string | null
+        }
+        Insert: {
+          rating?: number | null
+          recipe_id?: string | null
+        }
+        Update: {
+          rating?: number | null
+          recipe_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recipe_ratings_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       delete_email: {

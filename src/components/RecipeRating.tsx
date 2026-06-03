@@ -64,14 +64,37 @@ const RecipeRating = ({ recipeId }: RecipeRatingProps) => {
   const [submitting, setSubmitting] = useState(false);
 
   const { data: ratings = [] } = useQuery<RatingRow[]>({
-    queryKey: ["recipe-ratings", recipeId],
+    queryKey: ["recipe-ratings", recipeId, user?.id ?? null],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("recipe_ratings")
-        .select("rating, user_id")
+      // Public aggregate (no user_id exposed)
+      const { data: aggData, error: aggError } = await supabase
+        .from("recipe_ratings_public")
+        .select("rating")
         .eq("recipe_id", recipeId);
-      if (error) throw error;
-      return (data ?? []) as RatingRow[];
+      if (aggError) throw aggError;
+      const aggRows = ((aggData ?? []) as { rating: number }[]).map((r) => ({
+        rating: r.rating,
+        user_id: "",
+      }));
+
+      // Signed-in user's own rating (own row only via RLS)
+      if (user) {
+        const { data: ownData, error: ownError } = await supabase
+          .from("recipe_ratings")
+          .select("rating, user_id")
+          .eq("recipe_id", recipeId)
+          .eq("user_id", user.id)
+          .maybeSingle();
+        if (ownError) throw ownError;
+        if (ownData) {
+          // Replace one anonymous row with the user's row so userRating resolves
+          const idx = aggRows.findIndex(
+            (r) => r.rating === ownData.rating && r.user_id === "",
+          );
+          if (idx >= 0) aggRows[idx] = ownData as RatingRow;
+        }
+      }
+      return aggRows;
     },
     enabled: !!recipeId,
   });
