@@ -14,6 +14,7 @@ import { buildSeoTitle, buildSeoDescription, buildServingSuggestion } from "@/li
 import { buildRecipeJsonLd, buildRecipeKeywords } from "@/lib/recipe-schema";
 import { cuisineRegionLabels } from "@/lib/cuisine-regions";
 import { recipeFAQs } from "@/lib/recipe-faqs";
+import { getRelatedGuides } from "@/lib/recipe-guide-links";
 import RecipeFAQ from "@/components/RecipeFAQ";
 import { optimisedImage, responsiveSrcSet, pinterestImage } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
@@ -260,16 +261,24 @@ const RecipeDetail = () => {
   const scaleFactor = currentServings / baseServings;
 
   const ingredients = normaliseIngredients(recipe?.ingredients as unknown[] | null | undefined);
-  const instructions: string[] = (((recipe?.instructions as unknown[]) || [])
-    .map((s) => {
-      if (typeof s === "string") return s;
-      if (s && typeof s === "object") {
-        const o = s as { text?: unknown; step?: unknown; instruction?: unknown };
-        return String(o.text ?? o.step ?? o.instruction ?? "");
-      }
-      return String(s ?? "");
-    })
-    .filter((s) => s.trim().length > 0));
+  // Instructions support either plain strings or objects of the form
+  // `{ text, tip? }`. The optional `tip` renders as a styled callout below
+  // the step — matches the "mistake most home cooks make" style used in guides.
+  const instructionSteps: Array<{ text: string; tip?: string }> = (
+    ((recipe?.instructions as unknown[]) || [])
+      .map((s) => {
+        if (typeof s === "string") return { text: s.trim() };
+        if (s && typeof s === "object") {
+          const o = s as { text?: unknown; step?: unknown; instruction?: unknown; tip?: unknown };
+          const text = String(o.text ?? o.step ?? o.instruction ?? "").trim();
+          const tip = typeof o.tip === "string" && o.tip.trim() ? o.tip.trim() : undefined;
+          return { text, tip };
+        }
+        return { text: String(s ?? "").trim() };
+      })
+      .filter((s) => s.text.length > 0)
+  );
+  const instructions: string[] = instructionSteps.map((s) => s.text);
   const scaledIngredients = scaleIngredients(ingredients, baseServings, currentServings);
   const smartScaledIngredients = scaleIngredientsSmart(ingredients, baseServings, currentServings);
   const isScaled = currentServings !== baseServings;
@@ -529,6 +538,38 @@ const RecipeDetail = () => {
               {recipe.description}
             </p>
 
+            {/* Inline contextual guide references — surfaces internal links
+                to relevant /guides/ pages based on technique, cuisine and key
+                ingredients. */}
+            {(() => {
+              const related = getRelatedGuides(
+                {
+                  title: recipe.title,
+                  cuisine_region: recipe.cuisine_region,
+                  categories: recipe.categories,
+                  collections: recipe.collections,
+                  ingredients: Array.isArray(recipe.ingredients) ? recipe.ingredients : [],
+                },
+                2,
+              );
+              if (!related.length) return null;
+              return (
+                <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
+                  New to this style of cooking? Read our guide on{" "}
+                  {related.map((g, idx) => (
+                    <span key={g.slug}>
+                      <Link to={`/guides/${g.slug}`} className="editorial-link text-foreground">
+                        {g.title.replace(/\s*[—-].*$/, "").toLowerCase()}
+                      </Link>
+                      {idx < related.length - 2 ? ", " : idx === related.length - 2 ? " and " : "."}
+                    </span>
+                  ))}
+                </p>
+              );
+            })()}
+
+
+
             {/* Meta */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
               {recipe.prep_time_minutes ? (
@@ -667,13 +708,13 @@ const RecipeDetail = () => {
               <ol className="space-y-6">
                 {(() => {
                   let stepNum = 0;
-                  return instructions.map((step, i) => {
-                    const isHeader = isSectionHeader(step);
+                  return instructionSteps.map((step, i) => {
+                    const isHeader = isSectionHeader(step.text);
                     if (isHeader) {
                       return (
                         <li key={i} className="pt-4 first:pt-0">
                           <span className="text-base font-semibold text-foreground">
-                            {step.replace(/:$/, "")}
+                            {step.text.replace(/:$/, "")}
                           </span>
                         </li>
                       );
@@ -684,14 +725,25 @@ const RecipeDetail = () => {
                         <span className="font-display text-2xl text-muted-foreground/40 flex-shrink-0 w-8">
                           {stepNum}
                         </span>
-                        <p className="text-muted-foreground leading-relaxed pt-1">
-                          {step}
-                        </p>
+                        <div className="flex-1 pt-1 space-y-3">
+                          <p className="text-muted-foreground leading-relaxed">
+                            {step.text}
+                          </p>
+                          {step.tip && (
+                            <div className="border-l-2 border-accent/60 bg-accent/5 pl-4 py-2 pr-3">
+                              <p className="micro-caption mb-1 text-accent">Tip</p>
+                              <p className="text-sm text-muted-foreground leading-relaxed">
+                                {step.tip}
+                              </p>
+                            </div>
+                          )}
+                        </div>
                       </li>
                     );
                   });
                 })()}
               </ol>
+
 
               {/* Tips */}
               {recipe.tips && (
