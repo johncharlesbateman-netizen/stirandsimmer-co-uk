@@ -51,11 +51,8 @@ const About = () => {
       <section className="pt-8 md:pt-10 pb-6 md:pb-8">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-3xl space-y-6 body-editorial text-muted-foreground">
-            <p className="text-foreground text-xl md:text-2xl font-display leading-relaxed">
-              Stir & Simmer is written by John Bateman.
-            </p>
             <p>
-              A career in international financial services with a global banking group took John across the world — four years living and working in Bahrain, and extensive responsibilities for financing UK exports across Malaysia, Indonesia, Singapore and Thailand. Along the way came an education in food that no cookery school could replicate: markets, home kitchens, restaurant dining and street food across the Middle East and Southeast Asia, each with its own produce, techniques and flavour logic.
+              Stir & Simmer was started by John Bateman, whose career in international financial services with a global banking group took him across the world — four years living and working in Bahrain, and extensive responsibilities for financing UK exports across Malaysia, Indonesia, Singapore and Thailand. Along the way came an education in food that no cookery school could replicate: markets, home kitchens, restaurant dining and street food across the Middle East and Southeast Asia, each with its own produce, techniques and flavour logic.
             </p>
             <p>
               Back in the UK and retired, that lifetime of eating well found a new purpose. What started as a basic recipe book — the dishes that had been cooked, tested and asked for again — became Great Food Recipes, and eventually Stir & Simmer. The name changed. The principle never did.
@@ -68,20 +65,6 @@ const About = () => {
             </p>
           </div>
 
-          <div className="max-w-3xl mt-10 pt-8 border-t border-border">
-            <h2 className="heading-section mb-4">How This Started</h2>
-            <div className="space-y-4 body-editorial text-muted-foreground">
-              <p>
-                What became Stir & Simmer began as a handwritten recipe collection started around twenty years ago. The dishes that worked — the ones family and friends asked for again — were written down. Over time that personal collection became Great Food Recipes, a site shared with a wider audience, and eventually evolved into what you see today.
-              </p>
-              <p>
-                The principle never changed: if it wasn't asked for again, it didn't make the cut.
-              </p>
-              <p>
-                Every recipe comes from actually making it — not once, but enough times to know what goes wrong and how to fix it. The portions are honest. The ingredients come from Tesco, Sainsbury's, Aldi or Waitrose. The methods are written for someone who's cooking after work, not performing for a camera.
-              </p>
-            </div>
-          </div>
 
           <div className="max-w-3xl mt-10 pt-8 border-t border-border">
             <h2 className="heading-section mb-4">What You'll Find Here</h2>
