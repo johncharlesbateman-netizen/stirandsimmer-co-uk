@@ -25,6 +25,19 @@ const CATEGORY_SLUGS = [
   "seafood", "pasta", "lunch-suggestions", "sweets",
 ];
 
+// Kitchen Atlas cuisine pages — must stay in sync with src/lib/cuisine-guides.ts.
+const CUISINE_ATLAS_SLUGS = [
+  "italy", "united-kingdom", "france", "spain", "india",
+  "thailand", "mediterranean", "middle-east", "mexico",
+];
+
+// Region pages — must stay in sync with src/lib/cuisine-regions.ts.
+const REGION_SLUGS = [
+  "italian", "french", "british", "spanish", "indian", "asian",
+  "mexican", "thai", "japanese", "mediterranean", "middle-eastern",
+];
+
+
 // Must stay in sync with src/lib/collections.ts (the live curated set).
 const COLLECTION_SLUGS = [
   "italian-meals", "romantic-meals", "fish-and-seafood",
