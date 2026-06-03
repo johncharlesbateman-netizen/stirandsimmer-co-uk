@@ -542,7 +542,16 @@ const RecipeDetail = () => {
                 to relevant /guides/ pages based on technique, cuisine and key
                 ingredients. */}
             {(() => {
-              const related = getRelatedGuides(recipe, 2);
+              const related = getRelatedGuides(
+                {
+                  title: recipe.title,
+                  cuisine_region: recipe.cuisine_region,
+                  categories: recipe.categories,
+                  collections: recipe.collections,
+                  ingredients: Array.isArray(recipe.ingredients) ? recipe.ingredients : [],
+                },
+                2,
+              );
               if (!related.length) return null;
               return (
                 <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
