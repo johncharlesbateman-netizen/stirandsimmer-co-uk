@@ -3,6 +3,8 @@
 // new recipe gets consistent, rich-results-eligible structured data.
 
 import { categoryLabels } from "@/lib/recipe-utils";
+import { AUTHOR_REFERENCE } from "@/lib/person-schema";
+
 
 export interface RecipeSchemaInput {
   title: string;
