@@ -35,6 +35,36 @@ Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
+    // Require an authenticated admin caller.
+    const authHeader = req.headers.get("Authorization") ?? "";
+    if (!authHeader.startsWith("Bearer ")) {
+      return json({ error: "Unauthorized" }, 401);
+    }
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const userClient = createClient(supabaseUrl, anonKey, {
+      global: { headers: { Authorization: authHeader } },
+    });
+    const { data: userData, error: userError } = await userClient.auth.getUser();
+    if (userError || !userData?.user) {
+      return json({ error: "Unauthorized" }, 401);
+    }
+    const admin = createClient(supabaseUrl, serviceKey);
+    const email = userData.user.email?.toLowerCase() ?? "";
+    let allowed = false;
+    if (email) {
+      const { data: match } = await admin
+        .from("admin_emails")
+        .select("email")
+        .ilike("email", email)
+        .maybeSingle();
+      allowed = !!match;
+    }
+    if (!allowed) {
+      return json({ error: "Forbidden" }, 403);
+    }
+
     const apiKey = Deno.env.get("LOVABLE_API_KEY");
     if (!apiKey) {
       return json({ error: "AI gateway not configured" }, 500);
