@@ -99,6 +99,35 @@ const RecipeRating = ({ recipeId }: RecipeRatingProps) => {
     enabled: !!recipeId,
   });
 
+  const { average, count, userRating } = useMemo(() => {
+    const c = ratings.length;
+    const avg = c ? ratings.reduce((s, r) => s + r.rating, 0) / c : 0;
+    const own = user ? ratings.find((r) => r.user_id === user.id)?.rating ?? 0 : 0;
+    return { average: avg, count: c, userRating: own };
+  }, [ratings, user]);
+
+  const submit = async (value: number) => {
+    if (!user || submitting) return;
+    setSubmitting(true);
+    const { error } = await supabase
+      .from("recipe_ratings")
+      .upsert(
+        { recipe_id: recipeId, user_id: user.id, rating: value },
+        { onConflict: "recipe_id,user_id" },
+      );
+    setSubmitting(false);
+    if (error) {
+      toast({
+        title: "Couldn't save rating",
+        description: error.message,
+        variant: "destructive",
+      });
+      return;
+    }
+    toast({ title: "Thanks for rating!", description: `You rated this ${value} out of 5.` });
+    queryClient.invalidateQueries({ queryKey: ["recipe-ratings", recipeId] });
+  };
+
   const display = hover || userRating || Math.round(average);
 
   return (
