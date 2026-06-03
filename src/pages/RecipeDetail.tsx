@@ -260,16 +260,24 @@ const RecipeDetail = () => {
   const scaleFactor = currentServings / baseServings;
 
   const ingredients = normaliseIngredients(recipe?.ingredients as unknown[] | null | undefined);
-  const instructions: string[] = (((recipe?.instructions as unknown[]) || [])
-    .map((s) => {
-      if (typeof s === "string") return s;
-      if (s && typeof s === "object") {
-        const o = s as { text?: unknown; step?: unknown; instruction?: unknown };
-        return String(o.text ?? o.step ?? o.instruction ?? "");
-      }
-      return String(s ?? "");
-    })
-    .filter((s) => s.trim().length > 0));
+  // Instructions support either plain strings or objects of the form
+  // `{ text, tip? }`. The optional `tip` renders as a styled callout below
+  // the step — matches the "mistake most home cooks make" style used in guides.
+  const instructionSteps: Array<{ text: string; tip?: string }> = (
+    ((recipe?.instructions as unknown[]) || [])
+      .map((s) => {
+        if (typeof s === "string") return { text: s.trim() };
+        if (s && typeof s === "object") {
+          const o = s as { text?: unknown; step?: unknown; instruction?: unknown; tip?: unknown };
+          const text = String(o.text ?? o.step ?? o.instruction ?? "").trim();
+          const tip = typeof o.tip === "string" && o.tip.trim() ? o.tip.trim() : undefined;
+          return { text, tip };
+        }
+        return { text: String(s ?? "").trim() };
+      })
+      .filter((s) => s.text.length > 0)
+  );
+  const instructions: string[] = instructionSteps.map((s) => s.text);
   const scaledIngredients = scaleIngredients(ingredients, baseServings, currentServings);
   const smartScaledIngredients = scaleIngredientsSmart(ingredients, baseServings, currentServings);
   const isScaled = currentServings !== baseServings;
