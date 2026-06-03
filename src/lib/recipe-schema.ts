@@ -25,7 +25,7 @@ export interface RecipeSchemaInput {
   /** Comma-separated keyword string. */
   keywords?: string;
   siteUrl?: string;
-  /** Aggregate rating; when null/empty, sensible defaults are emitted. */
+  /** Aggregate rating; when null/undefined or zero-count, the block is omitted entirely. */
   aggregateRating?: { ratingValue: number; ratingCount: number } | null;
   /** Optional video metadata; only emitted when provided. */
   video?: {
