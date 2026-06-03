@@ -47,9 +47,9 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     characterLine: "Pasta, sauces and the art of simplicity. Italian cooking that feeds the soul.",
     imageId: "36753771",
     imageAlt: "A rustic Italian table with pasta, tomatoes, basil and olive oil",
-    seoTitle: "Italian Cuisine Guide — Stir & Simmer",
+    seoTitle: "Italian Cooking — Recipes, Ingredients & Techniques | Stir & Simmer",
     seoDescription:
-      "A warm, honest guide to Italian cuisine — its regions, defining ingredients and why it works so well at home. Plus tried-and-tested Italian recipes from our kitchen.",
+      "Discover authentic Italian cooking with San Marzano tomatoes, olive oil and fresh pasta. From ragù to risotto, bring Italy home tonight.",
     about: [
       "There isn't really one Italian cuisine — there are twenty. The cooking of Sicily, with its capers, anchovies and citrus, has almost nothing in common with the butter, cream and slow-cooked ragùs of Emilia-Romagna. The north leans on rice, polenta and dairy; the south on tomatoes, olive oil and the sea. What ties it all together is a quiet respect for the ingredient — you cook to show it off, not to cover it up.",
       "The defining flavours are simpler than people think. Good olive oil, a tin of proper tomatoes, garlic, an onion, a piece of Parmigiano, a handful of herbs and decent dried pasta will carry you through most weeknights. The technique that matters most isn't fancy — it's patience. Letting onions soften slowly, letting a sauce reduce until it clings, finishing pasta in the pan with a splash of its own cooking water so everything binds together.",
@@ -75,9 +75,9 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     characterLine: "Honest, seasonal and deeply comforting. The foundation of everything.",
     imageId: "19119797",
     imageAlt: "A traditional British table with pie, roast vegetables and gravy",
-    seoTitle: "British Cuisine Guide — Stir & Simmer",
+    seoTitle: "British Cooking — Recipes, Ingredients & Techniques | Stir & Simmer",
     seoDescription:
-      "An honest guide to British cuisine — pies, roasts, puddings and the seasonal ingredients that make it work. Plus tried-and-tested British recipes from our kitchen.",
+      "Explore honest British cooking with seasonal roasts, flaky pastry and mature Cheddar. Comforting recipes for every day of the week.",
     about: [
       "British cooking has spent decades being underrated, mostly by people who haven't eaten it properly. The truth is it's one of the most seasonal cuisines in Europe — built around root vegetables in winter, asparagus and peas in spring, soft fruit in summer and game in autumn. Every region has its own thing: pies in the Midlands, fish and seafood on the coasts, oatcakes and cured fish in Scotland, Welsh cawl, Northern Irish soda bread.",
       "The defining flavours are quiet rather than loud. Butter, slow-cooked onions, a good stock, mustard, horseradish, decent bread, properly aged cheese. Sauces tend to be made from the cooking juices rather than poured over from a jar. The technique that matters most is patience — a real braise, a slow-roasted joint, a stock that's simmered all afternoon. Cut corners and it falls flat; give it time and it sings.",
@@ -103,9 +103,9 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     characterLine: "Classical techniques that underpin all of western cooking.",
     imageId: "821365",
     imageAlt: "A French kitchen scene with butter, herbs, copper pans and a baguette",
-    seoTitle: "French Cuisine Guide — Stir & Simmer",
+    seoTitle: "French Cooking — Recipes, Ingredients & Techniques | Stir & Simmer",
     seoDescription:
-      "A practical guide to French cuisine — the mother sauces, key ingredients and techniques that underpin western cooking. Plus French recipes tested in a real home kitchen.",
+      "Master French cooking with butter, shallots and white wine. From mother sauces to pan sauce, bring classical technique home tonight.",
     about: [
       "French cooking is the grammar that almost every western kitchen still speaks. The sauces, the cuts, the way a stock is built, the order in which ingredients hit the pan — most of it was written down in France over the last two centuries, and most of it still holds. Beyond the textbook though, there are dozens of regional cuisines: the butter and cream of Normandy, the duck and beans of the south-west, the olive oil and tomatoes of Provence, the fish stews of Marseille.",
       "The defining flavours are richer than Italian, more restrained than British. Butter, shallots, white wine, a good chicken or veal stock, decent mustard, fresh tarragon or thyme. The technique that matters most is building flavour in layers — searing properly, deglazing the pan, reducing slowly, finishing with cold butter so the sauce turns silky. Skip a step and you can taste it.",
@@ -131,9 +131,9 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     characterLine: "Bold flavours, beautiful simplicity and the art of sharing.",
     imageId: "16743486",
     imageAlt: "A Spanish table with paella, chorizo, prawns and olive oil",
-    seoTitle: "Spanish Cuisine Guide — Stir & Simmer",
+    seoTitle: "Spanish Cooking — Recipes, Ingredients & Techniques | Stir & Simmer",
     seoDescription:
-      "A warm guide to Spanish cuisine — paella, tapas, chorizo and the ingredients that define it. Plus tried-and-tested Spanish recipes from our kitchen.",
+      "Explore Spanish cooking with smoked paprika, saffron and sofrito. From tapas to paella, bring bold flavour to your table tonight.",
     about: [
       "Spanish food is built around the table rather than the plate. A meal often arrives as half a dozen small things at once — olives, anchovies, jamón, a tortilla, prawns, bread to mop everything up — and that idea shapes the whole cuisine. The regions vary enormously: the Basque country leans on seafood and grilled meats, Andalusia on cold soups and fried fish, Valencia on rice, Catalonia on a Mediterranean mix of seafood, sausages and stews.",
       "The defining flavours are loud in the best way. Smoked paprika, saffron, garlic, sherry vinegar, good olive oil, decent chorizo, sweet onions cooked down to a sofrito. The technique that matters most is the sofrito itself — onion, garlic and tomato cooked slowly in olive oil until everything melts together. Get that right and most Spanish dishes more or less cook themselves.",
@@ -159,9 +159,9 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     characterLine: "Bold spices, fragrant herbs and layers of warmth and depth.",
     imageId: "28674690",
     imageAlt: "An Indian spice grinder with whole spices, fresh ginger and coriander",
-    seoTitle: "Indian Cuisine Guide — Stir & Simmer",
+    seoTitle: "Indian Cooking — Recipes, Ingredients & Techniques | Stir & Simmer",
     seoDescription:
-      "A warm guide to Indian cuisine — its regions, defining spices and how to cook proper curries at home. Plus tried-and-tested Indian recipes from our kitchen.",
+      "Discover Indian cooking with whole spices, ginger-garlic and slow-cooked onions. From curries to tandoori, cook bold food at home.",
     about: [
       "There is no single Indian cuisine — there are dozens, each as distinct as the languages spoken alongside them. The cooking of the Punjab, with its tandoors, butter and cream, looks nothing like the coconut-and-curry-leaf food of Kerala, or the mustard-oil fish curries of Bengal. The north leans on wheat, dairy and slow-cooked meats; the south on rice, lentils, tamarind and seafood. What runs through all of it is the careful layering of spice.",
       "The defining flavours come from whole spices toasted in hot oil — cumin, coriander, mustard seeds, cardamom, cloves, cinnamon — alongside ginger, garlic, fresh chilli and bunches of coriander stalks. The technique that matters most is the order. Build the base properly: onions cooked until truly brown, ginger-garlic paste fried until the raw smell goes, tomatoes broken down until the oil splits back out. Rush any of those steps and the curry tastes thin.",
@@ -187,9 +187,9 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     characterLine: "Fragrant, fiery and beautifully balanced — sweet, sour, salty, spicy.",
     imageId: "18765531",
     imageAlt: "A Thai market table with lemongrass, chillies, lime and fish sauce",
-    seoTitle: "Thai Cuisine Guide — Stir & Simmer",
+    seoTitle: "Thai Cooking — Recipes, Ingredients & Techniques | Stir & Simmer",
     seoDescription:
-      "A warm guide to Thai cuisine — its four-flavour balance, defining ingredients and how to cook proper Thai food at home. Plus tried-and-tested Thai recipes from our kitchen.",
+      "Explore Thai cooking with lemongrass, fish sauce and coconut milk. From green curry to stir-fry, balance sweet, sour, salty and heat.",
     about: [
       "Thai cooking is built around a balance of four flavours: sweet, sour, salty and spicy. Almost every dish, from a green curry to a simple stir-fry, is adjusted at the end until those four sit in harmony. The regions pull the balance in different directions — the north leans on grilled meats and sticky rice, the north-east on chilli and fermented fish, central Thailand on coconut curries, the south on intense, fiery seafood dishes.",
       "The defining ingredients are unmistakable. Lemongrass, galangal, kaffir lime leaves, bird's-eye chillies, fish sauce, palm sugar, fresh coriander and Thai basil. The technique that matters most is building a proper paste — pounding aromatics in a pestle and mortar until everything turns into a fragrant, oily mass, then frying it slowly in coconut cream until the oil splits. Use a jar of curry paste from the supermarket and it's fine; pound your own and the whole dish lifts.",
@@ -215,9 +215,9 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     characterLine: "The shared table around one sea — olive oil, vegetables, fish and herbs.",
     imageId: "1213710",
     imageAlt: "A Mediterranean table with olive oil, lemons, fish, herbs and vegetables",
-    seoTitle: "Mediterranean Cuisine Guide — Stir & Simmer",
+    seoTitle: "Mediterranean Cooking — Recipes, Ingredients & Techniques | Stir & Simmer",
     seoDescription:
-      "A warm guide to Mediterranean cuisine — the shared ingredients of southern Europe and North Africa, and how they work in a home kitchen. Plus tried-and-tested recipes.",
+      "Discover Mediterranean cooking with olive oil, lemon and fresh herbs. From grilled fish to mezze, bring the sea to your table tonight.",
     about: [
       "The Mediterranean isn't a country, it's a sea — and the cooking that sits around it has more in common than the politics on its shores suggest. Greek, southern Italian, Provençal, Catalan, Lebanese, Moroccan and Turkish cooking all draw on the same handful of ingredients: olive oil, lemons, vegetables, fish, herbs, lamb, grains. Each country pulls them in its own direction, but the underlying language is the same.",
       "The defining flavours are bright and clean. Good olive oil, lemon juice, fresh oregano and parsley, garlic, ripe tomatoes, plenty of fresh fish, lamb cooked slowly, grains like bulgur and farro, beans and pulses for warmth. The technique that matters most is restraint — a piece of fish needs salt, oil and a squeeze of lemon, not seven other things. Trust the ingredients and step back.",
@@ -243,9 +243,9 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     characterLine: "Warm spices, slow-cooked meats, fresh herbs and deep hospitality.",
     imageId: "6275158",
     imageAlt: "A Middle Eastern mezze table with flatbreads, herbs, lamb and spices",
-    seoTitle: "Middle Eastern Cuisine Guide — Stir & Simmer",
+    seoTitle: "Middle Eastern Cooking — Recipes, Ingredients & Techniques | Stir & Simmer",
     seoDescription:
-      "A warm guide to Middle Eastern cuisine — its spices, herbs, slow-cooked meats and the hospitality at its heart. Plus tried-and-tested recipes from our kitchen.",
+      "Explore Middle Eastern cooking with cumin, tahini and sumac. From slow lamb to mezze, bring warm spice and deep hospitality home.",
     about: [
       "Middle Eastern food spans a huge stretch of the world — Lebanon, Syria, Palestine, Jordan, Turkey, Iran, Iraq, the Gulf — and yet the family resemblance is unmistakable. Mezze tables groaning with small plates, flatbreads pulled hot from the oven, lamb cooked until it falls apart, rice studded with nuts and dried fruit, parsley by the bowlful. The hospitality is as much part of the cuisine as the cooking itself.",
       "The defining flavours come from warm, fragrant spices — cumin, coriander, allspice, cinnamon, sumac, Aleppo pepper — alongside huge handfuls of fresh herbs, lemon, garlic, tahini and pomegranate molasses. The technique that matters most is the cooking time. A proper lamb stew, a slow-cooked aubergine, a pot of beans with tahini — they need an afternoon to come into themselves. Rushed, they're flat; given time, they're some of the deepest food you'll cook.",
@@ -271,9 +271,9 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     characterLine: "Vibrant, smoky and deeply satisfying. The bold flavours of Mexican cooking.",
     imageId: "8448339",
     imageAlt: "A Mexican table with tortillas, dried chillies, lime, coriander and avocado",
-    seoTitle: "Mexican Cuisine Guide — Stir & Simmer",
+    seoTitle: "Mexican Cooking — Recipes, Ingredients & Techniques | Stir & Simmer",
     seoDescription:
-      "A warm guide to Mexican cuisine — its dried chillies, herbs and ancient corn-based cooking. Plus tried-and-tested Mexican recipes from our kitchen.",
+      "Discover Mexican cooking with dried chillies, lime and corn tortillas. From mole to tacos, bring ancient, bold flavour to your table.",
     about: [
       "Mexican food is much older and much deeper than the version most of us grew up with. Beneath the tex-mex shortcuts sits one of the most varied cuisines in the Americas, built on corn, beans and chillies that have been cooked here for thousands of years. Each region has its own thing: the moles of Oaxaca, the seafood of the Yucatán, the grilled meats of the north, the masa-based street food of Mexico City.",
       "The defining flavours come from dried chillies — ancho, guajillo, pasilla, chipotle — toasted and rehydrated until they go fragrant and almost fruity. Add fresh lime, coriander, raw white onion, cumin, oregano, garlic, ripe avocado and a salsa with real bite, and you have the backbone of nearly every dish. The technique that matters most is toasting the chillies and spices properly — a minute too long and they're bitter; done well, they're transformative.",
