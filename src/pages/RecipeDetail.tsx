@@ -241,14 +241,13 @@ const RecipeDetail = () => {
     queryKey: ["recipe-rating-aggregate", recipe?.id],
     queryFn: async () => {
       if (!recipe?.id) return { average: 0, count: 0 };
-      // @ts-expect-error - recipe_ratings_public view not in generated types yet
       const { data, error } = await supabase
+        // @ts-expect-error - recipe_ratings_public view not in generated types yet
         .from("recipe_ratings_public")
         .select("rating")
         .eq("recipe_id", recipe.id);
       if (error) throw error;
       const rows = (data ?? []) as { rating: number }[];
-      const rows = data ?? [];
       const count = rows.length;
       const average = count ? rows.reduce((s, r) => s + r.rating, 0) / count : 0;
       return { average, count };
