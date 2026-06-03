@@ -405,7 +405,7 @@ const MealPlanner = () => {
         <meta name="twitter:title" content="Weekly Meal Planner | Stir & Simmer" />
         <meta name="twitter:description" content="Plan your week's meals, edit ingredients to match what's in your kitchen, and build a smart shopping list automatically. Free meal planner from Stir & Simmer." />
         <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image.jpg" />
-        <meta name="robots" content="noindex, nofollow" />
+        
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebApplication",
