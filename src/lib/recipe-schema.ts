@@ -207,11 +207,13 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
     name: title,
     description,
     ...(imageUrl && { image: [imageUrl] }),
-    author: {
+    author: AUTHOR_REFERENCE,
+    publisher: {
       "@type": "Organization",
       name: "Stir & Simmer",
       url: siteUrl,
     },
+
     ...(createdAt && { datePublished: createdAt }),
     ...(updatedAt && { dateModified: updatedAt }),
     ...(isoDuration(prepMinutes) && { prepTime: isoDuration(prepMinutes) }),
