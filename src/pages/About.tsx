@@ -48,13 +48,19 @@ const About = () => {
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-3xl space-y-6 body-editorial text-muted-foreground">
             <p className="text-foreground text-xl md:text-2xl font-display leading-relaxed">
-              Stir & Simmer started at our kitchen table. Every recipe on this site has been cooked in our family kitchen, eaten at our table, and only written down because someone around that table asked for it again.
+              Stir & Simmer is written by John Bateman.
             </p>
             <p>
-              We built this for people who love good food but don't want cooking to become a project — after one too many recipes that called for ingredients you've never heard of, techniques that assumed professional training, or timings that only work if you have the whole afternoon free.
+              A career in international financial services with a global banking group took John across the world — four years living and working in Bahrain, and extensive responsibilities for financing UK exports across Malaysia, Indonesia, Singapore and Thailand. Along the way came an education in food that no cookery school could replicate: markets, home kitchens, restaurant dining and street food across the Middle East and Southeast Asia, each with its own produce, techniques and flavour logic.
             </p>
             <p>
-              That's not most people's reality. So we made something different.
+              Back in the UK and retired, that lifetime of eating well found a new purpose. What started as a basic recipe book — the dishes that had been cooked, tested and asked for again — became Great Food Recipes, and eventually Stir & Simmer. The name changed. The principle never did.
+            </p>
+            <p>
+              Every recipe here is one we actually make. Nothing requires ingredients you can't find in Tesco, Sainsbury's, Aldi or Waitrose. Nothing assumes professional training or a free afternoon. The techniques are explained because understanding why something works matters more than just following instructions. And every recipe is completely free — no subscriptions, no paywalls, no catch.
+            </p>
+            <p>
+              That's what this site is.
             </p>
           </div>
 
@@ -62,13 +68,13 @@ const About = () => {
             <h2 className="heading-section mb-4">How This Started</h2>
             <div className="space-y-4 body-editorial text-muted-foreground">
               <p>
-                Stir & Simmer grew out of a handwritten recipe book the founder of Stir and Simmer started around twenty years ago, when he retired from a career in international financial services. The recipes that worked — the ones that got asked for again — got written down. What began as a personal collection became a digital one, and eventually found its way here as a proper site.
+                What became Stir & Simmer began as a handwritten recipe collection started around twenty years ago. The dishes that worked — the ones family and friends asked for again — were written down. Over time that personal collection became Great Food Recipes, a site shared with a wider audience, and eventually evolved into what you see today.
               </p>
               <p>
-                The principle never changed: if the family didn't ask for it again, it didn't make the cut.
+                The principle never changed: if it wasn't asked for again, it didn't make the cut.
               </p>
               <p>
-                Every recipe on here comes from actually making it — not once, but enough times to know what goes wrong and how to fix it. The portions are honest. The ingredients come from Tesco, Sainsbury's, Aldi or Waitrose. The methods are written for someone who's cooking after work, not performing for a camera.
+                Every recipe comes from actually making it — not once, but enough times to know what goes wrong and how to fix it. The portions are honest. The ingredients come from Tesco, Sainsbury's, Aldi or Waitrose. The methods are written for someone who's cooking after work, not performing for a camera.
               </p>
             </div>
           </div>
