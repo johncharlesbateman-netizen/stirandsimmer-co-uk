@@ -2,6 +2,7 @@
 // for a recipe based on the author-provided content. Never returns suggestions for
 // author-controlled fields. Caller decides which suggestions to apply.
 
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { CUISINE_REGIONS } from "../_shared/cuisine-regions.ts";
 
 const corsHeaders = {
