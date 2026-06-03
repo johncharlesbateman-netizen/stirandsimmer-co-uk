@@ -37,7 +37,9 @@ const About = () => {
             "description": "We create recipes the same way we enjoy food — with care, curiosity, and a love for fresh, honest ingredients."
           }
         })}</script>
+        <script type="application/ld+json">{JSON.stringify(AUTHOR_PERSON_SCHEMA)}</script>
       </Helmet>
+
 
       <PageHero
         title="About Stir & Simmer"
