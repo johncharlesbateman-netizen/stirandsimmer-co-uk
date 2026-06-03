@@ -16,9 +16,15 @@ const Privacy = () => {
         <meta property="og:url" content="https://stirandsimmer.co.uk/privacy" />
         <meta property="og:title" content="Privacy Policy | Stir & Simmer" />
         <meta property="og:description" content="How Stir & Simmer collects, uses and protects your personal data, including newsletter subscriptions, cookies and your rights under UK GDPR." />
-        <meta name="twitter:card" content="summary" />
+        <meta property="og:image" content="https://stirandsimmer.co.uk/og-image-1200x630.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Stir & Simmer — recipes for UK home cooks" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Privacy Policy | Stir & Simmer" />
         <meta name="twitter:description" content="How Stir & Simmer collects, uses and protects your personal data, including newsletter subscriptions, cookies and your rights under UK GDPR." />
+        <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image-1200x630.jpg" />
+
       </Helmet>
 
       <article className="container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24 max-w-3xl">
