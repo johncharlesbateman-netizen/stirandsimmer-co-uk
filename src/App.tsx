@@ -12,7 +12,7 @@ import { AuthProvider } from "./hooks/useAuth";
 import Index from "./pages/Index";
 import { TILES_BY_SLUG } from "./lib/recipe-tiles";
 import ExitIntentPopup from "./components/ExitIntentPopup";
-import CookieConsent from "./components/CookieConsent";
+
 import CanonicalRedirect from "./components/CanonicalRedirect";
 
 const About = lazy(() => import("./pages/About"));
@@ -182,7 +182,6 @@ const App = () => (
             </Routes>
           </Suspense>
           <ExitIntentPopup />
-          <CookieConsent />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
