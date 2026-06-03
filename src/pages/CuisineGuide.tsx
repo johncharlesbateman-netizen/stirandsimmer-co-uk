@@ -34,6 +34,7 @@ const CuisineGuidePage = () => {
   if (!guide) return <Navigate to="/kitchen-atlas" replace />;
 
   const canonical = `https://stirandsimmer.co.uk/kitchen-atlas/${guide.slug}`;
+  const ogImage = `https://images.pexels.com/photos/${guide.imageId}/pexels-photo-${guide.imageId}.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop`;
 
   return (
     <Layout hideNewsletter>
@@ -45,11 +46,18 @@ const CuisineGuidePage = () => {
         <meta property="og:url" content={canonical} />
         <meta property="og:title" content={guide.seoTitle} />
         <meta property="og:description" content={guide.seoDescription} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={guide.imageAlt} />
         <meta property="og:site_name" content="Stir & Simmer" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={guide.seoTitle} />
         <meta name="twitter:description" content={guide.seoDescription} />
+        <meta name="twitter:image" content={ogImage} />
+        <meta name="twitter:image:alt" content={guide.imageAlt} />
       </Helmet>
+
 
       <PageHero
         title={`${guide.emoji} ${guide.name}`}
