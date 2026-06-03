@@ -704,11 +704,12 @@ function buildRecipeJsonLd(r, aggregate) {
       calories: `${calories} kcal`,
       servingSize: r.servings ? `1 of ${r.servings} servings` : "1 serving",
     },
-    ...(aggregate && aggregate.count > 0 && {
+    ...(aggregate != null && aggregate.count > 0 && {
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: Number(aggregate.average.toFixed(2)),
         ratingCount: aggregate.count,
+        reviewCount: aggregate.count,
         bestRating: 5,
         worstRating: 1,
       },
