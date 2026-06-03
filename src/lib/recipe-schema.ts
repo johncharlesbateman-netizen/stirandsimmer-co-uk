@@ -3,6 +3,8 @@
 // new recipe gets consistent, rich-results-eligible structured data.
 
 import { categoryLabels } from "@/lib/recipe-utils";
+import { AUTHOR_REFERENCE } from "@/lib/person-schema";
+
 
 export interface RecipeSchemaInput {
   title: string;
@@ -205,11 +207,13 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
     name: title,
     description,
     ...(imageUrl && { image: [imageUrl] }),
-    author: {
+    author: AUTHOR_REFERENCE,
+    publisher: {
       "@type": "Organization",
       name: "Stir & Simmer",
       url: siteUrl,
     },
+
     ...(createdAt && { datePublished: createdAt }),
     ...(updatedAt && { dateModified: updatedAt }),
     ...(isoDuration(prepMinutes) && { prepTime: isoDuration(prepMinutes) }),

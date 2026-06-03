@@ -1,6 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
+import { AUTHOR_PERSON_SCHEMA } from "@/lib/person-schema";
+
 
 const brandImage = "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=85";
 
@@ -35,7 +37,9 @@ const About = () => {
             "description": "We create recipes the same way we enjoy food — with care, curiosity, and a love for fresh, honest ingredients."
           }
         })}</script>
+        <script type="application/ld+json">{JSON.stringify(AUTHOR_PERSON_SCHEMA)}</script>
       </Helmet>
+
 
       <PageHero
         title="About Stir & Simmer"
