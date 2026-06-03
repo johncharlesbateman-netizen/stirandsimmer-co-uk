@@ -675,13 +675,13 @@ const RecipeDetail = () => {
               <ol className="space-y-6">
                 {(() => {
                   let stepNum = 0;
-                  return instructions.map((step, i) => {
-                    const isHeader = isSectionHeader(step);
+                  return instructionSteps.map((step, i) => {
+                    const isHeader = isSectionHeader(step.text);
                     if (isHeader) {
                       return (
                         <li key={i} className="pt-4 first:pt-0">
                           <span className="text-base font-semibold text-foreground">
-                            {step.replace(/:$/, "")}
+                            {step.text.replace(/:$/, "")}
                           </span>
                         </li>
                       );
@@ -692,14 +692,25 @@ const RecipeDetail = () => {
                         <span className="font-display text-2xl text-muted-foreground/40 flex-shrink-0 w-8">
                           {stepNum}
                         </span>
-                        <p className="text-muted-foreground leading-relaxed pt-1">
-                          {step}
-                        </p>
+                        <div className="flex-1 pt-1 space-y-3">
+                          <p className="text-muted-foreground leading-relaxed">
+                            {step.text}
+                          </p>
+                          {step.tip && (
+                            <div className="border-l-2 border-accent/60 bg-accent/5 pl-4 py-2 pr-3">
+                              <p className="micro-caption mb-1 text-accent">Tip</p>
+                              <p className="text-sm text-muted-foreground leading-relaxed">
+                                {step.tip}
+                              </p>
+                            </div>
+                          )}
+                        </div>
                       </li>
                     );
                   });
                 })()}
               </ol>
+
 
               {/* Tips */}
               {recipe.tips && (
