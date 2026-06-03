@@ -75,9 +75,15 @@ const CollectionsIndex = () => {
         <meta property="og:url" content="https://stirandsimmer.co.uk/collections" />
         <meta property="og:title" content="Meal Ideas | Stir & Simmer" />
         <meta property="og:description" content="Browse our handpicked meal ideas — Italian Meals, Romantic Meals, Quick & Easy, Fish & Seafood and more. Curated recipe collections for every kind of meal." />
+        <meta property="og:image" content="https://stirandsimmer.co.uk/og-image-1200x630.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Stir & Simmer — recipes for UK home cooks" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Meal Ideas | Stir & Simmer" />
         <meta name="twitter:description" content="Browse our handpicked meal ideas — Italian Meals, Romantic Meals, Quick & Easy, Fish & Seafood and more. Curated recipe collections for every kind of meal." />
+        <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image-1200x630.jpg" />
+
       </Helmet>
 
       <section className="py-12 md:py-16 border-b border-border">
