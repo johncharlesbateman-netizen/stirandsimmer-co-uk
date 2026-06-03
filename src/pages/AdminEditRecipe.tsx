@@ -5,7 +5,7 @@ import { Upload, X, Plus, Loader2, ArrowUp, ArrowDown, CornerDownRight, Clipboar
 import QuickPasteDialog from "@/components/QuickPasteDialog";
 import { supabase } from "@/integrations/supabase/client";
 import { allCategories } from "@/lib/recipe-utils";
-import { collections, collectionNames } from "@/lib/collections";
+import { collectionNames } from "@/lib/collections";
 import { CUISINE_REGIONS, sanitiseCuisineRegion, type CuisineRegion } from "@/lib/cuisine-regions";
 import { MEAL_TYPES, sanitiseMealTypes, type MealType } from "@/lib/meal-types";
 import CuisineRegionPicker from "@/components/CuisineRegionPicker";
