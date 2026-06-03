@@ -338,6 +338,46 @@ const AdminEditRecipe = () => {
             />
           </div>
 
+          {/* Times & servings */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-2">Prep time (min) <AuthorBadge /></label>
+              <Input
+                type="number"
+                inputMode="numeric"
+                min={0}
+                max={9999}
+                value={prepTime}
+                onChange={(e) => setPrepTime(e.target.value)}
+                placeholder="15"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Cook time (min) <AuthorBadge /></label>
+              <Input
+                type="number"
+                inputMode="numeric"
+                min={0}
+                max={9999}
+                value={cookTime}
+                onChange={(e) => setCookTime(e.target.value)}
+                placeholder="30"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Servings <AuthorBadge /></label>
+              <Input
+                type="number"
+                inputMode="numeric"
+                min={1}
+                max={999}
+                value={servings}
+                onChange={(e) => setServings(e.target.value)}
+                placeholder="4"
+              />
+            </div>
+          </div>
+
           {/* Image */}
           <div>
             <label className="block text-sm font-medium mb-2">Photo <AuthorBadge /></label>
