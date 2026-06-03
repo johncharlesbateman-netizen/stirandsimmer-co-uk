@@ -79,6 +79,8 @@ export async function generateSitemap() {
   for (const u of STATIC_URLS) pageParts.push(urlEntry(SITE + u.path, today, u.changefreq, u.priority));
   for (const slug of CATEGORY_SLUGS) pageParts.push(urlEntry(`${SITE}/recipes/category/${slug}`, today, "weekly", "0.8"));
   for (const slug of COLLECTION_SLUGS) pageParts.push(urlEntry(`${SITE}/collections/${slug}`, today, "weekly", "0.7"));
+  for (const slug of CUISINE_ATLAS_SLUGS) pageParts.push(urlEntry(`${SITE}/kitchen-atlas/${slug}`, today, "monthly", "0.7"));
+  for (const slug of REGION_SLUGS) pageParts.push(urlEntry(`${SITE}/recipes/region/${slug}`, today, "weekly", "0.6"));
 
   // sitemap-guides.xml — driven by hardcoded GUIDE_SLUGS (see App.tsx routes).
   // Independent of Supabase so it always regenerates even if env vars are missing.
