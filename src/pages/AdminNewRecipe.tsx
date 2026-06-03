@@ -23,6 +23,70 @@ import { normaliseRecipeImageUpload } from "@/lib/recipe-image-upload";
 
 type RecipeCategory = Database["public"]["Enums"]["recipe_category"];
 
+type NewRecipeDraft = {
+  title: string;
+  categories: RecipeCategory[];
+  description: string;
+  prepTime: string;
+  cookTime: string;
+  servings: string;
+  ingredients: string[];
+  instructions: string[];
+  tips: string;
+  seoTitle: string;
+  seoDescription: string;
+  cuisineRegion: CuisineRegion | null;
+  mealTypes: MealType[];
+  published: boolean;
+};
+
+const NEW_RECIPE_DRAFT_STORAGE_KEY = "admin-new-recipe-draft-v1";
+const DEFAULT_CATEGORIES: RecipeCategory[] = ["chicken"];
+const DEFAULT_MEAL_TYPES: MealType[] = ["mains"];
+
+const arraysMatch = (a: string[], b: string[]) =>
+  a.length === b.length && a.every((value, index) => value === b[index]);
+
+const loadNewRecipeDraft = (): NewRecipeDraft | null => {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const raw = window.localStorage.getItem(NEW_RECIPE_DRAFT_STORAGE_KEY);
+    if (!raw) return null;
+
+    const parsed = JSON.parse(raw) as Partial<NewRecipeDraft>;
+
+    return {
+      title: typeof parsed.title === "string" ? parsed.title : "",
+      categories: Array.isArray(parsed.categories) && parsed.categories.length
+        ? parsed.categories as RecipeCategory[]
+        : DEFAULT_CATEGORIES,
+      description: typeof parsed.description === "string" ? parsed.description : "",
+      prepTime: typeof parsed.prepTime === "string" ? parsed.prepTime : "",
+      cookTime: typeof parsed.cookTime === "string" ? parsed.cookTime : "",
+      servings: typeof parsed.servings === "string" ? parsed.servings : "",
+      ingredients: Array.isArray(parsed.ingredients) && parsed.ingredients.length
+        ? parsed.ingredients.filter((item): item is string => typeof item === "string")
+        : [""],
+      instructions: Array.isArray(parsed.instructions) && parsed.instructions.length
+        ? parsed.instructions.filter((item): item is string => typeof item === "string")
+        : [""],
+      tips: typeof parsed.tips === "string" ? parsed.tips : "",
+      seoTitle: typeof parsed.seoTitle === "string" ? parsed.seoTitle : "",
+      seoDescription: typeof parsed.seoDescription === "string" ? parsed.seoDescription : "",
+      cuisineRegion: CUISINE_REGIONS.includes(parsed.cuisineRegion as CuisineRegion)
+        ? parsed.cuisineRegion as CuisineRegion
+        : null,
+      mealTypes: Array.isArray(parsed.mealTypes) && parsed.mealTypes.length
+        ? parsed.mealTypes as MealType[]
+        : DEFAULT_MEAL_TYPES,
+      published: typeof parsed.published === "boolean" ? parsed.published : true,
+    };
+  } catch {
+    return null;
+  }
+};
+
 const recipeSchema = z.object({
   title: z.string().trim().min(1, "Title is required").max(200, "Title too long"),
   categories: z.array(z.enum([
@@ -51,25 +115,26 @@ const slugify = (s: string) =>
 
 const AdminNewRecipe = () => {
   const navigate = useNavigate();
+  const [initialDraft] = useState<NewRecipeDraft | null>(() => loadNewRecipeDraft());
   const [submitting, setSubmitting] = useState(false);
   const [savingDraft, setSavingDraft] = useState(false);
 
-  const [title, setTitle] = useState("");
-  const [categories, setCategories] = useState<RecipeCategory[]>(["chicken"]);
-  const [description, setDescription] = useState("");
-  const [prepTime, setPrepTime] = useState("");
-  const [cookTime, setCookTime] = useState("");
-  const [servings, setServings] = useState("");
-  const [ingredients, setIngredients] = useState<string[]>([""]);
-  const [instructions, setInstructions] = useState<string[]>([""]);
-  const [tips, setTips] = useState("");
-  const [seoTitle, setSeoTitle] = useState("");
-  const [seoDescription, setSeoDescription] = useState("");
-  const [cuisineRegion, setCuisineRegion] = useState<CuisineRegion | null>(null);
-  const [mealTypes, setMealTypes] = useState<MealType[]>(["mains"]);
+  const [title, setTitle] = useState(initialDraft?.title ?? "");
+  const [categories, setCategories] = useState<RecipeCategory[]>(initialDraft?.categories ?? DEFAULT_CATEGORIES);
+  const [description, setDescription] = useState(initialDraft?.description ?? "");
+  const [prepTime, setPrepTime] = useState(initialDraft?.prepTime ?? "");
+  const [cookTime, setCookTime] = useState(initialDraft?.cookTime ?? "");
+  const [servings, setServings] = useState(initialDraft?.servings ?? "");
+  const [ingredients, setIngredients] = useState<string[]>(initialDraft?.ingredients ?? [""]);
+  const [instructions, setInstructions] = useState<string[]>(initialDraft?.instructions ?? [""]);
+  const [tips, setTips] = useState(initialDraft?.tips ?? "");
+  const [seoTitle, setSeoTitle] = useState(initialDraft?.seoTitle ?? "");
+  const [seoDescription, setSeoDescription] = useState(initialDraft?.seoDescription ?? "");
+  const [cuisineRegion, setCuisineRegion] = useState<CuisineRegion | null>(initialDraft?.cuisineRegion ?? null);
+  const [mealTypes, setMealTypes] = useState<MealType[]>(initialDraft?.mealTypes ?? DEFAULT_MEAL_TYPES);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [published, setPublished] = useState(true);
+  const [published, setPublished] = useState(initialDraft?.published ?? true);
   const [savedOrSubmitted, setSavedOrSubmitted] = useState(false);
   const [pasteIngredientsOpen, setPasteIngredientsOpen] = useState(false);
   const [pasteStepsOpen, setPasteStepsOpen] = useState(false);
@@ -83,6 +148,7 @@ const AdminNewRecipe = () => {
 
   const isDirty =
     title.trim() !== "" ||
+    !arraysMatch(categories, DEFAULT_CATEGORIES) ||
     description.trim() !== "" ||
     prepTime !== "" ||
     cookTime !== "" ||
@@ -93,7 +159,9 @@ const AdminNewRecipe = () => {
     seoTitle.trim() !== "" ||
     seoDescription.trim() !== "" ||
     cuisineRegion !== null ||
-    imageFile !== null;
+    !arraysMatch(mealTypes, DEFAULT_MEAL_TYPES) ||
+    imageFile !== null ||
+    published !== true;
 
   useEffect(() => {
     if (!isDirty || savedOrSubmitted) return;
