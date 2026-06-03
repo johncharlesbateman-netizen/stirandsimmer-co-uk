@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { getGuideMeta, SITE_ORIGIN } from "@/lib/guideMeta";
+import { AUTHOR_REFERENCE, AUTHOR_NAME } from "@/lib/person-schema";
+
 
 type Props = { slug: string };
 
