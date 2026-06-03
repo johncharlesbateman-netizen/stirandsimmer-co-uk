@@ -16,11 +16,8 @@ const GuideSeo = ({ slug }: Props) => {
     image: [meta.image],
     datePublished: meta.publishedTime,
     dateModified: meta.modifiedTime,
-    author: {
-      "@type": "Organization",
-      name: meta.author,
-      url: SITE_ORIGIN,
-    },
+    author: AUTHOR_REFERENCE,
+
     publisher: {
       "@type": "Organization",
       name: "Stir & Simmer",
