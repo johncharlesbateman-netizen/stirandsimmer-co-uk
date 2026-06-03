@@ -242,9 +242,9 @@ const RecipeDetail = () => {
     queryFn: async () => {
       if (!recipe?.id) return { average: 0, count: 0 };
       const { data, error } = await supabase
-        .from("recipe_ratings")
+        .from("recipe_ratings_public" as never)
         .select("rating")
-        .eq("recipe_id", recipe.id);
+        .eq("recipe_id", recipe.id) as { data: { rating: number }[] | null; error: unknown };
       if (error) throw error;
       const rows = data ?? [];
       const count = rows.length;
