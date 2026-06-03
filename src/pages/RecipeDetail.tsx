@@ -241,10 +241,13 @@ const RecipeDetail = () => {
     queryKey: ["recipe-rating-aggregate", recipe?.id],
     queryFn: async () => {
       if (!recipe?.id) return { average: 0, count: 0 };
-      const { data, error } = await supabase
-        .from("recipe_ratings_public" as never)
-        .select("rating")
-        .eq("recipe_id", recipe.id) as { data: { rating: number }[] | null; error: unknown };
+      const { data, error } = await (supabase as unknown as {
+        from: (t: string) => {
+          select: (c: string) => {
+            eq: (k: string, v: string) => Promise<{ data: { rating: number }[] | null; error: Error | null }>
+          }
+        }
+      }).from("recipe_ratings_public").select("rating").eq("recipe_id", recipe.id);
       if (error) throw error;
       const rows = data ?? [];
       const count = rows.length;
