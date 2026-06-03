@@ -173,6 +173,56 @@ const AdminNewRecipe = () => {
     return () => window.removeEventListener("beforeunload", handler);
   }, [isDirty, savedOrSubmitted]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    if (savedOrSubmitted) {
+      window.localStorage.removeItem(NEW_RECIPE_DRAFT_STORAGE_KEY);
+      return;
+    }
+
+    if (!isDirty) {
+      window.localStorage.removeItem(NEW_RECIPE_DRAFT_STORAGE_KEY);
+      return;
+    }
+
+    const draft: NewRecipeDraft = {
+      title,
+      categories,
+      description,
+      prepTime,
+      cookTime,
+      servings,
+      ingredients,
+      instructions,
+      tips,
+      seoTitle,
+      seoDescription,
+      cuisineRegion,
+      mealTypes,
+      published,
+    };
+
+    window.localStorage.setItem(NEW_RECIPE_DRAFT_STORAGE_KEY, JSON.stringify(draft));
+  }, [
+    title,
+    categories,
+    description,
+    prepTime,
+    cookTime,
+    servings,
+    ingredients,
+    instructions,
+    tips,
+    seoTitle,
+    seoDescription,
+    cuisineRegion,
+    mealTypes,
+    published,
+    isDirty,
+    savedOrSubmitted,
+  ]);
+
   const updateListItem = (
     list: string[],
     setter: (v: string[]) => void,
@@ -279,6 +329,9 @@ const AdminNewRecipe = () => {
       if (insertError) throw insertError;
 
       setSavedOrSubmitted(true);
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem(NEW_RECIPE_DRAFT_STORAGE_KEY);
+      }
       toast({ title: "Draft saved", description: title });
       navigate(`/admin/recipes/${slug}/edit`);
     } catch (err) {
@@ -365,6 +418,9 @@ const AdminNewRecipe = () => {
       if (insertError) throw insertError;
 
       setSavedOrSubmitted(true);
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem(NEW_RECIPE_DRAFT_STORAGE_KEY);
+      }
       toast({ title: "Recipe created", description: title });
       navigate(published ? `/recipes/${slug}` : `/admin/recipes/${slug}/edit`);
     } catch (err) {
