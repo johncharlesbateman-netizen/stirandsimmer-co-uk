@@ -14,6 +14,7 @@ import { buildSeoTitle, buildSeoDescription, buildServingSuggestion } from "@/li
 import { buildRecipeJsonLd, buildRecipeKeywords } from "@/lib/recipe-schema";
 import { cuisineRegionLabels } from "@/lib/cuisine-regions";
 import { recipeFAQs } from "@/lib/recipe-faqs";
+import { getRelatedGuides } from "@/lib/recipe-guide-links";
 import RecipeFAQ from "@/components/RecipeFAQ";
 import { optimisedImage, responsiveSrcSet, pinterestImage } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
