@@ -25,7 +25,7 @@ export interface RecipeSchemaInput {
   /** Comma-separated keyword string. */
   keywords?: string;
   siteUrl?: string;
-  /** Aggregate rating; when null/empty, sensible defaults are emitted. */
+  /** Aggregate rating; when null/undefined or zero-count, the block is omitted entirely. */
   aggregateRating?: { ratingValue: number; ratingCount: number } | null;
   /** Optional video metadata; only emitted when provided. */
   video?: {
@@ -195,7 +195,7 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
     video,
   } = input;
 
-  const hasRealRatings = aggregateRating && aggregateRating.ratingCount > 0;
+  const hasRealRatings = aggregateRating != null && aggregateRating.ratingCount > 0;
 
   const totalMinutes = (prepMinutes || 0) + (cookMinutes || 0);
   const pageUrl = `${siteUrl}/recipes/${slug}`;
@@ -241,28 +241,12 @@ export const buildRecipeJsonLd = (input: RecipeSchemaInput) => {
     ...(hasRealRatings && {
       aggregateRating: {
         "@type": "AggregateRating",
-        itemReviewed: { "@type": "Recipe", name: title },
         ratingValue: Number(aggregateRating.ratingValue.toFixed(2)),
         ratingCount: aggregateRating.ratingCount,
         reviewCount: aggregateRating.ratingCount,
         bestRating: 5,
         worstRating: 1,
       },
-    }),
-    ...(hasRealRatings && {
-      review: [
-        {
-          "@type": "Review",
-          itemReviewed: { "@type": "Recipe", name: title },
-          author: { "@type": "Organization", name: "Stir & Simmer" },
-          reviewRating: {
-            "@type": "Rating",
-            ratingValue: Number(aggregateRating.ratingValue.toFixed(2)),
-            bestRating: 5,
-            worstRating: 1,
-          },
-        },
-      ],
     }),
     ...(video && (video.contentUrl || video.embedUrl) && {
       video: {
