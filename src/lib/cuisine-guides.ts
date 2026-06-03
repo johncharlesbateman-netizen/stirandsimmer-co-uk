@@ -28,8 +28,8 @@ export type CuisineGuide = {
   /** SEO title and description (under 60 / 160 chars where possible). */
   seoTitle: string;
   seoDescription: string;
-  /** 3 short, warm paragraphs about the cuisine. */
-  about: [string, string, string];
+  /** Short, warm paragraphs about the cuisine. */
+  about: string[];
   /** 6 defining ingredients. */
   keyIngredients: CuisineIngredient[];
   /** 2 related cuisine slugs for "You might also enjoy" cross-links. */
