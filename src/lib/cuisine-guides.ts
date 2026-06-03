@@ -191,9 +191,8 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
     seoDescription:
       "Explore Thai cooking with lemongrass, fish sauce and coconut milk. From green curry to stir-fry, balance sweet, sour, salty and heat.",
     about: [
-      "Thai cooking is built around a balance of four flavours: sweet, sour, salty and spicy. Almost every dish, from a green curry to a simple stir-fry, is adjusted at the end until those four sit in harmony. The regions pull the balance in different directions — the north leans on grilled meats and sticky rice, the north-east on chilli and fermented fish, central Thailand on coconut curries, the south on intense, fiery seafood dishes.",
-      "The defining ingredients are unmistakable. Lemongrass, galangal, kaffir lime leaves, bird's-eye chillies, fish sauce, palm sugar, fresh coriander and Thai basil. The technique that matters most is building a proper paste — pounding aromatics in a pestle and mortar until everything turns into a fragrant, oily mass, then frying it slowly in coconut cream until the oil splits. Use a jar of curry paste from the supermarket and it's fine; pound your own and the whole dish lifts.",
-      "It comes together at home faster than most people expect. A stir-fry on a hot pan is on the table in ten minutes. A proper curry needs an afternoon of paste-pounding but then reheats beautifully all week. A handful of Thai pantry staples — fish sauce, palm sugar, jasmine rice, dried noodles — will keep you cooking for weeks.",
+      "Thai food makes more sense when you've eaten it where it comes from. Travelling through Thailand for work in the 1980s meant encountering the street food culture before it became something tourists sought out — small boats along the waterways selling and cooking their own food, each one its own kitchen, reaching out to offer whatever was on that day. The balance of sweet, sour, salty and heat wasn't a concept, it was just what everything tasted like.",
+      "Bringing that home to a British kitchen takes a little understanding of why Thai food works — the fish sauce, the lime, the fresh herbs added at the end. Get those relationships right and the cuisine translates surprisingly well.",
     ],
     keyIngredients: [
       { emoji: "🌿", name: "Lemongrass", note: "The outer layers stripped, the tender heart bruised or finely sliced." },
