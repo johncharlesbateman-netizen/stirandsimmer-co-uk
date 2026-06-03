@@ -538,6 +538,29 @@ const RecipeDetail = () => {
               {recipe.description}
             </p>
 
+            {/* Inline contextual guide references — surfaces internal links
+                to relevant /guides/ pages based on technique, cuisine and key
+                ingredients. */}
+            {(() => {
+              const related = getRelatedGuides(recipe, 2);
+              if (!related.length) return null;
+              return (
+                <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
+                  New to this style of cooking? Read our guide on{" "}
+                  {related.map((g, idx) => (
+                    <span key={g.slug}>
+                      <Link to={`/guides/${g.slug}`} className="editorial-link text-foreground">
+                        {g.title.replace(/\s*[—-].*$/, "").toLowerCase()}
+                      </Link>
+                      {idx < related.length - 2 ? ", " : idx === related.length - 2 ? " and " : "."}
+                    </span>
+                  ))}
+                </p>
+              );
+            })()}
+
+
+
             {/* Meta */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
               {recipe.prep_time_minutes ? (
