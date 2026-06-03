@@ -70,10 +70,24 @@ const Guides = () => {
           content="Practical kitchen guides from Stir & Simmer — techniques, reference and the craft behind great home cooking."
         />
         <link rel="canonical" href={collectionUrl} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Stir & Simmer" />
+        <meta property="og:url" content={collectionUrl} />
+        <meta property="og:title" content="Guides — kitchen techniques and reference | Stir & Simmer" />
+        <meta property="og:description" content="Practical kitchen guides from Stir & Simmer — techniques, reference and the craft behind great home cooking." />
+        <meta property="og:image" content="https://stirandsimmer.co.uk/og-image-1200x630.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Warm spices, herbs and cookware arranged on a dark rustic surface" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Guides — kitchen techniques and reference | Stir & Simmer" />
+        <meta name="twitter:description" content="Practical kitchen guides from Stir & Simmer — techniques, reference and the craft behind great home cooking." />
+        <meta name="twitter:image" content="https://stirandsimmer.co.uk/og-image-1200x630.jpg" />
         <link rel="preload" as="image" href={heroImage} imageSrcSet={heroSrcSet} imageSizes="100vw" fetchPriority="high" />
         <script type="application/ld+json">{JSON.stringify(collectionJsonLd)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
       </Helmet>
+
 
       {/* Hero */}
       <section className="relative overflow-hidden">
