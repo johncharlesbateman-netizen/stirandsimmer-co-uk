@@ -256,7 +256,9 @@ const AdminEditRecipe = () => {
       if (updateError) throw updateError;
 
       toast({ title: "Recipe updated", description: title });
-      navigate(`/recipes/${slug}`);
+      if (published) {
+        navigate(`/recipes/${slug}`);
+      }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Something went wrong";
       toast({ title: "Failed to update recipe", description: msg, variant: "destructive" });
