@@ -65,20 +65,6 @@ const About = () => {
             </p>
           </div>
 
-          <div className="max-w-3xl mt-10 pt-8 border-t border-border">
-            <h2 className="heading-section mb-4">How This Started</h2>
-            <div className="space-y-4 body-editorial text-muted-foreground">
-              <p>
-                What became Stir & Simmer began as a handwritten recipe collection started around twenty years ago. The dishes that worked — the ones family and friends asked for again — were written down. Over time that personal collection became Great Food Recipes, a site shared with a wider audience, and eventually evolved into what you see today.
-              </p>
-              <p>
-                The principle never changed: if it wasn't asked for again, it didn't make the cut.
-              </p>
-              <p>
-                Every recipe comes from actually making it — not once, but enough times to know what goes wrong and how to fix it. The portions are honest. The ingredients come from Tesco, Sainsbury's, Aldi or Waitrose. The methods are written for someone who's cooking after work, not performing for a camera.
-              </p>
-            </div>
-          </div>
 
           <div className="max-w-3xl mt-10 pt-8 border-t border-border">
             <h2 className="heading-section mb-4">What You'll Find Here</h2>
