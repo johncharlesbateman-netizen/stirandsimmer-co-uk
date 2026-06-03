@@ -64,46 +64,40 @@ const RecipeRating = ({ recipeId }: RecipeRatingProps) => {
   const [submitting, setSubmitting] = useState(false);
 
   const { data: ratings = [] } = useQuery<RatingRow[]>({
-    queryKey: ["recipe-ratings", recipeId],
+    queryKey: ["recipe-ratings", recipeId, user?.id ?? null],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("recipe_ratings")
-        .select("rating, user_id")
+      // Public aggregate (no user_id exposed)
+      const { data: aggData, error: aggError } = await supabase
+        .from("recipe_ratings_public")
+        .select("rating")
         .eq("recipe_id", recipeId);
-      if (error) throw error;
-      return (data ?? []) as RatingRow[];
+      if (aggError) throw aggError;
+      const aggRows = ((aggData ?? []) as { rating: number }[]).map((r) => ({
+        rating: r.rating,
+        user_id: "",
+      }));
+
+      // Signed-in user's own rating (own row only via RLS)
+      if (user) {
+        const { data: ownData, error: ownError } = await supabase
+          .from("recipe_ratings")
+          .select("rating, user_id")
+          .eq("recipe_id", recipeId)
+          .eq("user_id", user.id)
+          .maybeSingle();
+        if (ownError) throw ownError;
+        if (ownData) {
+          // Replace one anonymous row with the user's row so userRating resolves
+          const idx = aggRows.findIndex(
+            (r) => r.rating === ownData.rating && r.user_id === "",
+          );
+          if (idx >= 0) aggRows[idx] = ownData as RatingRow;
+        }
+      }
+      return aggRows;
     },
     enabled: !!recipeId,
   });
-
-  const { average, count, userRating } = useMemo(() => {
-    const c = ratings.length;
-    const avg = c ? ratings.reduce((s, r) => s + r.rating, 0) / c : 0;
-    const own = user ? ratings.find((r) => r.user_id === user.id)?.rating ?? 0 : 0;
-    return { average: avg, count: c, userRating: own };
-  }, [ratings, user]);
-
-  const submit = async (value: number) => {
-    if (!user || submitting) return;
-    setSubmitting(true);
-    const { error } = await supabase
-      .from("recipe_ratings")
-      .upsert(
-        { recipe_id: recipeId, user_id: user.id, rating: value },
-        { onConflict: "recipe_id,user_id" },
-      );
-    setSubmitting(false);
-    if (error) {
-      toast({
-        title: "Couldn't save rating",
-        description: error.message,
-        variant: "destructive",
-      });
-      return;
-    }
-    toast({ title: "Thanks for rating!", description: `You rated this ${value} out of 5.` });
-    queryClient.invalidateQueries({ queryKey: ["recipe-ratings", recipeId] });
-  };
 
   const display = hover || userRating || Math.round(average);
 
