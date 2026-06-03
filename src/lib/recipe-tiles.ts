@@ -22,8 +22,8 @@ const hasCategory = (r: Recipe, cat: string) =>
   (r.categories ?? []).includes(cat as Recipe["categories"][number]);
 
 const titleMatches = (r: Recipe, words: string[]) => {
-  const hay = `${r.title} ${r.description ?? ""}`.toLowerCase();
-  return words.some((w) => hay.includes(w));
+  const hay = r.title.toLowerCase();
+  return words.some((w) => new RegExp(`\\b${w}\\b`).test(hay));
 };
 
 const totalTime = (r: Recipe) =>
