@@ -52,6 +52,7 @@ const GuideHowToBuildFlavourFromScratch = () => {
         <GuideTOC
           items={[
             { id: "the-foundation-why-heat-changes-everything", label: "The Foundation: Why Heat Changes Everything" },
+            { id: "browning-in-european-cooking", label: "Browning in European Cooking" },
             { id: "what-flavour-actually-is", label: "What flavour actually is" },
             { id: "the-foundation-fat-and-aromatics", label: "The foundation — fat and aromatics" },
             { id: "the-base-stocks-and-roux", label: "The base — stocks and roux" },
@@ -78,6 +79,20 @@ const GuideHowToBuildFlavourFromScratch = () => {
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             This single principle — that browning creates flavour — sits at the heart of cooking across every cuisine that has ever produced something worth eating.
+          </p>
+        </div>
+
+        {/* Browning in European Cooking */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="browning-in-european-cooking" className="font-display text-3xl md:text-4xl text-foreground mb-6">Browning in European Cooking</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In French and Italian cooking, the process begins with the soffritto or mirepoix — onion, carrot and celery cooked slowly in fat until softened and lightly coloured. This is not just a way of softening vegetables. It is the first layer of flavour in the dish, the foundation on which everything else is built.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Meat is seared separately, at high heat, until a deep brown crust forms on every surface. That crust is flavour. It is not a seal — the old idea that searing "seals in juices" has been disproven — but it is an enormous concentration of taste that cannot be achieved any other way.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            The fat used for browning matters. Butter adds richness and its own flavour. Olive oil brings fruitiness. Rendered animal fat — duck fat, lard, beef dripping — adds depth that vegetable oils cannot match.
           </p>
         </div>
 
