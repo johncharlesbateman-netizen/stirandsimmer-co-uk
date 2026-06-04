@@ -172,18 +172,18 @@ const RAW: RawMeta[] = [
   },
   {
     slug: "how-to-build-flavour-from-scratch",
-    title: "How to Build Flavour From Scratch: A Cook's Guide — Stir & Simmer",
+    title: "How to Build Flavour from Scratch | Stir & Simmer",
     description:
-      "Build flavour the way good cooks do — fat and aromatics, stocks and roux, the Maillard layer, salt and acid, and how Indian, Thai and French kitchens layer depth.",
+      "The logic of browning, deglazing, reducing and finishing — and why the same principles apply whether you're making a French braise, an Indian curry or a Thai stir-fry.",
     imageId: "1640774",
     publishedTime: "2026-06-04T12:00:00Z",
     modifiedTime: "2026-06-04T12:00:00Z",
   },
   {
     slug: "how-to-make-a-roux",
-    title: "How to Make a Roux: White, Blond and Brown — Stir & Simmer",
+    title: "How to Make a Roux | Stir & Simmer",
     description:
-      "How to make a proper roux — butter and flour, the three stages, the ratios that thicken, the warm-liquid rule that prevents lumps, and where to use each colour.",
+      "Equal parts butter and flour — the small piece of technique that underpins Béchamel, Velouté, Espagnole and most classic sauces. The three stages, the ratios and the method explained simply.",
     imageId: "5908227",
     publishedTime: "2026-06-04T13:00:00Z",
     modifiedTime: "2026-06-04T13:00:00Z",
