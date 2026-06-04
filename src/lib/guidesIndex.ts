@@ -210,6 +210,26 @@ export const GUIDES: GuideEntry[] = [
     imageSrcSet: understandingHeatSrcSet,
     imageAlt: "A hot cast iron skillet on a hob with butter sizzling and steam rising",
   },
+  {
+    slug: "how-to-build-flavour-from-scratch",
+    title: "How to build flavour from scratch",
+    description:
+      "The layers, the bases and the small habits that turn a pan of ingredients into something with depth, balance and life — fat, aromatics, stock, roux, browning, salt and acid.",
+    eyebrow: "Technique",
+    category: "Technique",
+    imageId: "1640774",
+    imageAlt: "A pan of softening onions and aromatics in golden butter on a dark stove",
+  },
+  {
+    slug: "how-to-make-a-roux",
+    title: "How to make a roux",
+    description:
+      "Equal parts butter and flour — the small piece of technique that underpins Béchamel, Velouté, Espagnole and most classic sauces. The three stages, the ratios and the rule that prevents lumps.",
+    eyebrow: "French Technique",
+    category: "French Technique",
+    imageId: "5908227",
+    imageAlt: "A wooden spoon stirring a pale golden roux of butter and flour in a copper pan",
+  },
 ];
 
 export const GUIDE_FALLBACK_IMAGE = properStockImage;
