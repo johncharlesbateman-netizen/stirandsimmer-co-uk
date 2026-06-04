@@ -51,6 +51,7 @@ const GuideHowToBuildFlavourFromScratch = () => {
 
         <GuideTOC
           items={[
+            { id: "the-foundation-why-heat-changes-everything", label: "The Foundation: Why Heat Changes Everything" },
             { id: "what-flavour-actually-is", label: "What flavour actually is" },
             { id: "the-foundation-fat-and-aromatics", label: "The foundation — fat and aromatics" },
             { id: "the-base-stocks-and-roux", label: "The base — stocks and roux" },
