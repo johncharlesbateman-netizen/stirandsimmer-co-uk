@@ -220,6 +220,12 @@ const STATIC_ROUTES = [
     description:
       "Learn the pinch grip, the claw grip, the rocking motion and the four essential cuts every home cook needs. Plus why a sharp, well-cared-for knife is safer and more satisfying.",
   },
+  {
+    path: "/guides/understanding-heat",
+    title: "Understanding heat — a cook's guide | Stir & Simmer",
+    description:
+      "How to control heat on any cooker, understand the heat levels, tell dry heat from wet heat, and read the visual and sound cues that reveal what is really happening in the pan.",
+  },
 
   {
     path: "/meal-planner",

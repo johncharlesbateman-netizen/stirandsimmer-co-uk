@@ -8,6 +8,7 @@ import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.jpg";
 import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.jpg";
 import howToSeasonFoodImage from "@/assets/guide-how-to-season-food.jpg";
 import knifeSkillsImage from "@/assets/guide-knife-skills.jpg";
+import understandingHeatImage from "@/assets/guide-understanding-heat.jpg";
 
 export const SITE_ORIGIN = "https://stirandsimmer.co.uk";
 const AUTHOR = "Stir & Simmer";
@@ -159,6 +160,15 @@ const RAW: RawMeta[] = [
     image: knifeSkillsImage,
     publishedTime: "2026-06-04T10:00:00Z",
     modifiedTime: "2026-06-04T10:00:00Z",
+  },
+  {
+    slug: "understanding-heat",
+    title: "Understanding Heat — A Cook's Guide | Stir & Simmer",
+    description:
+      "How to control heat on any cooker, understand the heat levels, tell dry heat from wet heat, and read the visual and sound cues that reveal what is really happening in the pan.",
+    image: understandingHeatImage,
+    publishedTime: "2026-06-04T11:00:00Z",
+    modifiedTime: "2026-06-04T11:00:00Z",
   },
 ];
 

@@ -295,4 +295,26 @@ export const guideFAQs: Record<string, GuideFAQ[]> = {
         "Rough chop for stocks and soups, dice for even cooking in stews and sauces, slice for consistent thickness in roasting and stir-fries, and fine chop for garlic, herbs and aromatics where even flavour distribution matters.",
     },
   ],
+  "understanding-heat": [
+    {
+      question: "Why does food stick to the pan when it is not hot enough?",
+      answer:
+        "A cold or lukewarm pan causes food to steam rather than sear. The moisture released by the food sits between the surface and the pan, preventing contact and browning. Heat the pan first, then add the oil, then add the food.",
+    },
+    {
+      question: "What is the difference between dry heat and wet heat cooking?",
+      answer:
+        "Dry heat — roasting, grilling, frying — uses hot air or metal to produce colour and caramelisation at higher temperatures. Wet heat — simmering, braising, steaming — uses liquid, which cannot exceed 100°C at sea level and produces tender rather than charred results.",
+    },
+    {
+      question: "How do I know when a pan is hot enough?",
+      answer:
+        "Add a few drops of water. If they bead up, roll around the surface and disappear quickly, the pan is ready. If they sit and steam slowly, it needs more time. You can also look for the oil to shimmer and move fluidly.",
+    },
+    {
+      question: "Why does garlic burn so quickly?",
+      answer:
+        "Garlic has a high sugar and low moisture content, so it browns and burns within seconds at high heat. Once burnt, the bitterness cannot be fixed. Add garlic after other aromatics, keep the heat moderate, and watch it constantly.",
+    },
+  ],
 };
