@@ -56,6 +56,9 @@ const GuideHowToBuildFlavourFromScratch = () => {
             { id: "browning-in-indian-cooking-the-bhuna", label: "Browning in Indian Cooking: The Bhuna" },
             { id: "browning-in-thai-cooking-frying-the-paste", label: "Browning in Thai Cooking: Frying the Paste" },
             { id: "deglazing-the-technique-that-wastes-nothing", label: "Deglazing: The Technique That Wastes Nothing" },
+            { id: "reducing-concentrating-what-you-have-built", label: "Reducing: Concentrating What You Have Built" },
+            { id: "finishing-the-final-layer", label: "Finishing: The Final Layer" },
+            { id: "how-it-all-connects", label: "How It All Connects" },
             { id: "what-flavour-actually-is", label: "What flavour actually is" },
             { id: "the-foundation-fat-and-aromatics", label: "The foundation — fat and aromatics" },
             { id: "the-base-stocks-and-roux", label: "The base — stocks and roux" },
@@ -156,6 +159,69 @@ const GuideHowToBuildFlavourFromScratch = () => {
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             Different liquids. Different cuisines. The same principle.
+          </p>
+        </div>
+
+        {/* Reducing: Concentrating What You Have Built */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="reducing-concentrating-what-you-have-built" className="font-display text-3xl md:text-4xl text-foreground mb-6">Reducing: Concentrating What You Have Built</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Once liquid has been added to a flavour base, the next task is often to reduce it — to simmer off water and concentrate the flavour compounds that remain.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Reduction is not complicated, but it requires patience and attention. A sauce that has been properly reduced has body, depth and intensity. A sauce that has not has none of these things.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In European cooking, wine is almost always reduced before stock is added — this drives off the harsh alcohol and concentrates the fruit and acidity. The stock then reduces further with the meat or vegetables, picking up their flavour as it goes.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In Indian cooking, the addition of tomatoes to a bhuna base is followed by a period of cooking down — simmering until the tomatoes have broken completely and the sauce has reduced to a thick, concentrated paste that coats everything in the pan. This stage, sometimes called the masala, is where the character of the curry is established.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            In Thai cooking, the curry sauce often reduces gently as it cooks, the coconut cream thickening and intensifying around the protein or vegetables. The balance of sweet, sour, salt and heat is adjusted at this stage — not at the beginning.
+          </p>
+        </div>
+
+        {/* Finishing: The Final Layer */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="finishing-the-final-layer" className="font-display text-3xl md:text-4xl text-foreground mb-6">Finishing: The Final Layer</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The last stage of flavour building is finishing — the adjustments made just before the dish is served that bring everything into balance and add the final layer of complexity.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In French cooking, finishing often means mounting a sauce with cold butter — whisking small cubes of butter into a hot, reduced sauce off the heat to give it gloss, richness and a rounded flavour that nothing else provides. A squeeze of lemon or a splash of vinegar may follow, to lift what the richness has flattened.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In Indian cooking, finishing might mean a final tarka — whole spices and dried chilli fried briefly in hot ghee and poured over the dish at the last moment. Or a handful of fresh coriander and a squeeze of lime. Or a swirl of cream. Each addition is deliberate.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In Thai cooking, the finishing is arguably the most precise of all: fish sauce for salt and depth, lime juice for acidity, palm sugar for sweetness, fresh Thai basil or kaffir lime leaves for fragrance. The cook tastes and adjusts until all four elements are in balance — not any one of them dominant, but each one present and harmonious.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            The principle is the same everywhere: the final moments of cooking are not an afterthought. They are where a good dish becomes a memorable one.
+          </p>
+        </div>
+
+        {/* How It All Connects */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="how-it-all-connects" className="font-display text-3xl md:text-4xl text-foreground mb-6">How It All Connects</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The guides on this site covering stocks, mother sauces, roux, and French techniques are all, in different ways, about the same thing: using the principles above to build flavour systematically rather than by accident.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Stock is reduced browning — bones and vegetables that have been slowly coaxed to give up everything they contain into a liquid that becomes the backbone of hundreds of dishes.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            A mother sauce is a reduced, flavoured liquid that has been finished into something versatile and stable — the logic of deglazing and reducing applied at scale.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            A roux is a way of building body and flavour simultaneously, the fat carrying the flavour of butter or other fat into the sauce as it thickens.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Whether the dish is a coq au vin, a lamb rogan josh or a green Thai curry, the cook is doing the same things: browning to create flavour, deglazing to capture it, reducing to concentrate it, and finishing to balance it.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            The ingredients change. The cuisine changes. The logic does not.
           </p>
         </div>
 
