@@ -160,6 +160,8 @@ const App = () => (
               <Route path="/guides/how-to-season-food" element={<GuideHowToSeasonFood />} />
               <Route path="/guides/knife-skills" element={<GuideKnifeSkills />} />
               <Route path="/guides/understanding-heat" element={<GuideUnderstandingHeat />} />
+              <Route path="/guides/how-to-build-flavour-from-scratch" element={<GuideHowToBuildFlavourFromScratch />} />
+              <Route path="/guides/how-to-make-a-roux" element={<GuideHowToMakeARoux />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/meal-planner" element={<MealPlanner />} />
               <Route path="/auth" element={<Auth />} />
