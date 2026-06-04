@@ -18,6 +18,10 @@ import knifeSkillsImage from "@/assets/guide-knife-skills.jpg";
 import knifeSkillsSrcSet from "@/assets/guide-knife-skills.jpg?w=400;600;800;1200&format=webp&as=srcset";
 import understandingHeatImage from "@/assets/guide-understanding-heat.jpg";
 import understandingHeatSrcSet from "@/assets/guide-understanding-heat.jpg?w=400;600;800;1200&format=webp&as=srcset";
+import buildFlavourImage from "@/assets/guide-build-flavour.jpg";
+import buildFlavourSrcSet from "@/assets/guide-build-flavour.jpg?w=400;600;800;1200&format=webp&as=srcset";
+import howToMakeARouxImage from "@/assets/guide-how-to-make-a-roux.jpg";
+import howToMakeARouxSrcSet from "@/assets/guide-how-to-make-a-roux.jpg?w=400;600;800;1200&format=webp&as=srcset";
 
 export const GUIDE_CATEGORIES = [
   "All",
@@ -217,8 +221,9 @@ export const GUIDES: GuideEntry[] = [
       "The layers, the bases and the small habits that turn a pan of ingredients into something with depth, balance and life — fat, aromatics, stock, roux, browning, salt and acid.",
     eyebrow: "Technique",
     category: "Technique",
-    imageId: "1640774",
-    imageAlt: "A pan of softening onions and aromatics in golden butter on a dark stove",
+    image: buildFlavourImage,
+    imageSrcSet: buildFlavourSrcSet,
+    imageAlt: "A cast iron skillet of deeply browned onions and aromatics sizzling in golden butter",
   },
   {
     slug: "how-to-make-a-roux",
@@ -227,8 +232,9 @@ export const GUIDES: GuideEntry[] = [
       "Equal parts butter and flour — the small piece of technique that underpins Béchamel, Velouté, Espagnole and most classic sauces. The three stages, the ratios and the rule that prevents lumps.",
     eyebrow: "French Technique",
     category: "French Technique",
-    imageId: "5908227",
-    imageAlt: "A wooden spoon stirring a pale golden roux of butter and flour in a copper pan",
+    image: howToMakeARouxImage,
+    imageSrcSet: howToMakeARouxSrcSet,
+    imageAlt: "A pale golden roux being whisked in a copper saucepan with butter and flour beside it",
   },
 ];
 
