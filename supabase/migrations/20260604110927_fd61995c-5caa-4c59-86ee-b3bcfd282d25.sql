@@ -1,0 +1,1 @@
+CREATE POLICY "Public read access for recipe-images" ON storage.objects FOR SELECT TO public USING (bucket_id = 'recipe-images');
