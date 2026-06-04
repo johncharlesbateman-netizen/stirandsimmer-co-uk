@@ -14,6 +14,8 @@ import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.
 import whatToCookInSummerSrcSet from "@/assets/guide-what-to-cook-in-summer-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
 import howToSeasonFoodImage from "@/assets/guide-how-to-season-food.jpg";
 import howToSeasonFoodSrcSet from "@/assets/guide-how-to-season-food.jpg?w=400;600;800;1200&format=webp&as=srcset";
+import knifeSkillsImage from "@/assets/guide-knife-skills.jpg";
+import knifeSkillsSrcSet from "@/assets/guide-knife-skills.jpg?w=400;600;800;1200&format=webp&as=srcset";
 
 export const GUIDE_CATEGORIES = [
   "All",
@@ -184,6 +186,17 @@ export const GUIDES: GuideEntry[] = [
     imageSrcSet: howToSeasonFoodSrcSet,
     imageAlt: "A hand sprinkling flaky sea salt over a wooden board with peppercorns and fresh herbs",
   },
+  {
+    slug: "knife-skills",
+    title: "Knife skills for home cooks — a practical guide",
+    description:
+      "The pinch grip, the claw grip, the rocking motion and the four cuts every home cook needs — plus why a sharp knife is safer, more efficient and more satisfying to use.",
+    eyebrow: "Technique",
+    category: "Technique",
+    image: knifeSkillsImage,
+    imageSrcSet: knifeSkillsSrcSet,
+    imageAlt: "A chef's knife on a dark wooden cutting board with finely chopped vegetables and fresh herbs",
+  },
 ];
 
 export const GUIDE_FALLBACK_IMAGE = properStockImage;
@@ -206,7 +219,8 @@ export const RELATED_GUIDES: Record<string, [string, string]> = {
   "proper-stock": ["how-to-season-food", "proper-sauce"],
   "proper-sauce": ["how-to-season-food", "proper-stock"],
   "choosing-pans": ["kitchen-knives", "how-to-cook-pasta"],
-  "kitchen-knives": ["choosing-pans", "french-techniques"],
+  "kitchen-knives": ["knife-skills", "choosing-pans"],
+  "knife-skills": ["kitchen-knives", "how-to-season-food"],
   "understanding-olive-oil": ["proper-sauce", "what-to-cook-in-summer"],
   "how-to-cook-pasta": ["proper-sauce", "understanding-olive-oil"],
   "how-to-make-bread": ["how-to-cook-pasta", "kitchen-knives"],

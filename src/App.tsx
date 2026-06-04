@@ -39,6 +39,7 @@ const GuideHowToCookPasta = lazy(() => import("./pages/GuideHowToCookPasta"));
 const GuideHowToMakeBread = lazy(() => import("./pages/GuideHowToMakeBread"));
 const GuideWhatToCookInSummer = lazy(() => import("./pages/GuideWhatToCookInSummer"));
 const GuideHowToSeasonFood = lazy(() => import("./pages/GuideHowToSeasonFood"));
+const GuideKnifeSkills = lazy(() => import("./pages/GuideKnifeSkills"));
 const Auth = lazy(() => import("./pages/Auth"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -154,6 +155,7 @@ const App = () => (
               <Route path="/guides/how-to-make-bread" element={<GuideHowToMakeBread />} />
               <Route path="/guides/what-to-cook-in-summer" element={<GuideWhatToCookInSummer />} />
               <Route path="/guides/how-to-season-food" element={<GuideHowToSeasonFood />} />
+              <Route path="/guides/knife-skills" element={<GuideKnifeSkills />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/meal-planner" element={<MealPlanner />} />
               <Route path="/auth" element={<Auth />} />
