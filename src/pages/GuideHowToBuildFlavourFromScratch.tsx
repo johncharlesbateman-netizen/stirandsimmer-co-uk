@@ -362,9 +362,51 @@ const GuideHowToBuildFlavourFromScratch = () => {
           </p>
         </div>
 
+        {/* A Note on Patience */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="a-note-on-patience" className="font-display text-3xl md:text-4xl text-foreground mb-6">A Note on Patience</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The single most common reason that home cooking disappoints is impatience — turning the heat up to speed things along, adding liquid before the browning is done, serving before the reduction has finished. The food that results tastes of effort without the reward that patience would have given it.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Every technique in this guide requires time. The bhuna cannot be rushed. The braise needs its hours. The reduction must not be forced with high heat that burns rather than concentrates.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Give the process time. The flavour will find you.
+          </p>
+        </div>
+
         <GuideFAQ slug="how-to-build-flavour-from-scratch" />
 
-        <GuideRelatedGuides guideSlug="how-to-build-flavour-from-scratch" />
+        {/* Related Guides */}
+        <section className="border-t border-border py-12 md:py-16">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl">
+            <h2 className="heading-section mb-8 md:mb-10">Related Guides</h2>
+            <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+              <Link to="/guides/proper-stock" className="editorial-link underline underline-offset-4 hover:text-primary">How to Make a Proper Stock</Link>{" "}
+              ·{" "}
+              <Link to="/guides/mother-sauces" className="editorial-link underline underline-offset-4 hover:text-primary">The Mother Sauces</Link>{" "}
+              ·{" "}
+              <Link to="/guides/how-to-make-a-roux" className="editorial-link underline underline-offset-4 hover:text-primary">How to Make a Roux</Link>{" "}
+              ·{" "}
+              <Link to="/guides/french-techniques" className="editorial-link underline underline-offset-4 hover:text-primary">French Cooking Techniques</Link>
+            </p>
+          </div>
+        </section>
+
+        {/* Kitchen Atlas links */}
+        <div className="border-t border-border">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20 py-8 md:py-10 max-w-3xl">
+            <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+              See these principles in action in the Kitchen Atlas:{" "}
+              <Link to="/kitchen-atlas/india" className="editorial-link underline underline-offset-4 hover:text-primary">Indian Cuisine</Link>{" "}
+              ·{" "}
+              <Link to="/kitchen-atlas/thailand" className="editorial-link underline underline-offset-4 hover:text-primary">Thai Cuisine</Link>{" "}
+              ·{" "}
+              <Link to="/kitchen-atlas/france" className="editorial-link underline underline-offset-4 hover:text-primary">French Cuisine</Link>
+            </p>
+          </div>
+        </div>
 
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
           <Link
