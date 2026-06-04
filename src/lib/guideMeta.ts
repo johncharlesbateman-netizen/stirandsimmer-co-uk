@@ -6,6 +6,7 @@ import oliveOilImage from "@/assets/guide-understanding-olive-oil-hero.jpg";
 import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.jpg";
 import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.jpg";
 import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.jpg";
+import howToSeasonFoodImage from "@/assets/guide-how-to-season-food.jpg";
 
 export const SITE_ORIGIN = "https://stirandsimmer.co.uk";
 const AUTHOR = "Stir & Simmer";
@@ -139,6 +140,15 @@ const RAW: RawMeta[] = [
       "Cook with the British summer — what's in season, how to build a proper salad, grilling done well, the herbs to use, and five summer dishes to master.",
     image: whatToCookInSummerImage,
     publishedTime: "2025-05-18T12:00:00Z",
+  },
+  {
+    slug: "how-to-season-food",
+    title: "How to Season Food: A Cook's Guide to Salt, Acid and Balance — Stir & Simmer",
+    description:
+      "How to season food properly — when to add salt, how to taste as you cook, the role of acid, and how Thai, Japanese and Middle Eastern cooks build flavour.",
+    image: howToSeasonFoodImage,
+    publishedTime: "2026-06-04T09:00:00Z",
+    modifiedTime: "2026-06-04T09:00:00Z",
   },
 ];
 

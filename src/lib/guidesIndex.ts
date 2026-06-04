@@ -12,9 +12,12 @@ import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.webp";
 import howToMakeBreadSrcSet from "@/assets/guide-how-to-make-bread-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
 import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.webp";
 import whatToCookInSummerSrcSet from "@/assets/guide-what-to-cook-in-summer-hero.webp?w=400;600;800;1200&format=webp&as=srcset";
+import howToSeasonFoodImage from "@/assets/guide-how-to-season-food.jpg";
+import howToSeasonFoodSrcSet from "@/assets/guide-how-to-season-food.jpg?w=400;600;800;1200&format=webp&as=srcset";
 
 export const GUIDE_CATEGORIES = [
   "All",
+  "Technique",
   "French Technique",
   "Spices",
   "Equipment",
@@ -170,6 +173,17 @@ export const GUIDES: GuideEntry[] = [
     imageSrcSet: whatToCookInSummerSrcSet,
     imageAlt: "A sunlit summer table with grilled vegetables, ripe tomatoes, peaches, fresh herbs and a jug of iced drink",
   },
+  {
+    slug: "how-to-season-food",
+    title: "How to season food — a cook's guide",
+    description:
+      "Seasoning is a continuous conversation with the food — when to add salt, when to add acid, and how different cuisines build flavour without it.",
+    eyebrow: "Technique",
+    category: "Technique",
+    image: howToSeasonFoodImage,
+    imageSrcSet: howToSeasonFoodSrcSet,
+    imageAlt: "A hand sprinkling flaky sea salt over a wooden board with peppercorns and fresh herbs",
+  },
 ];
 
 export const GUIDE_FALLBACK_IMAGE = properStockImage;
@@ -187,14 +201,15 @@ export const GUIDE_BY_SLUG: Record<string, GuideEntry> = Object.fromEntries(
 export const RELATED_GUIDES: Record<string, [string, string]> = {
   "mother-sauces": ["proper-sauce", "french-techniques"],
   "french-techniques": ["mother-sauces", "kitchen-knives"],
-  "garam-masala": ["how-to-use-spices", "proper-stock"],
-  "how-to-use-spices": ["garam-masala", "proper-sauce"],
-  "proper-stock": ["proper-sauce", "mother-sauces"],
-  "proper-sauce": ["mother-sauces", "proper-stock"],
+  "garam-masala": ["how-to-season-food", "how-to-use-spices"],
+  "how-to-use-spices": ["garam-masala", "how-to-season-food"],
+  "proper-stock": ["how-to-season-food", "proper-sauce"],
+  "proper-sauce": ["how-to-season-food", "proper-stock"],
   "choosing-pans": ["kitchen-knives", "how-to-cook-pasta"],
   "kitchen-knives": ["choosing-pans", "french-techniques"],
   "understanding-olive-oil": ["proper-sauce", "what-to-cook-in-summer"],
   "how-to-cook-pasta": ["proper-sauce", "understanding-olive-oil"],
   "how-to-make-bread": ["how-to-cook-pasta", "kitchen-knives"],
   "what-to-cook-in-summer": ["understanding-olive-oil", "how-to-make-bread"],
+  "how-to-season-food": ["proper-sauce", "how-to-use-spices"],
 };

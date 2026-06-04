@@ -208,6 +208,12 @@ const STATIC_ROUTES = [
     description:
       "A seasonal guide to summer cooking in the UK — what's in season, how to build a proper salad, grilling done well, summer herbs, soft fruit, and five dishes every cook should know.",
   },
+  {
+    path: "/guides/how-to-season-food",
+    title: "How to season food — a cook's guide | Stir & Simmer",
+    description:
+      "How to season food properly — when to add salt, how to taste as you cook, the role of acid at the end, and how different cuisines season beyond salt and pepper.",
+  },
 
   {
     path: "/meal-planner",
