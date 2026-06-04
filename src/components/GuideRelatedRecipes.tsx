@@ -61,6 +61,21 @@ const GUIDE_FILTERS: Record<string, GuideFilterSpec> = {
     seasonalOnly: true,
     titleIncludes: ["salad", "tomato", "summer", "prawn", "ceviche", "tartare"],
   },
+  "how-to-build-flavour-from-scratch": {
+    titleIncludes: [
+      "braise", "braised", "stew", "ragu", "ragù", "curry", "bhuna", "rogan josh",
+      "tagine", "coq au vin", "bourguignon", "chasseur", "stroganoff", "daube",
+      "goulash", "massaman", "rendang", "pan sauce", "confit", "osso buco",
+    ],
+  },
+  "how-to-make-a-roux": {
+    cuisines: ["french"],
+    titleIncludes: [
+      "béchamel", "bechamel", "velouté", "veloute", "espagnole", "sauce",
+      "gratin", "mac and cheese", "macaroni cheese", "lasagne", "lasagna",
+      "fish pie", "gumbo", "soufflé", "souffle", "gravy", "moussaka",
+    ],
+  },
 };
 
 const matches = (r: Recipe, spec: GuideFilterSpec): boolean => {

@@ -1,6 +1,8 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
 import GuideFAQ from "@/components/GuideFAQ";
+import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
+import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -232,21 +234,9 @@ const GuideHowToBuildFlavourFromScratch = () => {
 
         <GuideFAQ slug="how-to-build-flavour-from-scratch" />
 
-        {/* Related Guides */}
-        <section className="border-t border-border py-12 md:py-16">
-          <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-3xl">
-            <h2 className="heading-section mb-8 md:mb-10">Related Guides</h2>
-            <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-              <Link to="/guides/proper-stock" className="editorial-link underline underline-offset-4 hover:text-primary">How to Make a Proper Stock</Link>{" "}
-              ·{" "}
-              <Link to="/guides/mother-sauces" className="editorial-link underline underline-offset-4 hover:text-primary">The Mother Sauces</Link>{" "}
-              ·{" "}
-              <Link to="/guides/how-to-make-a-roux" className="editorial-link underline underline-offset-4 hover:text-primary">How to Make a Roux</Link>{" "}
-              ·{" "}
-              <Link to="/guides/french-techniques" className="editorial-link underline underline-offset-4 hover:text-primary">French Cooking Techniques</Link>
-            </p>
-          </div>
-        </section>
+        <GuideRelatedRecipes guideSlug="how-to-build-flavour-from-scratch" />
+
+        <GuideRelatedGuides guideSlug="how-to-build-flavour-from-scratch" />
 
         {/* Kitchen Atlas links */}
         <div className="border-t border-border">
