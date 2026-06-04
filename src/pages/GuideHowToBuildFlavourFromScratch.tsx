@@ -53,6 +53,7 @@ const GuideHowToBuildFlavourFromScratch = () => {
           items={[
             { id: "the-foundation-why-heat-changes-everything", label: "The Foundation: Why Heat Changes Everything" },
             { id: "browning-in-european-cooking", label: "Browning in European Cooking" },
+            { id: "browning-in-indian-cooking-the-bhuna", label: "Browning in Indian Cooking: The Bhuna" },
             { id: "what-flavour-actually-is", label: "What flavour actually is" },
             { id: "the-foundation-fat-and-aromatics", label: "The foundation — fat and aromatics" },
             { id: "the-base-stocks-and-roux", label: "The base — stocks and roux" },
@@ -93,6 +94,29 @@ const GuideHowToBuildFlavourFromScratch = () => {
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             The fat used for browning matters. Butter adds richness and its own flavour. Olive oil brings fruitiness. Rendered animal fat — duck fat, lard, beef dripping — adds depth that vegetable oils cannot match.
+          </p>
+        </div>
+
+        {/* Browning in Indian Cooking: The Bhuna */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="browning-in-indian-cooking-the-bhuna" className="font-display text-3xl md:text-4xl text-foreground mb-6">Browning in Indian Cooking: The Bhuna</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Indian cooking has its own version of this principle, and it is arguably even more systematic.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The bhuna is the process of cooking down onions, garlic, ginger and spice paste together in oil over medium-high heat, stirring constantly, until the mixture is deeply caramelised, the water has completely evaporated, and the oil begins to separate and pool around the edges of the paste. This can take twenty to thirty minutes. It cannot be rushed.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            What you are doing during the bhuna is building the flavour base of the entire dish. The raw sharpness of the onion becomes sweet and complex. The garlic loses its bite and becomes mellow. The spices bloom in the hot oil, their fat-soluble flavour compounds releasing in a way that water-based cooking cannot achieve.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            A curry made with a properly cooked bhuna base and one made with onions that have only softened without colouring taste like different dishes. They are, in a sense, different dishes.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The spices themselves are added in sequence — whole spices first into the hot oil (mustard seeds, cardamom, cloves, dried chillies), which crackle and release their flavour before the onions go in; ground spices later, when the paste is already well-coloured, so they cook briefly in the oil without burning.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            This is layering. Each addition builds on the last.
           </p>
         </div>
 
