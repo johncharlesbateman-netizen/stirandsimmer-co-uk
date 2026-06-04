@@ -59,6 +59,7 @@ const GuideHowToBuildFlavourFromScratch = () => {
             { id: "reducing-concentrating-what-you-have-built", label: "Reducing: Concentrating What You Have Built" },
             { id: "finishing-the-final-layer", label: "Finishing: The Final Layer" },
             { id: "how-it-all-connects", label: "How It All Connects" },
+            { id: "a-note-on-patience", label: "A Note on Patience" },
             { id: "what-flavour-actually-is", label: "What flavour actually is" },
             { id: "the-foundation-fat-and-aromatics", label: "The foundation — fat and aromatics" },
             { id: "the-base-stocks-and-roux", label: "The base — stocks and roux" },
