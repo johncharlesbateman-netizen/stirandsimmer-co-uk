@@ -41,6 +41,8 @@ const GuideWhatToCookInSummer = lazy(() => import("./pages/GuideWhatToCookInSumm
 const GuideHowToSeasonFood = lazy(() => import("./pages/GuideHowToSeasonFood"));
 const GuideKnifeSkills = lazy(() => import("./pages/GuideKnifeSkills"));
 const GuideUnderstandingHeat = lazy(() => import("./pages/GuideUnderstandingHeat"));
+const GuideHowToBuildFlavourFromScratch = lazy(() => import("./pages/GuideHowToBuildFlavourFromScratch"));
+const GuideHowToMakeARoux = lazy(() => import("./pages/GuideHowToMakeARoux"));
 const Auth = lazy(() => import("./pages/Auth"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -158,6 +160,8 @@ const App = () => (
               <Route path="/guides/how-to-season-food" element={<GuideHowToSeasonFood />} />
               <Route path="/guides/knife-skills" element={<GuideKnifeSkills />} />
               <Route path="/guides/understanding-heat" element={<GuideUnderstandingHeat />} />
+              <Route path="/guides/how-to-build-flavour-from-scratch" element={<GuideHowToBuildFlavourFromScratch />} />
+              <Route path="/guides/how-to-make-a-roux" element={<GuideHowToMakeARoux />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/meal-planner" element={<MealPlanner />} />
               <Route path="/auth" element={<Auth />} />

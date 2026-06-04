@@ -210,6 +210,26 @@ export const GUIDES: GuideEntry[] = [
     imageSrcSet: understandingHeatSrcSet,
     imageAlt: "A hot cast iron skillet on a hob with butter sizzling and steam rising",
   },
+  {
+    slug: "how-to-build-flavour-from-scratch",
+    title: "How to build flavour from scratch",
+    description:
+      "The layers, the bases and the small habits that turn a pan of ingredients into something with depth, balance and life — fat, aromatics, stock, roux, browning, salt and acid.",
+    eyebrow: "Technique",
+    category: "Technique",
+    imageId: "1640774",
+    imageAlt: "A pan of softening onions and aromatics in golden butter on a dark stove",
+  },
+  {
+    slug: "how-to-make-a-roux",
+    title: "How to make a roux",
+    description:
+      "Equal parts butter and flour — the small piece of technique that underpins Béchamel, Velouté, Espagnole and most classic sauces. The three stages, the ratios and the rule that prevents lumps.",
+    eyebrow: "French Technique",
+    category: "French Technique",
+    imageId: "5908227",
+    imageAlt: "A wooden spoon stirring a pale golden roux of butter and flour in a copper pan",
+  },
 ];
 
 export const GUIDE_FALLBACK_IMAGE = properStockImage;
@@ -224,12 +244,12 @@ export const GUIDE_BY_SLUG: Record<string, GuideEntry> = Object.fromEntries(
 );
 
 /** Manual related-guide mapping. Order matters — first listed shows first. */
-export const RELATED_GUIDES: Record<string, [string, string]> = {
-  "mother-sauces": ["proper-sauce", "french-techniques"],
-  "french-techniques": ["mother-sauces", "kitchen-knives"],
+export const RELATED_GUIDES: Record<string, string[]> = {
+  "mother-sauces": ["proper-sauce", "french-techniques", "how-to-make-a-roux", "how-to-build-flavour-from-scratch"],
+  "french-techniques": ["mother-sauces", "kitchen-knives", "how-to-build-flavour-from-scratch"],
   "garam-masala": ["how-to-season-food", "how-to-use-spices"],
   "how-to-use-spices": ["garam-masala", "how-to-season-food"],
-  "proper-stock": ["understanding-heat", "how-to-season-food"],
+  "proper-stock": ["understanding-heat", "how-to-season-food", "how-to-build-flavour-from-scratch"],
   "proper-sauce": ["understanding-heat", "how-to-season-food"],
   "choosing-pans": ["kitchen-knives", "how-to-cook-pasta"],
   "kitchen-knives": ["knife-skills", "choosing-pans"],
@@ -240,4 +260,7 @@ export const RELATED_GUIDES: Record<string, [string, string]> = {
   "what-to-cook-in-summer": ["understanding-olive-oil", "how-to-make-bread"],
   "how-to-season-food": ["proper-sauce", "how-to-use-spices"],
   "understanding-heat": ["proper-sauce", "proper-stock"],
+  "how-to-build-flavour-from-scratch": ["proper-stock", "mother-sauces", "how-to-make-a-roux", "french-techniques"],
+  "how-to-make-a-roux": ["mother-sauces", "how-to-build-flavour-from-scratch", "proper-stock", "french-techniques"],
 };
+
