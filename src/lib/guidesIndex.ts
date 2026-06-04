@@ -16,6 +16,8 @@ import howToSeasonFoodImage from "@/assets/guide-how-to-season-food.jpg";
 import howToSeasonFoodSrcSet from "@/assets/guide-how-to-season-food.jpg?w=400;600;800;1200&format=webp&as=srcset";
 import knifeSkillsImage from "@/assets/guide-knife-skills.jpg";
 import knifeSkillsSrcSet from "@/assets/guide-knife-skills.jpg?w=400;600;800;1200&format=webp&as=srcset";
+import understandingHeatImage from "@/assets/guide-understanding-heat.jpg";
+import understandingHeatSrcSet from "@/assets/guide-understanding-heat.jpg?w=400;600;800;1200&format=webp&as=srcset";
 
 export const GUIDE_CATEGORIES = [
   "All",
@@ -197,6 +199,17 @@ export const GUIDES: GuideEntry[] = [
     imageSrcSet: knifeSkillsSrcSet,
     imageAlt: "A chef's knife on a dark wooden cutting board with finely chopped vegetables and fresh herbs",
   },
+  {
+    slug: "understanding-heat",
+    title: "Understanding heat — a cook's guide",
+    description:
+      "How to control heat on any cooker, the difference between dry and wet heat, what the heat levels actually mean, and the visual and sound cues that tell you what's really happening in the pan.",
+    eyebrow: "Technique",
+    category: "Technique",
+    image: understandingHeatImage,
+    imageSrcSet: understandingHeatSrcSet,
+    imageAlt: "A hot cast iron skillet on a hob with butter sizzling and steam rising",
+  },
 ];
 
 export const GUIDE_FALLBACK_IMAGE = properStockImage;
@@ -216,8 +229,8 @@ export const RELATED_GUIDES: Record<string, [string, string]> = {
   "french-techniques": ["mother-sauces", "kitchen-knives"],
   "garam-masala": ["how-to-season-food", "how-to-use-spices"],
   "how-to-use-spices": ["garam-masala", "how-to-season-food"],
-  "proper-stock": ["how-to-season-food", "proper-sauce"],
-  "proper-sauce": ["how-to-season-food", "proper-stock"],
+  "proper-stock": ["understanding-heat", "how-to-season-food"],
+  "proper-sauce": ["understanding-heat", "how-to-season-food"],
   "choosing-pans": ["kitchen-knives", "how-to-cook-pasta"],
   "kitchen-knives": ["knife-skills", "choosing-pans"],
   "knife-skills": ["kitchen-knives", "how-to-season-food"],
@@ -226,4 +239,5 @@ export const RELATED_GUIDES: Record<string, [string, string]> = {
   "how-to-make-bread": ["how-to-cook-pasta", "kitchen-knives"],
   "what-to-cook-in-summer": ["understanding-olive-oil", "how-to-make-bread"],
   "how-to-season-food": ["proper-sauce", "how-to-use-spices"],
+  "understanding-heat": ["proper-sauce", "proper-stock"],
 };

@@ -52,6 +52,7 @@ const GUIDE_SLUGS = [
   "proper-stock", "proper-sauce", "choosing-pans", "kitchen-knives",
   "understanding-olive-oil", "how-to-cook-pasta", "how-to-make-bread",
   "what-to-cook-in-summer", "how-to-season-food", "knife-skills",
+  "understanding-heat",
 ];
 
 
