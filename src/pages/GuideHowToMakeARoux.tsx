@@ -2,6 +2,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
 import GuideFAQ from "@/components/GuideFAQ";
 import GuideRelatedGuides from "@/components/GuideRelatedGuides";
+import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
@@ -149,6 +150,8 @@ const GuideHowToMakeARoux = () => {
         </div>
 
         <GuideFAQ slug="how-to-make-a-roux" />
+
+        <GuideRelatedRecipes guideSlug="how-to-make-a-roux" />
 
         <GuideRelatedGuides guideSlug="how-to-make-a-roux" />
 
