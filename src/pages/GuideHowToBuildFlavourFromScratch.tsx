@@ -32,13 +32,19 @@ const GuideHowToBuildFlavourFromScratch = () => {
             </Link>
             <p className="micro-caption mb-4 text-primary">Guide</p>
             <h1 className="font-display text-4xl md:text-5xl leading-tight text-foreground mb-5">
-              How to build flavour from scratch
+              How to Build Flavour from Scratch
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
-              The layers, the bases and the small habits that turn a pan of ingredients into something with depth, balance and life.
+              The logic of browning, deglazing, reducing and finishing — and why the same principles apply whether you're making a French braise, an Indian curry or a Thai stir-fry.
+            </p>
+            <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+              There is a reason that some food tastes of something and some food merely tastes of its ingredients. The difference is almost never about the quality of what went in. It is almost always about what happened to it on the way.
+            </p>
+            <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+              Flavour in cooking is not found — it is built. Layer by layer, decision by decision, from the moment the pan heats up to the moment the dish reaches the table. Every great cuisine in the world understands this, though each one goes about it differently.
             </p>
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-              Great cooking is rarely about one dramatic ingredient. It is about layers — flavours added at the right moment, in the right order, each one building on the last. Once you understand how those layers work, you stop following recipes blindly and start cooking with intent.
+              This guide explains the underlying logic. Once you understand it, you will cook differently — not because you have learned a new recipe, but because you understand what you are actually trying to do.
             </p>
           </div>
         </header>
