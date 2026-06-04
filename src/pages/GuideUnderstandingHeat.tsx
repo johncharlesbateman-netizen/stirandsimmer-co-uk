@@ -67,6 +67,8 @@ const GuideUnderstandingHeat = () => {
             { id: "dry-heat-wet-heat", label: "Dry heat and wet heat — understanding the difference" },
             { id: "understanding-your-oven", label: "Understanding your oven" },
             { id: "visual-sound-cues", label: "Visual and sound cues — what to look and listen for" },
+            { id: "food-thermometer", label: "The food thermometer — the most underused tool in a home kitchen" },
+            { id: "resting", label: "Resting — the step most home cooks skip" },
           ]}
         />
 
@@ -204,8 +206,36 @@ const GuideUnderstandingHeat = () => {
           </p>
 
           <Callout label="The mistake most home cooks make">
-            Not getting the pan hot enough before adding food, and then turning the heat up to compensate once the food is already in. Food added to a cold pan sticks, steams and colours unevenly. The time to build heat is before the food goes in, not after. Be patient with the pan. It will tell you when it is ready.
+            Not getting the pan hot enough before adding food, and then turning the heat up to compensate once the food is already in. Food added to a cold pan sticks, steams and colours unevenly. The time to build heat is before the food goes in, not after. Be patient with the pan. It will tell you when it is ready. The same applies to resting — food taken straight from heat to plate loses its juices immediately. Give it time.
           </Callout>
+        </div>
+
+        {/* Section 7: Food thermometer */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="food-thermometer" className="font-display text-3xl md:text-4xl text-foreground mb-6">The food thermometer — the most underused tool in a home kitchen</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            A food thermometer removes the guesswork from the most important question in cooking — is it done. Cutting into a piece of meat to check costs you juice and presentation. Pressing it and guessing takes years of experience to do reliably. A thermometer tells you exactly where you are in seconds.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The principle is simple: it is always better to undercook, measure and return something to the heat than to overcook it and find there is nothing to be done. Overcooked meat, fish or poultry cannot be retrieved. Undercooked food can always go back.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Key internal temperatures to know: Chicken and poultry — 74 degrees Celsius at the thickest point away from bone. Beef and lamb medium rare — 55 to 57 degrees Celsius. Beef and lamb medium — 60 to 63 degrees Celsius. Pork — 70 degrees Celsius. Fish — 60 degrees Celsius though many prefer it pulled slightly before this.
+          </p>
+        </div>
+
+        {/* Section 8: Resting */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="resting" className="font-display text-3xl md:text-4xl text-foreground mb-6">Resting — the step most home cooks skip</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Once food comes off the heat it is not finished. Resting allows the juices that have been driven to the centre of the meat during cooking to redistribute through the whole piece. Cut into it immediately and those juices run straight onto the board. Rest it properly and they stay in the meat where they belong.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            A steak needs to rest for roughly as long as it was cooked — a steak cooked for four minutes needs four minutes of rest. A larger joint needs longer. Tent it loosely with foil to retain some warmth and leave it alone.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            The temperature will also continue to rise slightly during resting — known as carry-over cooking — which is why pulling food from the heat two or three degrees before the target temperature makes sense.
+          </p>
         </div>
 
         {/* Closing */}
