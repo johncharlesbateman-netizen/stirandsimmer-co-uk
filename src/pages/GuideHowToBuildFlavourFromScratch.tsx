@@ -51,6 +51,7 @@ const GuideHowToBuildFlavourFromScratch = () => {
 
         <GuideTOC
           items={[
+            { id: "the-foundation-why-heat-changes-everything", label: "The Foundation: Why Heat Changes Everything" },
             { id: "what-flavour-actually-is", label: "What flavour actually is" },
             { id: "the-foundation-fat-and-aromatics", label: "The foundation — fat and aromatics" },
             { id: "the-base-stocks-and-roux", label: "The base — stocks and roux" },
@@ -62,6 +63,23 @@ const GuideHowToBuildFlavourFromScratch = () => {
             { id: "putting-it-all-together", label: "Putting it all together" },
           ]}
         />
+
+        {/* The Foundation: Why Heat Changes Everything */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="the-foundation-why-heat-changes-everything" className="font-display text-3xl md:text-4xl text-foreground mb-6">The Foundation: Why Heat Changes Everything</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Raw ingredients taste of themselves. Cooked ingredients — properly cooked — taste of something more.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The reason is chemistry. When proteins and sugars are exposed to high heat, they undergo what is known as the Maillard reaction: a complex series of chemical changes that produce hundreds of new flavour compounds. This is what happens when meat sears, when onions soften and colour, when spices hit a hot pan. It is not burning. It is transformation.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The Maillard reaction requires dry, high heat. This is why a piece of meat dropped into a cold, wet pan steams rather than sears — and why it tastes flat as a result. The surface must be dry, the pan must be hot, and the heat must have time to work.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            This single principle — that browning creates flavour — sits at the heart of cooking across every cuisine that has ever produced something worth eating.
+          </p>
+        </div>
 
         {/* What flavour actually is */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
