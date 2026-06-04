@@ -170,6 +170,24 @@ const RAW: RawMeta[] = [
     publishedTime: "2026-06-04T11:00:00Z",
     modifiedTime: "2026-06-04T11:00:00Z",
   },
+  {
+    slug: "how-to-build-flavour-from-scratch",
+    title: "How to Build Flavour From Scratch: A Cook's Guide — Stir & Simmer",
+    description:
+      "Build flavour the way good cooks do — fat and aromatics, stocks and roux, the Maillard layer, salt and acid, and how Indian, Thai and French kitchens layer depth.",
+    imageId: "1640774",
+    publishedTime: "2026-06-04T12:00:00Z",
+    modifiedTime: "2026-06-04T12:00:00Z",
+  },
+  {
+    slug: "how-to-make-a-roux",
+    title: "How to Make a Roux: White, Blond and Brown — Stir & Simmer",
+    description:
+      "How to make a proper roux — butter and flour, the three stages, the ratios that thicken, the warm-liquid rule that prevents lumps, and where to use each colour.",
+    imageId: "5908227",
+    publishedTime: "2026-06-04T13:00:00Z",
+    modifiedTime: "2026-06-04T13:00:00Z",
+  },
 ];
 
 const DEFAULT_MODIFIED = "2025-05-16T09:00:00Z";
