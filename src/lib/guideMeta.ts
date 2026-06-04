@@ -7,6 +7,7 @@ import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.jpg";
 import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.jpg";
 import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.jpg";
 import howToSeasonFoodImage from "@/assets/guide-how-to-season-food.jpg";
+import knifeSkillsImage from "@/assets/guide-knife-skills.jpg";
 
 export const SITE_ORIGIN = "https://stirandsimmer.co.uk";
 const AUTHOR = "Stir & Simmer";
