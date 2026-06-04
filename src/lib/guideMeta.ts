@@ -7,6 +7,7 @@ import howToCookPastaImage from "@/assets/guide-how-to-cook-pasta-hero.jpg";
 import howToMakeBreadImage from "@/assets/guide-how-to-make-bread-hero.jpg";
 import whatToCookInSummerImage from "@/assets/guide-what-to-cook-in-summer-hero.jpg";
 import howToSeasonFoodImage from "@/assets/guide-how-to-season-food.jpg";
+import knifeSkillsImage from "@/assets/guide-knife-skills.jpg";
 
 export const SITE_ORIGIN = "https://stirandsimmer.co.uk";
 const AUTHOR = "Stir & Simmer";
@@ -149,6 +150,15 @@ const RAW: RawMeta[] = [
     image: howToSeasonFoodImage,
     publishedTime: "2026-06-04T09:00:00Z",
     modifiedTime: "2026-06-04T09:00:00Z",
+  },
+  {
+    slug: "knife-skills",
+    title: "Knife Skills for Home Cooks — A Practical Guide | Stir & Simmer",
+    description:
+      "Learn the pinch grip, the claw grip, the rocking motion and the four essential cuts every home cook needs. Plus why a sharp, well-cared-for knife is safer and more satisfying.",
+    image: knifeSkillsImage,
+    publishedTime: "2026-06-04T10:00:00Z",
+    modifiedTime: "2026-06-04T10:00:00Z",
   },
 ];
 

@@ -51,7 +51,7 @@ const GUIDE_SLUGS = [
   "mother-sauces", "french-techniques", "garam-masala", "how-to-use-spices",
   "proper-stock", "proper-sauce", "choosing-pans", "kitchen-knives",
   "understanding-olive-oil", "how-to-cook-pasta", "how-to-make-bread",
-  "what-to-cook-in-summer", "how-to-season-food",
+  "what-to-cook-in-summer", "how-to-season-food", "knife-skills",
 ];
 
 

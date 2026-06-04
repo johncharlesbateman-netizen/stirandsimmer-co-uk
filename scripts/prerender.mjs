@@ -214,6 +214,12 @@ const STATIC_ROUTES = [
     description:
       "How to season food properly — when to add salt, how to taste as you cook, the role of acid at the end, and how different cuisines season beyond salt and pepper.",
   },
+  {
+    path: "/guides/knife-skills",
+    title: "Knife skills for home cooks — a practical guide | Stir & Simmer",
+    description:
+      "Learn the pinch grip, the claw grip, the rocking motion and the four essential cuts every home cook needs. Plus why a sharp, well-cared-for knife is safer and more satisfying.",
+  },
 
   {
     path: "/meal-planner",

@@ -273,4 +273,26 @@ export const guideFAQs: Record<string, GuideFAQ[]> = {
         "Soft herbs — basil, mint, dill, tarragon, chives and parsley. They wilt under heat, so add them at the end or use them raw. A handful torn over a finished dish lifts almost anything you cook in summer.",
     },
   ],
+  "knife-skills": [
+    {
+      question: "What is the claw grip and why is it important?",
+      answer:
+        "The claw grip curls your fingertips inward so the flat of your knuckles guides the blade. It keeps your fingers safe from the edge and lets you move the ingredient steadily toward the knife — improving both safety and efficiency.",
+    },
+    {
+      question: "Do I need expensive knives to cook well?",
+      answer:
+        "No. One good chef's knife in the £80-150 range, kept sharp, will outperform a full block of blunt knives. Spend your money on a single quality blade and a honing steel rather than a large set.",
+    },
+    {
+      question: "How often should I sharpen my knife?",
+      answer:
+        "Hone with a steel before every use — it takes thirty seconds and realigns the edge. A full sharpen on a whetstone is only needed every few months if you hone consistently. A blunt knife is more dangerous than a sharp one.",
+    },
+    {
+      question: "What are the four basic cuts every home cook needs?",
+      answer:
+        "Rough chop for stocks and soups, dice for even cooking in stews and sauces, slice for consistent thickness in roasting and stir-fries, and fine chop for garlic, herbs and aromatics where even flavour distribution matters.",
+    },
+  ],
 };
