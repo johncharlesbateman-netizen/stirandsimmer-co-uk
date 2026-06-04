@@ -151,6 +151,15 @@ const RAW: RawMeta[] = [
     publishedTime: "2026-06-04T09:00:00Z",
     modifiedTime: "2026-06-04T09:00:00Z",
   },
+  {
+    slug: "knife-skills",
+    title: "Knife Skills for Home Cooks — A Practical Guide | Stir & Simmer",
+    description:
+      "Learn the pinch grip, the claw grip, the rocking motion and the four essential cuts every home cook needs. Plus why a sharp, well-cared-for knife is safer and more satisfying.",
+    image: knifeSkillsImage,
+    publishedTime: "2026-06-04T10:00:00Z",
+    modifiedTime: "2026-06-04T10:00:00Z",
+  },
 ];
 
 const DEFAULT_MODIFIED = "2025-05-16T09:00:00Z";
