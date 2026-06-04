@@ -54,6 +54,8 @@ const GuideHowToBuildFlavourFromScratch = () => {
             { id: "the-foundation-why-heat-changes-everything", label: "The Foundation: Why Heat Changes Everything" },
             { id: "browning-in-european-cooking", label: "Browning in European Cooking" },
             { id: "browning-in-indian-cooking-the-bhuna", label: "Browning in Indian Cooking: The Bhuna" },
+            { id: "browning-in-thai-cooking-frying-the-paste", label: "Browning in Thai Cooking: Frying the Paste" },
+            { id: "deglazing-the-technique-that-wastes-nothing", label: "Deglazing: The Technique That Wastes Nothing" },
             { id: "what-flavour-actually-is", label: "What flavour actually is" },
             { id: "the-foundation-fat-and-aromatics", label: "The foundation — fat and aromatics" },
             { id: "the-base-stocks-and-roux", label: "The base — stocks and roux" },
@@ -117,6 +119,43 @@ const GuideHowToBuildFlavourFromScratch = () => {
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             This is layering. Each addition builds on the last.
+          </p>
+        </div>
+
+        {/* Browning in Thai Cooking: Frying the Paste */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="browning-in-thai-cooking-frying-the-paste" className="font-display text-3xl md:text-4xl text-foreground mb-6">Browning in Thai Cooking: Frying the Paste</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Thai cooking approaches the same principle differently again, but the logic is identical.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            A Thai curry does not begin with the liquid. It begins with the paste — red, green, yellow or massaman — fried in the thick, fatty top layer of coconut cream over high heat, stirred constantly, until it is fragrant and beginning to separate from the cream. The paste is cooked, not just warmed. The raw edges of galangal, lemongrass, shrimp paste and chilli are transformed by the heat before anything else enters the pan.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Only once the paste is properly cooked — fragrant, slightly darkened, with oil pooling at the edges — does the rest of the coconut milk go in. This sequence is not traditional habit. It is the correct way to build flavour.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            A Thai curry made by dumping paste and coconut milk in together from the start tastes thinner and flatter than one where the paste has been properly fried first. The difference, again, is the Maillard reaction doing its work.
+          </p>
+        </div>
+
+        {/* Deglazing: The Technique That Wastes Nothing */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <h2 id="deglazing-the-technique-that-wastes-nothing" className="font-display text-3xl md:text-4xl text-foreground mb-6">Deglazing: The Technique That Wastes Nothing</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            After browning — whether meat, vegetables or a spice paste — there is almost always something left in the pan. A dark, sticky, slightly caramelised residue clinging to the bottom and sides. This is not a problem to be cleaned up. It is concentrated flavour waiting to be used.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Deglazing is the process of dissolving this residue into a liquid — wine, stock, cider, water, tamarind, coconut milk, or fish sauce — by adding it to the hot pan and scraping as it sizzles. The residue dissolves completely into the liquid within seconds, transforming a few tablespoons of something thin into the flavoured base of a sauce. In French cooking, deglazing with wine or stock after searing a piece of meat is the first step in almost every pan sauce and braise. The liquid picks up everything the browning created and carries it into the finished dish.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In Indian cooking, the equivalent moment is when tomatoes or yogurt are added to a bhuna base — the liquid ingredients hit the hot, dry paste and dissolve the caramelised residue from the pan into the sauce.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            In Thai cooking, it happens when the full coconut milk goes into the pan after the paste has been fried — the liquid lifts everything the frying created and incorporates it into the curry.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Different liquids. Different cuisines. The same principle.
           </p>
         </div>
 
