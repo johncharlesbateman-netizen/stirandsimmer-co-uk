@@ -244,12 +244,12 @@ export const GUIDE_BY_SLUG: Record<string, GuideEntry> = Object.fromEntries(
 );
 
 /** Manual related-guide mapping. Order matters — first listed shows first. */
-export const RELATED_GUIDES: Record<string, [string, string]> = {
-  "mother-sauces": ["proper-sauce", "french-techniques"],
-  "french-techniques": ["mother-sauces", "kitchen-knives"],
+export const RELATED_GUIDES: Record<string, string[]> = {
+  "mother-sauces": ["proper-sauce", "french-techniques", "how-to-make-a-roux", "how-to-build-flavour-from-scratch"],
+  "french-techniques": ["mother-sauces", "kitchen-knives", "how-to-build-flavour-from-scratch"],
   "garam-masala": ["how-to-season-food", "how-to-use-spices"],
   "how-to-use-spices": ["garam-masala", "how-to-season-food"],
-  "proper-stock": ["understanding-heat", "how-to-season-food"],
+  "proper-stock": ["understanding-heat", "how-to-season-food", "how-to-build-flavour-from-scratch"],
   "proper-sauce": ["understanding-heat", "how-to-season-food"],
   "choosing-pans": ["kitchen-knives", "how-to-cook-pasta"],
   "kitchen-knives": ["knife-skills", "choosing-pans"],
@@ -260,4 +260,7 @@ export const RELATED_GUIDES: Record<string, [string, string]> = {
   "what-to-cook-in-summer": ["understanding-olive-oil", "how-to-make-bread"],
   "how-to-season-food": ["proper-sauce", "how-to-use-spices"],
   "understanding-heat": ["proper-sauce", "proper-stock"],
+  "how-to-build-flavour-from-scratch": ["proper-stock", "mother-sauces", "how-to-make-a-roux", "french-techniques"],
+  "how-to-make-a-roux": ["mother-sauces", "how-to-build-flavour-from-scratch", "proper-stock", "french-techniques"],
 };
+
