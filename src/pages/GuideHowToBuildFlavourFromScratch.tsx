@@ -53,6 +53,7 @@ const GuideHowToBuildFlavourFromScratch = () => {
           items={[
             { id: "the-foundation-why-heat-changes-everything", label: "The Foundation: Why Heat Changes Everything" },
             { id: "browning-in-european-cooking", label: "Browning in European Cooking" },
+            { id: "browning-in-indian-cooking-the-bhuna", label: "Browning in Indian Cooking: The Bhuna" },
             { id: "what-flavour-actually-is", label: "What flavour actually is" },
             { id: "the-foundation-fat-and-aromatics", label: "The foundation — fat and aromatics" },
             { id: "the-base-stocks-and-roux", label: "The base — stocks and roux" },
