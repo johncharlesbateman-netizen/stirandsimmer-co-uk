@@ -237,6 +237,9 @@ const GuideUnderstandingHeat = () => {
             The temperature will also continue to rise slightly during resting — known as carry-over cooking — which is why pulling food from the heat two or three degrees before the target temperature makes sense.
           </p>
         </div>
+
+        {/* Closing */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
             Heat is the part of cooking that no recipe can fully control for you. A recipe can tell you high, medium or low — it cannot know your cooker, your pan, your kitchen. Developing heat awareness is a matter of paying attention every time you cook. Listen to the pan. Watch the oil. Smell what is happening. The more you notice, the more instinctive it becomes.
           </p>
