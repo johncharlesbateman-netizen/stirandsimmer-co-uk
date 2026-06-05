@@ -7,63 +7,90 @@ const Footer = () => {
   return (
     <footer style={{ backgroundColor: "#2C2416", color: "#F5EAD8", borderTop: "1px solid rgba(245,234,216,0.15)" }}>
       <div className="container mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Brand */}
-          <div className="space-y-4">
-            <h3 className="font-display text-xl" style={{ color: "#F5EAD8" }}>Stir & Simmer</h3>
-            <p className="text-sm leading-relaxed" style={{ color: "rgba(245,234,216,0.7)" }}>
-              Delicious recipes crafted with love, flavour, and fresh ingredients.
-            </p>
-          </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
+      {/* Brand */}
+      <div className="space-y-4 sm:col-span-2 md:col-span-1">
+        <h3 className="font-display text-xl" style={{ color: "#F5EAD8" }}>Stir & Simmer</h3>
+        <p className="text-sm leading-relaxed" style={{ color: "rgba(245,234,216,0.7)" }}>
+          Delicious recipes crafted with love, flavour, and fresh ingredients.
+        </p>
+      </div>
 
-          {/* Navigation */}
-          <div className="space-y-4 md:pl-4 lg:pl-8">
-            <h4 className="micro-caption" style={{ color: "#C4A97A" }}>Navigate</h4>
-            <nav className="flex flex-col gap-3">
-              {[
-                { to: "/recipes", label: "Recipes" },
-                { to: "/kitchen-atlas", label: "Kitchen Atlas" },
-                { to: "/guides", label: "Guides" },
-                { to: "/meal-planner", label: "Meal Planner" },
-                { to: "/about", label: "About" },
-                { to: "/contact", label: "Contact" },
-                { to: "/privacy", label: "Privacy" },
-              ].map(({ to, label }) => (
-                <Link
-                  key={to}
-                  to={to}
-                  className="text-sm w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
-                  style={{ color: "#F5EAD8" }}
-                >
-                  {label}
-                </Link>
-              ))}
-            </nav>
-          </div>
+      {/* Navigate */}
+      <div className="space-y-4">
+        <h4 className="micro-caption" style={{ color: "#C4A97A" }}>Navigate</h4>
+        <nav className="flex flex-col gap-3">
+          {[
+            { to: "/recipes", label: "Recipes" },
+            { to: "/guides", label: "Guides" },
+            { to: "/meal-planner", label: "Meal Planner" },
+            { to: "/about", label: "About" },
+            { to: "/contact", label: "Contact" },
+            { to: "/privacy", label: "Privacy" },
+          ].map(({ to, label }) => (
+            <Link
+              key={to}
+              to={to}
+              className="text-sm w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
+              style={{ color: "#F5EAD8" }}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </div>
 
-          {/* Connect */}
-          <div className="space-y-4">
-            <h4 className="micro-caption" style={{ color: "#C4A97A" }}>Get in Touch</h4>
-            <div className="space-y-3 text-sm">
-              <a
-                href="mailto:hello@stirandsimmer.co.uk"
-                className="block opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
-                style={{ color: "#F5EAD8" }}
-              >
-                hello@stirandsimmer.co.uk
-              </a>
-              <a
-                href="https://www.instagram.com/stirandsimmeruk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
-                style={{ color: "#F5EAD8" }}
-              >
-                <Instagram className="w-4 h-4" aria-hidden="true" />
-                <span>@stirandsimmeruk</span>
-              </a>
-            </div>
-          </div>
+      {/* Kitchen Atlas */}
+      <div className="space-y-4">
+        <h4 className="micro-caption" style={{ color: "#C4A97A" }}>Kitchen Atlas</h4>
+        <nav className="flex flex-col gap-3">
+          {[
+            { to: "/kitchen-atlas", label: "All Regions" },
+            { to: "/kitchen-atlas/united-kingdom", label: "United Kingdom" },
+            { to: "/kitchen-atlas/italy", label: "Italy" },
+            { to: "/kitchen-atlas/france", label: "France" },
+            { to: "/kitchen-atlas/spain", label: "Spain" },
+            { to: "/kitchen-atlas/india", label: "India" },
+            { to: "/kitchen-atlas/thailand", label: "Thailand" },
+            { to: "/kitchen-atlas/mediterranean", label: "Mediterranean" },
+            { to: "/kitchen-atlas/middle-east", label: "Middle East" },
+            { to: "/kitchen-atlas/mexico", label: "Mexico" },
+          ].map(({ to, label }) => (
+            <Link
+              key={to}
+              to={to}
+              className="text-sm w-fit opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
+              style={{ color: "#F5EAD8" }}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+
+      {/* Connect */}
+      <div className="space-y-4">
+        <h4 className="micro-caption" style={{ color: "#C4A97A" }}>Get in Touch</h4>
+        <div className="space-y-3 text-sm">
+          <a
+            href="mailto:hello@stirandsimmer.co.uk"
+            className="block opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
+            style={{ color: "#F5EAD8" }}
+          >
+            hello@stirandsimmer.co.uk
+          </a>
+          <a
+            href="https://www.instagram.com/stirandsimmeruk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
+            style={{ color: "#F5EAD8" }}
+          >
+            <Instagram className="w-4 h-4" aria-hidden="true" />
+            <span>@stirandsimmeruk</span>
+          </a>
+        </div>
+      </div>
         </div>
 
         {/* Bottom Bar */}
