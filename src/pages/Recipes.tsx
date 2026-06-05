@@ -160,7 +160,7 @@ const Recipes = () => {
                 {results.map((r) => (
                   <li key={r.id}>
                     <Link
-                      to={`/recipe/${r.slug}`}
+                      to={`/recipes/${r.slug}`}
                       className="group flex items-start justify-between gap-4 py-4 hover:bg-secondary/40 transition-colors px-2 -mx-2 rounded-md"
                     >
                       <div className="min-w-0">
