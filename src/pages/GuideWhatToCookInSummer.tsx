@@ -117,13 +117,13 @@ const GuideWhatToCookInSummer = () => {
           </p>
           <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             <li>
-              <strong className="text-foreground">June</strong> — strawberries, broad beans, peas, new potatoes, asparagus (just finishing), elderflowers, gooseberries, lettuce, radishes, spring onions, mackerel, sea trout, crab. Offshore, crab and sea trout are at their best. Mackerel are running in large numbers close to shore — one of the great bargains of the British food year.
+              <strong className="text-foreground">June</strong> — strawberries, broad beans, peas, new potatoes, asparagus (just finishing), elderflowers, gooseberries, lettuce, radishes, spring onions. At sea: mackerel running close to shore, crab, sea trout — one of the great bargains of the British food year.
             </li>
             <li>
-              <strong className="text-foreground">July</strong> — courgettes, cherries, raspberries, blackcurrants, redcurrants, runner beans, French beans, the first tomatoes, cucumbers, fennel, lamb, sardines. Girolles and chanterelles begin to appear at farmers' markets — worth seeking out. Native lobster comes into prime condition through July. Brill, sea bass and red mullet are excellent. Mussels return to their best after the summer spawning season ends.
+              <strong className="text-foreground">July</strong> — courgettes, cherries, raspberries, blackcurrants, redcurrants, runner beans, French beans, the first tomatoes, cucumbers, fennel, lamb, sardines. Girolles and chanterelles begin to appear at farmers' markets. At sea: native lobster comes into prime condition, brill, sea bass and red mullet are excellent, mussels return to their best after spawning.
             </li>
             <li>
-              <strong className="text-foreground">August</strong> — tomatoes at their absolute peak, sweetcorn, aubergines, peppers, plums, peaches and nectarines, figs, blackberries, basil, samphire. Damsons and greengages arrive towards the end of the month. Cobnuts appear — underused, delicious eaten fresh with cheese or folded into salads. Sea bass reach their peak weight through August. Crab, lobster and mackerel remain outstanding. Scallops begin to come back into condition. Dover sole and plaice are at their summer best.
+              <strong className="text-foreground">August</strong> — tomatoes at their absolute peak, sweetcorn, aubergines, peppers, plums, peaches and nectarines, figs, blackberries, basil, samphire. Damsons and greengages arrive towards the end of the month. Cobnuts appear — underused, delicious eaten fresh with cheese or folded into salads. At sea: sea bass, crab and lobster remain outstanding, scallops begin to come back into condition, Dover sole and plaice at their summer best.
             </li>
             <li>
               <strong className="text-foreground">Early September</strong> — late tomatoes, sweetcorn still going, the first apples and pears, damsons, blackberries, the first wild mushrooms, partridge.
