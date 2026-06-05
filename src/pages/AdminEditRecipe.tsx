@@ -115,8 +115,31 @@ const AdminEditRecipe = () => {
       setPrepTime(data.prep_time_minutes?.toString() || "");
       setCookTime(data.cook_time_minutes?.toString() || "");
       setServings(data.servings?.toString() || "");
-      setIngredients(Array.isArray(data.ingredients) && data.ingredients.length > 0 ? data.ingredients as string[] : [""]);
-      setInstructions(Array.isArray(data.instructions) && data.instructions.length > 0 ? data.instructions as string[] : [""]);
+      const coerceToStringList = (raw: unknown): string[] => {
+        if (!Array.isArray(raw)) return [];
+        return raw
+          .map((item) => {
+            if (typeof item === "string") return item;
+            if (item && typeof item === "object") {
+              const obj = item as { text?: unknown; tip?: unknown; amount?: unknown; item?: unknown };
+              if (typeof obj.text === "string") {
+                return typeof obj.tip === "string" && obj.tip.trim()
+                  ? `${obj.text} tip:${obj.tip}`
+                  : obj.text;
+              }
+              if (obj.amount !== undefined || obj.item !== undefined) {
+                return `${obj.amount ?? ""} ${obj.item ?? ""}`.trim();
+              }
+              return JSON.stringify(item);
+            }
+            return String(item ?? "");
+          })
+          .filter((s) => s.length > 0);
+      };
+      const loadedIngredients = coerceToStringList(data.ingredients);
+      const loadedInstructions = coerceToStringList(data.instructions);
+      setIngredients(loadedIngredients.length > 0 ? loadedIngredients : [""]);
+      setInstructions(loadedInstructions.length > 0 ? loadedInstructions : [""]);
       setTips(data.tips || "");
       setSeoTitle((data as { seo_title?: string | null }).seo_title || "");
       setSeoDescription((data as { seo_description?: string | null }).seo_description || "");
