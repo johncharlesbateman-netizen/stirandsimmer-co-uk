@@ -120,10 +120,10 @@ const GuideWhatToCookInSummer = () => {
               <strong className="text-foreground">June</strong> — strawberries, broad beans, peas, new potatoes, asparagus (just finishing), elderflowers, gooseberries, lettuce, radishes, spring onions, mackerel, sea trout, crab.
             </li>
             <li>
-              <strong className="text-foreground">July</strong> — courgettes, cherries, raspberries, blackcurrants, redcurrants, runner beans, French beans, the first tomatoes, cucumbers, fennel, lamb, sardines.
+              <strong className="text-foreground">July</strong> — courgettes, cherries, raspberries, blackcurrants, redcurrants, runner beans, French beans, the first tomatoes, cucumbers, fennel, lamb, sardines. Girolles and chanterelles begin to appear at farmers' markets — worth seeking out.
             </li>
             <li>
-              <strong className="text-foreground">August</strong> — tomatoes at their peak, sweetcorn, aubergines, peppers, plums, peaches and nectarines (mostly imported but at their best now), figs, blackberries, basil, samphire.
+              <strong className="text-foreground">August</strong> — tomatoes at their absolute peak, sweetcorn, aubergines, peppers, plums, peaches and nectarines, figs, blackberries, basil, samphire. Damsons and greengages arrive towards the end of the month. Cobnuts appear — underused, delicious eaten fresh with cheese or folded into salads.
             </li>
             <li>
               <strong className="text-foreground">Early September</strong> — late tomatoes, sweetcorn still going, the first apples and pears, damsons, blackberries, the first wild mushrooms, partridge.
