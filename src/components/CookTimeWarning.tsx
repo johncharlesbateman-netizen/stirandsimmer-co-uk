@@ -23,7 +23,9 @@ const formatMinutes = (mins: number): string => {
 
 const CookTimeWarning = ({ cookTimeMinutes, instructions }: Props) => {
   const { analysis, warning } = useMemo(() => {
-    const cleaned = instructions.map((s) => s.trim()).filter(Boolean);
+    const cleaned = (instructions ?? [])
+      .map((s) => (typeof s === "string" ? s : String(s ?? "")).trim())
+      .filter(Boolean);
     return {
       analysis: analyseCookTimeFromSteps(cleaned),
       warning: getCookTimeWarning(cookTimeMinutes, cleaned),
