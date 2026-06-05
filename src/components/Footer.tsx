@@ -68,29 +68,29 @@ const Footer = () => {
         </nav>
       </div>
 
-          {/* Connect */}
-          <div className="space-y-4">
-            <h4 className="micro-caption" style={{ color: "#C4A97A" }}>Get in Touch</h4>
-            <div className="space-y-3 text-sm">
-              <a
-                href="mailto:hello@stirandsimmer.co.uk"
-                className="block opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
-                style={{ color: "#F5EAD8" }}
-              >
-                hello@stirandsimmer.co.uk
-              </a>
-              <a
-                href="https://www.instagram.com/stirandsimmeruk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
-                style={{ color: "#F5EAD8" }}
-              >
-                <Instagram className="w-4 h-4" aria-hidden="true" />
-                <span>@stirandsimmeruk</span>
-              </a>
-            </div>
-          </div>
+      {/* Connect */}
+      <div className="space-y-4">
+        <h4 className="micro-caption" style={{ color: "#C4A97A" }}>Get in Touch</h4>
+        <div className="space-y-3 text-sm">
+          <a
+            href="mailto:hello@stirandsimmer.co.uk"
+            className="block opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
+            style={{ color: "#F5EAD8" }}
+          >
+            hello@stirandsimmer.co.uk
+          </a>
+          <a
+            href="https://www.instagram.com/stirandsimmeruk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 opacity-70 hover:opacity-100 transition-all duration-300 hover:translate-x-1"
+            style={{ color: "#F5EAD8" }}
+          >
+            <Instagram className="w-4 h-4" aria-hidden="true" />
+            <span>@stirandsimmeruk</span>
+          </a>
+        </div>
+      </div>
         </div>
 
         {/* Bottom Bar */}
