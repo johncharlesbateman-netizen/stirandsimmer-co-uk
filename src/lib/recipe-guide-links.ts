@@ -43,12 +43,15 @@ export const getRelatedGuides = (
   const candidates: string[] = [];
 
   // Pasta dishes
-  if (cats.includes("pasta") || /\bpasta|spaghetti|tagliatelle|penne|linguine|rigatoni|fettuccine|lasagne\b/.test(haystack)) {
+  if (
+    cats.includes("pasta") ||
+    /\b(pasta|spaghetti|tagliatelle|penne|linguine|rigatoni|fettuccine|lasagne)\b/.test(haystack)
+  ) {
     candidates.push("how-to-cook-pasta");
   }
 
-  // Bread
-  if (/\bbread|loaf|focaccia|sourdough|dough\b/.test(title)) {
+  // Bread — title-only to avoid matching "breadcrumbs" or "shortbread" in ingredient lists.
+  if (/\b(bread|loaf|focaccia|sourdough)\b/.test(title) || /\bbread dough\b/.test(haystack)) {
     candidates.push("how-to-make-bread");
   }
 
@@ -66,42 +69,51 @@ export const getRelatedGuides = (
 
   // Sauces, braises, reductions, stocks
   if (
-    /\bsauce|gravy|reduction|ragu|ragù|sugo|jus\b/.test(haystack) ||
+    /\b(sauce|gravy|reduction|ragu|ragù|sugo|jus)\b/.test(haystack) ||
     /\bsimmer.*until.*thicken|reduce.*by|deglaze\b/.test(haystack)
   ) {
     candidates.push("proper-sauce");
   }
-  if (/\bstock|broth|bone broth\b/.test(haystack)) {
+  if (/\b(stock|broth|bone broth)\b/.test(haystack)) {
     candidates.push("proper-stock");
   }
 
-  // Olive oil — Italian / Mediterranean / Greek
-  if (
-    cuisine === "italian" ||
-    cuisine === "mediterranean" ||
-    /\bolive oil|extra virgin\b/.test(ingText)
-  ) {
+  // Olive oil — Italian / Mediterranean / Greek cuisines where olive oil is
+  // genuinely central. Don't trigger just because a recipe uses olive oil as
+  // a cooking fat (almost every recipe does).
+  if (cuisine === "italian" || cuisine === "mediterranean" || cuisine === "greek") {
     candidates.push("understanding-olive-oil");
   }
 
-  // Knife work for prep-heavy dishes
-  if (/\bfinely chop|dice|julienne|brunoise|chiffonade\b/.test(haystack)) {
+  // Knife work — only for recipes that actually require notable knife skills.
+  // Word-bounded terms; "diced butter" or "diced cheese" in a baking recipe
+  // must NOT trigger this.
+  if (
+    /\b(finely chopped|finely chop|finely diced|finely dice|julienned?|brunoise|chiffonade|filleted|deboned|butterflied)\b/.test(
+      haystack,
+    ) ||
+    /\bfillet (the |a |whole )?(fish|salmon|sea bass|trout|mackerel)\b/.test(haystack) ||
+    cats.includes("knife-skills")
+  ) {
     candidates.push("kitchen-knives");
   }
 
-  // Summer / seasonal
+  // Summer / seasonal — only when the recipe is explicitly tagged summer or
+  // built around a clearly summer hero ingredient in the title.
   if (
     cols.includes("summer") ||
-    /\bsalad|tomato|peach|courgette|cucumber\b/.test(title)
+    /\b(gazpacho|panzanella|caprese)\b/.test(title) ||
+    /\b(tomato|peach|courgette|cucumber)\b/.test(title)
   ) {
     candidates.push("what-to-cook-in-summer");
   }
 
   // French classical
-  if (cuisine === "french" || /\bbeurre blanc|hollandaise|béchamel|veloute|velouté|espagnole\b/.test(haystack)) {
+  if (cuisine === "french" || /\b(beurre blanc|hollandaise|béchamel|veloute|velouté|espagnole)\b/.test(haystack)) {
     candidates.push("mother-sauces");
     candidates.push("french-techniques");
   }
+
 
   // De-duplicate, resolve, cap.
   const seen = new Set<string>();
