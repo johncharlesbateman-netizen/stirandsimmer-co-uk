@@ -71,8 +71,8 @@ export const GUIDES: GuideEntry[] = [
       "Seven essential French techniques — mise en place, julienne, brunoise, chiffonade, beurre blanc, flambé and déglaze — explained simply.",
     eyebrow: "French Technique",
     category: "French Technique",
-    imageId: "4252137",
-    imageAlt: "Chef's knife and finely chopped vegetables on a wooden board",
+    imageId: "33858056",
+    imageAlt: "Flames rising from a sauté pan on a gas stove during flambé",
   },
   {
     slug: "garam-masala",
