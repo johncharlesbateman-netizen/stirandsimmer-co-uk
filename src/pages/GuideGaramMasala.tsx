@@ -5,6 +5,7 @@ import GuideFAQ from "@/components/GuideFAQ";
 import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import GuideHero from "@/components/GuideHero";
 import GuideTOC from "@/components/GuideTOC";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -95,6 +96,8 @@ const GuideGaramMasala = () => {
       <GuideSeo slug="garam-masala" />
 
       <article className="bg-background">
+        <GuideHero slug="garam-masala" />
+
         {/* Header */}
         <header className="border-b border-border">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-20 max-w-3xl">

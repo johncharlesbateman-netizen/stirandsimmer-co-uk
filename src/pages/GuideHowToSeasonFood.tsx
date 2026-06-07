@@ -5,6 +5,7 @@ import GuideFAQ from "@/components/GuideFAQ";
 import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import GuideHero from "@/components/GuideHero";
 import GuideTOC from "@/components/GuideTOC";
 import { ArrowLeft } from "lucide-react";
 
@@ -29,6 +30,8 @@ const GuideHowToSeasonFood = () => {
       <GuideSeo slug="how-to-season-food" />
 
       <article className="bg-background">
+        <GuideHero slug="how-to-season-food" />
+
         {/* Header */}
         <header className="border-b border-border">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-20 max-w-3xl">
