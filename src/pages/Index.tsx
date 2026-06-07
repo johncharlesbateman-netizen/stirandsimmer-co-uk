@@ -5,10 +5,8 @@ import { Link } from "react-router-dom";
 import { BookOpen, Map, CalendarDays, UtensilsCrossed, ArrowRight } from "lucide-react";
 import RecipeCard from "@/components/RecipeCard";
 import { collections } from "@/lib/collections";
-import { Tables } from "@/integrations/supabase/types";
 import { useRecipeCount } from "@/hooks/useRecipeCount";
-
-import { supabase } from "@/integrations/supabase/client";
+import { useLatestPublishedRecipes } from "@/hooks/usePublishedRecipes";
 
 // Self-hosted hero — emitted to /public/hero/ as same-origin WebP. Avoids
 // the third-party DNS+TLS+CDN render hop that was costing ~1 s of LCP.
