@@ -52,7 +52,7 @@ const GuideHowToMakeARoux = () => {
             { id: "what-a-roux-is", label: "What a Roux Is — and What It Does" },
             { id: "the-three-stages", label: "The Three Stages" },
             { id: "the-basic-method", label: "The Basic Method" },
-            { id: "ratios-and-thickening-power", label: "Ratios and thickening power" },
+            { id: "ratios-and-thickening-power", label: "Ratios" },
             { id: "how-to-avoid-lumps", label: "How to avoid lumps" },
             { id: "common-mistakes", label: "Common mistakes" },
             { id: "where-to-use-it", label: "Where to use it" },
@@ -115,17 +115,21 @@ const GuideHowToMakeARoux = () => {
 
         {/* Ratios */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 id="ratios-and-thickening-power" className="font-display text-3xl md:text-4xl text-foreground mb-6">Ratios and thickening power</h2>
+          <h2 id="ratios-and-thickening-power" className="font-display text-3xl md:text-4xl text-foreground mb-6">Ratios</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            For one pint (around 600ml) of liquid:
+            For approximately 600ml (one pint) of finished sauce:
           </p>
-          <ul className="space-y-2 text-base md:text-lg text-foreground/90 leading-relaxed list-disc pl-6">
-            <li><strong className="text-foreground">Pouring sauce</strong> — 30g butter and 30g flour.</li>
-            <li><strong className="text-foreground">Coating sauce</strong> — 45g butter and 45g flour.</li>
-            <li><strong className="text-foreground">Thick (panade) sauce</strong> — 60g butter and 60g flour.</li>
-          </ul>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mt-5">
-            A brown roux thickens roughly half as much as a white one — compensate by using more, or accept a looser sauce in exchange for the deeper flavour.
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">Pouring sauce</strong> — 30g butter, 30g flour. The consistency of single cream. Correct for soups and light sauces.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">Coating sauce</strong> — 45g butter, 45g flour. Thick enough to coat the back of a spoon. Correct for Béchamel over pasta, cauliflower cheese, croque monsieur.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">Thick (panade) sauce</strong> — 60g butter, 60g flour. Used for binding croquettes and soufflé bases, not for pouring.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            If you are making a brown roux, increase the quantities by roughly half again to compensate for the reduced thickening power.
           </p>
         </div>
 
