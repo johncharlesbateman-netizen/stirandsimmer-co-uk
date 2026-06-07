@@ -36,19 +36,7 @@ const GuideHowToCookPasta = () => {
       </Helmet>
 
       <article className="bg-background">
-        {/* Hero image */}
-        <div className="w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-muted">
-          <img
-            src={heroImage}
-            srcSet={heroImageSrcSet}
-            sizes="100vw"
-            alt="Spaghetti being twirled in a pan of glossy tomato sauce with basil and parmesan"
-            width={1600}
-            height={900}
-            className="w-full h-full object-cover"
-            fetchPriority="high"
-          />
-        </div>
+        <GuideHero slug="how-to-cook-pasta" />
 
         {/* Header */}
         <header className="border-b border-border">
