@@ -225,28 +225,3 @@ export const buildRecipeIntro = (
   return `${opener} ${ingList}.${timing} ${description.trim()}`.trim();
 };
 
-/**
- * Build a short, varied serving-suggestion paragraph derived from the
- * recipe's category. Adds genuinely useful on-page text without requiring
- * per-recipe manual copy.
- */
-export const buildServingSuggestion = (
-  title: string,
-  category: string,
-): string => {
-  const cat = (category || "").toLowerCase();
-  const map: Record<string, string> = {
-    mains: `Serve ${title} hot, straight from the pan, with a simple green salad or seasonal vegetables on the side. A glass of dry white or a light red works beautifully.`,
-    starters: `Plate ${title} as a light first course before a main of roast meat or pasta. A wedge of lemon and a piece of crusty bread are all the company it needs.`,
-    desserts: `Serve ${title} just slightly chilled with a small jug of cream, a scoop of vanilla ice cream, or a strong espresso to finish.`,
-    sides: `${title} is the perfect partner for grilled meats, roast chicken or a hearty stew. Add a sprinkle of fresh herbs just before serving.`,
-    sandwiches: `Pack ${title} for lunch with a handful of crisps, some pickles, and a piece of fruit — or serve it with a bowl of soup for a quick supper.`,
-    salads: `Bring ${title} to the table as a light lunch on its own, or pair it with grilled fish or chicken for a more substantial meal.`,
-    soups: `Ladle ${title} into warm bowls and serve with thick slices of buttered bread or a swirl of cream and cracked pepper on top.`,
-    cakes: `Slice ${title} into generous wedges and serve with a pot of tea or strong coffee. Perfect for afternoons, birthdays, or any excuse really.`,
-    breakfast: `${title} works just as well for a leisurely weekend brunch as it does for a quick weekday breakfast — add fruit, yoghurt, or a strong coffee.`,
-    drinks: `Serve ${title} well chilled in your favourite glass, with plenty of ice and a garnish if the mood takes you.`,
-  };
-  return map[cat] ||
-    `Serve ${title} as soon as it's ready, with whatever sides you fancy — a fresh salad, crusty bread, or seasonal vegetables all work well.`;
-};
