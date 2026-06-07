@@ -63,8 +63,9 @@ export const GUIDES: GuideEntry[] = [
       "Master these five and you hold the keys to almost every classic sauce in western cuisine.",
     eyebrow: "French Technique",
     category: "French Technique",
-    imageId: "5908227",
-    imageAlt: "A glossy sauce being whisked in a saucepan",
+    image: motherSaucesImage,
+    imageSrcSet: motherSaucesSrcSet,
+    imageAlt: "A silky pale-golden béchamel sauce being whisked in a copper saucepan",
   },
   {
     slug: "french-techniques",
