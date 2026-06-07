@@ -1,6 +1,5 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideSeo from "@/components/GuideSeo";
-import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
 import GuideFAQ from "@/components/GuideFAQ";
 import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import { Link } from "react-router-dom";
@@ -154,7 +153,6 @@ const GuideHowToUseSpices = () => {
         <GuideFAQ slug="how-to-use-spices" />
 
 
-        <GuideRelatedRecipes guideSlug="how-to-use-spices" />
 
         <GuideRelatedGuides guideSlug="how-to-use-spices" />
 
