@@ -69,11 +69,12 @@ const GUIDE_FILTERS: Record<string, GuideFilterSpec> = {
     ],
   },
   "how-to-make-a-roux": {
-    cuisines: ["french"],
     titleIncludes: [
-      "béchamel", "bechamel", "velouté", "veloute", "espagnole", "sauce",
-      "gratin", "mac and cheese", "macaroni cheese", "lasagne", "lasagna",
-      "fish pie", "gumbo", "soufflé", "souffle", "gravy", "moussaka",
+      "béchamel", "bechamel", "velouté", "veloute", "espagnole",
+      "lasagne", "lasagna", "cauliflower cheese", "mac and cheese",
+      "macaroni cheese", "fish pie", "cottage pie", "shepherd's pie",
+      "moussaka", "gratin", "croque monsieur", "soufflé", "souffle",
+      "gumbo", "onion gravy", "brown gravy", "pan gravy",
     ],
   },
 };
