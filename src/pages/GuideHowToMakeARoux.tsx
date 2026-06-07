@@ -50,7 +50,7 @@ const GuideHowToMakeARoux = () => {
         <GuideTOC
           items={[
             { id: "what-a-roux-is", label: "What a Roux Is — and What It Does" },
-            { id: "the-three-stages", label: "The three stages" },
+            { id: "the-three-stages", label: "The Three Stages" },
             { id: "the-basic-method", label: "The basic method" },
             { id: "ratios-and-thickening-power", label: "Ratios and thickening power" },
             { id: "how-to-avoid-lumps", label: "How to avoid lumps" },
@@ -76,20 +76,18 @@ const GuideHowToMakeARoux = () => {
           </p>
         </div>
 
-        {/* The three stages */}
+        {/* The Three Stages */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 id="the-three-stages" className="font-display text-3xl md:text-4xl text-foreground mb-6">The three stages</h2>
-          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
-            <li>
-              <strong className="text-foreground">White roux</strong> — cooked for two to three minutes until the raw flour smell is gone but no colour has developed. This is the roux for Béchamel and any pale, milky sauce.
-            </li>
-            <li>
-              <strong className="text-foreground">Blond roux</strong> — cooked for five to seven minutes until straw-coloured and lightly nutty. Use it for Velouté and sauces built on chicken or fish stock.
-            </li>
-            <li>
-              <strong className="text-foreground">Brown roux</strong> — cooked patiently for twenty minutes or more until deep mahogany, smelling toasted and slightly chocolatey. This is the roux for Espagnole, gumbo and the rich, dark gravies of southern cooking. It thickens less, but the flavour is in a different league.
-            </li>
-          </ul>
+          <h2 id="the-three-stages" className="font-display text-3xl md:text-4xl text-foreground mb-6">The Three Stages</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">White roux</strong> is cooked for two to three minutes over medium heat, just until the raw flour smell disappears but before any colour develops. The roux should smell faintly biscuity — clean and slightly nutty. This is the roux for Béchamel, cheese sauce, lasagne, fish pie and any pale, creamy sauce. It has the highest thickening power of the three.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">Blond roux</strong> is cooked for five to seven minutes until the mixture turns a pale straw colour and the nutty smell deepens. Blond roux is used for Velouté — the mother sauce built on chicken, fish or veal stock — and for pale gravies and cream sauces where you want a little more flavour than a white roux provides without losing too much thickening power.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            <strong className="text-foreground">Brown roux</strong> is cooked for twenty minutes or more, stirring almost constantly, until the colour reaches a deep mahogany and the smell becomes toasty, rich and faintly chocolatey. This is the roux for Espagnole, proper onion gravy, gumbo and the rich, dark sauces of southern American cooking. It thickens less than a white roux — roughly half as much — but the flavour is in a different league entirely.
+          </p>
         </div>
 
         {/* The basic method */}
