@@ -51,7 +51,7 @@ const GuideHowToMakeARoux = () => {
           items={[
             { id: "what-a-roux-is", label: "What a Roux Is — and What It Does" },
             { id: "the-three-stages", label: "The Three Stages" },
-            { id: "the-basic-method", label: "The basic method" },
+            { id: "the-basic-method", label: "The Basic Method" },
             { id: "ratios-and-thickening-power", label: "Ratios and thickening power" },
             { id: "how-to-avoid-lumps", label: "How to avoid lumps" },
             { id: "common-mistakes", label: "Common mistakes" },
