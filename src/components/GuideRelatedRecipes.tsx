@@ -72,9 +72,8 @@ const GUIDE_FILTERS: Record<string, GuideFilterSpec> = {
     titleIncludes: [
       "béchamel", "bechamel", "velouté", "veloute", "espagnole",
       "lasagne", "lasagna", "cauliflower cheese", "mac and cheese",
-      "macaroni cheese", "fish pie", "cottage pie", "shepherd's pie",
-      "moussaka", "gratin", "croque monsieur", "soufflé", "souffle",
-      "gumbo", "onion gravy", "brown gravy", "pan gravy",
+      "macaroni cheese", "fish pie", "moussaka", "croque monsieur",
+      "gumbo", "onion gravy", "brown gravy",
     ],
   },
 };
