@@ -33,13 +33,16 @@ const GuideHowToMakeARoux = () => {
             </Link>
             <p className="micro-caption mb-4 text-primary">Guide</p>
             <h1 className="font-display text-4xl md:text-5xl leading-tight text-foreground mb-5">
-              How to make a roux
+              How to Make a Roux
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
-              Butter and flour, cooked together — the small piece of technique that underpins half of French cooking.
+              Equal parts butter and flour — the small piece of technique that underpins Béchamel, Velouté, Espagnole and most classic sauces. The three stages, the ratios and the method explained simply.
+            </p>
+            <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+              A roux is two ingredients and one technique. Get it right and you have the foundation of Béchamel, Velouté, Espagnole, a proper gumbo and most of the gravies and pan sauces worth making at home. Get it wrong and you have raw-tasting paste with lumps. The difference is patience and heat.
             </p>
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-              A roux is two ingredients and one technique. Get it right and you have the foundation of Béchamel, Velouté, Espagnole, a proper gumbo and most of the gravies and pan sauces worth making at home. Get it wrong and you have raw-tasting paste with lumps. The difference is patience.
+              This is not a complicated thing to learn. It is a fundamental one. Once a roux is instinctive, a whole category of cooking opens up.
             </p>
           </div>
         </header>
