@@ -90,17 +90,20 @@ const GuideHowToMakeARoux = () => {
           </p>
         </div>
 
-        {/* The basic method */}
+        {/* The Basic Method */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 id="the-basic-method" className="font-display text-3xl md:text-4xl text-foreground mb-6">The basic method</h2>
+          <h2 id="the-basic-method" className="font-display text-3xl md:text-4xl text-foreground mb-6">The Basic Method</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            Melt the butter in a heavy-based pan over a medium heat. Once foaming, add an equal weight of plain flour and stir with a wooden spoon or whisk to a smooth paste.
+            Use a heavy-based pan — cast iron or thick stainless steel. Thin pans create hot spots and a roux burns quickly, especially as it darkens.
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            Keep it moving. Cook for at least two minutes for a white roux, longer for blond or brown. The roux should hiss gently and smell biscuity, not raw.
+            Melt the butter over a medium heat. Once it is foaming and the foam is beginning to subside, add the flour all at once and stir immediately with a wooden spoon or flat whisk. The mixture will clump briefly and then come together into a smooth paste within thirty seconds.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Keep stirring and keep the heat steady. The roux needs constant attention — walk away and it burns. Cook it to the stage the dish requires, keeping the heat moderate throughout. If you are going for brown roux, lower the heat as the colour deepens: the darker it gets, the faster it can tip from mahogany to black.
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            Add your liquid gradually, whisking constantly — warm milk for Béchamel, warm stock for Velouté, dark stock for Espagnole. Bring slowly to a simmer and cook for a few minutes more to let it thicken and the flour finish cooking out.
+            Once the roux has reached the right stage, add the liquid. Warm your milk or stock before it goes in — not boiling, just warm. The sauce comes together in seconds rather than minutes when the temperatures are close.
           </p>
         </div>
 
