@@ -25,7 +25,7 @@ const GuideHero = ({ slug, alt }: GuideHeroProps) => {
     (g.imageId ? pexelsSrcSet(g.imageId, [768, 1200, 1600, 2000]) : undefined);
 
   return (
-    <div className="w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-muted">
+    <div className="w-full max-h-[50vh] aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-muted">
       <img
         src={src}
         srcSet={srcSet}
