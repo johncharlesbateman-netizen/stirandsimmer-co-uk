@@ -22,6 +22,8 @@ import buildFlavourImage from "@/assets/guide-build-flavour.jpg";
 import buildFlavourSrcSet from "@/assets/guide-build-flavour.jpg?w=400;600;800;1200&format=webp&as=srcset";
 import howToMakeARouxImage from "@/assets/guide-how-to-make-a-roux.jpg";
 import howToMakeARouxSrcSet from "@/assets/guide-how-to-make-a-roux.jpg?w=400;600;800;1200&format=webp&as=srcset";
+import motherSaucesImage from "@/assets/guide-mother-sauces.png";
+import motherSaucesSrcSet from "@/assets/guide-mother-sauces.png?w=400;600;800;1200&format=webp&as=srcset";
 
 export const GUIDE_CATEGORIES = [
   "All",
@@ -61,8 +63,9 @@ export const GUIDES: GuideEntry[] = [
       "Master these five and you hold the keys to almost every classic sauce in western cuisine.",
     eyebrow: "French Technique",
     category: "French Technique",
-    imageId: "5908227",
-    imageAlt: "A glossy sauce being whisked in a saucepan",
+    image: motherSaucesImage,
+    imageSrcSet: motherSaucesSrcSet,
+    imageAlt: "A silky pale-golden béchamel sauce being whisked in a copper saucepan",
   },
   {
     slug: "french-techniques",
