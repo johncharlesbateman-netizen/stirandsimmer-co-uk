@@ -5,10 +5,8 @@ import { Link } from "react-router-dom";
 import { BookOpen, Map, CalendarDays, UtensilsCrossed, ArrowRight } from "lucide-react";
 import RecipeCard from "@/components/RecipeCard";
 import { collections } from "@/lib/collections";
-import { Tables } from "@/integrations/supabase/types";
 import { useRecipeCount } from "@/hooks/useRecipeCount";
-
-import { supabase } from "@/integrations/supabase/client";
+import { useLatestPublishedRecipes } from "@/hooks/usePublishedRecipes";
 
 // Self-hosted hero — emitted to /public/hero/ as same-origin WebP. Avoids
 // the third-party DNS+TLS+CDN render hop that was costing ~1 s of LCP.
@@ -20,7 +18,7 @@ const heroImageSizes = "100vw";
 
 const Index = () => {
   const recipeCount = useRecipeCount();
-  const [latestRecipes, setLatestRecipes] = useState<Tables<"recipes">[]>([]);
+  const { data: latestRecipes = [] } = useLatestPublishedRecipes(6);
   // True when the prerender has injected an <img id="lcp-hero"> + overlay
   // into the static HTML. In that case React must NOT render its own hero
   // <img>, otherwise the browser swaps LCP candidates once we mount and we
@@ -37,25 +35,8 @@ const Index = () => {
     document.documentElement.classList.add("lcp-hero-dismissed");
   }, [hasBootstrapHero]);
 
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const { data, error } = await supabase
-        .from("recipes")
-        .select("*")
-        .eq("published", true)
-        .order("created_at", { ascending: false })
-        .limit(6);
-      if (!cancelled && !error && data) {
-        setLatestRecipes(data);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   const collectionCount = collections.length;
+
 
   return (
     <Layout>

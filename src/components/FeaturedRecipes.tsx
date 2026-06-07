@@ -1,11 +1,11 @@
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { categoryLabels } from "@/lib/recipe-utils";
 import { cn } from "@/lib/utils";
 import { optimisedImage, responsiveSrcSet } from "@/lib/image-utils";
 import { buildRecipeAltText } from "@/lib/seo";
+import { useLatestPublishedRecipes } from "@/hooks/usePublishedRecipes";
 
 const floatClasses = [
   "floating-item",
@@ -24,22 +24,10 @@ const layouts = [
 ];
 
 const FeaturedRecipes = () => {
-  const [recipes, setRecipes] = useState<Tables<"recipes">[]>([]);
-
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      const { data } = await supabase
-        .from("recipes")
-        .select("*")
-        .eq("published", true)
-        .order("created_at", { ascending: false })
-        .limit(5);
-      if (data) setRecipes(data);
-    };
-    fetchRecipes();
-  }, []);
+  const { data: recipes = [] } = useLatestPublishedRecipes(5);
 
   if (recipes.length === 0) return null;
+
 
   return (
     <section className="pb-32">

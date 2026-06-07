@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { collections } from "@/lib/collections";
-import { supabase } from "@/integrations/supabase/client";
+import { usePublishedCollectionCounts } from "@/hooks/usePublishedRecipes";
 
 // Build a responsive srcset for Pexels image URLs by replacing the `w=` param.
 const pexelsSrcSet = (url: string): string | undefined => {
@@ -26,20 +25,8 @@ const CollectionTiles = ({
 }: CollectionTilesProps) => {
   const HeadingTag = asH1 ? "h1" : "h2";
 
-  const { data: counts } = useQuery({
-    queryKey: ["collection-counts"],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("recipes").select("collections").eq("published", true);
-      if (error) throw error;
-      const tally: Record<string, number> = {};
-      for (const row of data ?? []) {
-        for (const name of row.collections ?? []) {
-          tally[name] = (tally[name] ?? 0) + 1;
-        }
-      }
-      return tally;
-    },
-  });
+  const { data: counts } = usePublishedCollectionCounts();
+
 
   return (
     <section className="section-breathing border-t border-border">
