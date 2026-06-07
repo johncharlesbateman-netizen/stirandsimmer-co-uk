@@ -22,6 +22,8 @@ import buildFlavourImage from "@/assets/guide-build-flavour.jpg";
 import buildFlavourSrcSet from "@/assets/guide-build-flavour.jpg?w=400;600;800;1200&format=webp&as=srcset";
 import howToMakeARouxImage from "@/assets/guide-how-to-make-a-roux.jpg";
 import howToMakeARouxSrcSet from "@/assets/guide-how-to-make-a-roux.jpg?w=400;600;800;1200&format=webp&as=srcset";
+import motherSaucesImage from "@/assets/guide-mother-sauces.png";
+import motherSaucesSrcSet from "@/assets/guide-mother-sauces.png?w=400;600;800;1200&format=webp&as=srcset";
 
 export const GUIDE_CATEGORIES = [
   "All",
