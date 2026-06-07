@@ -54,7 +54,7 @@ const DEFAULT_OG_ALT =
 const STATIC_ROUTES = [
   {
     path: "/",
-    title: "Stir & Simmer — Tried-and-tested recipes from a real family kitchen",
+    title: "Stir & Simmer — Tried-and-tested family recipes",
     description:
       "125 tried-and-tested recipes cooked, eaten and approved in our kitchen. Explore world cuisines, build your meal plan, and find food that actually works.",
   },
