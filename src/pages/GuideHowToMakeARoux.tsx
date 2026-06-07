@@ -102,8 +102,14 @@ const GuideHowToMakeARoux = () => {
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             Keep stirring and keep the heat steady. The roux needs constant attention — walk away and it burns. Cook it to the stage the dish requires, keeping the heat moderate throughout. If you are going for brown roux, lower the heat as the colour deepens: the darker it gets, the faster it can tip from mahogany to black.
           </p>
-          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             Once the roux has reached the right stage, add the liquid. Warm your milk or stock before it goes in — not boiling, just warm. The sauce comes together in seconds rather than minutes when the temperatures are close.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Add the liquid gradually at first. The first addition should be two or three tablespoons, whisked in vigorously until completely smooth before the next addition. Once the first few additions have gone in without lumping, you can add the rest in a steady stream, whisking constantly.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            Bring slowly to a simmer and cook for a further three to five minutes, stirring regularly. This finishes cooking out any remaining flour taste and lets the sauce reach its final consistency.
           </p>
         </div>
 
