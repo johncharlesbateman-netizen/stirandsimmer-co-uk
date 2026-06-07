@@ -18,7 +18,7 @@ const heroImageSizes = "100vw";
 
 const Index = () => {
   const recipeCount = useRecipeCount();
-  const [latestRecipes, setLatestRecipes] = useState<Tables<"recipes">[]>([]);
+  const { data: latestRecipes = [] } = useLatestPublishedRecipes(6);
   // True when the prerender has injected an <img id="lcp-hero"> + overlay
   // into the static HTML. In that case React must NOT render its own hero
   // <img>, otherwise the browser swaps LCP candidates once we mount and we
@@ -35,25 +35,8 @@ const Index = () => {
     document.documentElement.classList.add("lcp-hero-dismissed");
   }, [hasBootstrapHero]);
 
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const { data, error } = await supabase
-        .from("recipes")
-        .select("*")
-        .eq("published", true)
-        .order("created_at", { ascending: false })
-        .limit(6);
-      if (!cancelled && !error && data) {
-        setLatestRecipes(data);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   const collectionCount = collections.length;
+
 
   return (
     <Layout>
