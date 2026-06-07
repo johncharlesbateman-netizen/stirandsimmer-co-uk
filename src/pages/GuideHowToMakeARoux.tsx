@@ -5,6 +5,7 @@ import GuideRelatedGuides from "@/components/GuideRelatedGuides";
 import GuideRelatedRecipes from "@/components/GuideRelatedRecipes";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import GuideHero from "@/components/GuideHero";
 import GuideTOC from "@/components/GuideTOC";
 import { ArrowLeft } from "lucide-react";
 
@@ -14,6 +15,8 @@ const GuideHowToMakeARoux = () => {
       <GuideSeo slug="how-to-make-a-roux" />
 
       <article className="bg-background">
+        <GuideHero slug="how-to-make-a-roux" />
+
         {/* Header */}
         <header className="border-b border-border">
           <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-20 max-w-3xl">
