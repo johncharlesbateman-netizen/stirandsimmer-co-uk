@@ -55,7 +55,7 @@ const GuideHowToMakeARoux = () => {
             { id: "ratios-and-thickening-power", label: "Ratios" },
             { id: "how-to-avoid-lumps", label: "How to Avoid Lumps" },
             { id: "common-mistakes", label: "Common Mistakes" },
-            { id: "where-to-use-it", label: "Where to use it" },
+            { id: "where-to-use-it", label: "Where to Use It" },
           ]}
         />
 
@@ -167,17 +167,23 @@ const GuideHowToMakeARoux = () => {
           </p>
         </div>
 
-        {/* Where to use it */}
+        {/* Where to Use It */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 id="where-to-use-it" className="font-display text-3xl md:text-4xl text-foreground mb-6">Where to use it</h2>
+          <h2 id="where-to-use-it" className="font-display text-3xl md:text-4xl text-foreground mb-6">Where to Use It</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
             A roux is the backbone of three of{" "}
             <Link to="/guides/mother-sauces" className="underline underline-offset-4 hover:text-primary">the five French mother sauces</Link>
-            {" "}— Béchamel, Velouté and Espagnole — and through them, dozens of daughter sauces. It also thickens proper gravies, cheese sauces, lasagne, fish pie, gumbo and almost every classic comfort dish you can name.
+            {" "}— Béchamel, Velouté and Espagnole — and through them, dozens of the classic derivative sauces. It also thickens proper gravies, cheese sauces, lasagne, fish pie, gumbo and almost every classic comfort dish you can name.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Understanding the roux is understanding why those dishes work — and how to adjust them. Too thick? Add more warm liquid. Too thin? Make a small fresh roux and whisk it in. Too pale in flavour? Cook the roux a little longer next time. Every variable is in your hands.
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            For the bigger picture on how a roux fits into the layered approach of building a dish, see the guide on{" "}
-            <Link to="/guides/how-to-build-flavour-from-scratch" className="underline underline-offset-4 hover:text-primary">how to build flavour from scratch</Link>.
+            For the bigger picture on how a roux fits into the layered approach to building a dish, see the guide on{" "}
+            <Link to="/guides/how-to-build-flavour-from-scratch" className="underline underline-offset-4 hover:text-primary">how to build flavour from scratch</Link>
+            . For where the roux leads in classical French cooking, see{" "}
+            <Link to="/guides/mother-sauces" className="underline underline-offset-4 hover:text-primary">the five French mother sauces</Link>
+            .
           </p>
         </div>
 
@@ -185,7 +191,11 @@ const GuideHowToMakeARoux = () => {
 
         <GuideRelatedRecipes guideSlug="how-to-make-a-roux" />
 
-        <GuideRelatedGuides guideSlug="how-to-make-a-roux" />
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            <strong className="text-foreground">Related Guides:</strong> The Five French Mother Sauces · How to Build Flavour from Scratch · How to Make a Proper Stock · French Cooking Techniques
+          </p>
+        </div>
 
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
           <Link
