@@ -191,7 +191,11 @@ const GuideHowToMakeARoux = () => {
 
         <GuideRelatedRecipes guideSlug="how-to-make-a-roux" />
 
-        <GuideRelatedGuides guideSlug="how-to-make-a-roux" />
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            <strong className="text-foreground">Related Guides:</strong> The Five French Mother Sauces · How to Build Flavour from Scratch · How to Make a Proper Stock · French Cooking Techniques
+          </p>
+        </div>
 
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 max-w-3xl">
           <Link
