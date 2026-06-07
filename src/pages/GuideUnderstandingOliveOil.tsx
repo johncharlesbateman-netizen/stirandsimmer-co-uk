@@ -8,8 +8,7 @@ import Layout from "@/components/Layout";
 import GuideTOC from "@/components/GuideTOC";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import heroImage from "@/assets/guide-understanding-olive-oil-hero.webp";
-import heroImageSrcSet from "@/assets/guide-understanding-olive-oil-hero.webp?w=640;960;1280;1600&format=webp&as=srcset";
+import GuideHero from "@/components/GuideHero";
 
 const GuideUnderstandingOliveOil = () => {
   return (
@@ -17,19 +16,7 @@ const GuideUnderstandingOliveOil = () => {
       <GuideSeo slug="understanding-olive-oil" />
 
       <article className="bg-background">
-        {/* Hero image */}
-        <div className="w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-muted">
-          <img
-            src={heroImage}
-            srcSet={heroImageSrcSet}
-            sizes="100vw"
-            alt="Extra virgin olive oil being poured into a small white dish on a rustic wooden board, with green olives, rosemary and bread"
-            width={1600}
-            height={900}
-            className="w-full h-full object-cover"
-            fetchPriority="high"
-          />
-        </div>
+        <GuideHero slug="understanding-olive-oil" />
 
         {/* Header */}
         <header className="border-b border-border">
