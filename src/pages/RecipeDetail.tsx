@@ -10,7 +10,7 @@ import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { categoryLabels, categoryToSlug } from "@/lib/recipe-utils";
 import { scaleIngredients, scaleIngredientsSmart } from "@/lib/ingredient-scaler";
-import { buildSeoTitle, buildSeoDescription, buildServingSuggestion } from "@/lib/seo";
+import { buildSeoTitle, buildSeoDescription } from "@/lib/seo";
 import { buildRecipeJsonLd, buildRecipeKeywords } from "@/lib/recipe-schema";
 import { cuisineRegionLabels } from "@/lib/cuisine-regions";
 import { recipeFAQs } from "@/lib/recipe-faqs";
@@ -764,13 +764,6 @@ const RecipeDetail = () => {
             <RecipeRatingPrompt recipeId={recipe.id} />
           </div>
 
-          {/* Serving Suggestions — adds unique on-page text for SEO */}
-          <div className="max-w-4xl mt-10 pt-8 border-t border-border">
-            <h2 className="heading-section mb-4">Serving Suggestions</h2>
-            <p className="text-base text-muted-foreground leading-relaxed max-w-2xl">
-              {buildServingSuggestion(recipe.title, recipe.categories?.[0])}
-            </p>
-          </div>
 
           {faqs.length > 0 && <RecipeFAQ faqs={faqs} />}
 
