@@ -49,7 +49,7 @@ const GuideHowToMakeARoux = () => {
 
         <GuideTOC
           items={[
-            { id: "what-a-roux-is", label: "What a roux is" },
+            { id: "what-a-roux-is", label: "What a Roux Is — and What It Does" },
             { id: "the-three-stages", label: "The three stages" },
             { id: "the-basic-method", label: "The basic method" },
             { id: "ratios-and-thickening-power", label: "Ratios and thickening power" },
@@ -59,14 +59,20 @@ const GuideHowToMakeARoux = () => {
           ]}
         />
 
-        {/* What a roux is */}
+        {/* What a Roux Is — and What It Does */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 id="what-a-roux-is" className="font-display text-3xl md:text-4xl text-foreground mb-6">What a roux is</h2>
+          <h2 id="what-a-roux-is" className="font-display text-3xl md:text-4xl text-foreground mb-6">What a Roux Is — and What It Does</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            A roux is equal parts fat and flour cooked together. The fat is almost always butter in classical French cooking, though oil or rendered fat will do the same job. Cooking the flour does two things — it strips out the raw, pasty taste, and it coats the starch granules in fat so they disperse into liquid without clumping.
+            A roux is equal parts fat and flour cooked together. The fat is almost always butter in classical French cooking, though oil or rendered fat will do the same job.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Cooking the flour in fat does two things. First, it strips out the raw, pasty taste that uncooked flour gives to a sauce. Second, it coats the starch granules in fat so they disperse into liquid without clumping — the reason a properly made roux produces a smooth sauce while flour stirred directly into liquid almost always lumps.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            The longer you cook the roux, the darker and more flavoured it becomes — and the less it thickens. This trade-off is the whole craft of the roux. A white roux gives maximum thickening power and almost no flavour of its own. A dark brown roux gives the deep, toasted flavour of a gumbo or an Espagnole but thickens the sauce considerably less.
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            The longer you cook the roux, the darker and more flavoured it becomes — and the less it thickens. That trade-off is the whole craft.
+            You choose the stage based on what the dish needs.
           </p>
         </div>
 
