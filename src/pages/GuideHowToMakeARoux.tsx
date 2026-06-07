@@ -49,7 +49,7 @@ const GuideHowToMakeARoux = () => {
 
         <GuideTOC
           items={[
-            { id: "what-a-roux-is", label: "What a roux is" },
+            { id: "what-a-roux-is", label: "What a Roux Is — and What It Does" },
             { id: "the-three-stages", label: "The three stages" },
             { id: "the-basic-method", label: "The basic method" },
             { id: "ratios-and-thickening-power", label: "Ratios and thickening power" },
