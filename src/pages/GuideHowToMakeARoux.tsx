@@ -55,7 +55,7 @@ const GuideHowToMakeARoux = () => {
             { id: "ratios-and-thickening-power", label: "Ratios" },
             { id: "how-to-avoid-lumps", label: "How to Avoid Lumps" },
             { id: "common-mistakes", label: "Common Mistakes" },
-            { id: "where-to-use-it", label: "Where to use it" },
+            { id: "where-to-use-it", label: "Where to Use It" },
           ]}
         />
 
