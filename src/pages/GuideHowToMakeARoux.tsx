@@ -53,8 +53,8 @@ const GuideHowToMakeARoux = () => {
             { id: "the-three-stages", label: "The Three Stages" },
             { id: "the-basic-method", label: "The Basic Method" },
             { id: "ratios-and-thickening-power", label: "Ratios" },
-            { id: "how-to-avoid-lumps", label: "How to avoid lumps" },
-            { id: "common-mistakes", label: "Common mistakes" },
+            { id: "how-to-avoid-lumps", label: "How to Avoid Lumps" },
+            { id: "common-mistakes", label: "Common Mistakes" },
             { id: "where-to-use-it", label: "Where to use it" },
           ]}
         />
@@ -133,26 +133,38 @@ const GuideHowToMakeARoux = () => {
           </p>
         </div>
 
-        {/* How to avoid lumps */}
+        {/* How to Avoid Lumps */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 id="how-to-avoid-lumps" className="font-display text-3xl md:text-4xl text-foreground mb-6">How to avoid lumps</h2>
+          <h2 id="how-to-avoid-lumps" className="font-display text-3xl md:text-4xl text-foreground mb-6">How to Avoid Lumps</h2>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
-            Two rules. First, the liquid going in should be warm — cold milk hitting a hot roux is the classic recipe for lumps. Second, add the liquid gradually, whisking constantly, especially at the start. Once the first splash is smoothly incorporated, the rest goes in easily.
+            Lumps in a sauce come from one of two causes: cold liquid hitting a hot roux, or liquid added too fast before the starch has had time to disperse. Both are avoidable.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            Warm the liquid before it goes in. Add the first few splashes slowly and whisk hard. If the sauce is already thickening smoothly after the first addition, the rest can go in more quickly.
           </p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            If lumps do appear, pass the finished sauce through a fine sieve. Nobody will know.
+            If lumps do appear despite all of this, pass the finished sauce through a fine sieve before serving. Nobody will know. A lump-free sauce that has been sieved is indistinguishable from one that never lumped.
           </p>
         </div>
 
-        {/* Common mistakes */}
+        {/* Common Mistakes */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16 max-w-3xl border-b border-border">
-          <h2 id="common-mistakes" className="font-display text-3xl md:text-4xl text-foreground mb-6">Common mistakes</h2>
-          <ul className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
-            <li><strong className="text-foreground">Not cooking the flour long enough</strong> — under-cooked roux tastes raw and pasty. Always give it at least two full minutes.</li>
-            <li><strong className="text-foreground">Burning the roux</strong> — once it goes from dark brown to black, you start again. The bitter taste cannot be hidden.</li>
-            <li><strong className="text-foreground">Cold liquid into hot roux</strong> — warm the milk or stock first. The sauce comes together in seconds rather than minutes.</li>
-            <li><strong className="text-foreground">Walking away</strong> — a roux needs your attention, especially as it darkens. It can turn in under a minute.</li>
-          </ul>
+          <h2 id="common-mistakes" className="font-display text-3xl md:text-4xl text-foreground mb-6">Common Mistakes</h2>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">Not cooking the flour long enough.</strong> The most common error. An under-cooked roux tastes raw and starchy in the finished sauce. Always give a white roux at least two full minutes, even when you are in a hurry. The flavour of the dish depends on it.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">Burning the roux.</strong> Once a roux goes black, it is bitter and cannot be rescued. Start again. As a roux darkens, lower the heat — the darker it gets, the faster it can burn. A brown roux particularly needs watching in its final minutes.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">Adding cold liquid.</strong> Warm your milk or stock before it goes in. This single habit eliminates most lumping problems.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-5">
+            <strong className="text-foreground">Walking away.</strong> A roux needs your attention, especially as it darkens. It can go from perfect to burnt in under a minute at high heat. Stay with it.
+          </p>
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+            <strong className="text-foreground">Using too light a pan.</strong> A thin saucepan creates hot spots that burn the flour in patches before the rest has coloured. Use the heaviest pan you have.
+          </p>
         </div>
 
         {/* Where to use it */}
