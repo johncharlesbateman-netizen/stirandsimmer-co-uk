@@ -96,18 +96,6 @@ export const RECIPE_TILES: RecipeTile[] = [
     filter: (r) => hasCategory(r, "pork"),
   },
   {
-    slug: "quick-meals",
-    label: "Quick Meals",
-    emoji: "⚡",
-    description:
-      "On the table in 30 minutes or less. Fast, flavourful and fuss-free — perfect for busy weeknights.",
-    seoTitle:
-      "Quick meal recipes — ready in 30 minutes or less | Stir & Simmer",
-    seoDescription:
-      "Fast, flavourful and fuss-free — our quick meal recipes are ready in 30 minutes or less. Perfect for busy weeknights.",
-    filter: (r) => totalTime(r) > 0 && totalTime(r) <= 30,
-  },
-  {
     slug: "spicy",
     label: "Spicy",
     emoji: "🌶️",
