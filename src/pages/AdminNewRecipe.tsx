@@ -466,6 +466,17 @@ const AdminNewRecipe = () => {
           <p className="text-muted-foreground mt-3 text-sm">
             Add a recipe to the collection. Fields marked * are required.
           </p>
+          <div
+            className={`mt-3 text-xs text-muted-foreground transition-opacity duration-300 ${
+              showSavedIndicator ? "opacity-100" : "opacity-0"
+            }`}
+            aria-live="polite"
+            role="status"
+          >
+            {draftSavedAt
+              ? `Draft saved · ${new Date(draftSavedAt).toLocaleTimeString()}`
+              : ""}
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
