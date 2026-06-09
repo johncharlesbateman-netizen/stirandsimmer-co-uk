@@ -53,6 +53,7 @@ const AdminEditRecipe = lazy(() => import("./pages/AdminEditRecipe"));
 const AdminSeoStatus = lazy(() => import("./pages/AdminSeoStatus"));
 const AdminTaggingAudit = lazy(() => import("./pages/AdminTaggingAudit"));
 const AdminChallenges = lazy(() => import("./pages/AdminChallenges"));
+const AdminDatabasePassword = lazy(() => import("./pages/AdminDatabasePassword"));
 
 const RouteFallback = () => (
   <div className="container mx-auto px-6 py-20 text-sm text-muted-foreground">Loading…</div>
@@ -186,6 +187,7 @@ const App = () => (
                 element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminTaggingAudit /></Suspense></RequireAdmin>}
               />
               <Route path="/admin/challenges" element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminChallenges /></Suspense></RequireAdmin>} />
+              <Route path="/admin/database-password" element={<RequireAdmin><Suspense fallback={<AdminFallback />}><AdminDatabasePassword /></Suspense></RequireAdmin>} />
               <Route path="/privacy" element={<Privacy />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
