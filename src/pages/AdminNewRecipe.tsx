@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Upload, X, Plus, Loader2, ArrowUp, ArrowDown, CornerDownRight, ClipboardList } from "lucide-react";
@@ -173,38 +173,13 @@ const AdminNewRecipe = () => {
     return () => window.removeEventListener("beforeunload", handler);
   }, [isDirty, savedOrSubmitted]);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
+  const [draftSavedAt, setDraftSavedAt] = useState<number | null>(null);
+  const [showSavedIndicator, setShowSavedIndicator] = useState(false);
+  const draftStateRef = useRef<NewRecipeDraft | null>(null);
+  const isDirtyRef = useRef(isDirty);
+  const savedOrSubmittedRef = useRef(savedOrSubmitted);
 
-    if (savedOrSubmitted) {
-      window.localStorage.removeItem(NEW_RECIPE_DRAFT_STORAGE_KEY);
-      return;
-    }
-
-    if (!isDirty) {
-      window.localStorage.removeItem(NEW_RECIPE_DRAFT_STORAGE_KEY);
-      return;
-    }
-
-    const draft: NewRecipeDraft = {
-      title,
-      categories,
-      description,
-      prepTime,
-      cookTime,
-      servings,
-      ingredients,
-      instructions,
-      tips,
-      seoTitle,
-      seoDescription,
-      cuisineRegion,
-      mealTypes,
-      published,
-    };
-
-    window.localStorage.setItem(NEW_RECIPE_DRAFT_STORAGE_KEY, JSON.stringify(draft));
-  }, [
+  draftStateRef.current = {
     title,
     categories,
     description,
@@ -219,9 +194,60 @@ const AdminNewRecipe = () => {
     cuisineRegion,
     mealTypes,
     published,
-    isDirty,
-    savedOrSubmitted,
-  ]);
+  };
+  isDirtyRef.current = isDirty;
+  savedOrSubmittedRef.current = savedOrSubmitted;
+
+  // Auto-save draft to localStorage every 60 seconds
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const persistDraft = () => {
+      if (savedOrSubmittedRef.current) {
+        window.localStorage.removeItem(NEW_RECIPE_DRAFT_STORAGE_KEY);
+        return;
+      }
+      if (!isDirtyRef.current || !draftStateRef.current) return;
+
+      try {
+        window.localStorage.setItem(
+          NEW_RECIPE_DRAFT_STORAGE_KEY,
+          JSON.stringify(draftStateRef.current),
+        );
+        setDraftSavedAt(Date.now());
+        setShowSavedIndicator(true);
+      } catch {
+        // ignore quota/serialisation errors
+      }
+    };
+
+    const interval = window.setInterval(persistDraft, 60_000);
+    // Also persist on tab hide so a close mid-cycle isn't lost
+    const onVisibility = () => {
+      if (document.visibilityState === "hidden") persistDraft();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      window.clearInterval(interval);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, []);
+
+  // Clear stored draft after successful save/submit
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (savedOrSubmitted) {
+      window.localStorage.removeItem(NEW_RECIPE_DRAFT_STORAGE_KEY);
+    }
+  }, [savedOrSubmitted]);
+
+  // Hide the "Draft saved" indicator after a few seconds
+  useEffect(() => {
+    if (!showSavedIndicator) return;
+    const timeout = window.setTimeout(() => setShowSavedIndicator(false), 2500);
+    return () => window.clearTimeout(timeout);
+  }, [showSavedIndicator, draftSavedAt]);
 
   const updateListItem = (
     list: string[],
