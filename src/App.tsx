@@ -53,6 +53,7 @@ const AdminEditRecipe = lazy(() => import("./pages/AdminEditRecipe"));
 const AdminSeoStatus = lazy(() => import("./pages/AdminSeoStatus"));
 const AdminTaggingAudit = lazy(() => import("./pages/AdminTaggingAudit"));
 const AdminChallenges = lazy(() => import("./pages/AdminChallenges"));
+const AdminDatabasePassword = lazy(() => import("./pages/AdminDatabasePassword"));
 
 const RouteFallback = () => (
   <div className="container mx-auto px-6 py-20 text-sm text-muted-foreground">Loading…</div>
