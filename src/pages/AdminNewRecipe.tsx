@@ -198,39 +198,55 @@ const AdminNewRecipe = () => {
   isDirtyRef.current = isDirty;
   savedOrSubmittedRef.current = savedOrSubmitted;
 
-  // Auto-save draft to localStorage every 60 seconds
-  useEffect(() => {
+  // Persist draft to localStorage on every change (debounced) so input is
+  // never lost — including when the auth session expires and the page is
+  // redirected to /auth mid-edit.
+  const persistDraft = (showIndicator: boolean) => {
     if (typeof window === "undefined") return;
-
-    const persistDraft = () => {
-      if (savedOrSubmittedRef.current) {
-        window.localStorage.removeItem(NEW_RECIPE_DRAFT_STORAGE_KEY);
-        return;
-      }
-      if (!isDirtyRef.current || !draftStateRef.current) return;
-
-      try {
-        window.localStorage.setItem(
-          NEW_RECIPE_DRAFT_STORAGE_KEY,
-          JSON.stringify(draftStateRef.current),
-        );
+    if (savedOrSubmittedRef.current) {
+      window.localStorage.removeItem(NEW_RECIPE_DRAFT_STORAGE_KEY);
+      return;
+    }
+    if (!isDirtyRef.current || !draftStateRef.current) return;
+    try {
+      window.localStorage.setItem(
+        NEW_RECIPE_DRAFT_STORAGE_KEY,
+        JSON.stringify(draftStateRef.current),
+      );
+      if (showIndicator) {
         setDraftSavedAt(Date.now());
         setShowSavedIndicator(true);
-      } catch {
-        // ignore quota/serialisation errors
       }
-    };
+    } catch {
+      // ignore quota/serialisation errors
+    }
+  };
 
-    const interval = window.setInterval(persistDraft, 60_000);
-    // Also persist on tab hide so a close mid-cycle isn't lost
+  // Debounced save on every field change
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const t = window.setTimeout(() => persistDraft(true), 400);
+    return () => window.clearTimeout(t);
+  }, [
+    title, categories, description, prepTime, cookTime, servings,
+    ingredients, instructions, tips, seoTitle, seoDescription,
+    cuisineRegion, mealTypes, published,
+  ]);
+
+  // Persist on tab hide and on unmount (covers auth redirect, navigation, close)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
     const onVisibility = () => {
-      if (document.visibilityState === "hidden") persistDraft();
+      if (document.visibilityState === "hidden") persistDraft(false);
     };
+    const onPageHide = () => persistDraft(false);
     document.addEventListener("visibilitychange", onVisibility);
-
+    window.addEventListener("pagehide", onPageHide);
     return () => {
-      window.clearInterval(interval);
       document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pagehide", onPageHide);
+      // Final synchronous save when the component unmounts (e.g. auth redirect)
+      persistDraft(false);
     };
   }, []);
 
