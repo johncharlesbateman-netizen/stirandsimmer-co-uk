@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2, Plus, Search, Pencil, ExternalLink } from "lucide-react";
 import Layout from "@/components/Layout";
@@ -19,7 +19,6 @@ type Row = {
 type Filter = "all" | "published" | "draft";
 
 const AdminRecipes = () => {
-  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("all");
 
@@ -112,12 +111,12 @@ const AdminRecipes = () => {
               >
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <Link
-                      to={`/admin/recipes/${r.slug}/edit`}
+                    <a
+                      href={`/admin/recipes/${r.slug}/edit`}
                       className="font-display text-lg leading-tight underline-offset-4 transition-opacity hover:underline hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
                     >
                       {r.title}
-                    </Link>
+                    </a>
                     {!r.published && (
                       <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-900 border border-amber-300">
                         Draft
@@ -129,8 +128,8 @@ const AdminRecipes = () => {
                       </span>
                     )}
                   </div>
-                  <Link
-                    to={`/admin/recipes/${r.slug}/edit`}
+                  <a
+                    href={`/admin/recipes/${r.slug}/edit`}
                     className="block text-xs text-muted-foreground mt-1 truncate underline-offset-4 transition-opacity hover:underline hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
                   >
                     /{r.slug} · updated{" "}
@@ -139,7 +138,7 @@ const AdminRecipes = () => {
                       month: "short",
                       year: "numeric",
                     })}
-                  </Link>
+                  </a>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   {r.published && (
@@ -149,10 +148,10 @@ const AdminRecipes = () => {
                       </Link>
                     </Button>
                   )}
-                  <Button size="sm" onClick={() => navigate(`/admin/recipes/${r.slug}/edit`)}>
-                    <span>
+                  <Button asChild size="sm">
+                    <a href={`/admin/recipes/${r.slug}/edit`}>
                       <Pencil className="w-4 h-4" /> Edit
-                    </span>
+                    </a>
                   </Button>
                 </div>
               </li>
