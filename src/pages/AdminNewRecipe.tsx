@@ -52,7 +52,7 @@ const scheduleIdleWork = (callback: () => void): number => {
     return window.requestIdleCallback(callback, { timeout: 1200 });
   }
 
-  return globalThis.setTimeout(callback, 250);
+  return globalThis.setTimeout(callback, 250) as unknown as number;
 };
 
 const cancelIdleWork = (handle: number) => {
@@ -63,7 +63,7 @@ const cancelIdleWork = (handle: number) => {
     return;
   }
 
-  globalThis.clearTimeout(handle);
+  globalThis.clearTimeout(handle as unknown as ReturnType<typeof setTimeout>);
 };
 
 const arraysMatch = (a: string[], b: string[]) =>
