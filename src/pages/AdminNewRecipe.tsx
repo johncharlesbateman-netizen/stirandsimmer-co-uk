@@ -52,7 +52,7 @@ const scheduleIdleWork = (callback: () => void): number => {
     return window.requestIdleCallback(callback, { timeout: 1200 });
   }
 
-  return window.setTimeout(callback, 250);
+  return globalThis.setTimeout(callback, 250);
 };
 
 const cancelIdleWork = (handle: number) => {
@@ -63,7 +63,7 @@ const cancelIdleWork = (handle: number) => {
     return;
   }
 
-  window.clearTimeout(handle);
+  globalThis.clearTimeout(handle);
 };
 
 const arraysMatch = (a: string[], b: string[]) =>
@@ -201,6 +201,7 @@ const AdminNewRecipe = () => {
   const draftStateRef = useRef<NewRecipeDraft | null>(null);
   const isDirtyRef = useRef(isDirty);
   const savedOrSubmittedRef = useRef(savedOrSubmitted);
+  const idleSaveHandleRef = useRef<number>(0);
 
   draftStateRef.current = {
     title,
@@ -250,17 +251,15 @@ const AdminNewRecipe = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const timeoutId = window.setTimeout(() => {
+      cancelIdleWork(idleSaveHandleRef.current);
       const idleHandle = scheduleIdleWork(() => persistDraft(true));
-      if (idleHandle) {
-        // ensure cleanup can cancel the pending idle write too
-        (window as Window & { __adminRecipeDraftIdleHandle?: number }).__adminRecipeDraftIdleHandle = idleHandle;
-      }
+      idleSaveHandleRef.current = idleHandle;
     }, AUTO_SAVE_DEBOUNCE_MS);
 
     return () => {
       window.clearTimeout(timeoutId);
-      cancelIdleWork((window as Window & { __adminRecipeDraftIdleHandle?: number }).__adminRecipeDraftIdleHandle ?? 0);
-      delete (window as Window & { __adminRecipeDraftIdleHandle?: number }).__adminRecipeDraftIdleHandle;
+      cancelIdleWork(idleSaveHandleRef.current);
+      idleSaveHandleRef.current = 0;
     };
   }, [
     title, categories, description, prepTime, cookTime, servings,
