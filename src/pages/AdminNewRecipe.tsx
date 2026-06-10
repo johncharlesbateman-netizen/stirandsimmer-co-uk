@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useDeferredValue, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Upload, X, Plus, Loader2, ArrowUp, ArrowDown, CornerDownRight, ClipboardList } from "lucide-react";
@@ -43,6 +43,28 @@ type NewRecipeDraft = {
 const NEW_RECIPE_DRAFT_STORAGE_KEY = "admin-new-recipe-draft-v1";
 const DEFAULT_CATEGORIES: RecipeCategory[] = ["chicken"];
 const DEFAULT_MEAL_TYPES: MealType[] = ["mains"];
+const AUTO_SAVE_DEBOUNCE_MS = 1500;
+
+const scheduleIdleWork = (callback: () => void): number => {
+  if (typeof window === "undefined") return 0;
+
+  if ("requestIdleCallback" in window) {
+    return window.requestIdleCallback(callback, { timeout: 1200 });
+  }
+
+  return globalThis.setTimeout(callback, 250) as unknown as number;
+};
+
+const cancelIdleWork = (handle: number) => {
+  if (typeof window === "undefined" || handle === 0) return;
+
+  if ("cancelIdleCallback" in window) {
+    window.cancelIdleCallback(handle);
+    return;
+  }
+
+  globalThis.clearTimeout(handle as unknown as ReturnType<typeof setTimeout>);
+};
 
 const arraysMatch = (a: string[], b: string[]) =>
   a.length === b.length && a.every((value, index) => value === b[index]);
@@ -138,6 +160,7 @@ const AdminNewRecipe = () => {
   const [savedOrSubmitted, setSavedOrSubmitted] = useState(false);
   const [pasteIngredientsOpen, setPasteIngredientsOpen] = useState(false);
   const [pasteStepsOpen, setPasteStepsOpen] = useState(false);
+  const deferredInstructions = useDeferredValue(instructions);
   const aiFill = useAiFillRecipeMetadata();
   const handleAiFill = () =>
     aiFill.request(
@@ -178,6 +201,7 @@ const AdminNewRecipe = () => {
   const draftStateRef = useRef<NewRecipeDraft | null>(null);
   const isDirtyRef = useRef(isDirty);
   const savedOrSubmittedRef = useRef(savedOrSubmitted);
+  const idleSaveHandleRef = useRef<number>(0);
 
   draftStateRef.current = {
     title,
@@ -222,11 +246,21 @@ const AdminNewRecipe = () => {
     }
   };
 
-  // Debounced save on every field change
+  // Debounced save on every field change. Use idle time so typing into long
+  // method fields stays responsive instead of blocking on localStorage writes.
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const t = window.setTimeout(() => persistDraft(true), 400);
-    return () => window.clearTimeout(t);
+    const timeoutId = window.setTimeout(() => {
+      cancelIdleWork(idleSaveHandleRef.current);
+      const idleHandle = scheduleIdleWork(() => persistDraft(true));
+      idleSaveHandleRef.current = idleHandle;
+    }, AUTO_SAVE_DEBOUNCE_MS);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      cancelIdleWork(idleSaveHandleRef.current);
+      idleSaveHandleRef.current = 0;
+    };
   }, [
     title, categories, description, prepTime, cookTime, servings,
     ingredients, instructions, tips, seoTitle, seoDescription,
@@ -765,7 +799,7 @@ const AdminNewRecipe = () => {
           <div className="pt-4 border-t border-border space-y-4">
             <CookTimeWarning
               cookTimeMinutes={cookTime ? parseInt(cookTime, 10) : null}
-              instructions={instructions}
+              instructions={deferredInstructions}
             />
             <label className="flex items-start gap-3 p-3 border border-border rounded-md cursor-pointer hover:bg-secondary/50 transition-colors">
               <input
