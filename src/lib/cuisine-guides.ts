@@ -34,6 +34,13 @@ export type CuisineGuide = {
   keyIngredients: CuisineIngredient[];
   /** 2 related cuisine slugs for "You might also enjoy" cross-links. */
   relatedCuisines: string[];
+  /**
+   * Optional allowlist of exact recipe titles to feature in the
+   * "Recipes from our kitchen to try" section. When set, only these
+   * recipes are shown (and only if they exist + are published).
+   * Use this to avoid surfacing mis-tagged or unrelated recipes.
+   */
+  featuredRecipeTitles?: string[];
 };
 
 export const CUISINE_GUIDES: CuisineGuide[] = [
