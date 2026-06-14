@@ -34,6 +34,13 @@ export type CuisineGuide = {
   keyIngredients: CuisineIngredient[];
   /** 2 related cuisine slugs for "You might also enjoy" cross-links. */
   relatedCuisines: string[];
+  /**
+   * Optional allowlist of exact recipe titles to feature in the
+   * "Recipes from our kitchen to try" section. When set, only these
+   * recipes are shown (and only if they exist + are published).
+   * Use this to avoid surfacing mis-tagged or unrelated recipes.
+   */
+  featuredRecipeTitles?: string[];
 };
 
 export const CUISINE_GUIDES: CuisineGuide[] = [
@@ -64,6 +71,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🍝", name: "Good dried pasta", note: "Bronze-die cut holds sauce better than supermarket smooth pasta." },
     ],
     relatedCuisines: ["france", "mediterranean"],
+    featuredRecipeTitles: ["Roasted Pepper, White Beans and Tuna Salad"],
   },
   {
     slug: "united-kingdom",
@@ -92,6 +100,9 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🌿", name: "Fresh herbs", note: "Thyme, sage, parsley and rosemary — the backbone of British seasoning." },
     ],
     relatedCuisines: ["france", "mediterranean"],
+    featuredRecipeTitles: [
+      "Salmon with Garlic Leaf Pesto, Crushed Jersey Royals and Asparagus",
+    ],
   },
   {
     slug: "france",
@@ -120,6 +131,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🍞", name: "Good bread", note: "A proper baguette or sourdough — eaten with everything." },
     ],
     relatedCuisines: ["italy", "spain"],
+    featuredRecipeTitles: ["Pistachio Sablés"],
   },
   {
     slug: "spain",
@@ -231,6 +243,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🫘", name: "Beans & pulses", note: "Chickpeas, white beans and lentils — protein, body and warmth." },
     ],
     relatedCuisines: ["italy", "spain"],
+    featuredRecipeTitles: ["Greek Lemon Chicken (Kotopoulo Lemonato)"],
   },
   {
     slug: "middle-east",

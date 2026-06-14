@@ -15,17 +15,28 @@ const CuisineGuidePage = () => {
   const guide = slug ? CUISINE_GUIDES_BY_SLUG[slug] : undefined;
 
   const { data: recipes } = useQuery({
-    queryKey: ["kitchen-atlas-cuisine-recipes", guide?.cuisineRegionTag],
+    queryKey: [
+      "kitchen-atlas-cuisine-recipes",
+      guide?.cuisineRegionTag,
+      guide?.featuredRecipeTitles ?? null,
+    ],
     enabled: !!guide,
     queryFn: async () => {
       if (!guide) return [];
-      const { data, error } = await supabase
+      let query = supabase
         .from("recipes")
         .select("*")
-        .eq("cuisine_region", guide.cuisineRegionTag)
         .eq("published", true)
-        .order("created_at", { ascending: false })
-        .limit(6);
+        .order("created_at", { ascending: false });
+
+      if (guide.featuredRecipeTitles && guide.featuredRecipeTitles.length > 0) {
+        // Curated allowlist — only show these specific recipes.
+        query = query.in("title", guide.featuredRecipeTitles);
+      } else {
+        query = query.eq("cuisine_region", guide.cuisineRegionTag).limit(6);
+      }
+
+      const { data, error } = await query;
       if (error) throw error;
       return data ?? [];
     },
@@ -142,25 +153,30 @@ const CuisineGuidePage = () => {
           </p>
 
           {recipes && recipes.length > 0 ? (
-            <>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {recipes.map((r) => (
-                  <RecipeCard key={r.id} recipe={r} />
-                ))}
-              </div>
-              <div className="mt-10">
-                <Button asChild size="lg">
-                  <Link to={`/recipes/region/${guide.regionPageId}`}>
-                    Explore all {guide.adjective} recipes <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
-              </div>
-            </>
+            <div
+              className={
+                recipes.length === 1
+                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                  : "grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              }
+            >
+              {recipes.map((r) => (
+                <RecipeCard key={r.id} recipe={r} />
+              ))}
+            </div>
           ) : (
             <p className="text-muted-foreground">
               No {guide.adjective} recipes published yet — check back soon.
             </p>
           )}
+
+          <div className="mt-10">
+            <Button asChild size="lg">
+              <Link to={`/recipes/region/${guide.regionPageId}`}>
+                Explore all {guide.adjective} recipes <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
