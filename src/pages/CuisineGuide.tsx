@@ -15,17 +15,28 @@ const CuisineGuidePage = () => {
   const guide = slug ? CUISINE_GUIDES_BY_SLUG[slug] : undefined;
 
   const { data: recipes } = useQuery({
-    queryKey: ["kitchen-atlas-cuisine-recipes", guide?.cuisineRegionTag],
+    queryKey: [
+      "kitchen-atlas-cuisine-recipes",
+      guide?.cuisineRegionTag,
+      guide?.featuredRecipeTitles ?? null,
+    ],
     enabled: !!guide,
     queryFn: async () => {
       if (!guide) return [];
-      const { data, error } = await supabase
+      let query = supabase
         .from("recipes")
         .select("*")
-        .eq("cuisine_region", guide.cuisineRegionTag)
         .eq("published", true)
-        .order("created_at", { ascending: false })
-        .limit(6);
+        .order("created_at", { ascending: false });
+
+      if (guide.featuredRecipeTitles && guide.featuredRecipeTitles.length > 0) {
+        // Curated allowlist — only show these specific recipes.
+        query = query.in("title", guide.featuredRecipeTitles);
+      } else {
+        query = query.eq("cuisine_region", guide.cuisineRegionTag).limit(6);
+      }
+
+      const { data, error } = await query;
       if (error) throw error;
       return data ?? [];
     },
