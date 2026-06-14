@@ -131,6 +131,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🍞", name: "Good bread", note: "A proper baguette or sourdough — eaten with everything." },
     ],
     relatedCuisines: ["italy", "spain"],
+    featuredRecipeTitles: ["Pistachio Sablés"],
   },
   {
     slug: "spain",
