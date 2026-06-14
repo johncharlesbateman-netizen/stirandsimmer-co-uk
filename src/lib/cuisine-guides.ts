@@ -71,6 +71,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🍝", name: "Good dried pasta", note: "Bronze-die cut holds sauce better than supermarket smooth pasta." },
     ],
     relatedCuisines: ["france", "mediterranean"],
+    featuredRecipeTitles: ["Roasted Pepper, White Beans and Tuna Salad"],
   },
   {
     slug: "united-kingdom",
