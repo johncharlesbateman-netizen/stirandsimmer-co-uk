@@ -100,6 +100,9 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🌿", name: "Fresh herbs", note: "Thyme, sage, parsley and rosemary — the backbone of British seasoning." },
     ],
     relatedCuisines: ["france", "mediterranean"],
+    featuredRecipeTitles: [
+      "Salmon with Garlic Leaf Pesto, Crushed Jersey Royals and Asparagus",
+    ],
   },
   {
     slug: "france",
