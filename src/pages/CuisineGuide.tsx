@@ -153,25 +153,30 @@ const CuisineGuidePage = () => {
           </p>
 
           {recipes && recipes.length > 0 ? (
-            <>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {recipes.map((r) => (
-                  <RecipeCard key={r.id} recipe={r} />
-                ))}
-              </div>
-              <div className="mt-10">
-                <Button asChild size="lg">
-                  <Link to={`/recipes/region/${guide.regionPageId}`}>
-                    Explore all {guide.adjective} recipes <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
-              </div>
-            </>
+            <div
+              className={
+                recipes.length === 1
+                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                  : "grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              }
+            >
+              {recipes.map((r) => (
+                <RecipeCard key={r.id} recipe={r} />
+              ))}
+            </div>
           ) : (
             <p className="text-muted-foreground">
               No {guide.adjective} recipes published yet — check back soon.
             </p>
           )}
+
+          <div className="mt-10">
+            <Button asChild size="lg">
+              <Link to={`/recipes/region/${guide.regionPageId}`}>
+                Explore all {guide.adjective} recipes <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
