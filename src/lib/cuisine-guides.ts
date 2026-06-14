@@ -243,6 +243,7 @@ export const CUISINE_GUIDES: CuisineGuide[] = [
       { emoji: "🫘", name: "Beans & pulses", note: "Chickpeas, white beans and lentils — protein, body and warmth." },
     ],
     relatedCuisines: ["italy", "spain"],
+    featuredRecipeTitles: ["Greek Lemon Chicken (Kotopoulo Lemonato)"],
   },
   {
     slug: "middle-east",
